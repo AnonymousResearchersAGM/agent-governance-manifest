@@ -1,0 +1,4 @@
+title: Agent Governance Manifest
+description: Project-side governance infrastructure for agent-mediated open-source contributions
+theme: minima
+markdown: kramdown
