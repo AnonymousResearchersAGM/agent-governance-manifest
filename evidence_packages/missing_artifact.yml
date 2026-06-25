@@ -1,0 +1,23 @@
+schema_version: "agm.evidence_package/v0.1"
+contribution_id: "demo-high-missing-artifact-001"
+changed_files:
+  - "demo_app/config.py"
+summary: "Adjusts demo app configuration validation."
+rationale: "The configuration path is high risk because it controls runtime behavior and test strategy assumptions."
+risk_zone_assessment:
+  declared_risk_level: "high"
+  declared_risk_zones:
+    - "configuration"
+evidence_index:
+  - label: "config tests"
+    path: "review_packets/artifacts/missing_config_pytest.txt"
+tests_run:
+  - command: "python -m pytest demo_app/tests"
+    outcome: "passed"
+    artifact: "review_packets/artifacts/missing_config_pytest.txt"
+artifacts:
+  - path: "review_packets/artifacts/missing_config_pytest.txt"
+    description: "Intentionally absent artifact used to demonstrate incomplete evidence."
+known_limitations: "No production deployment configuration is represented by this prototype."
+human_review_declaration: {}
+generated_at: "2026-06-24T00:00:00Z"

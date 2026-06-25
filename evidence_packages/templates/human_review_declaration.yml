@@ -1,0 +1,7 @@
+human_review_declaration:
+  required: true
+  status: pending_human_review
+  reviewer: null
+  reviewed_at: null
+  review_scope: null
+  statement: "Human review is required before final acceptance."

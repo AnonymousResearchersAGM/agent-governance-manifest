@@ -1,0 +1,126 @@
+schema_version: "agm.evidence_requirements/v0.1"
+requirements:
+  low:
+    required_fields:
+      - "summary"
+      - "changed_files"
+    required_evidence_package_fields:
+      - "summary"
+      - "changed_files"
+    required_evidence:
+      - "contribution summary"
+      - "changed files list"
+    required_evidence_items:
+      - "contribution summary"
+      - "changed files list"
+    field_reference:
+      summary: "Concise factual contribution summary"
+      changed_files: "List of changed files"
+  medium:
+    required_fields:
+      - "summary"
+      - "changed_files"
+      - "rationale"
+      - "tests_run"
+    required_evidence_package_fields:
+      - "summary"
+      - "changed_files"
+      - "rationale"
+      - "tests_run"
+    required_evidence:
+      - "contribution summary"
+      - "changed files list"
+      - "rationale"
+      - "tests run or explanation"
+    required_evidence_items:
+      - "contribution summary"
+      - "changed files list"
+      - "rationale"
+      - "tests run or explanation"
+    field_reference:
+      summary: "Concise factual contribution summary"
+      changed_files: "List of changed files"
+      rationale: "Why the business logic change is needed"
+      tests_run: "Test command or clear explanation if not run"
+  high:
+    required_fields:
+      - "summary"
+      - "changed_files"
+      - "rationale"
+      - "tests_run"
+      - "artifacts"
+      - "known_limitations"
+    required_evidence_package_fields:
+      - "summary"
+      - "changed_files"
+      - "rationale"
+      - "tests_run"
+      - "artifacts"
+      - "known_limitations"
+    required_evidence:
+      - "contribution summary"
+      - "changed files list"
+      - "rationale"
+      - "tests run with command"
+      - "relevant artifacts or test output"
+      - "known limitations"
+    required_evidence_items:
+      - "contribution summary"
+      - "changed files list"
+      - "rationale"
+      - "tests run with command"
+      - "relevant artifacts or test output"
+      - "known limitations"
+    field_reference:
+      summary: "Concise factual contribution summary"
+      changed_files: "List of changed files"
+      rationale: "Why this configuration, dependency, test, or policy change is needed"
+      tests_run: "Concrete test command and outcome"
+      artifacts: "Existing artifact or test output file"
+      known_limitations: "Known limitations or explicit none"
+  critical:
+    required_fields:
+      - "summary"
+      - "changed_files"
+      - "rationale"
+      - "security_auth_impact_statement"
+      - "tests_run"
+      - "artifacts"
+      - "known_limitations"
+      - "human_review_declaration"
+    required_evidence_package_fields:
+      - "summary"
+      - "changed_files"
+      - "rationale"
+      - "security_auth_impact_statement"
+      - "tests_run"
+      - "artifacts"
+      - "known_limitations"
+      - "human_review_declaration"
+    required_evidence:
+      - "contribution summary"
+      - "changed files list"
+      - "rationale"
+      - "security/auth impact statement"
+      - "tests run with command"
+      - "relevant artifacts or test output"
+      - "known limitations"
+      - "human review declaration"
+    required_evidence_items:
+      - "contribution summary"
+      - "changed files list"
+      - "rationale"
+      - "security/auth impact statement"
+      - "tests run with command"
+      - "relevant artifacts or test output"
+      - "known limitations"
+      - "human review declaration"
+    field_reference:
+      summary: "Concise factual contribution summary"
+      changed_files: "List of changed files"
+      rationale: "Why the auth/security change is needed"
+      security_auth_impact_statement: "Security/auth behavior affected by the contribution"
+      tests_run: "Concrete auth/security regression test command and outcome"
+      artifacts: "Existing artifact or test output file"
+      known_limitations: "Known limitations or explicit none"
+      human_review_declaration: "Human review declaration with status human_reviewed for critical risk"

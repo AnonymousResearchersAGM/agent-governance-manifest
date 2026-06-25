@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Agent Governance Manifest",
+  "type": "object",
+  "required": [
+    "manifest_version",
+    "repository",
+    "risk_levels",
+    "risk_zones",
+    "evidence_requirements_by_risk_level",
+    "governance_boundaries"
+  ],
+  "properties": {
+    "manifest_version": { "type": "string" },
+    "repository": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "name": { "type": "string" },
+        "purpose": { "type": "string" }
+      }
+    },
+    "risk_levels": { "type": "object" },
+    "risk_zones": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "level", "paths"],
+        "properties": {
+          "id": { "type": "string" },
+          "level": { "enum": ["low", "medium", "high", "critical"] },
+          "paths": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "critical_if_contains": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "description": { "type": "string" }
+        }
+      }
+    },
+    "evidence_requirements_by_risk_level": {
+      "type": "object",
+      "properties": {
+        "low": { "type": "array", "items": { "type": "string" } },
+        "medium": { "type": "array", "items": { "type": "string" } },
+        "high": { "type": "array", "items": { "type": "string" } },
+        "critical": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "governance_boundaries": { "type": "object" }
+  }
+}
+

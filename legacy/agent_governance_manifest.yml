@@ -1,0 +1,122 @@
+manifest_version: "0.1"
+repository:
+  name: "agm_prototype"
+  purpose: "Controlled research prototype for Agent Governance Manifest workflows."
+
+governance_objectives:
+  - "Make contributor-side AI assistance auditable through structured evidence."
+  - "Support maintainer-side review without requiring private prompts or chain-of-thought."
+  - "Map repository changes to risk zones and evidence requirements."
+  - "Keep final merge responsibility with human maintainers."
+
+risk_levels:
+  low:
+    description: "Documentation-only changes with no executable behavior impact."
+    rank: 1
+  medium:
+    description: "Tests, non-critical refactors, and lightweight configuration changes."
+    rank: 2
+  high:
+    description: "Core application logic changes."
+    rank: 3
+  critical:
+    description: "Authentication, dependencies, CI/workflow, and security-sensitive configuration changes."
+    rank: 4
+
+risk_zones:
+  - id: documentation
+    level: low
+    paths:
+      - "README.md"
+      - "docs/**"
+      - "evaluation_tasks/**"
+    description: "Human-readable project documentation and evaluation descriptions."
+  - id: tests
+    level: medium
+    paths:
+      - "tests/**"
+    description: "Test-only changes that do not modify application runtime behavior."
+  - id: configuration
+    level: medium
+    paths:
+      - "app/config.py"
+    critical_if_contains:
+      - "SECRET"
+      - "TOKEN"
+      - "AUTH"
+      - "SESSION"
+    description: "Application configuration; security-sensitive settings may escalate to critical."
+  - id: core_logic
+    level: high
+    paths:
+      - "app/core.py"
+    description: "Core business logic."
+  - id: authentication
+    level: critical
+    paths:
+      - "app/auth.py"
+    description: "Authentication and authorization behavior."
+  - id: dependencies
+    level: critical
+    paths:
+      - "app/dependencies.txt"
+    description: "Runtime or test dependency changes."
+  - id: workflow
+    level: critical
+    paths:
+      - "workflows/**"
+      - ".github/workflows/**"
+    description: "CI, workflow, and automation configuration."
+
+evidence_requirements_by_risk_level:
+  low:
+    - "contribution_report"
+  medium:
+    - "contribution_report"
+    - "test_report"
+    - "trace_manifest"
+  high:
+    - "contribution_report"
+    - "test_report"
+    - "trace_manifest"
+    - "human_review_declaration"
+  critical:
+    - "contribution_report"
+    - "test_report"
+    - "trace_manifest"
+    - "human_review_declaration"
+    - "linked_issue_or_explicit_no_issue_note"
+
+contributor_side_obligations:
+  - "Read this manifest before starting a task."
+  - "Classify changed files into risk zones and declare the highest risk level."
+  - "Generate a structured evidence package for the declared risk level."
+  - "Disclose AI assistance at a high level."
+  - "Report tests run, outcomes, known limitations, linked issues, and missing evidence."
+  - "Mark high and critical changes as requiring human confirmation."
+
+maintainer_side_review_expectations:
+  - "Read this manifest before reviewing AI-assisted changes."
+  - "Use the diff or changed-file summary to independently classify risk."
+  - "Compare required evidence with submitted evidence."
+  - "Use tests, trace manifest, issue context, and human declaration as review inputs."
+  - "Generate review-support artifacts rather than final merge decisions."
+  - "Keep review independent from contributor prompts or detailed reasoning."
+
+human_responsibility_gates:
+  high:
+    - "Human maintainer must inspect relevant behavior and tests before merge."
+  critical:
+    - "Human maintainer must explicitly confirm security-sensitive or infrastructure-sensitive changes before merge."
+    - "Review agent must not auto-approve, auto-reject, or merge."
+
+enforcement_levels:
+  informational: "Low-risk guidance and checklist support."
+  advisory: "Medium-risk evidence completeness warnings."
+  blocking_recommendation: "High and critical missing-evidence findings should block until a human maintainer resolves them."
+
+governance_boundaries:
+  evidence_not_reasoning: "AGM requires structured evidence, not full reasoning disclosure."
+  no_mandatory_private_prompt_disclosure: "Contributors and coding agents are not required to disclose original prompts, detailed intermediate reasoning, private exploratory attempts, chain-of-thought, or persuasive narratives."
+  independent_review_basis: "Maintainer-side review should be based on diff, tests, risk zones, evidence package, and issue context."
+  final_decision: "Final approval, rejection, or merge decisions remain with human maintainers."

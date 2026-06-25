@@ -1,0 +1,16 @@
+schema_version: "agm.evidence_package/v0.1"
+contribution_id: "demo-high-config-missing-001"
+changed_files:
+  - "demo_app/config.py"
+summary: "Changes configuration defaults for the demo task tracker."
+rationale: ""
+risk_zone_assessment:
+  declared_risk_level: "high"
+  declared_risk_zones:
+    - "configuration"
+evidence_index: []
+tests_run: []
+artifacts: []
+known_limitations: ""
+human_review_declaration: {}
+generated_at: "2026-06-24T00:00:00Z"

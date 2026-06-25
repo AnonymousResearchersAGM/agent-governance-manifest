@@ -1,0 +1,30 @@
+schema_version: "agm.manifest/v0.1"
+project:
+  name: "AGM Demo Task Tracker"
+  repository: "agm_prototype"
+  description: "A compact artifact prototype for repository-level agent governance."
+governance_scope:
+  description: "Project-level governance for agent-mediated contributions before human review."
+  governed_paths:
+    - "demo_app/**"
+    - "docs/**"
+    - ".agm/**"
+    - "evidence_packages/**"
+    - "scripts/**"
+    - "src/**"
+    - "tests/**"
+    - "requirements.txt"
+risk_zone_reference: ".agm/risk_zones.yml"
+evidence_requirement_reference: ".agm/evidence_requirements.yml"
+human_review_policy:
+  critical_requires_human_review_declaration: true
+  high_and_critical_require_known_limitations: true
+  gate_meaning: "A pass means eligible for human decision, not accepted."
+final_decision_authority: "Final approval, rejection, request-for-changes, or merge decisions remain with human maintainers."
+non_goals:
+  - "AGM is not AGENTS.md."
+  - "AGM is not a PR template."
+  - "AGM is not an AI detector."
+  - "AGM is not an agent trace or provenance log system."
+  - "AGM is not an automatic merge or reject tool."
+  - "AGM does not replace human maintainer judgment."

@@ -1,0 +1,31 @@
+manifest_version: "0.1"
+repository:
+  name: "agm_prototype"
+
+risk_levels:
+  low: "Documentation-only changes."
+  medium: "Tests, non-critical refactors, and lightweight configuration changes."
+  high: "Core application logic changes."
+  critical: "Authentication, dependencies, CI/workflow, and security-sensitive configuration changes."
+
+risk_zones:
+  documentation:
+    paths: ["README.md", "docs/**", "evaluation_tasks/**"]
+    level: low
+  tests:
+    paths: ["tests/**"]
+    level: medium
+  core_logic:
+    paths: ["app/core.py"]
+    level: high
+  authentication:
+    paths: ["app/auth.py"]
+    level: critical
+  workflow:
+    paths: ["workflows/**", ".github/workflows/**"]
+    level: critical
+
+governance_boundaries:
+  evidence_not_reasoning: "AGM requires structured evidence, not full reasoning disclosure."
+  final_decision: "Final approval, rejection, or merge decisions remain with human maintainers."
+

@@ -1,0 +1,46 @@
+schema_version: agm.evidence_package/v0.1
+contribution_id: simulated-critical-auth
+changed_files:
+- demo_app/auth.py
+- demo_app/tests/test_auth.py
+summary: Simulated auth-token contribution with regression evidence.
+rationale: Auth behavior is security-sensitive and requires explicit test evidence.
+risk_zone_assessment:
+  declared_risk_level: critical
+  declared_risk_zones:
+  - authentication
+  - configuration
+  agent_read_agm_files:
+  - .agm/manifest.yml
+  - .agm/risk_zones.yml
+  - .agm/evidence_requirements.yml
+  required_evidence:
+  - contribution summary
+  - changed files list
+  - rationale
+  - security/auth impact statement
+  - tests run with command
+  - relevant artifacts or test output
+  - known limitations
+  - human review declaration
+evidence_index:
+- label: Auth pytest output
+  path: review_packets/artifacts/critical_auth_pytest.txt
+tests_run:
+- command: python -m pytest demo_app/tests/test_auth.py
+  outcome: passed
+  artifact: review_packets/artifacts/critical_auth_pytest.txt
+artifacts:
+- path: review_packets/artifacts/critical_auth_pytest.txt
+  description: Auth pytest output
+known_limitations: No persistent session store or network boundary is implemented
+  in this prototype.
+human_review_declaration:
+  required: true
+  status: pending_human_review
+  reviewer: null
+  reviewed_at: null
+  review_scope: null
+  statement: Human review is required before final acceptance.
+generated_at: '2026-06-24T13:45:54Z'
+security_auth_impact_statement: Token authentication and role checks are affected.

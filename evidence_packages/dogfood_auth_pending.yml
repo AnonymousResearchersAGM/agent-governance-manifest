@@ -1,0 +1,49 @@
+schema_version: agm.evidence_package/v0.1
+contribution_id: dogfood-auth-token-trim
+changed_files:
+- demo_app/auth.py
+- demo_app/tests/test_auth.py
+summary: Normalize token whitespace before auth lookup and cover the behavior with
+  a regression test.
+rationale: Accidental leading or trailing whitespace should not cause a valid local
+  demo token to fail authentication.
+risk_zone_assessment:
+  declared_risk_level: critical
+  declared_risk_zones:
+  - authentication
+  - configuration
+  agent_read_agm_files:
+  - .agm/manifest.yml
+  - .agm/risk_zones.yml
+  - .agm/evidence_requirements.yml
+  required_evidence:
+  - contribution summary
+  - changed files list
+  - rationale
+  - security/auth impact statement
+  - tests run with command
+  - relevant artifacts or test output
+  - known limitations
+  - human review declaration
+evidence_index:
+- label: Dogfooding auth pytest output
+  path: review_packets/artifacts/dogfood_auth_pytest.txt
+tests_run:
+- command: python -m pytest demo_app/tests/test_auth.py
+  outcome: 4 passed in 0.27s
+  artifact: review_packets/artifacts/dogfood_auth_pytest.txt
+artifacts:
+- path: review_packets/artifacts/dogfood_auth_pytest.txt
+  description: Dogfooding auth pytest output
+known_limitations: This local prototype still has no persistent session store, token
+  expiry, or network boundary.
+human_review_declaration:
+  required: true
+  status: pending_human_review
+  reviewer: null
+  reviewed_at: null
+  review_scope: null
+  statement: Human review is required before final acceptance.
+generated_at: '2026-06-24T14:11:21Z'
+security_auth_impact_statement: Authentication token normalization changed; unknown
+  tokens and empty tokens must still be rejected.

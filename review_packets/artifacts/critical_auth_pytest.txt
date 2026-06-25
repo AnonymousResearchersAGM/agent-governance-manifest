@@ -1,0 +1,3 @@
+python -m pytest demo_app/tests/test_auth.py
+
+3 passed

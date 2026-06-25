@@ -1,0 +1,28 @@
+{
+  "manifest_version": "0.1",
+  "task_id": "critical_auth_change",
+  "task_file": "evaluation_tasks/critical_auth_change.md",
+  "linked_issues": ["#42"],
+  "affected_files": ["app/auth.py", "tests/test_auth.py"],
+  "risk_zones": ["authentication", "tests"],
+  "risk_level": "critical",
+  "required_evidence": [
+    "contribution_report",
+    "test_report",
+    "trace_manifest",
+    "human_review_declaration",
+    "linked_issue_or_explicit_no_issue_note"
+  ],
+  "evidence_files": [
+    "contribution_report.md",
+    "test_report.md",
+    "trace_manifest.json",
+    "human_review_declaration.md"
+  ],
+  "evidence_package_dir": "sample_outputs/manifest_supported/critical_auth_change",
+  "human_confirmation_required": true,
+  "human_confirmation_status": "required completed",
+  "reasoning_materials_excluded": true,
+  "excluded_materials_note": "Original prompts, chain-of-thought, detailed intermediate reasoning, private exploratory attempts, and persuasive narratives are excluded from the required evidence package."
+}
+

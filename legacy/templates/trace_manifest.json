@@ -1,0 +1,18 @@
+{
+  "manifest_version": "0.1",
+  "task_id": "<task-id>",
+  "linked_issues": ["<issue-id-or-none>"],
+  "affected_files": ["<path>"],
+  "risk_zones": ["<risk-zone-id>"],
+  "risk_level": "<low|medium|high|critical>",
+  "evidence_files": [
+    "contribution_report.md",
+    "test_report.md",
+    "trace_manifest.json"
+  ],
+  "human_confirmation_required": false,
+  "human_confirmation_status": "<not required|required pending|required completed>",
+  "reasoning_materials_excluded": true,
+  "excluded_materials_note": "Original prompts, chain-of-thought, detailed intermediate reasoning, private exploratory attempts, and persuasive narratives are not part of the required evidence package."
+}
+

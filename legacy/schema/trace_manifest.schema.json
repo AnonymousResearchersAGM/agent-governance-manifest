@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AGM Trace Manifest",
+  "type": "object",
+  "required": [
+    "manifest_version",
+    "task_id",
+    "linked_issues",
+    "affected_files",
+    "risk_zones",
+    "risk_level",
+    "evidence_files",
+    "human_confirmation_required",
+    "reasoning_materials_excluded"
+  ],
+  "properties": {
+    "manifest_version": { "type": "string" },
+    "task_id": { "type": "string" },
+    "linked_issues": { "type": "array", "items": { "type": "string" } },
+    "affected_files": { "type": "array", "items": { "type": "string" } },
+    "risk_zones": { "type": "array", "items": { "type": "string" } },
+    "risk_level": { "enum": ["low", "medium", "high", "critical"] },
+    "evidence_files": { "type": "array", "items": { "type": "string" } },
+    "human_confirmation_required": { "type": "boolean" },
+    "reasoning_materials_excluded": { "type": "boolean" }
+  }
+}
+

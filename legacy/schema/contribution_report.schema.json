@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AGM Contribution Report",
+  "type": "object",
+  "required": [
+    "contribution_summary",
+    "affected_files",
+    "declared_risk_zone",
+    "declared_risk_level",
+    "ai_assistance_disclosure",
+    "tests_run",
+    "test_outcomes",
+    "known_limitations",
+    "linked_issues",
+    "human_confirmation_status",
+    "missing_evidence"
+  ],
+  "properties": {
+    "contribution_summary": { "type": "string" },
+    "affected_files": { "type": "array", "items": { "type": "string" } },
+    "declared_risk_zone": { "type": "array", "items": { "type": "string" } },
+    "declared_risk_level": { "enum": ["low", "medium", "high", "critical"] },
+    "ai_assistance_disclosure": { "type": "string" },
+    "tests_run": { "type": "array", "items": { "type": "string" } },
+    "test_outcomes": { "type": "string" },
+    "known_limitations": { "type": "array", "items": { "type": "string" } },
+    "linked_issues": { "type": "array", "items": { "type": "string" } },
+    "human_confirmation_status": { "type": "string" },
+    "missing_evidence": { "type": "array", "items": { "type": "string" } }
+  }
+}
+

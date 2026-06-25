@@ -1,0 +1,18 @@
+schema_version: "agm.evidence_package/v0.1"
+contribution_id: "demo-low-docs-001"
+changed_files:
+  - "docs/PROTOTYPE_USAGE.md"
+summary: "Clarifies the prototype usage commands for artifact reviewers."
+rationale: ""
+risk_zone_assessment:
+  declared_risk_level: "low"
+  declared_risk_zones:
+    - "documentation"
+evidence_index:
+  - label: "documentation summary"
+    value: "The change only affects reviewer-facing docs."
+tests_run: []
+artifacts: []
+known_limitations: ""
+human_review_declaration: {}
+generated_at: "2026-06-24T00:00:00Z"

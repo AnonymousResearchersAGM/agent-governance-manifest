@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+title: "Agent Governance Manifest"
+message: "If you use AGM, please cite this artifact and cite the related paper when it becomes available."
+type: software
+authors:
+  - name: "TO-BE-UPDATED: replace with full paper author list in paper order"
+  - name: "Agent Governance Manifest Project"
+version: "0.1.0"
+date-released: "2026-06-24"
+repository-code: "https://github.com/agent-governance-manifest/agent-governance-manifest"
+license: "MIT"
+abstract: "Agent Governance Manifest (AGM) is a project-side, agent-readable governance manifest and lightweight prototype for making agent-mediated open-source contributions reviewable, evidence-oriented, and accountable."
+keywords:
+  - "agent governance"
+  - "open-source governance"
+  - "software supply chain"
+  - "human review"
+  - "evidence package"

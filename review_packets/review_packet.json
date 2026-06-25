@@ -1,0 +1,97 @@
+{
+  "contribution_id": "demo-critical-auth-001",
+  "summary": "Updates token-auth behavior and covers accepted and rejected token paths.",
+  "changed_files": [
+    "demo_app/auth.py",
+    "demo_app/tests/test_auth.py"
+  ],
+  "detected_risk_zones": [
+    {
+      "file": "demo_app/auth.py",
+      "zone": "authentication",
+      "risk_level": "critical",
+      "reason": "matched path pattern"
+    },
+    {
+      "file": "demo_app/tests/test_auth.py",
+      "zone": "configuration",
+      "risk_level": "high",
+      "reason": "matched path pattern"
+    }
+  ],
+  "governance_entrypoint_changes": [],
+  "required_evidence": [
+    "contribution summary",
+    "changed files list",
+    "rationale",
+    "security/auth impact statement",
+    "tests run with command",
+    "relevant artifacts or test output",
+    "known limitations",
+    "human review declaration"
+  ],
+  "provided_evidence": [
+    "summary",
+    "changed_files",
+    "rationale",
+    "security_auth_impact_statement",
+    "tests_run",
+    "artifacts",
+    "known_limitations",
+    "human_review_declaration"
+  ],
+  "missing_evidence": [],
+  "placeholder_warnings": [],
+  "human_review_declaration_status": "human_reviewed",
+  "governance_gate_status": "pass",
+  "technical_review_readiness": "ready",
+  "final_acceptance_readiness": "eligible_for_human_decision",
+  "governance_indicators": [
+    {
+      "indicator": "AGM reference source",
+      "reference": "Base branch .agm/manifest.yml",
+      "observed": "Used current repository .agm/manifest.yml",
+      "status": "Pass"
+    },
+    {
+      "indicator": "Governance entrypoint change",
+      "reference": "Must be reviewed if changed",
+      "observed": "None detected",
+      "status": "Pass"
+    },
+    {
+      "indicator": "Risk-zone classification",
+      "reference": "Must identify affected risk zone",
+      "observed": "authentication, configuration",
+      "status": "Pass"
+    },
+    {
+      "indicator": "Required tests",
+      "reference": "Tests run with command/artifact",
+      "observed": "Provided",
+      "status": "Pass"
+    },
+    {
+      "indicator": "Human review declaration",
+      "reference": "Required and must be human_reviewed for critical risk",
+      "observed": "human_reviewed",
+      "status": "Pass"
+    },
+    {
+      "indicator": "Placeholder evidence",
+      "reference": "Must be absent",
+      "observed": "Absent",
+      "status": "Pass"
+    },
+    {
+      "indicator": "Final decision authority",
+      "reference": "Human maintainer",
+      "observed": "Human decision required",
+      "status": "Pass"
+    }
+  ],
+  "reviewer_attention_points": [
+    "Inspect auth/security behavior and confirm the human review declaration before final decision."
+  ],
+  "final_decision_authority": "Final approval, rejection, request-for-changes, or merge decisions remain with human maintainers."
+}

@@ -1,0 +1,35 @@
+schema_version: "agm.evidence_package/v0.1"
+contribution_id: "demo-critical-auth-001"
+changed_files:
+  - "demo_app/auth.py"
+  - "demo_app/tests/test_auth.py"
+summary: "Updates token-auth behavior and covers accepted and rejected token paths."
+rationale: "Authentication behavior is security-sensitive, so the package records explicit regression coverage and human review readiness."
+risk_zone_assessment:
+  declared_risk_level: "critical"
+  declared_risk_zones:
+    - "authentication"
+    - "configuration"
+evidence_index:
+  - label: "auth tests"
+    path: "review_packets/artifacts/critical_auth_pytest.txt"
+security_auth_impact_statement: "The changed surface authenticates bearer-like tokens and role checks; unauthorized tokens must continue to be rejected."
+tests_run:
+  - command: "python -m pytest demo_app/tests/test_auth.py"
+    outcome: "passed"
+    artifact: "review_packets/artifacts/critical_auth_pytest.txt"
+artifacts:
+  - path: "review_packets/artifacts/critical_auth_pytest.txt"
+    description: "Captured pytest output for the auth regression tests."
+known_limitations: "No persistent session store or network boundary is implemented in this local prototype."
+human_review_declaration:
+  required: true
+  status: "human_reviewed"
+  reviewer: "human contributor"
+  reviewed_at: "2026-06-24T00:00:00Z"
+  review_scope:
+    - "Reviewed auth-sensitive logic"
+    - "Checked auth regression test output"
+    - "Confirmed known limitations"
+  statement: "I reviewed the security-sensitive change and confirm that it is ready for maintainer review."
+generated_at: "2026-06-24T00:00:00Z"

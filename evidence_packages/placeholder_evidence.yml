@@ -1,0 +1,27 @@
+schema_version: "agm.evidence_package/v0.1"
+contribution_id: "demo-critical-placeholder-001"
+changed_files:
+  - "demo_app/auth.py"
+summary: "TODO"
+rationale: "TBD"
+risk_zone_assessment:
+  declared_risk_level: "low"
+  declared_risk_zones:
+    - "documentation"
+evidence_index:
+  - label: "placeholder"
+    path: "missing/path.txt"
+security_auth_impact_statement: "placeholder"
+tests_run: "tests passed"
+artifacts:
+  - path: "missing/path.txt"
+    description: "TODO"
+known_limitations: "N/A"
+human_review_declaration:
+  required: true
+  status: "pending_human_review"
+  reviewer: "TODO"
+  reviewed_at: null
+  review_scope: null
+  statement: "TBD"
+generated_at: "2026-06-24T00:00:00Z"

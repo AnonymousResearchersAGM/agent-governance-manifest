@@ -1,0 +1,97 @@
+{
+  "contribution_id": "dogfood-auth-token-trim",
+  "summary": "Normalize token whitespace before auth lookup and cover the behavior with a regression test.",
+  "changed_files": [
+    "demo_app/auth.py",
+    "demo_app/tests/test_auth.py"
+  ],
+  "detected_risk_zones": [
+    {
+      "file": "demo_app/auth.py",
+      "zone": "authentication",
+      "risk_level": "critical",
+      "reason": "matched path pattern"
+    },
+    {
+      "file": "demo_app/tests/test_auth.py",
+      "zone": "configuration",
+      "risk_level": "high",
+      "reason": "matched path pattern"
+    }
+  ],
+  "governance_entrypoint_changes": [],
+  "required_evidence": [
+    "contribution summary",
+    "changed files list",
+    "rationale",
+    "security/auth impact statement",
+    "tests run with command",
+    "relevant artifacts or test output",
+    "known limitations",
+    "human review declaration"
+  ],
+  "provided_evidence": [
+    "summary",
+    "changed_files",
+    "rationale",
+    "security_auth_impact_statement",
+    "tests_run",
+    "artifacts",
+    "known_limitations"
+  ],
+  "missing_evidence": [],
+  "placeholder_warnings": [],
+  "human_review_declaration_status": "pending_human_review",
+  "governance_gate_status": "blocked",
+  "technical_review_readiness": "not_ready",
+  "final_acceptance_readiness": "blocked_by_policy",
+  "governance_indicators": [
+    {
+      "indicator": "AGM reference source",
+      "reference": "Base branch .agm/manifest.yml",
+      "observed": "Used current repository .agm/manifest.yml",
+      "status": "Pass"
+    },
+    {
+      "indicator": "Governance entrypoint change",
+      "reference": "Must be reviewed if changed",
+      "observed": "None detected",
+      "status": "Pass"
+    },
+    {
+      "indicator": "Risk-zone classification",
+      "reference": "Must identify affected risk zone",
+      "observed": "authentication, configuration",
+      "status": "Pass"
+    },
+    {
+      "indicator": "Required tests",
+      "reference": "Tests run with command/artifact",
+      "observed": "Provided",
+      "status": "Pass"
+    },
+    {
+      "indicator": "Human review declaration",
+      "reference": "Required and must be human_reviewed for critical risk",
+      "observed": "pending_human_review",
+      "status": "Blocked"
+    },
+    {
+      "indicator": "Placeholder evidence",
+      "reference": "Must be absent",
+      "observed": "Absent",
+      "status": "Pass"
+    },
+    {
+      "indicator": "Final decision authority",
+      "reference": "Human maintainer",
+      "observed": "Human decision required",
+      "status": "Pass"
+    }
+  ],
+  "reviewer_attention_points": [
+    "Inspect auth/security behavior and confirm the human review declaration before final decision.",
+    "Human review remains pending; do not treat the contribution as final-acceptance ready."
+  ],
+  "final_decision_authority": "Final approval, rejection, request-for-changes, or merge decisions remain with human maintainers."
+}

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AGM Test Report",
+  "type": "object",
+  "required": ["commands", "environment", "outcomes", "coverage_notes", "failures"],
+  "properties": {
+    "commands": { "type": "array", "items": { "type": "string" } },
+    "environment": { "type": "string" },
+    "outcomes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["command", "result"],
+        "properties": {
+          "command": { "type": "string" },
+          "result": { "type": "string" },
+          "summary": { "type": "string" }
+        }
+      }
+    },
+    "coverage_notes": { "type": "string" },
+    "failures": { "type": "array", "items": { "type": "string" } }
+  }
+}
+

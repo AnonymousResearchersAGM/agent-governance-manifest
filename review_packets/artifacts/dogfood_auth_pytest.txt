@@ -1,0 +1,5 @@
+Command:
+python -m pytest demo_app/tests/test_auth.py
+
+Result:
+4 passed in 0.27s
