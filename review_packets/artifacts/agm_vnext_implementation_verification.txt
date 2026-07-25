@@ -1,0 +1,72 @@
+AGM vNext implementation verification artifact
+Generated: 2026-07-25T15:09:24Z
+Branch: v0.2-dev
+Base commit: c781a2f40d823ca8b5cc53fb43ccf2c4f88dfa1b
+Verified implementation commit before evidence packaging: 04d6dc639ecf9c9b7ea3d1d5917ce403eb8f707e
+
+Working-tree verification
+Command: .venv\Scripts\python.exe -m pytest -q
+Observed: 97 passed in 12.25s
+
+Compilation verification
+Command: .venv\Scripts\python.exe -m compileall -q src scripts
+Observed: exit code 0
+
+Policy validation
+Command: .venv\Scripts\python.exe -m agm.vnext.cli project validate
+Observed:
+- valid: true
+- schema_version: agm.manifest/v0.2-dev
+- policy_fingerprint: e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564
+- risk_rule_count: 7
+- obligation_count: 12
+- role_count: 7
+- transition_count: 22
+
+Fresh-clone verification
+Method: cloned local v0.2-dev into a new temporary directory with no local
+runtime state, created a new uv virtual environment, installed requirements and
+the editable package, then ran the documented commands from the clone root.
+Command: .venv\Scripts\python.exe -m pytest -q
+Observed: 97 passed in 11.79s
+Observed clone status after validation: clean
+
+Fresh-clone multi-risk simulation
+Command: python -m agm.vnext.cli project simulate --changed-file
+demo_app/auth.py --changed-file requirements.txt --mode
+declared_agent_mediated --autonomy-profile supervised_agent
+Observed:
+- effective intake: policy_required
+- overall risk: critical
+- matched rules: configuration-high, authentication-critical
+- interaction: authentication-configuration
+- distinct authentication, general high-risk, human-attestation,
+  action-scope, and independent-review obligations retained
+
+Ten-scenario development demonstration
+Command: .venv\Scripts\python.exe scripts\run_vnext_demo.py
+Observed:
+- ok: true
+- 10 scenarios executed
+- ordinary no-package semantics passed
+- critical multi-risk compilation passed
+- governance self-modification interaction passed
+- stale evidence detection passed
+- pending then explicit attestation transition passed
+- repair/resubmission/final-decision loop passed
+- override remained separate from final decision
+- open-case policy change was detected
+- contradictory policy input produced a blocking policy_conflict
+
+Security/static checks
+Command: rg for eval, unsafe yaml.load, release/evidence-boundary wording,
+placeholders, followed by git diff --check
+Observed:
+- no eval use
+- no unsafe yaml.load use
+- vNext remains labeled development, not existing-study validation
+- diff whitespace check passed
+
+Human/maintainer authority
+No human attestation or independent maintainer verification was performed by
+the coding agent. Required human review remains pending_human_review.

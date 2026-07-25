@@ -1,0 +1,150 @@
+schema_version: "agm.evidence_package/v0.1"
+contribution_id: "agm-vnext-development-implementation"
+changed_files:
+  - ".agm/README.md"
+  - ".agm/agents/contributor_protocol.md"
+  - ".agm/agents/entrypoints.yml"
+  - ".agm/agents/maintainer_protocol.md"
+  - ".agm/interfaces/contributor_panel.yml"
+  - ".agm/interfaces/governance_report.yml"
+  - ".agm/interfaces/maintainer_panel.yml"
+  - ".agm/interfaces/messages.yml"
+  - ".agm/manifest.yml"
+  - ".agm/policies/evidence_profiles.yml"
+  - ".agm/policies/interaction_rules.yml"
+  - ".agm/policies/risk_rules.yml"
+  - ".agm/profiles/assurance_profiles.yml"
+  - ".agm/profiles/autonomy_profiles.yml"
+  - ".agm/roles/permissions.yml"
+  - ".agm/roles/roles.yml"
+  - ".agm/schemas/bound_evidence.schema.json"
+  - ".agm/schemas/closure_receipt.schema.json"
+  - ".agm/schemas/compiled_obligation.schema.json"
+  - ".agm/schemas/governance_case.schema.json"
+  - ".agm/schemas/human_attestation.schema.json"
+  - ".agm/schemas/manifest.schema.json"
+  - ".agm/schemas/repair_request.schema.json"
+  - ".agm/schemas/risk_rules.schema.json"
+  - ".agm/schemas/state_transition.schema.json"
+  - ".agm/workflows/state_machine.yml"
+  - ".gitignore"
+  - "AGENTS.md"
+  - "AGM_vNext_Work_Package/AGM_v0.1.0_Artifact_Anatomy_and_Multi_Risk_Diagnosis.md"
+  - "AGM_vNext_Work_Package/AGM_vNext_Conceptual_Doctrine_CN.md"
+  - "AGM_vNext_Work_Package/CODEX_AGM_vNext_Implementation_Goal.md"
+  - "CLAUDE.md"
+  - "README.md"
+  - "docs/AGM_AGENT_SKILLS.md"
+  - "docs/AGM_VNEXT_ADOPTION_AND_MIGRATION.md"
+  - "docs/AGM_VNEXT_AUTHORITY_AND_STATE.md"
+  - "docs/AGM_VNEXT_CONTRIBUTOR_GUIDE.md"
+  - "docs/AGM_VNEXT_DESIGN.md"
+  - "docs/AGM_VNEXT_MAINTAINER_GUIDE.md"
+  - "docs/AGM_VNEXT_SPEC.md"
+  - "docs/PROTOTYPE_USAGE.md"
+  - "docs/V0_1_RESEARCH_SNAPSHOT.md"
+  - "docs/index.md"
+  - "evidence_packages/agm_vnext_implementation_pending.yml"
+  - "examples/vnext/README.md"
+  - "pyproject.toml"
+  - "review_packets/artifacts/agm_vnext_implementation_verification.txt"
+  - "scripts/run_vnext_demo.py"
+  - "skills/agm-contributor/skill.md"
+  - "skills/agm-maintainer/skill.md"
+  - "src/agm/vnext/__init__.py"
+  - "src/agm/vnext/attestations.py"
+  - "src/agm/vnext/cli.py"
+  - "src/agm/vnext/config.py"
+  - "src/agm/vnext/evidence.py"
+  - "src/agm/vnext/migration.py"
+  - "src/agm/vnext/models.py"
+  - "src/agm/vnext/obligations.py"
+  - "src/agm/vnext/policy.py"
+  - "src/agm/vnext/repair.py"
+  - "src/agm/vnext/reporting.py"
+  - "src/agm/vnext/risk.py"
+  - "src/agm/vnext/service.py"
+  - "src/agm/vnext/state_machine.py"
+  - "src/agm/vnext/storage.py"
+  - "src/agm/vnext/ui.py"
+  - "tests/test_vnext_config_policy.py"
+  - "tests/test_vnext_demo.py"
+  - "tests/test_vnext_evidence.py"
+  - "tests/test_vnext_migration.py"
+  - "tests/test_vnext_reporting_ui_cli.py"
+  - "tests/test_vnext_risk_obligations.py"
+  - "tests/test_vnext_state_storage_service.py"
+summary: >-
+  Implemented the isolated AGM vNext development prototype while preserving
+  the reported v0.1 compatibility module and research boundary. The change
+  adds typed governance cases, complete multi-risk rule resolution, obligation
+  compilation, evidence binding, explicit human attestation, authorized
+  maintainer operations, repair and migration diagnostics, closure receipts,
+  local contributor/maintainer panels, CLI workflows, portable Skills,
+  steward protocols, documentation, and ten deterministic demonstration
+  scenarios.
+rationale: >-
+  AGM v0.1 retained multiple risk observations but selected evidence only from
+  the highest risk profile. vNext needs contribution-specific governance
+  instantiation that preserves all matched obligations, binds evidence and
+  accountability to the actual change, separates agent preparation from human
+  authority, and supports independently authorized verification, repair,
+  decision, and closure.
+risk_zone_assessment:
+  declared_risk_level: "high"
+  declared_risk_zones:
+    - "configuration"
+    - "documentation"
+    - "unclassified_path"
+  vnext_interaction:
+    rule_id: "governance-self-modification"
+    effective_level: "critical"
+    reason: "Canonical governance policy and its executable runtime changed together."
+  agent_read_agm_files:
+    - ".agm/manifest.yml"
+    - ".agm/risk_zones.yml"
+    - ".agm/evidence_requirements.yml"
+    - ".agm/policies/risk_rules.yml"
+    - ".agm/policies/evidence_profiles.yml"
+    - ".agm/policies/interaction_rules.yml"
+    - ".agm/roles/permissions.yml"
+    - ".agm/workflows/state_machine.yml"
+evidence_index:
+  - label: "AGM vNext implementation verification"
+    path: "review_packets/artifacts/agm_vnext_implementation_verification.txt"
+tests_run:
+  - command: ".venv\\Scripts\\python.exe -m pytest -q"
+    outcome: "97 passed in 12.25s"
+    artifact: "review_packets/artifacts/agm_vnext_implementation_verification.txt"
+  - command: "fresh clone: .venv\\Scripts\\python.exe -m pytest -q"
+    outcome: "97 passed in 11.79s; clone worktree remained clean"
+    artifact: "review_packets/artifacts/agm_vnext_implementation_verification.txt"
+  - command: ".venv\\Scripts\\python.exe -m agm.vnext.cli project validate"
+    outcome: "valid true; 7 risk rules, 12 obligations, 7 roles, 22 transitions"
+    artifact: "review_packets/artifacts/agm_vnext_implementation_verification.txt"
+  - command: ".venv\\Scripts\\python.exe scripts\\run_vnext_demo.py"
+    outcome: "ok true; all 10 development scenarios executed successfully"
+    artifact: "review_packets/artifacts/agm_vnext_implementation_verification.txt"
+artifacts:
+  - path: "review_packets/artifacts/agm_vnext_implementation_verification.txt"
+    description: "Observed working-tree, fresh-clone, CLI, demonstration, and static-check results."
+known_limitations: >-
+  This remains a local v0.2-dev prototype. It does not provide cryptographic
+  identity, signed attestations, hosted storage, CI/platform enforcement, or
+  proof that a claimed human identity is truthful. Change-type and semantic
+  selectors are supplied extension points rather than an embedded AST parser.
+  The local panels use loopback binding and per-session action tokens but are
+  not a multi-user authentication service. Migration checking is diagnostic
+  and never silently mutates an open case. No usability, field-adoption, or
+  organizational-outcome claim is made. Independent human review of the
+  governance self-modification remains pending.
+human_review_declaration:
+  required: true
+  status: "pending_human_review"
+  reviewer: null
+  reviewed_at: null
+  review_scope: null
+  statement: >-
+    Human review and independent maintainer verification are required before
+    final acceptance. The coding agent did not perform or fabricate them.
+generated_at: "2026-07-25T15:09:24Z"
