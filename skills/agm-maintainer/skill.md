@@ -1,22 +1,45 @@
 # AGM Maintainer Skill
 
-This skill is a governance diagnostic assistant. It does not approve, reject, or merge.
+Use this portable lifecycle protocol to perform independent governance
+verification. A maintainer-side agent may prepare the diagnosis; only an
+authorized human role may execute human-authority operations.
 
-Use it to compare the project AGM reference rules with a contributor-submitted evidence package and the changed files in a proposed contribution.
+## Executable lifecycle
 
-## Behavior
+1. **Load base policy** — recover canonical `.agm/` from the contribution's
+   recorded base branch/commit, not from contributor assertions alone.
+2. **Independently resolve** — inspect the actual diff, recover every matched
+   risk rule, autonomy/assurance profile, fallback, and interaction rule.
+3. **Recompile** — independently compile the full obligation set and compare it
+   with the submitted case. Record mismatches and policy conflicts.
+4. **Verify bindings** — check obligation linkage, file/symbol scope,
+   contribution and policy fingerprints, commands, environment, artifact
+   existence/hash, freshness, expiry, provenance fields, and conflicting
+   evidence.
+5. **Verify attestations** — confirm actor role, scope, statement,
+   reservations, and current contribution/evidence fingerprints. Never treat
+   `pending` as confirmed.
+6. **Produce the report** — show overall readiness, every risk domain,
+   obligation reference vs observed state, findings, attestations, repair
+   history, and authority boundary.
+7. **Execute one authorized operation** — verify/reject evidence, request
+   repair, ask clarification, invalidate an attestation, record/resolve a
+   policy conflict, or record an authorized override. The domain service must
+   recheck role and transition authority.
+8. **Repair or close** — preserve attempts, revalidate only affected records,
+   and produce a closure receipt for a terminal human decision.
 
-- Use the base-branch `.agm/manifest.yml` as the reference governance standard.
-- Read the risk-zone and evidence-requirement files referenced by the manifest.
-- Read the contributor-submitted AGM evidence package as observed/provided values.
-- Read the PR diff or changed-file list to independently recover risk zones.
-- Compare recovered risk zones with contributor-declared risk zones.
-- If `.agm/`, `AGENTS.md`, `CLAUDE.md`, or `skills/**` changed, flag a governance-rule or governance-entrypoint change.
-- Generate a reference-vs-observed diagnostic report.
-- Treat `pending_human_review` as different from `human_reviewed`.
-- Treat `human_reviewed` as a declaration of human review, not final acceptance.
-- State clearly that final decisions remain with human maintainers.
+Useful commands:
 
-## Boundaries
+```bash
+python -m agm.vnext.cli maintainer inspect --case CASE --serve
+python -m agm.vnext.cli maintainer verify --case CASE --actor HUMAN
+python -m agm.vnext.cli maintainer request-repair --case CASE --actor HUMAN
+python -m agm.vnext.cli maintainer decide --case CASE --actor HUMAN
+```
 
-This skill does not call external services, inspect private prompts, act as an AI detector, approve changes, reject changes, merge changes, or replace maintainer judgment.
+## Authority boundary
+
+An agent may generate the report but may not impersonate a human verifier,
+policy steward, accountable human, or final maintainer. Verification is not
+acceptance. Final decisions remain with authorized human maintainers.

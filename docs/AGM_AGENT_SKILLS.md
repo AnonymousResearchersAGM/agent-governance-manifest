@@ -1,5 +1,17 @@
 # AGM Agent Skills and Adoption Layer
 
+This document records the v0.1 adoption layer. The two files under `skills/`
+now also contain executable vNext lifecycle protocols. The v0.1 research
+snapshot remains fixed; the new protocol steps are `v0.2-dev` design
+development.
+
+For the vNext authority and lifecycle model, see:
+
+- `AGM_VNEXT_SPEC.md`
+- `AGM_VNEXT_AUTHORITY_AND_STATE.md`
+- `.agm/agents/contributor_protocol.md`
+- `.agm/agents/maintainer_protocol.md`
+
 AGM core lives in `.agm/`. The canonical governance rules are:
 
 - `.agm/manifest.yml`

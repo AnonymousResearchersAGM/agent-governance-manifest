@@ -32,6 +32,8 @@ vnext:
     contributor_panel: ".agm/interfaces/contributor_panel.yml"
     maintainer_panel: ".agm/interfaces/maintainer_panel.yml"
     governance_report: ".agm/interfaces/governance_report.yml"
+    messages: ".agm/interfaces/messages.yml"
+    agent_entrypoints: ".agm/agents/entrypoints.yml"
 human_review_policy:
   critical_requires_human_review_declaration: true
   high_and_critical_require_known_limitations: true

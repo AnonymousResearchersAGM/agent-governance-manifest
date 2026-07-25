@@ -1,0 +1,15 @@
+schema_version: "agm.agent_entrypoints/v0.2-dev"
+adoption_levels:
+  - id: "discovery_pointer"
+    description: "AGENTS.md or another thin adapter points to canonical .agm policy."
+  - id: "portable_skill"
+    description: "An ordinary agent follows the contributor or maintainer lifecycle Skill."
+  - id: "dedicated_steward"
+    description: "A harness-neutral AGM Steward follows the same canonical lifecycle."
+protocols:
+  contributor: ".agm/agents/contributor_protocol.md"
+  maintainer: ".agm/agents/maintainer_protocol.md"
+skills:
+  contributor: "skills/agm-contributor/skill.md"
+  maintainer: "skills/agm-maintainer/skill.md"
+authority_notice: "Dedicated agents are optional and never acquire human authority."

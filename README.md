@@ -1,11 +1,28 @@
 # Agent Governance Manifest (AGM)
 
-AGM is a project-side, agent-readable governance manifest for making agent-mediated open-source contributions reviewable, evidence-oriented, and accountable.
+AGM is project-side governance infrastructure that resolves project rules
+against a concrete contribution, compiles contribution-specific obligations
+and authority boundaries, binds evidence and human accountability to the
+actual change, and supports authorized verification, repair, final human
+decision, and auditable closure.
 
-Status: Community Draft v0.1.0. AGM is an open research artifact, not a commercial product, platform lock-in mechanism, or vendor-specific agent workflow.
+Status:
+
+- AGM v0.1.0 remains the immutable reported research snapshot.
+- AGM vNext is isolated `v0.2-dev` design development, not a stable release and
+  not behavior validated by the existing v0.1.0 studies.
+
+AGM is an open research artifact, not a commercial product, platform lock-in
+mechanism, or vendor-specific agent workflow.
 
 ## Specification and Documentation
 
+- [vNext Development Specification](docs/AGM_VNEXT_SPEC.md)
+- [vNext Design](docs/AGM_VNEXT_DESIGN.md)
+- [vNext Contributor Guide](docs/AGM_VNEXT_CONTRIBUTOR_GUIDE.md)
+- [vNext Maintainer Guide](docs/AGM_VNEXT_MAINTAINER_GUIDE.md)
+- [vNext Adoption and Migration](docs/AGM_VNEXT_ADOPTION_AND_MIGRATION.md)
+- [v0.1 Research Snapshot](docs/V0_1_RESEARCH_SNAPSHOT.md)
 - [Documentation Home](docs/index.md)
 - [Human Guide to `.agm/`](.agm/README.md)
 - [AGM Specification v0.1 — Community Draft](docs/AGM_SPEC_v0.1.md)
@@ -14,7 +31,38 @@ Status: Community Draft v0.1.0. AGM is an open research artifact, not a commerci
 - [Human Review Declaration](docs/HUMAN_REVIEW_DECLARATION.md)
 - [Dogfooding Report](docs/DOGFOODING_REPORT.md)
 
-## Quick Start
+## vNext Quick Start
+
+```bash
+python -m pip install -e .
+python -m agm.vnext.cli project validate
+python -m agm.vnext.cli project simulate \
+  --changed-file demo_app/auth.py \
+  --changed-file requirements.txt \
+  --mode declared_agent_mediated \
+  --autonomy-profile supervised_agent
+```
+
+The vNext lifecycle is:
+
+`Resolve -> Compile -> Bind -> Attest -> Verify -> Repair -> Decide -> Record`
+
+Runtime cases live under ignored `.agm-work/`. Contributor and maintainer
+commands are separated:
+
+```bash
+python -m agm.vnext.cli contributor --help
+python -m agm.vnext.cli maintainer --help
+python -m agm.vnext.cli case --help
+```
+
+Run the deterministic ten-scenario development demonstration:
+
+```bash
+python scripts/run_vnext_demo.py
+```
+
+## v0.1 Compatibility Quick Start
 
 AGM v0.1.0 uses `.agm/` as the canonical governance source:
 
@@ -55,12 +103,13 @@ python -m demo_app.app
 
 AGM helps projects define:
 
-- risk zones for files and paths;
-- evidence requirements by risk level;
-- contribution-side evidence package expectations;
-- human review declaration requirements;
-- maintainer-facing diagnostic review packets;
-- reference-vs-observed governance reports.
+- complete matched-rule sets and multi-risk interaction rules;
+- obligations compiled from risk, autonomy, and assurance profiles;
+- evidence bound to policy, change fingerprint, scope, environment, and time;
+- explicit accountable-human and maintainer operations;
+- authority-typed state transitions, scoped repair, migration diagnostics, and
+  closure receipts; and
+- contributor and maintainer reference-versus-observed reports.
 
 ## What AGM Is Not
 
@@ -92,6 +141,10 @@ The canonical governance source remains `.agm/`. Skills, `AGENTS.md`, and `CLAUD
 - `review_packets/`: generated maintainer-facing review packet examples and small test artifacts.
 - `skills/`: optional contributor-side and maintainer-side AGM adoption profiles.
 - `src/agm/`: manifest loading, risk classification, evidence validation, gate-state calculation, and review packet generation.
+- `src/agm/vnext/`: isolated vNext models, policy compiler, evidence binding,
+  state machine, repair/migration services, reports, local panels, storage, and
+  CLI.
+- `.agm-work/`: ignored local vNext case runtime.
 - `scripts/`: small CLI wrappers around the core AGM engine.
 - `tests/`: pytest coverage for AGM behavior.
 - `docs/`: specification, usage guide, adoption guidance, and dogfooding report.

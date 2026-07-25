@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "agm.closure_receipt/v0.2-dev",
+  "title": "AGM vNext closure receipt",
+  "type": "object",
+  "required": [
+    "id",
+    "case_id",
+    "created_at",
+    "policy_fingerprint",
+    "contribution_fingerprint",
+    "final_state",
+    "final_decision_id",
+    "obligation_statuses",
+    "transition_log_hash"
+  ],
+  "properties": {
+    "id": {"type": "string", "minLength": 1},
+    "case_id": {"type": "string", "minLength": 1},
+    "created_at": {"type": "string", "format": "date-time"},
+    "policy_fingerprint": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "contribution_fingerprint": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "final_state": {"enum": ["accepted", "rejected", "closed"]},
+    "final_decision_id": {"type": "string", "minLength": 1},
+    "obligation_statuses": {"type": "object", "additionalProperties": {"type": "string"}},
+    "transition_log_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  }
+}

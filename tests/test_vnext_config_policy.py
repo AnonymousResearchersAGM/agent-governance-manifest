@@ -28,6 +28,7 @@ from agm.vnext.risk import resolve_risk  # noqa: E402
 def copied_policy(tmp_path: Path) -> Path:
     root = tmp_path / "project"
     shutil.copytree(ROOT / ".agm", root / ".agm")
+    shutil.copytree(ROOT / "skills", root / "skills")
     return root
 
 

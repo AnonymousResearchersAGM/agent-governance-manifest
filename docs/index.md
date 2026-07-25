@@ -1,6 +1,6 @@
 # Agent Governance Manifest Documentation
 
-**AGM Specification v0.1 — Community Draft**
+**AGM v0.1 Research Snapshot and vNext Development**
 
 Agent Governance Manifest (AGM) is a project-side, agent-readable governance manifest for making agent-mediated open-source contributions reviewable, evidence-oriented, and accountable.
 
@@ -10,6 +10,13 @@ Website: https://agent-governance-manifest.github.io/agent-governance-manifest/
 
 ## Documentation
 
+- [AGM vNext Design](AGM_VNEXT_DESIGN.md)
+- [AGM vNext Development Specification](AGM_VNEXT_SPEC.md)
+- [vNext Contributor Guide](AGM_VNEXT_CONTRIBUTOR_GUIDE.md)
+- [vNext Maintainer Guide](AGM_VNEXT_MAINTAINER_GUIDE.md)
+- [vNext Adoption and Migration](AGM_VNEXT_ADOPTION_AND_MIGRATION.md)
+- [vNext Authority and State Model](AGM_VNEXT_AUTHORITY_AND_STATE.md)
+- [v0.1 Research Snapshot](V0_1_RESEARCH_SNAPSHOT.md)
 - [AGM Specification v0.1 — Community Draft](AGM_SPEC_v0.1.md)
 - [Human Guide to `.agm/`](AGM_HUMAN_GUIDE.md)
 - [Prototype Usage Guide](PROTOTYPE_USAGE.md)

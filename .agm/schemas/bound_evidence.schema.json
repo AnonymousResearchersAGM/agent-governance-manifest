@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "agm.bound_evidence/v0.2-dev",
+  "title": "AGM vNext bound evidence",
+  "type": "object",
+  "required": [
+    "id",
+    "obligation_ids",
+    "affected_scope",
+    "contribution_fingerprint",
+    "policy_fingerprint",
+    "evidence_type",
+    "value",
+    "observed_at",
+    "source_actor",
+    "validity_state"
+  ],
+  "properties": {
+    "id": {"type": "string", "minLength": 1},
+    "obligation_ids": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "affected_scope": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "contribution_fingerprint": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "policy_fingerprint": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "evidence_type": {"type": "string", "minLength": 1},
+    "observed_at": {"type": "string", "format": "date-time"},
+    "expires_at": {"type": ["string", "null"], "format": "date-time"},
+    "source_actor": {"type": "string", "minLength": 1},
+    "validity_state": {
+      "enum": [
+        "unverified",
+        "valid",
+        "verified",
+        "invalid",
+        "stale",
+        "expired",
+        "conflicting",
+        "rejected"
+      ]
+    }
+  }
+}

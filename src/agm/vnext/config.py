@@ -296,6 +296,8 @@ def load_vnext_config(root: Path) -> VNextConfig:
         "contributor_panel",
         "maintainer_panel",
         "governance_report",
+        "messages",
+        "agent_entrypoints",
     }
     missing_references = sorted(required_references - set(references))
     if missing_references:
@@ -396,8 +398,31 @@ def load_vnext_config(root: Path) -> VNextConfig:
 
     interfaces = {
         key: documents[key]
-        for key in {"contributor_panel", "maintainer_panel", "governance_report"}
+        for key in {
+            "contributor_panel",
+            "maintainer_panel",
+            "governance_report",
+            "messages",
+        }
     }
+    messages = documents["messages"].get("messages")
+    if not isinstance(messages, dict) or not all(
+        isinstance(key, str) and isinstance(value, str)
+        for key, value in messages.items()
+    ):
+        raise VNextError("Interface messages must be a string mapping")
+    entrypoints = documents["agent_entrypoints"]
+    for group_name in ("protocols", "skills"):
+        references_group = entrypoints.get(group_name)
+        if not isinstance(references_group, dict):
+            raise VNextError(f"Agent entrypoints {group_name} must be a mapping")
+        for label, relative in references_group.items():
+            if not isinstance(relative, str) or not safe_project_path(
+                root, relative
+            ).is_file():
+                raise VNextError(
+                    f"Agent entrypoint {group_name}.{label} references a missing file"
+                )
     policy_payload = {
         key: documents[key]
         for key in sorted(documents)

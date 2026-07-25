@@ -1,22 +1,49 @@
 # AGM Contributor Skill
 
-This skill is a governance overlay, not the primary coding agent.
+Use this portable lifecycle protocol as a governance overlay. It does not
+replace the coding objective or the primary coding agent.
 
-Use it to prepare an Agent Governance Manifest (AGM) evidence package for a completed or in-progress change. Do not replace the user's original coding instructions, and do not change the development objective unless AGM requirements explicitly require risk disclosure, evidence, or review preparation.
+## Executable lifecycle
 
-## Behavior
+1. **Discover** — read `.agm/manifest.yml` and every referenced policy needed
+   for the contribution. Treat Skills and discovery files as adapters, not
+   authority.
+2. **Preflight** — identify the base commit, requested intake mode, changed
+   files, change-type tags, semantic targets, autonomy profile, permissions,
+   supervision, and delegation.
+3. **Inspect the actual change** — compute or obtain the real diff/change
+   fingerprint. Do not infer authorship from package presence or absence.
+4. **Resolve all risk** — retain every matched rule and the conservative
+   fallback for unknown paths. Overall risk is a summary only.
+5. **Compile** — union and deduplicate rule, autonomy, assurance, and
+   interaction obligations. Surface contradictions as policy conflicts.
+6. **Gather** — bind factual evidence to obligation IDs, affected scope,
+   contribution and policy fingerprints, command/environment, artifact hash,
+   time, expiry, and source actor/tool.
+7. **Validate** — detect missing, placeholder, stale, expired, mismatched,
+   conflicting, orphaned, or unverifiable evidence. Never invent evidence or
+   test outcomes.
+8. **Pause for human attestation** — generate the contributor panel and
+   explicitly tell the user what scope requires review. An agent must not
+   submit `confirm_attestation`.
+9. **Bind and revalidate** — after explicit human action, bind the attestation
+   to the current contribution, policy, evidence set, scope, statement, and
+   reservations.
+10. **Prepare submission** — revalidate after every material change, invalidate
+    only affected records, record repair attempts, and submit for independent
+    maintainer verification.
 
-- Before editing, read `.agm/manifest.yml` if it exists.
-- Treat `.agm/manifest.yml` and its referenced risk-zone and evidence-requirement files as the canonical AGM rules.
-- Use AGM only to understand risk zones, evidence requirements, and human review requirements.
-- Continue following the user's original coding task and project instructions.
-- After editing, prepare or update an AGM evidence package.
-- Do not invent evidence.
-- Do not claim tests were run unless they were actually run or the user provides reliable test output.
-- If required evidence cannot be produced, mark it as missing rather than hiding the gap.
-- For high-risk or critical changes, keep human review as `pending_human_review` unless a human explicitly confirms review.
-- `human_reviewed` is a declaration of human review readiness, not acceptance.
+Useful commands:
 
-## Boundaries
+```bash
+python -m agm.vnext.cli project simulate --changed-file PATH
+python -m agm.vnext.cli contributor open-case --changed-file PATH --actor ACTOR
+python -m agm.vnext.cli contributor prepare --case CASE --actor ACTOR
+python -m agm.vnext.cli contributor review --case CASE --serve
+```
 
-This skill does not call external services, run LLM workflows, approve changes, reject changes, merge changes, or replace maintainer judgment. Final decisions remain with human maintainers.
+## Authority boundary
+
+Contributor agents may propose, prepare, and resubmit. They may not perform
+human attestation, maintainer verification, policy override, acceptance,
+rejection, closure, or merge. `ready` is never `accepted`.

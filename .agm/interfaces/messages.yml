@@ -1,0 +1,8 @@
+schema_version: "agm.messages/v0.2-dev"
+messages:
+  no_package: "No AGM package submitted. This does not confirm human authorship."
+  ready: "Eligible for an authorized human decision; not accepted."
+  pending_attestation: "Explicit accountable-human attestation is required. An agent cannot perform it."
+  pending_verification: "Independent maintainer verification is required."
+  repair_required: "Repair is required; see scoped findings and revalidation requirements."
+  final_authority: "Final decisions remain with authorized human maintainers."

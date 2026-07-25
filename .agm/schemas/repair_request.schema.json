@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "agm.repair_request/v0.2-dev",
+  "title": "AGM vNext repair request",
+  "type": "object",
+  "required": [
+    "id",
+    "finding_ids",
+    "responsible_role",
+    "affected_obligation_ids",
+    "requested_correction",
+    "revalidation_required",
+    "requested_by",
+    "requested_at",
+    "status"
+  ],
+  "properties": {
+    "id": {"type": "string", "minLength": 1},
+    "finding_ids": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+    "responsible_role": {"type": "string", "minLength": 1},
+    "affected_obligation_ids": {"type": "array", "items": {"type": "string"}},
+    "requested_correction": {"type": "string", "minLength": 1},
+    "revalidation_required": {"type": "array", "items": {"type": "string"}},
+    "requested_by": {"type": "string", "minLength": 1},
+    "requested_at": {"type": "string", "format": "date-time"},
+    "status": {"enum": ["open", "resubmitted", "resolved", "closed"]}
+  }
+}

@@ -23,6 +23,7 @@ from agm.vnext.service import GovernanceService  # noqa: E402
 def project(tmp_path: Path) -> Path:
     root = tmp_path / "project"
     shutil.copytree(ROOT / ".agm", root / ".agm")
+    shutil.copytree(ROOT / "skills", root / "skills")
     (root / "docs").mkdir()
     (root / "docs" / "guide.md").write_text("guide", encoding="utf-8")
     return root

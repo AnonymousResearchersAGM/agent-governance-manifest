@@ -4,6 +4,11 @@ Version: v0.1.0
 
 Status: Community Draft
 
+This guide documents the preserved v0.1 compatibility workflow. It does not
+describe vNext as previously evaluated behavior. For `v0.2-dev`, use
+`AGM_VNEXT_CONTRIBUTOR_GUIDE.md`, `AGM_VNEXT_MAINTAINER_GUIDE.md`, and
+`AGM_VNEXT_SPEC.md`.
+
 Run commands from the repository root:
 
 ```bash

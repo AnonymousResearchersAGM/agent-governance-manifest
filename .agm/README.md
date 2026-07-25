@@ -1,6 +1,19 @@
 # Agent Governance Manifest Human Guide
 
-This directory is the canonical governance source for the AGM v0.1.0 Community Draft prototype.
+This directory now carries two explicit boundaries:
+
+- the v0.1-compatible `risk_zones.yml` and `evidence_requirements.yml` used by
+  the reported prototype; and
+- `/v0.2-dev` policy, profile, role, workflow, interface, agent, and schema
+  files used by new vNext design development.
+
+The v0.1 research boundary is documented in
+`docs/V0_1_RESEARCH_SNAPSHOT.md`. New vNext mechanisms must not be described as
+already evaluated by the v0.1 studies.
+
+The root compatibility files remain the canonical source for the AGM v0.1.0
+Community Draft behavior; the referenced subdirectories are canonical for
+vNext development.
 
 The YAML files are machine-readable so that agents and lightweight scripts can validate contributions. They are also intended to be human-readable project governance documents. This guide explains the same rules in natural language.
 
@@ -13,6 +26,21 @@ The YAML files are machine-readable so that agents and lightweight scripts can v
 | `evidence_requirements.yml` | Evidence requirements | Defines the minimum evidence package fields required for each risk level. |
 
 Skills, `AGENTS.md`, and `CLAUDE.md` are optional adoption helpers. They point agents to this directory, but they do not replace these canonical files.
+
+## vNext Canonical Structure
+
+| Directory | Purpose |
+| --- | --- |
+| `policies/` | Multi-selector risk rules, stable obligation definitions, and interaction escalation |
+| `profiles/` | Orthogonal autonomy and assurance profiles |
+| `roles/` | Human/non-human roles and permissions |
+| `workflows/` | Authority-typed lifecycle transitions |
+| `interfaces/` | Contributor/maintainer panels, reports, and messages |
+| `agents/` | Optional portable steward entrypoints |
+| `schemas/` | Development schema artifacts |
+
+Runtime Governance Cases belong under ignored `.agm-work/`, never inside this
+canonical policy directory.
 
 ## Risk Levels
 
