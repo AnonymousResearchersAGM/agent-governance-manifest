@@ -35,7 +35,7 @@ transitions:
     to: "evidence_incomplete"
     roles: ["system"]
   - action: "await_attestation"
-    from: ["obligations_compiled", "evidence_incomplete"]
+    from: ["obligations_compiled", "evidence_incomplete", "resubmitted"]
     to: "awaiting_human_attestation"
     roles: ["system"]
   - action: "confirm_attestation"
@@ -70,6 +70,22 @@ transitions:
     from: ["awaiting_maintainer_verification", "verification_complete"]
     to: "repair_requested"
     roles: ["maintainer_verifier", "maintainer"]
+  - action: "ask_clarification"
+    from: ["awaiting_maintainer_verification", "verification_complete", "ready_for_human_decision"]
+    to: "repair_requested"
+    roles: ["maintainer_verifier", "maintainer"]
+  - action: "invalidate_attestation"
+    from: ["awaiting_maintainer_verification", "verification_complete", "ready_for_human_decision"]
+    to: "repair_requested"
+    roles: ["maintainer_verifier", "maintainer"]
+  - action: "record_policy_conflict"
+    from: ["evidence_incomplete", "awaiting_human_attestation", "awaiting_maintainer_verification", "verification_complete", "ready_for_human_decision"]
+    to: "repair_requested"
+    roles: ["maintainer_verifier", "policy_steward", "maintainer"]
+  - action: "resolve_policy_conflict"
+    from: ["repair_requested"]
+    to: "resubmitted"
+    roles: ["policy_steward", "maintainer"]
   - action: "resubmit"
     from: ["repair_requested"]
     to: "resubmitted"

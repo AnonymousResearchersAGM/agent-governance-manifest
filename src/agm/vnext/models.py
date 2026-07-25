@@ -94,6 +94,7 @@ class BoundEvidence(RecordMixin):
     obligation_ids: list[str]
     affected_scope: list[str]
     contribution_fingerprint: str
+    policy_fingerprint: str
     evidence_type: str
     value: Any
     command: str | None
@@ -104,6 +105,9 @@ class BoundEvidence(RecordMixin):
     expires_at: str | None
     source_actor: str
     source_tool: str | None
+    rejected_at: str | None = None
+    rejected_by: str | None = None
+    rejection_reason: str | None = None
     validity_state: str = "unverified"
     invalid_reasons: list[str] = field(default_factory=list)
 
