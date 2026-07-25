@@ -350,6 +350,11 @@ class GovernanceService:
         reservations: list[str] | None = None,
         timestamp: str | None = None,
     ):
+        if role != "accountable_human":
+            raise VNextError(
+                "Human attestation requires the accountable_human role; agents cannot attest"
+            )
+        authorize(self.config, role=role, action="confirm_attestation")
         case = self.storage.load_case(case_id)
         validate_evidence_set(case, root=self.root)
         evidence_blockers = [
