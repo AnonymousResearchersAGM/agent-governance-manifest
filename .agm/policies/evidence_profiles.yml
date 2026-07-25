@@ -1,0 +1,86 @@
+schema_version: "agm.evidence_profiles/v0.2-dev"
+obligations:
+  - id: "O-SUMMARY"
+    type: "evidence"
+    severity: "low"
+    blocking: true
+    verifier_roles: ["maintainer_verifier", "maintainer"]
+    evidence_type: "contribution_summary"
+    description: "Provide a concise factual contribution summary."
+  - id: "O-CHANGED-FILES"
+    type: "evidence"
+    severity: "low"
+    blocking: true
+    verifier_roles: ["maintainer_verifier", "maintainer"]
+    evidence_type: "changed_files"
+    description: "Identify the files and scopes covered by the contribution."
+  - id: "O-RATIONALE"
+    type: "evidence"
+    severity: "medium"
+    blocking: true
+    verifier_roles: ["maintainer_verifier", "maintainer"]
+    evidence_type: "rationale"
+    description: "Explain why the change is needed without disclosing private reasoning."
+  - id: "O-TEST-EXPLANATION"
+    type: "evidence"
+    severity: "medium"
+    blocking: true
+    verifier_roles: ["maintainer_verifier", "maintainer"]
+    evidence_type: "test_explanation"
+    description: "Provide a test command or a clear explanation when tests are not applicable."
+  - id: "O-TEST-COMMAND"
+    type: "evidence"
+    severity: "high"
+    blocking: true
+    verifier_roles: ["maintainer_verifier", "maintainer"]
+    evidence_type: "test_command"
+    description: "Provide a concrete test command, environment, and outcome."
+  - id: "O-ARTIFACT"
+    type: "evidence"
+    severity: "high"
+    blocking: true
+    verifier_roles: ["maintainer_verifier", "maintainer"]
+    evidence_type: "artifact"
+    description: "Provide a locally checkable artifact or test output."
+  - id: "O-LIMITATIONS"
+    type: "evidence"
+    severity: "high"
+    blocking: true
+    verifier_roles: ["maintainer_verifier", "maintainer"]
+    evidence_type: "known_limitations"
+    description: "State known limitations or explicitly state none."
+  - id: "O-AUTH-IMPACT"
+    type: "evidence"
+    severity: "critical"
+    blocking: true
+    verifier_roles: ["maintainer_verifier", "maintainer"]
+    evidence_type: "security_auth_impact"
+    description: "Describe security, authentication, and authorization impact."
+  - id: "O-POLICY-IMPACT"
+    type: "evidence"
+    severity: "high"
+    blocking: true
+    verifier_roles: ["policy_steward", "maintainer"]
+    evidence_type: "policy_impact"
+    description: "Describe policy compatibility, migration, and self-modification impact."
+  - id: "O-AGENT-SCOPE"
+    type: "evidence"
+    severity: "medium"
+    blocking: true
+    verifier_roles: ["maintainer_verifier", "maintainer"]
+    evidence_type: "agent_action_scope"
+    description: "Record the declared action, permissions, supervision, and delegation scope."
+  - id: "O-HUMAN-ATTEST"
+    type: "human_attestation"
+    severity: "critical"
+    blocking: true
+    verifier_roles: ["accountable_human", "maintainer"]
+    evidence_type: "human_attestation"
+    description: "Obtain explicit accountable-human attestation bound to the case."
+  - id: "O-INDEPENDENT-REVIEW"
+    type: "maintainer_verification"
+    severity: "critical"
+    blocking: true
+    verifier_roles: ["maintainer"]
+    evidence_type: "independent_review"
+    description: "Require independent maintainer verification with separation of duty."

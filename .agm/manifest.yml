@@ -1,8 +1,8 @@
-schema_version: "agm.manifest/v0.1"
+schema_version: "agm.manifest/v0.2-dev"
 project:
   name: "AGM Demo Task Tracker"
   repository: "agm_prototype"
-  description: "A compact artifact prototype for repository-level agent governance."
+  description: "A v0.1-compatible artifact plus isolated AGM vNext design development."
 governance_scope:
   description: "Project-level governance for agent-mediated contributions before human review."
   governed_paths:
@@ -16,6 +16,22 @@ governance_scope:
     - "requirements.txt"
 risk_zone_reference: ".agm/risk_zones.yml"
 evidence_requirement_reference: ".agm/evidence_requirements.yml"
+vnext:
+  schema_version: "agm.vnext_config/v0.2-dev"
+  status: "development"
+  reported_snapshot: "docs/V0_1_RESEARCH_SNAPSHOT.md"
+  policy_references:
+    risk_rules: ".agm/policies/risk_rules.yml"
+    evidence_profiles: ".agm/policies/evidence_profiles.yml"
+    interaction_rules: ".agm/policies/interaction_rules.yml"
+    autonomy_profiles: ".agm/profiles/autonomy_profiles.yml"
+    assurance_profiles: ".agm/profiles/assurance_profiles.yml"
+    roles: ".agm/roles/roles.yml"
+    permissions: ".agm/roles/permissions.yml"
+    state_machine: ".agm/workflows/state_machine.yml"
+    contributor_panel: ".agm/interfaces/contributor_panel.yml"
+    maintainer_panel: ".agm/interfaces/maintainer_panel.yml"
+    governance_report: ".agm/interfaces/governance_report.yml"
 human_review_policy:
   critical_requires_human_review_declaration: true
   high_and_critical_require_known_limitations: true

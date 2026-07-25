@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "agm.manifest/v0.2-dev",
+  "title": "AGM vNext development manifest",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "project",
+    "governance_scope",
+    "risk_zone_reference",
+    "evidence_requirement_reference",
+    "vnext",
+    "final_decision_authority"
+  ],
+  "properties": {
+    "schema_version": {"const": "agm.manifest/v0.2-dev"},
+    "vnext": {
+      "type": "object",
+      "required": ["schema_version", "status", "policy_references"],
+      "properties": {
+        "schema_version": {"const": "agm.vnext_config/v0.2-dev"},
+        "status": {"const": "development"},
+        "policy_references": {
+          "type": "object",
+          "additionalProperties": {"type": "string", "minLength": 1}
+        }
+      }
+    }
+  },
+  "additionalProperties": true
+}

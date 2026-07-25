@@ -24,4 +24,7 @@ temp/
 *.tmp
 *.log
 
+# AGM vNext local case runtime (curated examples live under examples/)
+.agm-work/
+
 *.zip

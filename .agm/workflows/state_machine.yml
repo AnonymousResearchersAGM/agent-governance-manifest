@@ -1,0 +1,96 @@
+schema_version: "agm.state_machine/v0.2-dev"
+initial_state: "case_opened"
+terminal_states:
+  - "ordinary_unmanaged"
+  - "accepted"
+  - "rejected"
+  - "closed"
+states:
+  - "ordinary_unmanaged"
+  - "case_opened"
+  - "policy_resolved"
+  - "obligations_compiled"
+  - "evidence_incomplete"
+  - "awaiting_human_attestation"
+  - "awaiting_maintainer_verification"
+  - "repair_requested"
+  - "resubmitted"
+  - "verification_complete"
+  - "ready_for_human_decision"
+  - "overridden"
+  - "accepted"
+  - "rejected"
+  - "closed"
+transitions:
+  - action: "resolve_policy"
+    from: ["case_opened"]
+    to: "policy_resolved"
+    roles: ["system"]
+  - action: "compile_obligations"
+    from: ["policy_resolved"]
+    to: "obligations_compiled"
+    roles: ["system"]
+  - action: "mark_evidence_state"
+    from: ["obligations_compiled", "resubmitted"]
+    to: "evidence_incomplete"
+    roles: ["system"]
+  - action: "await_attestation"
+    from: ["obligations_compiled", "evidence_incomplete"]
+    to: "awaiting_human_attestation"
+    roles: ["system"]
+  - action: "confirm_attestation"
+    from: ["awaiting_human_attestation", "evidence_incomplete"]
+    to: "awaiting_maintainer_verification"
+    roles: ["accountable_human"]
+  - action: "decline_attestation"
+    from: ["awaiting_human_attestation"]
+    to: "repair_requested"
+    roles: ["accountable_human"]
+  - action: "request_correction"
+    from: ["awaiting_human_attestation", "evidence_incomplete"]
+    to: "repair_requested"
+    roles: ["accountable_human", "contributor"]
+  - action: "submit_for_verification"
+    from: ["obligations_compiled", "evidence_incomplete", "resubmitted"]
+    to: "awaiting_maintainer_verification"
+    roles: ["contributor", "contributor_agent"]
+  - action: "verify_evidence"
+    from: ["awaiting_maintainer_verification", "resubmitted"]
+    to: "verification_complete"
+    roles: ["maintainer_verifier", "policy_steward", "maintainer"]
+  - action: "mark_ready"
+    from: ["verification_complete"]
+    to: "ready_for_human_decision"
+    roles: ["system"]
+  - action: "request_repair"
+    from: ["awaiting_maintainer_verification", "verification_complete", "ready_for_human_decision"]
+    to: "repair_requested"
+    roles: ["maintainer_verifier", "policy_steward", "maintainer"]
+  - action: "reject_evidence"
+    from: ["awaiting_maintainer_verification", "verification_complete"]
+    to: "repair_requested"
+    roles: ["maintainer_verifier", "maintainer"]
+  - action: "resubmit"
+    from: ["repair_requested"]
+    to: "resubmitted"
+    roles: ["contributor", "contributor_agent"]
+  - action: "authorized_override"
+    from: ["repair_requested", "verification_complete", "ready_for_human_decision"]
+    to: "overridden"
+    roles: ["maintainer"]
+  - action: "decide_accept"
+    from: ["ready_for_human_decision", "overridden"]
+    to: "accepted"
+    roles: ["maintainer"]
+  - action: "decide_reject"
+    from: ["ready_for_human_decision", "repair_requested", "overridden"]
+    to: "rejected"
+    roles: ["maintainer"]
+  - action: "decide_request_changes"
+    from: ["ready_for_human_decision", "overridden"]
+    to: "repair_requested"
+    roles: ["maintainer"]
+  - action: "decide_close"
+    from: ["ready_for_human_decision", "repair_requested", "overridden"]
+    to: "closed"
+    roles: ["maintainer"]

@@ -1,0 +1,9 @@
+schema_version: "agm.interface/v0.2-dev"
+columns:
+  - "obligation_id"
+  - "source_rules"
+  - "reference"
+  - "observed"
+  - "status"
+  - "blocking"
+readiness_rule: "Every unresolved blocking obligation must be satisfied and verified."

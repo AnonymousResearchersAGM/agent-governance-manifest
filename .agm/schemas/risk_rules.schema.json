@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "agm.risk_rules/v0.2-dev",
+  "title": "AGM vNext risk rules",
+  "type": "object",
+  "required": ["schema_version", "default_risk_level", "fallback", "risk_rules"],
+  "properties": {
+    "schema_version": {"const": "agm.risk_rules/v0.2-dev"},
+    "default_risk_level": {"enum": ["low", "medium", "high", "critical"]},
+    "risk_rules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "zone", "risk_level", "selectors", "obligation_ids"],
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "zone": {"type": "string", "minLength": 1},
+          "risk_level": {"enum": ["low", "medium", "high", "critical"]},
+          "case_required": {"type": "boolean"},
+          "selectors": {"type": "object", "minProperties": 1},
+          "obligation_ids": {
+            "type": "array",
+            "items": {"type": "string", "minLength": 1}
+          }
+        }
+      }
+    }
+  }
+}

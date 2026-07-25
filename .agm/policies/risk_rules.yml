@@ -1,0 +1,129 @@
+schema_version: "agm.risk_rules/v0.2-dev"
+default_risk_level: "high"
+fallback:
+  rule_id: "unclassified-surface"
+  zone: "unclassified_surface"
+  risk_level: "high"
+  obligation_ids:
+    - "O-SUMMARY"
+    - "O-CHANGED-FILES"
+    - "O-RATIONALE"
+    - "O-TEST-COMMAND"
+    - "O-ARTIFACT"
+    - "O-LIMITATIONS"
+risk_rules:
+  - id: "documentation-low"
+    zone: "documentation"
+    risk_level: "low"
+    case_required: false
+    selectors:
+      paths:
+        - "README.md"
+        - "docs/**"
+    obligation_ids:
+      - "O-SUMMARY"
+      - "O-CHANGED-FILES"
+  - id: "task-logic-medium"
+    zone: "task_logic"
+    risk_level: "medium"
+    case_required: false
+    selectors:
+      paths:
+        - "demo_app/tasks.py"
+      semantic_targets:
+        - "task_logic"
+    obligation_ids:
+      - "O-SUMMARY"
+      - "O-CHANGED-FILES"
+      - "O-RATIONALE"
+      - "O-TEST-EXPLANATION"
+  - id: "configuration-high"
+    zone: "configuration"
+    risk_level: "high"
+    case_required: false
+    selectors:
+      paths:
+        - "demo_app/config.py"
+        - "requirements.txt"
+      change_types:
+        - "dependency_change"
+        - "deployment_configuration"
+    obligation_ids:
+      - "O-SUMMARY"
+      - "O-CHANGED-FILES"
+      - "O-RATIONALE"
+      - "O-TEST-COMMAND"
+      - "O-ARTIFACT"
+      - "O-LIMITATIONS"
+  - id: "test-strategy-high"
+    zone: "test_strategy"
+    risk_level: "high"
+    case_required: false
+    selectors:
+      paths:
+        - "tests/**"
+        - "demo_app/tests/**"
+    obligation_ids:
+      - "O-SUMMARY"
+      - "O-CHANGED-FILES"
+      - "O-RATIONALE"
+      - "O-TEST-COMMAND"
+      - "O-ARTIFACT"
+      - "O-LIMITATIONS"
+  - id: "authentication-critical"
+    zone: "authentication"
+    risk_level: "critical"
+    case_required: true
+    selectors:
+      paths:
+        - "demo_app/auth.py"
+        - "**/auth.py"
+      semantic_targets:
+        - "authentication"
+        - "authorization"
+    obligation_ids:
+      - "O-SUMMARY"
+      - "O-CHANGED-FILES"
+      - "O-RATIONALE"
+      - "O-AUTH-IMPACT"
+      - "O-TEST-COMMAND"
+      - "O-ARTIFACT"
+      - "O-LIMITATIONS"
+      - "O-HUMAN-ATTEST"
+  - id: "governance-policy-high"
+    zone: "project_governance"
+    risk_level: "high"
+    case_required: true
+    selectors:
+      paths:
+        - ".agm/**"
+        - "AGENTS.md"
+        - "CLAUDE.md"
+      governance_entrypoint: true
+    obligation_ids:
+      - "O-SUMMARY"
+      - "O-CHANGED-FILES"
+      - "O-RATIONALE"
+      - "O-TEST-COMMAND"
+      - "O-ARTIFACT"
+      - "O-LIMITATIONS"
+      - "O-POLICY-IMPACT"
+  - id: "governance-runtime-high"
+    zone: "governance_runtime"
+    risk_level: "high"
+    case_required: true
+    selectors:
+      paths:
+        - "src/agm/**"
+        - "scripts/**"
+        - "skills/**"
+      change_types:
+        - "governance_runtime"
+    obligation_ids:
+      - "O-SUMMARY"
+      - "O-CHANGED-FILES"
+      - "O-RATIONALE"
+      - "O-TEST-COMMAND"
+      - "O-ARTIFACT"
+      - "O-LIMITATIONS"
+      - "O-POLICY-IMPACT"

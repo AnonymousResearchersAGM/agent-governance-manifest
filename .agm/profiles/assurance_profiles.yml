@@ -1,0 +1,10 @@
+schema_version: "agm.assurance_profiles/v0.2-dev"
+assurance_profiles:
+  - id: "standard"
+    description: "Project-default assurance profile."
+    obligation_ids: []
+  - id: "heightened"
+    extends: "standard"
+    description: "Independent maintainer verification is required."
+    obligation_ids:
+      - "O-INDEPENDENT-REVIEW"

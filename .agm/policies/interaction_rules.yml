@@ -1,0 +1,20 @@
+schema_version: "agm.interaction_rules/v0.2-dev"
+interaction_rules:
+  - id: "governance-self-modification"
+    all_rule_ids:
+      - "governance-policy-high"
+      - "governance-runtime-high"
+    risk_level: "critical"
+    obligation_ids:
+      - "O-INDEPENDENT-REVIEW"
+    separation_of_duty: true
+    description: "Policy and its executable governance runtime change together."
+  - id: "authentication-configuration"
+    all_rule_ids:
+      - "authentication-critical"
+      - "configuration-high"
+    risk_level: "critical"
+    obligation_ids:
+      - "O-INDEPENDENT-REVIEW"
+    separation_of_duty: true
+    description: "Authentication behavior and deployment/dependency configuration interact."

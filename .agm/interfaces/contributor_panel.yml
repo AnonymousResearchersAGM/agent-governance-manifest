@@ -1,0 +1,14 @@
+schema_version: "agm.interface/v0.2-dev"
+title: "AGM Contributor Governance Panel"
+sections:
+  - "case_identity"
+  - "contribution_fingerprint"
+  - "matched_risk_areas"
+  - "compiled_obligations"
+  - "evidence_status"
+  - "attestation_scope"
+actions:
+  - "confirm_attestation"
+  - "request_correction"
+  - "decline_attestation"
+authority_notice: "An agent may prepare this panel but cannot perform human attestation."

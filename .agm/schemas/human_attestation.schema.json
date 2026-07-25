@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "agm.human_attestation/v0.2-dev",
+  "title": "AGM vNext human attestation event",
+  "type": "object",
+  "required": [
+    "id",
+    "actor",
+    "role",
+    "timestamp",
+    "reviewed_scope",
+    "statement",
+    "policy_fingerprint",
+    "contribution_fingerprint",
+    "evidence_set_fingerprint",
+    "status"
+  ],
+  "properties": {
+    "id": {"type": "string", "minLength": 1},
+    "actor": {"type": "string", "minLength": 1},
+    "role": {"const": "accountable_human"},
+    "timestamp": {"type": "string", "format": "date-time"},
+    "reviewed_scope": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "statement": {"type": "string", "minLength": 1},
+    "status": {"enum": ["confirmed", "declined", "invalidated"]}
+  }
+}

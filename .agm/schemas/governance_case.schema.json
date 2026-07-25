@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "agm.governance_case/v0.2-dev",
+  "title": "AGM vNext governance case",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "id",
+    "mode",
+    "state",
+    "base_commit",
+    "changed_files",
+    "contribution_fingerprint",
+    "policy_snapshot",
+    "matched_rules",
+    "obligations"
+  ],
+  "properties": {
+    "schema_version": {"const": "agm.governance_case/v0.2-dev"},
+    "id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"},
+    "mode": {
+      "enum": [
+        "declared_agent_mediated",
+        "policy_required",
+        "maintainer_requested"
+      ]
+    },
+    "state": {"type": "string", "minLength": 1},
+    "base_commit": {"type": "string", "minLength": 1},
+    "changed_files": {"type": "array", "items": {"type": "string"}},
+    "contribution_fingerprint": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "policy_snapshot": {"type": "object"},
+    "matched_rules": {"type": "array", "items": {"type": "object"}},
+    "obligations": {"type": "array", "items": {"type": "object"}}
+  }
+}

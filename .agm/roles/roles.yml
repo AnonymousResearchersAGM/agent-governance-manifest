@@ -1,0 +1,23 @@
+schema_version: "agm.roles/v0.2-dev"
+roles:
+  - id: "system"
+    human: false
+    description: "Deterministic local lifecycle engine; has no final authority."
+  - id: "contributor_agent"
+    human: false
+    description: "May prepare proposals and evidence but cannot attest or decide."
+  - id: "contributor"
+    human: true
+    description: "Human contributor who may prepare and resubmit evidence."
+  - id: "accountable_human"
+    human: true
+    description: "Human who may attest to an explicitly reviewed scope."
+  - id: "maintainer_verifier"
+    human: true
+    description: "Human maintainer-side verifier without final-decision authority."
+  - id: "policy_steward"
+    human: true
+    description: "Human authorized to diagnose and resolve policy conflicts."
+  - id: "maintainer"
+    human: true
+    description: "Authorized human maintainer with final-decision authority."
