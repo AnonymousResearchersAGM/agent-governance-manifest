@@ -1,7 +1,7 @@
 # AGM v0.1.0 Artifact Anatomy and Multi-Risk Diagnosis
 
-**Working date:** 2026-07-25  
-**Source snapshot:** user-provided `agent-governance-manifest-main.zip`  
+**Working date:** 2026-07-25
+**Source snapshot:** user-provided `agent-governance-manifest-main.zip`
 **Status:** diagnostic working note; does not modify the reported AGM v0.1.0 research snapshot.
 
 ## 1. Verified repository state
@@ -260,4 +260,3 @@ The first implementation slice should then cover:
 - visible human attestation interface;
 - maintainer verification operations;
 - report generation from per-obligation states.
-

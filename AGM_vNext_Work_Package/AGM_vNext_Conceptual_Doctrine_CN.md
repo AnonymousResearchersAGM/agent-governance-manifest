@@ -1,7 +1,7 @@
 # AGM vNext：全新思想、治理机制与制品架构
 
-**状态：** JSIS 冲刺与 AGM vNext 开发的工作基线  
-**日期：** 2026-07-25  
+**状态：** JSIS 冲刺与 AGM vNext 开发的工作基线
+**日期：** 2026-07-25
 **适用边界：** 本文描述的是 AGM v0.1.0 之后的新设计发展。AGM v0.1.0 仍是既有论文与实验所报告的固定研究快照；本文中的新增机制不得被写成旧实验已经验证。
 
 ---
@@ -195,34 +195,34 @@ AGM 的 readiness 或 verification 状态不能自动转化为 merge 权限。
 
 AGM vNext 至少包含以下一等对象：
 
-1. **Governance Case**  
+1. **Governance Case**
    一次具体贡献的治理实例，拥有稳定 case ID 和生命周期。
 
-2. **Applicable Policy Snapshot**  
+2. **Applicable Policy Snapshot**
    该贡献适用的项目规则版本、base commit 和解析结果。
 
-3. **Matched Rule Set**  
+3. **Matched Rule Set**
    实际 diff 命中的全部规则，保留触发原因、作用范围和风险性质。
 
-4. **Compiled Obligation Set**  
+4. **Compiled Obligation Set**
    根据风险、自治、角色和交互规则编译出的贡献专属义务。
 
-5. **Bound Evidence**  
+5. **Bound Evidence**
    与具体 obligation、diff、环境和有效期绑定的证据。
 
-6. **Human Attestation**  
+6. **Human Attestation**
    与明确范围和具体 package hash 绑定的人类责任确认。
 
-7. **Authorized State Transition Record**  
+7. **Authorized State Transition Record**
    谁以什么角色、依据什么权限、从什么状态转到什么状态。
 
-8. **Governance Finding / Repair Request**  
+8. **Governance Finding / Repair Request**
    可定位、可分派、可修复、可重新验证的问题对象。
 
-9. **Contribution Governance Report**  
+9. **Contribution Governance Report**
    面向 contributor 或 maintainer 的可操作“治理检验报告”。
 
-10. **Closure Receipt**  
+10. **Closure Receipt**
     事后可恢复决策过程的最终闭环记录。
 
 ---
