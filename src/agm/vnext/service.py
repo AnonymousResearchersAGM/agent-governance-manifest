@@ -902,6 +902,12 @@ class GovernanceService:
         selected_findings = set(finding_ids or [])
         if not selected_obligations and not selected_findings:
             raise VNextError("Override must identify obligations or findings")
+        known_finding_ids = {item.id for item in case.findings}
+        unknown_findings = sorted(selected_findings - known_finding_ids)
+        if unknown_findings:
+            raise VNextError(
+                f"Override references unknown findings: {', '.join(unknown_findings)}"
+            )
         for obligation_id in selected_obligations:
             case.obligation(obligation_id).status = "overridden"
         for finding in case.findings:
@@ -973,8 +979,10 @@ class GovernanceService:
             self.storage.save_case(case)
             return None
 
-        overridden_findings = [
+        overridden_objects = [
             item.id for item in case.findings if item.status == "overridden"
+        ] + [
+            item.id for item in case.obligations if item.status == "overridden"
         ]
         final_decision = FinalDecision(
             id=new_id("decision"),
@@ -984,7 +992,7 @@ class GovernanceService:
             decision=decision,
             reason=reason,
             override=case.state == "overridden",
-            unresolved_exception_ids=overridden_findings,
+            unresolved_exception_ids=sorted(overridden_objects),
         )
         case.final_decision = final_decision
         self._transition(

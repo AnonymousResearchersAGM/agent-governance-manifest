@@ -102,6 +102,21 @@ def test_contributor_html_prominently_shows_fingerprint_and_actions(tmp_path):
     assert "cannot submit" in rendered.lower()
 
 
+def test_maintainer_html_exposes_full_authorized_operation_surface(tmp_path):
+    _, service, case = case_and_service(tmp_path)
+    rendered = render_html(
+        case,
+        service.storage.read_transitions(case.id),
+        audience="maintainer",
+        action_token="secret-token",
+    )
+
+    assert "Reject evidence" in rendered
+    assert "Invalidate attestation" in rendered
+    assert "Record policy conflict" in rendered
+    assert "Final request changes" in rendered
+
+
 def test_non_loopback_ui_bind_is_rejected():
     with pytest.raises(VNextError, match="loopback"):
         validate_loopback_host("0.0.0.0")

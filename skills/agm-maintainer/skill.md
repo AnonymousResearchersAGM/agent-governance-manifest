@@ -33,9 +33,9 @@ Useful commands:
 
 ```bash
 python -m agm.vnext.cli maintainer inspect --case CASE --serve
-python -m agm.vnext.cli maintainer verify --case CASE --actor HUMAN
-python -m agm.vnext.cli maintainer request-repair --case CASE --actor HUMAN
-python -m agm.vnext.cli maintainer decide --case CASE --actor HUMAN
+python -m agm.vnext.cli maintainer verify --case CASE --actor HUMAN --reason "Bindings checked."
+python -m agm.vnext.cli maintainer request-repair --case CASE --actor HUMAN --message "Correction required." --obligation O-ID
+python -m agm.vnext.cli maintainer decide --case CASE --actor HUMAN --decision accept --reason "Human decision rationale."
 ```
 
 ## Authority boundary

@@ -96,6 +96,7 @@ def execute_panel_action(
 
     role = _first(form, "role")
     obligation = _first(form, "obligation")
+    object_id = _first(form, "object_id")
     reason = _first(form, "reason")
     selected = [obligation] if obligation else []
     if action == "verify_evidence":
@@ -105,6 +106,14 @@ def execute_panel_action(
             role=role,
             reason=reason,
             obligation_ids=selected or None,
+        )
+    elif action == "reject_evidence":
+        service.reject_evidence(
+            case_id,
+            actor=actor,
+            role=role,
+            evidence_id=object_id,
+            reason=reason,
         )
     elif action == "request_repair":
         service.request_repair(
@@ -121,6 +130,30 @@ def execute_panel_action(
             role=role,
             question=reason,
             affected_obligation_ids=selected,
+        )
+    elif action == "invalidate_attestation":
+        service.invalidate_attestation(
+            case_id,
+            actor=actor,
+            role=role,
+            attestation_id=object_id,
+            reason=reason,
+        )
+    elif action == "record_policy_conflict":
+        service.record_policy_conflict(
+            case_id,
+            actor=actor,
+            role=role,
+            message=reason,
+            affected_obligation_ids=selected,
+        )
+    elif action == "resolve_policy_conflict":
+        service.resolve_policy_conflict(
+            case_id,
+            actor=actor,
+            role=role,
+            finding_id=object_id,
+            resolution=reason,
         )
     elif action == "authorized_override":
         service.override(

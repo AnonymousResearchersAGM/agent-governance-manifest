@@ -477,6 +477,7 @@ def test_authorized_override_is_distinct_from_final_decision(tmp_path):
     final = service.storage.load_case("docs-case")
     assert final.final_decision is not None and final.final_decision.override
     assert repair.id in final.closure_receipt.repair_request_ids
+    assert "obl-o-summary" in final.closure_receipt.unresolved_exception_ids
 
 
 def test_reject_evidence_records_rejection_and_repair_transition(tmp_path):

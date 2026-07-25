@@ -323,10 +323,11 @@ def render_action_forms(
 <section><h2>Authorized maintainer operation</h2>
 <form method="post">
 <input type="hidden" name="action_token" value="{token}">
-<label>Action<select name="action"><option value="verify_evidence">Verify evidence</option><option value="request_repair">Request repair</option><option value="ask_clarification">Ask for clarification</option><option value="authorized_override">Authorized override</option><option value="decide_accept">Final accept</option><option value="decide_reject">Final reject</option><option value="decide_close">Close without merge</option></select></label>
+<label>Action<select name="action"><option value="verify_evidence">Verify evidence</option><option value="reject_evidence">Reject evidence</option><option value="request_repair">Request repair</option><option value="ask_clarification">Ask for clarification</option><option value="invalidate_attestation">Invalidate attestation</option><option value="record_policy_conflict">Record policy conflict</option><option value="resolve_policy_conflict">Resolve policy conflict</option><option value="authorized_override">Authorized override</option><option value="decide_accept">Final accept</option><option value="decide_reject">Final reject</option><option value="decide_request_changes">Final request changes</option><option value="decide_close">Close without merge</option></select></label>
 <label>Maintainer actor<input name="actor" required></label>
 <label>Role<select name="role"><option value="maintainer_verifier">maintainer_verifier</option><option value="policy_steward">policy_steward</option><option value="maintainer">maintainer</option></select></label>
 <label>Affected obligation<select name="obligation">{obligation_options}</select></label>
+<label>Evidence, attestation, or finding ID (when required)<input name="object_id"></label>
 <label>Reason<textarea name="reason" required></textarea></label>
 <button type="submit">Record authorized operation</button>
 </form></section>"""

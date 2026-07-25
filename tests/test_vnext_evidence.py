@@ -94,7 +94,8 @@ def test_placeholder_evidence_is_invalid(tmp_path):
 
 
 def test_explicit_none_is_allowed_for_known_limitations():
-    assert not is_placeholder("none")
+    assert is_placeholder("none")
+    assert not is_placeholder("none", allow_explicit_none=True)
 
 
 def test_stale_diff_binding_is_detected(tmp_path):

@@ -28,7 +28,15 @@ PLACEHOLDER_TERMS = (
     "to be filled",
     "not provided",
 )
-PLACEHOLDER_EXACT = {"", "n/a", "na", "unknown", "tests passed", "test passed"}
+PLACEHOLDER_EXACT = {
+    "",
+    "n/a",
+    "na",
+    "none",
+    "unknown",
+    "tests passed",
+    "test passed",
+}
 
 
 def parse_timestamp(value: str, *, label: str) -> datetime:
@@ -59,8 +67,10 @@ def value_text(value: Any) -> str:
     return str(value).strip()
 
 
-def is_placeholder(value: Any) -> bool:
+def is_placeholder(value: Any, *, allow_explicit_none: bool = False) -> bool:
     lowered = value_text(value).lower()
+    if allow_explicit_none and lowered == "none":
+        return False
     return (
         lowered in PLACEHOLDER_EXACT
         or lowered.startswith("todo")
@@ -184,7 +194,10 @@ def validate_bound_evidence(
         reasons.append(
             "evidence type does not match referenced obligation definitions"
         )
-    if is_placeholder(item.value):
+    if is_placeholder(
+        item.value,
+        allow_explicit_none=item.evidence_type == "known_limitations",
+    ):
         reasons.append("evidence value is a placeholder")
     if item.contribution_fingerprint != current_contribution_fingerprint:
         reasons.append("evidence is bound to a stale contribution fingerprint")
