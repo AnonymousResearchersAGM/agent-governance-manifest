@@ -85,7 +85,7 @@
       "after": "ready_for_human_decision",
       "explanation": "受影响项会记录维护者检查；全部阻断项完成后进入人类最终决定。",
       "source_object_ids": [
-        "transition-1676373f1be04af7836bd0a027c6e244"
+        "transition-edb55a1ee0c543c490e4363341dfcd4e"
       ]
     },
     {
@@ -96,14 +96,23 @@
       "source_object_ids": [
         "obl-o-agent-scope"
       ]
+    },
+    {
+      "target": "指定修复请求",
+      "before": "resubmitted",
+      "after": "resolved",
+      "explanation": "所关联的问题在本次重新检查后关闭。",
+      "source_object_ids": [
+        "repair-fcae5dc548bb4440848e80210d229a8e"
+      ]
     }
   ],
   "affected_obligation_ids": [
     "O-AGENT-SCOPE"
   ],
   "retained_evidence_ids": [
-    "evidence-59e7bb664b8a45338fb9c91c75148219",
-    "evidence-4919dde096154afabac5e46994334e45"
+    "evidence-52d1959b65174b11a46526b31074ae80",
+    "evidence-4544e6c323e945d7b96b3d602e6856d5"
   ],
   "invalidated_attestation_ids": [],
   "next_authorized_actor_roles": [
@@ -111,7 +120,7 @@
   ],
   "requires_confirmation": true,
   "mutates_case": false,
-  "preview_fingerprint": "b24b0c5a027fa8cdfeb5304bd40697716faabdb315c7d2e142d39fc609205dd7",
+  "preview_fingerprint": "1b84357f01fa0924d5792f4b431cbe3cefef7ba2bfabfb30b462c3d348148da2",
   "traceability": [
     {
       "kind": "permission_rule",

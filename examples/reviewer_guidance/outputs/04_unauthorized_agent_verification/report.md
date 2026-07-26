@@ -92,7 +92,7 @@
   ],
   "requires_confirmation": false,
   "mutates_case": false,
-  "preview_fingerprint": "13d1b45b657460e2a97074de2c561ecf6439b3b3b2c55b11511d144e50cad9a7",
+  "preview_fingerprint": "5bfd1b340e04f53e98f9bf0763623264359ff34310966f791fe4ea8f477280e1",
   "traceability": [
     {
       "kind": "permission_rule",

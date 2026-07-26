@@ -54,12 +54,12 @@
         "traceability": [
           {
             "kind": "state_transition",
-            "object_id": "transition-455cc82017c0443696073a4defba1231",
+            "object_id": "transition-1e1b7732b4504f9b9fbb5ae031231bd3",
             "relationship": "primary:resolve_policy"
           },
           {
             "kind": "state_transition",
-            "object_id": "transition-159054beba674f74afe23574fee37707",
+            "object_id": "transition-66f971deae5249088e90ec465df9388a",
             "relationship": "primary:compile_obligations"
           },
           {
@@ -144,7 +144,7 @@
         "traceability": [
           {
             "kind": "state_transition",
-            "object_id": "transition-4a75875f7f7f4aeea0838468fbfc9b50",
+            "object_id": "transition-51bda88fa6ac42dc9228448aa671f935",
             "relationship": "primary:mark_evidence_state"
           }
         ]
@@ -1839,7 +1839,7 @@
       "contribution_fingerprint": "c3323431536bbbb95ba1b08b6e69fd082ab89accf9a348306c042228fe49e2ef",
       "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
       "policy_snapshot": {
-        "id": "policy-5fcb0282bd5f428182a005c593210ad4",
+        "id": "policy-3655904bf4104eb98127ad2040c37e69",
         "schema_version": "agm.policy_snapshot/v0.2-dev",
         "manifest_version": "agm.manifest/v0.2-dev",
         "base_commit": "demo-base",
@@ -1864,7 +1864,7 @@
       },
       "transition_history": [
         {
-          "id": "transition-455cc82017c0443696073a4defba1231",
+          "id": "transition-1e1b7732b4504f9b9fbb5ae031231bd3",
           "case_id": "multi-risk-missing",
           "actor": "agm-engine",
           "role": "system",
@@ -1873,12 +1873,12 @@
           "action": "resolve_policy",
           "reason": "Resolved canonical policy against the contribution.",
           "related_object_ids": [
-            "policy-5fcb0282bd5f428182a005c593210ad4"
+            "policy-3655904bf4104eb98127ad2040c37e69"
           ],
           "timestamp": "2026-07-26T00:00:00Z"
         },
         {
-          "id": "transition-159054beba674f74afe23574fee37707",
+          "id": "transition-66f971deae5249088e90ec465df9388a",
           "case_id": "multi-risk-missing",
           "actor": "agm-engine",
           "role": "system",
@@ -1901,7 +1901,7 @@
           "timestamp": "2026-07-26T00:00:00Z"
         },
         {
-          "id": "transition-4a75875f7f7f4aeea0838468fbfc9b50",
+          "id": "transition-51bda88fa6ac42dc9228448aa671f935",
           "case_id": "multi-risk-missing",
           "actor": "agm-engine",
           "role": "system",
@@ -3712,12 +3712,12 @@
     "identify_requirements": [
       {
         "kind": "state_transition",
-        "object_id": "transition-455cc82017c0443696073a4defba1231",
+        "object_id": "transition-1e1b7732b4504f9b9fbb5ae031231bd3",
         "relationship": "primary:resolve_policy"
       },
       {
         "kind": "state_transition",
-        "object_id": "transition-159054beba674f74afe23574fee37707",
+        "object_id": "transition-66f971deae5249088e90ec465df9388a",
         "relationship": "primary:compile_obligations"
       },
       {
@@ -3789,7 +3789,7 @@
     "prepare_materials": [
       {
         "kind": "state_transition",
-        "object_id": "transition-4a75875f7f7f4aeea0838468fbfc9b50",
+        "object_id": "transition-51bda88fa6ac42dc9228448aa671f935",
         "relationship": "primary:mark_evidence_state"
       }
     ],

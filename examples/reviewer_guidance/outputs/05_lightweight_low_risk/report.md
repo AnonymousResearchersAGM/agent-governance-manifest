@@ -84,7 +84,7 @@
       "after": "ready_for_human_decision",
       "explanation": "受影响项会记录维护者检查；全部阻断项完成后进入人类最终决定。",
       "source_object_ids": [
-        "transition-f2614e19fb914c6b84baa37ffa3a1e5d"
+        "transition-ece0b73c39a4428190d87b96b52f4f33"
       ]
     },
     {
@@ -117,7 +117,7 @@
   ],
   "requires_confirmation": true,
   "mutates_case": false,
-  "preview_fingerprint": "5f9716ffa0750b172bfc0385253eb99f83b9fa10fd4b050e93f6d984b1dcc027",
+  "preview_fingerprint": "6e8b14e49741b7bdfaa04538e9146350ac3d1d2353f2aab2d87909212c26a9a4",
   "traceability": [
     {
       "kind": "permission_rule",

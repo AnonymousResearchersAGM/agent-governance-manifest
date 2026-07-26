@@ -58,12 +58,12 @@
         "traceability": [
           {
             "kind": "state_transition",
-            "object_id": "transition-c40b7e2ff3484a4a90eca57846d5c912",
+            "object_id": "transition-e76e8cb1fd1a427ba58db207089b9c2f",
             "relationship": "primary:resolve_policy"
           },
           {
             "kind": "state_transition",
-            "object_id": "transition-a5de13670b224ea9af02124755fd150e",
+            "object_id": "transition-3ca72aa23fa54a5992f5a5fb942367ca",
             "relationship": "primary:compile_obligations"
           },
           {
@@ -98,17 +98,17 @@
         "traceability": [
           {
             "kind": "state_transition",
-            "object_id": "transition-32004024869e40e0ace587a02e44f8e9",
+            "object_id": "transition-9e7bcad889a9416098604424926b01a9",
             "relationship": "primary:mark_evidence_state"
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-9d7c0414c779470fbc199fa3b7cdbc8f",
+            "object_id": "evidence-643cfb6ba5984911a2d24f62763472b5",
             "relationship": "binding_or_retention"
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-2ea89d4269c94c099e7a964a156a9e2a",
+            "object_id": "evidence-f2e3fde55f164289a63af1fd842a3592",
             "relationship": "binding_or_retention"
           }
         ]
@@ -141,7 +141,7 @@
         "traceability": [
           {
             "kind": "state_transition",
-            "object_id": "transition-c652c67e03084877a1f3d629ebf2b59c",
+            "object_id": "transition-c25ef804d8c54c2282770d072dd10271",
             "relationship": "primary:submit_for_verification"
           }
         ]
@@ -176,7 +176,7 @@
         ],
         "interaction_ids": [],
         "evidence_ids": [
-          "evidence-9d7c0414c779470fbc199fa3b7cdbc8f"
+          "evidence-643cfb6ba5984911a2d24f62763472b5"
         ],
         "binding_fingerprints": [
           "a0f5344b373cb8b07ca2a27dac543248200f012933c03da5368a25e8729b2833"
@@ -197,7 +197,7 @@
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-9d7c0414c779470fbc199fa3b7cdbc8f",
+            "object_id": "evidence-643cfb6ba5984911a2d24f62763472b5",
             "relationship": "observed"
           }
         ],
@@ -228,7 +228,7 @@
         ],
         "interaction_ids": [],
         "evidence_ids": [
-          "evidence-2ea89d4269c94c099e7a964a156a9e2a"
+          "evidence-f2e3fde55f164289a63af1fd842a3592"
         ],
         "binding_fingerprints": [
           "a0f5344b373cb8b07ca2a27dac543248200f012933c03da5368a25e8729b2833"
@@ -249,7 +249,7 @@
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-2ea89d4269c94c099e7a964a156a9e2a",
+            "object_id": "evidence-f2e3fde55f164289a63af1fd842a3592",
             "relationship": "observed"
           }
         ],
@@ -836,7 +836,7 @@
       ],
       "evidence_records": [
         {
-          "id": "evidence-9d7c0414c779470fbc199fa3b7cdbc8f",
+          "id": "evidence-643cfb6ba5984911a2d24f62763472b5",
           "obligation_ids": [
             "O-CHANGED-FILES"
           ],
@@ -866,7 +866,7 @@
           "invalid_reasons": []
         },
         {
-          "id": "evidence-2ea89d4269c94c099e7a964a156a9e2a",
+          "id": "evidence-f2e3fde55f164289a63af1fd842a3592",
           "obligation_ids": [
             "O-SUMMARY"
           ],
@@ -901,7 +901,7 @@
       "contribution_fingerprint": "a0f5344b373cb8b07ca2a27dac543248200f012933c03da5368a25e8729b2833",
       "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
       "policy_snapshot": {
-        "id": "policy-be2f1d1030b047a3b1c327b0a65bda78",
+        "id": "policy-1611f99b14b24ff8bbc8599c721aad5e",
         "schema_version": "agm.policy_snapshot/v0.2-dev",
         "manifest_version": "agm.manifest/v0.2-dev",
         "base_commit": "demo-base",
@@ -926,7 +926,7 @@
       },
       "transition_history": [
         {
-          "id": "transition-c40b7e2ff3484a4a90eca57846d5c912",
+          "id": "transition-e76e8cb1fd1a427ba58db207089b9c2f",
           "case_id": "unauthorized-agent",
           "actor": "agm-engine",
           "role": "system",
@@ -935,12 +935,12 @@
           "action": "resolve_policy",
           "reason": "Resolved canonical policy against the contribution.",
           "related_object_ids": [
-            "policy-be2f1d1030b047a3b1c327b0a65bda78"
+            "policy-1611f99b14b24ff8bbc8599c721aad5e"
           ],
           "timestamp": "2026-07-26T00:00:00Z"
         },
         {
-          "id": "transition-a5de13670b224ea9af02124755fd150e",
+          "id": "transition-3ca72aa23fa54a5992f5a5fb942367ca",
           "case_id": "unauthorized-agent",
           "actor": "agm-engine",
           "role": "system",
@@ -955,7 +955,7 @@
           "timestamp": "2026-07-26T00:00:00Z"
         },
         {
-          "id": "transition-32004024869e40e0ace587a02e44f8e9",
+          "id": "transition-9e7bcad889a9416098604424926b01a9",
           "case_id": "unauthorized-agent",
           "actor": "agm-engine",
           "role": "system",
@@ -970,7 +970,7 @@
           "timestamp": "2026-07-26T00:00:00Z"
         },
         {
-          "id": "transition-c652c67e03084877a1f3d629ebf2b59c",
+          "id": "transition-c25ef804d8c54c2282770d072dd10271",
           "case_id": "unauthorized-agent",
           "actor": "contributor-agent",
           "role": "contributor_agent",
@@ -979,10 +979,10 @@
           "action": "submit_for_verification",
           "reason": "Contributor submitted prepared evidence for maintainer verification.",
           "related_object_ids": [
-            "evidence-9d7c0414c779470fbc199fa3b7cdbc8f",
-            "evidence-2ea89d4269c94c099e7a964a156a9e2a"
+            "evidence-643cfb6ba5984911a2d24f62763472b5",
+            "evidence-f2e3fde55f164289a63af1fd842a3592"
           ],
-          "timestamp": "2026-07-26T13:13:12Z"
+          "timestamp": "2026-07-26T13:27:34Z"
         }
       ],
       "final_decision": null,
@@ -1096,7 +1096,7 @@
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-9d7c0414c779470fbc199fa3b7cdbc8f",
+            "object_id": "evidence-643cfb6ba5984911a2d24f62763472b5",
             "relationship": "observed"
           },
           {
@@ -1106,7 +1106,7 @@
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-2ea89d4269c94c099e7a964a156a9e2a",
+            "object_id": "evidence-f2e3fde55f164289a63af1fd842a3592",
             "relationship": "observed"
           }
         ],
@@ -1146,7 +1146,7 @@
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-9d7c0414c779470fbc199fa3b7cdbc8f",
+            "object_id": "evidence-643cfb6ba5984911a2d24f62763472b5",
             "relationship": "observed"
           },
           {
@@ -1156,7 +1156,7 @@
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-2ea89d4269c94c099e7a964a156a9e2a",
+            "object_id": "evidence-f2e3fde55f164289a63af1fd842a3592",
             "relationship": "observed"
           }
         ],
@@ -1207,7 +1207,7 @@
       ],
       "interaction_ids": [],
       "evidence_ids": [
-        "evidence-9d7c0414c779470fbc199fa3b7cdbc8f"
+        "evidence-643cfb6ba5984911a2d24f62763472b5"
       ],
       "binding_fingerprints": [
         "a0f5344b373cb8b07ca2a27dac543248200f012933c03da5368a25e8729b2833"
@@ -1228,7 +1228,7 @@
         },
         {
           "kind": "evidence",
-          "object_id": "evidence-9d7c0414c779470fbc199fa3b7cdbc8f",
+          "object_id": "evidence-643cfb6ba5984911a2d24f62763472b5",
           "relationship": "observed"
         }
       ],
@@ -1259,7 +1259,7 @@
       ],
       "interaction_ids": [],
       "evidence_ids": [
-        "evidence-2ea89d4269c94c099e7a964a156a9e2a"
+        "evidence-f2e3fde55f164289a63af1fd842a3592"
       ],
       "binding_fingerprints": [
         "a0f5344b373cb8b07ca2a27dac543248200f012933c03da5368a25e8729b2833"
@@ -1280,7 +1280,7 @@
         },
         {
           "kind": "evidence",
-          "object_id": "evidence-2ea89d4269c94c099e7a964a156a9e2a",
+          "object_id": "evidence-f2e3fde55f164289a63af1fd842a3592",
           "relationship": "observed"
         }
       ],
@@ -1318,12 +1318,12 @@
     "identify_requirements": [
       {
         "kind": "state_transition",
-        "object_id": "transition-c40b7e2ff3484a4a90eca57846d5c912",
+        "object_id": "transition-e76e8cb1fd1a427ba58db207089b9c2f",
         "relationship": "primary:resolve_policy"
       },
       {
         "kind": "state_transition",
-        "object_id": "transition-a5de13670b224ea9af02124755fd150e",
+        "object_id": "transition-3ca72aa23fa54a5992f5a5fb942367ca",
         "relationship": "primary:compile_obligations"
       },
       {
@@ -1345,17 +1345,17 @@
     "prepare_materials": [
       {
         "kind": "state_transition",
-        "object_id": "transition-32004024869e40e0ace587a02e44f8e9",
+        "object_id": "transition-9e7bcad889a9416098604424926b01a9",
         "relationship": "primary:mark_evidence_state"
       },
       {
         "kind": "evidence",
-        "object_id": "evidence-9d7c0414c779470fbc199fa3b7cdbc8f",
+        "object_id": "evidence-643cfb6ba5984911a2d24f62763472b5",
         "relationship": "binding_or_retention"
       },
       {
         "kind": "evidence",
-        "object_id": "evidence-2ea89d4269c94c099e7a964a156a9e2a",
+        "object_id": "evidence-f2e3fde55f164289a63af1fd842a3592",
         "relationship": "binding_or_retention"
       }
     ],
@@ -1363,7 +1363,7 @@
     "maintainer_check": [
       {
         "kind": "state_transition",
-        "object_id": "transition-c652c67e03084877a1f3d629ebf2b59c",
+        "object_id": "transition-c25ef804d8c54c2282770d072dd10271",
         "relationship": "primary:submit_for_verification"
       }
     ],
@@ -1844,7 +1844,7 @@
     ],
     "requires_confirmation": false,
     "mutates_case": false,
-    "preview_fingerprint": "13d1b45b657460e2a97074de2c561ecf6439b3b3b2c55b11511d144e50cad9a7",
+    "preview_fingerprint": "5bfd1b340e04f53e98f9bf0763623264359ff34310966f791fe4ea8f477280e1",
     "traceability": [
       {
         "kind": "permission_rule",

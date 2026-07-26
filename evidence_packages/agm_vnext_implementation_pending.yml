@@ -192,6 +192,9 @@ tests_run:
   - command: "fresh clone: install, pytest, project validate, and guidance demo generation"
     outcome: "151 passed in 38.59s; valid true; 8 scenario directories/25 files; clone worktree clean"
     artifact: "review_packets/artifacts/agm_vnext_implementation_verification.txt"
+  - command: ".venv\\Scripts\\python.exe -m pytest -q"
+    outcome: "151 passed in 39.29s after scoped repair-request closure consistency fix"
+    artifact: "review_packets/artifacts/agm_vnext_implementation_verification.txt"
 artifacts:
   - path: "review_packets/artifacts/agm_vnext_implementation_verification.txt"
     description: "Observed working-tree, fresh-clone, CLI, demonstration, and static-check results."
@@ -218,4 +221,4 @@ human_review_declaration:
   statement: >-
     Human review and independent maintainer verification are required before
     final acceptance. The coding agent did not perform or fabricate them.
-generated_at: "2026-07-26T13:17:22Z"
+generated_at: "2026-07-26T13:28:07Z"

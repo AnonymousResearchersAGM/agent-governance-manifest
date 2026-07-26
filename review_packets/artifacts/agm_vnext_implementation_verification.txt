@@ -212,6 +212,13 @@ Observed:
 - 8 scenario directories and 25 output/manifest files generated
 - cloned worktree remained clean
 
+Scoped-repair closure consistency follow-up
+Command: .venv\Scripts\python.exe -m pytest -q
+Observed: 151 passed in 39.29s
+Observed: successful scoped revalidation now resolves both the affected
+finding and its RepairRequest; preview and real execution expose the same
+repair-closure effect.
+
 Human/maintainer authority
 No human attestation, maintainer verification, override, final decision,
 acceptance, merge, or human-review completion was performed by the coding

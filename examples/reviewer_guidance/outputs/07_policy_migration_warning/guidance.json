@@ -52,12 +52,12 @@
         "traceability": [
           {
             "kind": "state_transition",
-            "object_id": "transition-4551ced00c2b43919ac761d7dd3f4bb8",
+            "object_id": "transition-2cdb15d865e74f2e8c4b334a47492138",
             "relationship": "primary:resolve_policy"
           },
           {
             "kind": "state_transition",
-            "object_id": "transition-b6755200e9f9420d906f2b9fc2fa0449",
+            "object_id": "transition-9a4125a31a0d4ce1a4b027ff79f3c79a",
             "relationship": "primary:compile_obligations"
           },
           {
@@ -92,7 +92,7 @@
         "traceability": [
           {
             "kind": "state_transition",
-            "object_id": "transition-ea05a8e50a0a46048af40e6d18843135",
+            "object_id": "transition-a3387af59dfd4db28c555a80ea33bc6d",
             "relationship": "primary:mark_evidence_state"
           }
         ]
@@ -862,7 +862,7 @@
       "contribution_fingerprint": "e9d96f8f36a92549155112fc471507591a241d77f81bbcdd2eb695d170e7fdc4",
       "policy_fingerprint": "recorded-policy-fingerprint-before-change",
       "policy_snapshot": {
-        "id": "policy-90364e0c2dfe4722b64dbfde1ee59026",
+        "id": "policy-d19a9b2e1a7747eb8d428a9f41012a51",
         "schema_version": "agm.policy_snapshot/v0.2-dev",
         "manifest_version": "agm.manifest/v0.2-dev",
         "base_commit": "demo-base",
@@ -887,7 +887,7 @@
       },
       "transition_history": [
         {
-          "id": "transition-4551ced00c2b43919ac761d7dd3f4bb8",
+          "id": "transition-2cdb15d865e74f2e8c4b334a47492138",
           "case_id": "policy-migration",
           "actor": "agm-engine",
           "role": "system",
@@ -896,12 +896,12 @@
           "action": "resolve_policy",
           "reason": "Resolved canonical policy against the contribution.",
           "related_object_ids": [
-            "policy-90364e0c2dfe4722b64dbfde1ee59026"
+            "policy-d19a9b2e1a7747eb8d428a9f41012a51"
           ],
           "timestamp": "2026-07-26T00:00:00Z"
         },
         {
-          "id": "transition-b6755200e9f9420d906f2b9fc2fa0449",
+          "id": "transition-9a4125a31a0d4ce1a4b027ff79f3c79a",
           "case_id": "policy-migration",
           "actor": "agm-engine",
           "role": "system",
@@ -916,7 +916,7 @@
           "timestamp": "2026-07-26T00:00:00Z"
         },
         {
-          "id": "transition-ea05a8e50a0a46048af40e6d18843135",
+          "id": "transition-a3387af59dfd4db28c555a80ea33bc6d",
           "case_id": "policy-migration",
           "actor": "agm-engine",
           "role": "system",
@@ -1445,12 +1445,12 @@
     "identify_requirements": [
       {
         "kind": "state_transition",
-        "object_id": "transition-4551ced00c2b43919ac761d7dd3f4bb8",
+        "object_id": "transition-2cdb15d865e74f2e8c4b334a47492138",
         "relationship": "primary:resolve_policy"
       },
       {
         "kind": "state_transition",
-        "object_id": "transition-b6755200e9f9420d906f2b9fc2fa0449",
+        "object_id": "transition-9a4125a31a0d4ce1a4b027ff79f3c79a",
         "relationship": "primary:compile_obligations"
       },
       {
@@ -1472,7 +1472,7 @@
     "prepare_materials": [
       {
         "kind": "state_transition",
-        "object_id": "transition-ea05a8e50a0a46048af40e6d18843135",
+        "object_id": "transition-a3387af59dfd4db28c555a80ea33bc6d",
         "relationship": "primary:mark_evidence_state"
       }
     ],
@@ -1991,7 +1991,7 @@
         "after": "repair_requested",
         "explanation": "案例转入 repair，由 policy steward 或维护者处理。",
         "source_object_ids": [
-          "transition-ea05a8e50a0a46048af40e6d18843135"
+          "transition-a3387af59dfd4db28c555a80ea33bc6d"
         ]
       },
       {

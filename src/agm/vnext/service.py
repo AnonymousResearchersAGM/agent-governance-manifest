@@ -1006,6 +1006,19 @@ class GovernanceService:
                     resolution="Correction verified by maintainer-side operation.",
                     timestamp=timestamp,
                 )
+        finding_statuses = {
+            item.id: item.status for item in case.findings
+        }
+        for repair in case.repair_requests:
+            if (
+                repair.status in {"open", "resubmitted"}
+                and repair.finding_ids
+                and all(
+                    finding_statuses.get(finding_id) != "open"
+                    for finding_id in repair.finding_ids
+                )
+            ):
+                repair.status = "resolved"
         self._transition(
             case,
             action="verify_evidence",

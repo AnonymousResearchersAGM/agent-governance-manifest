@@ -85,14 +85,14 @@
       "after": "accepted",
       "explanation": "案例 accepted 并生成 closure receipt；该动作不是自动合并。",
       "source_object_ids": [
-        "transition-0414510c7de148938a0f053c5c00dc26"
+        "transition-833d4aee3f724954813bb730c3533d62"
       ]
     }
   ],
   "affected_obligation_ids": [],
   "retained_evidence_ids": [
-    "evidence-cf1485b25c004cd18f9602db67ef8a08",
-    "evidence-9c501fe370294e6ca5e307a9b6c9c755"
+    "evidence-c701f892009b4bd3af410126d26dc906",
+    "evidence-2e006840991340b0a0e8000551050a08"
   ],
   "invalidated_attestation_ids": [],
   "next_authorized_actor_roles": [],

@@ -84,8 +84,8 @@
     "O-SUMMARY"
   ],
   "retained_evidence_ids": [
-    "evidence-2148f15f6a9f4a26b70c3fd4334318ed",
-    "evidence-28c0b898eefb4dc5847a24663b97c8b8"
+    "evidence-ff9a84de45064d098b889c7a8b04c52f",
+    "evidence-4790b765290e447d92c34a364a38d36b"
   ],
   "invalidated_attestation_ids": [],
   "next_authorized_actor_roles": [
@@ -94,7 +94,7 @@
   ],
   "requires_confirmation": false,
   "mutates_case": false,
-  "preview_fingerprint": "1b648d12bd685661cd626dd61f02548ca149774504916da6447856f208c05657",
+  "preview_fingerprint": "69298465fceed0695549f5cdfc33431ef4ef45657532df9d048b0e26b599a93b",
   "traceability": [
     {
       "kind": "permission_rule",

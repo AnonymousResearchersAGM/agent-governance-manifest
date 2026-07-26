@@ -54,12 +54,12 @@
         "traceability": [
           {
             "kind": "state_transition",
-            "object_id": "transition-46508a27596544d786c20ad4832fe248",
+            "object_id": "transition-5e6fc44e7b674ff9a4b7c9a7e0e12856",
             "relationship": "primary:resolve_policy"
           },
           {
             "kind": "state_transition",
-            "object_id": "transition-13e7873083da43ce99a34be6df260c75",
+            "object_id": "transition-70481b0197694df19ab026e01a4b6e7f",
             "relationship": "primary:compile_obligations"
           },
           {
@@ -94,17 +94,17 @@
         "traceability": [
           {
             "kind": "state_transition",
-            "object_id": "transition-932750945106494a84f97f0d63dac645",
+            "object_id": "transition-f976d5bac610471abf4c543a11b76701",
             "relationship": "primary:mark_evidence_state"
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-29d7d208f1e141bdb4349c1c5f23ca67",
+            "object_id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
             "relationship": "binding_or_retention"
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-80037f9f775348f49f6b01f0283fef62",
+            "object_id": "evidence-ebcddb02af6f4454a16de8186659a880",
             "relationship": "binding_or_retention"
           }
         ]
@@ -137,7 +137,7 @@
         "traceability": [
           {
             "kind": "state_transition",
-            "object_id": "transition-f2614e19fb914c6b84baa37ffa3a1e5d",
+            "object_id": "transition-ece0b73c39a4428190d87b96b52f4f33",
             "relationship": "primary:submit_for_verification"
           }
         ]
@@ -172,7 +172,7 @@
         ],
         "interaction_ids": [],
         "evidence_ids": [
-          "evidence-29d7d208f1e141bdb4349c1c5f23ca67"
+          "evidence-52161624f3d54c59a2b8490de8b9eaf5"
         ],
         "binding_fingerprints": [
           "73fd2b8969b9783204be0cdaf8c41541ce85a134187c87443f7872143ab64d9b"
@@ -193,7 +193,7 @@
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-29d7d208f1e141bdb4349c1c5f23ca67",
+            "object_id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
             "relationship": "observed"
           }
         ],
@@ -224,7 +224,7 @@
         ],
         "interaction_ids": [],
         "evidence_ids": [
-          "evidence-80037f9f775348f49f6b01f0283fef62"
+          "evidence-ebcddb02af6f4454a16de8186659a880"
         ],
         "binding_fingerprints": [
           "73fd2b8969b9783204be0cdaf8c41541ce85a134187c87443f7872143ab64d9b"
@@ -245,7 +245,7 @@
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-80037f9f775348f49f6b01f0283fef62",
+            "object_id": "evidence-ebcddb02af6f4454a16de8186659a880",
             "relationship": "observed"
           }
         ],
@@ -337,7 +337,7 @@
             "technical_details": {
               "obligation_id": "O-CHANGED-FILES",
               "evidence_ids": [
-                "evidence-29d7d208f1e141bdb4349c1c5f23ca67"
+                "evidence-52161624f3d54c59a2b8490de8b9eaf5"
               ],
               "finding_ids": []
             },
@@ -354,7 +354,7 @@
               },
               {
                 "kind": "evidence",
-                "object_id": "evidence-29d7d208f1e141bdb4349c1c5f23ca67",
+                "object_id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
                 "relationship": "observed"
               }
             ]
@@ -380,7 +380,7 @@
             "technical_details": {
               "obligation_id": "O-SUMMARY",
               "evidence_ids": [
-                "evidence-80037f9f775348f49f6b01f0283fef62"
+                "evidence-ebcddb02af6f4454a16de8186659a880"
               ],
               "finding_ids": []
             },
@@ -397,7 +397,7 @@
               },
               {
                 "kind": "evidence",
-                "object_id": "evidence-80037f9f775348f49f6b01f0283fef62",
+                "object_id": "evidence-ebcddb02af6f4454a16de8186659a880",
                 "relationship": "observed"
               }
             ]
@@ -453,7 +453,7 @@
             "technical_details": {
               "obligation_id": "O-CHANGED-FILES",
               "evidence_ids": [
-                "evidence-29d7d208f1e141bdb4349c1c5f23ca67"
+                "evidence-52161624f3d54c59a2b8490de8b9eaf5"
               ],
               "finding_ids": []
             },
@@ -470,7 +470,7 @@
               },
               {
                 "kind": "evidence",
-                "object_id": "evidence-29d7d208f1e141bdb4349c1c5f23ca67",
+                "object_id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
                 "relationship": "observed"
               }
             ]
@@ -496,7 +496,7 @@
             "technical_details": {
               "obligation_id": "O-SUMMARY",
               "evidence_ids": [
-                "evidence-80037f9f775348f49f6b01f0283fef62"
+                "evidence-ebcddb02af6f4454a16de8186659a880"
               ],
               "finding_ids": []
             },
@@ -513,7 +513,7 @@
               },
               {
                 "kind": "evidence",
-                "object_id": "evidence-80037f9f775348f49f6b01f0283fef62",
+                "object_id": "evidence-ebcddb02af6f4454a16de8186659a880",
                 "relationship": "observed"
               }
             ]
@@ -549,7 +549,7 @@
         "primary_reason": "该操作直接对应当前流程阶段或开放问题。",
         "selector_options": [
           {
-            "selector_token": "sel-b0fab19c4296369359268c1e77e1580e9a3a0059091ce48e4a04e4ea84a2710e",
+            "selector_token": "sel-d9fc93d1730b531b7beb190b2387e4fa3d096a0158dbfbe51eafd64476ff627a",
             "action": "reject_evidence",
             "label": "变更文件清单",
             "status_label": "当前材料有效，可记录拒绝依据",
@@ -561,25 +561,25 @@
             ],
             "object_type": "evidence",
             "object_ids": [
-              "evidence-29d7d208f1e141bdb4349c1c5f23ca67"
+              "evidence-52161624f3d54c59a2b8490de8b9eaf5"
             ],
             "blocking": true,
             "material_status": "valid",
             "workflow_status": "",
             "technical_details": {
-              "evidence_id": "evidence-29d7d208f1e141bdb4349c1c5f23ca67",
+              "evidence_id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
               "evidence_type": "changed_files"
             },
             "traceability": [
               {
                 "kind": "evidence",
-                "object_id": "evidence-29d7d208f1e141bdb4349c1c5f23ca67",
+                "object_id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
                 "relationship": "action_target"
               }
             ]
           },
           {
-            "selector_token": "sel-c3c921a437b2b3a5d4ea7c8f68e4ae79910061ae0d2a92c6fe9a34baea696bd8",
+            "selector_token": "sel-74dc4da9103a67f7ea5c810ca8342229adfb5ff12c4f34e9230adba698fdce2d",
             "action": "reject_evidence",
             "label": "修改说明",
             "status_label": "当前材料有效，可记录拒绝依据",
@@ -591,19 +591,19 @@
             ],
             "object_type": "evidence",
             "object_ids": [
-              "evidence-80037f9f775348f49f6b01f0283fef62"
+              "evidence-ebcddb02af6f4454a16de8186659a880"
             ],
             "blocking": true,
             "material_status": "valid",
             "workflow_status": "",
             "technical_details": {
-              "evidence_id": "evidence-80037f9f775348f49f6b01f0283fef62",
+              "evidence_id": "evidence-ebcddb02af6f4454a16de8186659a880",
               "evidence_type": "contribution_summary"
             },
             "traceability": [
               {
                 "kind": "evidence",
-                "object_id": "evidence-80037f9f775348f49f6b01f0283fef62",
+                "object_id": "evidence-ebcddb02af6f4454a16de8186659a880",
                 "relationship": "action_target"
               }
             ]
@@ -659,7 +659,7 @@
             "technical_details": {
               "obligation_id": "O-CHANGED-FILES",
               "evidence_ids": [
-                "evidence-29d7d208f1e141bdb4349c1c5f23ca67"
+                "evidence-52161624f3d54c59a2b8490de8b9eaf5"
               ],
               "finding_ids": []
             },
@@ -676,7 +676,7 @@
               },
               {
                 "kind": "evidence",
-                "object_id": "evidence-29d7d208f1e141bdb4349c1c5f23ca67",
+                "object_id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
                 "relationship": "observed"
               }
             ]
@@ -702,7 +702,7 @@
             "technical_details": {
               "obligation_id": "O-SUMMARY",
               "evidence_ids": [
-                "evidence-80037f9f775348f49f6b01f0283fef62"
+                "evidence-ebcddb02af6f4454a16de8186659a880"
               ],
               "finding_ids": []
             },
@@ -719,7 +719,7 @@
               },
               {
                 "kind": "evidence",
-                "object_id": "evidence-80037f9f775348f49f6b01f0283fef62",
+                "object_id": "evidence-ebcddb02af6f4454a16de8186659a880",
                 "relationship": "observed"
               }
             ]
@@ -775,7 +775,7 @@
             "technical_details": {
               "obligation_id": "O-CHANGED-FILES",
               "evidence_ids": [
-                "evidence-29d7d208f1e141bdb4349c1c5f23ca67"
+                "evidence-52161624f3d54c59a2b8490de8b9eaf5"
               ],
               "finding_ids": []
             },
@@ -792,7 +792,7 @@
               },
               {
                 "kind": "evidence",
-                "object_id": "evidence-29d7d208f1e141bdb4349c1c5f23ca67",
+                "object_id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
                 "relationship": "observed"
               }
             ]
@@ -818,7 +818,7 @@
             "technical_details": {
               "obligation_id": "O-SUMMARY",
               "evidence_ids": [
-                "evidence-80037f9f775348f49f6b01f0283fef62"
+                "evidence-ebcddb02af6f4454a16de8186659a880"
               ],
               "finding_ids": []
             },
@@ -835,7 +835,7 @@
               },
               {
                 "kind": "evidence",
-                "object_id": "evidence-80037f9f775348f49f6b01f0283fef62",
+                "object_id": "evidence-ebcddb02af6f4454a16de8186659a880",
                 "relationship": "observed"
               }
             ]
@@ -1211,7 +1211,7 @@
       ],
       "evidence_records": [
         {
-          "id": "evidence-29d7d208f1e141bdb4349c1c5f23ca67",
+          "id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
           "obligation_ids": [
             "O-CHANGED-FILES"
           ],
@@ -1241,7 +1241,7 @@
           "invalid_reasons": []
         },
         {
-          "id": "evidence-80037f9f775348f49f6b01f0283fef62",
+          "id": "evidence-ebcddb02af6f4454a16de8186659a880",
           "obligation_ids": [
             "O-SUMMARY"
           ],
@@ -1276,7 +1276,7 @@
       "contribution_fingerprint": "73fd2b8969b9783204be0cdaf8c41541ce85a134187c87443f7872143ab64d9b",
       "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
       "policy_snapshot": {
-        "id": "policy-f03476a9a9ae474eb37c3ea2e417033c",
+        "id": "policy-b8dd4d4e523a48af938643102f4b34b5",
         "schema_version": "agm.policy_snapshot/v0.2-dev",
         "manifest_version": "agm.manifest/v0.2-dev",
         "base_commit": "demo-base",
@@ -1301,7 +1301,7 @@
       },
       "transition_history": [
         {
-          "id": "transition-46508a27596544d786c20ad4832fe248",
+          "id": "transition-5e6fc44e7b674ff9a4b7c9a7e0e12856",
           "case_id": "lightweight-low",
           "actor": "agm-engine",
           "role": "system",
@@ -1310,12 +1310,12 @@
           "action": "resolve_policy",
           "reason": "Resolved canonical policy against the contribution.",
           "related_object_ids": [
-            "policy-f03476a9a9ae474eb37c3ea2e417033c"
+            "policy-b8dd4d4e523a48af938643102f4b34b5"
           ],
           "timestamp": "2026-07-26T00:00:00Z"
         },
         {
-          "id": "transition-13e7873083da43ce99a34be6df260c75",
+          "id": "transition-70481b0197694df19ab026e01a4b6e7f",
           "case_id": "lightweight-low",
           "actor": "agm-engine",
           "role": "system",
@@ -1330,7 +1330,7 @@
           "timestamp": "2026-07-26T00:00:00Z"
         },
         {
-          "id": "transition-932750945106494a84f97f0d63dac645",
+          "id": "transition-f976d5bac610471abf4c543a11b76701",
           "case_id": "lightweight-low",
           "actor": "agm-engine",
           "role": "system",
@@ -1345,7 +1345,7 @@
           "timestamp": "2026-07-26T00:00:00Z"
         },
         {
-          "id": "transition-f2614e19fb914c6b84baa37ffa3a1e5d",
+          "id": "transition-ece0b73c39a4428190d87b96b52f4f33",
           "case_id": "lightweight-low",
           "actor": "contributor-agent",
           "role": "contributor_agent",
@@ -1354,10 +1354,10 @@
           "action": "submit_for_verification",
           "reason": "Contributor submitted prepared evidence for maintainer verification.",
           "related_object_ids": [
-            "evidence-29d7d208f1e141bdb4349c1c5f23ca67",
-            "evidence-80037f9f775348f49f6b01f0283fef62"
+            "evidence-52161624f3d54c59a2b8490de8b9eaf5",
+            "evidence-ebcddb02af6f4454a16de8186659a880"
           ],
-          "timestamp": "2026-07-26T13:13:12Z"
+          "timestamp": "2026-07-26T13:27:35Z"
         }
       ],
       "final_decision": null,
@@ -1460,7 +1460,7 @@
             "technical_details": {
               "obligation_id": "O-CHANGED-FILES",
               "evidence_ids": [
-                "evidence-29d7d208f1e141bdb4349c1c5f23ca67"
+                "evidence-52161624f3d54c59a2b8490de8b9eaf5"
               ],
               "finding_ids": []
             },
@@ -1477,7 +1477,7 @@
               },
               {
                 "kind": "evidence",
-                "object_id": "evidence-29d7d208f1e141bdb4349c1c5f23ca67",
+                "object_id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
                 "relationship": "observed"
               }
             ]
@@ -1503,7 +1503,7 @@
             "technical_details": {
               "obligation_id": "O-SUMMARY",
               "evidence_ids": [
-                "evidence-80037f9f775348f49f6b01f0283fef62"
+                "evidence-ebcddb02af6f4454a16de8186659a880"
               ],
               "finding_ids": []
             },
@@ -1520,7 +1520,7 @@
               },
               {
                 "kind": "evidence",
-                "object_id": "evidence-80037f9f775348f49f6b01f0283fef62",
+                "object_id": "evidence-ebcddb02af6f4454a16de8186659a880",
                 "relationship": "observed"
               }
             ]
@@ -1576,7 +1576,7 @@
             "technical_details": {
               "obligation_id": "O-CHANGED-FILES",
               "evidence_ids": [
-                "evidence-29d7d208f1e141bdb4349c1c5f23ca67"
+                "evidence-52161624f3d54c59a2b8490de8b9eaf5"
               ],
               "finding_ids": []
             },
@@ -1593,7 +1593,7 @@
               },
               {
                 "kind": "evidence",
-                "object_id": "evidence-29d7d208f1e141bdb4349c1c5f23ca67",
+                "object_id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
                 "relationship": "observed"
               }
             ]
@@ -1619,7 +1619,7 @@
             "technical_details": {
               "obligation_id": "O-SUMMARY",
               "evidence_ids": [
-                "evidence-80037f9f775348f49f6b01f0283fef62"
+                "evidence-ebcddb02af6f4454a16de8186659a880"
               ],
               "finding_ids": []
             },
@@ -1636,7 +1636,7 @@
               },
               {
                 "kind": "evidence",
-                "object_id": "evidence-80037f9f775348f49f6b01f0283fef62",
+                "object_id": "evidence-ebcddb02af6f4454a16de8186659a880",
                 "relationship": "observed"
               }
             ]
@@ -1672,7 +1672,7 @@
         "primary_reason": "该操作直接对应当前流程阶段或开放问题。",
         "selector_options": [
           {
-            "selector_token": "sel-b0fab19c4296369359268c1e77e1580e9a3a0059091ce48e4a04e4ea84a2710e",
+            "selector_token": "sel-d9fc93d1730b531b7beb190b2387e4fa3d096a0158dbfbe51eafd64476ff627a",
             "action": "reject_evidence",
             "label": "变更文件清单",
             "status_label": "当前材料有效，可记录拒绝依据",
@@ -1684,25 +1684,25 @@
             ],
             "object_type": "evidence",
             "object_ids": [
-              "evidence-29d7d208f1e141bdb4349c1c5f23ca67"
+              "evidence-52161624f3d54c59a2b8490de8b9eaf5"
             ],
             "blocking": true,
             "material_status": "valid",
             "workflow_status": "",
             "technical_details": {
-              "evidence_id": "evidence-29d7d208f1e141bdb4349c1c5f23ca67",
+              "evidence_id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
               "evidence_type": "changed_files"
             },
             "traceability": [
               {
                 "kind": "evidence",
-                "object_id": "evidence-29d7d208f1e141bdb4349c1c5f23ca67",
+                "object_id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
                 "relationship": "action_target"
               }
             ]
           },
           {
-            "selector_token": "sel-c3c921a437b2b3a5d4ea7c8f68e4ae79910061ae0d2a92c6fe9a34baea696bd8",
+            "selector_token": "sel-74dc4da9103a67f7ea5c810ca8342229adfb5ff12c4f34e9230adba698fdce2d",
             "action": "reject_evidence",
             "label": "修改说明",
             "status_label": "当前材料有效，可记录拒绝依据",
@@ -1714,19 +1714,19 @@
             ],
             "object_type": "evidence",
             "object_ids": [
-              "evidence-80037f9f775348f49f6b01f0283fef62"
+              "evidence-ebcddb02af6f4454a16de8186659a880"
             ],
             "blocking": true,
             "material_status": "valid",
             "workflow_status": "",
             "technical_details": {
-              "evidence_id": "evidence-80037f9f775348f49f6b01f0283fef62",
+              "evidence_id": "evidence-ebcddb02af6f4454a16de8186659a880",
               "evidence_type": "contribution_summary"
             },
             "traceability": [
               {
                 "kind": "evidence",
-                "object_id": "evidence-80037f9f775348f49f6b01f0283fef62",
+                "object_id": "evidence-ebcddb02af6f4454a16de8186659a880",
                 "relationship": "action_target"
               }
             ]
@@ -1782,7 +1782,7 @@
             "technical_details": {
               "obligation_id": "O-CHANGED-FILES",
               "evidence_ids": [
-                "evidence-29d7d208f1e141bdb4349c1c5f23ca67"
+                "evidence-52161624f3d54c59a2b8490de8b9eaf5"
               ],
               "finding_ids": []
             },
@@ -1799,7 +1799,7 @@
               },
               {
                 "kind": "evidence",
-                "object_id": "evidence-29d7d208f1e141bdb4349c1c5f23ca67",
+                "object_id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
                 "relationship": "observed"
               }
             ]
@@ -1825,7 +1825,7 @@
             "technical_details": {
               "obligation_id": "O-SUMMARY",
               "evidence_ids": [
-                "evidence-80037f9f775348f49f6b01f0283fef62"
+                "evidence-ebcddb02af6f4454a16de8186659a880"
               ],
               "finding_ids": []
             },
@@ -1842,7 +1842,7 @@
               },
               {
                 "kind": "evidence",
-                "object_id": "evidence-80037f9f775348f49f6b01f0283fef62",
+                "object_id": "evidence-ebcddb02af6f4454a16de8186659a880",
                 "relationship": "observed"
               }
             ]
@@ -1921,7 +1921,7 @@
             "technical_details": {
               "obligation_id": "O-CHANGED-FILES",
               "evidence_ids": [
-                "evidence-29d7d208f1e141bdb4349c1c5f23ca67"
+                "evidence-52161624f3d54c59a2b8490de8b9eaf5"
               ],
               "finding_ids": []
             },
@@ -1938,7 +1938,7 @@
               },
               {
                 "kind": "evidence",
-                "object_id": "evidence-29d7d208f1e141bdb4349c1c5f23ca67",
+                "object_id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
                 "relationship": "observed"
               }
             ]
@@ -1964,7 +1964,7 @@
             "technical_details": {
               "obligation_id": "O-SUMMARY",
               "evidence_ids": [
-                "evidence-80037f9f775348f49f6b01f0283fef62"
+                "evidence-ebcddb02af6f4454a16de8186659a880"
               ],
               "finding_ids": []
             },
@@ -1981,7 +1981,7 @@
               },
               {
                 "kind": "evidence",
-                "object_id": "evidence-80037f9f775348f49f6b01f0283fef62",
+                "object_id": "evidence-ebcddb02af6f4454a16de8186659a880",
                 "relationship": "observed"
               }
             ]
@@ -2028,7 +2028,7 @@
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-29d7d208f1e141bdb4349c1c5f23ca67",
+            "object_id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
             "relationship": "observed"
           },
           {
@@ -2038,7 +2038,7 @@
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-80037f9f775348f49f6b01f0283fef62",
+            "object_id": "evidence-ebcddb02af6f4454a16de8186659a880",
             "relationship": "observed"
           }
         ],
@@ -2078,7 +2078,7 @@
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-29d7d208f1e141bdb4349c1c5f23ca67",
+            "object_id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
             "relationship": "observed"
           },
           {
@@ -2088,7 +2088,7 @@
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-80037f9f775348f49f6b01f0283fef62",
+            "object_id": "evidence-ebcddb02af6f4454a16de8186659a880",
             "relationship": "observed"
           }
         ],
@@ -2139,7 +2139,7 @@
       ],
       "interaction_ids": [],
       "evidence_ids": [
-        "evidence-29d7d208f1e141bdb4349c1c5f23ca67"
+        "evidence-52161624f3d54c59a2b8490de8b9eaf5"
       ],
       "binding_fingerprints": [
         "73fd2b8969b9783204be0cdaf8c41541ce85a134187c87443f7872143ab64d9b"
@@ -2160,7 +2160,7 @@
         },
         {
           "kind": "evidence",
-          "object_id": "evidence-29d7d208f1e141bdb4349c1c5f23ca67",
+          "object_id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
           "relationship": "observed"
         }
       ],
@@ -2191,7 +2191,7 @@
       ],
       "interaction_ids": [],
       "evidence_ids": [
-        "evidence-80037f9f775348f49f6b01f0283fef62"
+        "evidence-ebcddb02af6f4454a16de8186659a880"
       ],
       "binding_fingerprints": [
         "73fd2b8969b9783204be0cdaf8c41541ce85a134187c87443f7872143ab64d9b"
@@ -2212,7 +2212,7 @@
         },
         {
           "kind": "evidence",
-          "object_id": "evidence-80037f9f775348f49f6b01f0283fef62",
+          "object_id": "evidence-ebcddb02af6f4454a16de8186659a880",
           "relationship": "observed"
         }
       ],
@@ -2295,7 +2295,7 @@
           "technical_details": {
             "obligation_id": "O-CHANGED-FILES",
             "evidence_ids": [
-              "evidence-29d7d208f1e141bdb4349c1c5f23ca67"
+              "evidence-52161624f3d54c59a2b8490de8b9eaf5"
             ],
             "finding_ids": []
           },
@@ -2312,7 +2312,7 @@
             },
             {
               "kind": "evidence",
-              "object_id": "evidence-29d7d208f1e141bdb4349c1c5f23ca67",
+              "object_id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
               "relationship": "observed"
             }
           ]
@@ -2338,7 +2338,7 @@
           "technical_details": {
             "obligation_id": "O-SUMMARY",
             "evidence_ids": [
-              "evidence-80037f9f775348f49f6b01f0283fef62"
+              "evidence-ebcddb02af6f4454a16de8186659a880"
             ],
             "finding_ids": []
           },
@@ -2355,7 +2355,7 @@
             },
             {
               "kind": "evidence",
-              "object_id": "evidence-80037f9f775348f49f6b01f0283fef62",
+              "object_id": "evidence-ebcddb02af6f4454a16de8186659a880",
               "relationship": "observed"
             }
           ]
@@ -2411,7 +2411,7 @@
           "technical_details": {
             "obligation_id": "O-CHANGED-FILES",
             "evidence_ids": [
-              "evidence-29d7d208f1e141bdb4349c1c5f23ca67"
+              "evidence-52161624f3d54c59a2b8490de8b9eaf5"
             ],
             "finding_ids": []
           },
@@ -2428,7 +2428,7 @@
             },
             {
               "kind": "evidence",
-              "object_id": "evidence-29d7d208f1e141bdb4349c1c5f23ca67",
+              "object_id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
               "relationship": "observed"
             }
           ]
@@ -2454,7 +2454,7 @@
           "technical_details": {
             "obligation_id": "O-SUMMARY",
             "evidence_ids": [
-              "evidence-80037f9f775348f49f6b01f0283fef62"
+              "evidence-ebcddb02af6f4454a16de8186659a880"
             ],
             "finding_ids": []
           },
@@ -2471,7 +2471,7 @@
             },
             {
               "kind": "evidence",
-              "object_id": "evidence-80037f9f775348f49f6b01f0283fef62",
+              "object_id": "evidence-ebcddb02af6f4454a16de8186659a880",
               "relationship": "observed"
             }
           ]
@@ -2507,7 +2507,7 @@
       "primary_reason": "该操作直接对应当前流程阶段或开放问题。",
       "selector_options": [
         {
-          "selector_token": "sel-b0fab19c4296369359268c1e77e1580e9a3a0059091ce48e4a04e4ea84a2710e",
+          "selector_token": "sel-d9fc93d1730b531b7beb190b2387e4fa3d096a0158dbfbe51eafd64476ff627a",
           "action": "reject_evidence",
           "label": "变更文件清单",
           "status_label": "当前材料有效，可记录拒绝依据",
@@ -2519,25 +2519,25 @@
           ],
           "object_type": "evidence",
           "object_ids": [
-            "evidence-29d7d208f1e141bdb4349c1c5f23ca67"
+            "evidence-52161624f3d54c59a2b8490de8b9eaf5"
           ],
           "blocking": true,
           "material_status": "valid",
           "workflow_status": "",
           "technical_details": {
-            "evidence_id": "evidence-29d7d208f1e141bdb4349c1c5f23ca67",
+            "evidence_id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
             "evidence_type": "changed_files"
           },
           "traceability": [
             {
               "kind": "evidence",
-              "object_id": "evidence-29d7d208f1e141bdb4349c1c5f23ca67",
+              "object_id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
               "relationship": "action_target"
             }
           ]
         },
         {
-          "selector_token": "sel-c3c921a437b2b3a5d4ea7c8f68e4ae79910061ae0d2a92c6fe9a34baea696bd8",
+          "selector_token": "sel-74dc4da9103a67f7ea5c810ca8342229adfb5ff12c4f34e9230adba698fdce2d",
           "action": "reject_evidence",
           "label": "修改说明",
           "status_label": "当前材料有效，可记录拒绝依据",
@@ -2549,19 +2549,19 @@
           ],
           "object_type": "evidence",
           "object_ids": [
-            "evidence-80037f9f775348f49f6b01f0283fef62"
+            "evidence-ebcddb02af6f4454a16de8186659a880"
           ],
           "blocking": true,
           "material_status": "valid",
           "workflow_status": "",
           "technical_details": {
-            "evidence_id": "evidence-80037f9f775348f49f6b01f0283fef62",
+            "evidence_id": "evidence-ebcddb02af6f4454a16de8186659a880",
             "evidence_type": "contribution_summary"
           },
           "traceability": [
             {
               "kind": "evidence",
-              "object_id": "evidence-80037f9f775348f49f6b01f0283fef62",
+              "object_id": "evidence-ebcddb02af6f4454a16de8186659a880",
               "relationship": "action_target"
             }
           ]
@@ -2617,7 +2617,7 @@
           "technical_details": {
             "obligation_id": "O-CHANGED-FILES",
             "evidence_ids": [
-              "evidence-29d7d208f1e141bdb4349c1c5f23ca67"
+              "evidence-52161624f3d54c59a2b8490de8b9eaf5"
             ],
             "finding_ids": []
           },
@@ -2634,7 +2634,7 @@
             },
             {
               "kind": "evidence",
-              "object_id": "evidence-29d7d208f1e141bdb4349c1c5f23ca67",
+              "object_id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
               "relationship": "observed"
             }
           ]
@@ -2660,7 +2660,7 @@
           "technical_details": {
             "obligation_id": "O-SUMMARY",
             "evidence_ids": [
-              "evidence-80037f9f775348f49f6b01f0283fef62"
+              "evidence-ebcddb02af6f4454a16de8186659a880"
             ],
             "finding_ids": []
           },
@@ -2677,7 +2677,7 @@
             },
             {
               "kind": "evidence",
-              "object_id": "evidence-80037f9f775348f49f6b01f0283fef62",
+              "object_id": "evidence-ebcddb02af6f4454a16de8186659a880",
               "relationship": "observed"
             }
           ]
@@ -2709,7 +2709,7 @@
         "technical_details": {
           "obligation_id": "O-CHANGED-FILES",
           "evidence_ids": [
-            "evidence-29d7d208f1e141bdb4349c1c5f23ca67"
+            "evidence-52161624f3d54c59a2b8490de8b9eaf5"
           ],
           "finding_ids": []
         },
@@ -2726,7 +2726,7 @@
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-29d7d208f1e141bdb4349c1c5f23ca67",
+            "object_id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
             "relationship": "observed"
           }
         ]
@@ -2752,7 +2752,7 @@
         "technical_details": {
           "obligation_id": "O-SUMMARY",
           "evidence_ids": [
-            "evidence-80037f9f775348f49f6b01f0283fef62"
+            "evidence-ebcddb02af6f4454a16de8186659a880"
           ],
           "finding_ids": []
         },
@@ -2769,7 +2769,7 @@
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-80037f9f775348f49f6b01f0283fef62",
+            "object_id": "evidence-ebcddb02af6f4454a16de8186659a880",
             "relationship": "observed"
           }
         ]
@@ -2797,7 +2797,7 @@
         "technical_details": {
           "obligation_id": "O-CHANGED-FILES",
           "evidence_ids": [
-            "evidence-29d7d208f1e141bdb4349c1c5f23ca67"
+            "evidence-52161624f3d54c59a2b8490de8b9eaf5"
           ],
           "finding_ids": []
         },
@@ -2814,7 +2814,7 @@
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-29d7d208f1e141bdb4349c1c5f23ca67",
+            "object_id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
             "relationship": "observed"
           }
         ]
@@ -2840,7 +2840,7 @@
         "technical_details": {
           "obligation_id": "O-SUMMARY",
           "evidence_ids": [
-            "evidence-80037f9f775348f49f6b01f0283fef62"
+            "evidence-ebcddb02af6f4454a16de8186659a880"
           ],
           "finding_ids": []
         },
@@ -2857,7 +2857,7 @@
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-80037f9f775348f49f6b01f0283fef62",
+            "object_id": "evidence-ebcddb02af6f4454a16de8186659a880",
             "relationship": "observed"
           }
         ]
@@ -2865,7 +2865,7 @@
     ],
     "reject_evidence": [
       {
-        "selector_token": "sel-b0fab19c4296369359268c1e77e1580e9a3a0059091ce48e4a04e4ea84a2710e",
+        "selector_token": "sel-d9fc93d1730b531b7beb190b2387e4fa3d096a0158dbfbe51eafd64476ff627a",
         "action": "reject_evidence",
         "label": "变更文件清单",
         "status_label": "当前材料有效，可记录拒绝依据",
@@ -2877,25 +2877,25 @@
         ],
         "object_type": "evidence",
         "object_ids": [
-          "evidence-29d7d208f1e141bdb4349c1c5f23ca67"
+          "evidence-52161624f3d54c59a2b8490de8b9eaf5"
         ],
         "blocking": true,
         "material_status": "valid",
         "workflow_status": "",
         "technical_details": {
-          "evidence_id": "evidence-29d7d208f1e141bdb4349c1c5f23ca67",
+          "evidence_id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
           "evidence_type": "changed_files"
         },
         "traceability": [
           {
             "kind": "evidence",
-            "object_id": "evidence-29d7d208f1e141bdb4349c1c5f23ca67",
+            "object_id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
             "relationship": "action_target"
           }
         ]
       },
       {
-        "selector_token": "sel-c3c921a437b2b3a5d4ea7c8f68e4ae79910061ae0d2a92c6fe9a34baea696bd8",
+        "selector_token": "sel-74dc4da9103a67f7ea5c810ca8342229adfb5ff12c4f34e9230adba698fdce2d",
         "action": "reject_evidence",
         "label": "修改说明",
         "status_label": "当前材料有效，可记录拒绝依据",
@@ -2907,19 +2907,19 @@
         ],
         "object_type": "evidence",
         "object_ids": [
-          "evidence-80037f9f775348f49f6b01f0283fef62"
+          "evidence-ebcddb02af6f4454a16de8186659a880"
         ],
         "blocking": true,
         "material_status": "valid",
         "workflow_status": "",
         "technical_details": {
-          "evidence_id": "evidence-80037f9f775348f49f6b01f0283fef62",
+          "evidence_id": "evidence-ebcddb02af6f4454a16de8186659a880",
           "evidence_type": "contribution_summary"
         },
         "traceability": [
           {
             "kind": "evidence",
-            "object_id": "evidence-80037f9f775348f49f6b01f0283fef62",
+            "object_id": "evidence-ebcddb02af6f4454a16de8186659a880",
             "relationship": "action_target"
           }
         ]
@@ -2947,7 +2947,7 @@
         "technical_details": {
           "obligation_id": "O-CHANGED-FILES",
           "evidence_ids": [
-            "evidence-29d7d208f1e141bdb4349c1c5f23ca67"
+            "evidence-52161624f3d54c59a2b8490de8b9eaf5"
           ],
           "finding_ids": []
         },
@@ -2964,7 +2964,7 @@
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-29d7d208f1e141bdb4349c1c5f23ca67",
+            "object_id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
             "relationship": "observed"
           }
         ]
@@ -2990,7 +2990,7 @@
         "technical_details": {
           "obligation_id": "O-SUMMARY",
           "evidence_ids": [
-            "evidence-80037f9f775348f49f6b01f0283fef62"
+            "evidence-ebcddb02af6f4454a16de8186659a880"
           ],
           "finding_ids": []
         },
@@ -3007,7 +3007,7 @@
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-80037f9f775348f49f6b01f0283fef62",
+            "object_id": "evidence-ebcddb02af6f4454a16de8186659a880",
             "relationship": "observed"
           }
         ]
@@ -3035,7 +3035,7 @@
         "technical_details": {
           "obligation_id": "O-CHANGED-FILES",
           "evidence_ids": [
-            "evidence-29d7d208f1e141bdb4349c1c5f23ca67"
+            "evidence-52161624f3d54c59a2b8490de8b9eaf5"
           ],
           "finding_ids": []
         },
@@ -3052,7 +3052,7 @@
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-29d7d208f1e141bdb4349c1c5f23ca67",
+            "object_id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
             "relationship": "observed"
           }
         ]
@@ -3078,7 +3078,7 @@
         "technical_details": {
           "obligation_id": "O-SUMMARY",
           "evidence_ids": [
-            "evidence-80037f9f775348f49f6b01f0283fef62"
+            "evidence-ebcddb02af6f4454a16de8186659a880"
           ],
           "finding_ids": []
         },
@@ -3095,7 +3095,7 @@
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-80037f9f775348f49f6b01f0283fef62",
+            "object_id": "evidence-ebcddb02af6f4454a16de8186659a880",
             "relationship": "observed"
           }
         ]
@@ -3106,12 +3106,12 @@
     "identify_requirements": [
       {
         "kind": "state_transition",
-        "object_id": "transition-46508a27596544d786c20ad4832fe248",
+        "object_id": "transition-5e6fc44e7b674ff9a4b7c9a7e0e12856",
         "relationship": "primary:resolve_policy"
       },
       {
         "kind": "state_transition",
-        "object_id": "transition-13e7873083da43ce99a34be6df260c75",
+        "object_id": "transition-70481b0197694df19ab026e01a4b6e7f",
         "relationship": "primary:compile_obligations"
       },
       {
@@ -3133,17 +3133,17 @@
     "prepare_materials": [
       {
         "kind": "state_transition",
-        "object_id": "transition-932750945106494a84f97f0d63dac645",
+        "object_id": "transition-f976d5bac610471abf4c543a11b76701",
         "relationship": "primary:mark_evidence_state"
       },
       {
         "kind": "evidence",
-        "object_id": "evidence-29d7d208f1e141bdb4349c1c5f23ca67",
+        "object_id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
         "relationship": "binding_or_retention"
       },
       {
         "kind": "evidence",
-        "object_id": "evidence-80037f9f775348f49f6b01f0283fef62",
+        "object_id": "evidence-ebcddb02af6f4454a16de8186659a880",
         "relationship": "binding_or_retention"
       }
     ],
@@ -3151,7 +3151,7 @@
     "maintainer_check": [
       {
         "kind": "state_transition",
-        "object_id": "transition-f2614e19fb914c6b84baa37ffa3a1e5d",
+        "object_id": "transition-ece0b73c39a4428190d87b96b52f4f33",
         "relationship": "primary:submit_for_verification"
       }
     ],
@@ -3230,7 +3230,7 @@
           "technical_details": {
             "obligation_id": "O-CHANGED-FILES",
             "evidence_ids": [
-              "evidence-29d7d208f1e141bdb4349c1c5f23ca67"
+              "evidence-52161624f3d54c59a2b8490de8b9eaf5"
             ],
             "finding_ids": []
           },
@@ -3247,7 +3247,7 @@
             },
             {
               "kind": "evidence",
-              "object_id": "evidence-29d7d208f1e141bdb4349c1c5f23ca67",
+              "object_id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
               "relationship": "observed"
             }
           ]
@@ -3273,7 +3273,7 @@
           "technical_details": {
             "obligation_id": "O-SUMMARY",
             "evidence_ids": [
-              "evidence-80037f9f775348f49f6b01f0283fef62"
+              "evidence-ebcddb02af6f4454a16de8186659a880"
             ],
             "finding_ids": []
           },
@@ -3290,7 +3290,7 @@
             },
             {
               "kind": "evidence",
-              "object_id": "evidence-80037f9f775348f49f6b01f0283fef62",
+              "object_id": "evidence-ebcddb02af6f4454a16de8186659a880",
               "relationship": "observed"
             }
           ]
@@ -3346,7 +3346,7 @@
           "technical_details": {
             "obligation_id": "O-CHANGED-FILES",
             "evidence_ids": [
-              "evidence-29d7d208f1e141bdb4349c1c5f23ca67"
+              "evidence-52161624f3d54c59a2b8490de8b9eaf5"
             ],
             "finding_ids": []
           },
@@ -3363,7 +3363,7 @@
             },
             {
               "kind": "evidence",
-              "object_id": "evidence-29d7d208f1e141bdb4349c1c5f23ca67",
+              "object_id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
               "relationship": "observed"
             }
           ]
@@ -3389,7 +3389,7 @@
           "technical_details": {
             "obligation_id": "O-SUMMARY",
             "evidence_ids": [
-              "evidence-80037f9f775348f49f6b01f0283fef62"
+              "evidence-ebcddb02af6f4454a16de8186659a880"
             ],
             "finding_ids": []
           },
@@ -3406,7 +3406,7 @@
             },
             {
               "kind": "evidence",
-              "object_id": "evidence-80037f9f775348f49f6b01f0283fef62",
+              "object_id": "evidence-ebcddb02af6f4454a16de8186659a880",
               "relationship": "observed"
             }
           ]
@@ -3442,7 +3442,7 @@
       "primary_reason": "该操作直接对应当前流程阶段或开放问题。",
       "selector_options": [
         {
-          "selector_token": "sel-b0fab19c4296369359268c1e77e1580e9a3a0059091ce48e4a04e4ea84a2710e",
+          "selector_token": "sel-d9fc93d1730b531b7beb190b2387e4fa3d096a0158dbfbe51eafd64476ff627a",
           "action": "reject_evidence",
           "label": "变更文件清单",
           "status_label": "当前材料有效，可记录拒绝依据",
@@ -3454,25 +3454,25 @@
           ],
           "object_type": "evidence",
           "object_ids": [
-            "evidence-29d7d208f1e141bdb4349c1c5f23ca67"
+            "evidence-52161624f3d54c59a2b8490de8b9eaf5"
           ],
           "blocking": true,
           "material_status": "valid",
           "workflow_status": "",
           "technical_details": {
-            "evidence_id": "evidence-29d7d208f1e141bdb4349c1c5f23ca67",
+            "evidence_id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
             "evidence_type": "changed_files"
           },
           "traceability": [
             {
               "kind": "evidence",
-              "object_id": "evidence-29d7d208f1e141bdb4349c1c5f23ca67",
+              "object_id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
               "relationship": "action_target"
             }
           ]
         },
         {
-          "selector_token": "sel-c3c921a437b2b3a5d4ea7c8f68e4ae79910061ae0d2a92c6fe9a34baea696bd8",
+          "selector_token": "sel-74dc4da9103a67f7ea5c810ca8342229adfb5ff12c4f34e9230adba698fdce2d",
           "action": "reject_evidence",
           "label": "修改说明",
           "status_label": "当前材料有效，可记录拒绝依据",
@@ -3484,19 +3484,19 @@
           ],
           "object_type": "evidence",
           "object_ids": [
-            "evidence-80037f9f775348f49f6b01f0283fef62"
+            "evidence-ebcddb02af6f4454a16de8186659a880"
           ],
           "blocking": true,
           "material_status": "valid",
           "workflow_status": "",
           "technical_details": {
-            "evidence_id": "evidence-80037f9f775348f49f6b01f0283fef62",
+            "evidence_id": "evidence-ebcddb02af6f4454a16de8186659a880",
             "evidence_type": "contribution_summary"
           },
           "traceability": [
             {
               "kind": "evidence",
-              "object_id": "evidence-80037f9f775348f49f6b01f0283fef62",
+              "object_id": "evidence-ebcddb02af6f4454a16de8186659a880",
               "relationship": "action_target"
             }
           ]
@@ -3552,7 +3552,7 @@
           "technical_details": {
             "obligation_id": "O-CHANGED-FILES",
             "evidence_ids": [
-              "evidence-29d7d208f1e141bdb4349c1c5f23ca67"
+              "evidence-52161624f3d54c59a2b8490de8b9eaf5"
             ],
             "finding_ids": []
           },
@@ -3569,7 +3569,7 @@
             },
             {
               "kind": "evidence",
-              "object_id": "evidence-29d7d208f1e141bdb4349c1c5f23ca67",
+              "object_id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
               "relationship": "observed"
             }
           ]
@@ -3595,7 +3595,7 @@
           "technical_details": {
             "obligation_id": "O-SUMMARY",
             "evidence_ids": [
-              "evidence-80037f9f775348f49f6b01f0283fef62"
+              "evidence-ebcddb02af6f4454a16de8186659a880"
             ],
             "finding_ids": []
           },
@@ -3612,7 +3612,7 @@
             },
             {
               "kind": "evidence",
-              "object_id": "evidence-80037f9f775348f49f6b01f0283fef62",
+              "object_id": "evidence-ebcddb02af6f4454a16de8186659a880",
               "relationship": "observed"
             }
           ]
@@ -3668,7 +3668,7 @@
           "technical_details": {
             "obligation_id": "O-CHANGED-FILES",
             "evidence_ids": [
-              "evidence-29d7d208f1e141bdb4349c1c5f23ca67"
+              "evidence-52161624f3d54c59a2b8490de8b9eaf5"
             ],
             "finding_ids": []
           },
@@ -3685,7 +3685,7 @@
             },
             {
               "kind": "evidence",
-              "object_id": "evidence-29d7d208f1e141bdb4349c1c5f23ca67",
+              "object_id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
               "relationship": "observed"
             }
           ]
@@ -3711,7 +3711,7 @@
           "technical_details": {
             "obligation_id": "O-SUMMARY",
             "evidence_ids": [
-              "evidence-80037f9f775348f49f6b01f0283fef62"
+              "evidence-ebcddb02af6f4454a16de8186659a880"
             ],
             "finding_ids": []
           },
@@ -3728,7 +3728,7 @@
             },
             {
               "kind": "evidence",
-              "object_id": "evidence-80037f9f775348f49f6b01f0283fef62",
+              "object_id": "evidence-ebcddb02af6f4454a16de8186659a880",
               "relationship": "observed"
             }
           ]
@@ -4004,7 +4004,7 @@
         "after": "ready_for_human_decision",
         "explanation": "受影响项会记录维护者检查；全部阻断项完成后进入人类最终决定。",
         "source_object_ids": [
-          "transition-f2614e19fb914c6b84baa37ffa3a1e5d"
+          "transition-ece0b73c39a4428190d87b96b52f4f33"
         ]
       },
       {
@@ -4037,7 +4037,7 @@
     ],
     "requires_confirmation": true,
     "mutates_case": false,
-    "preview_fingerprint": "5f9716ffa0750b172bfc0385253eb99f83b9fa10fd4b050e93f6d984b1dcc027",
+    "preview_fingerprint": "6e8b14e49741b7bdfaa04538e9146350ac3d1d2353f2aab2d87909212c26a9a4",
     "traceability": [
       {
         "kind": "permission_rule",

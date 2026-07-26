@@ -325,6 +325,34 @@ def test_resubmitted_valid_material_waits_for_scoped_revalidation(tmp_path):
     assert row.workflow_status == "awaiting_revalidation"
     assert "重新检查" in row.workflow_status_label
     assert "maintainer_verifier" in guidance.responsibility.primary_roles
+    preview = service.preview_reviewer_action(
+        "resubmit-ready",
+        actor="verifier-1",
+        role="maintainer_verifier",
+        action="verify_evidence",
+        parameters={
+            "obligation_ids": ["O-AGENT-SCOPE"],
+            "reason": "Scoped revalidation.",
+        },
+    )
+    assert any(
+        effect.target == "指定修复请求"
+        and effect.after == "resolved"
+        for effect in preview.effects
+    )
+    service.verify(
+        "resubmit-ready",
+        actor="verifier-1",
+        role="maintainer_verifier",
+        reason="Scoped revalidation.",
+        obligation_ids=["O-AGENT-SCOPE"],
+    )
+    assert (
+        service.storage.load_case("resubmit-ready")
+        .repair_requests[-1]
+        .status
+        == "resolved"
+    )
 
 
 def test_ready_for_decision_responsibility_is_human_maintainer(tmp_path):

@@ -727,6 +727,19 @@ def _project_action(
                 and set(finding.affected_obligation_ids) <= requested
             ):
                 finding.status = "resolved"
+        finding_statuses = {
+            item.id: item.status for item in projected.findings
+        }
+        for repair in projected.repair_requests:
+            if (
+                repair.status in {"open", "resubmitted"}
+                and repair.finding_ids
+                and all(
+                    finding_statuses.get(finding_id) != "open"
+                    for finding_id in repair.finding_ids
+                )
+            ):
+                repair.status = "resolved"
     elif action in {
         "request_repair",
         "ask_clarification",
@@ -888,6 +901,34 @@ def preview_reviewer_action(
                     source_object_ids=[obligation.id],
                 )
             )
+        if action == "verify_evidence":
+            for repair in case.repair_requests:
+                affected_findings = [
+                    finding
+                    for finding in case.findings
+                    if finding.id in repair.finding_ids
+                ]
+                if (
+                    repair.status in {"open", "resubmitted"}
+                    and affected_findings
+                    and all(
+                        set(finding.affected_obligation_ids)
+                        <= set(scope)
+                        for finding in affected_findings
+                        if finding.status == "open"
+                    )
+                ):
+                    effects.append(
+                        ActionEffect(
+                            target="指定修复请求",
+                            before=repair.status,
+                            after="resolved",
+                            explanation=(
+                                "所关联的问题在本次重新检查后关闭。"
+                            ),
+                            source_object_ids=[repair.id],
+                        )
+                    )
         if action == "reject_evidence":
             object_id = str(parameters.get("object_id", ""))
             evidence = next(

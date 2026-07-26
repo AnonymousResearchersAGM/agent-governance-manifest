@@ -70,12 +70,12 @@ code { overflow-wrap: anywhere; }
 <ol class="workflow"><li class="workflow-step status-completed" data-status="completed"><span class="symbol" aria-hidden="true">✓</span><strong>1. 系统识别要求</strong><span class="state-text">已完成</span><p>适用规则和本次要求已由 AGM 引擎生成。</p><details><summary>内部阶段与依据</summary><p>Resolve, Compile</p><pre>[
   {
     &quot;kind&quot;: &quot;state_transition&quot;,
-    &quot;object_id&quot;: &quot;transition-4551ced00c2b43919ac761d7dd3f4bb8&quot;,
+    &quot;object_id&quot;: &quot;transition-2cdb15d865e74f2e8c4b334a47492138&quot;,
     &quot;relationship&quot;: &quot;primary:resolve_policy&quot;
   },
   {
     &quot;kind&quot;: &quot;state_transition&quot;,
-    &quot;object_id&quot;: &quot;transition-b6755200e9f9420d906f2b9fc2fa0449&quot;,
+    &quot;object_id&quot;: &quot;transition-9a4125a31a0d4ce1a4b027ff79f3c79a&quot;,
     &quot;relationship&quot;: &quot;primary:compile_obligations&quot;
   },
   {
@@ -96,7 +96,7 @@ code { overflow-wrap: anywhere; }
 ]</pre></details></li><li class="workflow-step status-current" data-status="current"><span class="symbol" aria-hidden="true">●</span><strong>2. 贡献者准备材料</strong><span class="state-text">当前阶段</span><p>贡献者正在准备或补齐本次所需材料。</p><details><summary>内部阶段与依据</summary><p>Bind, Repair</p><pre>[
   {
     &quot;kind&quot;: &quot;state_transition&quot;,
-    &quot;object_id&quot;: &quot;transition-ea05a8e50a0a46048af40e6d18843135&quot;,
+    &quot;object_id&quot;: &quot;transition-a3387af59dfd4db28c555a80ea33bc6d&quot;,
     &quot;relationship&quot;: &quot;primary:mark_evidence_state&quot;
   }
 ]</pre></details></li><li class="workflow-step status-skipped" data-status="skipped"><span class="symbol" aria-hidden="true">—</span><strong>3. 负责人确认</strong><span class="state-text">本次不要求</span><p>当前义务集合不要求负责人确认。</p><details><summary>内部阶段与依据</summary><p>Attest</p><pre>[]</pre></details></li><li class="workflow-step status-pending" data-status="pending"><span class="symbol" aria-hidden="true">○</span><strong>4. 维护者检查</strong><span class="state-text">尚未开始</span><p>贡献侧要求完成后才进入维护者检查。</p><details><summary>内部阶段与依据</summary><p>Verify, Repair</p><pre>[]</pre></details></li><li class="workflow-step status-pending" data-status="pending"><span class="symbol" aria-hidden="true">○</span><strong>5. 人类维护者最终决定</strong><span class="state-text">尚未开始</span><p>前序治理要求完成后才进入最终决定。</p><details><summary>内部阶段与依据</summary><p>Decide, Record</p><pre>[]</pre></details></li></ol>
@@ -726,7 +726,7 @@ code { overflow-wrap: anywhere; }
   &quot;contribution_fingerprint&quot;: &quot;e9d96f8f36a92549155112fc471507591a241d77f81bbcdd2eb695d170e7fdc4&quot;,
   &quot;policy_fingerprint&quot;: &quot;recorded-policy-fingerprint-before-change&quot;,
   &quot;policy_snapshot&quot;: {
-    &quot;id&quot;: &quot;policy-90364e0c2dfe4722b64dbfde1ee59026&quot;,
+    &quot;id&quot;: &quot;policy-d19a9b2e1a7747eb8d428a9f41012a51&quot;,
     &quot;schema_version&quot;: &quot;agm.policy_snapshot/v0.2-dev&quot;,
     &quot;manifest_version&quot;: &quot;agm.manifest/v0.2-dev&quot;,
     &quot;base_commit&quot;: &quot;demo-base&quot;,
@@ -751,7 +751,7 @@ code { overflow-wrap: anywhere; }
   },
   &quot;transition_history&quot;: [
     {
-      &quot;id&quot;: &quot;transition-4551ced00c2b43919ac761d7dd3f4bb8&quot;,
+      &quot;id&quot;: &quot;transition-2cdb15d865e74f2e8c4b334a47492138&quot;,
       &quot;case_id&quot;: &quot;policy-migration&quot;,
       &quot;actor&quot;: &quot;agm-engine&quot;,
       &quot;role&quot;: &quot;system&quot;,
@@ -760,12 +760,12 @@ code { overflow-wrap: anywhere; }
       &quot;action&quot;: &quot;resolve_policy&quot;,
       &quot;reason&quot;: &quot;Resolved canonical policy against the contribution.&quot;,
       &quot;related_object_ids&quot;: [
-        &quot;policy-90364e0c2dfe4722b64dbfde1ee59026&quot;
+        &quot;policy-d19a9b2e1a7747eb8d428a9f41012a51&quot;
       ],
       &quot;timestamp&quot;: &quot;2026-07-26T00:00:00Z&quot;
     },
     {
-      &quot;id&quot;: &quot;transition-b6755200e9f9420d906f2b9fc2fa0449&quot;,
+      &quot;id&quot;: &quot;transition-9a4125a31a0d4ce1a4b027ff79f3c79a&quot;,
       &quot;case_id&quot;: &quot;policy-migration&quot;,
       &quot;actor&quot;: &quot;agm-engine&quot;,
       &quot;role&quot;: &quot;system&quot;,
@@ -780,7 +780,7 @@ code { overflow-wrap: anywhere; }
       &quot;timestamp&quot;: &quot;2026-07-26T00:00:00Z&quot;
     },
     {
-      &quot;id&quot;: &quot;transition-ea05a8e50a0a46048af40e6d18843135&quot;,
+      &quot;id&quot;: &quot;transition-a3387af59dfd4db28c555a80ea33bc6d&quot;,
       &quot;case_id&quot;: &quot;policy-migration&quot;,
       &quot;actor&quot;: &quot;agm-engine&quot;,
       &quot;role&quot;: &quot;system&quot;,

@@ -54,12 +54,12 @@
         "traceability": [
           {
             "kind": "state_transition",
-            "object_id": "transition-ced71113dcbe487392a002f49f4e604f",
+            "object_id": "transition-df8cbc8f795c40169d2dabf865ef01b8",
             "relationship": "primary:resolve_policy"
           },
           {
             "kind": "state_transition",
-            "object_id": "transition-ca265c2104df418e8b6de78d42de32f5",
+            "object_id": "transition-3bad8885dbb447e4a3f758d692918122",
             "relationship": "primary:compile_obligations"
           },
           {
@@ -99,32 +99,32 @@
         "traceability": [
           {
             "kind": "state_transition",
-            "object_id": "transition-be91f3f9b27a44fa82d1a57492732814",
+            "object_id": "transition-92734d164caa4345807392f7c0026517",
             "relationship": "primary:mark_evidence_state"
           },
           {
             "kind": "state_transition",
-            "object_id": "transition-1676373f1be04af7836bd0a027c6e244",
+            "object_id": "transition-edb55a1ee0c543c490e4363341dfcd4e",
             "relationship": "primary:resubmit"
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-8a80d7ad66bb41ef9bac2a4fb364aa41",
+            "object_id": "evidence-3c0c167445a143248e0fa0f71bb423b6",
             "relationship": "binding_or_retention"
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-59e7bb664b8a45338fb9c91c75148219",
+            "object_id": "evidence-52d1959b65174b11a46526b31074ae80",
             "relationship": "binding_or_retention"
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-4919dde096154afabac5e46994334e45",
+            "object_id": "evidence-4544e6c323e945d7b96b3d602e6856d5",
             "relationship": "binding_or_retention"
           },
           {
             "kind": "repair_request",
-            "object_id": "repair-5f273d51b2264666a0d09267fcd1ae07",
+            "object_id": "repair-fcae5dc548bb4440848e80210d229a8e",
             "relationship": "repair_scope"
           }
         ]
@@ -157,27 +157,27 @@
         "traceability": [
           {
             "kind": "state_transition",
-            "object_id": "transition-0f93946c2b144b64bb1631171d7998da",
+            "object_id": "transition-3b0eae34c8b44a1bb35fcf073cf81fab",
             "relationship": "primary:submit_for_verification"
           },
           {
             "kind": "state_transition",
-            "object_id": "transition-f2d691c85c384dadbd793d03fc9f6b47",
+            "object_id": "transition-f19842708d3b47d8961be953f6b1c356",
             "relationship": "primary:verify_evidence"
           },
           {
             "kind": "state_transition",
-            "object_id": "transition-c42559820be742d1abaffc51584621cf",
+            "object_id": "transition-634a529f8c364e39a34145a6ea0dda6c",
             "relationship": "primary:request_repair"
           },
           {
             "kind": "maintainer_verification",
-            "object_id": "verification-f1301dfcdb754102a4447dafba93f380",
+            "object_id": "verification-0984956c115c4a1b8d1332b28a2e2387",
             "relationship": "verified"
           },
           {
             "kind": "finding",
-            "object_id": "finding-6f49f5101d9641a68dc91db40bd6edbd",
+            "object_id": "finding-3c07f0079a2a40e9879548d26cf01ca2",
             "relationship": "open"
           }
         ]
@@ -197,7 +197,7 @@
         "traceability": [
           {
             "kind": "state_transition",
-            "object_id": "transition-680aad883f654a97970dc4e017c8b9dd",
+            "object_id": "transition-40a765972f2f4680914c3d11ebf3c035",
             "relationship": "primary:mark_ready"
           }
         ]
@@ -218,13 +218,13 @@
         ],
         "interaction_ids": [],
         "evidence_ids": [
-          "evidence-8a80d7ad66bb41ef9bac2a4fb364aa41"
+          "evidence-3c0c167445a143248e0fa0f71bb423b6"
         ],
         "binding_fingerprints": [
           "9fe19abd52f6e8e2b7fbb8b2f8ed283cb530ad8698ef8cf7c4411fc6fd3fb1d8"
         ],
         "finding_ids": [
-          "finding-6f49f5101d9641a68dc91db40bd6edbd"
+          "finding-3c07f0079a2a40e9879548d26cf01ca2"
         ],
         "reference_english": "Record the declared action, permissions, supervision, and delegation scope.",
         "observed_english": "valid material present; open repair awaits revalidation",
@@ -241,12 +241,12 @@
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-8a80d7ad66bb41ef9bac2a4fb364aa41",
+            "object_id": "evidence-3c0c167445a143248e0fa0f71bb423b6",
             "relationship": "observed"
           },
           {
             "kind": "finding",
-            "object_id": "finding-6f49f5101d9641a68dc91db40bd6edbd",
+            "object_id": "finding-3c07f0079a2a40e9879548d26cf01ca2",
             "relationship": "diagnostic"
           }
         ],
@@ -275,7 +275,7 @@
         ],
         "interaction_ids": [],
         "evidence_ids": [
-          "evidence-59e7bb664b8a45338fb9c91c75148219"
+          "evidence-52d1959b65174b11a46526b31074ae80"
         ],
         "binding_fingerprints": [
           "9fe19abd52f6e8e2b7fbb8b2f8ed283cb530ad8698ef8cf7c4411fc6fd3fb1d8"
@@ -296,7 +296,7 @@
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-59e7bb664b8a45338fb9c91c75148219",
+            "object_id": "evidence-52d1959b65174b11a46526b31074ae80",
             "relationship": "observed"
           }
         ],
@@ -327,7 +327,7 @@
         ],
         "interaction_ids": [],
         "evidence_ids": [
-          "evidence-4919dde096154afabac5e46994334e45"
+          "evidence-4544e6c323e945d7b96b3d602e6856d5"
         ],
         "binding_fingerprints": [
           "9fe19abd52f6e8e2b7fbb8b2f8ed283cb530ad8698ef8cf7c4411fc6fd3fb1d8"
@@ -348,7 +348,7 @@
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-4919dde096154afabac5e46994334e45",
+            "object_id": "evidence-4544e6c323e945d7b96b3d602e6856d5",
             "relationship": "observed"
           }
         ],
@@ -368,7 +368,7 @@
     ],
     "diagnostics": [
       {
-        "finding_id": "finding-6f49f5101d9641a68dc91db40bd6edbd",
+        "finding_id": "finding-3c07f0079a2a40e9879548d26cf01ca2",
         "title": "阻断问题",
         "plain_language": "Clarify agent action and delegation scope only.",
         "severity": "high",
@@ -378,17 +378,17 @@
           "O-AGENT-SCOPE"
         ],
         "repair_request_ids": [
-          "repair-5f273d51b2264666a0d09267fcd1ae07"
+          "repair-fcae5dc548bb4440848e80210d229a8e"
         ],
         "traceability": [
           {
             "kind": "finding",
-            "object_id": "finding-6f49f5101d9641a68dc91db40bd6edbd",
+            "object_id": "finding-3c07f0079a2a40e9879548d26cf01ca2",
             "relationship": "diagnostic"
           },
           {
             "kind": "repair_request",
-            "object_id": "repair-5f273d51b2264666a0d09267fcd1ae07",
+            "object_id": "repair-fcae5dc548bb4440848e80210d229a8e",
             "relationship": "repair"
           }
         ]
@@ -464,10 +464,10 @@
             "technical_details": {
               "obligation_id": "O-AGENT-SCOPE",
               "evidence_ids": [
-                "evidence-8a80d7ad66bb41ef9bac2a4fb364aa41"
+                "evidence-3c0c167445a143248e0fa0f71bb423b6"
               ],
               "finding_ids": [
-                "finding-6f49f5101d9641a68dc91db40bd6edbd"
+                "finding-3c07f0079a2a40e9879548d26cf01ca2"
               ]
             },
             "traceability": [
@@ -483,12 +483,12 @@
               },
               {
                 "kind": "evidence",
-                "object_id": "evidence-8a80d7ad66bb41ef9bac2a4fb364aa41",
+                "object_id": "evidence-3c0c167445a143248e0fa0f71bb423b6",
                 "relationship": "observed"
               },
               {
                 "kind": "finding",
-                "object_id": "finding-6f49f5101d9641a68dc91db40bd6edbd",
+                "object_id": "finding-3c07f0079a2a40e9879548d26cf01ca2",
                 "relationship": "diagnostic"
               }
             ]
@@ -880,21 +880,21 @@
       {
         "title": "本次只重新检查受影响部分",
         "technical_term": "scoped repair and revalidation",
-        "plain_language": "需要重新检查：O-AGENT-SCOPE。 保留的材料：evidence-4919dde096154afabac5e46994334e45, evidence-59e7bb664b8a45338fb9c91c75148219。",
+        "plain_language": "需要重新检查：O-AGENT-SCOPE。 保留的材料：evidence-4544e6c323e945d7b96b3d602e6856d5, evidence-52d1959b65174b11a46526b31074ae80。",
         "source_references": [
           {
             "kind": "repair_request",
-            "object_id": "repair-5f273d51b2264666a0d09267fcd1ae07",
+            "object_id": "repair-fcae5dc548bb4440848e80210d229a8e",
             "relationship": "scope"
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-4919dde096154afabac5e46994334e45",
+            "object_id": "evidence-4544e6c323e945d7b96b3d602e6856d5",
             "relationship": "retained"
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-59e7bb664b8a45338fb9c91c75148219",
+            "object_id": "evidence-52d1959b65174b11a46526b31074ae80",
             "relationship": "retained"
           }
         ]
@@ -1031,7 +1031,7 @@
       ],
       "evidence_records": [
         {
-          "id": "evidence-8a80d7ad66bb41ef9bac2a4fb364aa41",
+          "id": "evidence-3c0c167445a143248e0fa0f71bb423b6",
           "obligation_ids": [
             "O-AGENT-SCOPE"
           ],
@@ -1059,7 +1059,7 @@
           "invalid_reasons": []
         },
         {
-          "id": "evidence-59e7bb664b8a45338fb9c91c75148219",
+          "id": "evidence-52d1959b65174b11a46526b31074ae80",
           "obligation_ids": [
             "O-CHANGED-FILES"
           ],
@@ -1089,7 +1089,7 @@
           "invalid_reasons": []
         },
         {
-          "id": "evidence-4919dde096154afabac5e46994334e45",
+          "id": "evidence-4544e6c323e945d7b96b3d602e6856d5",
           "obligation_ids": [
             "O-SUMMARY"
           ],
@@ -1120,19 +1120,19 @@
       "attestation_records": [],
       "verification_records": [
         {
-          "id": "verification-f1301dfcdb754102a4447dafba93f380",
+          "id": "verification-0984956c115c4a1b8d1332b28a2e2387",
           "actor": "verifier-1",
           "role": "maintainer_verifier",
-          "timestamp": "2026-07-26T13:13:11Z",
+          "timestamp": "2026-07-26T13:27:34Z",
           "obligation_ids": [
             "O-AGENT-SCOPE",
             "O-CHANGED-FILES",
             "O-SUMMARY"
           ],
           "evidence_ids": [
-            "evidence-4919dde096154afabac5e46994334e45",
-            "evidence-59e7bb664b8a45338fb9c91c75148219",
-            "evidence-8a80d7ad66bb41ef9bac2a4fb364aa41"
+            "evidence-3c0c167445a143248e0fa0f71bb423b6",
+            "evidence-4544e6c323e945d7b96b3d602e6856d5",
+            "evidence-52d1959b65174b11a46526b31074ae80"
           ],
           "outcome": "verified",
           "reason": "Initial evidence checked.",
@@ -1142,7 +1142,7 @@
       ],
       "findings": [
         {
-          "id": "finding-6f49f5101d9641a68dc91db40bd6edbd",
+          "id": "finding-3c07f0079a2a40e9879548d26cf01ca2",
           "code": "repair_required",
           "severity": "high",
           "message": "Clarify agent action and delegation scope only.",
@@ -1152,16 +1152,16 @@
             "O-AGENT-SCOPE"
           ],
           "status": "open",
-          "created_at": "2026-07-26T13:13:11Z",
+          "created_at": "2026-07-26T13:27:34Z",
           "resolved_at": null,
           "resolution": null
         }
       ],
       "repair_requests": [
         {
-          "id": "repair-5f273d51b2264666a0d09267fcd1ae07",
+          "id": "repair-fcae5dc548bb4440848e80210d229a8e",
           "finding_ids": [
-            "finding-6f49f5101d9641a68dc91db40bd6edbd"
+            "finding-3c07f0079a2a40e9879548d26cf01ca2"
           ],
           "responsible_role": "contributor",
           "affected_obligation_ids": [
@@ -1172,13 +1172,13 @@
             "O-AGENT-SCOPE"
           ],
           "requested_by": "verifier-1",
-          "requested_at": "2026-07-26T13:13:11Z",
+          "requested_at": "2026-07-26T13:27:34Z",
           "status": "resubmitted",
           "attempts": [
             {
-              "id": "attempt-0ad736fc21d245cb9cc0d9e1a062e3fc",
+              "id": "attempt-34381e3c671d4850b2639f0be008e3c3",
               "actor": "contributor-agent",
-              "timestamp": "2026-07-26T13:13:11Z",
+              "timestamp": "2026-07-26T13:27:34Z",
               "summary": "Clarified delegation wording without changing the contribution.",
               "affected_obligation_ids": [
                 "O-AGENT-SCOPE"
@@ -1191,8 +1191,8 @@
                 "new_contribution_fingerprint": "9fe19abd52f6e8e2b7fbb8b2f8ed283cb530ad8698ef8cf7c4411fc6fd3fb1d8",
                 "stale_evidence_ids": [],
                 "retained_evidence_ids": [
-                  "evidence-4919dde096154afabac5e46994334e45",
-                  "evidence-59e7bb664b8a45338fb9c91c75148219"
+                  "evidence-4544e6c323e945d7b96b3d602e6856d5",
+                  "evidence-52d1959b65174b11a46526b31074ae80"
                 ],
                 "invalidated_attestation_ids": [],
                 "required_revalidation_scope": [
@@ -1205,8 +1205,8 @@
               "new_contribution_fingerprint": "9fe19abd52f6e8e2b7fbb8b2f8ed283cb530ad8698ef8cf7c4411fc6fd3fb1d8",
               "stale_evidence_ids": [],
               "retained_evidence_ids": [
-                "evidence-4919dde096154afabac5e46994334e45",
-                "evidence-59e7bb664b8a45338fb9c91c75148219"
+                "evidence-4544e6c323e945d7b96b3d602e6856d5",
+                "evidence-52d1959b65174b11a46526b31074ae80"
               ],
               "invalidated_attestation_ids": [],
               "required_revalidation_scope": [
@@ -1219,7 +1219,7 @@
       "contribution_fingerprint": "9fe19abd52f6e8e2b7fbb8b2f8ed283cb530ad8698ef8cf7c4411fc6fd3fb1d8",
       "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
       "policy_snapshot": {
-        "id": "policy-f584a2834e614afd9cdea83ead1eb37d",
+        "id": "policy-4a8d0da19e674e2590b507558f5b6d07",
         "schema_version": "agm.policy_snapshot/v0.2-dev",
         "manifest_version": "agm.manifest/v0.2-dev",
         "base_commit": "demo-base",
@@ -1244,7 +1244,7 @@
       },
       "transition_history": [
         {
-          "id": "transition-ced71113dcbe487392a002f49f4e604f",
+          "id": "transition-df8cbc8f795c40169d2dabf865ef01b8",
           "case_id": "scoped-repair",
           "actor": "agm-engine",
           "role": "system",
@@ -1253,12 +1253,12 @@
           "action": "resolve_policy",
           "reason": "Resolved canonical policy against the contribution.",
           "related_object_ids": [
-            "policy-f584a2834e614afd9cdea83ead1eb37d"
+            "policy-4a8d0da19e674e2590b507558f5b6d07"
           ],
           "timestamp": "2026-07-26T00:00:00Z"
         },
         {
-          "id": "transition-ca265c2104df418e8b6de78d42de32f5",
+          "id": "transition-3bad8885dbb447e4a3f758d692918122",
           "case_id": "scoped-repair",
           "actor": "agm-engine",
           "role": "system",
@@ -1274,7 +1274,7 @@
           "timestamp": "2026-07-26T00:00:00Z"
         },
         {
-          "id": "transition-be91f3f9b27a44fa82d1a57492732814",
+          "id": "transition-92734d164caa4345807392f7c0026517",
           "case_id": "scoped-repair",
           "actor": "agm-engine",
           "role": "system",
@@ -1290,7 +1290,7 @@
           "timestamp": "2026-07-26T00:00:00Z"
         },
         {
-          "id": "transition-0f93946c2b144b64bb1631171d7998da",
+          "id": "transition-3b0eae34c8b44a1bb35fcf073cf81fab",
           "case_id": "scoped-repair",
           "actor": "contributor-agent",
           "role": "contributor_agent",
@@ -1299,14 +1299,14 @@
           "action": "submit_for_verification",
           "reason": "Contributor submitted prepared evidence for maintainer verification.",
           "related_object_ids": [
-            "evidence-8a80d7ad66bb41ef9bac2a4fb364aa41",
-            "evidence-59e7bb664b8a45338fb9c91c75148219",
-            "evidence-4919dde096154afabac5e46994334e45"
+            "evidence-3c0c167445a143248e0fa0f71bb423b6",
+            "evidence-52d1959b65174b11a46526b31074ae80",
+            "evidence-4544e6c323e945d7b96b3d602e6856d5"
           ],
-          "timestamp": "2026-07-26T13:13:11Z"
+          "timestamp": "2026-07-26T13:27:34Z"
         },
         {
-          "id": "transition-f2d691c85c384dadbd793d03fc9f6b47",
+          "id": "transition-f19842708d3b47d8961be953f6b1c356",
           "case_id": "scoped-repair",
           "actor": "verifier-1",
           "role": "maintainer_verifier",
@@ -1315,12 +1315,12 @@
           "action": "verify_evidence",
           "reason": "Initial evidence checked.",
           "related_object_ids": [
-            "verification-f1301dfcdb754102a4447dafba93f380"
+            "verification-0984956c115c4a1b8d1332b28a2e2387"
           ],
-          "timestamp": "2026-07-26T13:13:11Z"
+          "timestamp": "2026-07-26T13:27:34Z"
         },
         {
-          "id": "transition-680aad883f654a97970dc4e017c8b9dd",
+          "id": "transition-40a765972f2f4680914c3d11ebf3c035",
           "case_id": "scoped-repair",
           "actor": "agm-engine",
           "role": "system",
@@ -1329,12 +1329,12 @@
           "action": "mark_ready",
           "reason": "All blocking obligations are satisfied or verified; the case is ready for an authorized human decision, not accepted.",
           "related_object_ids": [
-            "verification-f1301dfcdb754102a4447dafba93f380"
+            "verification-0984956c115c4a1b8d1332b28a2e2387"
           ],
-          "timestamp": "2026-07-26T13:13:11Z"
+          "timestamp": "2026-07-26T13:27:34Z"
         },
         {
-          "id": "transition-c42559820be742d1abaffc51584621cf",
+          "id": "transition-634a529f8c364e39a34145a6ea0dda6c",
           "case_id": "scoped-repair",
           "actor": "verifier-1",
           "role": "maintainer_verifier",
@@ -1343,13 +1343,13 @@
           "action": "request_repair",
           "reason": "Clarify agent action and delegation scope only.",
           "related_object_ids": [
-            "finding-6f49f5101d9641a68dc91db40bd6edbd",
-            "repair-5f273d51b2264666a0d09267fcd1ae07"
+            "finding-3c07f0079a2a40e9879548d26cf01ca2",
+            "repair-fcae5dc548bb4440848e80210d229a8e"
           ],
-          "timestamp": "2026-07-26T13:13:11Z"
+          "timestamp": "2026-07-26T13:27:34Z"
         },
         {
-          "id": "transition-1676373f1be04af7836bd0a027c6e244",
+          "id": "transition-edb55a1ee0c543c490e4363341dfcd4e",
           "case_id": "scoped-repair",
           "actor": "contributor-agent",
           "role": "contributor_agent",
@@ -1358,9 +1358,9 @@
           "action": "resubmit",
           "reason": "Clarified delegation wording without changing the contribution.",
           "related_object_ids": [
-            "attempt-0ad736fc21d245cb9cc0d9e1a062e3fc"
+            "attempt-34381e3c671d4850b2639f0be008e3c3"
           ],
-          "timestamp": "2026-07-26T13:13:11Z"
+          "timestamp": "2026-07-26T13:27:34Z"
         }
       ],
       "final_decision": null,
@@ -1464,10 +1464,10 @@
             "technical_details": {
               "obligation_id": "O-AGENT-SCOPE",
               "evidence_ids": [
-                "evidence-8a80d7ad66bb41ef9bac2a4fb364aa41"
+                "evidence-3c0c167445a143248e0fa0f71bb423b6"
               ],
               "finding_ids": [
-                "finding-6f49f5101d9641a68dc91db40bd6edbd"
+                "finding-3c07f0079a2a40e9879548d26cf01ca2"
               ]
             },
             "traceability": [
@@ -1483,12 +1483,12 @@
               },
               {
                 "kind": "evidence",
-                "object_id": "evidence-8a80d7ad66bb41ef9bac2a4fb364aa41",
+                "object_id": "evidence-3c0c167445a143248e0fa0f71bb423b6",
                 "relationship": "observed"
               },
               {
                 "kind": "finding",
-                "object_id": "finding-6f49f5101d9641a68dc91db40bd6edbd",
+                "object_id": "finding-3c07f0079a2a40e9879548d26cf01ca2",
                 "relationship": "diagnostic"
               }
             ]
@@ -1558,12 +1558,12 @@
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-8a80d7ad66bb41ef9bac2a4fb364aa41",
+            "object_id": "evidence-3c0c167445a143248e0fa0f71bb423b6",
             "relationship": "observed"
           },
           {
             "kind": "finding",
-            "object_id": "finding-6f49f5101d9641a68dc91db40bd6edbd",
+            "object_id": "finding-3c07f0079a2a40e9879548d26cf01ca2",
             "relationship": "diagnostic"
           },
           {
@@ -1578,7 +1578,7 @@
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-59e7bb664b8a45338fb9c91c75148219",
+            "object_id": "evidence-52d1959b65174b11a46526b31074ae80",
             "relationship": "observed"
           },
           {
@@ -1588,7 +1588,7 @@
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-4919dde096154afabac5e46994334e45",
+            "object_id": "evidence-4544e6c323e945d7b96b3d602e6856d5",
             "relationship": "observed"
           }
         ],
@@ -1628,12 +1628,12 @@
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-8a80d7ad66bb41ef9bac2a4fb364aa41",
+            "object_id": "evidence-3c0c167445a143248e0fa0f71bb423b6",
             "relationship": "observed"
           },
           {
             "kind": "finding",
-            "object_id": "finding-6f49f5101d9641a68dc91db40bd6edbd",
+            "object_id": "finding-3c07f0079a2a40e9879548d26cf01ca2",
             "relationship": "diagnostic"
           }
         ],
@@ -1660,8 +1660,8 @@
         "修改说明"
       ],
       "retained_evidence_ids": [
-        "evidence-4919dde096154afabac5e46994334e45",
-        "evidence-59e7bb664b8a45338fb9c91c75148219"
+        "evidence-4544e6c323e945d7b96b3d602e6856d5",
+        "evidence-52d1959b65174b11a46526b31074ae80"
       ],
       "stale_evidence_ids": [],
       "invalidated_attestation_ids": [],
@@ -1669,12 +1669,12 @@
       "traceability": [
         {
           "kind": "repair_request",
-          "object_id": "repair-5f273d51b2264666a0d09267fcd1ae07",
+          "object_id": "repair-fcae5dc548bb4440848e80210d229a8e",
           "relationship": "source"
         },
         {
           "kind": "resubmission_attempt",
-          "object_id": "attempt-0ad736fc21d245cb9cc0d9e1a062e3fc",
+          "object_id": "attempt-34381e3c671d4850b2639f0be008e3c3",
           "relationship": "materiality_declaration"
         }
       ]
@@ -1722,13 +1722,13 @@
       ],
       "interaction_ids": [],
       "evidence_ids": [
-        "evidence-8a80d7ad66bb41ef9bac2a4fb364aa41"
+        "evidence-3c0c167445a143248e0fa0f71bb423b6"
       ],
       "binding_fingerprints": [
         "9fe19abd52f6e8e2b7fbb8b2f8ed283cb530ad8698ef8cf7c4411fc6fd3fb1d8"
       ],
       "finding_ids": [
-        "finding-6f49f5101d9641a68dc91db40bd6edbd"
+        "finding-3c07f0079a2a40e9879548d26cf01ca2"
       ],
       "reference_english": "Record the declared action, permissions, supervision, and delegation scope.",
       "observed_english": "valid material present; open repair awaits revalidation",
@@ -1745,12 +1745,12 @@
         },
         {
           "kind": "evidence",
-          "object_id": "evidence-8a80d7ad66bb41ef9bac2a4fb364aa41",
+          "object_id": "evidence-3c0c167445a143248e0fa0f71bb423b6",
           "relationship": "observed"
         },
         {
           "kind": "finding",
-          "object_id": "finding-6f49f5101d9641a68dc91db40bd6edbd",
+          "object_id": "finding-3c07f0079a2a40e9879548d26cf01ca2",
           "relationship": "diagnostic"
         }
       ],
@@ -1779,7 +1779,7 @@
       ],
       "interaction_ids": [],
       "evidence_ids": [
-        "evidence-59e7bb664b8a45338fb9c91c75148219"
+        "evidence-52d1959b65174b11a46526b31074ae80"
       ],
       "binding_fingerprints": [
         "9fe19abd52f6e8e2b7fbb8b2f8ed283cb530ad8698ef8cf7c4411fc6fd3fb1d8"
@@ -1800,7 +1800,7 @@
         },
         {
           "kind": "evidence",
-          "object_id": "evidence-59e7bb664b8a45338fb9c91c75148219",
+          "object_id": "evidence-52d1959b65174b11a46526b31074ae80",
           "relationship": "observed"
         }
       ],
@@ -1831,7 +1831,7 @@
       ],
       "interaction_ids": [],
       "evidence_ids": [
-        "evidence-4919dde096154afabac5e46994334e45"
+        "evidence-4544e6c323e945d7b96b3d602e6856d5"
       ],
       "binding_fingerprints": [
         "9fe19abd52f6e8e2b7fbb8b2f8ed283cb530ad8698ef8cf7c4411fc6fd3fb1d8"
@@ -1852,7 +1852,7 @@
         },
         {
           "kind": "evidence",
-          "object_id": "evidence-4919dde096154afabac5e46994334e45",
+          "object_id": "evidence-4544e6c323e945d7b96b3d602e6856d5",
           "relationship": "observed"
         }
       ],
@@ -1934,10 +1934,10 @@
           "technical_details": {
             "obligation_id": "O-AGENT-SCOPE",
             "evidence_ids": [
-              "evidence-8a80d7ad66bb41ef9bac2a4fb364aa41"
+              "evidence-3c0c167445a143248e0fa0f71bb423b6"
             ],
             "finding_ids": [
-              "finding-6f49f5101d9641a68dc91db40bd6edbd"
+              "finding-3c07f0079a2a40e9879548d26cf01ca2"
             ]
           },
           "traceability": [
@@ -1953,12 +1953,12 @@
             },
             {
               "kind": "evidence",
-              "object_id": "evidence-8a80d7ad66bb41ef9bac2a4fb364aa41",
+              "object_id": "evidence-3c0c167445a143248e0fa0f71bb423b6",
               "relationship": "observed"
             },
             {
               "kind": "finding",
-              "object_id": "finding-6f49f5101d9641a68dc91db40bd6edbd",
+              "object_id": "finding-3c07f0079a2a40e9879548d26cf01ca2",
               "relationship": "diagnostic"
             }
           ]
@@ -1988,10 +1988,10 @@
         "technical_details": {
           "obligation_id": "O-AGENT-SCOPE",
           "evidence_ids": [
-            "evidence-8a80d7ad66bb41ef9bac2a4fb364aa41"
+            "evidence-3c0c167445a143248e0fa0f71bb423b6"
           ],
           "finding_ids": [
-            "finding-6f49f5101d9641a68dc91db40bd6edbd"
+            "finding-3c07f0079a2a40e9879548d26cf01ca2"
           ]
         },
         "traceability": [
@@ -2007,12 +2007,12 @@
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-8a80d7ad66bb41ef9bac2a4fb364aa41",
+            "object_id": "evidence-3c0c167445a143248e0fa0f71bb423b6",
             "relationship": "observed"
           },
           {
             "kind": "finding",
-            "object_id": "finding-6f49f5101d9641a68dc91db40bd6edbd",
+            "object_id": "finding-3c07f0079a2a40e9879548d26cf01ca2",
             "relationship": "diagnostic"
           }
         ]
@@ -2023,12 +2023,12 @@
     "identify_requirements": [
       {
         "kind": "state_transition",
-        "object_id": "transition-ced71113dcbe487392a002f49f4e604f",
+        "object_id": "transition-df8cbc8f795c40169d2dabf865ef01b8",
         "relationship": "primary:resolve_policy"
       },
       {
         "kind": "state_transition",
-        "object_id": "transition-ca265c2104df418e8b6de78d42de32f5",
+        "object_id": "transition-3bad8885dbb447e4a3f758d692918122",
         "relationship": "primary:compile_obligations"
       },
       {
@@ -2055,32 +2055,32 @@
     "prepare_materials": [
       {
         "kind": "state_transition",
-        "object_id": "transition-be91f3f9b27a44fa82d1a57492732814",
+        "object_id": "transition-92734d164caa4345807392f7c0026517",
         "relationship": "primary:mark_evidence_state"
       },
       {
         "kind": "state_transition",
-        "object_id": "transition-1676373f1be04af7836bd0a027c6e244",
+        "object_id": "transition-edb55a1ee0c543c490e4363341dfcd4e",
         "relationship": "primary:resubmit"
       },
       {
         "kind": "evidence",
-        "object_id": "evidence-8a80d7ad66bb41ef9bac2a4fb364aa41",
+        "object_id": "evidence-3c0c167445a143248e0fa0f71bb423b6",
         "relationship": "binding_or_retention"
       },
       {
         "kind": "evidence",
-        "object_id": "evidence-59e7bb664b8a45338fb9c91c75148219",
+        "object_id": "evidence-52d1959b65174b11a46526b31074ae80",
         "relationship": "binding_or_retention"
       },
       {
         "kind": "evidence",
-        "object_id": "evidence-4919dde096154afabac5e46994334e45",
+        "object_id": "evidence-4544e6c323e945d7b96b3d602e6856d5",
         "relationship": "binding_or_retention"
       },
       {
         "kind": "repair_request",
-        "object_id": "repair-5f273d51b2264666a0d09267fcd1ae07",
+        "object_id": "repair-fcae5dc548bb4440848e80210d229a8e",
         "relationship": "repair_scope"
       }
     ],
@@ -2088,34 +2088,34 @@
     "maintainer_check": [
       {
         "kind": "state_transition",
-        "object_id": "transition-0f93946c2b144b64bb1631171d7998da",
+        "object_id": "transition-3b0eae34c8b44a1bb35fcf073cf81fab",
         "relationship": "primary:submit_for_verification"
       },
       {
         "kind": "state_transition",
-        "object_id": "transition-f2d691c85c384dadbd793d03fc9f6b47",
+        "object_id": "transition-f19842708d3b47d8961be953f6b1c356",
         "relationship": "primary:verify_evidence"
       },
       {
         "kind": "state_transition",
-        "object_id": "transition-c42559820be742d1abaffc51584621cf",
+        "object_id": "transition-634a529f8c364e39a34145a6ea0dda6c",
         "relationship": "primary:request_repair"
       },
       {
         "kind": "maintainer_verification",
-        "object_id": "verification-f1301dfcdb754102a4447dafba93f380",
+        "object_id": "verification-0984956c115c4a1b8d1332b28a2e2387",
         "relationship": "verified"
       },
       {
         "kind": "finding",
-        "object_id": "finding-6f49f5101d9641a68dc91db40bd6edbd",
+        "object_id": "finding-3c07f0079a2a40e9879548d26cf01ca2",
         "relationship": "open"
       }
     ],
     "human_final_decision": [
       {
         "kind": "state_transition",
-        "object_id": "transition-680aad883f654a97970dc4e017c8b9dd",
+        "object_id": "transition-40a765972f2f4680914c3d11ebf3c035",
         "relationship": "primary:mark_ready"
       }
     ]
@@ -2190,10 +2190,10 @@
           "technical_details": {
             "obligation_id": "O-AGENT-SCOPE",
             "evidence_ids": [
-              "evidence-8a80d7ad66bb41ef9bac2a4fb364aa41"
+              "evidence-3c0c167445a143248e0fa0f71bb423b6"
             ],
             "finding_ids": [
-              "finding-6f49f5101d9641a68dc91db40bd6edbd"
+              "finding-3c07f0079a2a40e9879548d26cf01ca2"
             ]
           },
           "traceability": [
@@ -2209,12 +2209,12 @@
             },
             {
               "kind": "evidence",
-              "object_id": "evidence-8a80d7ad66bb41ef9bac2a4fb364aa41",
+              "object_id": "evidence-3c0c167445a143248e0fa0f71bb423b6",
               "relationship": "observed"
             },
             {
               "kind": "finding",
-              "object_id": "finding-6f49f5101d9641a68dc91db40bd6edbd",
+              "object_id": "finding-3c07f0079a2a40e9879548d26cf01ca2",
               "relationship": "diagnostic"
             }
           ]
@@ -2609,7 +2609,7 @@
         "after": "ready_for_human_decision",
         "explanation": "受影响项会记录维护者检查；全部阻断项完成后进入人类最终决定。",
         "source_object_ids": [
-          "transition-1676373f1be04af7836bd0a027c6e244"
+          "transition-edb55a1ee0c543c490e4363341dfcd4e"
         ]
       },
       {
@@ -2620,14 +2620,23 @@
         "source_object_ids": [
           "obl-o-agent-scope"
         ]
+      },
+      {
+        "target": "指定修复请求",
+        "before": "resubmitted",
+        "after": "resolved",
+        "explanation": "所关联的问题在本次重新检查后关闭。",
+        "source_object_ids": [
+          "repair-fcae5dc548bb4440848e80210d229a8e"
+        ]
       }
     ],
     "affected_obligation_ids": [
       "O-AGENT-SCOPE"
     ],
     "retained_evidence_ids": [
-      "evidence-59e7bb664b8a45338fb9c91c75148219",
-      "evidence-4919dde096154afabac5e46994334e45"
+      "evidence-52d1959b65174b11a46526b31074ae80",
+      "evidence-4544e6c323e945d7b96b3d602e6856d5"
     ],
     "invalidated_attestation_ids": [],
     "next_authorized_actor_roles": [
@@ -2635,7 +2644,7 @@
     ],
     "requires_confirmation": true,
     "mutates_case": false,
-    "preview_fingerprint": "b24b0c5a027fa8cdfeb5304bd40697716faabdb315c7d2e142d39fc609205dd7",
+    "preview_fingerprint": "1b84357f01fa0924d5792f4b431cbe3cefef7ba2bfabfb30b462c3d348148da2",
     "traceability": [
       {
         "kind": "permission_rule",
@@ -2693,19 +2702,19 @@
     "final_acceptance_still_required": true
   },
   "final_verification_record": {
-    "id": "verification-f1301dfcdb754102a4447dafba93f380",
+    "id": "verification-0984956c115c4a1b8d1332b28a2e2387",
     "actor": "verifier-1",
     "role": "maintainer_verifier",
-    "timestamp": "2026-07-26T13:13:11Z",
+    "timestamp": "2026-07-26T13:27:34Z",
     "obligation_ids": [
       "O-AGENT-SCOPE",
       "O-CHANGED-FILES",
       "O-SUMMARY"
     ],
     "evidence_ids": [
-      "evidence-4919dde096154afabac5e46994334e45",
-      "evidence-59e7bb664b8a45338fb9c91c75148219",
-      "evidence-8a80d7ad66bb41ef9bac2a4fb364aa41"
+      "evidence-3c0c167445a143248e0fa0f71bb423b6",
+      "evidence-4544e6c323e945d7b96b3d602e6856d5",
+      "evidence-52d1959b65174b11a46526b31074ae80"
     ],
     "outcome": "verified",
     "reason": "Initial evidence checked.",

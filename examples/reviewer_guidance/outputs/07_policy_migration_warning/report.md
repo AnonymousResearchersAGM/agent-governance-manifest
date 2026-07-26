@@ -85,7 +85,7 @@
       "after": "repair_requested",
       "explanation": "案例转入 repair，由 policy steward 或维护者处理。",
       "source_object_ids": [
-        "transition-ea05a8e50a0a46048af40e6d18843135"
+        "transition-a3387af59dfd4db28c555a80ea33bc6d"
       ]
     },
     {

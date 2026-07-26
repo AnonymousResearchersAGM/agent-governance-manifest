@@ -46,12 +46,12 @@
         "traceability": [
           {
             "kind": "state_transition",
-            "object_id": "transition-4de83e51a2734af59644c46d18d913da",
+            "object_id": "transition-770979f456264f10b06671a70f37917e",
             "relationship": "primary:resolve_policy"
           },
           {
             "kind": "state_transition",
-            "object_id": "transition-5d81eea5619f4279a0c5d7e3e8203380",
+            "object_id": "transition-2fa26aada3a649cb929bbf6d289c7b3c",
             "relationship": "primary:compile_obligations"
           },
           {
@@ -86,17 +86,17 @@
         "traceability": [
           {
             "kind": "state_transition",
-            "object_id": "transition-3ef72e1205b04e86903514d4d3a0d6db",
+            "object_id": "transition-664133fde6704c6e9d17bbdaf23d11c7",
             "relationship": "primary:mark_evidence_state"
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-cf1485b25c004cd18f9602db67ef8a08",
+            "object_id": "evidence-c701f892009b4bd3af410126d26dc906",
             "relationship": "binding_or_retention"
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-9c501fe370294e6ca5e307a9b6c9c755",
+            "object_id": "evidence-2e006840991340b0a0e8000551050a08",
             "relationship": "binding_or_retention"
           }
         ]
@@ -129,17 +129,17 @@
         "traceability": [
           {
             "kind": "state_transition",
-            "object_id": "transition-f4ecb050e19e49128c65aeeb95baa8c3",
+            "object_id": "transition-8287b4c003774148a51aace269665704",
             "relationship": "primary:submit_for_verification"
           },
           {
             "kind": "state_transition",
-            "object_id": "transition-bc6c8f0a0f7e4012bd01b15b7ae884ba",
+            "object_id": "transition-603ee3961f63421480424bafeb2f32b2",
             "relationship": "primary:verify_evidence"
           },
           {
             "kind": "maintainer_verification",
-            "object_id": "verification-d799f253c38e416094e6cf8c8dcc9177",
+            "object_id": "verification-e46fb7ce77b14baea2d7ce2a24e33238",
             "relationship": "verified"
           }
         ]
@@ -159,22 +159,22 @@
         "traceability": [
           {
             "kind": "state_transition",
-            "object_id": "transition-0414510c7de148938a0f053c5c00dc26",
+            "object_id": "transition-833d4aee3f724954813bb730c3533d62",
             "relationship": "primary:mark_ready"
           },
           {
             "kind": "state_transition",
-            "object_id": "transition-73b698b28a734183a1f99d598a6f61cf",
+            "object_id": "transition-f5f3fe6b205f4e67907e1ddfb7230d2d",
             "relationship": "primary:decide_accept"
           },
           {
             "kind": "final_decision",
-            "object_id": "decision-27df9c1a81874ecf93fa3400b05383f7",
+            "object_id": "decision-1964e79b65b547b6a648f6e5ad49ef6f",
             "relationship": "accept"
           },
           {
             "kind": "closure_receipt",
-            "object_id": "closure-2a41f1155a464ebcb9b1726d6c5a35f0",
+            "object_id": "closure-5c842d8e02784af697001aa957f984a2",
             "relationship": "closure"
           }
         ]
@@ -195,7 +195,7 @@
         ],
         "interaction_ids": [],
         "evidence_ids": [
-          "evidence-cf1485b25c004cd18f9602db67ef8a08"
+          "evidence-c701f892009b4bd3af410126d26dc906"
         ],
         "binding_fingerprints": [
           "91d4654f97e096f13211d6f1e50de376057d725b7eccdf4980c366131a4e54a2"
@@ -216,7 +216,7 @@
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-cf1485b25c004cd18f9602db67ef8a08",
+            "object_id": "evidence-c701f892009b4bd3af410126d26dc906",
             "relationship": "observed"
           }
         ],
@@ -247,7 +247,7 @@
         ],
         "interaction_ids": [],
         "evidence_ids": [
-          "evidence-9c501fe370294e6ca5e307a9b6c9c755"
+          "evidence-2e006840991340b0a0e8000551050a08"
         ],
         "binding_fingerprints": [
           "91d4654f97e096f13211d6f1e50de376057d725b7eccdf4980c366131a4e54a2"
@@ -268,7 +268,7 @@
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-9c501fe370294e6ca5e307a9b6c9c755",
+            "object_id": "evidence-2e006840991340b0a0e8000551050a08",
             "relationship": "observed"
           }
         ],
@@ -790,7 +790,7 @@
       ],
       "evidence_records": [
         {
-          "id": "evidence-cf1485b25c004cd18f9602db67ef8a08",
+          "id": "evidence-c701f892009b4bd3af410126d26dc906",
           "obligation_ids": [
             "O-CHANGED-FILES"
           ],
@@ -820,7 +820,7 @@
           "invalid_reasons": []
         },
         {
-          "id": "evidence-9c501fe370294e6ca5e307a9b6c9c755",
+          "id": "evidence-2e006840991340b0a0e8000551050a08",
           "obligation_ids": [
             "O-SUMMARY"
           ],
@@ -851,7 +851,7 @@
       "attestation_records": [],
       "verification_records": [
         {
-          "id": "verification-d799f253c38e416094e6cf8c8dcc9177",
+          "id": "verification-e46fb7ce77b14baea2d7ce2a24e33238",
           "actor": "verifier-1",
           "role": "maintainer_verifier",
           "timestamp": "2026-07-26T00:20:00Z",
@@ -860,8 +860,8 @@
             "O-SUMMARY"
           ],
           "evidence_ids": [
-            "evidence-9c501fe370294e6ca5e307a9b6c9c755",
-            "evidence-cf1485b25c004cd18f9602db67ef8a08"
+            "evidence-2e006840991340b0a0e8000551050a08",
+            "evidence-c701f892009b4bd3af410126d26dc906"
           ],
           "outcome": "verified",
           "reason": "Evidence independently checked.",
@@ -874,7 +874,7 @@
       "contribution_fingerprint": "91d4654f97e096f13211d6f1e50de376057d725b7eccdf4980c366131a4e54a2",
       "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
       "policy_snapshot": {
-        "id": "policy-d83b3dc14b8b44d685866a3f5c4330c6",
+        "id": "policy-c1d5986e6ced4d5c87fef963a94402e1",
         "schema_version": "agm.policy_snapshot/v0.2-dev",
         "manifest_version": "agm.manifest/v0.2-dev",
         "base_commit": "demo-base",
@@ -899,7 +899,7 @@
       },
       "transition_history": [
         {
-          "id": "transition-4de83e51a2734af59644c46d18d913da",
+          "id": "transition-770979f456264f10b06671a70f37917e",
           "case_id": "human-final-closure",
           "actor": "agm-engine",
           "role": "system",
@@ -908,12 +908,12 @@
           "action": "resolve_policy",
           "reason": "Resolved canonical policy against the contribution.",
           "related_object_ids": [
-            "policy-d83b3dc14b8b44d685866a3f5c4330c6"
+            "policy-c1d5986e6ced4d5c87fef963a94402e1"
           ],
           "timestamp": "2026-07-26T00:00:00Z"
         },
         {
-          "id": "transition-5d81eea5619f4279a0c5d7e3e8203380",
+          "id": "transition-2fa26aada3a649cb929bbf6d289c7b3c",
           "case_id": "human-final-closure",
           "actor": "agm-engine",
           "role": "system",
@@ -928,7 +928,7 @@
           "timestamp": "2026-07-26T00:00:00Z"
         },
         {
-          "id": "transition-3ef72e1205b04e86903514d4d3a0d6db",
+          "id": "transition-664133fde6704c6e9d17bbdaf23d11c7",
           "case_id": "human-final-closure",
           "actor": "agm-engine",
           "role": "system",
@@ -943,7 +943,7 @@
           "timestamp": "2026-07-26T00:00:00Z"
         },
         {
-          "id": "transition-f4ecb050e19e49128c65aeeb95baa8c3",
+          "id": "transition-8287b4c003774148a51aace269665704",
           "case_id": "human-final-closure",
           "actor": "contributor-agent",
           "role": "contributor_agent",
@@ -952,13 +952,13 @@
           "action": "submit_for_verification",
           "reason": "Contributor submitted prepared evidence for maintainer verification.",
           "related_object_ids": [
-            "evidence-cf1485b25c004cd18f9602db67ef8a08",
-            "evidence-9c501fe370294e6ca5e307a9b6c9c755"
+            "evidence-c701f892009b4bd3af410126d26dc906",
+            "evidence-2e006840991340b0a0e8000551050a08"
           ],
-          "timestamp": "2026-07-26T13:13:14Z"
+          "timestamp": "2026-07-26T13:27:36Z"
         },
         {
-          "id": "transition-bc6c8f0a0f7e4012bd01b15b7ae884ba",
+          "id": "transition-603ee3961f63421480424bafeb2f32b2",
           "case_id": "human-final-closure",
           "actor": "verifier-1",
           "role": "maintainer_verifier",
@@ -967,12 +967,12 @@
           "action": "verify_evidence",
           "reason": "Evidence independently checked.",
           "related_object_ids": [
-            "verification-d799f253c38e416094e6cf8c8dcc9177"
+            "verification-e46fb7ce77b14baea2d7ce2a24e33238"
           ],
           "timestamp": "2026-07-26T00:20:00Z"
         },
         {
-          "id": "transition-0414510c7de148938a0f053c5c00dc26",
+          "id": "transition-833d4aee3f724954813bb730c3533d62",
           "case_id": "human-final-closure",
           "actor": "agm-engine",
           "role": "system",
@@ -981,12 +981,12 @@
           "action": "mark_ready",
           "reason": "All blocking obligations are satisfied or verified; the case is ready for an authorized human decision, not accepted.",
           "related_object_ids": [
-            "verification-d799f253c38e416094e6cf8c8dcc9177"
+            "verification-e46fb7ce77b14baea2d7ce2a24e33238"
           ],
           "timestamp": "2026-07-26T00:20:00Z"
         },
         {
-          "id": "transition-73b698b28a734183a1f99d598a6f61cf",
+          "id": "transition-f5f3fe6b205f4e67907e1ddfb7230d2d",
           "case_id": "human-final-closure",
           "actor": "human-maintainer",
           "role": "maintainer",
@@ -995,13 +995,13 @@
           "action": "decide_accept",
           "reason": "Human maintainer accepted after independent review.",
           "related_object_ids": [
-            "decision-27df9c1a81874ecf93fa3400b05383f7"
+            "decision-1964e79b65b547b6a648f6e5ad49ef6f"
           ],
           "timestamp": "2026-07-26T00:30:00Z"
         }
       ],
       "final_decision": {
-        "id": "decision-27df9c1a81874ecf93fa3400b05383f7",
+        "id": "decision-1964e79b65b547b6a648f6e5ad49ef6f",
         "actor": "human-maintainer",
         "role": "maintainer",
         "timestamp": "2026-07-26T00:30:00Z",
@@ -1011,13 +1011,13 @@
         "unresolved_exception_ids": []
       },
       "closure_receipt": {
-        "id": "closure-2a41f1155a464ebcb9b1726d6c5a35f0",
+        "id": "closure-5c842d8e02784af697001aa957f984a2",
         "case_id": "human-final-closure",
-        "created_at": "2026-07-26T13:13:14Z",
+        "created_at": "2026-07-26T13:27:36Z",
         "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
         "contribution_fingerprint": "91d4654f97e096f13211d6f1e50de376057d725b7eccdf4980c366131a4e54a2",
         "final_state": "accepted",
-        "final_decision_id": "decision-27df9c1a81874ecf93fa3400b05383f7",
+        "final_decision_id": "decision-1964e79b65b547b6a648f6e5ad49ef6f",
         "matched_rule_ids": [
           "documentation-low"
         ],
@@ -1026,16 +1026,16 @@
           "O-SUMMARY": "verified"
         },
         "evidence_ids": [
-          "evidence-9c501fe370294e6ca5e307a9b6c9c755",
-          "evidence-cf1485b25c004cd18f9602db67ef8a08"
+          "evidence-2e006840991340b0a0e8000551050a08",
+          "evidence-c701f892009b4bd3af410126d26dc906"
         ],
         "attestation_ids": [],
         "verification_ids": [
-          "verification-d799f253c38e416094e6cf8c8dcc9177"
+          "verification-e46fb7ce77b14baea2d7ce2a24e33238"
         ],
         "repair_request_ids": [],
         "unresolved_exception_ids": [],
-        "transition_log_hash": "7e9cc680eff0571821277a19f72ed23eb50dcda8063b275b4b7524e0abaca899"
+        "transition_log_hash": "313515bd0f03fa25f23fbb026916f4234e610c64af4f9df4b627dc0074b499d3"
       },
       "policy_migration_diagnostic": {
         "case_id": "human-final-closure",
@@ -1140,7 +1140,7 @@
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-cf1485b25c004cd18f9602db67ef8a08",
+            "object_id": "evidence-c701f892009b4bd3af410126d26dc906",
             "relationship": "observed"
           },
           {
@@ -1150,7 +1150,7 @@
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-9c501fe370294e6ca5e307a9b6c9c755",
+            "object_id": "evidence-2e006840991340b0a0e8000551050a08",
             "relationship": "observed"
           }
         ],
@@ -1190,7 +1190,7 @@
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-cf1485b25c004cd18f9602db67ef8a08",
+            "object_id": "evidence-c701f892009b4bd3af410126d26dc906",
             "relationship": "observed"
           },
           {
@@ -1200,7 +1200,7 @@
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-9c501fe370294e6ca5e307a9b6c9c755",
+            "object_id": "evidence-2e006840991340b0a0e8000551050a08",
             "relationship": "observed"
           }
         ],
@@ -1251,7 +1251,7 @@
       ],
       "interaction_ids": [],
       "evidence_ids": [
-        "evidence-cf1485b25c004cd18f9602db67ef8a08"
+        "evidence-c701f892009b4bd3af410126d26dc906"
       ],
       "binding_fingerprints": [
         "91d4654f97e096f13211d6f1e50de376057d725b7eccdf4980c366131a4e54a2"
@@ -1272,7 +1272,7 @@
         },
         {
           "kind": "evidence",
-          "object_id": "evidence-cf1485b25c004cd18f9602db67ef8a08",
+          "object_id": "evidence-c701f892009b4bd3af410126d26dc906",
           "relationship": "observed"
         }
       ],
@@ -1303,7 +1303,7 @@
       ],
       "interaction_ids": [],
       "evidence_ids": [
-        "evidence-9c501fe370294e6ca5e307a9b6c9c755"
+        "evidence-2e006840991340b0a0e8000551050a08"
       ],
       "binding_fingerprints": [
         "91d4654f97e096f13211d6f1e50de376057d725b7eccdf4980c366131a4e54a2"
@@ -1324,7 +1324,7 @@
         },
         {
           "kind": "evidence",
-          "object_id": "evidence-9c501fe370294e6ca5e307a9b6c9c755",
+          "object_id": "evidence-2e006840991340b0a0e8000551050a08",
           "relationship": "observed"
         }
       ],
@@ -1356,12 +1356,12 @@
     "identify_requirements": [
       {
         "kind": "state_transition",
-        "object_id": "transition-4de83e51a2734af59644c46d18d913da",
+        "object_id": "transition-770979f456264f10b06671a70f37917e",
         "relationship": "primary:resolve_policy"
       },
       {
         "kind": "state_transition",
-        "object_id": "transition-5d81eea5619f4279a0c5d7e3e8203380",
+        "object_id": "transition-2fa26aada3a649cb929bbf6d289c7b3c",
         "relationship": "primary:compile_obligations"
       },
       {
@@ -1383,17 +1383,17 @@
     "prepare_materials": [
       {
         "kind": "state_transition",
-        "object_id": "transition-3ef72e1205b04e86903514d4d3a0d6db",
+        "object_id": "transition-664133fde6704c6e9d17bbdaf23d11c7",
         "relationship": "primary:mark_evidence_state"
       },
       {
         "kind": "evidence",
-        "object_id": "evidence-cf1485b25c004cd18f9602db67ef8a08",
+        "object_id": "evidence-c701f892009b4bd3af410126d26dc906",
         "relationship": "binding_or_retention"
       },
       {
         "kind": "evidence",
-        "object_id": "evidence-9c501fe370294e6ca5e307a9b6c9c755",
+        "object_id": "evidence-2e006840991340b0a0e8000551050a08",
         "relationship": "binding_or_retention"
       }
     ],
@@ -1401,39 +1401,39 @@
     "maintainer_check": [
       {
         "kind": "state_transition",
-        "object_id": "transition-f4ecb050e19e49128c65aeeb95baa8c3",
+        "object_id": "transition-8287b4c003774148a51aace269665704",
         "relationship": "primary:submit_for_verification"
       },
       {
         "kind": "state_transition",
-        "object_id": "transition-bc6c8f0a0f7e4012bd01b15b7ae884ba",
+        "object_id": "transition-603ee3961f63421480424bafeb2f32b2",
         "relationship": "primary:verify_evidence"
       },
       {
         "kind": "maintainer_verification",
-        "object_id": "verification-d799f253c38e416094e6cf8c8dcc9177",
+        "object_id": "verification-e46fb7ce77b14baea2d7ce2a24e33238",
         "relationship": "verified"
       }
     ],
     "human_final_decision": [
       {
         "kind": "state_transition",
-        "object_id": "transition-0414510c7de148938a0f053c5c00dc26",
+        "object_id": "transition-833d4aee3f724954813bb730c3533d62",
         "relationship": "primary:mark_ready"
       },
       {
         "kind": "state_transition",
-        "object_id": "transition-73b698b28a734183a1f99d598a6f61cf",
+        "object_id": "transition-f5f3fe6b205f4e67907e1ddfb7230d2d",
         "relationship": "primary:decide_accept"
       },
       {
         "kind": "final_decision",
-        "object_id": "decision-27df9c1a81874ecf93fa3400b05383f7",
+        "object_id": "decision-1964e79b65b547b6a648f6e5ad49ef6f",
         "relationship": "accept"
       },
       {
         "kind": "closure_receipt",
-        "object_id": "closure-2a41f1155a464ebcb9b1726d6c5a35f0",
+        "object_id": "closure-5c842d8e02784af697001aa957f984a2",
         "relationship": "closure"
       }
     ]
@@ -1841,14 +1841,14 @@
         "after": "accepted",
         "explanation": "案例 accepted 并生成 closure receipt；该动作不是自动合并。",
         "source_object_ids": [
-          "transition-0414510c7de148938a0f053c5c00dc26"
+          "transition-833d4aee3f724954813bb730c3533d62"
         ]
       }
     ],
     "affected_obligation_ids": [],
     "retained_evidence_ids": [
-      "evidence-cf1485b25c004cd18f9602db67ef8a08",
-      "evidence-9c501fe370294e6ca5e307a9b6c9c755"
+      "evidence-c701f892009b4bd3af410126d26dc906",
+      "evidence-2e006840991340b0a0e8000551050a08"
     ],
     "invalidated_attestation_ids": [],
     "next_authorized_actor_roles": [],
@@ -1903,7 +1903,7 @@
     "final_acceptance_still_required": false
   },
   "final_verification_record": {
-    "id": "verification-d799f253c38e416094e6cf8c8dcc9177",
+    "id": "verification-e46fb7ce77b14baea2d7ce2a24e33238",
     "actor": "verifier-1",
     "role": "maintainer_verifier",
     "timestamp": "2026-07-26T00:20:00Z",
@@ -1912,8 +1912,8 @@
       "O-SUMMARY"
     ],
     "evidence_ids": [
-      "evidence-9c501fe370294e6ca5e307a9b6c9c755",
-      "evidence-cf1485b25c004cd18f9602db67ef8a08"
+      "evidence-2e006840991340b0a0e8000551050a08",
+      "evidence-c701f892009b4bd3af410126d26dc906"
     ],
     "outcome": "verified",
     "reason": "Evidence independently checked.",

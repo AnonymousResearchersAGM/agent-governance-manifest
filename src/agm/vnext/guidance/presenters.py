@@ -874,6 +874,7 @@ def _action_preview_html(
         "rejected": "已拒绝",
         "confirmed": "已确认",
         "invalidated": "已失效",
+        "resolved": "已解决",
     }
     def effect_label(target: str, value: str) -> str:
         if target == "案例状态":
