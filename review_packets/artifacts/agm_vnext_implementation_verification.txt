@@ -200,6 +200,18 @@ Observed:
 - technical and unavailable details closed by default
 - no raw evidence/finding/attestation/obligation ID input
 
+Fresh-clone semantic-hardening reproduction
+Method: cloned commit 75fa9721060f5c83e0d4072931c3a61f157de408
+with --no-local into a new temporary directory, created a new Python 3.11
+virtual environment, installed requirements plus the editable package, then
+ran the full tests, policy validation, and demonstration generator with an
+external output directory.
+Observed:
+- 151 passed in 38.59s
+- project validate returned valid true and the unchanged policy fingerprint
+- 8 scenario directories and 25 output/manifest files generated
+- cloned worktree remained clean
+
 Human/maintainer authority
 No human attestation, maintainer verification, override, final decision,
 acceptance, merge, or human-review completion was performed by the coding
