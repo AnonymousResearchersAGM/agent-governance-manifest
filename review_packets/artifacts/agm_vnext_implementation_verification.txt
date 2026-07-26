@@ -70,3 +70,81 @@ Observed:
 Human/maintainer authority
 No human attestation or independent maintainer verification was performed by
 the coding agent. Required human review remains pending_human_review.
+
+Reviewer Guidance Layer follow-on verification
+Generated: 2026-07-26T11:40:51Z
+Branch: codex/reviewer-guidance-layer
+Starting commit: baf711cfb4a8b5bf943f739a6eaf9707551dc914
+Verified implementation commit before evidence update:
+18b3a56fdae4f32e60009eacc07d69c089f09348
+
+Working-tree regression verification
+Command: .venv\Scripts\python.exe -m pytest -q
+Observed: 132 passed in 24.52s
+Observed: the original 97 tests remain present and unchanged; 35 guidance,
+UI, materiality, authority, and end-to-end cases were added.
+
+Compilation verification
+Command: .venv\Scripts\python.exe -m compileall -q src scripts tests
+Observed: exit code 0
+
+Canonical policy validation
+Command: .venv\Scripts\python.exe -m agm.vnext.cli project validate
+Observed:
+- valid: true
+- policy fingerprint remained
+  e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564
+- canonical .agm policy was not modified
+- status remained development
+
+Maintainer guidance CLI smoke test
+Commands:
+- python -m agm.vnext.cli contributor open-case --changed-file
+  docs/AGM_REVIEWER_GUIDANCE_LAYER.md --mode declared_agent_mediated
+- python -m agm.vnext.cli maintainer inspect --case
+  reviewer-guidance-cli-smoke --actor human-maintainer --role maintainer
+Observed:
+- guidance.json generated
+- report.html generated
+- report.md generated
+- raw case state remained evidence_incomplete
+- report generation performed no human verification or final decision
+
+Eight-scenario guidance demonstration
+Command: .venv\Scripts\python.exe
+scripts\generate_reviewer_guidance_demos.py
+Observed:
+- 8 guidance JSON files generated
+- 8 rendered HTML files generated
+- multi-risk missing requirements passed
+- partial material invalidation retained unaffected evidence
+- scoped repair recorded retained evidence and revalidation scope
+- contributor-agent maintainer verification was rejected without state advance
+- lightweight low-risk authority remained human
+- governance self-modification exposed independent review
+- policy migration warning remained diagnostic
+- human verification, final decision, and closure were separate records
+
+Fresh-clone verification
+Method: cloned implementation commit into a new temporary directory, created
+a new virtual environment, installed requirements and the editable package,
+then ran tests, policy validation, and demonstration generation.
+Observed:
+- 132 passed in 24.82s
+- project validate returned valid true
+- 8 JSON and 8 HTML scenario files regenerated outside the clone
+- fresh clone worktree remained clean
+
+UI verification limitation
+The generated local file URL could not be opened by the in-app browser because
+its security policy blocks file:// navigation. No bypass was attempted.
+Automated coverage verifies the five-step structure, comparison table,
+default-collapsed technical detail, text/symbol status cues, absence of a
+hard-coded recommended answer, and the live loopback HTTP two-stage operation:
+preview caused no mutation and confirmation performed the authorized
+transition.
+
+Human/maintainer authority
+No human attestation, maintainer verification, override, final decision, or
+acceptance of this implementation was performed by the coding agent. The
+artifact human_review_declaration remains pending_human_review.

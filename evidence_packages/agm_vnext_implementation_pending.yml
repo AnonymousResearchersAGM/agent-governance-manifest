@@ -35,6 +35,8 @@ changed_files:
   - "CLAUDE.md"
   - "README.md"
   - "docs/AGM_AGENT_SKILLS.md"
+  - "docs/AGM_MAINTAINER_GUIDE.md"
+  - "docs/AGM_REVIEWER_GUIDANCE_LAYER.md"
   - "docs/AGM_VNEXT_ADOPTION_AND_MIGRATION.md"
   - "docs/AGM_VNEXT_AUTHORITY_AND_STATE.md"
   - "docs/AGM_VNEXT_CONTRIBUTOR_GUIDE.md"
@@ -45,10 +47,29 @@ changed_files:
   - "docs/V0_1_RESEARCH_SNAPSHOT.md"
   - "docs/index.md"
   - "evidence_packages/agm_vnext_implementation_pending.yml"
+  - "examples/reviewer_guidance/README.md"
+  - "examples/reviewer_guidance/outputs/01_multi_risk_missing.html"
+  - "examples/reviewer_guidance/outputs/01_multi_risk_missing.json"
+  - "examples/reviewer_guidance/outputs/02_material_partial_invalidation.html"
+  - "examples/reviewer_guidance/outputs/02_material_partial_invalidation.json"
+  - "examples/reviewer_guidance/outputs/03_scoped_repair.html"
+  - "examples/reviewer_guidance/outputs/03_scoped_repair.json"
+  - "examples/reviewer_guidance/outputs/04_unauthorized_agent_verification.html"
+  - "examples/reviewer_guidance/outputs/04_unauthorized_agent_verification.json"
+  - "examples/reviewer_guidance/outputs/05_lightweight_low_risk.html"
+  - "examples/reviewer_guidance/outputs/05_lightweight_low_risk.json"
+  - "examples/reviewer_guidance/outputs/06_governance_self_modification.html"
+  - "examples/reviewer_guidance/outputs/06_governance_self_modification.json"
+  - "examples/reviewer_guidance/outputs/07_policy_migration_warning.html"
+  - "examples/reviewer_guidance/outputs/07_policy_migration_warning.json"
+  - "examples/reviewer_guidance/outputs/08_human_final_decision_closure.html"
+  - "examples/reviewer_guidance/outputs/08_human_final_decision_closure.json"
+  - "examples/reviewer_guidance/outputs/manifest.json"
   - "examples/vnext/README.md"
   - "pyproject.toml"
   - "review_packets/artifacts/agm_vnext_implementation_verification.txt"
   - "scripts/run_vnext_demo.py"
+  - "scripts/generate_reviewer_guidance_demos.py"
   - "skills/agm-contributor/skill.md"
   - "skills/agm-maintainer/skill.md"
   - "src/agm/vnext/__init__.py"
@@ -56,6 +77,12 @@ changed_files:
   - "src/agm/vnext/cli.py"
   - "src/agm/vnext/config.py"
   - "src/agm/vnext/evidence.py"
+  - "src/agm/vnext/guidance/__init__.py"
+  - "src/agm/vnext/guidance/action_planner.py"
+  - "src/agm/vnext/guidance/diagnostics.py"
+  - "src/agm/vnext/guidance/models.py"
+  - "src/agm/vnext/guidance/presenters.py"
+  - "src/agm/vnext/guidance/workflow.py"
   - "src/agm/vnext/migration.py"
   - "src/agm/vnext/models.py"
   - "src/agm/vnext/obligations.py"
@@ -70,8 +97,10 @@ changed_files:
   - "tests/test_vnext_config_policy.py"
   - "tests/test_vnext_demo.py"
   - "tests/test_vnext_evidence.py"
+  - "tests/test_vnext_guidance_e2e.py"
   - "tests/test_vnext_migration.py"
   - "tests/test_vnext_reporting_ui_cli.py"
+  - "tests/test_vnext_reviewer_guidance.py"
   - "tests/test_vnext_risk_obligations.py"
   - "tests/test_vnext_state_storage_service.py"
 summary: >-
@@ -81,7 +110,11 @@ summary: >-
   compilation, evidence binding, explicit human attestation, authorized
   maintainer operations, repair and migration diagnostics, closure receipts,
   local contributor/maintainer panels, CLI workflows, portable Skills,
-  steward protocols, documentation, and ten deterministic demonstration
+  steward protocols, documentation, and ten deterministic lifecycle
+  demonstrations. The follow-on Reviewer Guidance Layer adds a five-step
+  maintainer workflow, traceable reference-versus-observed comparisons,
+  authority-aligned available and unavailable operations, non-mutating action
+  previews, explicit partial binding retention, and eight generated guidance
   scenarios.
 rationale: >-
   AGM v0.1 retained multiple risk observations but selected evidence only from
@@ -125,6 +158,15 @@ tests_run:
   - command: ".venv\\Scripts\\python.exe scripts\\run_vnext_demo.py"
     outcome: "ok true; all 10 development scenarios executed successfully"
     artifact: "review_packets/artifacts/agm_vnext_implementation_verification.txt"
+  - command: ".venv\\Scripts\\python.exe -m pytest -q"
+    outcome: "132 passed in 24.52s; original 97 regression tests remain present"
+    artifact: "review_packets/artifacts/agm_vnext_implementation_verification.txt"
+  - command: "fresh clone: .venv\\Scripts\\python.exe -m pytest -q"
+    outcome: "132 passed in 24.82s; clone worktree remained clean"
+    artifact: "review_packets/artifacts/agm_vnext_implementation_verification.txt"
+  - command: ".venv\\Scripts\\python.exe scripts\\generate_reviewer_guidance_demos.py"
+    outcome: "8 guidance JSON and 8 HTML scenarios generated successfully"
+    artifact: "review_packets/artifacts/agm_vnext_implementation_verification.txt"
 artifacts:
   - path: "review_packets/artifacts/agm_vnext_implementation_verification.txt"
     description: "Observed working-tree, fresh-clone, CLI, demonstration, and static-check results."
@@ -135,9 +177,13 @@ known_limitations: >-
   selectors are supplied extension points rather than an embedded AST parser.
   The local panels use loopback binding and per-session action tokens but are
   not a multi-user authentication service. Migration checking is diagnostic
-  and never silently mutates an open case. No usability, field-adoption, or
-  organizational-outcome claim is made. Independent human review of the
-  governance self-modification remains pending.
+  and never silently mutates an open case. Materiality and affected obligation
+  scope are explicitly declared and remain subject to maintainer inspection.
+  Browser screenshot QA of the generated file URL was blocked by the browser
+  security policy; HTTP two-stage UI behavior and HTML structure are covered
+  by automated tests. No usability, field-adoption, or organizational-outcome
+  claim is made. Independent human review of the governance
+  self-modification remains pending.
 human_review_declaration:
   required: true
   status: "pending_human_review"
@@ -147,4 +193,4 @@ human_review_declaration:
   statement: >-
     Human review and independent maintainer verification are required before
     final acceptance. The coding agent did not perform or fabricate them.
-generated_at: "2026-07-25T15:09:24Z"
+generated_at: "2026-07-26T11:40:51Z"
