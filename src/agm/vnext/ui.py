@@ -9,9 +9,15 @@ import secrets
 from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from typing import Any
-from urllib.parse import parse_qs
+from urllib.parse import parse_qs, urlparse
 
-from .guidance import ActorContext, preview_reviewer_action
+from .guidance import (
+    ActorContext,
+    build_context_selector_options,
+    preview_reviewer_action,
+    resolve_selector_tokens,
+    utility_output,
+)
 from .models import VNextError
 from .reporting import render_html, render_markdown
 from .service import GovernanceService
@@ -47,6 +53,62 @@ def _first(form: dict[str, list[str]], key: str, default: str = "") -> str:
 
 def _lines(value: str) -> list[str]:
     return [item.strip() for item in value.splitlines() if item.strip()]
+
+
+def _values(form: dict[str, list[str]], key: str) -> list[str]:
+    return [item.strip() for item in form.get(key, []) if item.strip()]
+
+
+def resolve_panel_selection(
+    service: GovernanceService,
+    *,
+    case_id: str,
+    form: dict[str, list[str]],
+) -> dict[str, list[str] | str]:
+    """Rebuild selector choices from current case before using any token."""
+    action = _first(form, "action")
+    tokens = _values(form, "selector_token")
+    selector_actions = {
+        "verify_evidence",
+        "reject_evidence",
+        "request_repair",
+        "ask_clarification",
+        "invalidate_attestation",
+        "record_policy_conflict",
+        "resolve_policy_conflict",
+        "resubmit",
+        "authorized_override",
+    }
+    if not tokens:
+        if (
+            action == "verify_evidence"
+            and not _first(form, "obligation")
+            and not _values(form, "obligation_ids")
+            and not _first(form, "object_id")
+        ):
+            return {
+                "obligation_ids": [],
+                "object_id": "",
+                "finding_ids": [],
+            }
+        if action in selector_actions:
+            case = service.storage.load_case(case_id)
+            options = build_context_selector_options(case, action)
+            detail = (
+                "请从页面提供的当前案例对象中选择。"
+                if options
+                else "当前案例没有适用于此操作的对象。"
+            )
+            raise VNextError(
+                "Web 面板不接受手填内部 ID；" + detail
+            )
+        return {
+            "obligation_ids": _values(form, "obligation_ids"),
+            "object_id": _first(form, "object_id"),
+            "finding_ids": _values(form, "finding_ids"),
+        }
+    case = service.storage.load_case(case_id)
+    return resolve_selector_tokens(case, action, tokens)
 
 
 def execute_panel_action(
@@ -97,10 +159,13 @@ def execute_panel_action(
         raise VNextError(f"Unsupported contributor panel action: {action}")
 
     role = _first(form, "role")
-    obligation = _first(form, "obligation")
+    selected = _values(form, "obligation_ids")
+    if not selected:
+        obligation = _first(form, "obligation")
+        selected = [obligation] if obligation else []
     object_id = _first(form, "object_id")
+    finding_ids = _values(form, "finding_ids")
     reason = _first(form, "reason")
-    selected = [obligation] if obligation else []
     if action == "verify_evidence":
         service.verify(
             case_id,
@@ -157,6 +222,26 @@ def execute_panel_action(
             finding_id=object_id,
             resolution=reason,
         )
+    elif action == "resubmit":
+        service.resubmit(
+            case_id,
+            actor=actor,
+            role=role,
+            summary=reason,
+            affected_obligation_ids=selected,
+            change_classification=_first(
+                form, "change_classification", "non_material"
+            ),
+            change_reason=_first(form, "change_reason", reason),
+        )
+    elif action == "confirm_attestation":
+        service.attest(
+            case_id,
+            actor=actor,
+            role=role,
+            reviewed_scope=_values(form, "scope"),
+            statement=reason,
+        )
     elif action == "authorized_override":
         service.override(
             case_id,
@@ -164,6 +249,7 @@ def execute_panel_action(
             role=role,
             reason=reason,
             obligation_ids=selected,
+            finding_ids=finding_ids,
         )
     elif action.startswith("decide_"):
         decision = action.removeprefix("decide_")
@@ -189,10 +275,16 @@ def handler_class(
     class PanelHandler(BaseHTTPRequestHandler):
         server_version = "AGMLocalPanel/0.2-dev"
 
-        def _send(self, status: int, body: str) -> None:
+        def _send(
+            self,
+            status: int,
+            body: str,
+            *,
+            content_type: str = "text/html; charset=utf-8",
+        ) -> None:
             payload = body.encode("utf-8")
             self.send_response(status)
-            self.send_header("Content-Type", "text/html; charset=utf-8")
+            self.send_header("Content-Type", content_type)
             self.send_header("Content-Length", str(len(payload)))
             self.send_header("Cache-Control", "no-store")
             self.send_header("Content-Security-Policy", "default-src 'self'; style-src 'unsafe-inline'; form-action 'self'")
@@ -201,7 +293,39 @@ def handler_class(
             self.wfile.write(payload)
 
         def do_GET(self) -> None:  # noqa: N802
-            if self.path != "/":
+            parsed = urlparse(self.path)
+            if parsed.path == "/utility" and audience == "maintainer":
+                query = parse_qs(parsed.query)
+                action_id = _first(query, "action_id")
+                try:
+                    view = service.reviewer_guidance(
+                        case_id,
+                        actor=(
+                            current_actor.actor
+                            if current_actor
+                            else "maintainer-reviewer"
+                        ),
+                        role=(
+                            current_actor.role
+                            if current_actor
+                            else "maintainer"
+                        ),
+                    )
+                    item = utility_output(view.utility_actions, action_id)
+                except KeyError:
+                    self._send(
+                        HTTPStatus.NOT_FOUND,
+                        "未知的只读 guidance 工具。",
+                        content_type="text/plain; charset=utf-8",
+                    )
+                    return
+                self._send(
+                    HTTPStatus.OK,
+                    item.output,
+                    content_type=item.output_type + "; charset=utf-8",
+                )
+                return
+            if parsed.path != "/" or parsed.query:
                 self._send(HTTPStatus.NOT_FOUND, "<h1>Not found</h1>")
                 return
             case = service.storage.load_case(case_id)
@@ -255,14 +379,26 @@ def handler_class(
                             ),
                         ),
                     )
+                    resolved = resolve_panel_selection(
+                        service,
+                        case_id=case_id,
+                        form=form,
+                    )
                     parameters = {
-                        "obligation_ids": (
-                            [_first(form, "obligation")]
-                            if _first(form, "obligation")
-                            else []
+                        "obligation_ids": list(
+                            resolved.get("obligation_ids", [])
                         ),
-                        "object_id": _first(form, "object_id"),
+                        "object_id": str(
+                            resolved.get("object_id", "")
+                        ),
+                        "finding_ids": list(
+                            resolved.get("finding_ids", [])
+                        ),
                         "reason": _first(form, "reason"),
+                        "change_classification": _first(
+                            form, "change_classification"
+                        ),
+                        "change_reason": _first(form, "change_reason"),
                     }
                     preview = preview_reviewer_action(
                         case,
@@ -300,6 +436,18 @@ def handler_class(
                             "Case or action inputs changed after preview; "
                             "generate a new preview"
                         )
+                    form = {
+                        **form,
+                        "obligation_ids": list(
+                            resolved.get("obligation_ids", [])
+                        ),
+                        "object_id": [
+                            str(resolved.get("object_id", ""))
+                        ],
+                        "finding_ids": list(
+                            resolved.get("finding_ids", [])
+                        ),
+                    }
                 execute_panel_action(
                     service,
                     case_id=case_id,

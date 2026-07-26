@@ -131,3 +131,60 @@ retained, invalidated, and revalidation scopes for guidance traceability.
 
 See `docs/AGM_REVIEWER_GUIDANCE_LAYER.md` for state definitions and
 `docs/AGM_MAINTAINER_GUIDE.md` for operation guidance.
+
+## Reviewer guidance semantic hardening
+
+Participant-facing Chinese is presentation metadata keyed by canonical
+obligation ID. It is not written into `.agm`, and raw canonical English remains
+in every comparison row and technical detail. Unknown future obligations use a
+safe non-empty fallback.
+
+`RequirementComparison` models two orthogonal axes:
+
+- material: missing, invalid, stale, provided, retained, verified, overridden,
+  or not applicable; and
+- workflow: blocked, awaiting contribution, attestation, revalidation, final
+  decision, or completed.
+
+This prevents valid repaired material from being labelled invalid merely
+because a finding remains open until scoped revalidation.
+
+`ResponsibilityView` is derived from unresolved material, findings, repairs,
+attestations, policy conflicts, revalidation scope and readiness. Case state is
+one input, not the only input. A resubmitted case with stale contributor-side
+material therefore stays with the contributor side.
+
+The action surface has three layers:
+
+1. no more than four current-relevant legal actions;
+2. default-collapsed other legal actions; and
+3. default-collapsed unavailable actions with role/state/future explanations.
+
+This relevance model is presentation-only. Canonical permissions, transitions
+and service validation remain authoritative.
+
+Web mutation forms use current-case `ContextSelectorOption` objects. Opaque
+tokens bind case, contribution fingerprint, action, object kind and scope. The
+server rebuilds and resolves selectors on preview and confirmation, rejecting
+unknown, stale, wrong-case, wrong-action and wrong-scope selections. Domain
+services still validate IDs and repair/override/conflict scope.
+
+`GuidanceUtilityAction` provides read-only checklists, summaries, change scope
+and handoff notes. Utility generation consumes comparison rows and trace
+references and never writes case storage or transition history.
+
+Workflow trace mapping assigns each transition to one primary user step.
+Compiled rules/obligations, evidence, attestations, verification/findings and
+decision/closure records are attached only to their relevant step.
+
+Action previews project onto a deep-copied case. Besides target state, they
+expose processed objects, retained/invalidated records, before/after
+responsibility and workflow, expected record types, remaining attestation and
+verification, and the fact that final acceptance remains outstanding unless a
+human accept action is actually being previewed.
+
+Materiality remains an actor declaration, not an objective semantic proof.
+The view identifies classification, declarer, reason, affected/unaffected
+requirements, stale/retained records and the continuing need for maintainer
+inspection. Lightweight and ordinary paths reduce governance intensity only;
+they never transfer final authority to an agent.

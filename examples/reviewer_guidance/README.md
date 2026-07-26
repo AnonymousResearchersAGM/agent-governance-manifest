@@ -12,16 +12,18 @@ preferred maintainer answer:
 7. policy migration warning; and
 8. human final decision and closure.
 
-Regenerate the JSON and HTML outputs from a clean clone:
+Regenerate the JSON, Markdown, and HTML outputs from a clean clone:
 
 ```bash
 python scripts/generate_reviewer_guidance_demos.py
 ```
 
-Every JSON file contains the complete guidance view, derived workflow and
-requirement snapshots, available and unavailable actions, a dry-run action
-preview, and the final verification record when one exists. The HTML file is
-rendered from that same view model.
+Every scenario directory contains `guidance.json`, `report.md`, and
+`report.html`. JSON contains the complete guidance view, workflow and
+requirement snapshots, current responsibility, action groups, unavailable
+summary, context selector data, trace mapping, dry-run preview, and the final
+verification record when one exists. Markdown and HTML are rendered from that
+same view model.
 
 These are development demonstrations, not a formal experiment package or a
 human acceptance record.

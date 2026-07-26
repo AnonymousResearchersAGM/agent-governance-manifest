@@ -1,7 +1,8 @@
-"""Derive plain-language diagnostics exclusively from AGM domain records."""
+"""Derive participant-facing diagnostics from AGM domain records."""
 
 from __future__ import annotations
 
+from dataclasses import dataclass
 from typing import Any
 
 from ..models import (
@@ -31,19 +32,92 @@ RESULT_LABELS = {
     "closed": "已完成并关闭",
 }
 
+MATERIAL_STATUS_LABELS = {
+    "missing": "缺少",
+    "invalid": "无效",
+    "stale": "需要更新",
+    "provided": "已提供",
+    "retained": "仍然有效",
+    "verified": "已检查",
+    "overridden": "已由有权维护者覆盖",
+    "not_applicable": "本次不要求",
+}
+
+WORKFLOW_STATUS_LABELS = {
+    "blocks_progression": "阻止继续",
+    "awaiting_contributor": "等待贡献者处理",
+    "awaiting_attestation": "等待负责人确认",
+    "awaiting_revalidation": "等待维护者重新检查",
+    "awaiting_final_decision": "等待人类维护者最终决定",
+    "completed": "已完成",
+}
+
 CHECK_ITEM_LABELS = {
     "contribution_summary": "修改说明",
     "changed_files": "变更文件清单",
     "rationale": "修改理由",
     "test_explanation": "测试说明",
-    "test_command": "测试结果",
+    "test_command": "测试命令与结果",
     "artifact": "可核验制品",
     "known_limitations": "已知限制",
     "security_auth_impact": "登录与安全影响说明",
-    "policy_impact": "治理策略影响说明",
-    "agent_action_scope": "智能体行动与委派范围",
+    "policy_impact": "项目规则影响说明",
+    "agent_action_scope": "智能体行动与委派说明",
     "human_attestation": "负责人确认",
     "independent_review": "独立维护者检查",
+}
+
+# This dictionary is presentation metadata only. Canonical English remains in
+# CompiledObligation.description and the .agm policy is never rewritten.
+OBLIGATION_PRESENTATION = {
+    "O-SUMMARY": (
+        "修改说明",
+        "简要说明这次修改做了什么。",
+    ),
+    "O-CHANGED-FILES": (
+        "变更文件清单",
+        "列出这次修改涉及的文件和范围。",
+    ),
+    "O-RATIONALE": (
+        "修改理由",
+        "说明为什么需要这次修改。",
+    ),
+    "O-TEST-EXPLANATION": (
+        "测试覆盖说明",
+        "说明测试覆盖了什么，以及它如何支持本次修改。",
+    ),
+    "O-TEST-COMMAND": (
+        "测试命令与结果",
+        "提供测试命令、运行环境和实际结果。",
+    ),
+    "O-ARTIFACT": (
+        "可核验测试制品",
+        "提供可以实际检查的测试输出或文件。",
+    ),
+    "O-LIMITATIONS": (
+        "已知限制",
+        "说明已知限制；没有已知限制也要明确说明。",
+    ),
+    "O-AUTH-IMPACT": (
+        "登录、认证与权限影响",
+        "说明本次修改是否改变登录、认证或权限行为。",
+    ),
+    "O-POLICY-IMPACT": (
+        "项目规则与治理影响",
+        "说明本次修改是否影响项目规则或治理流程。",
+    ),
+    "O-AGENT-SCOPE": (
+        "智能体行动与委派说明",
+        "说明智能体做了什么、用了哪些权限、是否有人监督，以及是否把具有独立行动能力的工作继续交给了另一个智能体。",
+    ),
+    "O-HUMAN-ATTEST": (
+        "负责人确认",
+        "由负责人确认自己审阅了当前代码版本、材料和明确范围。",
+    ),
+    "O-INDEPENDENT-REVIEW": (
+        "独立维护者检查",
+        "由另一名具备权限且与贡献侧分离的维护者独立检查。",
+    ),
 }
 
 CURRENT_STATE_LABELS = {
@@ -54,8 +128,8 @@ CURRENT_STATE_LABELS = {
     "awaiting_human_attestation": "等待负责人确认",
     "awaiting_maintainer_verification": "等待维护者检查",
     "repair_requested": "发现问题，等待指定范围修改",
-    "resubmitted": "已补交，等待重新检查受影响部分",
-    "verification_complete": "维护者检查完成，系统正在确认可决策状态",
+    "resubmitted": "已补交，等待确认材料是否齐备",
+    "verification_complete": "维护者检查完成，正在确认可决策状态",
     "ready_for_human_decision": "等待人类维护者最终决定",
     "overridden": "有权覆盖已记录，等待人类维护者最终决定",
     "accepted": "人类维护者已接受并关闭",
@@ -65,8 +139,18 @@ CURRENT_STATE_LABELS = {
 }
 
 
+@dataclass(frozen=True)
+class _ComparisonState:
+    result: str
+    observed_plain: str
+    observed_raw: str
+    material_status: str
+    workflow_status: str
+    blocks_progression: bool
+
+
 def derive_readiness(case: GovernanceCase) -> str:
-    """Return the canonical report readiness without implying acceptance."""
+    """Return readiness without ever converting readiness into acceptance."""
     if case.state in {"accepted", "rejected", "closed"}:
         return f"closed:{case.state}"
     if case.state == "ordinary_unmanaged":
@@ -82,14 +166,28 @@ def derive_readiness(case: GovernanceCase) -> str:
     return "verification_in_progress"
 
 
-def check_item_label(obligation: CompiledObligation) -> str:
-    return CHECK_ITEM_LABELS.get(
+def obligation_presentation(
+    obligation: CompiledObligation,
+) -> tuple[str, str]:
+    """Return stable Chinese display text with a safe non-empty fallback."""
+    configured = OBLIGATION_PRESENTATION.get(obligation.obligation_id)
+    if configured:
+        return configured
+    name = CHECK_ITEM_LABELS.get(
         obligation.evidence_type,
-        obligation.description.rstrip(".") or obligation.obligation_id,
+        f"项目要求（{obligation.obligation_id or '未命名'}）",
     )
+    plain = (
+        f"请按照项目记录完成“{name}”，英文原文和完整依据见技术详情。"
+    )
+    return name, plain
 
 
-def _evidence_for(case: GovernanceCase, obligation_id: str):
+def check_item_label(obligation: CompiledObligation) -> str:
+    return obligation_presentation(obligation)[0]
+
+
+def _evidence_for(case: GovernanceCase, obligation_id: str) -> list[Any]:
     return [
         item for item in case.evidence if obligation_id in item.obligation_ids
     ]
@@ -112,24 +210,49 @@ def _findings_for(
     ]
 
 
+def _open_revalidation(case: GovernanceCase, obligation_id: str) -> bool:
+    return any(
+        item.status == "resubmitted"
+        and obligation_id in item.revalidation_required
+        and any(
+            finding.id in item.finding_ids
+            and finding.status == "open"
+            for finding in case.findings
+        )
+        for item in case.repair_requests
+    )
+
+
+def _terminal_workflow(case: GovernanceCase) -> str:
+    if case.state in {"accepted", "rejected", "closed"}:
+        return "completed"
+    return "awaiting_final_decision"
+
+
 def _comparison_state(
     case: GovernanceCase,
     obligation: CompiledObligation,
     evidence: list[Any],
     attestations: list[HumanAttestation],
     findings: list[GovernanceFinding],
-) -> tuple[str, str, str]:
+) -> _ComparisonState:
     if obligation.status == "overridden":
-        return (
+        return _ComparisonState(
             "overridden",
-            "该要求已由具备权限的人类维护者记录覆盖。",
+            "该要求已有具备权限的人类维护者记录覆盖；覆盖不等于接受贡献。",
             "overridden by authorized maintainer",
+            "overridden",
+            _terminal_workflow(case),
+            False,
         )
     if obligation.status == "policy_conflict":
-        return (
+        return _ComparisonState(
             "blocked",
-            "项目规则之间存在冲突，需要有权角色先处理。",
+            "项目规则之间存在未解决的冲突，需要有权角色先处理。",
             "blocked by policy conflict",
+            "invalid",
+            "blocks_progression",
+            True,
         )
 
     blocking_findings = [
@@ -138,148 +261,215 @@ def _comparison_state(
     warning_findings = [
         item for item in findings if not item.blocking and item.status == "open"
     ]
+    awaiting_revalidation = _open_revalidation(
+        case, obligation.obligation_id
+    )
 
     if obligation.type == "evidence":
         if not evidence:
-            result = (
-                "not_started"
-                if case.state
-                in {"case_opened", "policy_resolved", "obligations_compiled"}
-                else "missing"
+            initial = case.state in {
+                "case_opened",
+                "policy_resolved",
+                "obligations_compiled",
+            }
+            return _ComparisonState(
+                "not_started" if initial else "missing",
+                "流程尚未进入材料准备。" if initial else "尚未提供。",
+                "no bound evidence record",
+                "missing",
+                "awaiting_contributor",
+                bool(obligation.blocking and not initial),
             )
-            observed = (
-                "流程尚未进入材料准备"
-                if result == "not_started"
-                else "尚未提供与本项绑定的材料"
-            )
-            return result, observed, "no bound evidence record"
         states = {item.validity_state for item in evidence}
-        if "stale" in states or "expired" in states:
-            stale = [
-                item.id
-                for item in evidence
-                if item.validity_state in {"stale", "expired"}
-            ]
-            return (
+        if states & {"stale", "expired"}:
+            return _ComparisonState(
                 "needs_update",
-                f"已有材料需要更新：{', '.join(stale)}",
-                f"stale or expired evidence: {', '.join(stale)}",
+                "现有材料对应旧版本或已过有效期，需要更新后再继续。",
+                "stale or expired evidence: "
+                + ", ".join(
+                    item.id
+                    for item in evidence
+                    if item.validity_state in {"stale", "expired"}
+                ),
+                "stale",
+                "awaiting_contributor",
+                obligation.blocking,
             )
-        invalid_states = states & {"invalid", "rejected", "conflicting"}
-        if invalid_states:
-            invalid = [
-                item.id
-                for item in evidence
-                if item.validity_state in invalid_states
-            ]
-            return (
+        if states & {"invalid", "rejected", "conflicting"}:
+            return _ComparisonState(
                 "invalid",
-                f"已有材料无效：{', '.join(invalid)}",
-                f"invalid evidence: {', '.join(invalid)}",
+                "现有材料不能支持当前修改，需要更正或替换。",
+                "invalid evidence: "
+                + ", ".join(
+                    item.id
+                    for item in evidence
+                    if item.validity_state
+                    in {"invalid", "rejected", "conflicting"}
+                ),
+                "invalid",
+                "awaiting_contributor",
+                obligation.blocking,
+            )
+
+        retained = any(
+            item.retained_for_contribution_fingerprint
+            == case.contribution_fingerprint
+            for item in evidence
+        )
+        verified = (
+            obligation.status == "verified"
+            or any(item.validity_state == "verified" for item in evidence)
+        )
+        material = "retained" if retained else (
+            "verified" if verified else "provided"
+        )
+        if awaiting_revalidation or (
+            blocking_findings and case.state == "resubmitted"
+        ):
+            return _ComparisonState(
+                "blocked" if obligation.blocking else "needs_attention",
+                (
+                    "材料已补充或仍然有效；当前等待维护者重新检查这一项。"
+                ),
+                "valid material present; open repair awaits revalidation",
+                material,
+                "awaiting_revalidation",
+                obligation.blocking,
             )
         if blocking_findings:
-            return (
+            return _ComparisonState(
                 "blocked",
-                blocking_findings[0].message,
+                "维护者已记录一个需要贡献侧处理的问题。",
                 f"open blocking finding: {blocking_findings[0].code}",
+                material,
+                "awaiting_contributor",
+                True,
             )
-        if obligation.status == "verified":
-            return (
+        if verified:
+            return _ComparisonState(
                 "verified",
                 "材料已由具备权限的维护者完成检查。",
                 "verified by maintainer-side record",
+                material,
+                "completed",
+                False,
             )
         if warning_findings:
-            return (
+            return _ComparisonState(
                 "needs_attention",
-                warning_findings[0].message,
+                "材料已提供，但维护者记录了一个非阻断关注项。",
                 f"open non-blocking finding: {warning_findings[0].code}",
+                material,
+                "completed",
+                False,
             )
         if obligation.status == "satisfied":
-            return (
+            return _ComparisonState(
                 "meets_requirement",
-                "已提供与当前贡献和项目策略绑定的材料。",
+                "已提供与当前贡献和项目规则绑定的材料。",
                 "valid bound evidence is present",
+                material,
+                "completed",
+                False,
             )
-        return (
+        return _ComparisonState(
             "blocked" if obligation.blocking else "needs_attention",
-            "现有材料尚未使该要求达到可继续状态。",
+            "材料记录存在，但尚未达到本项要求。",
             f"obligation status is {obligation.status}",
+            material,
+            "blocks_progression" if obligation.blocking else "completed",
+            obligation.blocking,
         )
 
     if obligation.type == "human_attestation":
-        invalidated = [item for item in attestations if item.status == "invalidated"]
         confirmed = [item for item in attestations if item.status == "confirmed"]
+        invalidated = [
+            item for item in attestations if item.status == "invalidated"
+        ]
         if invalidated and not confirmed:
-            return (
+            return _ComparisonState(
                 "invalid",
-                "已有负责人确认已失效，需要由负责人重新确认受影响范围。",
+                "旧的负责人确认已经失效，需要负责人确认当前版本和范围。",
                 "human attestation invalidated",
+                "invalid",
+                "awaiting_attestation",
+                obligation.blocking,
             )
-        if obligation.status in {"satisfied", "verified"} and confirmed:
-            return (
+        if confirmed and obligation.status in {"satisfied", "verified"}:
+            retained = any(
+                item.retained_for_contribution_fingerprint
+                == case.contribution_fingerprint
+                for item in confirmed
+            )
+            return _ComparisonState(
                 "meets_requirement",
-                "负责人已确认当前绑定范围。",
+                "负责人已确认当前版本、材料和明确范围。",
                 "confirmed accountable-human attestation is bound",
+                "retained" if retained else "provided",
+                "completed" if not awaiting_revalidation else "awaiting_revalidation",
+                False,
             )
-        if blocking_findings:
-            return (
-                "blocked",
-                blocking_findings[0].message,
-                f"open blocking finding: {blocking_findings[0].code}",
-            )
-        if case.state == "awaiting_human_attestation":
-            return (
+        if case.state == "awaiting_human_attestation" or blocking_findings:
+            return _ComparisonState(
                 "missing",
-                "材料已准备，正在等待负责人确认。",
+                "材料已准备，正在等待负责人确认当前版本和范围。",
                 "awaiting accountable-human attestation",
+                "missing",
+                "awaiting_attestation",
+                obligation.blocking,
             )
-        return (
+        return _ComparisonState(
             "not_started",
             "尚未到负责人确认阶段。",
             "attestation stage not reached",
+            "missing",
+            "awaiting_attestation",
+            False,
         )
 
     if obligation.type == "maintainer_verification":
-        verified = [
+        verified_records = [
             item
             for item in case.maintainer_verifications
             if obligation.obligation_id in item.obligation_ids
             and item.outcome == "verified"
         ]
-        if obligation.status == "overridden":
-            return (
-                "overridden",
-                "独立检查要求已由有权维护者记录覆盖。",
-                "independent review overridden",
-            )
-        if verified or obligation.status == "verified":
-            return (
+        if verified_records or obligation.status == "verified":
+            return _ComparisonState(
                 "verified",
-                "独立维护者检查已经完成。",
+                "独立维护者检查已经完成；这不等于最终接受。",
                 "independent maintainer verification recorded",
+                "verified",
+                "completed",
+                False,
             )
-        if blocking_findings:
-            return (
-                "blocked",
-                blocking_findings[0].message,
-                f"open blocking finding: {blocking_findings[0].code}",
+        if case.state in {"awaiting_maintainer_verification", "resubmitted"}:
+            return _ComparisonState(
+                "not_started",
+                "前序材料满足后，由具备权限且与贡献侧分离的维护者检查。",
+                "independent maintainer verification not recorded",
+                "missing",
+                "awaiting_revalidation"
+                if case.state == "resubmitted"
+                else "blocks_progression",
+                obligation.blocking,
             )
-        return (
+        return _ComparisonState(
             "not_started",
-            (
-                "已轮到维护者检查，当前尚未完成。"
-                if case.state
-                in {"awaiting_maintainer_verification", "resubmitted"}
-                else "尚未到独立维护者检查阶段。"
-            ),
+            "尚未到独立维护者检查阶段。",
             "independent maintainer verification not recorded",
+            "missing",
+            "blocks_progression" if obligation.blocking else "completed",
+            False,
         )
 
-    return (
+    return _ComparisonState(
         "blocked" if obligation.blocking else "needs_attention",
-        f"无法解释的要求类型：{obligation.type}",
+        "当前界面无法解释这种要求类型，请在技术详情中核对原始记录。",
         f"unknown obligation type: {obligation.type}",
+        "invalid",
+        "blocks_progression",
+        obligation.blocking,
     )
 
 
@@ -291,19 +481,14 @@ def build_requirement_comparisons(
         evidence = _evidence_for(case, obligation.obligation_id)
         attestations = _attestations_for(case, obligation)
         findings = _findings_for(case, obligation.obligation_id)
-        result, observed, observed_english = _comparison_state(
+        state = _comparison_state(
             case, obligation, evidence, attestations, findings
         )
+        display_name, reference_plain = obligation_presentation(obligation)
         evidence_ids = [item.id for item in evidence]
         binding_fingerprints = sorted(
-            {
-                item.contribution_fingerprint
-                for item in evidence
-            }
-            | {
-                item.contribution_fingerprint
-                for item in attestations
-            }
+            {item.contribution_fingerprint for item in evidence}
+            | {item.contribution_fingerprint for item in attestations}
         )
         traces = [
             TraceReference("compiled_obligation", obligation.id, "reference")
@@ -331,14 +516,11 @@ def build_requirement_comparisons(
         rows.append(
             RequirementComparison(
                 obligation_id=obligation.obligation_id,
-                check_item=check_item_label(obligation),
-                project_requirement=(
-                    f"项目要求：{obligation.description.rstrip('.')}"
-                    + ("（阻断项）" if obligation.blocking else "（关注项）")
-                ),
-                current_situation=observed,
-                result=result,
-                result_label=RESULT_LABELS[result],
+                check_item=display_name,
+                project_requirement=reference_plain,
+                current_situation=state.observed_plain,
+                result=state.result,
+                result_label=RESULT_LABELS[state.result],
                 raw_status=obligation.status,
                 blocking=obligation.blocking,
                 source_rule_ids=list(obligation.source_rule_ids),
@@ -347,8 +529,22 @@ def build_requirement_comparisons(
                 binding_fingerprints=binding_fingerprints,
                 finding_ids=[item.id for item in findings],
                 reference_english=obligation.description,
-                observed_english=observed_english,
+                observed_english=state.observed_raw,
                 traceability=traces,
+                display_name=display_name,
+                reference_plain=reference_plain,
+                observed_plain=state.observed_plain,
+                observed_raw=state.observed_raw,
+                material_status=state.material_status,
+                material_status_label=MATERIAL_STATUS_LABELS[
+                    state.material_status
+                ],
+                workflow_status=state.workflow_status,
+                workflow_status_label=WORKFLOW_STATUS_LABELS[
+                    state.workflow_status
+                ],
+                blocks_progression=state.blocks_progression,
+                affected_scope=list(obligation.affected_scope),
             )
         )
     return rows
@@ -365,9 +561,7 @@ def build_finding_views(case: GovernanceCase) -> list[DiagnosticFindingView]:
         result.append(
             DiagnosticFindingView(
                 finding_id=finding.id,
-                title=(
-                    "阻断问题" if finding.blocking else "需要关注的问题"
-                ),
+                title="阻断问题" if finding.blocking else "需要关注的问题",
                 plain_language=finding.message,
                 severity=finding.severity,
                 blocking=finding.blocking,

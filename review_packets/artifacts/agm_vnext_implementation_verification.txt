@@ -148,3 +148,59 @@ Human/maintainer authority
 No human attestation, maintainer verification, override, final decision, or
 acceptance of this implementation was performed by the coding agent. The
 artifact human_review_declaration remains pending_human_review.
+
+Reviewer Guidance Layer semantic-hardening verification
+Generated: 2026-07-26T13:08:37Z
+Branch: codex/reviewer-guidance-hardening
+Starting commit: 375414c6e9de4a858fec7b205e412c946d3f9c5f
+
+Working-tree regression verification
+Command: .venv\Scripts\python.exe -m pytest -q
+Observed: 151 passed in 42.50s
+Observed: all 132 baseline tests remain present; 19 hardening and E2E
+assertions cover Chinese presentation, dual material/workflow status,
+responsibility, action grouping, selectors, utilities, trace allocation,
+preview purity/accuracy, scope rejection, and no-package semantics.
+
+Canonical policy validation
+Command: .venv\Scripts\python.exe -m agm.vnext.cli project validate
+Observed:
+- valid: true
+- policy fingerprint:
+  e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564
+- risk rules: 7
+- obligations: 12
+- roles: 7
+- transitions: 22
+- canonical .agm diff: empty
+
+Eight-scenario semantic-hardening demonstration
+Command: .venv\Scripts\python.exe
+scripts\generate_reviewer_guidance_demos.py
+Observed:
+- 8 scenario directories generated
+- every directory contains guidance.json, report.md, and report.html
+- scenario 2 responsibility remained contributor/contributor_agent while
+  affected summary material was stale
+- scenario 3 O-AGENT-SCOPE displayed material provided and workflow
+  awaiting_revalidation
+- every transition trace had one primary workflow step
+- JSON contains responsibility, action groups, unavailable summary, selector
+  data, preview, trace mapping, and final verification record
+
+Loopback browser structure verification
+Method: served the generated scoped-repair report on 127.0.0.1 with a temporary
+read-only HTTP server, inspected visible DOM semantics, then stopped the server.
+Observed:
+- current stage: waiting for scoped maintainer revalidation
+- current responsibility: maintainer-side authorized roles
+- current workflow node: step 4, maintainer check
+- affected material: provided plus awaiting revalidation
+- unaffected rows: completed
+- technical and unavailable details closed by default
+- no raw evidence/finding/attestation/obligation ID input
+
+Human/maintainer authority
+No human attestation, maintainer verification, override, final decision,
+acceptance, merge, or human-review completion was performed by the coding
+agent. The evidence package remains pending_human_review.

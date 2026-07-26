@@ -47,6 +47,9 @@ def test_each_scenario_outputs_complete_json_and_html(
     result = next(item for item in results if item["scenario"] == scenario)
     payload = payloads[scenario]
     rendered = (output / result["html"]).read_text(encoding="utf-8")
+    markdown = (output / result["markdown"]).read_text(
+        encoding="utf-8"
+    )
 
     assert len(payload["expected_workflow_steps"]) == 5
     assert payload["expected_requirement_comparison"]
@@ -54,10 +57,16 @@ def test_each_scenario_outputs_complete_json_and_html(
     assert payload["unavailable_actions"]
     assert payload["action_preview"]["mutates_case"] is False
     assert "final_verification_record" in payload
+    assert payload["current_responsibility"]
+    assert "current_relevant_actions" in payload
+    assert payload["unavailable_action_summary"]
+    assert "context_selector_data" in payload
+    assert len(payload["trace_mapping"]) == 5
     assert rendered.startswith("<!doctype html>")
     assert "治理流程导航器" in rendered
     assert "项目要求对比报告" in rendered
     assert "technical-details" in rendered
+    assert markdown.startswith("# AGM Reviewer Guidance Layer")
 
 
 def test_multi_risk_scenario_keeps_union_and_interaction(
@@ -92,6 +101,10 @@ def test_material_change_scenario_records_partial_invalidation(
     assert attempt["stale_evidence_ids"]
     assert attempt["retained_evidence_ids"]
     assert set(attempt["required_revalidation_scope"]) == {"O-SUMMARY"}
+    assert payload["current_responsibility"]["primary_roles"] == [
+        "contributor",
+        "contributor_agent",
+    ]
 
 
 def test_scoped_repair_scenario_preserves_unaffected_records(
@@ -109,6 +122,29 @@ def test_scoped_repair_scenario_preserves_unaffected_records(
     assert payload["action_preview"]["affected_obligation_ids"] == [
         "O-AGENT-SCOPE"
     ]
+    row = next(
+        item
+        for item in payload["expected_requirement_comparison"]
+        if item["obligation_id"] == "O-AGENT-SCOPE"
+    )
+    assert row["material_status"] in {"provided", "retained", "verified"}
+    assert row["workflow_status"] == "awaiting_revalidation"
+
+
+def test_e2e_transition_traces_have_one_primary_step(generated_scenarios):
+    for payload in generated_scenarios[2].values():
+        transition_refs = [
+            trace
+            for traces in payload["trace_mapping"].values()
+            for trace in traces
+            if trace["kind"] == "state_transition"
+        ]
+        ids = [item["object_id"] for item in transition_refs]
+        assert len(ids) == len(set(ids))
+        assert all(
+            item["relationship"].startswith("primary:")
+            for item in transition_refs
+        )
 
 
 def test_unauthorized_agent_scenario_does_not_advance_state(

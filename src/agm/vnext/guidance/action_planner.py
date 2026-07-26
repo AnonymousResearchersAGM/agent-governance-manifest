@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import copy
 from dataclasses import dataclass
 from typing import Any
 
@@ -13,9 +14,14 @@ from .models import (
     ActionPreview,
     ActorContext,
     AvailableAction,
+    ResponsibilityView,
     TraceReference,
     UnavailableAction,
 )
+from .diagnostics import build_requirement_comparisons
+from .responsibility import derive_current_responsibility
+from .selectors import build_context_selector_options
+from .workflow import build_workflow_steps
 
 
 @dataclass(frozen=True)
@@ -40,7 +46,7 @@ ACTION_DEFINITIONS = (
         "verify_evidence",
         "检查待核验项",
         "记录维护者对指定义务及其绑定材料的检查结果。",
-        "受影响项会记录 verification；全部阻断项完成后进入人类最终决定。",
+        "受影响项会记录维护者检查；全部阻断项完成后进入人类最终决定。",
         required_parameters=("reason",),
     ),
     _ActionDefinition(
@@ -275,15 +281,32 @@ def _domain_unavailability(
     ):
         return "当前没有开放的 repair request。"
     if action == "authorized_override":
-        candidates = any(
-            item.status == "open" for item in case.findings
-        ) or any(
+        open_findings = [
+            item for item in case.findings if item.status == "open"
+        ]
+        eligible_obligations = {
+            item.obligation_id
+            for item in case.obligations
+            if item.blocking
+            and item.status not in {"satisfied", "verified", "overridden"}
+        } | {
+            obligation_id
+            for finding in open_findings
+            for obligation_id in finding.affected_obligation_ids
+        }
+        candidates = bool(open_findings) or any(
             item.blocking
             and item.status not in {"satisfied", "verified", "overridden"}
             for item in case.obligations
         )
         if not candidates:
             return "当前没有明确的 obligation 或 finding 可供覆盖。"
+        outside = sorted(set(scope) - eligible_obligations)
+        if outside:
+            return (
+                "所选要求不属于当前可覆盖的开放异常范围："
+                + ", ".join(outside)
+            )
     if action == "confirm_attestation":
         unresolved_evidence = [
             item.obligation_id
@@ -338,6 +361,7 @@ def action_views(
     actor: ActorContext,
 ) -> tuple[list[AvailableAction], list[UnavailableAction]]:
     normalized = normalize_actor(config, actor)
+    comparisons = build_requirement_comparisons(case)
     available: list[AvailableAction] = []
     unavailable: list[UnavailableAction] = []
     state_actions = set(
@@ -367,6 +391,9 @@ def action_views(
                 )
             )
         if reason is None:
+            relevance, group, primary_reason = _action_relevance(
+                case, definition.action
+            )
             available.append(
                 AvailableAction(
                     action=definition.action,
@@ -378,6 +405,12 @@ def action_views(
                     default_obligation_ids=scope,
                     required_parameters=list(definition.required_parameters),
                     traceability=traces,
+                    relevance=relevance,
+                    group=group,
+                    primary_reason=primary_reason,
+                    selector_options=build_context_selector_options(
+                        case, definition.action, comparisons
+                    ),
                 )
             )
         else:
@@ -403,9 +436,111 @@ def action_views(
                     next_actor_roles=roles,
                     mutates_state=definition.mutates_state,
                     traceability=traces,
+                    category=_unavailable_category(reason),
+                    required_role=authorized_roles,
+                    required_state=_required_states(
+                        config, definition.action
+                    ),
+                    future_availability=_future_availability(
+                        case, definition.action, reason
+                    ),
                 )
             )
     return available, unavailable
+
+
+def _action_relevance(
+    case: GovernanceCase, action: str
+) -> tuple[str, str, str]:
+    state_relevant: dict[str, set[str]] = {
+        "evidence_incomplete": set(),
+        "awaiting_human_attestation": {
+            "confirm_attestation",
+            "invalidate_attestation",
+        },
+        "awaiting_maintainer_verification": {
+            "verify_evidence",
+            "request_repair",
+            "reject_evidence",
+            "ask_clarification",
+        },
+        "repair_requested": {"resubmit", "resolve_policy_conflict"},
+        "resubmitted": {
+            "verify_evidence",
+            "request_repair",
+            "reject_evidence",
+        },
+        "verification_complete": {"verify_evidence"},
+        "ready_for_human_decision": {
+            "decide_accept",
+            "decide_reject",
+            "decide_request_changes",
+            "decide_close",
+        },
+        "overridden": {
+            "decide_accept",
+            "decide_reject",
+            "decide_request_changes",
+            "decide_close",
+        },
+    }
+    if any(
+        item.code == "policy_conflict" and item.status == "open"
+        for item in case.findings
+    ) and action == "resolve_policy_conflict":
+        return (
+            "current",
+            "current_relevant",
+            "当前存在未解决的项目规则冲突。",
+        )
+    if action in state_relevant.get(case.state, set()):
+        return (
+            "current",
+            "current_relevant",
+            "该操作直接对应当前流程阶段或开放问题。",
+        )
+    return (
+        "secondary",
+        "other_available",
+        "后端允许此操作，但它不直接处理当前主要阻断项。",
+    )
+
+
+def _required_states(config: VNextConfig, action: str) -> list[str]:
+    return sorted(
+        {
+            state
+            for item in config.state_machine["transitions"]
+            if item["action"] == action
+            for state in item["from"]
+        }
+    )
+
+
+def _unavailable_category(reason: str) -> str:
+    if "没有" in reason and "权限" in reason:
+        return "permission"
+    if "当前状态" in reason or "不能从" in reason:
+        return "stage"
+    if "没有可" in reason or "没有待" in reason:
+        return "object"
+    if "范围" in reason or "项目" in reason:
+        return "scope"
+    return "authority"
+
+
+def _future_availability(
+    case: GovernanceCase, action: str, reason: str
+) -> str:
+    if "权限" in reason:
+        return "切换流程阶段不会改变角色权限；需要由列出的有权角色执行。"
+    if "没有" in reason and ("记录" in reason or "finding" in reason):
+        return "仅在当前案例出现相应有效对象时可用。"
+    if action.startswith("decide_"):
+        return "前序阻断要求完成并进入人类最终决定阶段后可用。"
+    if case.state in {"accepted", "rejected", "closed"}:
+        return "案例已关闭，后续阶段不再开放此操作。"
+    return "到达所需状态且对象范围满足后可能可用。"
 
 
 def _selected_scope(
@@ -421,6 +556,95 @@ def _selected_scope(
     scope = list(dict.fromkeys(raw or default_action_scope(case, action)))
     known = {item.obligation_id for item in case.obligations}
     return [item for item in scope if item in known]
+
+
+def _scope_error(
+    case: GovernanceCase,
+    action: str,
+    parameters: dict[str, Any],
+) -> str | None:
+    raw = parameters.get("obligation_ids")
+    if raw is None:
+        raw = parameters.get("obligation")
+    if isinstance(raw, str):
+        raw = [raw] if raw else []
+    supplied = set(raw or [])
+    known = {item.obligation_id for item in case.obligations}
+    unknown = sorted(supplied - known)
+    if unknown:
+        return (
+            "操作范围包含当前案例不存在的要求："
+            + ", ".join(unknown)
+            + "。"
+        )
+    if action == "resubmit" and supplied:
+        open_scope = {
+            obligation_id
+            for item in case.repair_requests
+            if item.status == "open"
+            for obligation_id in item.affected_obligation_ids
+        }
+        outside = sorted(supplied - open_scope)
+        if outside:
+            return (
+                "补交范围不属于当前开放 repair request："
+                + ", ".join(outside)
+                + "。"
+            )
+    return None
+
+
+def _object_error(
+    case: GovernanceCase,
+    action: str,
+    parameters: dict[str, Any],
+) -> str | None:
+    object_id = str(parameters.get("object_id", "") or "")
+    if action == "reject_evidence":
+        evidence = next(
+            (item for item in case.evidence if item.id == object_id),
+            None,
+        )
+        if evidence is None:
+            return "请选择当前案例中可拒绝的材料。"
+        if evidence.validity_state not in {"valid", "verified"}:
+            return "所选材料当前不是可拒绝的有效候选。"
+    if action == "invalidate_attestation":
+        attestation = next(
+            (
+                item
+                for item in case.attestations
+                if item.id == object_id
+            ),
+            None,
+        )
+        if attestation is None or attestation.status != "confirmed":
+            return "请选择当前案例中仍然有效的负责人确认。"
+    if action == "resolve_policy_conflict":
+        finding = next(
+            (
+                item
+                for item in case.findings
+                if item.id == object_id
+            ),
+            None,
+        )
+        if (
+            finding is None
+            or finding.code != "policy_conflict"
+            or finding.status != "open"
+        ):
+            return "请选择当前案例中开放的项目规则冲突。"
+    if action == "authorized_override":
+        finding_ids = set(parameters.get("finding_ids", []) or [])
+        known_open = {
+            item.id
+            for item in case.findings
+            if item.status == "open"
+        }
+        if finding_ids - known_open:
+            return "覆盖范围包含当前案例中不存在或已关闭的问题。"
+    return None
 
 
 def _predicted_target(
@@ -455,6 +679,128 @@ def _predicted_target(
     return target
 
 
+def _current_workflow_step(
+    case: GovernanceCase, transitions: list[StateTransition]
+) -> str:
+    steps = build_workflow_steps(case, transitions)
+    current = next(
+        (
+            item
+            for item in steps
+            if item.status in {"current", "problem", "return"}
+        ),
+        steps[-1],
+    )
+    return current.step_id
+
+
+def _project_action(
+    case: GovernanceCase,
+    action: str,
+    scope: list[str],
+    target_state: str,
+    parameters: dict[str, Any],
+) -> tuple[GovernanceCase, list[str], list[str], list[str]]:
+    projected = copy.deepcopy(case)
+    invalidated_evidence: list[str] = []
+    invalidated_attestations: list[str] = []
+    creates_records: list[str] = ["state_transition"]
+    requested = set(scope)
+    if action == "verify_evidence":
+        creates_records.append("maintainer_verification")
+        for evidence in projected.evidence:
+            if (
+                set(evidence.obligation_ids) & requested
+                and evidence.validity_state in {"valid", "verified"}
+            ):
+                evidence.validity_state = "verified"
+        for obligation in projected.obligations:
+            if (
+                obligation.obligation_id in requested
+                and obligation.type != "human_attestation"
+            ):
+                obligation.status = "verified"
+        for finding in projected.findings:
+            if (
+                finding.status == "open"
+                and finding.code != "policy_conflict"
+                and set(finding.affected_obligation_ids) <= requested
+            ):
+                finding.status = "resolved"
+    elif action in {
+        "request_repair",
+        "ask_clarification",
+        "record_policy_conflict",
+    }:
+        creates_records.extend(["finding", "repair_request"])
+        if action == "record_policy_conflict":
+            for obligation in projected.obligations:
+                if obligation.obligation_id in requested:
+                    obligation.status = "policy_conflict"
+    elif action == "reject_evidence":
+        creates_records.extend(["finding", "repair_request"])
+        object_id = str(parameters.get("object_id", ""))
+        evidence = next(
+            (item for item in projected.evidence if item.id == object_id),
+            None,
+        )
+        if evidence:
+            evidence.validity_state = "rejected"
+            invalidated_evidence.append(evidence.id)
+            for obligation_id in evidence.obligation_ids:
+                projected.obligation(obligation_id).status = "unsatisfied"
+    elif action == "invalidate_attestation":
+        creates_records.extend(["finding", "repair_request"])
+        object_id = str(parameters.get("object_id", ""))
+        attestation = next(
+            (
+                item
+                for item in projected.attestations
+                if item.id == object_id
+            ),
+            None,
+        )
+        if attestation:
+            attestation.status = "invalidated"
+            invalidated_attestations.append(attestation.id)
+            for obligation in projected.obligations:
+                if obligation.type == "human_attestation":
+                    obligation.status = "unsatisfied"
+    elif action == "resolve_policy_conflict":
+        object_id = str(parameters.get("object_id", ""))
+        for finding in projected.findings:
+            if finding.id == object_id:
+                finding.status = "resolved"
+    elif action == "resubmit":
+        for repair in projected.repair_requests:
+            if (
+                repair.status == "open"
+                and set(repair.affected_obligation_ids) & requested
+            ):
+                repair.status = "resubmitted"
+    elif action == "authorized_override":
+        for obligation in projected.obligations:
+            if obligation.obligation_id in requested:
+                obligation.status = "overridden"
+        for finding_id in parameters.get("finding_ids", []) or []:
+            for finding in projected.findings:
+                if finding.id == finding_id:
+                    finding.status = "overridden"
+    elif action.startswith("decide_"):
+        creates_records.append("final_decision")
+        if action != "decide_request_changes":
+            creates_records.append("closure_receipt")
+        else:
+            creates_records.extend(["finding", "repair_request"])
+    projected.state = target_state
+    return (
+        projected,
+        invalidated_evidence,
+        invalidated_attestations,
+        creates_records,
+    )
+
+
 def preview_reviewer_action(
     case: GovernanceCase,
     policy: VNextConfig,
@@ -476,8 +822,12 @@ def preview_reviewer_action(
         ),
     )
     scope = _selected_scope(case, action, parameters)
-    reason = _authority_reason(
-        policy, case, definition, normalized, scope
+    reason = (
+        _scope_error(case, action, parameters)
+        or _object_error(case, action, parameters)
+        or _authority_reason(
+            policy, case, definition, normalized, scope
+        )
     )
     authorized = reason is None
     target_state = (
@@ -492,8 +842,24 @@ def preview_reviewer_action(
         if not set(item.obligation_ids) & set(scope)
     ]
     invalidated_attestations: list[str] = []
+    invalidated_evidence: list[str] = []
+    creates_records: list[str] = []
+    responsibility_before = derive_current_responsibility(
+        case,
+        build_requirement_comparisons(case),
+        actor_context=normalized,
+    )
+    projected = copy.deepcopy(case)
 
     if authorized and definition.mutates_state:
+        (
+            projected,
+            invalidated_evidence,
+            invalidated_attestations,
+            creates_records,
+        ) = _project_action(
+            case, action, scope, target_state, parameters
+        )
         effects.append(
             ActionEffect(
                 target="案例状态",
@@ -545,7 +911,6 @@ def preview_reviewer_action(
                 None,
             )
             if attestation:
-                invalidated_attestations.append(attestation.id)
                 effects.append(
                     ActionEffect(
                         target=attestation.id,
@@ -565,6 +930,44 @@ def preview_reviewer_action(
                 source_object_ids=[case.id],
             )
         )
+
+    responsibility_after = derive_current_responsibility(
+        projected,
+        build_requirement_comparisons(projected),
+        actor_context=normalized,
+    )
+    before_step = _current_workflow_step(case, transitions)
+    after_step = _current_workflow_step(projected, transitions)
+    attestation_required = any(
+        item.type == "human_attestation"
+        and item.blocking
+        and item.status not in {"satisfied", "verified", "overridden"}
+        for item in projected.obligations
+    )
+    verification_required = (
+        projected.state
+        not in {
+            "ready_for_human_decision",
+            "overridden",
+            "accepted",
+            "rejected",
+            "closed",
+        }
+        and (
+            any(
+                item.blocking
+                and item.status not in {"verified", "overridden"}
+                for item in projected.obligations
+                if item.type != "human_attestation"
+            )
+            or bool(projected.open_blocking_findings())
+        )
+    )
+    final_acceptance_recorded = (
+        action == "decide_accept"
+        and authorized
+        and definition.mutates_state
+    )
 
     preview_material = {
         "case_id": case.id,
@@ -616,16 +1019,34 @@ def preview_reviewer_action(
         retained_evidence_ids=retained_evidence,
         invalidated_attestation_ids=invalidated_attestations,
         next_authorized_actor_roles=(
-            next_actor_roles(case)
+            responsibility_before.primary_roles
             if not authorized
-            else (
-                ["maintainer"]
-                if target_state in {"ready_for_human_decision", "overridden"}
-                else next_actor_roles(case)
-            )
+            else responsibility_after.primary_roles
         ),
         requires_confirmation=authorized and definition.mutates_state,
         mutates_case=False,
         preview_fingerprint=fingerprint(preview_material),
         traceability=traceability,
+        processed_objects=[
+            *scope,
+            *(
+                [str(parameters.get("object_id"))]
+                if parameters.get("object_id")
+                else []
+            ),
+        ],
+        invalidated_evidence_ids=invalidated_evidence,
+        responsibility_before=responsibility_before,
+        responsibility_after=responsibility_after,
+        workflow_step_before=before_step,
+        workflow_step_after=after_step,
+        creates_records=creates_records,
+        requires_human_attestation_after=attestation_required,
+        requires_maintainer_verification_after=verification_required,
+        final_acceptance_recorded=final_acceptance_recorded,
+        final_acceptance_still_required=(
+            projected.state
+            not in {"accepted", "rejected", "closed"}
+            and not final_acceptance_recorded
+        ),
     )

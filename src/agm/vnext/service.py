@@ -653,6 +653,16 @@ class GovernanceService:
     ):
         authorize(self.config, role=role, action="resolve_policy_conflict")
         case = self.storage.load_case(case_id)
+        candidate = next(
+            (item for item in case.findings if item.id == finding_id),
+            None,
+        )
+        if candidate is None:
+            raise VNextError(f"Unknown finding: {finding_id}")
+        if candidate.code != "policy_conflict" or candidate.status != "open":
+            raise VNextError(
+                "Policy conflict resolution requires an open policy_conflict finding in this case"
+            )
         finding = resolve_finding(
             case, finding_id=finding_id, resolution=resolution
         )
@@ -732,8 +742,45 @@ class GovernanceService:
                 "change_classification must be unrelated, non_material, or material"
             )
         affected_ids = list(dict.fromkeys(affected_obligation_ids))
+        if not affected_ids:
+            raise VNextError(
+                "Resubmission must identify an open repair scope"
+            )
         for obligation_id in affected_ids:
             case.obligation(obligation_id)
+        open_repair_scope = {
+            obligation_id
+            for item in case.repair_requests
+            if item.status == "open"
+            for obligation_id in item.affected_obligation_ids
+        }
+        outside_repair = sorted(set(affected_ids) - open_repair_scope)
+        if outside_repair:
+            raise VNextError(
+                "Resubmission references obligations outside the open repair scope: "
+                + ", ".join(outside_repair)
+            )
+        if evidence_ids:
+            known_evidence = {item.id: item for item in case.evidence}
+            unknown_evidence = sorted(set(evidence_ids) - set(known_evidence))
+            if unknown_evidence:
+                raise VNextError(
+                    "Resubmission references evidence outside this case: "
+                    + ", ".join(unknown_evidence)
+                )
+            wrong_scope = sorted(
+                evidence_id
+                for evidence_id in evidence_ids
+                if not (
+                    set(known_evidence[evidence_id].obligation_ids)
+                    & set(affected_ids)
+                )
+            )
+            if wrong_scope:
+                raise VNextError(
+                    "Resubmission evidence is outside the selected repair scope: "
+                    + ", ".join(wrong_scope)
+                )
         affected_scope = sorted(
             {
                 path
@@ -1008,6 +1055,37 @@ class GovernanceService:
         if unknown_findings:
             raise VNextError(
                 f"Override references unknown findings: {', '.join(unknown_findings)}"
+            )
+        open_findings = {
+            item.id: item
+            for item in case.findings
+            if item.status == "open"
+        }
+        ineligible_findings = sorted(
+            selected_findings - set(open_findings)
+        )
+        if ineligible_findings:
+            raise VNextError(
+                "Override requires open findings: "
+                + ", ".join(ineligible_findings)
+            )
+        eligible_obligations = {
+            item.obligation_id
+            for item in case.obligations
+            if item.blocking
+            and item.status not in {"satisfied", "verified", "overridden"}
+        } | {
+            obligation_id
+            for finding_id in selected_findings
+            for obligation_id in open_findings[finding_id].affected_obligation_ids
+        }
+        ineligible_obligations = sorted(
+            selected_obligations - eligible_obligations
+        )
+        if ineligible_obligations:
+            raise VNextError(
+                "Override references obligations outside the current exception scope: "
+                + ", ".join(ineligible_obligations)
             )
         for obligation_id in selected_obligations:
             case.obligation(obligation_id).status = "overridden"

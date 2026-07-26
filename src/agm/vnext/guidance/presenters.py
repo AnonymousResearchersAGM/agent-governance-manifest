@@ -9,7 +9,7 @@ from typing import Any
 from ..config import VNextConfig
 from ..migration import MigrationDiagnostic
 from ..models import GovernanceCase, StateTransition, fingerprint
-from .action_planner import action_views, next_actor_roles, normalize_actor
+from .action_planner import action_views, normalize_actor
 from .diagnostics import (
     CURRENT_STATE_LABELS,
     RESULT_LABELS,
@@ -22,13 +22,21 @@ from .models import (
     ActorContext,
     AvailableAction,
     ContributionSummary,
+    GuidanceUtilityAction,
     GuidanceExplanation,
+    MaterialityDeclarationView,
     RequirementComparison,
+    ResponsibilityView,
     ReviewerGuidanceView,
     TraceReference,
     UnavailableAction,
     WorkflowStepView,
 )
+from .responsibility import (
+    ROLE_LABELS,
+    derive_current_responsibility,
+)
+from .utilities import build_guidance_utilities
 from .workflow import STEP_DEFINITIONS, STEP_STYLES, build_workflow_steps
 
 
@@ -38,22 +46,28 @@ AUTHORITY_NOTICE = (
     "人类维护者。"
 )
 
-ROLE_LABELS = {
-    "system": "AGM 系统",
-    "contributor_agent": "贡献侧智能体",
-    "contributor": "贡献者",
-    "accountable_human": "负责人",
-    "maintainer_verifier": "维护者核验人",
-    "policy_steward": "策略负责人",
-    "maintainer": "人类维护者",
-}
-
 RISK_LABELS = {
     "low": "低",
     "medium": "中",
     "high": "较高",
     "critical": "关键",
     "not_applicable": "本次不适用",
+}
+
+RISK_AREA_LABELS = {
+    "authentication": "登录与认证",
+    "authorization": "权限控制",
+    "configuration": "配置",
+    "governance": "项目治理",
+    "documentation": "文档",
+    "runtime": "运行时",
+}
+
+AUTONOMY_LABELS = {
+    "human_direct": "由人直接完成或直接控制",
+    "supervised_agent": "智能体执行、有人监督",
+    "delegated_agent": "存在继续委派的智能体工作",
+    "autonomous_agent": "智能体具有较高独立行动范围",
 }
 
 
@@ -92,9 +106,9 @@ def _path_kind(case: GovernanceCase) -> tuple[str, str]:
 def _summary(
     case: GovernanceCase,
     comparisons: list[RequirementComparison],
+    responsibility: ResponsibilityView,
     migration: MigrationDiagnostic | None = None,
 ) -> ContributionSummary:
-    roles = next_actor_roles(case)
     blocking_results = {
         "missing",
         "needs_update",
@@ -118,28 +132,121 @@ def _summary(
     if migration and migration.policy_changed:
         warning_count += 1
     path_kind, path_label = _path_kind(case)
+    current_stage = CURRENT_STATE_LABELS.get(case.state, case.state)
+    if any(
+        item.blocking
+        and item.material_status in {"missing", "stale", "invalid"}
+        and item.workflow_status == "awaiting_contributor"
+        for item in comparisons
+    ):
+        current_stage = "等待贡献侧补齐或更新材料"
+    elif any(
+        item.workflow_status == "awaiting_revalidation"
+        for item in comparisons
+    ):
+        current_stage = "等待维护者重新检查指定范围"
+    elif any(
+        item.raw_status == "policy_conflict" for item in comparisons
+    ):
+        current_stage = "等待有权角色解决项目规则冲突"
     return ContributionSummary(
         case_id=case.id,
         changed_files=list(case.changed_files),
         risk_level=case.overall_risk_level,
         risk_areas=sorted(
             {
-                f"{item.zone} ({item.rule_id})"
+                (
+                    f"{RISK_AREA_LABELS.get(item.zone, item.zone)}"
+                    f"（{item.zone}）"
+                )
                 for item in case.matched_rules
             }
         ),
         autonomy_profile=case.autonomy_profile,
         path_kind=path_kind,
         path_label=path_label,
-        current_stage=CURRENT_STATE_LABELS.get(case.state, case.state),
+        current_stage=current_stage,
         blocking_issue_count=blocking_count,
         warning_count=warning_count,
         current_responsible_parties=[
-            ROLE_LABELS.get(item, item) for item in roles
+            ROLE_LABELS.get(item, item)
+            for item in responsibility.primary_roles
         ],
-        next_authorized_actor_roles=roles,
+        next_authorized_actor_roles=responsibility.primary_roles,
         raw_state=case.state,
         raw_readiness=derive_readiness(case),
+    )
+
+
+def _materiality_declaration(
+    case: GovernanceCase,
+    comparisons: list[RequirementComparison],
+) -> MaterialityDeclarationView | None:
+    latest_repair = next(
+        (
+            repair
+            for repair in reversed(case.repair_requests)
+            if repair.attempts
+        ),
+        None,
+    )
+    if latest_repair is None:
+        return None
+    attempt = latest_repair.attempts[-1]
+    assessment = attempt.get("change_assessment", attempt)
+    classification = str(
+        assessment.get("change_classification", "not_declared")
+    )
+    labels = {
+        "unrelated": "无关变化",
+        "non_material": "非实质变化",
+        "no_material_change": "未检测到贡献指纹变化",
+        "material": "实质变化",
+        "partial_material_change": "局部实质变化",
+        "full_material_change": "完整实质变化",
+        "not_declared": "未声明",
+    }
+    affected = list(
+        assessment.get(
+            "required_revalidation_scope",
+            attempt.get("affected_obligation_ids", []),
+        )
+    )
+    by_id = {
+        item.obligation_id: item.display_name for item in comparisons
+    }
+    unaffected = [
+        item.obligation_id
+        for item in comparisons
+        if item.obligation_id not in set(affected)
+    ]
+    return MaterialityDeclarationView(
+        classification=classification,
+        classification_label=labels.get(classification, classification),
+        declared_by=str(attempt.get("actor", "未记录")),
+        reason=str(assessment.get("change_reason", "未记录说明")),
+        affected_obligation_ids=affected,
+        affected_labels=[by_id.get(item, item) for item in affected],
+        unaffected_obligation_ids=unaffected,
+        unaffected_labels=[by_id.get(item, item) for item in unaffected],
+        retained_evidence_ids=list(
+            assessment.get("retained_evidence_ids", [])
+        ),
+        stale_evidence_ids=list(
+            assessment.get("stale_evidence_ids", [])
+        ),
+        invalidated_attestation_ids=list(
+            assessment.get("invalidated_attestation_ids", [])
+        ),
+        requires_maintainer_verification=True,
+        traceability=[
+            TraceReference("repair_request", latest_repair.id, "source"),
+            TraceReference(
+                "resubmission_attempt",
+                str(attempt.get("id", "unrecorded")),
+                "materiality_declaration",
+            ),
+        ],
     )
 
 
@@ -149,6 +256,24 @@ def _explanations(
     migration: MigrationDiagnostic | None = None,
 ) -> list[GuidanceExplanation]:
     result = []
+    path_kind, _ = _path_kind(case)
+    if path_kind == "lightweight":
+        result.append(
+            GuidanceExplanation(
+                title="为什么本次采用轻量审核？",
+                technical_term="lightweight path",
+                plain_language=(
+                    "本次修改未触发高风险规则，也不要求负责人确认或独立维护者"
+                    "检查；所需材料较少，但最终项目决定仍由人类维护者作出。"
+                ),
+                source_references=[
+                    TraceReference(
+                        "matched_rule", item.id, "path_intensity"
+                    )
+                    for item in case.matched_rules
+                ],
+            )
+        )
     by_result = {item.result for item in comparisons}
     if "needs_update" in by_result:
         stale_ids = [
@@ -313,12 +438,31 @@ def build_reviewer_guidance(
     """Build a pure, serializable view from canonical case and policy data."""
     actor = normalize_actor(policy, current_actor)
     comparisons = build_requirement_comparisons(case)
+    responsibility = derive_current_responsibility(
+        case,
+        comparisons,
+        case.findings,
+        case.repair_requests,
+        case.attestations,
+        actor,
+    )
     available, unavailable = action_views(case, policy, actor)
+    current_actions = [
+        item for item in available if item.group == "current_relevant"
+    ][:4]
+    current_ids = {item.action for item in current_actions}
+    other_actions = [
+        item
+        for item in available
+        if item.action not in current_ids
+    ]
     return ReviewerGuidanceView(
         schema_version="agm.reviewer_guidance/v0.2-dev",
         generated_from_case_fingerprint=case.contribution_fingerprint,
         actor=actor,
-        summary=_summary(case, comparisons, migration_diagnostic),
+        summary=_summary(
+            case, comparisons, responsibility, migration_diagnostic
+        ),
         workflow_steps=build_workflow_steps(case, transitions),
         requirement_comparisons=comparisons,
         diagnostics=build_finding_views(case),
@@ -328,13 +472,13 @@ def build_reviewer_guidance(
             case, comparisons, migration_diagnostic
         ),
         delegation_help=GuidanceExplanation(
-            title="怎样判断是否发生了智能体委派？",
+            title="是否把具有独立行动能力的工作交给了另一个智能体？",
             technical_term="agent action and delegation scope",
             plain_language=(
-                "通常属于委派：子智能体修改文件、执行命令、自主生成并提交被采用"
-                "的产出，或另一个智能体拥有独立行动范围/工具权限。通常不属于"
-                "委派：普通工具函数、读取、搜索、无独立行动权的模型调用，或只"
-                "返回建议且未自主修改贡献的辅助模型。"
+                "通常算作继续委派：子智能体修改文件、执行命令、自主生成被直接"
+                "采用的代码或配置、拥有独立工具权限或行动范围，或其产出直接进入"
+                "当前贡献。通常不算：普通函数或工具调用、文件读取、搜索、没有"
+                "独立行动权的模型调用，或只提供建议且没有修改/提交产出的辅助模型。"
             ),
             source_references=[
                 TraceReference(
@@ -363,6 +507,18 @@ def build_reviewer_guidance(
             case, policy, transitions, migration_diagnostic
         ),
         authority_notice=AUTHORITY_NOTICE,
+        responsibility=responsibility,
+        current_relevant_actions=current_actions,
+        other_available_actions=other_actions,
+        unavailable_action_summary=(
+            f"还有 {len(unavailable)} 项操作因当前阶段、权限或对象范围暂不可用"
+        ),
+        utility_actions=build_guidance_utilities(
+            case, comparisons, responsibility
+        ),
+        materiality_declaration=_materiality_declaration(
+            case, comparisons
+        ),
     )
 
 
@@ -410,6 +566,18 @@ def build_no_package_guidance(
                 "ordinary_path",
             )
         ],
+        display_name="完整 AGM 材料包",
+        reference_plain="本次修改不要求完整 AGM 材料。",
+        observed_plain="未提交 AGM 材料包；这不是失败，按普通项目流程继续。",
+        observed_raw=(
+            "No AGM package submitted. This does not confirm human authorship."
+        ),
+        material_status="not_applicable",
+        material_status_label="本次不要求",
+        workflow_status="completed",
+        workflow_status_label="已完成",
+        blocks_progression=False,
+        affected_scope=changed_files,
     )
     workflow = []
     statuses = [
@@ -433,7 +601,9 @@ def build_no_package_guidance(
                 symbol=symbol,
                 explanation=explanation,
                 internal_stages=internal,
-                traceability=requirement.traceability,
+                traceability=(
+                    requirement.traceability if number == 1 else []
+                ),
             )
         )
     view_action = AvailableAction(
@@ -460,6 +630,33 @@ def build_no_package_guidance(
             ("authorized_override", "执行有权覆盖"),
             ("decide_accept", "在 AGM Case 中记录接受"),
         )
+    ]
+    responsibility = ResponsibilityView(
+        primary_roles=["maintainer"],
+        display_label="人类维护者",
+        reason=(
+            "本次不要求完整 AGM 材料，最终项目决定仍由人类维护者按普通流程作出。"
+        ),
+        blocking_items=[],
+        next_handoff_roles=[],
+    )
+    utilities = [
+        GuidanceUtilityAction(
+            action_id="view_change_scope",
+            label="查看变化范围",
+            description="查看普通路径的 changed files 和 intake 依据。",
+            output_type="application/json",
+            output=json.dumps(simulation, ensure_ascii=False, indent=2),
+            trace_refs=requirement.traceability,
+        ),
+        GuidanceUtilityAction(
+            action_id="copy_handoff_note",
+            label="复制当前责任方说明",
+            description="生成普通路径的只读 handoff note。",
+            output_type="text/plain",
+            output=responsibility.reason,
+            trace_refs=requirement.traceability,
+        ),
     ]
     return ReviewerGuidanceView(
         schema_version="agm.reviewer_guidance/v0.2-dev",
@@ -528,6 +725,14 @@ def build_no_package_guidance(
             },
         },
         authority_notice=AUTHORITY_NOTICE,
+        responsibility=responsibility,
+        current_relevant_actions=[],
+        other_available_actions=[view_action],
+        unavailable_action_summary=(
+            f"还有 {len(unavailable)} 项 AGM Case 操作在普通路径不适用"
+        ),
+        utility_actions=utilities,
+        materiality_declaration=None,
     )
 
 
@@ -535,12 +740,28 @@ def render_guidance_markdown(view: ReviewerGuidanceView) -> str:
     lines = [
         "# AGM Reviewer Guidance Layer",
         "",
-        f"- Case: `{view.summary.case_id or 'ordinary/no-case'}`",
+        f"- 案例: `{view.summary.case_id or '普通路径 / 无 AGM Case'}`",
         f"- 本次路径: {view.summary.path_label}",
         f"- 当前阶段: {view.summary.current_stage}",
         f"- 风险: {RISK_LABELS.get(view.summary.risk_level, view.summary.risk_level)}",
         f"- 阻断问题: {view.summary.blocking_issue_count}",
         f"- 需要关注: {view.summary.warning_count}",
+        (
+            "- 当前责任方: "
+            + (
+                view.responsibility.display_label
+                if view.responsibility
+                else "未推导"
+            )
+        ),
+        (
+            "- 责任方依据: "
+            + (
+                view.responsibility.reason
+                if view.responsibility
+                else "无"
+            )
+        ),
         "",
         "## 五步流程",
         "",
@@ -555,16 +776,17 @@ def render_guidance_markdown(view: ReviewerGuidanceView) -> str:
             "",
             "## 项目要求对比",
             "",
-            "| 检查项 | 项目要求 | 当前情况 | 结果 |",
-            "| --- | --- | --- | --- |",
+            "| 检查项 | 项目要求 | 当前情况 | 材料状态 | 流程状态 |",
+            "| --- | --- | --- | --- | --- |",
         ]
     )
     for item in view.requirement_comparisons:
         values = [
             item.check_item,
-            item.project_requirement,
-            item.current_situation,
-            f"{item.result_label} (`{item.result}`)",
+            item.reference_plain,
+            item.observed_plain,
+            item.material_status_label,
+            item.workflow_status_label,
         ]
         lines.append(
             "| "
@@ -574,15 +796,24 @@ def render_guidance_markdown(view: ReviewerGuidanceView) -> str:
             )
             + " |"
         )
-    lines.extend(["", "## 当前可执行操作", ""])
-    for item in view.available_actions:
+    lines.extend(["", "## 当前相关操作", ""])
+    if not view.current_relevant_actions:
+        lines.append("- 当前角色没有直接改变状态的相关操作；可使用下方只读交接工具。")
+    for item in view.current_relevant_actions:
         lines.append(
             f"- **{item.title}** (`{item.action}`): {item.consequence}"
         )
-    lines.extend(["", "## 当前不可执行操作", ""])
+    lines.extend(["", "## 其他可用操作（折叠区内容）", ""])
+    for item in view.other_available_actions:
+        lines.append(f"- **{item.title}**: {item.consequence}")
+    lines.extend(["", "## 只读交接工具", ""])
+    for item in view.utility_actions:
+        lines.append(f"- **{item.label}**: {item.description}")
+    lines.extend(["", "## 暂不可用操作摘要", ""])
+    lines.append(f"- {view.unavailable_action_summary}")
     for item in view.unavailable_actions:
         lines.append(
-            f"- {item.title} (`{item.action}`): {item.reason}"
+            f"  - {item.title}: {item.reason}"
         )
     lines.extend(
         [
@@ -611,8 +842,10 @@ def _trace_details(row: RequirementComparison) -> str:
         "binding_fingerprints": row.binding_fingerprints,
         "finding_ids": row.finding_ids,
         "reference_english": row.reference_english,
-        "observed_english_state": row.observed_english,
+        "observed_raw": row.observed_raw,
         "raw_status": row.raw_status,
+        "material_status": row.material_status,
+        "workflow_status": row.workflow_status,
         "traceability": [
             item.to_dict() for item in row.traceability
         ],
@@ -629,15 +862,37 @@ def _action_preview_html(
     action_token: str | None,
     form_values: dict[str, list[str]] | None,
 ) -> str:
+    status_labels = {
+        "unsatisfied": "尚未满足",
+        "satisfied": "材料已满足",
+        "verified": "已检查",
+        "overridden": "已由有权维护者覆盖",
+        "needs_update": "需要更新",
+        "policy_conflict": "项目规则冲突",
+        "revalidation_required": "等待重新检查",
+        "valid": "有效",
+        "rejected": "已拒绝",
+        "confirmed": "已确认",
+        "invalidated": "已失效",
+    }
+    def effect_label(target: str, value: str) -> str:
+        if target == "案例状态":
+            return CURRENT_STATE_LABELS.get(value, value)
+        return status_labels.get(value, value)
+
     effects = "".join(
         "<li>"
         f"<strong>{html.escape(item.target)}</strong>: "
-        f"{html.escape(item.before)} → {html.escape(item.after)}"
+        f"{html.escape(effect_label(item.target, item.before))} → "
+        f"{html.escape(effect_label(item.target, item.after))}"
         f"<br>{html.escape(item.explanation)}"
         "</li>"
         for item in preview.effects
     )
     retained = ", ".join(preview.retained_evidence_ids) or "无"
+    invalidated_evidence = (
+        ", ".join(preview.invalidated_evidence_ids) or "无"
+    )
     invalidated = ", ".join(preview.invalidated_attestation_ids) or "无"
     confirmation = ""
     if (
@@ -687,55 +942,126 @@ def _action_preview_html(
         f"<p>{html.escape(preview.authorization_reason)}</p>"
         f"<ul>{effects or '<li>不会改变案例。</li>'}</ul>"
         f"<p><strong>保留的未受影响材料：</strong>{html.escape(retained)}</p>"
+        f"<p><strong>将失效的材料：</strong>{html.escape(invalidated_evidence)}</p>"
         f"<p><strong>将失效的负责人确认：</strong>{html.escape(invalidated)}</p>"
-        "<p><strong>此预览本身不会修改案例：</strong>"
-        f"{'是' if not preview.mutates_case else '否'}</p>"
+        "<p><strong>责任方变化：</strong>"
+        f"{html.escape(preview.responsibility_before.display_label if preview.responsibility_before else '未推导')}"
+        " → "
+        f"{html.escape(preview.responsibility_after.display_label if preview.responsibility_after else '未推导')}</p>"
+        "<p><strong>流程位置变化：</strong>"
+        f"{html.escape(preview.workflow_step_before)} → "
+        f"{html.escape(preview.workflow_step_after)}</p>"
+        "<p><strong>预计新增记录：</strong>"
+        f"{html.escape('、'.join(preview.creates_records) or '无')}</p>"
+        "<p><strong>后续仍需负责人确认：</strong>"
+        f"{'是' if preview.requires_human_attestation_after else '否'}；"
+        "<strong>后续仍需维护者检查：</strong>"
+        f"{'是' if preview.requires_maintainer_verification_after else '否'}；"
+        "<strong>最终接受是否已经发生：</strong>"
+        f"{'是' if preview.final_acceptance_recorded else '否'}</p>"
+        "<p><strong>此预览本身不会修改案例：</strong>是</p>"
         f"{confirmation}</section>"
     )
 
 
-def _action_form(
+def _single_action_form(
     view: ReviewerGuidanceView,
+    item: AvailableAction,
     action_token: str | None,
 ) -> str:
-    mutable = [
-        item for item in view.available_actions if item.mutates_state
-    ]
-    if not action_token or not mutable or not view.summary.case_id:
+    if (
+        not action_token
+        or not item.mutates_state
+        or not view.summary.case_id
+    ):
         return ""
-    options = "".join(
-        f'<option value="{html.escape(item.action, quote=True)}">'
-        f"{html.escape(item.title)} ({html.escape(item.action)})</option>"
-        for item in mutable
-    )
-    obligations = "".join(
-        f'<option value="{html.escape(item.obligation_id, quote=True)}">'
-        f"{html.escape(item.check_item)} ({html.escape(item.obligation_id)})"
-        "</option>"
-        for item in view.requirement_comparisons
-        if item.obligation_id != "AGM-PACKAGE"
-    )
+    selector = ""
+    if item.selector_options:
+        options = "".join(
+            '<option value="'
+            + html.escape(option.selector_token, quote=True)
+            + '">'
+            + html.escape(
+                f"{option.label} — {option.status_label}"
+                + ("（阻断）" if option.blocking else "")
+            )
+            + "</option>"
+            for option in item.selector_options
+        )
+        selector = (
+            "<label>选择要处理的问题或材料"
+            '<select name="selector_token" required'
+            + (" multiple" if item.action in {
+                "verify_evidence",
+                "request_repair",
+                "ask_clarification",
+                "record_policy_conflict",
+                "authorized_override",
+            } else "")
+            + f">{options}</select></label>"
+            "<details><summary>查看选择项的范围和内部标识</summary>"
+            f"<pre>{_json_block([option.to_dict() for option in item.selector_options])}</pre>"
+            "</details>"
+        )
+    elif any(
+        parameter in item.required_parameters
+        for parameter in {"object_id", "obligation_ids"}
+    ):
+        return (
+            '<p class="selector-empty">'
+            "当前没有符合此操作范围的对象；后端不会接受任意内部 ID。"
+            "</p>"
+        )
+    action_specific = ""
+    if item.action == "resubmit":
+        action_specific = """
+<label>本次变化声明
+<select name="change_classification" required>
+<option value="unrelated">与 repair 范围无关</option>
+<option value="non_material">非实质变化</option>
+<option value="material">实质变化</option>
+</select></label>
+<label>为什么这样声明
+<textarea name="change_reason" required></textarea></label>"""
+    if item.action == "confirm_attestation":
+        action_specific = "".join(
+            f'<input type="hidden" name="scope" value="{html.escape(path, quote=True)}">'
+            for path in view.summary.changed_files
+        )
     return f"""
-<form method="post" class="action-form">
+<form method="post" class="action-form" id="action-{html.escape(item.action, quote=True)}">
 <input type="hidden" name="action_token" value="{html.escape(action_token, quote=True)}">
+<input type="hidden" name="action" value="{html.escape(item.action, quote=True)}">
 <input type="hidden" name="role" value="{html.escape(view.actor.role, quote=True)}">
-<label>操作
-<select name="action" required>{options}</select>
-</label>
 <label>执行者（必须是真实身份）
-<input name="actor" value="" placeholder="{html.escape(view.actor.actor, quote=True)}" required>
+<input name="actor" value="{html.escape(view.actor.actor, quote=True)}" required>
 </label>
-<label>受影响检查项（需要 scope 的操作使用）
-<select name="obligation"><option value="">未选择</option>{obligations}</select>
-</label>
-<label>Evidence、attestation 或 finding ID（按操作需要）
-<input name="object_id">
-</label>
+{selector}
+{action_specific}
 <label>事实依据或原因
 <textarea name="reason" required></textarea>
 </label>
 <button type="submit">预览操作影响</button>
 </form>"""
+
+
+def _action_card(
+    view: ReviewerGuidanceView,
+    item: AvailableAction,
+    action_token: str | None,
+) -> str:
+    return (
+        '<article class="action-card available">'
+        f"<h3>{html.escape(item.title)}</h3>"
+        f"<p>{html.escape(item.description)}</p>"
+        f"<p><strong>为什么现在相关：</strong>"
+        f"{html.escape(item.primary_reason)}</p>"
+        f"<p><strong>执行后：</strong>{html.escape(item.consequence)}</p>"
+        f"{_single_action_form(view, item, action_token)}"
+        "<details><summary>技术操作标识与依据</summary>"
+        f"<pre>{_json_block({'action': item.action, 'traceability': [trace.to_dict() for trace in item.traceability]})}</pre>"
+        "</details></article>"
+    )
 
 
 def render_guidance_html(
@@ -761,36 +1087,59 @@ def render_guidance_html(
     )
     comparison_rows = "".join(
         "<tr>"
-        f"<td><strong>{html.escape(item.check_item)}</strong>"
-        f"<br><code>{html.escape(item.obligation_id)}</code></td>"
-        f"<td>{html.escape(item.project_requirement)}</td>"
-        f"<td>{html.escape(item.current_situation)}</td>"
-        f'<td><span class="result result-{html.escape(item.result)}">'
-        f"{html.escape(item.result_label)}</span>"
-        f"<br><code>{html.escape(item.result)}</code>"
-        f"{_trace_details(item)}</td>"
+        f"<td><strong>{html.escape(item.display_name)}</strong></td>"
+        f"<td>{html.escape(item.reference_plain)}</td>"
+        f"<td>{html.escape(item.observed_plain)}</td>"
+        f'<td><span class="result material-{html.escape(item.material_status)}">'
+        f"{html.escape(item.material_status_label)}</span></td>"
+        f'<td><span class="result workflow-{html.escape(item.workflow_status)}">'
+        f"{html.escape(item.workflow_status_label)}</span>"
+        + (
+            "<br><strong>案例暂时不能继续</strong>"
+            if item.blocks_progression
+            else ""
+        )
+        + f"{_trace_details(item)}</td>"
         "</tr>"
         for item in view.requirement_comparisons
     )
-    available = "".join(
-        '<article class="action-card available">'
-        f"<h3>{html.escape(item.title)}</h3>"
-        f"<p>{html.escape(item.description)}</p>"
-        f"<p><strong>执行后：</strong>{html.escape(item.consequence)}</p>"
-        f"<code>{html.escape(item.action)}</code>"
-        "</article>"
-        for item in view.available_actions
+    current_available = "".join(
+        _action_card(view, item, action_token)
+        for item in view.current_relevant_actions
+    ) or (
+        "<p>当前角色没有直接改变治理状态的相关操作。"
+        "可使用下方交接工具查看和导出真实待办。</p>"
+    )
+    other_available = "".join(
+        _action_card(view, item, action_token)
+        for item in view.other_available_actions
     )
     unavailable = "".join(
         '<article class="action-card unavailable" aria-disabled="true">'
         f"<h3>{html.escape(item.title)} <span>当前不可用</span></h3>"
         f"<p>{html.escape(item.description)}</p>"
         f"<p><strong>原因：</strong>{html.escape(item.reason)}</p>"
-        f"<p><strong>可能需要的角色：</strong>"
-        f"{html.escape(', '.join(item.next_actor_roles) or '无')}</p>"
-        f"<code>{html.escape(item.action)}</code>"
+        f"<p><strong>所需角色：</strong>"
+        f"{html.escape('、'.join(ROLE_LABELS.get(role, role) for role in item.required_role) or '无')}</p>"
+        f"<p><strong>所需技术状态：</strong>"
+        f"{html.escape('、'.join(item.required_state) or '无')}</p>"
+        f"<p><strong>以后是否可能可用：</strong>"
+        f"{html.escape(item.future_availability)}</p>"
+        "<details><summary>技术操作标识与依据</summary>"
+        f"<pre>{_json_block(item.to_dict())}</pre></details>"
         "</article>"
         for item in view.unavailable_actions
+    )
+    utilities = "".join(
+        '<article class="action-card utility">'
+        f"<h3>{html.escape(item.label)}</h3>"
+        f"<p>{html.escape(item.description)}</p>"
+        f'<a class="button-link" href="/utility?action_id={html.escape(item.action_id, quote=True)}">'
+        "打开只读输出</a>"
+        "<details><summary>在页面中预览</summary>"
+        f"<pre>{html.escape(item.output)}</pre></details>"
+        "</article>"
+        for item in view.utility_actions
     )
     explanations = "".join(
         "<details class=\"explanation\"><summary>"
@@ -804,11 +1153,12 @@ def render_guidance_html(
     diagnostics = "".join(
         "<li>"
         f"<strong>{html.escape(item.title)}</strong>: "
-        f"{html.escape(item.plain_language)} "
-        f"<code>{html.escape(item.finding_id)}</code>"
+        f"{html.escape(item.plain_language)}"
+        "<details><summary>finding 与 repair 原始依据</summary>"
+        f"<pre>{_json_block(item.to_dict())}</pre></details>"
         "</li>"
         for item in view.diagnostics
-    ) or "<li>当前没有 finding record。</li>"
+    ) or "<li>当前没有已记录的问题。</li>"
     preview_html = (
         _action_preview_html(
             preview,
@@ -818,6 +1168,24 @@ def render_guidance_html(
         if preview
         else ""
     )
+    materiality = ""
+    if view.materiality_declaration:
+        item = view.materiality_declaration
+        materiality = (
+            "<section><h2>变化影响声明</h2>"
+            f"<p><strong>本次变化被声明为：</strong>"
+            f"{html.escape(item.classification_label)}</p>"
+            f"<p><strong>声明者：</strong>{html.escape(item.declared_by)}</p>"
+            f"<p><strong>声明理由：</strong>{html.escape(item.reason)}</p>"
+            "<p><strong>尚需维护者核验：</strong>"
+            f"{'是' if item.requires_maintainer_verification else '否'}</p>"
+            f"<p><strong>受影响：</strong>"
+            f"{html.escape('、'.join(item.affected_labels) or '未声明')}</p>"
+            f"<p><strong>未受影响：</strong>"
+            f"{html.escape('、'.join(item.unaffected_labels) or '无')}</p>"
+            "<details><summary>材料保留、失效和原始依据</summary>"
+            f"<pre>{_json_block(item.to_dict())}</pre></details></section>"
+        )
     return f"""<!doctype html>
 <html lang="zh-CN">
 <head>
@@ -846,8 +1214,8 @@ table {{ width: 100%; border-collapse: collapse; font-size: .94rem; }}
 th, td {{ border-bottom: 1px solid #d8e0ea; padding: .7rem; text-align: left; vertical-align: top; }}
 th {{ background: #eef3fa; }}
 .result {{ font-weight: 800; }}
-.result-missing, .result-needs_update, .result-invalid, .result-blocked {{ color: #8c2818; }}
-.result-meets_requirement, .result-verified, .result-closed {{ color: #17633e; }}
+.material-missing, .material-stale, .material-invalid, .workflow-blocks_progression {{ color: #8c2818; }}
+.material-provided, .material-retained, .material-verified, .workflow-completed {{ color: #17633e; }}
 .actions {{ display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: .7rem; }}
 .action-card {{ border: 1px solid #bac5d3; border-radius: 9px; padding: .8rem; }}
 .action-card.unavailable {{ background: #f0f1f3; color: #4f5968; border-style: dashed; }}
@@ -871,43 +1239,55 @@ code {{ overflow-wrap: anywhere; }}
 <header class="hero">
 <h1>维护者审核引导</h1>
 <div class="grid">
-<div class="metric"><strong>贡献 / Case</strong><br>{html.escape(summary.case_id or '无 Case（普通路径）')}</div>
+<div class="metric"><strong>贡献 / 案例</strong><br>{html.escape(summary.case_id or '普通路径（无 AGM 案例）')}</div>
 <div class="metric"><strong>风险</strong><br>{html.escape(RISK_LABELS.get(summary.risk_level, summary.risk_level))}</div>
 <div class="metric"><strong>本次路径</strong><br>{html.escape(summary.path_label)}</div>
 <div class="metric"><strong>当前阶段</strong><br>{html.escape(summary.current_stage)}</div>
 <div class="metric"><strong>阻断问题</strong><br>{summary.blocking_issue_count} 项</div>
 <div class="metric"><strong>需要关注</strong><br>{summary.warning_count} 项</div>
 <div class="metric"><strong>当前责任方</strong><br>{html.escape('、'.join(summary.current_responsible_parties) or '流程已结束')}</div>
-<div class="metric"><strong>智能体范围</strong><br>{html.escape(summary.autonomy_profile)}</div>
+<div class="metric"><strong>智能体参与方式</strong><br>{html.escape(AUTONOMY_LABELS.get(summary.autonomy_profile, summary.autonomy_profile))}</div>
 </div>
-<p><strong>Changed files：</strong>{html.escape(', '.join(summary.changed_files) or '无')}</p>
+<p><strong>变更文件：</strong>{html.escape(', '.join(summary.changed_files) or '无')}</p>
 <p><strong>风险区域：</strong>{html.escape(', '.join(summary.risk_areas) or '无')}</p>
-<small>Raw state: <code>{html.escape(summary.raw_state)}</code> · Readiness: <code>{html.escape(summary.raw_readiness)}</code></small>
+<p><strong>为什么现在轮到这一方：</strong>{html.escape(view.responsibility.reason if view.responsibility else '未推导')}</p>
+<details><summary>技术状态</summary><p>State: <code>{html.escape(summary.raw_state)}</code> · Readiness: <code>{html.escape(summary.raw_readiness)}</code> · Autonomy: <code>{html.escape(summary.autonomy_profile)}</code></p></details>
 </header>
 <section>
 <h2>治理流程导航器</h2>
 <ol class="workflow">{workflow}</ol>
-{('<p><strong>Repair 回路：</strong>' + html.escape(' → '.join(view.repair_loop)) + '</p>') if view.repair_loop else ''}
+{('<p><strong>修复回路：</strong>' + html.escape(' → '.join(view.repair_loop)) + '</p>') if view.repair_loop else ''}
 </section>
 <section>
 <h2>项目要求对比报告</h2>
 <table>
-<thead><tr><th>检查项</th><th>项目要求</th><th>当前情况</th><th>结果</th></tr></thead>
+<thead><tr><th>检查项</th><th>项目要求</th><th>当前情况</th><th>材料状态</th><th>流程状态 / 整体影响</th></tr></thead>
 <tbody>{comparison_rows}</tbody>
 </table>
 </section>
+{materiality}
 <section><h2>问题与说明</h2><ul>{diagnostics}</ul>{explanations}</section>
 {preview_html}
 <section>
-<h2>当前可执行操作</h2>
-<p>这里列出合法选择及影响，不替维护者选择“正确答案”。后端仍会重新检查角色、状态和对象范围。</p>
-<div class="actions">{available}</div>
-{_action_form(view, action_token)}
+<h2>当前相关操作</h2>
+<p>这里列出合法选择及影响，不替维护者作决定。后端仍会重新检查角色、状态和对象范围。</p>
+<div class="actions">{current_available}</div>
 </section>
 <section>
-<h2>当前不可执行操作</h2>
-<p>不可用操作保留显示，以说明权限或流程原因。</p>
+<details><summary>其他可用操作（{len(view.other_available_actions)} 项）</summary>
+<div class="actions">{other_available or '<p>无其他可用操作。</p>'}</div>
+</details>
+</section>
+<section>
+<h2>交接与导出工具</h2>
+<p>这些工具只读取当前 guidance，不修改案例，也不增加 transition。</p>
+<div class="actions">{utilities}</div>
+</section>
+<section>
+<details><summary>{html.escape(view.unavailable_action_summary)}</summary>
+<p>展开后可查看不可用原因、所需角色、所需状态及以后是否可能开放。后端权限检查始终保留。</p>
 <div class="actions">{unavailable}</div>
+</details>
 </section>
 <section id="technical">
 <details class="technical-details"><summary>技术详情（默认折叠）</summary>

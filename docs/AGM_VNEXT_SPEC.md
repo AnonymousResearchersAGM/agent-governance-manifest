@@ -302,6 +302,10 @@ Its serializable domain records include:
 9. `ActionPreview`
 10. `GuidanceExplanation`
 11. `TraceReference`
+12. `ResponsibilityView`
+13. `ContextSelectorOption`
+14. `GuidanceUtilityAction`
+15. `MaterialityDeclarationView`
 
 The core API is:
 
@@ -397,7 +401,92 @@ The served HTML defaults to the Reviewer Guidance Layer and offers simple and
 technical views. The contributor panel retains its existing entry point and
 authority boundary.
 
-`scripts/generate_reviewer_guidance_demos.py` produces eight JSON/HTML
-development scenarios under `examples/reviewer_guidance/outputs/`. These
+`scripts/generate_reviewer_guidance_demos.py` produces eight scenario
+directories with `guidance.json`, `report.md`, and `report.html` under
+`examples/reviewer_guidance/outputs/`. These
 outputs are not a formal experimental package, human verification, or an
 acceptance record.
+
+## 21. Guidance semantic hardening requirements
+
+### 21.1 Presentation boundary
+
+The guidance layer shall provide stable Chinese participant-facing names and
+plain requirements for the twelve canonical obligation IDs. Presentation text
+shall not modify canonical `.agm` policy. Every row shall retain canonical
+English and raw observed state. An unknown obligation shall render a non-empty
+conservative fallback.
+
+### 21.2 Dual requirement state
+
+`RequirementComparison` shall carry `material_status`, `workflow_status`, and
+`blocks_progression` in addition to compatibility result fields. Material
+states are `missing`, `invalid`, `stale`, `provided`, `retained`, `verified`,
+`overridden`, and `not_applicable`. Workflow states are
+`blocks_progression`, `awaiting_contributor`, `awaiting_attestation`,
+`awaiting_revalidation`, `awaiting_final_decision`, and `completed`.
+
+Provided or retained repaired material awaiting maintainer revalidation shall
+not be presented as missing or invalid.
+
+### 21.3 Responsibility
+
+Current responsibility shall be derived from blocking comparisons, evidence
+validity, attestation status, open repair ownership, resubmission completeness,
+revalidation scope, policy conflict, and final-decision readiness. It shall not
+be derived from `GovernanceCase.state` alone. `resubmitted` with unresolved
+contributor-side material shall remain contributor-side; valid scoped
+resubmission shall hand off to an authorized verifier.
+
+### 21.4 Action relevance and unavailable detail
+
+The default-expanded group shall contain at most four current-relevant legal
+actions. Other legal actions and unavailable actions shall be collapsed by
+default. An unavailable action shall retain readable reason, required roles,
+required states, category, future availability and traceability. Presentation
+grouping shall not replace permission or state-machine checks.
+
+### 21.5 Context selectors
+
+The web panel shall use case-bound selector tokens rather than free-text
+evidence, finding, attestation, obligation or repair IDs. Valid options shall
+be rebuilt from current case state for each preview and confirmation. Forged,
+stale, wrong-case, wrong-action and wrong-scope tokens shall be rejected.
+Domain services shall continue to validate role, state, case membership and
+scope. Non-interactive CLI interfaces may accept explicit IDs.
+
+### 21.6 Read-only utilities
+
+The view shall expose missing-requirement, contributor-checklist,
+reviewer-summary, change-scope and handoff-note utilities. These actions shall
+carry trace references and `state_changing=false`, and shall neither write
+case storage nor append transitions.
+
+### 21.7 Workflow traces
+
+Each transition shall have exactly one primary five-step workflow node.
+Secondary cross-references, if introduced, shall be explicitly marked. Step
+details shall not indiscriminately repeat the complete transition log.
+
+### 21.8 Preview projection
+
+Preview shall remain pure and expose processed objects, state effects,
+retained/invalidated material, before/after responsibility and workflow,
+expected finding/repair/transition/verification/closure records, remaining
+attestation and verification, and whether final acceptance occurred. The
+preview fingerprint shall cover current case identity and submitted inputs.
+Real execution shall repeat canonical authorization and scope validation.
+
+### 21.9 Materiality, delegation, and lightweight paths
+
+Materiality shall be presented as a declaration with declarer and reason,
+affected/unaffected requirements, and a flag that maintainer inspection
+remains necessary. The interface shall not claim semantic proof.
+
+Delegation help shall distinguish subagent file/command/adopted-output or
+independent-tool action from ordinary tool calls, reading, search, non-agentic
+model calls, and advice-only assistance.
+
+Lightweight/no-package paths shall be non-failure outcomes. Reduced process
+intensity shall never authorize an agent to attest, verify, override, or make
+the final project decision.

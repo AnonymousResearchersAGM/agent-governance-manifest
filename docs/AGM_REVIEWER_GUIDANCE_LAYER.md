@@ -28,6 +28,9 @@ src/agm/vnext/guidance/
     __init__.py
     models.py
     diagnostics.py
+    responsibility.py
+    selectors.py
+    utilities.py
     workflow.py
     action_planner.py
     presenters.py
@@ -114,10 +117,38 @@ Every compiled obligation becomes one row:
 
 | Column | Source |
 | --- | --- |
-| 检查项 | `CompiledObligation.evidence_type` and stable obligation ID |
-| 项目要求 | compiled description, blocking flag, source rules |
-| 当前情况 | bound evidence, attestations, verifications, findings, and repair records |
-| 结果 | deterministic presentation state derived from those records |
+| 检查项 | Stable Chinese participant-facing name; the ID remains in detail |
+| 项目要求 | Chinese plain-language presentation metadata |
+| 当前情况 | Chinese observation derived from bound domain records |
+| 材料状态 | Whether the material is absent, usable, stale, retained, verified, etc. |
+| 流程状态 | Who/what the row is waiting for and whether progression is blocked |
+
+The twelve canonical obligation IDs have stable Chinese presentation metadata
+in `guidance/diagnostics.py`. This metadata is deliberately outside `.agm`;
+the canonical English `CompiledObligation.description` is preserved as
+`reference_english`. Every row carries `display_name`, `reference_plain`,
+`reference_english`, `observed_plain`, and `observed_raw`. Unknown future
+obligations use a non-empty conservative fallback and expose the English
+canonical text in detail.
+
+Material and workflow state are deliberately separate:
+
+| Material state | Meaning |
+| --- | --- |
+| `missing` | No usable material exists. |
+| `invalid` | A record exists but cannot support the contribution. |
+| `stale` | A record is bound to an old version or has expired. |
+| `provided` | Current bound material exists. |
+| `retained` | A prior binding was explicitly retained for the current contribution. |
+| `verified` | Maintainer-side checking covers the material. |
+| `overridden` | An authorized exception covers the requirement. |
+| `not_applicable` | This path does not require the material. |
+
+Workflow states are `blocks_progression`, `awaiting_contributor`,
+`awaiting_attestation`, `awaiting_revalidation`, `awaiting_final_decision`,
+and `completed`. Thus a repaired item can be `provided` or `retained` while
+its workflow state is `awaiting_revalidation`; it is not mislabelled missing
+or invalid.
 
 Presentation states are:
 
@@ -249,6 +280,52 @@ A contributor agent can prepare evidence and resubmit but cannot claim:
 
 Lower governance intensity never expands agent authority.
 
+### Responsibility derivation
+
+`derive_current_responsibility(...)` uses the comparison rows plus findings,
+repair requests, attestations, policy conflicts and readiness. Precedence is:
+
+1. terminal closure;
+2. open policy conflict;
+3. contributor-side missing/stale/invalid blocking material;
+4. open repair responsibility;
+5. pending or invalidated accountable-human attestation;
+6. valid resubmitted material awaiting scoped revalidation;
+7. human final-decision readiness; and
+8. ordinary lifecycle fallback.
+
+Consequently `state=resubmitted` does not automatically mean “maintainer
+verifier”. If affected material remains stale or missing, the contribution
+side remains responsible.
+
+### Relevance groups and selectors
+
+Legal actions are partitioned into at most four current-relevant actions and a
+default-collapsed other-available group. Unavailable actions are also
+collapsed and carry category, required roles, required states and future
+availability. This grouping does not remove or weaken domain authorization.
+
+The web panel uses action-specific `ContextSelectorOption` records instead of
+free-text evidence, finding, attestation, repair or obligation IDs. Selector
+tokens are opaque and bound to case ID, contribution fingerprint, action,
+object type and scope. On every POST the server rebuilds current valid options
+and rejects forged, stale, wrong-case, wrong-action or wrong-scope tokens.
+Non-interactive CLI operations may continue to accept explicit canonical IDs.
+
+### Read-only handoff utilities
+
+When no state-changing action is relevant, the view still exposes:
+
+- `copy_missing_requirements`;
+- `export_contributor_checklist`;
+- `export_reviewer_summary`;
+- `view_change_scope`; and
+- `copy_handoff_note`.
+
+Each `GuidanceUtilityAction` carries output and trace references with
+`state_changing=false`. Opening an output neither writes the case nor appends a
+transition.
+
 ## Action preview
 
 The pure API is:
@@ -268,6 +345,12 @@ It returns the source and predicted target states, affected obligations,
 retained evidence, potentially invalidated attestations, effects, authority
 reason, next actor roles, trace references, and a deterministic preview
 fingerprint. `mutates_case` is always false.
+
+The hardened preview also projects responsibility and workflow position,
+lists processed objects, retained and invalidated evidence, invalidated
+attestations, record types that would be created, remaining attestation and
+verification needs, and whether final acceptance actually occurred. Projection
+uses a deep copy; storage and transition history remain unchanged.
 
 The local panel uses two requests:
 
@@ -311,6 +394,23 @@ receipt, and raw English text.
 Routine review is possible without opening it, while every summary remains
 traceable.
 
+## Workflow trace allocation
+
+Each `StateTransition` has one primary five-step destination:
+
+| User step | Primary transition actions |
+| --- | --- |
+| 系统识别要求 | open/resolve policy, compile obligations |
+| 贡献者准备材料 | evidence-state preparation, resubmit |
+| 负责人确认 | await/confirm/decline/invalidate attestation, request correction |
+| 维护者检查 | submit/verify/reject, repair, clarification, policy-conflict operations |
+| 人类维护者最终决定 | mark ready, override, all decisions and closure |
+
+Rule/obligation compilation, evidence, attestation, verification, finding,
+decision and receipt references are attached only to the relevant expandable
+step. The implementation no longer copies the entire transition log onto all
+five nodes.
+
 ## Demonstrations
 
 Run:
@@ -324,9 +424,11 @@ cover multi-risk missing material, partial invalidation, scoped repair,
 unauthorized verification, lightweight review, governance self-modification,
 policy migration, and human final closure.
 
-Each JSON contains the guidance view, expected workflow and comparison
-snapshots, available/unavailable actions, preview, and final verification
-record. The HTML is rendered from the same view model.
+Each scenario has its own directory containing `guidance.json`, `report.md`
+and `report.html`. JSON includes workflow and comparison snapshots,
+responsibility, current actions, unavailable summary, selector data, preview,
+trace mapping and final verification record. Markdown and HTML are rendered
+from the same view model.
 
 ## Known limitations
 

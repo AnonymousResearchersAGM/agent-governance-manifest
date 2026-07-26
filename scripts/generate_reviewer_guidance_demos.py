@@ -18,6 +18,7 @@ from agm.vnext.guidance import (  # noqa: E402
     ActorContext,
     build_reviewer_guidance,
     render_guidance_html,
+    render_guidance_markdown,
 )
 from agm.vnext.models import VNextError  # noqa: E402
 from agm.vnext.service import GovernanceService  # noqa: E402
@@ -454,13 +455,36 @@ def generate(output_root: Path) -> list[dict[str, str]]:
                     for item in view.workflow_steps
                 ],
                 "expected_requirement_comparison": [
-                    {
-                        "obligation_id": item.obligation_id,
-                        "result": item.result,
-                        "blocking": item.blocking,
-                    }
+                    item.to_dict()
                     for item in view.requirement_comparisons
                 ],
+                "current_responsibility": (
+                    view.responsibility.to_dict()
+                    if view.responsibility
+                    else None
+                ),
+                "current_relevant_actions": [
+                    item.to_dict()
+                    for item in view.current_relevant_actions
+                ],
+                "unavailable_action_summary": (
+                    view.unavailable_action_summary
+                ),
+                "context_selector_data": {
+                    item.action: [
+                        option.to_dict()
+                        for option in item.selector_options
+                    ]
+                    for item in view.available_actions
+                    if item.selector_options
+                },
+                "trace_mapping": {
+                    item.step_id: [
+                        trace.to_dict()
+                        for trace in item.traceability
+                    ]
+                    for item in view.workflow_steps
+                },
                 "available_actions": [
                     item.to_dict() for item in view.available_actions
                 ],
@@ -470,11 +494,23 @@ def generate(output_root: Path) -> list[dict[str, str]]:
                 "action_preview": preview.to_dict(),
                 "final_verification_record": final_verification,
             }
-            json_path = output_root / f"{slug}.json"
-            html_path = output_root / f"{slug}.html"
+            scenario_root = output_root / slug
+            scenario_root.mkdir(parents=True, exist_ok=True)
+            json_path = scenario_root / "guidance.json"
+            markdown_path = scenario_root / "report.md"
+            html_path = scenario_root / "report.html"
             atomic_write_text(
                 json_path,
                 json.dumps(payload, indent=2, ensure_ascii=False) + "\n",
+            )
+            atomic_write_text(
+                markdown_path,
+                render_guidance_markdown(view)
+                + "\n\n## 操作预览\n\n```json\n"
+                + json.dumps(
+                    preview.to_dict(), indent=2, ensure_ascii=False
+                )
+                + "\n```\n",
             )
             atomic_write_text(
                 html_path,
@@ -483,8 +519,11 @@ def generate(output_root: Path) -> list[dict[str, str]]:
             results.append(
                 {
                     "scenario": slug,
-                    "json": json_path.name,
-                    "html": html_path.name,
+                    "json": str(json_path.relative_to(output_root)),
+                    "markdown": str(
+                        markdown_path.relative_to(output_root)
+                    ),
+                    "html": str(html_path.relative_to(output_root)),
                 }
             )
     manifest_path = output_root / "manifest.json"

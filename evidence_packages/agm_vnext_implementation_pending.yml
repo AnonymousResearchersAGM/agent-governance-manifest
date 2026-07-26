@@ -48,22 +48,30 @@ changed_files:
   - "docs/index.md"
   - "evidence_packages/agm_vnext_implementation_pending.yml"
   - "examples/reviewer_guidance/README.md"
-  - "examples/reviewer_guidance/outputs/01_multi_risk_missing.html"
-  - "examples/reviewer_guidance/outputs/01_multi_risk_missing.json"
-  - "examples/reviewer_guidance/outputs/02_material_partial_invalidation.html"
-  - "examples/reviewer_guidance/outputs/02_material_partial_invalidation.json"
-  - "examples/reviewer_guidance/outputs/03_scoped_repair.html"
-  - "examples/reviewer_guidance/outputs/03_scoped_repair.json"
-  - "examples/reviewer_guidance/outputs/04_unauthorized_agent_verification.html"
-  - "examples/reviewer_guidance/outputs/04_unauthorized_agent_verification.json"
-  - "examples/reviewer_guidance/outputs/05_lightweight_low_risk.html"
-  - "examples/reviewer_guidance/outputs/05_lightweight_low_risk.json"
-  - "examples/reviewer_guidance/outputs/06_governance_self_modification.html"
-  - "examples/reviewer_guidance/outputs/06_governance_self_modification.json"
-  - "examples/reviewer_guidance/outputs/07_policy_migration_warning.html"
-  - "examples/reviewer_guidance/outputs/07_policy_migration_warning.json"
-  - "examples/reviewer_guidance/outputs/08_human_final_decision_closure.html"
-  - "examples/reviewer_guidance/outputs/08_human_final_decision_closure.json"
+  - "examples/reviewer_guidance/outputs/01_multi_risk_missing/guidance.json"
+  - "examples/reviewer_guidance/outputs/01_multi_risk_missing/report.md"
+  - "examples/reviewer_guidance/outputs/01_multi_risk_missing/report.html"
+  - "examples/reviewer_guidance/outputs/02_material_partial_invalidation/guidance.json"
+  - "examples/reviewer_guidance/outputs/02_material_partial_invalidation/report.md"
+  - "examples/reviewer_guidance/outputs/02_material_partial_invalidation/report.html"
+  - "examples/reviewer_guidance/outputs/03_scoped_repair/guidance.json"
+  - "examples/reviewer_guidance/outputs/03_scoped_repair/report.md"
+  - "examples/reviewer_guidance/outputs/03_scoped_repair/report.html"
+  - "examples/reviewer_guidance/outputs/04_unauthorized_agent_verification/guidance.json"
+  - "examples/reviewer_guidance/outputs/04_unauthorized_agent_verification/report.md"
+  - "examples/reviewer_guidance/outputs/04_unauthorized_agent_verification/report.html"
+  - "examples/reviewer_guidance/outputs/05_lightweight_low_risk/guidance.json"
+  - "examples/reviewer_guidance/outputs/05_lightweight_low_risk/report.md"
+  - "examples/reviewer_guidance/outputs/05_lightweight_low_risk/report.html"
+  - "examples/reviewer_guidance/outputs/06_governance_self_modification/guidance.json"
+  - "examples/reviewer_guidance/outputs/06_governance_self_modification/report.md"
+  - "examples/reviewer_guidance/outputs/06_governance_self_modification/report.html"
+  - "examples/reviewer_guidance/outputs/07_policy_migration_warning/guidance.json"
+  - "examples/reviewer_guidance/outputs/07_policy_migration_warning/report.md"
+  - "examples/reviewer_guidance/outputs/07_policy_migration_warning/report.html"
+  - "examples/reviewer_guidance/outputs/08_human_final_decision_closure/guidance.json"
+  - "examples/reviewer_guidance/outputs/08_human_final_decision_closure/report.md"
+  - "examples/reviewer_guidance/outputs/08_human_final_decision_closure/report.html"
   - "examples/reviewer_guidance/outputs/manifest.json"
   - "examples/vnext/README.md"
   - "pyproject.toml"
@@ -82,6 +90,9 @@ changed_files:
   - "src/agm/vnext/guidance/diagnostics.py"
   - "src/agm/vnext/guidance/models.py"
   - "src/agm/vnext/guidance/presenters.py"
+  - "src/agm/vnext/guidance/responsibility.py"
+  - "src/agm/vnext/guidance/selectors.py"
+  - "src/agm/vnext/guidance/utilities.py"
   - "src/agm/vnext/guidance/workflow.py"
   - "src/agm/vnext/migration.py"
   - "src/agm/vnext/models.py"
@@ -98,6 +109,7 @@ changed_files:
   - "tests/test_vnext_demo.py"
   - "tests/test_vnext_evidence.py"
   - "tests/test_vnext_guidance_e2e.py"
+  - "tests/test_vnext_guidance_hardening.py"
   - "tests/test_vnext_migration.py"
   - "tests/test_vnext_reporting_ui_cli.py"
   - "tests/test_vnext_reviewer_guidance.py"
@@ -115,7 +127,11 @@ summary: >-
   maintainer workflow, traceable reference-versus-observed comparisons,
   authority-aligned available and unavailable operations, non-mutating action
   previews, explicit partial binding retention, and eight generated guidance
-  scenarios.
+  scenarios. The semantic-hardening follow-on adds stable Chinese obligation
+  presentation, independent material/workflow state, evidence-aware
+  responsibility derivation, relevance-grouped actions, case-bound object
+  selectors, read-only handoff utilities, single-primary workflow trace
+  allocation, and richer pure action previews.
 rationale: >-
   AGM v0.1 retained multiple risk observations but selected evidence only from
   the highest risk profile. vNext needs contribution-specific governance
@@ -167,6 +183,12 @@ tests_run:
   - command: ".venv\\Scripts\\python.exe scripts\\generate_reviewer_guidance_demos.py"
     outcome: "8 guidance JSON and 8 HTML scenarios generated successfully"
     artifact: "review_packets/artifacts/agm_vnext_implementation_verification.txt"
+  - command: ".venv\\Scripts\\python.exe -m pytest -q"
+    outcome: "151 passed in 42.50s; 132 baseline tests retained and 19 hardening/E2E assertions added"
+    artifact: "review_packets/artifacts/agm_vnext_implementation_verification.txt"
+  - command: ".venv\\Scripts\\python.exe scripts\\generate_reviewer_guidance_demos.py"
+    outcome: "8 scenario directories regenerated with guidance.json, report.md, and report.html"
+    artifact: "review_packets/artifacts/agm_vnext_implementation_verification.txt"
 artifacts:
   - path: "review_packets/artifacts/agm_vnext_implementation_verification.txt"
     description: "Observed working-tree, fresh-clone, CLI, demonstration, and static-check results."
@@ -179,10 +201,10 @@ known_limitations: >-
   not a multi-user authentication service. Migration checking is diagnostic
   and never silently mutates an open case. Materiality and affected obligation
   scope are explicitly declared and remain subject to maintainer inspection.
-  Browser screenshot QA of the generated file URL was blocked by the browser
-  security policy; HTTP two-stage UI behavior and HTML structure are covered
-  by automated tests. No usability, field-adoption, or organizational-outcome
-  claim is made. Independent human review of the governance
+  The generated HTML was inspected over a temporary loopback HTTP server;
+  automated tests cover the two-stage live UI, selector validation, collapsed
+  groups, and semantic consistency. No usability, field-adoption, or
+  organizational-outcome claim is made. Independent human review of the governance
   self-modification remains pending.
 human_review_declaration:
   required: true
@@ -193,4 +215,4 @@ human_review_declaration:
   statement: >-
     Human review and independent maintainer verification are required before
     final acceptance. The coding agent did not perform or fabricate them.
-generated_at: "2026-07-26T11:40:51Z"
+generated_at: "2026-07-26T13:08:37Z"

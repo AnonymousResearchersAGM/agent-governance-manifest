@@ -54,6 +54,15 @@ class ContributionSummary(GuidanceRecord):
 
 
 @dataclass(frozen=True)
+class ResponsibilityView(GuidanceRecord):
+    primary_roles: list[str]
+    display_label: str
+    reason: str
+    blocking_items: list[str] = field(default_factory=list)
+    next_handoff_roles: list[str] = field(default_factory=list)
+
+
+@dataclass(frozen=True)
 class WorkflowStepView(GuidanceRecord):
     number: int
     step_id: str
@@ -84,6 +93,16 @@ class RequirementComparison(GuidanceRecord):
     reference_english: str
     observed_english: str
     traceability: list[TraceReference] = field(default_factory=list)
+    display_name: str = ""
+    reference_plain: str = ""
+    observed_plain: str = ""
+    observed_raw: str = ""
+    material_status: str = "missing"
+    material_status_label: str = "缺少"
+    workflow_status: str = "awaiting_contributor"
+    workflow_status_label: str = "等待贡献者处理"
+    blocks_progression: bool = False
+    affected_scope: list[str] = field(default_factory=list)
 
 
 @dataclass(frozen=True)
@@ -109,6 +128,23 @@ class ActionEffect(GuidanceRecord):
 
 
 @dataclass(frozen=True)
+class ContextSelectorOption(GuidanceRecord):
+    selector_token: str
+    action: str
+    label: str
+    status_label: str
+    affected_scope: list[str]
+    obligation_ids: list[str]
+    object_type: str
+    object_ids: list[str]
+    blocking: bool
+    material_status: str = ""
+    workflow_status: str = ""
+    technical_details: dict[str, Any] = field(default_factory=dict)
+    traceability: list[TraceReference] = field(default_factory=list)
+
+
+@dataclass(frozen=True)
 class AvailableAction(GuidanceRecord):
     action: str
     title: str
@@ -119,6 +155,10 @@ class AvailableAction(GuidanceRecord):
     default_obligation_ids: list[str] = field(default_factory=list)
     required_parameters: list[str] = field(default_factory=list)
     traceability: list[TraceReference] = field(default_factory=list)
+    relevance: str = "other"
+    group: str = "other_available"
+    primary_reason: str = ""
+    selector_options: list[ContextSelectorOption] = field(default_factory=list)
 
 
 @dataclass(frozen=True)
@@ -129,6 +169,38 @@ class UnavailableAction(GuidanceRecord):
     reason: str
     next_actor_roles: list[str]
     mutates_state: bool
+    traceability: list[TraceReference] = field(default_factory=list)
+    category: str = "stage"
+    required_role: list[str] = field(default_factory=list)
+    required_state: list[str] = field(default_factory=list)
+    future_availability: str = ""
+
+
+@dataclass(frozen=True)
+class GuidanceUtilityAction(GuidanceRecord):
+    action_id: str
+    label: str
+    description: str
+    output_type: str
+    output: str
+    trace_refs: list[TraceReference] = field(default_factory=list)
+    state_changing: bool = False
+
+
+@dataclass(frozen=True)
+class MaterialityDeclarationView(GuidanceRecord):
+    classification: str
+    classification_label: str
+    declared_by: str
+    reason: str
+    affected_obligation_ids: list[str]
+    affected_labels: list[str]
+    unaffected_obligation_ids: list[str]
+    unaffected_labels: list[str]
+    retained_evidence_ids: list[str]
+    stale_evidence_ids: list[str]
+    invalidated_attestation_ids: list[str]
+    requires_maintainer_verification: bool
     traceability: list[TraceReference] = field(default_factory=list)
 
 
@@ -150,6 +222,17 @@ class ActionPreview(GuidanceRecord):
     mutates_case: bool
     preview_fingerprint: str
     traceability: list[TraceReference] = field(default_factory=list)
+    processed_objects: list[str] = field(default_factory=list)
+    invalidated_evidence_ids: list[str] = field(default_factory=list)
+    responsibility_before: ResponsibilityView | None = None
+    responsibility_after: ResponsibilityView | None = None
+    workflow_step_before: str = ""
+    workflow_step_after: str = ""
+    creates_records: list[str] = field(default_factory=list)
+    requires_human_attestation_after: bool = False
+    requires_maintainer_verification_after: bool = False
+    final_acceptance_recorded: bool = False
+    final_acceptance_still_required: bool = True
 
 
 @dataclass(frozen=True)
@@ -168,3 +251,9 @@ class ReviewerGuidanceView(GuidanceRecord):
     repair_loop: list[str]
     technical_details: dict[str, Any]
     authority_notice: str
+    responsibility: ResponsibilityView | None = None
+    current_relevant_actions: list[AvailableAction] = field(default_factory=list)
+    other_available_actions: list[AvailableAction] = field(default_factory=list)
+    unavailable_action_summary: str = ""
+    utility_actions: list[GuidanceUtilityAction] = field(default_factory=list)
+    materiality_declaration: MaterialityDeclarationView | None = None
