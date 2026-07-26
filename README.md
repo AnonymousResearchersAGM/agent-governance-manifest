@@ -21,6 +21,8 @@ mechanism, or vendor-specific agent workflow.
 - [vNext Design](docs/AGM_VNEXT_DESIGN.md)
 - [vNext Contributor Guide](docs/AGM_VNEXT_CONTRIBUTOR_GUIDE.md)
 - [vNext Maintainer Guide](docs/AGM_VNEXT_MAINTAINER_GUIDE.md)
+- [Reviewer Guidance Layer](docs/AGM_REVIEWER_GUIDANCE_LAYER.md)
+- [Reviewer Guidance Maintainer Guide](docs/AGM_MAINTAINER_GUIDE.md)
 - [vNext Adoption and Migration](docs/AGM_VNEXT_ADOPTION_AND_MIGRATION.md)
 - [v0.1 Research Snapshot](docs/V0_1_RESEARCH_SNAPSHOT.md)
 - [Documentation Home](docs/index.md)

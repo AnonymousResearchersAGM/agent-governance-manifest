@@ -718,9 +718,29 @@ class GovernanceService:
         affected_obligation_ids: list[str],
         evidence_ids: list[str] | None = None,
         diff_material: str | None = None,
+        change_classification: str = "material",
+        change_reason: str | None = None,
     ) -> GovernanceCase:
         authorize(self.config, role=role, action="resubmit")
         case = self.storage.load_case(case_id)
+        if change_classification not in {
+            "unrelated",
+            "non_material",
+            "material",
+        }:
+            raise VNextError(
+                "change_classification must be unrelated, non_material, or material"
+            )
+        affected_ids = list(dict.fromkeys(affected_obligation_ids))
+        for obligation_id in affected_ids:
+            case.obligation(obligation_id)
+        affected_scope = sorted(
+            {
+                path
+                for obligation_id in affected_ids
+                for path in case.obligation(obligation_id).affected_scope
+            }
+        )
         previous_contribution = case.contribution_fingerprint
         previous_evidence = evidence_set_fingerprint(case.evidence)
         case.contribution_fingerprint = contribution_fingerprint(
@@ -731,30 +751,111 @@ class GovernanceService:
             semantic_targets=case.semantic_targets,
             diff_material=diff_material,
         )
+        contribution_changed = (
+            previous_contribution != case.contribution_fingerprint
+        )
+        if contribution_changed:
+            for item in case.evidence:
+                evidence_affected = bool(
+                    set(item.obligation_ids) & set(affected_ids)
+                )
+                retain = (
+                    change_classification in {"unrelated", "non_material"}
+                    or not evidence_affected
+                )
+                if retain:
+                    item.retained_for_contribution_fingerprint = (
+                        case.contribution_fingerprint
+                    )
+                    item.retention_reason = (
+                        change_reason
+                        or (
+                            "The evidence scope is unaffected by the recorded "
+                            f"{change_classification} change."
+                        )
+                    )
+                else:
+                    item.retained_for_contribution_fingerprint = None
+                    item.retention_reason = None
         validate_evidence_set(
             case,
             root=self.root,
             current_contribution_fingerprint=case.contribution_fingerprint,
         )
-        invalidate_stale_attestations(
+        invalidated_attestation_ids = invalidate_stale_attestations(
             case,
             previous_contribution_fingerprint=previous_contribution,
             previous_evidence_set_fingerprint=previous_evidence,
-            affected_scope=sorted(
-                {
-                    path
-                    for obligation_id in affected_obligation_ids
-                    for path in case.obligation(obligation_id).affected_scope
-                }
+            affected_scope=(
+                []
+                if change_classification in {"unrelated", "non_material"}
+                else affected_scope
             ),
-            reason="The contribution or repaired evidence changed after attestation.",
+            reason=(
+                change_reason
+                or "The contribution or repaired evidence changed after attestation."
+            ),
         )
+        stale_evidence_ids = sorted(
+            item.id
+            for item in case.evidence
+            if item.validity_state in {"stale", "expired"}
+        )
+        retained_evidence_ids = sorted(
+            item.id
+            for item in case.evidence
+            if not set(item.obligation_ids) & set(affected_ids)
+            and item.validity_state in {"valid", "verified"}
+            and (
+                not contribution_changed
+                or item.retained_for_contribution_fingerprint
+                == case.contribution_fingerprint
+            )
+        )
+        if not contribution_changed:
+            effective_classification = "no_material_change"
+        elif change_classification == "material":
+            affected_blocking = {
+                item.obligation_id
+                for item in case.obligations
+                if item.blocking
+            } & set(affected_ids)
+            effective_classification = (
+                "full_material_change"
+                if affected_blocking
+                == {
+                    item.obligation_id
+                    for item in case.obligations
+                    if item.blocking
+                }
+                else "partial_material_change"
+            )
+        else:
+            effective_classification = change_classification
+        change_assessment = {
+            "change_classification": effective_classification,
+            "change_reason": (
+                change_reason
+                or (
+                    "Contribution fingerprint unchanged."
+                    if not contribution_changed
+                    else "Recorded by the resubmitting actor."
+                )
+            ),
+            "previous_contribution_fingerprint": previous_contribution,
+            "new_contribution_fingerprint": case.contribution_fingerprint,
+            "stale_evidence_ids": stale_evidence_ids,
+            "retained_evidence_ids": retained_evidence_ids,
+            "invalidated_attestation_ids": invalidated_attestation_ids,
+            "required_revalidation_scope": affected_ids,
+        }
         attempt = record_resubmission(
             case,
             actor=actor,
             summary=summary,
-            affected_obligation_ids=affected_obligation_ids,
+            affected_obligation_ids=affected_ids,
             evidence_ids=evidence_ids,
+            change_assessment=change_assessment,
         )
         self._transition(
             case,
@@ -1010,6 +1111,47 @@ class GovernanceService:
 
     def migration_check(self, case_id: str) -> MigrationDiagnostic:
         return check_migration(self.storage.load_case(case_id), self.config)
+
+    def reviewer_guidance(
+        self,
+        case_id: str,
+        *,
+        actor: str,
+        role: str,
+    ):
+        """Build a read-only reviewer view from the stored canonical case."""
+        from .guidance import ActorContext, build_reviewer_guidance
+
+        case = self.storage.load_case(case_id)
+        return build_reviewer_guidance(
+            case,
+            self.config,
+            self.storage.read_transitions(case_id),
+            ActorContext(actor=actor, role=role),
+            migration_diagnostic=check_migration(case, self.config),
+        )
+
+    def preview_reviewer_action(
+        self,
+        case_id: str,
+        *,
+        actor: str,
+        role: str,
+        action: str,
+        parameters: dict[str, Any] | None = None,
+    ):
+        """Return a deterministic action plan without saving any mutation."""
+        from .guidance import ActorContext, preview_reviewer_action
+
+        case = self.storage.load_case(case_id)
+        return preview_reviewer_action(
+            case,
+            self.config,
+            self.storage.read_transitions(case_id),
+            ActorContext(actor=actor, role=role),
+            action,
+            parameters,
+        )
 
     def _transition(self, case: GovernanceCase, **kwargs):
         transition = transition_case(self.config, case, **kwargs)

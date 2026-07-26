@@ -89,6 +89,8 @@ def evidence_set_fingerprint(evidence: list[BoundEvidence]) -> str:
         payload = item.to_dict()
         payload.pop("validity_state", None)
         payload.pop("invalid_reasons", None)
+        payload.pop("retained_for_contribution_fingerprint", None)
+        payload.pop("retention_reason", None)
         material.append(payload)
     return fingerprint(material)
 
@@ -200,7 +202,20 @@ def validate_bound_evidence(
     ):
         reasons.append("evidence value is a placeholder")
     if item.contribution_fingerprint != current_contribution_fingerprint:
-        reasons.append("evidence is bound to a stale contribution fingerprint")
+        retained = (
+            item.retained_for_contribution_fingerprint
+            == current_contribution_fingerprint
+            and bool(item.retention_reason and item.retention_reason.strip())
+        )
+        if not retained:
+            reasons.append(
+                "evidence is bound to a stale contribution fingerprint"
+            )
+    if (
+        item.retained_for_contribution_fingerprint
+        and not (item.retention_reason and item.retention_reason.strip())
+    ):
+        reasons.append("retained evidence binding is missing a reason")
     if item.policy_fingerprint != case.policy_snapshot.policy_fingerprint:
         reasons.append("evidence is bound to a different policy snapshot")
     case_scope = set(case.changed_files)

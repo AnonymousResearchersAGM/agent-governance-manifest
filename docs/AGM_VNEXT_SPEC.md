@@ -282,3 +282,122 @@ It does not provide cryptographic identity, signatures, hosted storage,
 platform branch protection, or proof that a claimed human identity is
 truthful. Projects requiring those guarantees must integrate external identity
 and attestation systems.
+
+## 17. Reviewer Guidance Layer
+
+The maintainer-facing Reviewer Guidance Layer shall be generated from a
+`GovernanceCase`, canonical `VNextConfig`, transition history, actor context,
+and optional migration diagnostic.
+
+Its serializable domain records include:
+
+1. `ActorContext`
+2. `ReviewerGuidanceView`
+3. `ContributionSummary`
+4. `WorkflowStepView`
+5. `RequirementComparison`
+6. `DiagnosticFindingView`
+7. `AvailableAction`
+8. `UnavailableAction`
+9. `ActionPreview`
+10. `GuidanceExplanation`
+11. `TraceReference`
+
+The core API is:
+
+```python
+build_reviewer_guidance(
+    case,
+    policy,
+    transitions,
+    current_actor,
+    migration_diagnostic=None,
+)
+```
+
+The main view shall expose a contribution summary, five-step lifecycle,
+reference-versus-observed comparison, available and unavailable actions,
+action preview, and default-collapsed technical detail. Plain-language labels
+shall not remove raw English states, stable IDs, fingerprints, or source
+references.
+
+The five workflow states use `completed`, `current`, `problem`, `pending`,
+`return`, and `skipped`/`not_required`. Status must be conveyed by text or
+symbol as well as color.
+
+Requirement presentation states are `meets_requirement`, `needs_attention`,
+`not_started`, `missing`, `needs_update`, `invalid`, `blocked`,
+`not_applicable`, `verified`, `overridden`, and `closed`.
+
+An ordinary no-case path shall render `no_agm_package_submitted` as
+`not_applicable`, never as failure or evidence of human authorship. A
+lightweight path may omit attestation or independent review while final
+authority remains human.
+
+## 18. Action planning
+
+The pure action API is:
+
+```python
+preview_reviewer_action(
+    case,
+    policy,
+    transitions,
+    actor,
+    action,
+    parameters,
+)
+```
+
+It shall not mutate the case, transition list, or storage. It shall expose the
+authority result, source and predicted target states, effects, affected
+obligations, retained evidence, attestation invalidation, next actors,
+traceability, and a deterministic preview fingerprint.
+
+The local maintainer panel shall require preview before confirmation.
+Confirmation shall be rejected when the preview fingerprint no longer matches
+the current case and inputs. Preview authorization does not replace domain
+service authorization.
+
+Available actions shall agree with canonical permissions, current-state
+transitions, and operation preconditions. Likely but unavailable actions shall
+remain visible with a readable reason and possible authorized role.
+
+No UI element may label one operation as the recommended or uniquely correct
+answer.
+
+## 19. Scoped binding retention
+
+Resubmission accepts an explicit `unrelated`, `non_material`, or `material`
+classification, a factual reason, and affected obligation IDs.
+
+When the contribution fingerprint changes:
+
+- evidence bound to affected material obligations becomes stale;
+- unaffected evidence retains its original binding and records a
+  `retained_for_contribution_fingerprint` plus reason;
+- intersecting attestations are invalidated;
+- unaffected attestations can be retained with an explicit reason; and
+- the repair attempt records old/new fingerprints, stale and retained evidence,
+  invalidated attestations, and required revalidation scope.
+
+The engine shall not treat every diff as full invalidation. The prototype does
+not independently establish semantic materiality; the declared classification
+and scope remain subject to human maintainer inspection.
+
+## 20. Guidance output and demonstrations
+
+`maintainer inspect` writes:
+
+- `guidance.json`;
+- `report.md`; and
+- `report.html`.
+
+The served HTML defaults to the Reviewer Guidance Layer and offers simple and
+technical views. The contributor panel retains its existing entry point and
+authority boundary.
+
+`scripts/generate_reviewer_guidance_demos.py` produces eight JSON/HTML
+development scenarios under `examples/reviewer_guidance/outputs/`. These
+outputs are not a formal experimental package, human verification, or an
+acceptance record.

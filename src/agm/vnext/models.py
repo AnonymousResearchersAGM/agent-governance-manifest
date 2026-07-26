@@ -105,6 +105,8 @@ class BoundEvidence(RecordMixin):
     expires_at: str | None
     source_actor: str
     source_tool: str | None
+    retained_for_contribution_fingerprint: str | None = None
+    retention_reason: str | None = None
     rejected_at: str | None = None
     rejected_by: str | None = None
     rejection_reason: str | None = None
@@ -124,6 +126,8 @@ class HumanAttestation(RecordMixin):
     policy_fingerprint: str
     contribution_fingerprint: str
     evidence_set_fingerprint: str
+    retained_for_contribution_fingerprint: str | None = None
+    retention_reason: str | None = None
     status: str = "confirmed"
     invalidated_at: str | None = None
     invalidation_reason: str | None = None

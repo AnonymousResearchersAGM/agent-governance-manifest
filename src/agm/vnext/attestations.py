@@ -72,8 +72,19 @@ def apply_attestation_status(case: GovernanceCase) -> None:
         for item in case.attestations
         if item.status == "confirmed"
         and item.policy_fingerprint == case.policy_snapshot.policy_fingerprint
-        and item.contribution_fingerprint == case.contribution_fingerprint
-        and item.evidence_set_fingerprint == current_evidence_fingerprint
+        and (
+            (
+                item.contribution_fingerprint
+                == case.contribution_fingerprint
+                and item.evidence_set_fingerprint
+                == current_evidence_fingerprint
+            )
+            or (
+                item.retained_for_contribution_fingerprint
+                == case.contribution_fingerprint
+                and bool(item.retention_reason)
+            )
+        )
     ]
     for obligation in case.obligations:
         if obligation.type != "human_attestation":
@@ -118,19 +129,27 @@ def invalidate_stale_attestations(
     evidence_changed = previous_evidence_set_fingerprint != current_evidence
     if not contribution_changed and not evidence_changed:
         return []
-    affected = set(affected_scope or case.changed_files)
+    affected = set(
+        case.changed_files if affected_scope is None else affected_scope
+    )
     invalidated: list[str] = []
     for item in case.attestations:
         if item.status != "confirmed":
             continue
-        if affected and not (set(item.reviewed_scope) & affected):
+        if affected and set(item.reviewed_scope) & affected:
+            invalidate_attestation(
+                case,
+                attestation_id=item.id,
+                reason=reason,
+                timestamp=timestamp,
+            )
+            invalidated.append(item.id)
             continue
-        invalidate_attestation(
-            case,
-            attestation_id=item.id,
-            reason=reason,
-            timestamp=timestamp,
+        item.retained_for_contribution_fingerprint = (
+            case.contribution_fingerprint
         )
-        invalidated.append(item.id)
+        item.retention_reason = (
+            "The attested scope was not affected by the recorded change."
+        )
     apply_attestation_status(case)
     return invalidated

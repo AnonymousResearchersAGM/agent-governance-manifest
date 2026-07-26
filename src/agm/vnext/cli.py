@@ -9,6 +9,11 @@ from pathlib import Path
 from typing import Any
 
 from .config import load_vnext_config
+from .guidance import ActorContext
+from .guidance.presenters import (
+    render_guidance_html,
+    render_guidance_markdown,
+)
 from .models import VNextError
 from .reporting import readiness, render_html, render_markdown
 from .service import GovernanceService
@@ -173,6 +178,16 @@ def build_parser() -> argparse.ArgumentParser:
     resubmit.add_argument("--obligation", action="append", required=True)
     resubmit.add_argument("--evidence-id", action="append")
     resubmit.add_argument("--diff-material")
+    resubmit.add_argument(
+        "--change-classification",
+        choices=["unrelated", "non_material", "material"],
+        default="material",
+        help="Declared materiality used for scoped evidence retention.",
+    )
+    resubmit.add_argument(
+        "--change-reason",
+        help="Factual reason for the declared materiality and affected scope.",
+    )
 
     maintainer = groups.add_parser(
         "maintainer", help="Inspect and execute authorized maintainer operations."
@@ -185,6 +200,24 @@ def build_parser() -> argparse.ArgumentParser:
     inspect.add_argument("--serve", action="store_true")
     inspect.add_argument("--host", default="127.0.0.1")
     inspect.add_argument("--port", type=int, default=8766)
+    inspect.add_argument(
+        "--actor",
+        default="maintainer-reviewer",
+        help="Actor identifier used to calculate the displayed operation surface.",
+    )
+    inspect.add_argument(
+        "--role",
+        default="maintainer",
+        choices=[
+            "contributor_agent",
+            "contributor",
+            "accountable_human",
+            "maintainer_verifier",
+            "policy_steward",
+            "maintainer",
+        ],
+        help="Role used for guidance; every mutation is re-authorized.",
+    )
 
     verify = maintainer_commands.add_parser(
         "verify", help="Record independent maintainer verification."
@@ -272,13 +305,48 @@ def report_case(
     *,
     case_id: str,
     audience: str,
+    current_actor: ActorContext | None = None,
 ) -> dict[str, str]:
     case = service.storage.load_case(case_id)
     transitions = service.storage.read_transitions(case_id)
+    guidance_json = None
+    if audience == "maintainer":
+        actor = current_actor or ActorContext(
+            actor="maintainer-reviewer",
+            role="maintainer",
+        )
+        view = service.reviewer_guidance(
+            case_id,
+            actor=actor.actor,
+            role=actor.role,
+        )
+        markdown = render_guidance_markdown(view)
+        html_report = render_guidance_html(view)
+        guidance_json = json.dumps(
+            view.to_dict(),
+            indent=2,
+            ensure_ascii=False,
+        )
+    else:
+        markdown = render_markdown(
+            case,
+            transitions,
+            audience=audience,
+            config=service.config,
+            current_actor=current_actor,
+        )
+        html_report = render_html(
+            case,
+            transitions,
+            audience=audience,
+            config=service.config,
+            current_actor=current_actor,
+        )
     paths = service.storage.write_report(
         case_id,
-        markdown=render_markdown(case, transitions, audience=audience),
-        html=render_html(case, transitions, audience=audience),
+        markdown=markdown,
+        html=html_report,
+        guidance_json=guidance_json,
     )
     return {key: str(value) for key, value in paths.items()}
 
@@ -467,14 +535,23 @@ def dispatch(args: argparse.Namespace) -> int:
                 affected_obligation_ids=args.obligation,
                 evidence_ids=args.evidence_id,
                 diff_material=args.diff_material,
+                change_classification=args.change_classification,
+                change_reason=args.change_reason,
             )
             print_json({"case_id": case.id, "state": case.state})
         return 0
 
     if args.group == "maintainer":
         if args.command == "inspect":
+            current_actor = ActorContext(
+                actor=args.actor,
+                role=args.role,
+            )
             paths = report_case(
-                service, case_id=args.case_id, audience="maintainer"
+                service,
+                case_id=args.case_id,
+                audience="maintainer",
+                current_actor=current_actor,
             )
             print_json(paths)
             if args.serve:
@@ -484,6 +561,8 @@ def dispatch(args: argparse.Namespace) -> int:
                     audience="maintainer",
                     host=args.host,
                     port=args.port,
+                    actor=args.actor,
+                    role=args.role,
                 )
         elif args.command == "verify":
             print_json(

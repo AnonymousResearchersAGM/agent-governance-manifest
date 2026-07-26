@@ -100,6 +100,7 @@ def record_resubmission(
     summary: str,
     affected_obligation_ids: list[str],
     evidence_ids: list[str] | None = None,
+    change_assessment: dict[str, Any] | None = None,
     timestamp: str | None = None,
 ) -> dict[str, Any]:
     if not summary.strip():
@@ -115,6 +116,25 @@ def record_resubmission(
         "affected_obligation_ids": list(dict.fromkeys(affected_obligation_ids)),
         "evidence_ids": list(dict.fromkeys(evidence_ids or [])),
     }
+    if change_assessment:
+        attempt["change_assessment"] = dict(change_assessment)
+        attempt.update(
+            {
+                key: value
+                for key, value in change_assessment.items()
+                if key
+                in {
+                    "change_classification",
+                    "change_reason",
+                    "previous_contribution_fingerprint",
+                    "new_contribution_fingerprint",
+                    "stale_evidence_ids",
+                    "retained_evidence_ids",
+                    "invalidated_attestation_ids",
+                    "required_revalidation_scope",
+                }
+            }
+        )
     for repair in open_repairs:
         if set(repair.affected_obligation_ids) & set(affected_obligation_ids):
             repair.attempts.append(attempt)

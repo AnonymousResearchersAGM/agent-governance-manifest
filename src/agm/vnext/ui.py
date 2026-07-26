@@ -4,12 +4,14 @@ from __future__ import annotations
 
 import hmac
 import ipaddress
+import json
 import secrets
 from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from typing import Any
 from urllib.parse import parse_qs
 
+from .guidance import ActorContext, preview_reviewer_action
 from .models import VNextError
 from .reporting import render_html, render_markdown
 from .service import GovernanceService
@@ -182,6 +184,7 @@ def handler_class(
     case_id: str,
     audience: str,
     action_token: str,
+    current_actor: ActorContext | None = None,
 ) -> type[BaseHTTPRequestHandler]:
     class PanelHandler(BaseHTTPRequestHandler):
         server_version = "AGMLocalPanel/0.2-dev"
@@ -210,6 +213,8 @@ def handler_class(
                     transitions,
                     audience=audience,
                     action_token=action_token,
+                    config=service.config,
+                    current_actor=current_actor,
                 ),
             )
 
@@ -232,6 +237,69 @@ def handler_class(
             raw = self.rfile.read(content_length).decode("utf-8", errors="strict")
             form = parse_qs(raw, keep_blank_values=True)
             try:
+                validate_action_token(
+                    action_token, _first(form, "action_token")
+                )
+                if audience == "maintainer":
+                    case = service.storage.load_case(case_id)
+                    transitions = service.storage.read_transitions(case_id)
+                    actor = ActorContext(
+                        actor=_first(form, "actor"),
+                        role=_first(
+                            form,
+                            "role",
+                            (
+                                current_actor.role
+                                if current_actor
+                                else "maintainer"
+                            ),
+                        ),
+                    )
+                    parameters = {
+                        "obligation_ids": (
+                            [_first(form, "obligation")]
+                            if _first(form, "obligation")
+                            else []
+                        ),
+                        "object_id": _first(form, "object_id"),
+                        "reason": _first(form, "reason"),
+                    }
+                    preview = preview_reviewer_action(
+                        case,
+                        service.config,
+                        transitions,
+                        actor,
+                        _first(form, "action"),
+                        parameters,
+                    )
+                    if _first(form, "confirm") != "execute":
+                        self._send(
+                            HTTPStatus.OK,
+                            render_html(
+                                case,
+                                transitions,
+                                audience=audience,
+                                action_token=action_token,
+                                config=service.config,
+                                current_actor=actor,
+                                preview=preview,
+                                form_values=form,
+                            ),
+                        )
+                        return
+                    if not preview.authorized:
+                        raise VNextError(
+                            "Operation rejected by preview authorization: "
+                            + preview.authorization_reason
+                        )
+                    if not hmac.compare_digest(
+                        preview.preview_fingerprint,
+                        _first(form, "preview_fingerprint"),
+                    ):
+                        raise VNextError(
+                            "Case or action inputs changed after preview; "
+                            "generate a new preview"
+                        )
                 execute_panel_action(
                     service,
                     case_id=case_id,
@@ -265,16 +333,51 @@ def serve_panel(
     audience: str,
     host: str = "127.0.0.1",
     port: int = 8765,
+    actor: str | None = None,
+    role: str | None = None,
 ) -> None:
     validate_loopback_host(host)
     if audience not in {"contributor", "maintainer"}:
         raise VNextError("Panel audience must be contributor or maintainer")
     case = service.storage.load_case(case_id)
     transitions = service.storage.read_transitions(case_id)
+    current_actor = (
+        ActorContext(
+            actor=actor or "maintainer-reviewer",
+            role=role or "maintainer",
+        )
+        if audience == "maintainer"
+        else None
+    )
     service.storage.write_report(
         case_id,
-        markdown=render_markdown(case, transitions, audience=audience),
-        html=render_html(case, transitions, audience=audience),
+        markdown=render_markdown(
+            case,
+            transitions,
+            audience=audience,
+            config=service.config,
+            current_actor=current_actor,
+        ),
+        html=render_html(
+            case,
+            transitions,
+            audience=audience,
+            config=service.config,
+            current_actor=current_actor,
+        ),
+        guidance_json=(
+            json.dumps(
+                service.reviewer_guidance(
+                    case_id,
+                    actor=current_actor.actor,
+                    role=current_actor.role,
+                ).to_dict(),
+                indent=2,
+                ensure_ascii=False,
+            )
+            if current_actor
+            else None
+        ),
     )
     token = new_action_token()
     server = ThreadingHTTPServer(
@@ -284,6 +387,7 @@ def serve_panel(
             case_id=case_id,
             audience=audience,
             action_token=token,
+            current_actor=current_actor,
         ),
     )
     print(f"AGM {audience} panel: http://{host}:{server.server_port}/")

@@ -1,0 +1,46 @@
+{
+  "schema_version": "agm.reviewer_guidance_demo_manifest/v0.2-dev",
+  "scenario_count": 8,
+  "scenarios": [
+    {
+      "scenario": "01_multi_risk_missing",
+      "json": "01_multi_risk_missing.json",
+      "html": "01_multi_risk_missing.html"
+    },
+    {
+      "scenario": "02_material_partial_invalidation",
+      "json": "02_material_partial_invalidation.json",
+      "html": "02_material_partial_invalidation.html"
+    },
+    {
+      "scenario": "03_scoped_repair",
+      "json": "03_scoped_repair.json",
+      "html": "03_scoped_repair.html"
+    },
+    {
+      "scenario": "04_unauthorized_agent_verification",
+      "json": "04_unauthorized_agent_verification.json",
+      "html": "04_unauthorized_agent_verification.html"
+    },
+    {
+      "scenario": "05_lightweight_low_risk",
+      "json": "05_lightweight_low_risk.json",
+      "html": "05_lightweight_low_risk.html"
+    },
+    {
+      "scenario": "06_governance_self_modification",
+      "json": "06_governance_self_modification.json",
+      "html": "06_governance_self_modification.html"
+    },
+    {
+      "scenario": "07_policy_migration_warning",
+      "json": "07_policy_migration_warning.json",
+      "html": "07_policy_migration_warning.html"
+    },
+    {
+      "scenario": "08_human_final_decision_closure",
+      "json": "08_human_final_decision_closure.json",
+      "html": "08_human_final_decision_closure.html"
+    }
+  ]
+}

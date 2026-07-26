@@ -2,6 +2,10 @@
 
 Status: `v0.2-dev`
 
+The current operational guide for the Reviewer Guidance Layer is
+`docs/AGM_MAINTAINER_GUIDE.md`. The notes below retain the lower-level CLI
+reference.
+
 Maintainer verification must independently use canonical policy and the actual
 change. Contributor assertions are observed values, not authority.
 
@@ -69,3 +73,7 @@ python -m agm.vnext.cli maintainer decide \
 `verify` and `ready_for_human_decision` are not acceptance. Override is also a
 separate operation and must be followed by an explicit final decision.
 Terminal decisions produce `closure_receipt.yml`.
+
+`maintainer inspect` now also writes `guidance.json` and defaults to the
+five-step Reviewer Guidance Layer. Every state-changing panel operation is
+previewed without mutation before a separate confirmation request.

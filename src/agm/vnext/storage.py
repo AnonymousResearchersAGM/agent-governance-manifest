@@ -229,6 +229,7 @@ class CaseStorage:
         *,
         markdown: str,
         html: str,
+        guidance_json: str | None = None,
     ) -> dict[str, Path]:
         directory = self.case_dir(case_id)
         if not directory.exists():
@@ -237,4 +238,9 @@ class CaseStorage:
         html_path = directory / "report.html"
         atomic_write_text(markdown_path, markdown)
         atomic_write_text(html_path, html)
-        return {"markdown": markdown_path, "html": html_path}
+        paths = {"markdown": markdown_path, "html": html_path}
+        if guidance_json is not None:
+            guidance_path = directory / "guidance.json"
+            atomic_write_text(guidance_path, guidance_json)
+            paths["guidance_json"] = guidance_path
+        return paths

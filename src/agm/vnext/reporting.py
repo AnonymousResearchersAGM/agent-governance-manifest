@@ -3,9 +3,13 @@
 from __future__ import annotations
 
 import html
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 from .models import GovernanceCase, StateTransition
+
+if TYPE_CHECKING:
+    from .config import VNextConfig
+    from .guidance.models import ActionPreview, ActorContext
 
 
 AUTHORITY_NOTICE = (
@@ -15,19 +19,9 @@ AUTHORITY_NOTICE = (
 
 
 def readiness(case: GovernanceCase) -> str:
-    if case.state in {"accepted", "rejected", "closed"}:
-        return f"closed:{case.state}"
-    if case.state == "ordinary_unmanaged":
-        return "no_agm_package_submitted"
-    if case.open_blocking_findings():
-        return "repair_required"
-    if case.unresolved_blocking_obligations():
-        return "not_ready"
-    if case.state == "ready_for_human_decision":
-        return "eligible_for_human_decision"
-    if case.state == "overridden":
-        return "authorized_override_pending_final_decision"
-    return "verification_in_progress"
+    from .guidance.diagnostics import derive_readiness
+
+    return derive_readiness(case)
 
 
 def obligation_observation(
@@ -62,7 +56,27 @@ def render_markdown(
     transitions: list[StateTransition],
     *,
     audience: str,
+    config: VNextConfig | None = None,
+    current_actor: ActorContext | None = None,
 ) -> str:
+    if audience == "maintainer" and config is not None:
+        from .guidance import ActorContext, build_reviewer_guidance
+        from .guidance.presenters import render_guidance_markdown
+        from .migration import check_migration
+
+        actor = current_actor or ActorContext(
+            actor="maintainer-reviewer",
+            role="maintainer",
+        )
+        return render_guidance_markdown(
+            build_reviewer_guidance(
+                case,
+                config,
+                transitions,
+                actor,
+                migration_diagnostic=check_migration(case, config),
+            )
+        )
     title = (
         "AGM Contributor Governance Panel"
         if audience == "contributor"
@@ -201,7 +215,32 @@ def render_html(
     *,
     audience: str,
     action_token: str | None = None,
+    config: VNextConfig | None = None,
+    current_actor: ActorContext | None = None,
+    preview: ActionPreview | None = None,
+    form_values: dict[str, list[str]] | None = None,
 ) -> str:
+    if audience == "maintainer" and config is not None:
+        from .guidance import ActorContext, build_reviewer_guidance
+        from .guidance.presenters import render_guidance_html
+        from .migration import check_migration
+
+        actor = current_actor or ActorContext(
+            actor="maintainer-reviewer",
+            role="maintainer",
+        )
+        return render_guidance_html(
+            build_reviewer_guidance(
+                case,
+                config,
+                transitions,
+                actor,
+                migration_diagnostic=check_migration(case, config),
+            ),
+            action_token=action_token,
+            preview=preview,
+            form_values=form_values,
+        )
     title = (
         "AGM Contributor Governance Panel"
         if audience == "contributor"

@@ -12,6 +12,8 @@ Website: https://agent-governance-manifest.github.io/agent-governance-manifest/
 
 - [AGM vNext Design](AGM_VNEXT_DESIGN.md)
 - [AGM vNext Development Specification](AGM_VNEXT_SPEC.md)
+- [Reviewer Guidance Layer](AGM_REVIEWER_GUIDANCE_LAYER.md)
+- [Reviewer Guidance Maintainer Guide](AGM_MAINTAINER_GUIDE.md)
 - [vNext Contributor Guide](AGM_VNEXT_CONTRIBUTOR_GUIDE.md)
 - [vNext Maintainer Guide](AGM_VNEXT_MAINTAINER_GUIDE.md)
 - [vNext Adoption and Migration](AGM_VNEXT_ADOPTION_AND_MIGRATION.md)
