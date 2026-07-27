@@ -9,24 +9,21 @@
   "live_actions_enabled": false,
   "can_save_draft": false,
   "can_preview": false,
-  "unavailable_reason": "当前没有需要该参与者完成的人类治理判断。",
+  "unavailable_reason": "材料已经补交，等待 AGM 提交维护者检查。",
+  "maintainer_stage_ready": false,
+  "current_stage": "resubmitted",
+  "stage_unavailable_reason": "材料已经补交，等待 AGM 提交维护者检查。",
   "current_next_step": {
-    "status": "awaiting_contributor",
+    "status": "contribution_preparation",
     "display_title": "当前无需你操作",
-    "plain_explanation": "只有修改说明需要按当前版本更新；未受影响的有效材料继续保留，当前无需维护者检查。",
-    "responsible_party": "贡献者或贡献侧智能体",
+    "responsible_party": "贡献侧",
+    "plain_explanation": "贡献侧已经补交材料，AGM 正在重新编译要求并提交维护者检查。材料正式进入维护者阶段后，你将收到需要检查的具体事项。",
+    "participant_should_do": [],
     "system_will_do": [
-      "已把需要补充或更新的内容整理为贡献侧待办。",
-      "材料更新后重新核对版本绑定、有效期和结构要求。",
-      "保留未受影响且仍有效的材料。"
+      "重新校验材料结构、版本绑定和当前要求。",
+      "使用既有贡献侧提交操作进入维护者检查阶段。"
     ],
-    "human_should_do": [
-      "维护者当前无需选择拒绝、退回或修复操作。",
-      "等待贡献侧补齐：修改说明"
-    ],
-    "final_acceptance_state": "not_decided",
-    "owner": "contribution_side",
-    "semantic_state": "system_checked"
+    "blocking": false
   },
   "system_handled_anomalies": [],
   "final_decision_entry_available": false,

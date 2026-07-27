@@ -170,9 +170,13 @@ def test_scoped_repair_is_item_bound_with_three_business_results(
         "要求补充或修正",
         "标记重大风险",
     ]
-    assert item["options"][0]["authorized"] is True
-    assert item["options"][1]["authorized"] is False
-    assert "当前案例阶段" in item["options"][1]["unavailable_reason"]
+    assert model["case_state"] == "awaiting_maintainer_verification"
+    assert model["maintainer_stage_ready"] is True
+    assert all(option["authorized"] for option in item["options"])
+    assert all(
+        option["unavailable_reason"] is None
+        for option in item["options"]
+    )
 
 
 def test_system_anomaly_and_low_risk_paths_have_no_mutation_controls(

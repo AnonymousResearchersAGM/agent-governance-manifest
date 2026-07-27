@@ -4,7 +4,7 @@
   "role": "maintainer",
   "contribution_fingerprint": "712fcd4dc43abd39cf07328603c2a14d9da29e20b1369a6d2b1b1b8eba6080a0",
   "policy_snapshot_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
-  "case_state": "resubmitted",
+  "case_state": "awaiting_maintainer_verification",
   "items": [
     {
       "judgment_id": "judgment-agent-actions-delegation",
@@ -35,9 +35,9 @@
           "plain_consequence": "该材料不足以支持当前检查。AGM 将针对这一项生成贡献侧待办。",
           "requires_reason": true,
           "consequence_type": "supplement",
-          "authorized": false,
-          "unavailable_reason": "当前案例阶段不允许执行该治理操作。",
-          "existing_operation_ref": null
+          "authorized": true,
+          "unavailable_reason": null,
+          "existing_operation_ref": "request_repair"
         },
         {
           "option_id": "material-risk",
@@ -45,9 +45,9 @@
           "plain_consequence": "你认为该项暴露出需要阻断当前进展的实质风险。",
           "requires_reason": true,
           "consequence_type": "material_risk",
-          "authorized": false,
-          "unavailable_reason": "当前案例阶段不允许执行该治理操作。",
-          "existing_operation_ref": null
+          "authorized": true,
+          "unavailable_reason": null,
+          "existing_operation_ref": "request_repair"
         }
       ],
       "blocking": true,
@@ -57,7 +57,8 @@
       "provenance_refs": [
         "compiled_requirement",
         "scoped_revalidation",
-        "existing_finding"
+        "existing_finding",
+        "maintainer_review_stage"
       ]
     }
   ],
@@ -65,6 +66,9 @@
   "can_save_draft": false,
   "can_preview": false,
   "unavailable_reason": null,
+  "maintainer_stage_ready": true,
+  "current_stage": "awaiting_maintainer_verification",
+  "stage_unavailable_reason": null,
   "current_next_step": {
     "status": "maintainer_judgment",
     "display_title": "现在需要你检查 1 项",

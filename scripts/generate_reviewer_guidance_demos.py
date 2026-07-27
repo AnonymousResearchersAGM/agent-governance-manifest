@@ -276,7 +276,11 @@ def material_partial_invalidation(
     }
 
 
-def scoped_repair(service: GovernanceService) -> dict[str, Any]:
+def scoped_repair(
+    service: GovernanceService,
+    *,
+    submit_for_verification: bool = True,
+) -> dict[str, Any]:
     open_case(
         service,
         "scoped-repair",
@@ -309,6 +313,8 @@ def scoped_repair(service: GovernanceService) -> dict[str, Any]:
         change_classification="non_material",
         change_reason="Wording clarification does not change contribution behavior.",
     )
+    if submit_for_verification:
+        prepare_for_verification(service, "scoped-repair")
     return {
         "case_id": "scoped-repair",
         "actor": ActorContext("verifier-1", "maintainer_verifier"),

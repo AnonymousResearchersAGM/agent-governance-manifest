@@ -73,6 +73,8 @@ FINAL_DEFINITIONS = (
     ),
 )
 
+MAINTAINER_REVIEW_STAGE = "awaiting_maintainer_verification"
+
 
 def _canonical_judgments(
     review_brief: ReviewBriefView,
@@ -99,6 +101,29 @@ def _canonical_judgments(
     return result
 
 
+def _interactive_next_step(
+    review_brief: ReviewBriefView,
+    case: GovernanceCase,
+) -> dict[str, object]:
+    if case.state != "resubmitted":
+        return review_brief.current_next_step.to_dict()
+    return {
+        "status": "contribution_preparation",
+        "display_title": "当前无需你操作",
+        "responsible_party": "贡献侧",
+        "plain_explanation": (
+            "贡献侧已经补交材料，AGM 正在重新编译要求并提交维护者检查。"
+            "材料正式进入维护者阶段后，你将收到需要检查的具体事项。"
+        ),
+        "participant_should_do": (),
+        "system_will_do": (
+            "重新校验材料结构、版本绑定和当前要求。",
+            "使用既有贡献侧提交操作进入维护者检查阶段。",
+        ),
+        "blocking": False,
+    }
+
+
 def compile_contextual_actions(
     *,
     review_brief: ReviewBriefView,
@@ -111,8 +136,23 @@ def compile_contextual_actions(
 
     case = governance_case
     actor = actor_from_context(actor_context)
+    maintainer_stage_ready = case.state == MAINTAINER_REVIEW_STAGE
+    stage_unavailable_reason = (
+        None
+        if maintainer_stage_ready
+        else (
+            "材料已经补交，等待 AGM 提交维护者检查。"
+            if case.state == "resubmitted"
+            else "当前案例尚未进入维护者检查阶段。"
+        )
+    )
     items = []
-    for judgment, obligation in _canonical_judgments(review_brief, case):
+    canonical_judgments = (
+        _canonical_judgments(review_brief, case)
+        if maintainer_stage_ready
+        else ()
+    )
+    for judgment, obligation in canonical_judgments:
         options = []
         for (
             option_id,
@@ -164,7 +204,10 @@ def compile_contextual_actions(
     )
     unavailable_reason = None
     if not items:
-        unavailable_reason = "当前没有需要该参与者完成的人类治理判断。"
+        unavailable_reason = (
+            stage_unavailable_reason
+            or "当前没有需要该参与者完成的人类治理判断。"
+        )
     elif not all_items_authorized:
         unavailable_reason = "当前参与者无权完成至少一项必需判断。"
     anomalies = tuple(
@@ -186,7 +229,10 @@ def compile_contextual_actions(
         can_save_draft=live_actions_enabled and all_items_authorized,
         can_preview=live_actions_enabled and all_items_authorized,
         unavailable_reason=unavailable_reason,
-        current_next_step=review_brief.current_next_step.to_dict(),
+        maintainer_stage_ready=maintainer_stage_ready,
+        current_stage=case.state,
+        stage_unavailable_reason=stage_unavailable_reason,
+        current_next_step=_interactive_next_step(review_brief, case),
         system_handled_anomalies=anomalies,
         final_decision_entry_available=(
             case.state in {"ready_for_human_decision", "overridden"}

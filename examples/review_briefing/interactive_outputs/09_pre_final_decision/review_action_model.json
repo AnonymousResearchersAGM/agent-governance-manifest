@@ -12,7 +12,10 @@
     "live_actions_enabled": false,
     "can_save_draft": false,
     "can_preview": false,
-    "unavailable_reason": "当前没有需要该参与者完成的人类治理判断。",
+    "unavailable_reason": "当前案例尚未进入维护者检查阶段。",
+    "maintainer_stage_ready": false,
+    "current_stage": "ready_for_human_decision",
+    "stage_unavailable_reason": "当前案例尚未进入维护者检查阶段。",
     "current_next_step": {
       "status": "awaiting_final_human_decision",
       "display_title": "治理材料检查已经完成",

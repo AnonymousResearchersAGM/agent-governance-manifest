@@ -222,6 +222,9 @@
   "can_save_draft": false,
   "can_preview": false,
   "unavailable_reason": null,
+  "maintainer_stage_ready": true,
+  "current_stage": "awaiting_maintainer_verification",
+  "stage_unavailable_reason": null,
   "current_next_step": {
     "status": "maintainer_judgment",
     "display_title": "现在需要你检查 4 项",

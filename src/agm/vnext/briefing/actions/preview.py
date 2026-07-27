@@ -268,33 +268,63 @@ def _build_review_preview(
         and not (set(evidence.obligation_ids) & affected_set)
     ]
     summaries = []
+    sufficient_titles = tuple(
+        item.display_title for _, item, _ in sufficient
+    )
+    supplement_titles = tuple(
+        item.display_title for _, item, _ in supplement
+    )
+    material_risk_titles = tuple(
+        item.display_title for _, item, _ in material_risk
+    )
+    format_titles = lambda values: "、".join(  # noqa: E731
+        f"“{value}”" for value in values
+    )
     if sufficient:
         if supplement or material_risk:
             summaries.append(
-                f"记录 {len(sufficient)} 项“材料充分”选择；"
-                "因本批仍包含阻断处理，本次不伪造 verification transition。"
+                f"保留对{format_titles(sufficient_titles)}的“材料充分”选择；"
+                "本批仍包含需要处理的问题，因此本次不会完成这些检查。"
             )
         else:
             summaries.append(
-                f"确认 {len(sufficient)} 项材料已完成维护者检查。"
+                f"完成{format_titles(sufficient_titles)}的维护者检查。"
             )
     if supplement:
         summaries.append(
-            f"针对 {len(supplement)} 项判断生成贡献侧 scoped 补充请求。"
+            f"针对{format_titles(supplement_titles)}生成补充请求。"
         )
+        summaries.append("将处理责任交回贡献侧。")
     if material_risk:
         summaries.append(
-            f"针对 {len(material_risk)} 项判断创建既有 blocking repair/finding 机制；"
-            "不会自动拒绝贡献。"
+            f"将{format_titles(material_risk_titles)}标记为阻断性风险。"
         )
-    summaries.extend(
-        [
-            f"保留其他 {len(retained_evidence)} 份未受影响且有效的材料。",
-            "当前不会接受或拒绝该贡献。",
-        ]
+        summaries.extend(
+            [
+                "记录维护者给出的原因。",
+                "阻止案例进入最终决定。",
+                "根据现有规则路由到贡献侧修复或独立维护者检查。",
+            ]
+        )
+    summaries.append(
+        f"保留其他 {len(retained_evidence)} 份未受影响且有效的材料。"
     )
-    if affected:
-        summaries.append("补充完成后，仅重新检查受影响项目。")
+    if material_risk:
+        summaries.append("不会自动作出最终拒绝决定。")
+    elif supplement:
+        summaries.extend(
+            [
+                "修复完成后仅重新检查这一项。",
+                "不会拒绝整个贡献。",
+            ]
+        )
+    else:
+        summaries.extend(
+            [
+                "将案例推进到等待最终人类决定。",
+                "不会自动接受贡献。",
+            ]
+        )
     binding_payload = {
         "case_id": case.id,
         "draft_id": draft.draft_id,
