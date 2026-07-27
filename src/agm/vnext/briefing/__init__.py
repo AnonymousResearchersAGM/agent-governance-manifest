@@ -17,6 +17,7 @@ from .models import (
     WorkOwner,
 )
 from .presenters import (
+    risk_css_class,
     render_review_brief_html,
     render_review_brief_json,
     render_review_brief_markdown,
@@ -39,6 +40,7 @@ __all__ = [
     "WorkOwner",
     "compile_review_brief",
     "compile_work_items",
+    "risk_css_class",
     "render_review_brief_html",
     "render_review_brief_json",
     "render_review_brief_markdown",

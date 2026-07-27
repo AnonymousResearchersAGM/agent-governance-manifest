@@ -31,8 +31,13 @@ h3 { margin:.2rem 0 .5rem; } h4 { margin:1rem 0 .35rem; }
 background:#fff; border-radius:5px; font-weight:700; }
 .grid,.two-col { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; }
 .summary-card { min-width:0; border:1px solid var(--line); border-radius:12px; padding:18px; }
-.risk-level { display:inline-block; font-size:1.35rem; font-weight:800; color:white;
-background:var(--red); padding:5px 14px; border-radius:999px; }
+.risk-level { display:inline-block; font-size:1.35rem; font-weight:800;
+padding:5px 14px; border:1px solid transparent; border-radius:999px; }
+.risk-level.risk-low { color:#0b5038; background:#dff4e9; border-color:#83c9a9; }
+.risk-level.risk-medium { color:#6a4500; background:#fff0bd; border-color:#d7ad38; }
+.risk-level.risk-high { color:#713608; background:#ffe2c6; border-color:#df8b43; }
+.risk-level.risk-critical { color:#fff; background:#982525; border-color:#6f1818; }
+.risk-level.risk-unknown { color:#3f4b57; background:#e8edf1; border-color:#a8b2bc; }
 .inference { background:#edf5f9; border-radius:10px; padding:12px; }
 .judgment { display:grid; grid-template-columns:48px minmax(0,1fr); gap:14px;
 padding:20px; margin:14px 0; border:2px solid #c8953b; border-radius:14px; }
@@ -53,6 +58,13 @@ margin:10px 0; background:#fbfcfd; border-radius:8px; }
 .check.informational,.check.not_applicable { border-color:var(--gray); background:#f5f6f7; }
 .check h3,.check p { margin:.3rem 0; }
 .system-note { color:var(--blue); font-weight:700; }
+.system-anomaly-notice { margin:14px 0 0; padding:12px 14px;
+border:1px solid #8abbd3; border-left:5px solid var(--blue);
+border-radius:9px; color:#17445d; background:#edf7fb; }
+.system-anomaly-notice p { margin:.25rem 0; }
+.system-anomaly-summary { margin:.5rem 0 0; padding:0; border:0;
+background:transparent; }
+.system-anomaly-summary summary { color:#17445d; }
 summary { cursor:pointer; font-weight:800; color:var(--navy); }
 .requirements { list-style:none; padding:0; margin:16px 0 0; display:grid; gap:10px; }
 .requirement { display:grid; grid-template-columns:34px minmax(0,1fr); gap:8px;
@@ -89,6 +101,7 @@ color:#e8eef4; border-radius:10px; white-space:pre-wrap; overflow-wrap:anywhere;
 <p class="owner-line"><strong>当前责任方：</strong>维护者侧检查人员</p>
 <ul><li>检查：独立维护者检查</li><li>检查：已知限制</li><li>检查：项目规则影响说明</li><li>检查：修改原因</li></ul>
 <p class="acceptance-boundary">检查完成不等于贡献已被接受；最终决定仍由有权人类维护者作出。</p>
+
 </section>
 <section id="judgments"><h2>现在需要你判断的事项（4 项）</h2>
 <article class="judgment">
@@ -157,7 +170,7 @@ color:#e8eef4; border-radius:10px; white-space:pre-wrap; overflow-wrap:anywhere;
 <h4>影响范围</h4><ul><li>AGM 治理与执行支持</li></ul>
 </article>
 <article class="summary-card"><h3>风险判断</h3>
-<p class="risk-level">综合风险：关键</p>
+<p class="risk-level risk-critical">综合风险：关键</p>
 <h4>为什么</h4><ul><li>.agm/manifest.yml 触发了“项目治理规则”风险范围。</li><li>src/agm/vnext/risk.py 触发了“治理执行逻辑”风险范围。</li></ul>
 <h4>风险联动</h4><ul><li>治理规则与治理执行逻辑同时变化，形成自修改联动，需要职责分离的独立检查。</li></ul>
 </article>
