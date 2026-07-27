@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from collections.abc import Mapping
 from functools import wraps
 from pathlib import Path
 from typing import Any, Callable
@@ -1270,6 +1271,40 @@ class GovernanceService:
             self.storage.read_transitions(case_id),
             ActorContext(actor=actor, role=role),
             migration_diagnostic=check_migration(case, self.config),
+        )
+
+    def review_brief(
+        self,
+        case_id: str,
+        *,
+        actor: str,
+        role: str,
+        contribution: Any = None,
+    ):
+        """Compile a read-only human-work brief from stored governance facts."""
+
+        from .briefing import compile_review_brief
+        from .guidance import ActorContext
+
+        case = self.storage.load_case(case_id)
+        context = (
+            dict(contribution)
+            if isinstance(contribution, Mapping)
+            else {}
+        )
+        context.update(
+            {
+                "transitions": self.storage.read_transitions(case_id),
+                "migration_diagnostic": check_migration(
+                    case, self.config
+                ),
+            }
+        )
+        return compile_review_brief(
+            governance_case=case,
+            policy_snapshot=self.config,
+            contribution=context,
+            actor_context=ActorContext(actor=actor, role=role),
         )
 
     def preview_reviewer_action(

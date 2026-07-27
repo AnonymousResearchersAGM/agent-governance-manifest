@@ -8,6 +8,12 @@ import sys
 from pathlib import Path
 from typing import Any
 
+from .briefing import (
+    render_review_brief_html,
+    render_review_brief_json,
+    render_review_brief_markdown,
+)
+from .briefing.server import serve_review_brief
 from .config import load_vnext_config
 from .guidance import ActorContext
 from .guidance.presenters import (
@@ -218,6 +224,29 @@ def build_parser() -> argparse.ArgumentParser:
         ],
         help="Role used for guidance; every mutation is re-authorized.",
     )
+    brief = maintainer_commands.add_parser(
+        "brief",
+        help="Compile the read-only human-work review briefing.",
+    )
+    add_case_argument(brief)
+    brief.add_argument("--serve", action="store_true")
+    brief.add_argument("--host", default="127.0.0.1")
+    brief.add_argument("--port", type=int, default=8767)
+    brief.add_argument(
+        "--actor",
+        default="maintainer-reviewer",
+        help="Human actor identifier shown in the briefing context.",
+    )
+    brief.add_argument(
+        "--role",
+        default="maintainer",
+        choices=[
+            "maintainer_verifier",
+            "policy_steward",
+            "maintainer",
+        ],
+        help="Read-only maintainer-side role used for briefing context.",
+    )
 
     verify = maintainer_commands.add_parser(
         "verify", help="Record independent maintainer verification."
@@ -347,6 +376,29 @@ def report_case(
         markdown=markdown,
         html=html_report,
         guidance_json=guidance_json,
+    )
+    return {key: str(value) for key, value in paths.items()}
+
+
+def report_review_brief(
+    service: GovernanceService,
+    *,
+    case_id: str,
+    actor: str,
+    role: str,
+) -> dict[str, str]:
+    """Compile and persist Phase 1 artifacts without changing the case."""
+
+    view = service.review_brief(
+        case_id,
+        actor=actor,
+        role=role,
+    )
+    paths = service.storage.write_review_brief(
+        case_id,
+        brief_json=render_review_brief_json(view),
+        markdown=render_review_brief_markdown(view),
+        html=render_review_brief_html(view),
     )
     return {key: str(value) for key, value in paths.items()}
 
@@ -563,6 +615,23 @@ def dispatch(args: argparse.Namespace) -> int:
                     port=args.port,
                     actor=args.actor,
                     role=args.role,
+                )
+        elif args.command == "brief":
+            paths = report_review_brief(
+                service,
+                case_id=args.case_id,
+                actor=args.actor,
+                role=args.role,
+            )
+            print_json(paths)
+            if args.serve:
+                serve_review_brief(
+                    service,
+                    case_id=args.case_id,
+                    actor=args.actor,
+                    role=args.role,
+                    host=args.host,
+                    port=args.port,
                 )
         elif args.command == "verify":
             print_json(
