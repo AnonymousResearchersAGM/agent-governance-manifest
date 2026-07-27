@@ -1,0 +1,18 @@
+schema_version: agm.attempted_operation_audit/v0.2-dev
+append_only: true
+items:
+- id: attempted-operation-81b69862b10e51b59ab3f6678ff68cea
+  case_id: p92-t3-system-handled
+  operation: verify_evidence
+  actor: p92-contributor-agent
+  actor_role: contributor_agent
+  attempted_at: '2026-07-27T00:00:00Z'
+  result: denied
+  reason_raw: Role contributor_agent is not authorized for action verify_evidence
+  state_before: awaiting_maintainer_verification
+  state_after: awaiting_maintainer_verification
+  state_changed: false
+  required_roles:
+  - maintainer
+  - maintainer_verifier
+  - policy_steward

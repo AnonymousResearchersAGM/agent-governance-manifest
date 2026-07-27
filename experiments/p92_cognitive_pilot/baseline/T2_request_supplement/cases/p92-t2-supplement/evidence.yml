@@ -1,0 +1,75 @@
+schema_version: agm.bound_evidence_set/v0.2-dev
+items:
+- id: evidence-ad1a7f020ec150b68a3ee752a8309d3c
+  obligation_ids:
+  - O-AGENT-SCOPE
+  affected_scope:
+  - docs/AGM_HUMAN_GUIDE.md
+  contribution_fingerprint: e1e9bef51c8f6e7031321031991c4f10af9734ac8877e322c95d25656e734b71
+  policy_fingerprint: e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564
+  evidence_type: agent_action_scope
+  value: 补交说明只写明主智能体修改了文档，没有列出系统记录所涉及的子智能体行动、命令范围或继续委派边界；当前说明无法确认实际行动是否都在负责人审阅范围内。
+  command: null
+  environment: null
+  artifact_path: null
+  artifact_hash: null
+  observed_at: '2026-07-27T00:02:00Z'
+  expires_at: null
+  source_actor: p92-contributor-agent
+  source_tool: p92-baseline-builder
+  retained_for_contribution_fingerprint: null
+  retention_reason: null
+  rejected_at: null
+  rejected_by: null
+  rejection_reason: null
+  validity_state: valid
+  invalid_reasons: []
+- id: evidence-2a0006d584795f7fa9dec703482bbb3a
+  obligation_ids:
+  - O-CHANGED-FILES
+  affected_scope:
+  - docs/AGM_HUMAN_GUIDE.md
+  contribution_fingerprint: e1e9bef51c8f6e7031321031991c4f10af9734ac8877e322c95d25656e734b71
+  policy_fingerprint: e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564
+  evidence_type: changed_files
+  value:
+  - docs/AGM_HUMAN_GUIDE.md
+  command: null
+  environment: null
+  artifact_path: null
+  artifact_hash: null
+  observed_at: '2026-07-27T00:02:00Z'
+  expires_at: null
+  source_actor: p92-contributor-agent
+  source_tool: p92-baseline-builder
+  retained_for_contribution_fingerprint: null
+  retention_reason: null
+  rejected_at: null
+  rejected_by: null
+  rejection_reason: null
+  validity_state: valid
+  invalid_reasons: []
+- id: evidence-741e4fc137af5f45ae7e24613dc2a998
+  obligation_ids:
+  - O-SUMMARY
+  affected_scope:
+  - docs/AGM_HUMAN_GUIDE.md
+  contribution_fingerprint: e1e9bef51c8f6e7031321031991c4f10af9734ac8877e322c95d25656e734b71
+  policy_fingerprint: e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564
+  evidence_type: contribution_summary
+  value: 更新当前贡献并补充对应说明。
+  command: null
+  environment: null
+  artifact_path: null
+  artifact_hash: null
+  observed_at: '2026-07-27T00:02:00Z'
+  expires_at: null
+  source_actor: p92-contributor-agent
+  source_tool: p92-baseline-builder
+  retained_for_contribution_fingerprint: null
+  retention_reason: null
+  rejected_at: null
+  rejected_by: null
+  rejection_reason: null
+  validity_state: valid
+  invalid_reasons: []

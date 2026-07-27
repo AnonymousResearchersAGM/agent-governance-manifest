@@ -1,0 +1,159 @@
+id: p92-t3-system-handled
+mode: declared_agent_mediated
+mode_reason: Structured AGM preparation was explicitly declared or requested; no claim
+  about contributor identity is inferred.
+state: awaiting_maintainer_verification
+created_at: '2026-07-27T00:00:00Z'
+updated_at: '2026-07-27T00:00:00Z'
+base_commit: cb1d741dac841a18dce3de53141ff66b1a57649b
+changed_files:
+- docs/AGM_HUMAN_GUIDE.md
+change_tags: []
+semantic_targets: []
+autonomy_profile: human_direct
+assurance_profile: standard
+contribution_fingerprint: f5b156bc8938e049be0ee8703c4d73e7bfe9f520c8b97a265e89f98ac530e361
+policy_snapshot:
+  id: policy-b12fdd885dec59c9a0d3541b8e5a4ada
+  schema_version: agm.policy_snapshot/v0.2-dev
+  manifest_version: agm.manifest/v0.2-dev
+  base_commit: cb1d741dac841a18dce3de53141ff66b1a57649b
+  policy_fingerprint: e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564
+  resolved_at: '2026-07-27T00:00:00Z'
+  source_paths:
+  - .agm/manifest.yml
+  - .agm/agents/entrypoints.yml
+  - .agm/profiles/assurance_profiles.yml
+  - .agm/profiles/autonomy_profiles.yml
+  - .agm/interfaces/contributor_panel.yml
+  - .agm/policies/evidence_profiles.yml
+  - .agm/interfaces/governance_report.yml
+  - .agm/policies/interaction_rules.yml
+  - .agm/interfaces/maintainer_panel.yml
+  - .agm/interfaces/messages.yml
+  - .agm/roles/permissions.yml
+  - .agm/policies/risk_rules.yml
+  - .agm/roles/roles.yml
+  - .agm/workflows/state_machine.yml
+overall_risk_level: low
+matched_rules:
+- id: match-documentation-low
+  rule_id: documentation-low
+  zone: documentation
+  risk_level: low
+  affected_paths:
+  - docs/AGM_HUMAN_GUIDE.md
+  selector_reasons:
+  - 'path selectors matched: docs/AGM_HUMAN_GUIDE.md'
+  obligation_ids:
+  - O-SUMMARY
+  - O-CHANGED-FILES
+  case_required: false
+  source: risk_rule
+  obligation_overrides: {}
+obligations:
+- id: obl-o-changed-files
+  obligation_id: O-CHANGED-FILES
+  source_rule_ids:
+  - documentation-low
+  type: evidence
+  severity: low
+  blocking: true
+  verifier_roles:
+  - maintainer
+  - maintainer_verifier
+  evidence_type: changed_files
+  description: Identify the files and scopes covered by the contribution.
+  affected_scope:
+  - docs/AGM_HUMAN_GUIDE.md
+  status: satisfied
+  interaction_ids: []
+- id: obl-o-summary
+  obligation_id: O-SUMMARY
+  source_rule_ids:
+  - documentation-low
+  type: evidence
+  severity: low
+  blocking: true
+  verifier_roles:
+  - maintainer
+  - maintainer_verifier
+  evidence_type: contribution_summary
+  description: Provide a concise factual contribution summary.
+  affected_scope:
+  - docs/AGM_HUMAN_GUIDE.md
+  status: satisfied
+  interaction_ids: []
+evidence:
+- id: evidence-4e5cb5852be75688bdb92581105dbe89
+  obligation_ids:
+  - O-CHANGED-FILES
+  affected_scope:
+  - docs/AGM_HUMAN_GUIDE.md
+  contribution_fingerprint: f5b156bc8938e049be0ee8703c4d73e7bfe9f520c8b97a265e89f98ac530e361
+  policy_fingerprint: e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564
+  evidence_type: changed_files
+  value:
+  - docs/AGM_HUMAN_GUIDE.md
+  command: null
+  environment: null
+  artifact_path: null
+  artifact_hash: null
+  observed_at: '2026-07-27T00:02:00Z'
+  expires_at: null
+  source_actor: p92-contributor-agent
+  source_tool: p92-baseline-builder
+  retained_for_contribution_fingerprint: null
+  retention_reason: null
+  rejected_at: null
+  rejected_by: null
+  rejection_reason: null
+  validity_state: valid
+  invalid_reasons: []
+- id: evidence-19dffd3d08765c00a45b816c0310849e
+  obligation_ids:
+  - O-SUMMARY
+  affected_scope:
+  - docs/AGM_HUMAN_GUIDE.md
+  contribution_fingerprint: f5b156bc8938e049be0ee8703c4d73e7bfe9f520c8b97a265e89f98ac530e361
+  policy_fingerprint: e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564
+  evidence_type: contribution_summary
+  value: 更新当前贡献并补充对应说明。
+  command: null
+  environment: null
+  artifact_path: null
+  artifact_hash: null
+  observed_at: '2026-07-27T00:02:00Z'
+  expires_at: null
+  source_actor: p92-contributor-agent
+  source_tool: p92-baseline-builder
+  retained_for_contribution_fingerprint: null
+  retention_reason: null
+  rejected_at: null
+  rejected_by: null
+  rejection_reason: null
+  validity_state: valid
+  invalid_reasons: []
+attestations: []
+findings: []
+repair_requests: []
+attempted_operations:
+- id: attempted-operation-81b69862b10e51b59ab3f6678ff68cea
+  case_id: p92-t3-system-handled
+  operation: verify_evidence
+  actor: p92-contributor-agent
+  actor_role: contributor_agent
+  attempted_at: '2026-07-27T00:00:00Z'
+  result: denied
+  reason_raw: Role contributor_agent is not authorized for action verify_evidence
+  state_before: awaiting_maintainer_verification
+  state_after: awaiting_maintainer_verification
+  state_changed: false
+  required_roles:
+  - maintainer
+  - maintainer_verifier
+  - policy_steward
+maintainer_verifications: []
+final_decision: null
+closure_receipt: null
+schema_version: agm.governance_case/v0.2-dev

@@ -1,0 +1,51 @@
+schema_version: agm.bound_evidence_set/v0.2-dev
+items:
+- id: evidence-4e5cb5852be75688bdb92581105dbe89
+  obligation_ids:
+  - O-CHANGED-FILES
+  affected_scope:
+  - docs/AGM_HUMAN_GUIDE.md
+  contribution_fingerprint: f5b156bc8938e049be0ee8703c4d73e7bfe9f520c8b97a265e89f98ac530e361
+  policy_fingerprint: e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564
+  evidence_type: changed_files
+  value:
+  - docs/AGM_HUMAN_GUIDE.md
+  command: null
+  environment: null
+  artifact_path: null
+  artifact_hash: null
+  observed_at: '2026-07-27T00:02:00Z'
+  expires_at: null
+  source_actor: p92-contributor-agent
+  source_tool: p92-baseline-builder
+  retained_for_contribution_fingerprint: null
+  retention_reason: null
+  rejected_at: null
+  rejected_by: null
+  rejection_reason: null
+  validity_state: valid
+  invalid_reasons: []
+- id: evidence-19dffd3d08765c00a45b816c0310849e
+  obligation_ids:
+  - O-SUMMARY
+  affected_scope:
+  - docs/AGM_HUMAN_GUIDE.md
+  contribution_fingerprint: f5b156bc8938e049be0ee8703c4d73e7bfe9f520c8b97a265e89f98ac530e361
+  policy_fingerprint: e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564
+  evidence_type: contribution_summary
+  value: 更新当前贡献并补充对应说明。
+  command: null
+  environment: null
+  artifact_path: null
+  artifact_hash: null
+  observed_at: '2026-07-27T00:02:00Z'
+  expires_at: null
+  source_actor: p92-contributor-agent
+  source_tool: p92-baseline-builder
+  retained_for_contribution_fingerprint: null
+  retention_reason: null
+  rejected_at: null
+  rejected_by: null
+  rejection_reason: null
+  validity_state: valid
+  invalid_reasons: []

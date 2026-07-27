@@ -1,0 +1,45 @@
+schema_version: agm.repair_request_set/v0.2-dev
+items:
+- id: repair-2e8d6e6377cf549d896f9390a0dc01a7
+  finding_ids:
+  - finding-9b01769332005c5ea9345d7516ed4bb3
+  responsible_role: contributor
+  affected_obligation_ids:
+  - O-AGENT-SCOPE
+  requested_correction: 仅重新检查当前指定说明。
+  revalidation_required:
+  - O-AGENT-SCOPE
+  requested_by: p92-maintainer
+  requested_at: '2026-07-27T00:00:00Z'
+  status: resubmitted
+  attempts:
+  - id: attempt-4d5d0e6ce9be5964adcf049346050e39
+    actor: p92-contributor-agent
+    timestamp: '2026-07-27T00:00:00Z'
+    summary: 贡献侧补交当前指定说明，其他材料未改变。
+    affected_obligation_ids:
+    - O-AGENT-SCOPE
+    evidence_ids: []
+    change_assessment:
+      change_classification: no_material_change
+      change_reason: 补交记录不改变贡献版本；仅重新提交当前说明供复核。
+      previous_contribution_fingerprint: e1e9bef51c8f6e7031321031991c4f10af9734ac8877e322c95d25656e734b71
+      new_contribution_fingerprint: e1e9bef51c8f6e7031321031991c4f10af9734ac8877e322c95d25656e734b71
+      stale_evidence_ids: []
+      retained_evidence_ids:
+      - evidence-2a0006d584795f7fa9dec703482bbb3a
+      - evidence-741e4fc137af5f45ae7e24613dc2a998
+      invalidated_attestation_ids: []
+      required_revalidation_scope:
+      - O-AGENT-SCOPE
+    change_classification: no_material_change
+    change_reason: 补交记录不改变贡献版本；仅重新提交当前说明供复核。
+    previous_contribution_fingerprint: e1e9bef51c8f6e7031321031991c4f10af9734ac8877e322c95d25656e734b71
+    new_contribution_fingerprint: e1e9bef51c8f6e7031321031991c4f10af9734ac8877e322c95d25656e734b71
+    stale_evidence_ids: []
+    retained_evidence_ids:
+    - evidence-2a0006d584795f7fa9dec703482bbb3a
+    - evidence-741e4fc137af5f45ae7e24613dc2a998
+    invalidated_attestation_ids: []
+    required_revalidation_scope:
+    - O-AGENT-SCOPE

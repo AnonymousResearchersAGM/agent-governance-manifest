@@ -1,0 +1,204 @@
+schema_version: agm.bound_evidence_set/v0.2-dev
+items:
+- id: evidence-b79137dc669f53d8b3d0fce5114b8e77
+  obligation_ids:
+  - O-AGENT-SCOPE
+  affected_scope:
+  - demo_app/auth.py
+  - demo_app/config.py
+  contribution_fingerprint: 2a72281500e135c094d72e5fc9b5c7367f0afd7e7c48576977d6e9e696ac6634
+  policy_fingerprint: e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564
+  evidence_type: agent_action_scope
+  value: 主智能体在当前任务范围内修改文件；没有未披露的继续委派。
+  command: null
+  environment: null
+  artifact_path: null
+  artifact_hash: null
+  observed_at: '2026-07-27T00:02:00Z'
+  expires_at: null
+  source_actor: p92-contributor-agent
+  source_tool: p92-baseline-builder
+  retained_for_contribution_fingerprint: null
+  retention_reason: null
+  rejected_at: null
+  rejected_by: null
+  rejection_reason: null
+  validity_state: valid
+  invalid_reasons: []
+- id: evidence-c2f8f00ac1d050e99c7d9f64fa2f0e52
+  obligation_ids:
+  - O-ARTIFACT
+  affected_scope:
+  - demo_app/auth.py
+  - demo_app/config.py
+  contribution_fingerprint: 2a72281500e135c094d72e5fc9b5c7367f0afd7e7c48576977d6e9e696ac6634
+  policy_fingerprint: e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564
+  evidence_type: artifact
+  value: 冻结仓库中的回归依赖清单可供复核。
+  command: null
+  environment: null
+  artifact_path: requirements.txt
+  artifact_hash: 35bbab988fca48c9bf339ab5ffe498589e1aa4949dff12828dc6b0bc4929938a
+  observed_at: '2026-07-27T00:02:00Z'
+  expires_at: null
+  source_actor: p92-contributor-agent
+  source_tool: p92-baseline-builder
+  retained_for_contribution_fingerprint: null
+  retention_reason: null
+  rejected_at: null
+  rejected_by: null
+  rejection_reason: null
+  validity_state: valid
+  invalid_reasons: []
+- id: evidence-6209c8651b5a51b6b90c3af1e0a1aec2
+  obligation_ids:
+  - O-AUTH-IMPACT
+  affected_scope:
+  - demo_app/auth.py
+  - demo_app/config.py
+  contribution_fingerprint: 2a72281500e135c094d72e5fc9b5c7367f0afd7e7c48576977d6e9e696ac6634
+  policy_fingerprint: e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564
+  evidence_type: security_auth_impact
+  value: 贡献者声明此次令牌撤销改动不会影响权限边界。补交说明同时记录：关键认证回归测试失败，权限撤销后旧令牌仍可访问受限接口；当前没有证据支持“权限边界不受影响”的声明。
+  command: null
+  environment: null
+  artifact_path: null
+  artifact_hash: null
+  observed_at: '2026-07-27T00:02:00Z'
+  expires_at: null
+  source_actor: p92-contributor-agent
+  source_tool: p92-baseline-builder
+  retained_for_contribution_fingerprint: null
+  retention_reason: null
+  rejected_at: null
+  rejected_by: null
+  rejection_reason: null
+  validity_state: valid
+  invalid_reasons: []
+- id: evidence-8e68b932cd4153dea82dc7eb39a7672b
+  obligation_ids:
+  - O-CHANGED-FILES
+  affected_scope:
+  - demo_app/auth.py
+  - demo_app/config.py
+  contribution_fingerprint: 2a72281500e135c094d72e5fc9b5c7367f0afd7e7c48576977d6e9e696ac6634
+  policy_fingerprint: e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564
+  evidence_type: changed_files
+  value:
+  - demo_app/auth.py
+  - demo_app/config.py
+  command: null
+  environment: null
+  artifact_path: null
+  artifact_hash: null
+  observed_at: '2026-07-27T00:02:00Z'
+  expires_at: null
+  source_actor: p92-contributor-agent
+  source_tool: p92-baseline-builder
+  retained_for_contribution_fingerprint: null
+  retention_reason: null
+  rejected_at: null
+  rejected_by: null
+  rejection_reason: null
+  validity_state: valid
+  invalid_reasons: []
+- id: evidence-ff548795d93959458df9455b262bab49
+  obligation_ids:
+  - O-LIMITATIONS
+  affected_scope:
+  - demo_app/auth.py
+  - demo_app/config.py
+  contribution_fingerprint: 2a72281500e135c094d72e5fc9b5c7367f0afd7e7c48576977d6e9e696ac6634
+  policy_fingerprint: e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564
+  evidence_type: known_limitations
+  value: 这是本地研究原型，未发现其他已知限制。
+  command: null
+  environment: null
+  artifact_path: null
+  artifact_hash: null
+  observed_at: '2026-07-27T00:02:00Z'
+  expires_at: null
+  source_actor: p92-contributor-agent
+  source_tool: p92-baseline-builder
+  retained_for_contribution_fingerprint: null
+  retention_reason: null
+  rejected_at: null
+  rejected_by: null
+  rejection_reason: null
+  validity_state: valid
+  invalid_reasons: []
+- id: evidence-b65ec9d4ff105e74bd0f6c14ba092dbd
+  obligation_ids:
+  - O-RATIONALE
+  affected_scope:
+  - demo_app/auth.py
+  - demo_app/config.py
+  contribution_fingerprint: 2a72281500e135c094d72e5fc9b5c7367f0afd7e7c48576977d6e9e696ac6634
+  policy_fingerprint: e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564
+  evidence_type: rationale
+  value: 该修改用于完成已说明的项目目标。
+  command: null
+  environment: null
+  artifact_path: null
+  artifact_hash: null
+  observed_at: '2026-07-27T00:02:00Z'
+  expires_at: null
+  source_actor: p92-contributor-agent
+  source_tool: p92-baseline-builder
+  retained_for_contribution_fingerprint: null
+  retention_reason: null
+  rejected_at: null
+  rejected_by: null
+  rejection_reason: null
+  validity_state: valid
+  invalid_reasons: []
+- id: evidence-413c4a84def95e7a80bb45997fd3732f
+  obligation_ids:
+  - O-SUMMARY
+  affected_scope:
+  - demo_app/auth.py
+  - demo_app/config.py
+  contribution_fingerprint: 2a72281500e135c094d72e5fc9b5c7367f0afd7e7c48576977d6e9e696ac6634
+  policy_fingerprint: e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564
+  evidence_type: contribution_summary
+  value: 更新当前贡献并补充对应说明。
+  command: null
+  environment: null
+  artifact_path: null
+  artifact_hash: null
+  observed_at: '2026-07-27T00:02:00Z'
+  expires_at: null
+  source_actor: p92-contributor-agent
+  source_tool: p92-baseline-builder
+  retained_for_contribution_fingerprint: null
+  retention_reason: null
+  rejected_at: null
+  rejected_by: null
+  rejection_reason: null
+  validity_state: valid
+  invalid_reasons: []
+- id: evidence-404ae44d245652a8afeb694ebbedd448
+  obligation_ids:
+  - O-TEST-COMMAND
+  affected_scope:
+  - demo_app/auth.py
+  - demo_app/config.py
+  contribution_fingerprint: 2a72281500e135c094d72e5fc9b5c7367f0afd7e7c48576977d6e9e696ac6634
+  policy_fingerprint: e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564
+  evidence_type: test_command
+  value: python -m pytest -q；完整回归通过。
+  command: python -m pytest -q
+  environment: Python / frozen P92 artifact
+  artifact_path: null
+  artifact_hash: null
+  observed_at: '2026-07-27T00:02:00Z'
+  expires_at: null
+  source_actor: p92-contributor-agent
+  source_tool: p92-baseline-builder
+  retained_for_contribution_fingerprint: null
+  retention_reason: null
+  rejected_at: null
+  rejected_by: null
+  rejection_reason: null
+  validity_state: valid
+  invalid_reasons: []

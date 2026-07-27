@@ -1,0 +1,579 @@
+id: p92-t4-material-risk
+mode: policy_required
+mode_reason: Project policy requires a Governance Case for at least one matched change
+  rule; this requirement is based on the change, not inferred authorship.
+state: awaiting_maintainer_verification
+created_at: '2026-07-27T00:00:00Z'
+updated_at: '2026-07-27T00:00:00Z'
+base_commit: cb1d741dac841a18dce3de53141ff66b1a57649b
+changed_files:
+- demo_app/auth.py
+- demo_app/config.py
+change_tags: []
+semantic_targets:
+- authentication
+- authorization
+autonomy_profile: supervised_agent
+assurance_profile: standard
+contribution_fingerprint: 2a72281500e135c094d72e5fc9b5c7367f0afd7e7c48576977d6e9e696ac6634
+policy_snapshot:
+  id: policy-381b7f60c1c95ee093f960faa53a493f
+  schema_version: agm.policy_snapshot/v0.2-dev
+  manifest_version: agm.manifest/v0.2-dev
+  base_commit: cb1d741dac841a18dce3de53141ff66b1a57649b
+  policy_fingerprint: e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564
+  resolved_at: '2026-07-27T00:00:00Z'
+  source_paths:
+  - .agm/manifest.yml
+  - .agm/agents/entrypoints.yml
+  - .agm/profiles/assurance_profiles.yml
+  - .agm/profiles/autonomy_profiles.yml
+  - .agm/interfaces/contributor_panel.yml
+  - .agm/policies/evidence_profiles.yml
+  - .agm/interfaces/governance_report.yml
+  - .agm/policies/interaction_rules.yml
+  - .agm/interfaces/maintainer_panel.yml
+  - .agm/interfaces/messages.yml
+  - .agm/roles/permissions.yml
+  - .agm/policies/risk_rules.yml
+  - .agm/roles/roles.yml
+  - .agm/workflows/state_machine.yml
+overall_risk_level: critical
+matched_rules:
+- id: match-configuration-high
+  rule_id: configuration-high
+  zone: configuration
+  risk_level: high
+  affected_paths:
+  - demo_app/config.py
+  selector_reasons:
+  - 'path selectors matched: demo_app/config.py'
+  obligation_ids:
+  - O-SUMMARY
+  - O-CHANGED-FILES
+  - O-RATIONALE
+  - O-TEST-COMMAND
+  - O-ARTIFACT
+  - O-LIMITATIONS
+  case_required: false
+  source: risk_rule
+  obligation_overrides: {}
+- id: match-authentication-critical
+  rule_id: authentication-critical
+  zone: authentication
+  risk_level: critical
+  affected_paths:
+  - demo_app/auth.py
+  - demo_app/config.py
+  selector_reasons:
+  - 'path selectors matched: demo_app/auth.py'
+  - 'semantic targets matched: authentication, authorization'
+  obligation_ids:
+  - O-SUMMARY
+  - O-CHANGED-FILES
+  - O-RATIONALE
+  - O-AUTH-IMPACT
+  - O-TEST-COMMAND
+  - O-ARTIFACT
+  - O-LIMITATIONS
+  - O-HUMAN-ATTEST
+  case_required: true
+  source: risk_rule
+  obligation_overrides: {}
+obligations:
+- id: obl-o-agent-scope
+  obligation_id: O-AGENT-SCOPE
+  source_rule_ids:
+  - autonomy:supervised_agent
+  type: evidence
+  severity: medium
+  blocking: true
+  verifier_roles:
+  - maintainer
+  - maintainer_verifier
+  evidence_type: agent_action_scope
+  description: Record the declared action, permissions, supervision, and delegation
+    scope.
+  affected_scope: []
+  status: satisfied
+  interaction_ids: []
+- id: obl-o-artifact
+  obligation_id: O-ARTIFACT
+  source_rule_ids:
+  - authentication-critical
+  - configuration-high
+  type: evidence
+  severity: high
+  blocking: true
+  verifier_roles:
+  - maintainer
+  - maintainer_verifier
+  evidence_type: artifact
+  description: Provide a locally checkable artifact or test output.
+  affected_scope:
+  - demo_app/auth.py
+  - demo_app/config.py
+  status: satisfied
+  interaction_ids: []
+- id: obl-o-auth-impact
+  obligation_id: O-AUTH-IMPACT
+  source_rule_ids:
+  - authentication-critical
+  type: evidence
+  severity: critical
+  blocking: true
+  verifier_roles:
+  - maintainer
+  - maintainer_verifier
+  evidence_type: security_auth_impact
+  description: Describe security, authentication, and authorization impact.
+  affected_scope:
+  - demo_app/auth.py
+  - demo_app/config.py
+  status: satisfied
+  interaction_ids: []
+- id: obl-o-changed-files
+  obligation_id: O-CHANGED-FILES
+  source_rule_ids:
+  - authentication-critical
+  - configuration-high
+  type: evidence
+  severity: low
+  blocking: true
+  verifier_roles:
+  - maintainer
+  - maintainer_verifier
+  evidence_type: changed_files
+  description: Identify the files and scopes covered by the contribution.
+  affected_scope:
+  - demo_app/auth.py
+  - demo_app/config.py
+  status: satisfied
+  interaction_ids: []
+- id: obl-o-human-attest
+  obligation_id: O-HUMAN-ATTEST
+  source_rule_ids:
+  - authentication-critical
+  type: human_attestation
+  severity: critical
+  blocking: true
+  verifier_roles:
+  - accountable_human
+  - maintainer
+  evidence_type: human_attestation
+  description: Obtain explicit accountable-human attestation bound to the case.
+  affected_scope:
+  - demo_app/auth.py
+  - demo_app/config.py
+  status: satisfied
+  interaction_ids: []
+- id: obl-o-independent-review
+  obligation_id: O-INDEPENDENT-REVIEW
+  source_rule_ids:
+  - authentication-configuration
+  type: maintainer_verification
+  severity: critical
+  blocking: true
+  verifier_roles:
+  - maintainer
+  evidence_type: independent_review
+  description: Require independent maintainer verification with separation of duty.
+  affected_scope:
+  - demo_app/auth.py
+  - demo_app/config.py
+  status: verified
+  interaction_ids:
+  - authentication-configuration
+- id: obl-o-limitations
+  obligation_id: O-LIMITATIONS
+  source_rule_ids:
+  - authentication-critical
+  - configuration-high
+  type: evidence
+  severity: high
+  blocking: true
+  verifier_roles:
+  - maintainer
+  - maintainer_verifier
+  evidence_type: known_limitations
+  description: State known limitations or explicitly state none.
+  affected_scope:
+  - demo_app/auth.py
+  - demo_app/config.py
+  status: satisfied
+  interaction_ids: []
+- id: obl-o-rationale
+  obligation_id: O-RATIONALE
+  source_rule_ids:
+  - authentication-critical
+  - configuration-high
+  type: evidence
+  severity: medium
+  blocking: true
+  verifier_roles:
+  - maintainer
+  - maintainer_verifier
+  evidence_type: rationale
+  description: Explain why the change is needed without disclosing private reasoning.
+  affected_scope:
+  - demo_app/auth.py
+  - demo_app/config.py
+  status: satisfied
+  interaction_ids: []
+- id: obl-o-summary
+  obligation_id: O-SUMMARY
+  source_rule_ids:
+  - authentication-critical
+  - configuration-high
+  type: evidence
+  severity: low
+  blocking: true
+  verifier_roles:
+  - maintainer
+  - maintainer_verifier
+  evidence_type: contribution_summary
+  description: Provide a concise factual contribution summary.
+  affected_scope:
+  - demo_app/auth.py
+  - demo_app/config.py
+  status: satisfied
+  interaction_ids: []
+- id: obl-o-test-command
+  obligation_id: O-TEST-COMMAND
+  source_rule_ids:
+  - authentication-critical
+  - configuration-high
+  type: evidence
+  severity: high
+  blocking: true
+  verifier_roles:
+  - maintainer
+  - maintainer_verifier
+  evidence_type: test_command
+  description: Provide a concrete test command, environment, and outcome.
+  affected_scope:
+  - demo_app/auth.py
+  - demo_app/config.py
+  status: satisfied
+  interaction_ids: []
+evidence:
+- id: evidence-b79137dc669f53d8b3d0fce5114b8e77
+  obligation_ids:
+  - O-AGENT-SCOPE
+  affected_scope:
+  - demo_app/auth.py
+  - demo_app/config.py
+  contribution_fingerprint: 2a72281500e135c094d72e5fc9b5c7367f0afd7e7c48576977d6e9e696ac6634
+  policy_fingerprint: e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564
+  evidence_type: agent_action_scope
+  value: 主智能体在当前任务范围内修改文件；没有未披露的继续委派。
+  command: null
+  environment: null
+  artifact_path: null
+  artifact_hash: null
+  observed_at: '2026-07-27T00:02:00Z'
+  expires_at: null
+  source_actor: p92-contributor-agent
+  source_tool: p92-baseline-builder
+  retained_for_contribution_fingerprint: null
+  retention_reason: null
+  rejected_at: null
+  rejected_by: null
+  rejection_reason: null
+  validity_state: valid
+  invalid_reasons: []
+- id: evidence-c2f8f00ac1d050e99c7d9f64fa2f0e52
+  obligation_ids:
+  - O-ARTIFACT
+  affected_scope:
+  - demo_app/auth.py
+  - demo_app/config.py
+  contribution_fingerprint: 2a72281500e135c094d72e5fc9b5c7367f0afd7e7c48576977d6e9e696ac6634
+  policy_fingerprint: e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564
+  evidence_type: artifact
+  value: 冻结仓库中的回归依赖清单可供复核。
+  command: null
+  environment: null
+  artifact_path: requirements.txt
+  artifact_hash: 35bbab988fca48c9bf339ab5ffe498589e1aa4949dff12828dc6b0bc4929938a
+  observed_at: '2026-07-27T00:02:00Z'
+  expires_at: null
+  source_actor: p92-contributor-agent
+  source_tool: p92-baseline-builder
+  retained_for_contribution_fingerprint: null
+  retention_reason: null
+  rejected_at: null
+  rejected_by: null
+  rejection_reason: null
+  validity_state: valid
+  invalid_reasons: []
+- id: evidence-6209c8651b5a51b6b90c3af1e0a1aec2
+  obligation_ids:
+  - O-AUTH-IMPACT
+  affected_scope:
+  - demo_app/auth.py
+  - demo_app/config.py
+  contribution_fingerprint: 2a72281500e135c094d72e5fc9b5c7367f0afd7e7c48576977d6e9e696ac6634
+  policy_fingerprint: e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564
+  evidence_type: security_auth_impact
+  value: 贡献者声明此次令牌撤销改动不会影响权限边界。补交说明同时记录：关键认证回归测试失败，权限撤销后旧令牌仍可访问受限接口；当前没有证据支持“权限边界不受影响”的声明。
+  command: null
+  environment: null
+  artifact_path: null
+  artifact_hash: null
+  observed_at: '2026-07-27T00:02:00Z'
+  expires_at: null
+  source_actor: p92-contributor-agent
+  source_tool: p92-baseline-builder
+  retained_for_contribution_fingerprint: null
+  retention_reason: null
+  rejected_at: null
+  rejected_by: null
+  rejection_reason: null
+  validity_state: valid
+  invalid_reasons: []
+- id: evidence-8e68b932cd4153dea82dc7eb39a7672b
+  obligation_ids:
+  - O-CHANGED-FILES
+  affected_scope:
+  - demo_app/auth.py
+  - demo_app/config.py
+  contribution_fingerprint: 2a72281500e135c094d72e5fc9b5c7367f0afd7e7c48576977d6e9e696ac6634
+  policy_fingerprint: e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564
+  evidence_type: changed_files
+  value:
+  - demo_app/auth.py
+  - demo_app/config.py
+  command: null
+  environment: null
+  artifact_path: null
+  artifact_hash: null
+  observed_at: '2026-07-27T00:02:00Z'
+  expires_at: null
+  source_actor: p92-contributor-agent
+  source_tool: p92-baseline-builder
+  retained_for_contribution_fingerprint: null
+  retention_reason: null
+  rejected_at: null
+  rejected_by: null
+  rejection_reason: null
+  validity_state: valid
+  invalid_reasons: []
+- id: evidence-ff548795d93959458df9455b262bab49
+  obligation_ids:
+  - O-LIMITATIONS
+  affected_scope:
+  - demo_app/auth.py
+  - demo_app/config.py
+  contribution_fingerprint: 2a72281500e135c094d72e5fc9b5c7367f0afd7e7c48576977d6e9e696ac6634
+  policy_fingerprint: e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564
+  evidence_type: known_limitations
+  value: 这是本地研究原型，未发现其他已知限制。
+  command: null
+  environment: null
+  artifact_path: null
+  artifact_hash: null
+  observed_at: '2026-07-27T00:02:00Z'
+  expires_at: null
+  source_actor: p92-contributor-agent
+  source_tool: p92-baseline-builder
+  retained_for_contribution_fingerprint: null
+  retention_reason: null
+  rejected_at: null
+  rejected_by: null
+  rejection_reason: null
+  validity_state: valid
+  invalid_reasons: []
+- id: evidence-b65ec9d4ff105e74bd0f6c14ba092dbd
+  obligation_ids:
+  - O-RATIONALE
+  affected_scope:
+  - demo_app/auth.py
+  - demo_app/config.py
+  contribution_fingerprint: 2a72281500e135c094d72e5fc9b5c7367f0afd7e7c48576977d6e9e696ac6634
+  policy_fingerprint: e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564
+  evidence_type: rationale
+  value: 该修改用于完成已说明的项目目标。
+  command: null
+  environment: null
+  artifact_path: null
+  artifact_hash: null
+  observed_at: '2026-07-27T00:02:00Z'
+  expires_at: null
+  source_actor: p92-contributor-agent
+  source_tool: p92-baseline-builder
+  retained_for_contribution_fingerprint: null
+  retention_reason: null
+  rejected_at: null
+  rejected_by: null
+  rejection_reason: null
+  validity_state: valid
+  invalid_reasons: []
+- id: evidence-413c4a84def95e7a80bb45997fd3732f
+  obligation_ids:
+  - O-SUMMARY
+  affected_scope:
+  - demo_app/auth.py
+  - demo_app/config.py
+  contribution_fingerprint: 2a72281500e135c094d72e5fc9b5c7367f0afd7e7c48576977d6e9e696ac6634
+  policy_fingerprint: e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564
+  evidence_type: contribution_summary
+  value: 更新当前贡献并补充对应说明。
+  command: null
+  environment: null
+  artifact_path: null
+  artifact_hash: null
+  observed_at: '2026-07-27T00:02:00Z'
+  expires_at: null
+  source_actor: p92-contributor-agent
+  source_tool: p92-baseline-builder
+  retained_for_contribution_fingerprint: null
+  retention_reason: null
+  rejected_at: null
+  rejected_by: null
+  rejection_reason: null
+  validity_state: valid
+  invalid_reasons: []
+- id: evidence-404ae44d245652a8afeb694ebbedd448
+  obligation_ids:
+  - O-TEST-COMMAND
+  affected_scope:
+  - demo_app/auth.py
+  - demo_app/config.py
+  contribution_fingerprint: 2a72281500e135c094d72e5fc9b5c7367f0afd7e7c48576977d6e9e696ac6634
+  policy_fingerprint: e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564
+  evidence_type: test_command
+  value: python -m pytest -q；完整回归通过。
+  command: python -m pytest -q
+  environment: Python / frozen P92 artifact
+  artifact_path: null
+  artifact_hash: null
+  observed_at: '2026-07-27T00:02:00Z'
+  expires_at: null
+  source_actor: p92-contributor-agent
+  source_tool: p92-baseline-builder
+  retained_for_contribution_fingerprint: null
+  retention_reason: null
+  rejected_at: null
+  rejected_by: null
+  rejection_reason: null
+  validity_state: valid
+  invalid_reasons: []
+attestations:
+- id: attestation-f462f1fe71785d21b011dfc77351bc03
+  actor: p92-accountable-human
+  role: accountable_human
+  timestamp: '2026-07-27T00:05:00Z'
+  reviewed_scope:
+  - demo_app/auth.py
+  - demo_app/config.py
+  statement: 已审阅当前版本、材料集合和明确列出的范围。
+  reservations: []
+  policy_fingerprint: e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564
+  contribution_fingerprint: 2a72281500e135c094d72e5fc9b5c7367f0afd7e7c48576977d6e9e696ac6634
+  evidence_set_fingerprint: ef2f242b37a15973c1c4567fe12aa758851b3a9fc30806314ffa89813efb99da
+  retained_for_contribution_fingerprint: null
+  retention_reason: null
+  status: confirmed
+  invalidated_at: null
+  invalidation_reason: null
+findings:
+- id: finding-cc044d4e888d5f17a3c7d4ffb3f73b8d
+  code: p92_scoped_revalidation
+  severity: high
+  message: 仅重新检查当前指定说明。
+  blocking: true
+  related_object_ids: []
+  affected_obligation_ids:
+  - O-AUTH-IMPACT
+  status: open
+  created_at: '2026-07-27T00:00:00Z'
+  resolved_at: null
+  resolution: null
+repair_requests:
+- id: repair-f4ce9e5836595c81a597666290273786
+  finding_ids:
+  - finding-cc044d4e888d5f17a3c7d4ffb3f73b8d
+  responsible_role: contributor
+  affected_obligation_ids:
+  - O-AUTH-IMPACT
+  requested_correction: 仅重新检查当前指定说明。
+  revalidation_required:
+  - O-AUTH-IMPACT
+  requested_by: p92-maintainer
+  requested_at: '2026-07-27T00:00:00Z'
+  status: resubmitted
+  attempts:
+  - id: attempt-071bae18a4af5796a40a69deaea1dec2
+    actor: p92-contributor-agent
+    timestamp: '2026-07-27T00:00:00Z'
+    summary: 贡献侧补交当前指定说明，其他材料未改变。
+    affected_obligation_ids:
+    - O-AUTH-IMPACT
+    evidence_ids: []
+    change_assessment:
+      change_classification: no_material_change
+      change_reason: 补交记录不改变贡献版本；仅重新提交当前说明供复核。
+      previous_contribution_fingerprint: 2a72281500e135c094d72e5fc9b5c7367f0afd7e7c48576977d6e9e696ac6634
+      new_contribution_fingerprint: 2a72281500e135c094d72e5fc9b5c7367f0afd7e7c48576977d6e9e696ac6634
+      stale_evidence_ids: []
+      retained_evidence_ids:
+      - evidence-404ae44d245652a8afeb694ebbedd448
+      - evidence-413c4a84def95e7a80bb45997fd3732f
+      - evidence-8e68b932cd4153dea82dc7eb39a7672b
+      - evidence-b65ec9d4ff105e74bd0f6c14ba092dbd
+      - evidence-b79137dc669f53d8b3d0fce5114b8e77
+      - evidence-c2f8f00ac1d050e99c7d9f64fa2f0e52
+      - evidence-ff548795d93959458df9455b262bab49
+      invalidated_attestation_ids: []
+      required_revalidation_scope:
+      - O-AUTH-IMPACT
+    change_classification: no_material_change
+    change_reason: 补交记录不改变贡献版本；仅重新提交当前说明供复核。
+    previous_contribution_fingerprint: 2a72281500e135c094d72e5fc9b5c7367f0afd7e7c48576977d6e9e696ac6634
+    new_contribution_fingerprint: 2a72281500e135c094d72e5fc9b5c7367f0afd7e7c48576977d6e9e696ac6634
+    stale_evidence_ids: []
+    retained_evidence_ids:
+    - evidence-404ae44d245652a8afeb694ebbedd448
+    - evidence-413c4a84def95e7a80bb45997fd3732f
+    - evidence-8e68b932cd4153dea82dc7eb39a7672b
+    - evidence-b65ec9d4ff105e74bd0f6c14ba092dbd
+    - evidence-b79137dc669f53d8b3d0fce5114b8e77
+    - evidence-c2f8f00ac1d050e99c7d9f64fa2f0e52
+    - evidence-ff548795d93959458df9455b262bab49
+    invalidated_attestation_ids: []
+    required_revalidation_scope:
+    - O-AUTH-IMPACT
+attempted_operations: []
+maintainer_verifications:
+- id: verification-a327a827780353a187738fbea1a71134
+  actor: p92-maintainer
+  role: maintainer
+  timestamp: '2026-07-27T00:08:00Z'
+  obligation_ids:
+  - O-AGENT-SCOPE
+  - O-ARTIFACT
+  - O-AUTH-IMPACT
+  - O-CHANGED-FILES
+  - O-HUMAN-ATTEST
+  - O-INDEPENDENT-REVIEW
+  - O-LIMITATIONS
+  - O-RATIONALE
+  - O-SUMMARY
+  - O-TEST-COMMAND
+  evidence_ids:
+  - evidence-404ae44d245652a8afeb694ebbedd448
+  - evidence-413c4a84def95e7a80bb45997fd3732f
+  - evidence-6209c8651b5a51b6b90c3af1e0a1aec2
+  - evidence-8e68b932cd4153dea82dc7eb39a7672b
+  - evidence-b65ec9d4ff105e74bd0f6c14ba092dbd
+  - evidence-b79137dc669f53d8b3d0fce5114b8e77
+  - evidence-c2f8f00ac1d050e99c7d9f64fa2f0e52
+  - evidence-ff548795d93959458df9455b262bab49
+  outcome: verified
+  reason: P92 基线前置材料已按当前冻结原型完成检查。
+  policy_fingerprint: e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564
+  contribution_fingerprint: 2a72281500e135c094d72e5fc9b5c7367f0afd7e7c48576977d6e9e696ac6634
+final_decision: null
+closure_receipt: null
+schema_version: agm.governance_case/v0.2-dev

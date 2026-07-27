@@ -1,0 +1,18 @@
+schema_version: agm.maintainer_verification_set/v0.2-dev
+items:
+- id: verification-9d49e8f827d05517a7ca782d4fc4a192
+  actor: p92-maintainer
+  role: maintainer
+  timestamp: '2026-07-27T00:08:00Z'
+  obligation_ids:
+  - O-AGENT-SCOPE
+  - O-CHANGED-FILES
+  - O-SUMMARY
+  evidence_ids:
+  - evidence-2a0006d584795f7fa9dec703482bbb3a
+  - evidence-741e4fc137af5f45ae7e24613dc2a998
+  - evidence-ad1a7f020ec150b68a3ee752a8309d3c
+  outcome: verified
+  reason: P92 基线前置材料已按当前冻结原型完成检查。
+  policy_fingerprint: e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564
+  contribution_fingerprint: e1e9bef51c8f6e7031321031991c4f10af9734ac8877e322c95d25656e734b71

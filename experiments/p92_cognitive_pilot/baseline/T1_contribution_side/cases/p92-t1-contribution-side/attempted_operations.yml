@@ -1,0 +1,3 @@
+schema_version: agm.attempted_operation_audit/v0.2-dev
+append_only: true
+items: []
