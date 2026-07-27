@@ -27,6 +27,7 @@ from .judgment_queue import compile_human_judgment_queue
 from .models import GovernanceTechnicalDetails, ReviewBriefView
 from .next_step import compile_next_step
 from .risk_summary import compile_risk_brief
+from .work_items import compile_work_items
 
 
 def _actor(value: Any) -> ActorContext:
@@ -251,6 +252,9 @@ def compile_review_brief(
     next_step = compile_next_step(
         case, requirements, judgments, migration
     )
+    work_items = compile_work_items(
+        requirements, automatic_checks, judgments, next_step
+    )
 
     migration_dict = migration.to_dict() if migration else None
     details = GovernanceTechnicalDetails(
@@ -302,6 +306,7 @@ def compile_review_brief(
         human_judgments=judgments,
         current_next_step=next_step,
         governance_details=details,
+        work_items=work_items,
     )
     details_with_traces = GovernanceTechnicalDetails(
         **{
@@ -320,4 +325,5 @@ def compile_review_brief(
         human_judgments=judgments,
         current_next_step=next_step,
         governance_details=details_with_traces,
+        work_items=work_items,
     )

@@ -1,7 +1,7 @@
 {
   "contribution": {
-    "title": "本次贡献",
-    "plain_summary": "Implemented the scenario contribution.",
+    "title": "已完成最终决定的文档贡献",
+    "plain_summary": "本次贡献的材料准备、负责人确认和维护者检查均已完成；具有最终决定权的人类维护者已经作出接受决定。",
     "changed_files": [
       "docs/guide.md"
     ],
@@ -15,7 +15,7 @@
     "configuration_changes": [],
     "governance_changes": [],
     "agent_involvement": "治理案例未声明智能体参与",
-    "summary_source": "贡献者声明，来源：contributor-agent（通过 scenario-generator 记录）",
+    "summary_source": "贡献者声明，来源：贡献者提供的演示说明",
     "system_inferred_summary": "更新项目文档：docs/guide.md",
     "inference_limitations": "系统归纳只依据文件路径、已匹配风险区域和明确声明，不代表系统已经证明代码的真实语义或行为。",
     "contributor_claims": []
@@ -42,23 +42,39 @@
         "requirement_key": "changed-files",
         "display_title": "变更文件清单",
         "status": "system_satisfied",
-        "status_label": "系统已确认",
-        "plain_status": "材料已由具备权限的维护者完成检查。",
-        "blocking": true,
+        "status_label": "维护者已完成检查",
+        "plain_status": "具备权限的维护者已完成本项检查；检查完成不等于贡献已经被最终接受。",
+        "blocking": false,
         "trace_refs": [
           "trace:requirement:changed-files"
-        ]
+        ],
+        "semantic_states": [
+          "material_available",
+          "structure_valid",
+          "version_bound",
+          "human_verified"
+        ],
+        "owner": "system",
+        "semantic_status": "human_verified"
       },
       {
         "requirement_key": "change-summary",
         "display_title": "修改说明",
         "status": "system_satisfied",
-        "status_label": "系统已确认",
-        "plain_status": "材料已由具备权限的维护者完成检查。",
-        "blocking": true,
+        "status_label": "维护者已完成检查",
+        "plain_status": "具备权限的维护者已完成本项检查；检查完成不等于贡献已经被最终接受。",
+        "blocking": false,
         "trace_refs": [
           "trace:requirement:change-summary"
-        ]
+        ],
+        "semantic_states": [
+          "material_available",
+          "structure_valid",
+          "version_bound",
+          "human_verified"
+        ],
+        "owner": "system",
+        "semantic_status": "human_verified"
       }
     ],
     "system_satisfied": [
@@ -66,23 +82,39 @@
         "requirement_key": "changed-files",
         "display_title": "变更文件清单",
         "status": "system_satisfied",
-        "status_label": "系统已确认",
-        "plain_status": "材料已由具备权限的维护者完成检查。",
-        "blocking": true,
+        "status_label": "维护者已完成检查",
+        "plain_status": "具备权限的维护者已完成本项检查；检查完成不等于贡献已经被最终接受。",
+        "blocking": false,
         "trace_refs": [
           "trace:requirement:changed-files"
-        ]
+        ],
+        "semantic_states": [
+          "material_available",
+          "structure_valid",
+          "version_bound",
+          "human_verified"
+        ],
+        "owner": "system",
+        "semantic_status": "human_verified"
       },
       {
         "requirement_key": "change-summary",
         "display_title": "修改说明",
         "status": "system_satisfied",
-        "status_label": "系统已确认",
-        "plain_status": "材料已由具备权限的维护者完成检查。",
-        "blocking": true,
+        "status_label": "维护者已完成检查",
+        "plain_status": "具备权限的维护者已完成本项检查；检查完成不等于贡献已经被最终接受。",
+        "blocking": false,
         "trace_refs": [
           "trace:requirement:change-summary"
-        ]
+        ],
+        "semantic_states": [
+          "material_available",
+          "structure_valid",
+          "version_bound",
+          "human_verified"
+        ],
+        "owner": "system",
+        "semantic_status": "human_verified"
       }
     ],
     "provided_requires_human_judgment": [],
@@ -106,7 +138,17 @@
       "requires_human_action": false,
       "trace_refs": [
         "trace:automatic-check:material_version_binding"
-      ]
+      ],
+      "policy_required": true,
+      "blocking": false,
+      "requirement_refs": [
+        "changed-files",
+        "change-summary"
+      ],
+      "informational_only": false,
+      "owner": "system",
+      "system_handled": false,
+      "semantic_status": "system_checked"
     },
     {
       "check_type": "test_command_and_result",
@@ -118,7 +160,14 @@
       "requires_human_action": false,
       "trace_refs": [
         "trace:automatic-check:test_command_and_result"
-      ]
+      ],
+      "policy_required": false,
+      "blocking": false,
+      "requirement_refs": [],
+      "informational_only": true,
+      "owner": "system",
+      "system_handled": false,
+      "semantic_status": "not_applicable"
     },
     {
       "check_type": "test_version_binding",
@@ -130,7 +179,14 @@
       "requires_human_action": false,
       "trace_refs": [
         "trace:automatic-check:test_version_binding"
-      ]
+      ],
+      "policy_required": false,
+      "blocking": false,
+      "requirement_refs": [],
+      "informational_only": false,
+      "owner": "system",
+      "system_handled": false,
+      "semantic_status": "not_applicable"
     },
     {
       "check_type": "evidence_freshness",
@@ -144,7 +200,17 @@
       "requires_human_action": false,
       "trace_refs": [
         "trace:automatic-check:evidence_freshness"
-      ]
+      ],
+      "policy_required": true,
+      "blocking": false,
+      "requirement_refs": [
+        "changed-files",
+        "change-summary"
+      ],
+      "informational_only": false,
+      "owner": "system",
+      "system_handled": false,
+      "semantic_status": "system_checked"
     },
     {
       "check_type": "attestation_version_binding",
@@ -156,7 +222,14 @@
       "requires_human_action": false,
       "trace_refs": [
         "trace:automatic-check:attestation_version_binding"
-      ]
+      ],
+      "policy_required": false,
+      "blocking": false,
+      "requirement_refs": [],
+      "informational_only": true,
+      "owner": "system",
+      "system_handled": false,
+      "semantic_status": "not_applicable"
     },
     {
       "check_type": "changed_file_scope_match",
@@ -170,15 +243,24 @@
       "requires_human_action": false,
       "trace_refs": [
         "trace:automatic-check:changed_file_scope_match"
-      ]
+      ],
+      "policy_required": true,
+      "blocking": false,
+      "requirement_refs": [
+        "changed-files"
+      ],
+      "informational_only": false,
+      "owner": "system",
+      "system_handled": false,
+      "semantic_status": "system_checked"
     },
     {
       "check_type": "agent_involvement",
       "display_title": "是否记录了智能体参与",
-      "status": "confirmed",
+      "status": "not_applicable",
       "plain_result": "治理案例采用直接人类贡献配置，未声明智能体参与。",
       "supporting_evidence": [
-        "记录的参与配置：human_direct"
+        "系统读取了案例中记录的参与方式。"
       ],
       "limitations": [
         "AGM 只呈现治理记录和声明，不是智能体使用检测器。"
@@ -186,7 +268,14 @@
       "requires_human_action": false,
       "trace_refs": [
         "trace:automatic-check:agent_involvement"
-      ]
+      ],
+      "policy_required": false,
+      "blocking": false,
+      "requirement_refs": [],
+      "informational_only": true,
+      "owner": "system",
+      "system_handled": false,
+      "semantic_status": "informational"
     },
     {
       "check_type": "recorded_delegation",
@@ -198,7 +287,14 @@
       "requires_human_action": false,
       "trace_refs": [
         "trace:automatic-check:recorded_delegation"
-      ]
+      ],
+      "policy_required": false,
+      "blocking": false,
+      "requirement_refs": [],
+      "informational_only": true,
+      "owner": "system",
+      "system_handled": false,
+      "semantic_status": "not_applicable"
     },
     {
       "check_type": "authority_boundary",
@@ -212,7 +308,14 @@
       "requires_human_action": false,
       "trace_refs": [
         "trace:automatic-check:authority_boundary"
-      ]
+      ],
+      "policy_required": false,
+      "blocking": false,
+      "requirement_refs": [],
+      "informational_only": false,
+      "owner": "system",
+      "system_handled": false,
+      "semantic_status": "system_checked"
     },
     {
       "check_type": "structural_obligations",
@@ -226,7 +329,17 @@
       "requires_human_action": false,
       "trace_refs": [
         "trace:automatic-check:structural_obligations"
-      ]
+      ],
+      "policy_required": true,
+      "blocking": false,
+      "requirement_refs": [
+        "changed-files",
+        "change-summary"
+      ],
+      "informational_only": false,
+      "owner": "system",
+      "system_handled": false,
+      "semantic_status": "system_checked"
     }
   ],
   "contributor_accountability": {
@@ -234,7 +347,7 @@
     "agent_capabilities": [],
     "agent_actions": [],
     "delegation_detected": null,
-    "declaration_source": "当前不要求",
+    "declaration_source": "贡献侧提供的智能体行动声明",
     "declaration_status": "not_required",
     "accountable_human": null,
     "attestation_status": "当前风险路径不要求额外确认",
@@ -251,8 +364,8 @@
   "human_judgments": [],
   "current_next_step": {
     "status": "completed",
-    "display_title": "贡献已由人类维护者接受",
-    "plain_explanation": "最终决定已由获授权的人类维护者记录，并生成关闭记录。",
+    "display_title": "本次治理案例已经关闭",
+    "plain_explanation": "具有最终决定权的人类维护者已经接受本次贡献；最终决定和治理记录已经归档。",
     "responsible_party": "无待处理责任方",
     "system_will_do": [
       "保留最终决定、关闭记录和完整审计轨迹。"
@@ -260,7 +373,9 @@
     "human_should_do": [
       "无需额外 AGM 审查操作。"
     ],
-    "final_acceptance_state": "accepted"
+    "final_acceptance_state": "accepted",
+    "owner": "system",
+    "semantic_state": "accepted"
   },
   "governance_details": {
     "case_id": "human-final-closure",
@@ -399,7 +514,7 @@
         "contribution_fingerprint": "159400577f1ab6619edb85a104337a8708142766cfebb85c92d32a26511eb524",
         "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
         "evidence_type": "contribution_summary",
-        "value": "Implemented the scenario contribution.",
+        "value": "本次贡献的材料准备、负责人确认和维护者检查均已完成；具有最终决定权的人类维护者已经作出接受决定。",
         "command": null,
         "environment": null,
         "artifact_path": null,
@@ -1441,7 +1556,7 @@
             "contribution_fingerprint": "159400577f1ab6619edb85a104337a8708142766cfebb85c92d32a26511eb524",
             "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
             "evidence_type": "contribution_summary",
-            "value": "Implemented the scenario contribution.",
+            "value": "本次贡献的材料准备、负责人确认和维护者检查均已完成；具有最终决定权的人类维护者已经作出接受决定。",
             "command": null,
             "environment": null,
             "artifact_path": null,
@@ -1912,6 +2027,7 @@
       ]
     }
   },
+  "work_items": [],
   "schema_version": "agm.review_brief/v0.2-dev",
-  "authority_notice": "系统确认、维护者检查完成或具备最终决定条件，都不等于贡献已被接受；最终接受、拒绝或合并决定仍由获授权的人类维护者作出。"
+  "authority_notice": "系统完成形式与版本核对、维护者完成内容检查或具备最终决定条件，都不等于贡献已被接受；最终接受、拒绝或合并决定仍由获授权的人类维护者作出。"
 }

@@ -1,4 +1,4 @@
-name: Reviewer Guidance cross-platform reproducibility
+name: Reviewer Guidance and Review Briefing reproducibility
 
 on:
   pull_request:
@@ -33,6 +33,14 @@ jobs:
 
       - name: Check frozen cross-platform SHA-256 values
         run: python scripts/check_reviewer_guidance_demo_hashes.py
+
+      - name: Generate deterministic Review Briefing demos
+        env:
+          PYTHONPATH: src
+        run: python scripts/generate_review_briefing_demos.py
+
+      - name: Check frozen Review Briefing SHA-256 values
+        run: python scripts/check_review_briefing_demo_hashes.py
 
       - name: Run complete test suite
         run: python -m pytest

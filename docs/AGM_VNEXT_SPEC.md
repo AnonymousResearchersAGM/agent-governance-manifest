@@ -603,7 +603,7 @@ workflow nodes, record types, state, and trace references. This presentation
 split shall not alter authority enforcement, state transitions, scoped repair,
 responsibility derivation, selector validation, or preview purity.
 
-## 22. Review Briefing Layer — Phase 1
+## 22. Review Briefing Layer — Phase 1 and Phase 1.1
 
 ### 22.1 Purpose and authority
 
@@ -611,7 +611,7 @@ The Review Briefing Layer shall compile existing governance conclusions into
 ordinary maintainer work. It is a read-only presentation/compiler layer above
 Reviewer Guidance and shall not replace, delete, or change Reviewer Guidance.
 
-Phase 1 shall not perform item-level verification, request repair, reject
+Phase 1 and Phase 1.1 shall not perform item-level verification, request repair, reject
 evidence, resubmit, attest, override, decide, close, merge, or mutate the case.
 Its server shall expose no state-changing route.
 
@@ -629,6 +629,9 @@ The serializable model shall include:
 8. `HumanJudgmentItem`
 9. `NextStepBrief`
 10. `GovernanceTechnicalDetails`
+11. `WorkItemSummary`
+12. `WorkOwner`
+13. `BriefSemanticState`
 
 The core API shall be:
 
@@ -654,9 +657,14 @@ or predict a state transition.
 
 Participant presentation shall distinguish:
 
-- system-confirmed record facts;
+- material availability;
+- structural validity;
+- current-version binding;
+- system-completed formal checking;
 - agent or contributor declarations;
 - accountable-human confirmation; and
+- legal maintainer verification;
+- final-decision eligibility and final acceptance; and
 - unverified path/declaration-based inference.
 
 Agent self-report shall not be labelled system-observed fact. A test command
@@ -678,16 +686,25 @@ rule IDs shall remain in technical detail.
 
 ### 22.5 Requirements and automatic checks
 
-Every compiled requirement shall map to exactly one participant status:
+Every compiled requirement shall map to one current participant status and may
+also expose the compatible semantic states:
 
-- `system_satisfied`;
-- `provided_requires_human_judgment`;
+- `material_available`;
+- `structure_valid`;
+- `version_bound`;
+- `system_checked`;
+- `human_review_required`;
+- `human_verified`;
 - `missing`;
 - `stale`;
 - `invalid`;
 - `awaiting_accountable_human`;
 - `awaiting_independent_review`; or
 - `not_applicable`.
+
+The original Phase 1 `status` field and bucket names shall remain available for
+compatibility. Phase 1.1 presentation shall use the additive
+`semantic_status` and `semantic_states` fields.
 
 The main organization shall use requirement meaning rather than obligation ID.
 
@@ -698,6 +715,14 @@ involvement, recorded delegation declaration, denied authority attempts, and
 structural obligations. Results shall state their evidence and limitations.
 The automatic layer shall not ask a maintainer to repeat a formal check AGM has
 already completed.
+
+Each `AutomaticCheckResult` shall expose `policy_required`, `blocking`, safe
+`requirement_refs`, `informational_only`, `owner`, and `system_handled`.
+Missing or blocking wording shall require a compiled obligation, active
+matched rule, binding requirement, existing finding, valid transition
+prerequisite, or canonical migration diagnostic. Agent involvement alone
+shall not create an agent-action-scope requirement. A non-required missing
+declaration may be shown only as non-blocking information.
 
 ### 22.6 Accountability
 
@@ -716,12 +741,16 @@ Only content AGM cannot decide automatically shall enter
 `HumanJudgmentItem`. Each item shall contain a stable presentation key, plain
 title, reason a human is needed, contribution claim, system observation,
 evidence summary, review focus, possible outcomes, priority, blocking meaning,
-and a safe public trace reference.
+and a safe public trace reference. It shall also identify a safe requirement
+reference and explicit governance provenance.
 
 Missing, stale, invalid, pre-attestation, already verified, terminal, and
 unaffected scoped-repair items shall not enter the queue. Scoped repair shall
 produce only the recorded revalidation scope. A low-risk path may produce an
 empty queue.
+
+A denied attempted operation shall not create a judgment item. It shall be
+shown as a system-handled anomaly and retained in technical audit detail.
 
 ### 22.8 Next-step routing
 
@@ -736,16 +765,18 @@ generic operation menu.
 
 ### 22.9 Participant information architecture
 
-The main page order shall be:
+The Phase 1.1 main page order shall be:
 
-1. contribution and changed scope;
-2. risk judgment;
-3. project requirements and completion;
-4. system-confirmed facts;
-5. system-detected problems and system limits;
-6. current human judgment queue;
-7. current next step; and
-8. default-collapsed governance process and technical detail.
+1. contribution identity;
+2. prominent current status and next step;
+3. current human judgment queue when non-empty;
+4. contribution and risk summary;
+5. contribution-side or accountable-human outstanding work;
+6. blocking problems and system-handled anomalies;
+7. requirement and automatic-check summaries;
+8. default-collapsed complete requirements;
+9. default-collapsed passed checks and accountability detail; and
+10. default-collapsed governance process and technical detail.
 
 The five-step workflow shall not be the primary Review Brief navigation. Raw
 state names, transition names, obligation/finding/evidence/repair IDs,
@@ -770,3 +801,17 @@ Reviewer Guidance governance cases into the same three output formats under
 `examples/review_briefing/outputs/`. The output is a design-review fixture, not
 a P92 experiment package, human verification, final decision, acceptance, or
 merge approval.
+
+### 22.11 Phase 1.1 determinism and review boundary
+
+`scripts/check_review_briefing_demo_hashes.py` shall verify frozen SHA-256
+values for all eight JSON/Markdown/HTML triples and `manifest.json`.
+Windows and Ubuntu CI shall explicitly regenerate the Review Briefing demos,
+check their hashes, and require a clean diff. Participant-visible demo prose
+shall use natural contribution language. Fixture actor IDs, generator names,
+raw states, IDs, traces, and fingerprints shall remain in folded technical
+detail.
+
+The artifact shall remain pending human review. Phase 1.1 shall not be
+described as human-approved, shall not start Phase 2, and shall not produce a
+P92 experiment package.

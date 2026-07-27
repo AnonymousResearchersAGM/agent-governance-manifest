@@ -1,7 +1,7 @@
 {
   "contribution": {
-    "title": "本次贡献",
-    "plain_summary": "Implemented the scenario contribution.",
+    "title": "补充智能体行动与委派说明",
+    "plain_summary": "贡献者补充了智能体行动与委派说明；本次补充未修改代码、测试结果或安全影响说明。",
     "changed_files": [
       "docs/guide.md"
     ],
@@ -15,7 +15,7 @@
     "configuration_changes": [],
     "governance_changes": [],
     "agent_involvement": "治理案例记录为智能体参与路径",
-    "summary_source": "贡献者声明，来源：contributor-agent（通过 scenario-generator 记录）",
+    "summary_source": "贡献者声明，来源：贡献者提供的演示说明",
     "system_inferred_summary": "更新项目文档：docs/guide.md",
     "inference_limitations": "系统归纳只依据文件路径、已匹配风险区域和明确声明，不代表系统已经证明代码的真实语义或行为。",
     "contributor_claims": []
@@ -42,34 +42,58 @@
         "requirement_key": "agent-actions-delegation",
         "display_title": "智能体行动与委派说明",
         "status": "provided_requires_human_judgment",
-        "status_label": "已提供，需要人判断",
-        "plain_status": "材料已提供且结构有效；其内容是否与实际修改一致，需要人类判断。",
+        "status_label": "材料齐备，内容待人工检查",
+        "plain_status": "材料已提供，形式要求有效且对应当前版本；内容是否与实际修改一致仍需维护者判断。",
         "blocking": true,
         "trace_refs": [
           "trace:requirement:agent-actions-delegation"
-        ]
+        ],
+        "semantic_states": [
+          "material_available",
+          "structure_valid",
+          "version_bound",
+          "human_review_required"
+        ],
+        "owner": "maintainer",
+        "semantic_status": "human_review_required"
       },
       {
         "requirement_key": "changed-files",
         "display_title": "变更文件清单",
         "status": "system_satisfied",
-        "status_label": "系统已确认",
-        "plain_status": "已提供与当前贡献和项目规则绑定的材料。",
-        "blocking": true,
+        "status_label": "材料与版本已核对",
+        "plain_status": "材料已提供，形式要求有效且对应当前版本；这只表示系统完成了可自动执行的核对，不表示内容正确。",
+        "blocking": false,
         "trace_refs": [
           "trace:requirement:changed-files"
-        ]
+        ],
+        "semantic_states": [
+          "material_available",
+          "structure_valid",
+          "version_bound",
+          "system_checked"
+        ],
+        "owner": "system",
+        "semantic_status": "system_checked"
       },
       {
         "requirement_key": "change-summary",
         "display_title": "修改说明",
         "status": "system_satisfied",
-        "status_label": "系统已确认",
-        "plain_status": "已提供与当前贡献和项目规则绑定的材料。",
-        "blocking": true,
+        "status_label": "材料与版本已核对",
+        "plain_status": "材料已提供，形式要求有效且对应当前版本；这只表示系统完成了可自动执行的核对，不表示内容正确。",
+        "blocking": false,
         "trace_refs": [
           "trace:requirement:change-summary"
-        ]
+        ],
+        "semantic_states": [
+          "material_available",
+          "structure_valid",
+          "version_bound",
+          "system_checked"
+        ],
+        "owner": "system",
+        "semantic_status": "system_checked"
       }
     ],
     "system_satisfied": [
@@ -77,23 +101,39 @@
         "requirement_key": "changed-files",
         "display_title": "变更文件清单",
         "status": "system_satisfied",
-        "status_label": "系统已确认",
-        "plain_status": "已提供与当前贡献和项目规则绑定的材料。",
-        "blocking": true,
+        "status_label": "材料与版本已核对",
+        "plain_status": "材料已提供，形式要求有效且对应当前版本；这只表示系统完成了可自动执行的核对，不表示内容正确。",
+        "blocking": false,
         "trace_refs": [
           "trace:requirement:changed-files"
-        ]
+        ],
+        "semantic_states": [
+          "material_available",
+          "structure_valid",
+          "version_bound",
+          "system_checked"
+        ],
+        "owner": "system",
+        "semantic_status": "system_checked"
       },
       {
         "requirement_key": "change-summary",
         "display_title": "修改说明",
         "status": "system_satisfied",
-        "status_label": "系统已确认",
-        "plain_status": "已提供与当前贡献和项目规则绑定的材料。",
-        "blocking": true,
+        "status_label": "材料与版本已核对",
+        "plain_status": "材料已提供，形式要求有效且对应当前版本；这只表示系统完成了可自动执行的核对，不表示内容正确。",
+        "blocking": false,
         "trace_refs": [
           "trace:requirement:change-summary"
-        ]
+        ],
+        "semantic_states": [
+          "material_available",
+          "structure_valid",
+          "version_bound",
+          "system_checked"
+        ],
+        "owner": "system",
+        "semantic_status": "system_checked"
       }
     ],
     "provided_requires_human_judgment": [
@@ -101,12 +141,20 @@
         "requirement_key": "agent-actions-delegation",
         "display_title": "智能体行动与委派说明",
         "status": "provided_requires_human_judgment",
-        "status_label": "已提供，需要人判断",
-        "plain_status": "材料已提供且结构有效；其内容是否与实际修改一致，需要人类判断。",
+        "status_label": "材料齐备，内容待人工检查",
+        "plain_status": "材料已提供，形式要求有效且对应当前版本；内容是否与实际修改一致仍需维护者判断。",
         "blocking": true,
         "trace_refs": [
           "trace:requirement:agent-actions-delegation"
-        ]
+        ],
+        "semantic_states": [
+          "material_available",
+          "structure_valid",
+          "version_bound",
+          "human_review_required"
+        ],
+        "owner": "maintainer",
+        "semantic_status": "human_review_required"
       }
     ],
     "missing": [],
@@ -129,7 +177,18 @@
       "requires_human_action": false,
       "trace_refs": [
         "trace:automatic-check:material_version_binding"
-      ]
+      ],
+      "policy_required": true,
+      "blocking": false,
+      "requirement_refs": [
+        "agent-actions-delegation",
+        "changed-files",
+        "change-summary"
+      ],
+      "informational_only": false,
+      "owner": "system",
+      "system_handled": false,
+      "semantic_status": "system_checked"
     },
     {
       "check_type": "test_command_and_result",
@@ -141,7 +200,14 @@
       "requires_human_action": false,
       "trace_refs": [
         "trace:automatic-check:test_command_and_result"
-      ]
+      ],
+      "policy_required": false,
+      "blocking": false,
+      "requirement_refs": [],
+      "informational_only": true,
+      "owner": "system",
+      "system_handled": false,
+      "semantic_status": "not_applicable"
     },
     {
       "check_type": "test_version_binding",
@@ -153,7 +219,14 @@
       "requires_human_action": false,
       "trace_refs": [
         "trace:automatic-check:test_version_binding"
-      ]
+      ],
+      "policy_required": false,
+      "blocking": false,
+      "requirement_refs": [],
+      "informational_only": false,
+      "owner": "system",
+      "system_handled": false,
+      "semantic_status": "not_applicable"
     },
     {
       "check_type": "evidence_freshness",
@@ -167,7 +240,18 @@
       "requires_human_action": false,
       "trace_refs": [
         "trace:automatic-check:evidence_freshness"
-      ]
+      ],
+      "policy_required": true,
+      "blocking": false,
+      "requirement_refs": [
+        "agent-actions-delegation",
+        "changed-files",
+        "change-summary"
+      ],
+      "informational_only": false,
+      "owner": "system",
+      "system_handled": false,
+      "semantic_status": "system_checked"
     },
     {
       "check_type": "attestation_version_binding",
@@ -179,7 +263,14 @@
       "requires_human_action": false,
       "trace_refs": [
         "trace:automatic-check:attestation_version_binding"
-      ]
+      ],
+      "policy_required": false,
+      "blocking": false,
+      "requirement_refs": [],
+      "informational_only": true,
+      "owner": "system",
+      "system_handled": false,
+      "semantic_status": "not_applicable"
     },
     {
       "check_type": "changed_file_scope_match",
@@ -193,15 +284,24 @@
       "requires_human_action": false,
       "trace_refs": [
         "trace:automatic-check:changed_file_scope_match"
-      ]
+      ],
+      "policy_required": true,
+      "blocking": false,
+      "requirement_refs": [
+        "changed-files"
+      ],
+      "informational_only": false,
+      "owner": "system",
+      "system_handled": false,
+      "semantic_status": "system_checked"
     },
     {
       "check_type": "agent_involvement",
       "display_title": "是否记录了智能体参与",
-      "status": "confirmed",
+      "status": "not_applicable",
       "plain_result": "治理案例明确记录为智能体参与路径。",
       "supporting_evidence": [
-        "记录的参与配置：supervised_agent"
+        "系统读取了案例中记录的参与方式。"
       ],
       "limitations": [
         "AGM 只呈现治理记录和声明，不是智能体使用检测器。"
@@ -209,13 +309,22 @@
       "requires_human_action": false,
       "trace_refs": [
         "trace:automatic-check:agent_involvement"
-      ]
+      ],
+      "policy_required": true,
+      "blocking": false,
+      "requirement_refs": [
+        "agent-actions-delegation"
+      ],
+      "informational_only": true,
+      "owner": "system",
+      "system_handled": false,
+      "semantic_status": "informational"
     },
     {
       "check_type": "recorded_delegation",
       "display_title": "是否记录继续委派",
       "status": "confirmed",
-      "plain_result": "系统确认已提供行动与委派声明。",
+      "plain_result": "行动与委派声明材料已提供，并通过形式与版本核对。",
       "supporting_evidence": [
         "已存在智能体行动范围材料。"
       ],
@@ -225,7 +334,16 @@
       "requires_human_action": false,
       "trace_refs": [
         "trace:automatic-check:recorded_delegation"
-      ]
+      ],
+      "policy_required": true,
+      "blocking": false,
+      "requirement_refs": [
+        "agent-actions-delegation"
+      ],
+      "informational_only": false,
+      "owner": "system",
+      "system_handled": false,
+      "semantic_status": "system_checked"
     },
     {
       "check_type": "authority_boundary",
@@ -239,7 +357,14 @@
       "requires_human_action": false,
       "trace_refs": [
         "trace:automatic-check:authority_boundary"
-      ]
+      ],
+      "policy_required": false,
+      "blocking": false,
+      "requirement_refs": [],
+      "informational_only": false,
+      "owner": "system",
+      "system_handled": false,
+      "semantic_status": "system_checked"
     },
     {
       "check_type": "structural_obligations",
@@ -253,7 +378,18 @@
       "requires_human_action": false,
       "trace_refs": [
         "trace:automatic-check:structural_obligations"
-      ]
+      ],
+      "policy_required": true,
+      "blocking": false,
+      "requirement_refs": [
+        "agent-actions-delegation",
+        "changed-files",
+        "change-summary"
+      ],
+      "informational_only": false,
+      "owner": "system",
+      "system_handled": false,
+      "semantic_status": "system_checked"
     },
     {
       "check_type": "semantic_declaration_consistency",
@@ -269,22 +405,31 @@
       "requires_human_action": true,
       "trace_refs": [
         "trace:automatic-check:semantic_declaration_consistency"
-      ]
+      ],
+      "policy_required": true,
+      "blocking": true,
+      "requirement_refs": [
+        "agent-actions-delegation"
+      ],
+      "informational_only": false,
+      "owner": "maintainer",
+      "system_handled": false,
+      "semantic_status": "human_review_required"
     }
   ],
   "contributor_accountability": {
     "agent_used": true,
     "agent_capabilities": [
-      "权限范围记录：workspace",
-      "行动范围记录：task-bounded",
-      "持续性记录：session"
+      "权限范围：可修改工作区文件并提供命令执行记录",
+      "行动范围：行动范围限制在本次任务内",
+      "持续方式：仅在当前工作会话内持续"
     ],
     "agent_actions": [
       "系统记录到智能体身份提交了 3 份治理材料。",
       "另有贡献者声明，见下方“声明事实”分组。"
     ],
     "delegation_detected": false,
-    "declaration_source": "contributor-agent（通过 scenario-generator 记录）",
+    "declaration_source": "贡献侧提供的智能体行动声明",
     "declaration_status": "provided",
     "accountable_human": null,
     "attestation_status": "当前风险路径不要求额外确认",
@@ -294,7 +439,7 @@
       "系统记录到智能体身份提交了 3 份治理材料。"
     ],
     "declared_facts": [
-      "智能体或贡献者声明：Task-bounded workspace access under active supervision; no undeclared delegation."
+      "智能体或贡献者声明：编码智能体仅处理本次文档贡献并运行既有检查；没有继续委派，补充说明覆盖当前版本。"
     ],
     "human_confirmed_facts": [],
     "unverified_inferences": [
@@ -307,9 +452,9 @@
       "judgment_id": "judgment-agent-actions-delegation",
       "display_title": "智能体行动与委派说明",
       "why_human_is_needed": "系统能确认材料结构、范围和版本绑定，但不能自动判断声明是否准确描述代码行为和风险。",
-      "contribution_claim": "Task-bounded workspace access under active supervision; no undeclared delegation.",
+      "contribution_claim": "编码智能体仅处理本次文档贡献并运行既有检查；没有继续委派，补充说明覆盖当前版本。",
       "system_observation": "治理案例记录为智能体参与路径，并存在相应行动范围材料。",
-      "evidence_summary": "系统确认有 1 份当前有效材料。",
+      "evidence_summary": "系统记录有 1 份形式有效且对应当前版本的材料。",
       "review_focus": [
         "声明范围是否覆盖实际变更和命令记录",
         "是否存在未披露的子智能体行动或继续委派",
@@ -324,22 +469,33 @@
       "blocking": true,
       "trace_refs": [
         "trace:judgment:agent-actions-delegation"
-      ]
+      ],
+      "requirement_refs": [
+        "agent-actions-delegation"
+      ],
+      "provenance": [
+        "compiled_requirement",
+        "scoped_revalidation",
+        "existing_finding"
+      ],
+      "owner": "maintainer"
     }
   ],
   "current_next_step": {
     "status": "maintainer_judgment",
-    "display_title": "现在轮到你检查 1 项",
+    "display_title": "现在需要你检查 1 项",
     "plain_explanation": "形式化检查已经完成到当前阶段；下面只列出系统不能替代人类作出的判断。",
     "responsible_party": "维护者侧检查人员",
     "system_will_do": [
-      "继续保留系统已确认的材料和未受影响范围。",
+      "继续保留已完成形式与绑定核对的材料和未受影响范围。",
       "检查完成后把案例路由到最终人类决定阶段。"
     ],
     "human_should_do": [
       "检查：智能体行动与委派说明"
     ],
-    "final_acceptance_state": "not_decided"
+    "final_acceptance_state": "not_decided",
+    "owner": "maintainer",
+    "semantic_state": "human_review_required"
   },
   "governance_details": {
     "case_id": "scoped-repair",
@@ -467,7 +623,7 @@
         "contribution_fingerprint": "712fcd4dc43abd39cf07328603c2a14d9da29e20b1369a6d2b1b1b8eba6080a0",
         "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
         "evidence_type": "agent_action_scope",
-        "value": "Task-bounded workspace access under active supervision; no undeclared delegation.",
+        "value": "编码智能体仅处理本次文档贡献并运行既有检查；没有继续委派，补充说明覆盖当前版本。",
         "command": null,
         "environment": null,
         "artifact_path": null,
@@ -525,7 +681,7 @@
         "contribution_fingerprint": "712fcd4dc43abd39cf07328603c2a14d9da29e20b1369a6d2b1b1b8eba6080a0",
         "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
         "evidence_type": "contribution_summary",
-        "value": "Implemented the scenario contribution.",
+        "value": "贡献者补充了智能体行动与委派说明；本次补充未修改代码、测试结果或安全影响说明。",
         "command": null,
         "environment": null,
         "artifact_path": null,
@@ -1890,7 +2046,7 @@
             "contribution_fingerprint": "712fcd4dc43abd39cf07328603c2a14d9da29e20b1369a6d2b1b1b8eba6080a0",
             "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
             "evidence_type": "agent_action_scope",
-            "value": "Task-bounded workspace access under active supervision; no undeclared delegation.",
+            "value": "编码智能体仅处理本次文档贡献并运行既有检查；没有继续委派，补充说明覆盖当前版本。",
             "command": null,
             "environment": null,
             "artifact_path": null,
@@ -1948,7 +2104,7 @@
             "contribution_fingerprint": "712fcd4dc43abd39cf07328603c2a14d9da29e20b1369a6d2b1b1b8eba6080a0",
             "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
             "evidence_type": "contribution_summary",
-            "value": "Implemented the scenario contribution.",
+            "value": "贡献者补充了智能体行动与委派说明；本次补充未修改代码、测试结果或安全影响说明。",
             "command": null,
             "environment": null,
             "artifact_path": null,
@@ -2712,6 +2868,21 @@
       ]
     }
   },
+  "work_items": [
+    {
+      "owner": "maintainer",
+      "display_title": "智能体行动与委派说明",
+      "plain_explanation": "系统能确认材料结构、范围和版本绑定，但不能自动判断声明是否准确描述代码行为和风险。",
+      "blocking": true,
+      "system_handled": false,
+      "requirement_refs": [
+        "agent-actions-delegation"
+      ],
+      "trace_refs": [
+        "trace:judgment:agent-actions-delegation"
+      ]
+    }
+  ],
   "schema_version": "agm.review_brief/v0.2-dev",
-  "authority_notice": "系统确认、维护者检查完成或具备最终决定条件，都不等于贡献已被接受；最终接受、拒绝或合并决定仍由获授权的人类维护者作出。"
+  "authority_notice": "系统完成形式与版本核对、维护者完成内容检查或具备最终决定条件，都不等于贡献已被接受；最终接受、拒绝或合并决定仍由获授权的人类维护者作出。"
 }
