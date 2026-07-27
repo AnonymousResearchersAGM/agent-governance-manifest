@@ -1,0 +1,42 @@
+schema_version: agm.matched_rule_set/v0.2-dev
+items:
+- id: match-configuration-high
+  rule_id: configuration-high
+  zone: configuration
+  risk_level: high
+  affected_paths:
+  - demo_app/config.py
+  selector_reasons:
+  - 'path selectors matched: demo_app/config.py'
+  obligation_ids:
+  - O-SUMMARY
+  - O-CHANGED-FILES
+  - O-RATIONALE
+  - O-TEST-COMMAND
+  - O-ARTIFACT
+  - O-LIMITATIONS
+  case_required: false
+  source: risk_rule
+  obligation_overrides: {}
+- id: match-authentication-critical
+  rule_id: authentication-critical
+  zone: authentication
+  risk_level: critical
+  affected_paths:
+  - demo_app/auth.py
+  - demo_app/config.py
+  selector_reasons:
+  - 'path selectors matched: demo_app/auth.py'
+  - 'semantic targets matched: authentication, authorization'
+  obligation_ids:
+  - O-SUMMARY
+  - O-CHANGED-FILES
+  - O-RATIONALE
+  - O-AUTH-IMPACT
+  - O-TEST-COMMAND
+  - O-ARTIFACT
+  - O-LIMITATIONS
+  - O-HUMAN-ATTEST
+  case_required: true
+  source: risk_rule
+  obligation_overrides: {}

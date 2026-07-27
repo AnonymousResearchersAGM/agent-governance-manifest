@@ -1,0 +1,21 @@
+id: policy-b12fdd885dec59c9a0d3541b8e5a4ada
+schema_version: agm.policy_snapshot/v0.2-dev
+manifest_version: agm.manifest/v0.2-dev
+base_commit: cb1d741dac841a18dce3de53141ff66b1a57649b
+policy_fingerprint: e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564
+resolved_at: '2026-07-27T00:00:00Z'
+source_paths:
+- .agm/manifest.yml
+- .agm/agents/entrypoints.yml
+- .agm/profiles/assurance_profiles.yml
+- .agm/profiles/autonomy_profiles.yml
+- .agm/interfaces/contributor_panel.yml
+- .agm/policies/evidence_profiles.yml
+- .agm/interfaces/governance_report.yml
+- .agm/policies/interaction_rules.yml
+- .agm/interfaces/maintainer_panel.yml
+- .agm/interfaces/messages.yml
+- .agm/roles/permissions.yml
+- .agm/policies/risk_rules.yml
+- .agm/roles/roles.yml
+- .agm/workflows/state_machine.yml

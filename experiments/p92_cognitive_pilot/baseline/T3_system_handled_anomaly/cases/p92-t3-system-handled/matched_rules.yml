@@ -1,0 +1,16 @@
+schema_version: agm.matched_rule_set/v0.2-dev
+items:
+- id: match-documentation-low
+  rule_id: documentation-low
+  zone: documentation
+  risk_level: low
+  affected_paths:
+  - docs/AGM_HUMAN_GUIDE.md
+  selector_reasons:
+  - 'path selectors matched: docs/AGM_HUMAN_GUIDE.md'
+  obligation_ids:
+  - O-SUMMARY
+  - O-CHANGED-FILES
+  case_required: false
+  source: risk_rule
+  obligation_overrides: {}

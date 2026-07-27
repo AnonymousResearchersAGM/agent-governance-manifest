@@ -1,0 +1,177 @@
+schema_version: agm.compiled_obligation_set/v0.2-dev
+items:
+- id: obl-o-agent-scope
+  obligation_id: O-AGENT-SCOPE
+  source_rule_ids:
+  - autonomy:supervised_agent
+  type: evidence
+  severity: medium
+  blocking: true
+  verifier_roles:
+  - maintainer
+  - maintainer_verifier
+  evidence_type: agent_action_scope
+  description: Record the declared action, permissions, supervision, and delegation
+    scope.
+  affected_scope: []
+  status: satisfied
+  interaction_ids: []
+- id: obl-o-artifact
+  obligation_id: O-ARTIFACT
+  source_rule_ids:
+  - authentication-critical
+  - configuration-high
+  type: evidence
+  severity: high
+  blocking: true
+  verifier_roles:
+  - maintainer
+  - maintainer_verifier
+  evidence_type: artifact
+  description: Provide a locally checkable artifact or test output.
+  affected_scope:
+  - demo_app/auth.py
+  - demo_app/config.py
+  status: satisfied
+  interaction_ids: []
+- id: obl-o-auth-impact
+  obligation_id: O-AUTH-IMPACT
+  source_rule_ids:
+  - authentication-critical
+  type: evidence
+  severity: critical
+  blocking: true
+  verifier_roles:
+  - maintainer
+  - maintainer_verifier
+  evidence_type: security_auth_impact
+  description: Describe security, authentication, and authorization impact.
+  affected_scope:
+  - demo_app/auth.py
+  - demo_app/config.py
+  status: satisfied
+  interaction_ids: []
+- id: obl-o-changed-files
+  obligation_id: O-CHANGED-FILES
+  source_rule_ids:
+  - authentication-critical
+  - configuration-high
+  type: evidence
+  severity: low
+  blocking: true
+  verifier_roles:
+  - maintainer
+  - maintainer_verifier
+  evidence_type: changed_files
+  description: Identify the files and scopes covered by the contribution.
+  affected_scope:
+  - demo_app/auth.py
+  - demo_app/config.py
+  status: satisfied
+  interaction_ids: []
+- id: obl-o-human-attest
+  obligation_id: O-HUMAN-ATTEST
+  source_rule_ids:
+  - authentication-critical
+  type: human_attestation
+  severity: critical
+  blocking: true
+  verifier_roles:
+  - accountable_human
+  - maintainer
+  evidence_type: human_attestation
+  description: Obtain explicit accountable-human attestation bound to the case.
+  affected_scope:
+  - demo_app/auth.py
+  - demo_app/config.py
+  status: satisfied
+  interaction_ids: []
+- id: obl-o-independent-review
+  obligation_id: O-INDEPENDENT-REVIEW
+  source_rule_ids:
+  - authentication-configuration
+  type: maintainer_verification
+  severity: critical
+  blocking: true
+  verifier_roles:
+  - maintainer
+  evidence_type: independent_review
+  description: Require independent maintainer verification with separation of duty.
+  affected_scope:
+  - demo_app/auth.py
+  - demo_app/config.py
+  status: verified
+  interaction_ids:
+  - authentication-configuration
+- id: obl-o-limitations
+  obligation_id: O-LIMITATIONS
+  source_rule_ids:
+  - authentication-critical
+  - configuration-high
+  type: evidence
+  severity: high
+  blocking: true
+  verifier_roles:
+  - maintainer
+  - maintainer_verifier
+  evidence_type: known_limitations
+  description: State known limitations or explicitly state none.
+  affected_scope:
+  - demo_app/auth.py
+  - demo_app/config.py
+  status: satisfied
+  interaction_ids: []
+- id: obl-o-rationale
+  obligation_id: O-RATIONALE
+  source_rule_ids:
+  - authentication-critical
+  - configuration-high
+  type: evidence
+  severity: medium
+  blocking: true
+  verifier_roles:
+  - maintainer
+  - maintainer_verifier
+  evidence_type: rationale
+  description: Explain why the change is needed without disclosing private reasoning.
+  affected_scope:
+  - demo_app/auth.py
+  - demo_app/config.py
+  status: satisfied
+  interaction_ids: []
+- id: obl-o-summary
+  obligation_id: O-SUMMARY
+  source_rule_ids:
+  - authentication-critical
+  - configuration-high
+  type: evidence
+  severity: low
+  blocking: true
+  verifier_roles:
+  - maintainer
+  - maintainer_verifier
+  evidence_type: contribution_summary
+  description: Provide a concise factual contribution summary.
+  affected_scope:
+  - demo_app/auth.py
+  - demo_app/config.py
+  status: satisfied
+  interaction_ids: []
+- id: obl-o-test-command
+  obligation_id: O-TEST-COMMAND
+  source_rule_ids:
+  - authentication-critical
+  - configuration-high
+  type: evidence
+  severity: high
+  blocking: true
+  verifier_roles:
+  - maintainer
+  - maintainer_verifier
+  evidence_type: test_command
+  description: Provide a concrete test command, environment, and outcome.
+  affected_scope:
+  - demo_app/auth.py
+  - demo_app/config.py
+  status: satisfied
+  interaction_ids: []

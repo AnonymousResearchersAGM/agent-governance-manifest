@@ -1,0 +1,19 @@
+schema_version: agm.human_attestation_set/v0.2-dev
+items:
+- id: attestation-f462f1fe71785d21b011dfc77351bc03
+  actor: p92-accountable-human
+  role: accountable_human
+  timestamp: '2026-07-27T00:05:00Z'
+  reviewed_scope:
+  - demo_app/auth.py
+  - demo_app/config.py
+  statement: 已审阅当前版本、材料集合和明确列出的范围。
+  reservations: []
+  policy_fingerprint: e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564
+  contribution_fingerprint: 2a72281500e135c094d72e5fc9b5c7367f0afd7e7c48576977d6e9e696ac6634
+  evidence_set_fingerprint: ef2f242b37a15973c1c4567fe12aa758851b3a9fc30806314ffa89813efb99da
+  retained_for_contribution_fingerprint: null
+  retention_reason: null
+  status: confirmed
+  invalidated_at: null
+  invalidation_reason: null

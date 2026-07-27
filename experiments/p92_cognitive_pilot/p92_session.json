@@ -1,0 +1,123 @@
+{
+  "schema_version": "agm.p92_cognitive_pilot/v1",
+  "title": "AGM P92 Human-Work Cognitive Pilot",
+  "formal_sample": false,
+  "exclusion_reason": "Internal cognitive pilot for participant-facing human-work compilation before formal experiment freeze.",
+  "artifact_commit": "cb1d741dac841a18dce3de53141ff66b1a57649b",
+  "artifact_branch": "codex/agm-review-briefing-phase-2-0-1",
+  "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
+  "artifact_status": "pending_human_review",
+  "task_order": ["T0", "T1", "T2", "T3", "T4"],
+  "tasks": {
+    "T0": {
+      "title": "训练：完成一项明确的维护者检查",
+      "prompt": "请根据页面完成当前需要你的维护者检查。提交后停止，不要继续作出最终项目决定。",
+      "baseline": "T0_training",
+      "case_id": "p92-t0-training",
+      "action_task": true,
+      "scored": false,
+      "judgment_title": "智能体行动与委派说明",
+      "expected_option_id": "sufficient",
+      "expected_operation": "verify_evidence",
+      "expected_state": "ready_for_human_decision",
+      "mastery_questions": [
+        {
+          "id": "step",
+          "text": "你刚才完成的是哪一步？",
+          "options": ["维护者检查", "最终接受贡献", "关闭治理案例"],
+          "correct": "维护者检查"
+        },
+        {
+          "id": "accepted",
+          "text": "当前贡献是否已经被项目正式接受？",
+          "options": ["是", "否", "无法判断"],
+          "correct": "否"
+        }
+      ]
+    },
+    "T1": {
+      "title": "贡献侧材料尚未完成",
+      "prompt": "请查看当前贡献，并完成页面当前要求你做的工作。若页面明确当前无需你操作，请通过任务栏结束本题。",
+      "baseline": "T1_contribution_side",
+      "case_id": "p92-t1-contribution-side",
+      "action_task": false,
+      "scored": true,
+      "expected_state": "evidence_incomplete",
+      "completion_questions": [
+        {
+          "id": "requires_action",
+          "text": "页面是否要求你现在执行维护者操作？",
+          "options": ["需要", "不需要", "无法判断"],
+          "correct": "不需要"
+        },
+        {
+          "id": "responsible_party",
+          "text": "当前主要由谁继续处理？",
+          "options": ["贡献侧", "人类负责人", "维护者", "最终决定人"],
+          "correct": "贡献侧"
+        }
+      ]
+    },
+    "T2": {
+      "title": "补交材料仍需补充",
+      "prompt": "贡献者已经补交一项材料。请根据页面判断并处理当前维护者任务。",
+      "baseline": "T2_request_supplement",
+      "case_id": "p92-t2-supplement",
+      "action_task": true,
+      "scored": true,
+      "judgment_title": "智能体行动与委派说明",
+      "expected_option_id": "supplement",
+      "expected_operation": "request_repair",
+      "expected_state": "repair_requested",
+      "expected_affected_obligation_count": 1
+    },
+    "T3": {
+      "title": "系统已经处理越权异常",
+      "prompt": "页面记录了一次由贡献侧智能体发起的维护者操作。请根据页面完成当前任务。",
+      "baseline": "T3_system_handled_anomaly",
+      "case_id": "p92-t3-system-handled",
+      "action_task": false,
+      "scored": true,
+      "expected_state": "awaiting_maintainer_verification",
+      "completion_questions": [
+        {
+          "id": "attempt_effect",
+          "text": "页面记录的越权操作是否已经生效？",
+          "options": ["未生效", "已经生效", "无法判断"],
+          "correct": "未生效"
+        },
+        {
+          "id": "needs_repeat",
+          "text": "你是否需要再次处理这个越权操作？",
+          "options": ["需要", "不需要", "无法判断"],
+          "correct": "不需要"
+        }
+      ]
+    },
+    "T4": {
+      "title": "需要识别阻断性风险",
+      "prompt": "请根据页面处理当前审查事项。",
+      "baseline": "T4_material_risk",
+      "case_id": "p92-t4-material-risk",
+      "action_task": true,
+      "scored": true,
+      "judgment_title": "登录与权限影响说明",
+      "expected_option_id": "material-risk",
+      "expected_operation": "request_repair",
+      "expected_state": "repair_requested",
+      "expected_finding_severity": "high",
+      "expected_finding_blocking": true,
+      "expected_affected_obligation_count": 1
+    }
+  },
+  "debrief_questions": [
+    "页面是否让你立即知道现在是否轮到自己？",
+    "页面是否让你知道应该重点检查什么？",
+    "发现问题时，你是否知道应该要求补充还是标记重大风险？",
+    "你是否需要理解 AGM 的内部流程才能完成任务？",
+    "哪一部分最让你困惑？",
+    "如果它出现在真实 PR 页面中，你是否愿意使用？为什么？",
+    "你认为它减少了审查工作，还是增加了额外负担？",
+    "维护者检查完成是否等于贡献已经被项目正式接受？"
+  ]
+}

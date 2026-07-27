@@ -1,0 +1,34 @@
+schema_version: agm.compiled_obligation_set/v0.2-dev
+items:
+- id: obl-o-changed-files
+  obligation_id: O-CHANGED-FILES
+  source_rule_ids:
+  - documentation-low
+  type: evidence
+  severity: low
+  blocking: true
+  verifier_roles:
+  - maintainer
+  - maintainer_verifier
+  evidence_type: changed_files
+  description: Identify the files and scopes covered by the contribution.
+  affected_scope:
+  - docs/AGM_HUMAN_GUIDE.md
+  status: satisfied
+  interaction_ids: []
+- id: obl-o-summary
+  obligation_id: O-SUMMARY
+  source_rule_ids:
+  - documentation-low
+  type: evidence
+  severity: low
+  blocking: true
+  verifier_roles:
+  - maintainer
+  - maintainer_verifier
+  evidence_type: contribution_summary
+  description: Provide a concise factual contribution summary.
+  affected_scope:
+  - docs/AGM_HUMAN_GUIDE.md
+  status: satisfied
+  interaction_ids: []

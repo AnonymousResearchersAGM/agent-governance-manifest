@@ -1,0 +1,14 @@
+schema_version: agm.governance_finding_set/v0.2-dev
+items:
+- id: finding-9b01769332005c5ea9345d7516ed4bb3
+  code: p92_scoped_revalidation
+  severity: high
+  message: 仅重新检查当前指定说明。
+  blocking: true
+  related_object_ids: []
+  affected_obligation_ids:
+  - O-AGENT-SCOPE
+  status: open
+  created_at: '2026-07-27T00:00:00Z'
+  resolved_at: null
+  resolution: null

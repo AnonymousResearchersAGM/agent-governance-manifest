@@ -1,0 +1,55 @@
+schema_version: agm.repair_request_set/v0.2-dev
+items:
+- id: repair-f4ce9e5836595c81a597666290273786
+  finding_ids:
+  - finding-cc044d4e888d5f17a3c7d4ffb3f73b8d
+  responsible_role: contributor
+  affected_obligation_ids:
+  - O-AUTH-IMPACT
+  requested_correction: 仅重新检查当前指定说明。
+  revalidation_required:
+  - O-AUTH-IMPACT
+  requested_by: p92-maintainer
+  requested_at: '2026-07-27T00:00:00Z'
+  status: resubmitted
+  attempts:
+  - id: attempt-071bae18a4af5796a40a69deaea1dec2
+    actor: p92-contributor-agent
+    timestamp: '2026-07-27T00:00:00Z'
+    summary: 贡献侧补交当前指定说明，其他材料未改变。
+    affected_obligation_ids:
+    - O-AUTH-IMPACT
+    evidence_ids: []
+    change_assessment:
+      change_classification: no_material_change
+      change_reason: 补交记录不改变贡献版本；仅重新提交当前说明供复核。
+      previous_contribution_fingerprint: 2a72281500e135c094d72e5fc9b5c7367f0afd7e7c48576977d6e9e696ac6634
+      new_contribution_fingerprint: 2a72281500e135c094d72e5fc9b5c7367f0afd7e7c48576977d6e9e696ac6634
+      stale_evidence_ids: []
+      retained_evidence_ids:
+      - evidence-404ae44d245652a8afeb694ebbedd448
+      - evidence-413c4a84def95e7a80bb45997fd3732f
+      - evidence-8e68b932cd4153dea82dc7eb39a7672b
+      - evidence-b65ec9d4ff105e74bd0f6c14ba092dbd
+      - evidence-b79137dc669f53d8b3d0fce5114b8e77
+      - evidence-c2f8f00ac1d050e99c7d9f64fa2f0e52
+      - evidence-ff548795d93959458df9455b262bab49
+      invalidated_attestation_ids: []
+      required_revalidation_scope:
+      - O-AUTH-IMPACT
+    change_classification: no_material_change
+    change_reason: 补交记录不改变贡献版本；仅重新提交当前说明供复核。
+    previous_contribution_fingerprint: 2a72281500e135c094d72e5fc9b5c7367f0afd7e7c48576977d6e9e696ac6634
+    new_contribution_fingerprint: 2a72281500e135c094d72e5fc9b5c7367f0afd7e7c48576977d6e9e696ac6634
+    stale_evidence_ids: []
+    retained_evidence_ids:
+    - evidence-404ae44d245652a8afeb694ebbedd448
+    - evidence-413c4a84def95e7a80bb45997fd3732f
+    - evidence-8e68b932cd4153dea82dc7eb39a7672b
+    - evidence-b65ec9d4ff105e74bd0f6c14ba092dbd
+    - evidence-b79137dc669f53d8b3d0fce5114b8e77
+    - evidence-c2f8f00ac1d050e99c7d9f64fa2f0e52
+    - evidence-ff548795d93959458df9455b262bab49
+    invalidated_attestation_ids: []
+    required_revalidation_scope:
+    - O-AUTH-IMPACT

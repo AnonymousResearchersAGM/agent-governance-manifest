@@ -1,0 +1,267 @@
+id: p92-t1-contribution-side
+mode: policy_required
+mode_reason: Project policy requires a Governance Case for at least one matched change
+  rule; this requirement is based on the change, not inferred authorship.
+state: evidence_incomplete
+created_at: '2026-07-27T00:00:00Z'
+updated_at: '2026-07-27T00:00:00Z'
+base_commit: cb1d741dac841a18dce3de53141ff66b1a57649b
+changed_files:
+- demo_app/auth.py
+- demo_app/config.py
+change_tags: []
+semantic_targets:
+- authentication
+- authorization
+autonomy_profile: supervised_agent
+assurance_profile: standard
+contribution_fingerprint: 2a31c7a8a5a0c5a2670c2d7382fa33de98af8e049aa7fea986c831bf084c6352
+policy_snapshot:
+  id: policy-b6335ce77a775d5e918c8827e09531b9
+  schema_version: agm.policy_snapshot/v0.2-dev
+  manifest_version: agm.manifest/v0.2-dev
+  base_commit: cb1d741dac841a18dce3de53141ff66b1a57649b
+  policy_fingerprint: e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564
+  resolved_at: '2026-07-27T00:00:00Z'
+  source_paths:
+  - .agm/manifest.yml
+  - .agm/agents/entrypoints.yml
+  - .agm/profiles/assurance_profiles.yml
+  - .agm/profiles/autonomy_profiles.yml
+  - .agm/interfaces/contributor_panel.yml
+  - .agm/policies/evidence_profiles.yml
+  - .agm/interfaces/governance_report.yml
+  - .agm/policies/interaction_rules.yml
+  - .agm/interfaces/maintainer_panel.yml
+  - .agm/interfaces/messages.yml
+  - .agm/roles/permissions.yml
+  - .agm/policies/risk_rules.yml
+  - .agm/roles/roles.yml
+  - .agm/workflows/state_machine.yml
+overall_risk_level: critical
+matched_rules:
+- id: match-configuration-high
+  rule_id: configuration-high
+  zone: configuration
+  risk_level: high
+  affected_paths:
+  - demo_app/config.py
+  selector_reasons:
+  - 'path selectors matched: demo_app/config.py'
+  obligation_ids:
+  - O-SUMMARY
+  - O-CHANGED-FILES
+  - O-RATIONALE
+  - O-TEST-COMMAND
+  - O-ARTIFACT
+  - O-LIMITATIONS
+  case_required: false
+  source: risk_rule
+  obligation_overrides: {}
+- id: match-authentication-critical
+  rule_id: authentication-critical
+  zone: authentication
+  risk_level: critical
+  affected_paths:
+  - demo_app/auth.py
+  - demo_app/config.py
+  selector_reasons:
+  - 'path selectors matched: demo_app/auth.py'
+  - 'semantic targets matched: authentication, authorization'
+  obligation_ids:
+  - O-SUMMARY
+  - O-CHANGED-FILES
+  - O-RATIONALE
+  - O-AUTH-IMPACT
+  - O-TEST-COMMAND
+  - O-ARTIFACT
+  - O-LIMITATIONS
+  - O-HUMAN-ATTEST
+  case_required: true
+  source: risk_rule
+  obligation_overrides: {}
+obligations:
+- id: obl-o-agent-scope
+  obligation_id: O-AGENT-SCOPE
+  source_rule_ids:
+  - autonomy:supervised_agent
+  type: evidence
+  severity: medium
+  blocking: true
+  verifier_roles:
+  - maintainer
+  - maintainer_verifier
+  evidence_type: agent_action_scope
+  description: Record the declared action, permissions, supervision, and delegation
+    scope.
+  affected_scope: []
+  status: unsatisfied
+  interaction_ids: []
+- id: obl-o-artifact
+  obligation_id: O-ARTIFACT
+  source_rule_ids:
+  - authentication-critical
+  - configuration-high
+  type: evidence
+  severity: high
+  blocking: true
+  verifier_roles:
+  - maintainer
+  - maintainer_verifier
+  evidence_type: artifact
+  description: Provide a locally checkable artifact or test output.
+  affected_scope:
+  - demo_app/auth.py
+  - demo_app/config.py
+  status: unsatisfied
+  interaction_ids: []
+- id: obl-o-auth-impact
+  obligation_id: O-AUTH-IMPACT
+  source_rule_ids:
+  - authentication-critical
+  type: evidence
+  severity: critical
+  blocking: true
+  verifier_roles:
+  - maintainer
+  - maintainer_verifier
+  evidence_type: security_auth_impact
+  description: Describe security, authentication, and authorization impact.
+  affected_scope:
+  - demo_app/auth.py
+  - demo_app/config.py
+  status: unsatisfied
+  interaction_ids: []
+- id: obl-o-changed-files
+  obligation_id: O-CHANGED-FILES
+  source_rule_ids:
+  - authentication-critical
+  - configuration-high
+  type: evidence
+  severity: low
+  blocking: true
+  verifier_roles:
+  - maintainer
+  - maintainer_verifier
+  evidence_type: changed_files
+  description: Identify the files and scopes covered by the contribution.
+  affected_scope:
+  - demo_app/auth.py
+  - demo_app/config.py
+  status: unsatisfied
+  interaction_ids: []
+- id: obl-o-human-attest
+  obligation_id: O-HUMAN-ATTEST
+  source_rule_ids:
+  - authentication-critical
+  type: human_attestation
+  severity: critical
+  blocking: true
+  verifier_roles:
+  - accountable_human
+  - maintainer
+  evidence_type: human_attestation
+  description: Obtain explicit accountable-human attestation bound to the case.
+  affected_scope:
+  - demo_app/auth.py
+  - demo_app/config.py
+  status: unsatisfied
+  interaction_ids: []
+- id: obl-o-independent-review
+  obligation_id: O-INDEPENDENT-REVIEW
+  source_rule_ids:
+  - authentication-configuration
+  type: maintainer_verification
+  severity: critical
+  blocking: true
+  verifier_roles:
+  - maintainer
+  evidence_type: independent_review
+  description: Require independent maintainer verification with separation of duty.
+  affected_scope:
+  - demo_app/auth.py
+  - demo_app/config.py
+  status: unsatisfied
+  interaction_ids:
+  - authentication-configuration
+- id: obl-o-limitations
+  obligation_id: O-LIMITATIONS
+  source_rule_ids:
+  - authentication-critical
+  - configuration-high
+  type: evidence
+  severity: high
+  blocking: true
+  verifier_roles:
+  - maintainer
+  - maintainer_verifier
+  evidence_type: known_limitations
+  description: State known limitations or explicitly state none.
+  affected_scope:
+  - demo_app/auth.py
+  - demo_app/config.py
+  status: unsatisfied
+  interaction_ids: []
+- id: obl-o-rationale
+  obligation_id: O-RATIONALE
+  source_rule_ids:
+  - authentication-critical
+  - configuration-high
+  type: evidence
+  severity: medium
+  blocking: true
+  verifier_roles:
+  - maintainer
+  - maintainer_verifier
+  evidence_type: rationale
+  description: Explain why the change is needed without disclosing private reasoning.
+  affected_scope:
+  - demo_app/auth.py
+  - demo_app/config.py
+  status: unsatisfied
+  interaction_ids: []
+- id: obl-o-summary
+  obligation_id: O-SUMMARY
+  source_rule_ids:
+  - authentication-critical
+  - configuration-high
+  type: evidence
+  severity: low
+  blocking: true
+  verifier_roles:
+  - maintainer
+  - maintainer_verifier
+  evidence_type: contribution_summary
+  description: Provide a concise factual contribution summary.
+  affected_scope:
+  - demo_app/auth.py
+  - demo_app/config.py
+  status: unsatisfied
+  interaction_ids: []
+- id: obl-o-test-command
+  obligation_id: O-TEST-COMMAND
+  source_rule_ids:
+  - authentication-critical
+  - configuration-high
+  type: evidence
+  severity: high
+  blocking: true
+  verifier_roles:
+  - maintainer
+  - maintainer_verifier
+  evidence_type: test_command
+  description: Provide a concrete test command, environment, and outcome.
+  affected_scope:
+  - demo_app/auth.py
+  - demo_app/config.py
+  status: unsatisfied
+  interaction_ids: []
+evidence: []
+attestations: []
+findings: []
+repair_requests: []
+attempted_operations: []
+maintainer_verifications: []
+final_decision: null
+closure_receipt: null
+schema_version: agm.governance_case/v0.2-dev

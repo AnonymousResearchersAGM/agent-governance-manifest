@@ -1,0 +1,57 @@
+AGM P92 研究者操作说明
+=======================
+
+性质
+----
+P92 是 participant-facing human-work compilation 的内部 cognitive pilot。
+formal_sample=false，所有结果排除在正式统计之外。
+
+开始前确认
+----------
+[ ] 参与者不是 P90、P91 或 P98。
+[ ] 参与者没有参加过此前 AGM 界面测试。
+[ ] 参与者没有阅读研究者答案。
+[ ] 参与者是具有一般代码审查经验的普通程序员。
+[ ] 浏览器缩放为 100%，窗口宽度至少 1280。
+[ ] 已关闭无关通知。
+[ ] 不解释 AGM 理论，不提示正确 option。
+[ ] 完整记录参与者原话。
+
+研究者可以解释
+--------------
+浏览器如何滚动；如何展开或收起；Preview 与正式提交的机械区别；
+任务栏和“完成本题”按钮如何使用。
+
+研究者不得解释
+--------------
+当前责任方；材料是否充分；哪个 option 正确；越权是否生效；
+风险是否重大；当前是否应该操作。
+
+标准命令
+--------
+完整验证：
+  .\Verify-P92.ps1 -RepoRoot "E:\Project\agent-governance-manifest-main"
+
+完整启动：
+  .\Start-P92.ps1 -RepoRoot "E:\Project\agent-governance-manifest-main" -ParticipantId "P92"
+
+中断后继续：
+  .\Start-P92.ps1 -RepoRoot "E:\Project\agent-governance-manifest-main" -ParticipantId "P92" -Resume
+
+单任务：
+  .\Start-Task.ps1 -RepoRoot "E:\Project\agent-governance-manifest-main" -ParticipantId "P92" -Task T2
+
+重置训练：
+  .\Reset-P92.ps1 -Task T0
+
+停止本会话残留服务：
+  .\Stop-P92.ps1
+
+导出：
+  .\Export-P92.ps1 -ParticipantId "P92"
+
+边界
+----
+T0 可在 mastery check 失败后重置重试；T1–T4 不提供答案反馈，也不允许
+普通重试。任何技术重跑必须新建 attempt 并明确记录 technical_rerun。
+不得将 P92 结果纳入正式统计，不得用同一参与者在修补 UI 后重测。
