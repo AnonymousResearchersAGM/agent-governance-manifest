@@ -9,8 +9,10 @@ import pytest
 
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
 sys.path.insert(0, str(ROOT / "scripts"))
 
+from agm.vnext.briefing import risk_css_class  # noqa: E402
 from agm.vnext.runtime import (  # noqa: E402
     DemoExecutionContext,
     use_execution_context,
@@ -126,6 +128,41 @@ def test_low_risk_first_screen_returns_to_normal_code_review(
     assert "可以进入正常代码审查" in visible
 
 
+@pytest.mark.parametrize(
+    ("scenario", "level", "css_class"),
+    [
+        ("05_lightweight_low_risk", "低", "risk-low"),
+        ("06_governance_self_modification", "关键", "risk-critical"),
+    ],
+)
+def test_risk_level_uses_stable_semantic_class(
+    phase_1_1_briefs,
+    scenario,
+    level,
+    css_class,
+):
+    rendered = phase_1_1_briefs[2][scenario]
+    visible = visible_text(rendered)
+    assert f'class="risk-level {css_class}"' in rendered
+    assert f"综合风险：{level}" in visible
+
+
+def test_high_and_unknown_risk_classes_are_safe():
+    assert risk_css_class("medium") == "risk-medium"
+    assert risk_css_class("high") == "risk-high"
+    assert risk_css_class("unexpected") == "risk-unknown"
+    assert risk_css_class("") == "risk-unknown"
+
+
+def test_low_risk_does_not_use_high_or_critical_class(
+    phase_1_1_briefs,
+):
+    rendered = phase_1_1_briefs[2]["05_lightweight_low_risk"]
+    assert 'class="risk-level risk-low"' in rendered
+    assert 'class="risk-level risk-high"' not in rendered
+    assert 'class="risk-level risk-critical"' not in rendered
+
+
 def test_formal_and_binding_checks_do_not_claim_content_confirmation(
     phase_1_1_briefs,
 ):
@@ -205,6 +242,35 @@ def test_denied_attempt_does_not_create_arbitrary_judgment(
     assert anomaly["semantic_status"] == "system_handled"
     assert anomaly["owner"] == "system"
     assert anomaly["blocking"] is False
+    assert len(payload["human_judgments"]) == 0
+
+
+def test_denied_attempt_is_visible_in_top_status_without_changing_work(
+    phase_1_1_briefs,
+):
+    payload = phase_1_1_briefs[1][
+        "04_unauthorized_agent_verification"
+    ]
+    rendered = phase_1_1_briefs[2][
+        "04_unauthorized_agent_verification"
+    ]
+    status_end = rendered.index("</section>", rendered.index(
+        'id="current-status"'
+    ))
+    status_html = rendered[rendered.index('id="current-status"'):status_end]
+    visible = visible_text(rendered)
+    assert "系统已自动拒绝 1 次越权检查尝试" in status_html
+    assert "该操作未生效，你无需额外处理" in status_html
+    assert "操作未生效" in visible
+    assert payload["current_next_step"]["status"] == "normal_code_review"
+    anomaly = next(
+        item
+        for item in payload["work_items"]
+        if item["system_handled"]
+    )
+    assert anomaly["owner"] == "system"
+    assert anomaly["blocking"] is False
+    assert len(payload["human_judgments"]) == 0
 
 
 def test_every_judgment_has_requirement_and_governance_provenance(

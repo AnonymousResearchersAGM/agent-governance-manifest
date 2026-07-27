@@ -815,3 +815,90 @@ detail.
 The artifact shall remain pending human review. Phase 1.1 shall not be
 described as human-approved, shall not start Phase 2, and shall not produce a
 P92 experiment package.
+
+## 23. Review Briefing Layer — Phase 2 contextual actions
+
+### 23.1 Compiler and governance boundary
+
+Phase 2 shall consume the existing `ReviewBriefView`, `HumanJudgmentItem`,
+`NextStepBrief`, and `WorkItemSummary`. It shall not independently match
+risks, compile obligations, derive responsibility, lower authority, add a
+transition, or treat presentation state as governance state.
+
+The contextual action compiler shall emit options only for current,
+canonical-provenance human judgment items. Each option shall name a business
+outcome, consequence, reason requirement, availability, unavailability
+reason, and folded existing-operation reference. Templates shall not infer
+availability from role text, actor name, query parameters, or hidden buttons.
+
+### 23.2 Draft and stale binding
+
+A `ReviewDecisionDraft` shall bind case, actor, role, contribution
+fingerprint, policy snapshot, judgment ID, safe requirement references, and
+judgment provenance. Draft persistence belongs under ignored `.agm-work`; it
+shall not modify `.agm`, append a successful transition, or masquerade as
+verification. Leaving and returning may restore a fresh draft. Abandoning one
+shall not change the case.
+
+Changed case, actor, role, contribution, policy, judgment set, provenance, or
+authorized option shall make a draft stale. A stale or incomplete draft shall
+not be previewed or executed.
+
+### 23.3 Preview and execution
+
+Preview shall reload current state, recompile human work, recheck authority,
+stage, contribution/policy fingerprints, decision provenance, and option
+legality, and describe retained and affected scope in ordinary language.
+Preview shall not change governance state.
+
+Live preview shall issue an opaque short-lived actor/role/case-bound token.
+Execution without a token, with a wrong binding, after expiry, after use, or
+after case/draft change shall be rejected. A consumed token shall never cause
+the operation twice.
+
+An all-sufficient review may use existing `verify_evidence`. Supplement or
+material-risk review may use an existing blocking finding/scoped-repair
+operation. Material risk shall not become final rejection. Unaffected
+evidence shall remain valid according to existing scoped-repair semantics.
+Where no semantically correct existing transition exists, the option shall be
+unavailable; the presentation shall not simulate success.
+
+### 23.4 Review/final-decision separation
+
+The review page shall contain only item decisions, draft controls, review
+preview, and review submission. It shall not expose final accept, final
+reject, or closure controls.
+
+Only a real final-decision stage may expose a separate **最终人类决定** page.
+That page shall summarize the contribution, risk, requirements,
+verification, unresolved findings, final authority, and acceptance boundary.
+Each supported final operation shall require its own reason, preview,
+authority check, and one-time token. Verification shall not equal acceptance;
+acceptance shall not be presented as merge.
+
+### 23.5 Local service security and audit
+
+The interactive server shall bind loopback by default and reject public
+binding. Mutation routes shall be POST-only, content-type and size bounded,
+UTF-8 checked, CSRF/session bound, loopback host/origin checked, and fixed to
+the command's case, actor, and role. It shall accept business option IDs, not
+arbitrary operation or transition names. Participant text and reasons shall
+be HTML escaped and JSON safe.
+
+Successful submitted review batches and rejected interaction attempts shall
+be append-only runtime audit records. A rejected attempt shall say
+`state_changed=false` and shall not be presented as a finding, transition, or
+successful verification.
+
+### 23.6 Deterministic outputs and identity limitation
+
+Static Phase 2 outputs shall set `live_actions_enabled=false` and contain no
+runtime CSRF token, preview token, random session ID, or current time.
+Windows and Ubuntu CI shall regenerate and hash-check all eight preserved
+scenarios plus one deterministic pre-final-decision fixture.
+
+The local CLI can enforce canonical role, permission, stage, actor binding,
+and separation from recorded source actors. Without an external identity
+provider it cannot prove that the local actor assertion belongs to the real
+human. This limitation shall be documented and shall not weaken domain
+authorization.

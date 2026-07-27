@@ -42,6 +42,20 @@ jobs:
       - name: Check frozen Review Briefing SHA-256 values
         run: python scripts/check_review_briefing_demo_hashes.py
 
+      - name: Generate deterministic interactive Review Briefing demos
+        env:
+          PYTHONPATH: src
+        run: python scripts/generate_review_interactive_demos.py
+
+      - name: Check frozen interactive Review Briefing SHA-256 values
+        run: python scripts/check_review_interactive_demo_hashes.py
+
+      - name: Verify Review Briefing test-file isolation
+        run: python -m pytest -q tests/test_vnext_review_briefing.py
+
+      - name: Verify Phase 1.1 test-file isolation
+        run: python -m pytest -q tests/test_vnext_review_briefing_phase_1_1.py
+
       - name: Run complete test suite
         run: python -m pytest
 

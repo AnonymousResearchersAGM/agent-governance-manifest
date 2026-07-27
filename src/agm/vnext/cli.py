@@ -14,6 +14,13 @@ from .briefing import (
     render_review_brief_markdown,
 )
 from .briefing.server import serve_review_brief
+from .briefing.actions import (
+    compile_contextual_actions,
+    compile_final_decision_view,
+    render_final_decision_html,
+    render_interactive_review_html,
+)
+from .briefing.actions.server import serve_interactive_review
 from .config import load_vnext_config
 from .guidance import ActorContext
 from .guidance.presenters import (
@@ -23,6 +30,7 @@ from .guidance.presenters import (
 from .models import VNextError
 from .reporting import readiness, render_html, render_markdown
 from .service import GovernanceService
+from .storage import atomic_write_text
 from .ui import serve_panel
 
 
@@ -247,6 +255,32 @@ def build_parser() -> argparse.ArgumentParser:
         ],
         help="Read-only maintainer-side role used for briefing context.",
     )
+    interactive_review = maintainer_commands.add_parser(
+        "review",
+        help=(
+            "Compile item-bound human judgment actions and optionally serve "
+            "the loopback interactive review."
+        ),
+    )
+    add_case_argument(interactive_review)
+    interactive_review.add_argument("--serve", action="store_true")
+    interactive_review.add_argument("--host", default="127.0.0.1")
+    interactive_review.add_argument("--port", type=int, default=8768)
+    interactive_review.add_argument(
+        "--actor",
+        default="human-maintainer",
+        help="Human actor identifier bound to drafts and previews.",
+    )
+    interactive_review.add_argument(
+        "--role",
+        default="maintainer",
+        choices=[
+            "maintainer_verifier",
+            "policy_steward",
+            "maintainer",
+        ],
+        help="Canonical human role used for server-side authorization.",
+    )
 
     verify = maintainer_commands.add_parser(
         "verify", help="Record independent maintainer verification."
@@ -401,6 +435,69 @@ def report_review_brief(
         html=render_review_brief_html(view),
     )
     return {key: str(value) for key, value in paths.items()}
+
+
+def report_interactive_review(
+    service: GovernanceService,
+    *,
+    case_id: str,
+    actor: str,
+    role: str,
+) -> dict[str, str]:
+    """Write deterministic static views without runtime secrets."""
+
+    case = service.storage.load_case(case_id)
+    actor_context = ActorContext(
+        actor=actor,
+        role=role,
+        human=True,
+    )
+    brief = service.review_brief(
+        case_id,
+        actor=actor,
+        role=role,
+    )
+    action_view = compile_contextual_actions(
+        review_brief=brief,
+        governance_case=case,
+        actor_context=actor_context,
+        policy_config=service.config,
+        live_actions_enabled=False,
+    )
+    case_root = service.storage.case_dir(case_id)
+    model_path = case_root / "review_action_model.json"
+    html_path = case_root / "review_interactive.html"
+    atomic_write_text(
+        model_path,
+        json.dumps(
+            action_view.to_dict(),
+            ensure_ascii=False,
+            indent=2,
+        )
+        + "\n",
+    )
+    atomic_write_text(
+        html_path,
+        render_interactive_review_html(action_view),
+    )
+    paths = {
+        "review_action_model": str(model_path),
+        "review_interactive_html": str(html_path),
+    }
+    final_view = compile_final_decision_view(
+        review_brief=brief,
+        governance_case=case,
+        actor_context=actor_context,
+        policy_config=service.config,
+    )
+    if final_view.available:
+        final_path = case_root / "final_decision.html"
+        atomic_write_text(
+            final_path,
+            render_final_decision_html(final_view),
+        )
+        paths["final_decision_html"] = str(final_path)
+    return paths
 
 
 def dispatch(args: argparse.Namespace) -> int:
@@ -626,6 +723,23 @@ def dispatch(args: argparse.Namespace) -> int:
             print_json(paths)
             if args.serve:
                 serve_review_brief(
+                    service,
+                    case_id=args.case_id,
+                    actor=args.actor,
+                    role=args.role,
+                    host=args.host,
+                    port=args.port,
+                )
+        elif args.command == "review":
+            paths = report_interactive_review(
+                service,
+                case_id=args.case_id,
+                actor=args.actor,
+                role=args.role,
+            )
+            print_json(paths)
+            if args.serve:
+                serve_interactive_review(
                     service,
                     case_id=args.case_id,
                     actor=args.actor,

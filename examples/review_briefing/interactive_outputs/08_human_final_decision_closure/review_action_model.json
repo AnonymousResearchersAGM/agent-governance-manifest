@@ -1,0 +1,31 @@
+{
+  "case_id": "human-final-closure",
+  "actor_id": "human-maintainer",
+  "role": "maintainer",
+  "contribution_fingerprint": "159400577f1ab6619edb85a104337a8708142766cfebb85c92d32a26511eb524",
+  "policy_snapshot_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
+  "case_state": "accepted",
+  "items": [],
+  "live_actions_enabled": false,
+  "can_save_draft": false,
+  "can_preview": false,
+  "unavailable_reason": "当前没有需要该参与者完成的人类治理判断。",
+  "current_next_step": {
+    "status": "completed",
+    "display_title": "本次治理案例已经关闭",
+    "plain_explanation": "具有最终决定权的人类维护者已经接受本次贡献；最终决定和治理记录已经归档。",
+    "responsible_party": "无待处理责任方",
+    "system_will_do": [
+      "保留最终决定、关闭记录和完整审计轨迹。"
+    ],
+    "human_should_do": [
+      "无需额外 AGM 审查操作。"
+    ],
+    "final_acceptance_state": "accepted",
+    "owner": "system",
+    "semantic_state": "accepted"
+  },
+  "system_handled_anomalies": [],
+  "final_decision_entry_available": false,
+  "schema_version": "agm.review_action_view/v0.2-dev"
+}

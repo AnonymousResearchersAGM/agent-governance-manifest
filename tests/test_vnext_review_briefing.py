@@ -9,6 +9,7 @@ import pytest
 
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
 sys.path.insert(0, str(ROOT / "scripts"))
 
 from agm.vnext.briefing import (  # noqa: E402

@@ -1,0 +1,51 @@
+{
+  "schema_version": "agm.review_interaction_demo_manifest/v0.2-dev",
+  "scenario_count": 9,
+  "scenarios": [
+    {
+      "scenario": "01_multi_risk_missing",
+      "model": "01_multi_risk_missing/review_action_model.json",
+      "html": "01_multi_risk_missing/review_interactive.html"
+    },
+    {
+      "scenario": "02_material_partial_invalidation",
+      "model": "02_material_partial_invalidation/review_action_model.json",
+      "html": "02_material_partial_invalidation/review_interactive.html"
+    },
+    {
+      "scenario": "03_scoped_repair",
+      "model": "03_scoped_repair/review_action_model.json",
+      "html": "03_scoped_repair/review_interactive.html"
+    },
+    {
+      "scenario": "04_unauthorized_agent_verification",
+      "model": "04_unauthorized_agent_verification/review_action_model.json",
+      "html": "04_unauthorized_agent_verification/review_interactive.html"
+    },
+    {
+      "scenario": "05_lightweight_low_risk",
+      "model": "05_lightweight_low_risk/review_action_model.json",
+      "html": "05_lightweight_low_risk/review_interactive.html"
+    },
+    {
+      "scenario": "06_governance_self_modification",
+      "model": "06_governance_self_modification/review_action_model.json",
+      "html": "06_governance_self_modification/review_interactive.html"
+    },
+    {
+      "scenario": "07_policy_migration_warning",
+      "model": "07_policy_migration_warning/review_action_model.json",
+      "html": "07_policy_migration_warning/review_interactive.html"
+    },
+    {
+      "scenario": "08_human_final_decision_closure",
+      "model": "08_human_final_decision_closure/review_action_model.json",
+      "html": "08_human_final_decision_closure/review_interactive.html"
+    },
+    {
+      "scenario": "09_pre_final_decision",
+      "model": "09_pre_final_decision/review_action_model.json",
+      "html": "09_pre_final_decision/review_interactive.html"
+    }
+  ]
+}

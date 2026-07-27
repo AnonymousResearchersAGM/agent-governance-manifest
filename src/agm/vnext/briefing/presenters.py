@@ -52,6 +52,19 @@ SEMANTIC_LABELS = {
     "accepted": "贡献已被最终接受",
 }
 
+RISK_CSS_CLASSES = {
+    "low": "risk-low",
+    "medium": "risk-medium",
+    "high": "risk-high",
+    "critical": "risk-critical",
+}
+
+
+def risk_css_class(level: str) -> str:
+    """Return a stable, presentation-only class with a safe fallback."""
+
+    return RISK_CSS_CLASSES.get(str(level).strip().lower(), "risk-unknown")
+
 OWNER_LABELS = {
     WorkOwner.SYSTEM: "系统已处理",
     WorkOwner.CONTRIBUTION_SIDE: "贡献侧处理",
@@ -211,6 +224,16 @@ def render_review_brief_markdown(view: ReviewBriefView) -> str:
         ),
         "",
     ]
+    if anomalies:
+        lines.extend(
+            [
+                (
+                    f"> 系统已自动拒绝 {len(anomalies)} 次越权检查尝试。"
+                    "该操作未生效，你无需额外处理。"
+                ),
+                "",
+            ]
+        )
     if view.human_judgments:
         lines.extend(
             [
@@ -499,6 +522,26 @@ def render_review_brief_html(view: ReviewBriefView) -> str:
             ensure_ascii=False,
         )
     )
+    top_anomaly_notice = ""
+    if anomalies:
+        anomaly_items = "".join(
+            "<li>"
+            f"{html.escape(item.display_title)}："
+            f"{html.escape(item.plain_explanation)}"
+            "</li>"
+            for item in anomalies
+        )
+        top_anomaly_notice = (
+            '<aside class="system-anomaly-notice" role="status">'
+            f"<strong>系统已自动拒绝 {len(anomalies)} 次越权检查尝试。</strong>"
+            "<p>该操作未生效，你无需额外处理。</p>"
+            '<details class="system-anomaly-summary">'
+            "<summary>查看系统处理摘要</summary>"
+            f"<ul>{anomaly_items}</ul>"
+            "<p>完整的参与者、操作和流程记录仅在技术详情中提供。</p>"
+            "</details>"
+            "</aside>"
+        )
     outstanding_section = (
         '<section id="outstanding"><h2>贡献侧或负责人尚需完成</h2>'
         + "".join(_html_work_item(item) for item in outstanding)
@@ -561,8 +604,13 @@ h3 {{ margin:.2rem 0 .5rem; }} h4 {{ margin:1rem 0 .35rem; }}
 background:#fff; border-radius:5px; font-weight:700; }}
 .grid,.two-col {{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; }}
 .summary-card {{ min-width:0; border:1px solid var(--line); border-radius:12px; padding:18px; }}
-.risk-level {{ display:inline-block; font-size:1.35rem; font-weight:800; color:white;
-background:var(--red); padding:5px 14px; border-radius:999px; }}
+.risk-level {{ display:inline-block; font-size:1.35rem; font-weight:800;
+padding:5px 14px; border:1px solid transparent; border-radius:999px; }}
+.risk-level.risk-low {{ color:#0b5038; background:#dff4e9; border-color:#83c9a9; }}
+.risk-level.risk-medium {{ color:#6a4500; background:#fff0bd; border-color:#d7ad38; }}
+.risk-level.risk-high {{ color:#713608; background:#ffe2c6; border-color:#df8b43; }}
+.risk-level.risk-critical {{ color:#fff; background:#982525; border-color:#6f1818; }}
+.risk-level.risk-unknown {{ color:#3f4b57; background:#e8edf1; border-color:#a8b2bc; }}
 .inference {{ background:#edf5f9; border-radius:10px; padding:12px; }}
 .judgment {{ display:grid; grid-template-columns:48px minmax(0,1fr); gap:14px;
 padding:20px; margin:14px 0; border:2px solid #c8953b; border-radius:14px; }}
@@ -583,6 +631,13 @@ margin:10px 0; background:#fbfcfd; border-radius:8px; }}
 .check.informational,.check.not_applicable {{ border-color:var(--gray); background:#f5f6f7; }}
 .check h3,.check p {{ margin:.3rem 0; }}
 .system-note {{ color:var(--blue); font-weight:700; }}
+.system-anomaly-notice {{ margin:14px 0 0; padding:12px 14px;
+border:1px solid #8abbd3; border-left:5px solid var(--blue);
+border-radius:9px; color:#17445d; background:#edf7fb; }}
+.system-anomaly-notice p {{ margin:.25rem 0; }}
+.system-anomaly-summary {{ margin:.5rem 0 0; padding:0; border:0;
+background:transparent; }}
+.system-anomaly-summary summary {{ color:#17445d; }}
 summary {{ cursor:pointer; font-weight:800; color:var(--navy); }}
 .requirements {{ list-style:none; padding:0; margin:16px 0 0; display:grid; gap:10px; }}
 .requirement {{ display:grid; grid-template-columns:34px minmax(0,1fr); gap:8px;
@@ -619,6 +674,7 @@ color:#e8eef4; border-radius:10px; white-space:pre-wrap; overflow-wrap:anywhere;
 <p class="owner-line"><strong>当前责任方：</strong>{html.escape(next_step.responsible_party)}</p>
 {_html_list(next_step.human_should_do, "当前无需操作")}
 <p class="acceptance-boundary">{html.escape(acceptance_boundary)}</p>
+{top_anomaly_notice}
 </section>
 {judgment_section}
 <section id="change-risk">
@@ -631,7 +687,7 @@ color:#e8eef4; border-radius:10px; white-space:pre-wrap; overflow-wrap:anywhere;
 <h4>影响范围</h4>{_html_list(contribution.changed_components, "未归纳出组件范围")}
 </article>
 <article class="summary-card"><h3>风险判断</h3>
-<p class="risk-level">综合风险：{html.escape(risk.display_level)}</p>
+<p class="risk-level {risk_css_class(risk.overall_level)}">综合风险：{html.escape(risk.display_level)}</p>
 <h4>为什么</h4>{_html_list(risk.plain_reasons, "未记录风险理由")}
 <h4>风险联动</h4>{_html_list(risk.interaction_effects, "未记录风险联动")}
 </article>
