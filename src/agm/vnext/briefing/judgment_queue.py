@@ -57,7 +57,7 @@ OBSERVATION_BY_TYPE = {
     "rationale": "系统只能确认修改理由已提供，不能证明理由与代码语义一致。",
     "known_limitations": "系统只能确认限制说明已提供，不能证明其完整性。",
     "independent_review": "现有治理结论要求职责分离的独立维护者检查。",
-    "contribution_summary": "系统记录到一次被拒绝的越权检查尝试；治理状态未因此改变。",
+    "contribution_summary": "系统记录了修改说明和实际变更文件，但不能判断说明是否完整。",
 }
 
 OUTCOMES = (
@@ -98,7 +98,7 @@ def _evidence_summary(
         if item.retained_for_contribution_fingerprint
         == case.contribution_fingerprint
     )
-    message = f"系统确认有 {len(records)} 份当前有效材料。"
+    message = f"系统记录有 {len(records)} 份形式有效且对应当前版本的材料。"
     if retained:
         message += f"其中 {retained} 份按未受影响范围保留。"
     return message
@@ -110,6 +110,7 @@ def _judgment(
     requirement: RequirementItem,
     *,
     reason: str | None = None,
+    provenance: tuple[str, ...],
 ) -> HumanJudgmentItem:
     evidence_type = obligation.evidence_type
     priority = (
@@ -143,6 +144,8 @@ def _judgment(
         trace_refs=(
             f"trace:judgment:{requirement.requirement_key}",
         ),
+        requirement_refs=(requirement.requirement_key,),
+        provenance=provenance,
     )
 
 
@@ -184,7 +187,20 @@ def compile_human_judgment_queue(
             for finding in case.findings
         )
     }
-    candidates: list[tuple[CompiledObligation, RequirementItem]] = []
+    if (
+        not open_revalidation_scope
+        and case.state
+        not in {"awaiting_maintainer_verification", "resubmitted"}
+    ):
+        return ()
+
+    candidates: list[
+        tuple[
+            CompiledObligation,
+            RequirementComparison,
+            RequirementItem,
+        ]
+    ] = []
     for obligation, comparison, requirement in zip(
         case.obligations,
         comparisons,
@@ -203,44 +219,29 @@ def compile_human_judgment_queue(
             "provided_requires_human_judgment",
             "awaiting_independent_review",
         }:
-            candidates.append((obligation, requirement))
+            candidates.append((obligation, comparison, requirement))
 
     if candidates:
-        return tuple(
-            _judgment(case, obligation, requirement)
-            for obligation, requirement in candidates
-        )
-
-    denied = [
-        item
-        for item in case.attempted_operations
-        if item.result == "denied"
-        and not item.state_changed
-    ]
-    if denied:
-        candidate = next(
-            (
-                (obligation, requirement)
-                for obligation, requirement in zip(
-                    case.obligations,
-                    requirements.items,
-                    strict=True,
-                )
-                if obligation.evidence_type == "contribution_summary"
-            ),
-            None,
-        )
-        if candidate is not None:
-            obligation, requirement = candidate
-            return (
+        judgments = []
+        for obligation, comparison, requirement in candidates:
+            provenance = ["compiled_requirement"]
+            if obligation.obligation_id in open_revalidation_scope:
+                provenance.append("scoped_revalidation")
+            if obligation.type == "maintainer_verification":
+                provenance.append("independent_review_requirement")
+            if comparison.finding_ids:
+                provenance.append("existing_finding")
+            if case.state == "awaiting_maintainer_verification":
+                provenance.append("maintainer_review_stage")
+            judgments.append(
                 _judgment(
                     case,
                     obligation,
                     requirement,
-                    reason=(
-                        "越权尝试已由系统拒绝；维护者只需检查当前贡献说明"
-                        "与实际变更范围，无需理解或处理该流程事件。"
-                    ),
-                ),
+                    provenance=tuple(provenance),
+                )
             )
+        return tuple(judgments)
+
+    # A denied operation is an audit fact, not provenance for new human work.
     return ()

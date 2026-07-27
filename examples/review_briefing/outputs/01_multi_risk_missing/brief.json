@@ -1,7 +1,7 @@
 {
   "contribution": {
-    "title": "本次贡献",
-    "plain_summary": "修改登录、认证或权限相关文件：demo_app/auth.py；调整配置、依赖或部署相关文件：demo_app/config.py",
+    "title": "认证令牌刷新与配置调整",
+    "plain_summary": "本次贡献修改认证模块中的令牌刷新逻辑，并同步调整认证配置，用于修复令牌即将过期时偶发退出登录的问题。",
     "changed_files": [
       "demo_app/auth.py",
       "demo_app/config.py"
@@ -22,7 +22,7 @@
     ],
     "governance_changes": [],
     "agent_involvement": "治理案例记录为智能体参与路径",
-    "summary_source": "系统根据已记录的变更路径归纳",
+    "summary_source": "贡献者声明，来源：贡献者提供的演示说明",
     "system_inferred_summary": "修改登录、认证或权限相关文件：demo_app/auth.py；调整配置、依赖或部署相关文件：demo_app/config.py",
     "inference_limitations": "系统归纳只依据文件路径、已匹配风险区域和明确声明，不代表系统已经证明代码的真实语义或行为。",
     "contributor_claims": []
@@ -59,7 +59,10 @@
         "blocking": true,
         "trace_refs": [
           "trace:requirement:agent-actions-delegation"
-        ]
+        ],
+        "semantic_states": [],
+        "owner": "contribution_side",
+        "semantic_status": "missing"
       },
       {
         "requirement_key": "reviewable-artifact",
@@ -70,7 +73,10 @@
         "blocking": true,
         "trace_refs": [
           "trace:requirement:reviewable-artifact"
-        ]
+        ],
+        "semantic_states": [],
+        "owner": "contribution_side",
+        "semantic_status": "missing"
       },
       {
         "requirement_key": "auth-impact",
@@ -81,7 +87,10 @@
         "blocking": true,
         "trace_refs": [
           "trace:requirement:auth-impact"
-        ]
+        ],
+        "semantic_states": [],
+        "owner": "contribution_side",
+        "semantic_status": "missing"
       },
       {
         "requirement_key": "changed-files",
@@ -92,7 +101,10 @@
         "blocking": true,
         "trace_refs": [
           "trace:requirement:changed-files"
-        ]
+        ],
+        "semantic_states": [],
+        "owner": "contribution_side",
+        "semantic_status": "missing"
       },
       {
         "requirement_key": "accountable-human-confirmation",
@@ -100,10 +112,13 @@
         "status": "awaiting_accountable_human",
         "status_label": "等待负责人确认",
         "plain_status": "需要人类负责人确认自己已审阅当前版本和明确范围。",
-        "blocking": true,
+        "blocking": false,
         "trace_refs": [
           "trace:requirement:accountable-human-confirmation"
-        ]
+        ],
+        "semantic_states": [],
+        "owner": "accountable_human",
+        "semantic_status": "awaiting_accountable_human"
       },
       {
         "requirement_key": "independent-review",
@@ -111,10 +126,13 @@
         "status": "awaiting_independent_review",
         "status_label": "等待独立维护者检查",
         "plain_status": "需要与贡献侧分离的维护者完成独立检查；完成检查不等于接受。",
-        "blocking": true,
+        "blocking": false,
         "trace_refs": [
           "trace:requirement:independent-review"
-        ]
+        ],
+        "semantic_states": [],
+        "owner": "maintainer",
+        "semantic_status": "awaiting_independent_review"
       },
       {
         "requirement_key": "known-limitations",
@@ -125,7 +143,10 @@
         "blocking": true,
         "trace_refs": [
           "trace:requirement:known-limitations"
-        ]
+        ],
+        "semantic_states": [],
+        "owner": "contribution_side",
+        "semantic_status": "missing"
       },
       {
         "requirement_key": "change-rationale",
@@ -136,7 +157,10 @@
         "blocking": true,
         "trace_refs": [
           "trace:requirement:change-rationale"
-        ]
+        ],
+        "semantic_states": [],
+        "owner": "contribution_side",
+        "semantic_status": "missing"
       },
       {
         "requirement_key": "change-summary",
@@ -147,7 +171,10 @@
         "blocking": true,
         "trace_refs": [
           "trace:requirement:change-summary"
-        ]
+        ],
+        "semantic_states": [],
+        "owner": "contribution_side",
+        "semantic_status": "missing"
       },
       {
         "requirement_key": "test-command-result",
@@ -158,7 +185,10 @@
         "blocking": true,
         "trace_refs": [
           "trace:requirement:test-command-result"
-        ]
+        ],
+        "semantic_states": [],
+        "owner": "contribution_side",
+        "semantic_status": "missing"
       }
     ],
     "system_satisfied": [],
@@ -173,7 +203,10 @@
         "blocking": true,
         "trace_refs": [
           "trace:requirement:agent-actions-delegation"
-        ]
+        ],
+        "semantic_states": [],
+        "owner": "contribution_side",
+        "semantic_status": "missing"
       },
       {
         "requirement_key": "reviewable-artifact",
@@ -184,7 +217,10 @@
         "blocking": true,
         "trace_refs": [
           "trace:requirement:reviewable-artifact"
-        ]
+        ],
+        "semantic_states": [],
+        "owner": "contribution_side",
+        "semantic_status": "missing"
       },
       {
         "requirement_key": "auth-impact",
@@ -195,7 +231,10 @@
         "blocking": true,
         "trace_refs": [
           "trace:requirement:auth-impact"
-        ]
+        ],
+        "semantic_states": [],
+        "owner": "contribution_side",
+        "semantic_status": "missing"
       },
       {
         "requirement_key": "changed-files",
@@ -206,7 +245,10 @@
         "blocking": true,
         "trace_refs": [
           "trace:requirement:changed-files"
-        ]
+        ],
+        "semantic_states": [],
+        "owner": "contribution_side",
+        "semantic_status": "missing"
       },
       {
         "requirement_key": "known-limitations",
@@ -217,7 +259,10 @@
         "blocking": true,
         "trace_refs": [
           "trace:requirement:known-limitations"
-        ]
+        ],
+        "semantic_states": [],
+        "owner": "contribution_side",
+        "semantic_status": "missing"
       },
       {
         "requirement_key": "change-rationale",
@@ -228,7 +273,10 @@
         "blocking": true,
         "trace_refs": [
           "trace:requirement:change-rationale"
-        ]
+        ],
+        "semantic_states": [],
+        "owner": "contribution_side",
+        "semantic_status": "missing"
       },
       {
         "requirement_key": "change-summary",
@@ -239,7 +287,10 @@
         "blocking": true,
         "trace_refs": [
           "trace:requirement:change-summary"
-        ]
+        ],
+        "semantic_states": [],
+        "owner": "contribution_side",
+        "semantic_status": "missing"
       },
       {
         "requirement_key": "test-command-result",
@@ -250,7 +301,10 @@
         "blocking": true,
         "trace_refs": [
           "trace:requirement:test-command-result"
-        ]
+        ],
+        "semantic_states": [],
+        "owner": "contribution_side",
+        "semantic_status": "missing"
       }
     ],
     "stale": [],
@@ -262,10 +316,13 @@
         "status": "awaiting_accountable_human",
         "status_label": "等待负责人确认",
         "plain_status": "需要人类负责人确认自己已审阅当前版本和明确范围。",
-        "blocking": true,
+        "blocking": false,
         "trace_refs": [
           "trace:requirement:accountable-human-confirmation"
-        ]
+        ],
+        "semantic_states": [],
+        "owner": "accountable_human",
+        "semantic_status": "awaiting_accountable_human"
       }
     ],
     "awaiting_independent_review": [
@@ -275,10 +332,13 @@
         "status": "awaiting_independent_review",
         "status_label": "等待独立维护者检查",
         "plain_status": "需要与贡献侧分离的维护者完成独立检查；完成检查不等于接受。",
-        "blocking": true,
+        "blocking": false,
         "trace_refs": [
           "trace:requirement:independent-review"
-        ]
+        ],
+        "semantic_states": [],
+        "owner": "maintainer",
+        "semantic_status": "awaiting_independent_review"
       }
     ],
     "not_applicable": []
@@ -296,7 +356,14 @@
       "requires_human_action": false,
       "trace_refs": [
         "trace:automatic-check:material_version_binding"
-      ]
+      ],
+      "policy_required": false,
+      "blocking": false,
+      "requirement_refs": [],
+      "informational_only": false,
+      "owner": "system",
+      "system_handled": false,
+      "semantic_status": "not_applicable"
     },
     {
       "check_type": "test_command_and_result",
@@ -308,7 +375,16 @@
       "requires_human_action": true,
       "trace_refs": [
         "trace:automatic-check:test_command_and_result"
-      ]
+      ],
+      "policy_required": true,
+      "blocking": true,
+      "requirement_refs": [
+        "test-command-result"
+      ],
+      "informational_only": false,
+      "owner": "contribution_side",
+      "system_handled": false,
+      "semantic_status": "problem"
     },
     {
       "check_type": "test_version_binding",
@@ -320,7 +396,14 @@
       "requires_human_action": false,
       "trace_refs": [
         "trace:automatic-check:test_version_binding"
-      ]
+      ],
+      "policy_required": false,
+      "blocking": false,
+      "requirement_refs": [],
+      "informational_only": false,
+      "owner": "system",
+      "system_handled": false,
+      "semantic_status": "not_applicable"
     },
     {
       "check_type": "evidence_freshness",
@@ -332,7 +415,14 @@
       "requires_human_action": false,
       "trace_refs": [
         "trace:automatic-check:evidence_freshness"
-      ]
+      ],
+      "policy_required": false,
+      "blocking": false,
+      "requirement_refs": [],
+      "informational_only": false,
+      "owner": "system",
+      "system_handled": false,
+      "semantic_status": "not_applicable"
     },
     {
       "check_type": "attestation_version_binding",
@@ -344,7 +434,16 @@
       "requires_human_action": true,
       "trace_refs": [
         "trace:automatic-check:attestation_version_binding"
-      ]
+      ],
+      "policy_required": true,
+      "blocking": true,
+      "requirement_refs": [
+        "accountable-human-confirmation"
+      ],
+      "informational_only": false,
+      "owner": "accountable_human",
+      "system_handled": false,
+      "semantic_status": "problem"
     },
     {
       "check_type": "changed_file_scope_match",
@@ -356,15 +455,24 @@
       "requires_human_action": true,
       "trace_refs": [
         "trace:automatic-check:changed_file_scope_match"
-      ]
+      ],
+      "policy_required": true,
+      "blocking": true,
+      "requirement_refs": [
+        "changed-files"
+      ],
+      "informational_only": false,
+      "owner": "contribution_side",
+      "system_handled": false,
+      "semantic_status": "problem"
     },
     {
       "check_type": "agent_involvement",
       "display_title": "是否记录了智能体参与",
-      "status": "confirmed",
+      "status": "not_applicable",
       "plain_result": "治理案例明确记录为智能体参与路径。",
       "supporting_evidence": [
-        "记录的参与配置：supervised_agent"
+        "系统读取了案例中记录的参与方式。"
       ],
       "limitations": [
         "AGM 只呈现治理记录和声明，不是智能体使用检测器。"
@@ -372,19 +480,37 @@
       "requires_human_action": false,
       "trace_refs": [
         "trace:automatic-check:agent_involvement"
-      ]
+      ],
+      "policy_required": true,
+      "blocking": false,
+      "requirement_refs": [
+        "agent-actions-delegation"
+      ],
+      "informational_only": true,
+      "owner": "system",
+      "system_handled": false,
+      "semantic_status": "informational"
     },
     {
       "check_type": "recorded_delegation",
       "display_title": "是否记录继续委派",
       "status": "problem",
-      "plain_result": "智能体参与路径缺少行动与委派说明。",
+      "plain_result": "项目当前规则要求智能体行动与委派说明，但材料尚未提供。",
       "supporting_evidence": [],
       "limitations": [],
       "requires_human_action": true,
       "trace_refs": [
         "trace:automatic-check:recorded_delegation"
-      ]
+      ],
+      "policy_required": true,
+      "blocking": true,
+      "requirement_refs": [
+        "agent-actions-delegation"
+      ],
+      "informational_only": false,
+      "owner": "contribution_side",
+      "system_handled": false,
+      "semantic_status": "problem"
     },
     {
       "check_type": "authority_boundary",
@@ -398,7 +524,14 @@
       "requires_human_action": false,
       "trace_refs": [
         "trace:automatic-check:authority_boundary"
-      ]
+      ],
+      "policy_required": false,
+      "blocking": false,
+      "requirement_refs": [],
+      "informational_only": false,
+      "owner": "system",
+      "system_handled": false,
+      "semantic_status": "system_checked"
     },
     {
       "check_type": "structural_obligations",
@@ -410,7 +543,24 @@
       "requires_human_action": true,
       "trace_refs": [
         "trace:automatic-check:structural_obligations"
-      ]
+      ],
+      "policy_required": true,
+      "blocking": true,
+      "requirement_refs": [
+        "agent-actions-delegation",
+        "reviewable-artifact",
+        "auth-impact",
+        "changed-files",
+        "known-limitations",
+        "change-rationale",
+        "change-summary",
+        "test-command-result",
+        "accountable-human-confirmation"
+      ],
+      "informational_only": false,
+      "owner": "contribution_side",
+      "system_handled": false,
+      "semantic_status": "problem"
     },
     {
       "check_type": "semantic_declaration_consistency",
@@ -426,29 +576,38 @@
       "requires_human_action": true,
       "trace_refs": [
         "trace:automatic-check:semantic_declaration_consistency"
-      ]
+      ],
+      "policy_required": true,
+      "blocking": false,
+      "requirement_refs": [
+        "independent-review"
+      ],
+      "informational_only": false,
+      "owner": "maintainer",
+      "system_handled": false,
+      "semantic_status": "human_review_required"
     }
   ],
   "contributor_accountability": {
     "agent_used": true,
     "agent_capabilities": [
-      "权限范围记录：workspace",
-      "行动范围记录：task-bounded",
-      "持续性记录：session"
+      "权限范围：可修改工作区文件并提供命令执行记录",
+      "行动范围：行动范围限制在本次任务内",
+      "持续方式：仅在当前工作会话内持续"
     ],
     "agent_actions": [
       "另有贡献者声明，见下方“声明事实”分组。"
     ],
-    "delegation_detected": null,
-    "declaration_source": "未记录",
-    "declaration_status": "missing",
+    "delegation_detected": false,
+    "declaration_source": "贡献侧提供的智能体行动声明",
+    "declaration_status": "provided",
     "accountable_human": null,
     "attestation_status": "尚未确认",
     "attestation_scope": [],
     "attestation_version_binding": "不适用",
     "system_observations": [],
     "declared_facts": [
-      "尚未提供智能体行动与委派声明。"
+      "智能体或贡献者声明：编码智能体修改了认证代码和配置文件；可修改工作区文件并运行测试；没有继续委派。"
     ],
     "human_confirmed_facts": [],
     "unverified_inferences": [
@@ -459,8 +618,8 @@
   "human_judgments": [],
   "current_next_step": {
     "status": "awaiting_contributor",
-    "display_title": "当前不能进入维护者检查",
-    "plain_explanation": "缺少、过期或无效材料需要由贡献侧先处理。",
+    "display_title": "当前无需你操作",
+    "plain_explanation": "贡献侧仍需补充或更新 8 项材料；材料准备完成后，AGM 才会进入维护者检查阶段。",
     "responsible_party": "贡献者或贡献侧智能体",
     "system_will_do": [
       "已把需要补充或更新的内容整理为贡献侧待办。",
@@ -471,7 +630,9 @@
       "维护者当前无需选择拒绝、退回或修复操作。",
       "等待贡献侧补齐：智能体行动与委派说明、可检查的测试输出或文件、登录、认证与权限影响说明、变更文件清单、已知限制、修改原因、修改说明、测试命令与结果"
     ],
-    "final_acceptance_state": "not_decided"
+    "final_acceptance_state": "not_decided",
+    "owner": "contribution_side",
+    "semantic_state": "system_checked"
   },
   "governance_details": {
     "case_id": "multi-risk-missing",
@@ -3889,6 +4050,125 @@
       ]
     }
   },
+  "work_items": [
+    {
+      "owner": "contribution_side",
+      "display_title": "智能体行动与委派说明",
+      "plain_explanation": "当前没有可用于这项要求的材料。",
+      "blocking": true,
+      "system_handled": false,
+      "requirement_refs": [
+        "agent-actions-delegation"
+      ],
+      "trace_refs": [
+        "trace:requirement:agent-actions-delegation"
+      ]
+    },
+    {
+      "owner": "contribution_side",
+      "display_title": "可检查的测试输出或文件",
+      "plain_explanation": "当前没有可用于这项要求的材料。",
+      "blocking": true,
+      "system_handled": false,
+      "requirement_refs": [
+        "reviewable-artifact"
+      ],
+      "trace_refs": [
+        "trace:requirement:reviewable-artifact"
+      ]
+    },
+    {
+      "owner": "contribution_side",
+      "display_title": "登录、认证与权限影响说明",
+      "plain_explanation": "当前没有可用于这项要求的材料。",
+      "blocking": true,
+      "system_handled": false,
+      "requirement_refs": [
+        "auth-impact"
+      ],
+      "trace_refs": [
+        "trace:requirement:auth-impact"
+      ]
+    },
+    {
+      "owner": "contribution_side",
+      "display_title": "变更文件清单",
+      "plain_explanation": "当前没有可用于这项要求的材料。",
+      "blocking": true,
+      "system_handled": false,
+      "requirement_refs": [
+        "changed-files"
+      ],
+      "trace_refs": [
+        "trace:requirement:changed-files"
+      ]
+    },
+    {
+      "owner": "accountable_human",
+      "display_title": "负责人确认",
+      "plain_explanation": "需要人类负责人确认自己已审阅当前版本和明确范围。",
+      "blocking": false,
+      "system_handled": false,
+      "requirement_refs": [
+        "accountable-human-confirmation"
+      ],
+      "trace_refs": [
+        "trace:requirement:accountable-human-confirmation"
+      ]
+    },
+    {
+      "owner": "contribution_side",
+      "display_title": "已知限制",
+      "plain_explanation": "当前没有可用于这项要求的材料。",
+      "blocking": true,
+      "system_handled": false,
+      "requirement_refs": [
+        "known-limitations"
+      ],
+      "trace_refs": [
+        "trace:requirement:known-limitations"
+      ]
+    },
+    {
+      "owner": "contribution_side",
+      "display_title": "修改原因",
+      "plain_explanation": "当前没有可用于这项要求的材料。",
+      "blocking": true,
+      "system_handled": false,
+      "requirement_refs": [
+        "change-rationale"
+      ],
+      "trace_refs": [
+        "trace:requirement:change-rationale"
+      ]
+    },
+    {
+      "owner": "contribution_side",
+      "display_title": "修改说明",
+      "plain_explanation": "当前没有可用于这项要求的材料。",
+      "blocking": true,
+      "system_handled": false,
+      "requirement_refs": [
+        "change-summary"
+      ],
+      "trace_refs": [
+        "trace:requirement:change-summary"
+      ]
+    },
+    {
+      "owner": "contribution_side",
+      "display_title": "测试命令与结果",
+      "plain_explanation": "当前没有可用于这项要求的材料。",
+      "blocking": true,
+      "system_handled": false,
+      "requirement_refs": [
+        "test-command-result"
+      ],
+      "trace_refs": [
+        "trace:requirement:test-command-result"
+      ]
+    }
+  ],
   "schema_version": "agm.review_brief/v0.2-dev",
-  "authority_notice": "系统确认、维护者检查完成或具备最终决定条件，都不等于贡献已被接受；最终接受、拒绝或合并决定仍由获授权的人类维护者作出。"
+  "authority_notice": "系统完成形式与版本核对、维护者完成内容检查或具备最终决定条件，都不等于贡献已被接受；最终接受、拒绝或合并决定仍由获授权的人类维护者作出。"
 }

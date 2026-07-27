@@ -162,27 +162,40 @@ It does not resolve policy or authority again. Its technical detail embeds the
 Reviewer Guidance view and complete canonical records, so disagreement between
 the two views is a defect rather than a permissible presentation choice.
 
-The epistemic boundary is explicit. System-confirmed binding, expiry,
-structure, scope equality, attestation binding, and denied-operation state
-effects are separate from contributor/agent declarations, accountable-human
-confirmation, and path-based inference. Test-record completeness is never
-described as code correctness. Agent self-report is never described as system-
-observed behavior.
+The epistemic boundary is explicit. Phase 1.1 no longer uses a broad
+“system-confirmed” category. Material availability, structural validity,
+current-version binding, system checking, human content review, maintainer
+verification, final-decision eligibility, and acceptance are separate states.
+Test-record completeness is never described as code correctness. Agent self-
+report is never described as system-observed behavior.
 
 The human judgment queue excludes missing, stale, invalid, or pre-attestation
-work. Scoped repair yields only its revalidation scope; a low-risk path can
-yield no extra AGM judgment. `NextStepBrief` then routes to contribution-side
-repair, accountable-human confirmation, maintainer judgment, ordinary code
-review, final human decision, or closure without exposing a generic action
-menu.
+work. Every item carries compiled-requirement, maintainer-stage, finding,
+independent-review, or scoped-revalidation provenance. A denied operation is a
+system-handled audit anomaly and cannot supply provenance for a new judgment.
+Scoped repair yields only its revalidation scope; a low-risk path can yield no
+extra AGM judgment.
 
-Phase 1 is entirely read-only. `maintainer brief` writes `brief.json`,
+`AutomaticCheckResult` identifies whether a check is canonical-policy
+required, blocking, informational-only, and system-handled. Missing
+agent-action scope is blocking only when `O-AGENT-SCOPE` was compiled. The
+brief cannot turn agent involvement into an implicit policy requirement.
+
+`WorkOwner` makes each unresolved item system-, contribution-side-,
+accountable-human-, maintainer-, or final-decision-authority-owned.
+`NextStepBrief` then routes to one of those owners without exposing a generic
+action menu.
+
+Phase 1.1 is entirely read-only. The page puts the current route first, then
+human judgments, change/risk, current-owner work, and blocking problems.
+Complete requirements, passed checks, accountability details, and technical
+records are closed by default. `maintainer brief` writes `brief.json`,
 `brief.md`, and `brief.html`; its loopback server accepts GET only. Raw
 workflow, state, obligation/finding/evidence/repair IDs, transition names, and
 fingerprints remain default-collapsed.
 
 See `docs/AGM_REVIEW_BRIEFING_LAYER.md` for the complete model, routing rules,
-information architecture, and Phase 1 limitations.
+information architecture, and Phase 1.1 limitations.
 
 ## Reviewer guidance semantic hardening
 

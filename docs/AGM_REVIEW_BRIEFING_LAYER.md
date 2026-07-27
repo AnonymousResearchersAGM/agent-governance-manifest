@@ -1,87 +1,123 @@
 # AGM Review Briefing Layer
 
-Status: Phase 1 development prototype (`agm.review_brief/v0.2-dev`)
+Status: Phase 1.1 read-only prototype (`agm.review_brief/v0.2-dev`)
 
-The Review Briefing Layer is AGM's human-work compiler. It turns an already
-resolved governance case into the smallest useful set of facts, problems,
-human judgments, and next responsibility that an ordinary maintainer needs to
-understand.
+The Review Briefing Layer is AGM's human-work compiler. It translates an
+already-resolved governance case into the current conclusion, owner, blocking
+work, irreducibly human judgment, and supporting explanation that an ordinary
+maintainer can use without first learning the AGM lifecycle.
 
-Phase 1 is read-only. It does not add an action menu, perform item-level
-verification, request repair, alter responsibility, advance the state machine,
-attest, decide, accept, reject, close, or merge.
+Phase 1.1 changes information hierarchy and semantic precision only. It does
+not add actions, findings, obligations, repair requests, attestations,
+verification, decisions, transitions, or case mutations. Phase 2 has not
+started.
 
-## 1. Two compiler levels
+## 1. Two compiler boundaries
 
-AGM now distinguishes two compilation problems:
+The **governance-state compiler** resolves policy, matches rules, compiles the
+union of obligations, binds evidence, enforces authority, derives
+responsibility, and owns lifecycle state.
 
-1. the **governance-state compiler** resolves policy, matches every applicable
-   risk rule, compiles obligations, binds evidence, validates freshness and
-   scope, derives responsibility, and records authority-checked lifecycle
-   state; and
-2. the **human-work compiler** consumes those conclusions and explains the
-   concrete review work to a maintainer who should not have to learn the AGM
-   lifecycle first.
+The **human-work compiler** reads those conclusions and explains:
 
-The data flow is:
+- whether the current reader needs to act;
+- who owns the current work if the reader does not;
+- which exact items require human content judgment;
+- what formal checks the system completed;
+- what blocking problems remain; and
+- what happens next.
 
 ```text
-Governance Case
-+ Policy Snapshot
-+ Matched Rules
-+ Compiled Obligations
-+ Bound Evidence
-+ Agent Declaration
-+ Human Attestation
-+ Findings / Repair
-+ Verification / Decision
+Governance Case + Policy Snapshot + canonical lifecycle records
         |
         v
 Reviewer Guidance View
-  governance state, workflow, trace, legal operation surface
+governance state, traceability, legal operation surface
         |
         v
 Review Brief View
-  change, risk, system facts, human judgment queue, next responsibility
+current conclusion, owner, human work, explanation
 ```
 
-The implementation may compile the brief directly from stable domain records,
-but it reuses Reviewer Guidance requirement comparisons and responsibility
-derivation. It never resolves selectors, unions obligations, validates
-authority, or predicts transitions again.
+The brief may compile directly from stable domain records, but it reuses
+Reviewer Guidance requirement comparisons and the same canonical lifecycle
+facts. It never resolves risk selectors, compiles obligations, derives
+authority, creates a finding, or predicts a transition. If Reviewer Guidance
+and Review Brief disagree about material state, responsibility, verification,
+or final acceptance, the disagreement is a compiler defect.
 
-## 2. Layer relationship
+## 2. Current-next-step-first hierarchy
 
-The two presentation layers serve different readers:
+HTML and Markdown use this order:
 
-| Layer | Primary purpose | Main concepts |
+1. contribution identity;
+2. a prominent current-status and next-step card;
+3. human judgment items, only when present;
+4. contribution and risk summary;
+5. contribution-side or accountable-human outstanding work;
+6. blocking problems and system-handled anomalies;
+7. requirement and automatic-check summaries;
+8. default-collapsed complete requirements;
+9. default-collapsed automatic-check and accountability detail; and
+10. default-collapsed governance process and technical records.
+
+The first status card states whether the maintainer acts now, the responsible
+party, the item count, and the acceptance boundary. A user does not need to
+scroll to discover the current route.
+
+The five-step Reviewer Guidance workflow is not Review Brief navigation.
+Workflow, internal state names, rule and obligation IDs, finding and repair
+IDs, transitions, traces, and fingerprints remain in technical details.
+
+## 3. Semantic vocabulary
+
+One broad “system confirmed” label is not sufficient. Brief records use
+non-overlapping semantic claims:
+
+| State | Participant wording | Meaning |
 | --- | --- | --- |
-| Reviewer Guidance | Governance-state and operation traceability | workflow, state, requirement comparison, finding, repair, legal action, preview |
-| Review Brief | Ordinary maintainer work understanding | what changed, why risky, what the system confirmed, what is wrong, what only a human can judge, who acts next |
+| `material_available` | 材料已提供 | A material record exists. |
+| `structure_valid` | 形式要求已满足 | Required fields or command/result structure are present. |
+| `version_bound` | 已对应当前版本 | The record binds the current contribution or has canonical retained-scope metadata. |
+| `system_checked` | 材料与版本已核对 | The system completed available formal and binding checks. |
+| `human_review_required` | 材料齐备，内容待人工检查 | Formal prerequisites are ready but content validity needs a human. |
+| `human_verified` | 维护者已完成检查 | A legal maintainer-side verification record exists. |
+| `final_decision_pending` | 等待最终人类决定 | Verification is complete but acceptance has not occurred. |
+| `accepted` | 贡献已被最终接受 | An authorized final accept decision exists. |
 
-The Review Brief's folded technical details contain the complete Reviewer
-Guidance view and canonical records. Both layers therefore point back to the
-same case conclusion. If a brief and guidance view ever disagree about
-material validity, responsibility, verification, or final acceptance, that is
-a compiler defect; the brief has no authority to choose a different answer.
+A supplied, structurally valid, current-version statement can therefore show
+`material_available`, `structure_valid`, `version_bound`, and
+`human_review_required` together without contradiction. It is not presented
+as content correctness.
 
-## 3. Public API and modules
+For Phase 1 API compatibility, the original coarse `status` values remain in
+serialized requirement and automatic-check records. Phase 1.1 adds
+`semantic_status` and `semantic_states`; presenters use those precise fields.
+Existing consumers can migrate without losing their original field.
+
+A recorded passing test result proves only that a checkable command/result
+record exists and is bound; it does not prove correct code or sufficient
+coverage. An agent declaration remains a declaration. Attestation binding is
+not proof that the statement is truthful. Maintainer verification is not
+final acceptance.
+
+## 4. Domain records and API
 
 The implementation lives in `src/agm/vnext/briefing/`:
 
-- `models.py`: immutable serializable briefing records;
-- `compiler.py`: top-level pure compiler and technical trace index;
-- `change_summary.py`: path- and declaration-aware contribution summary;
-- `risk_summary.py`: plain explanation of recorded matched rules and
-  interaction conclusions;
-- `evidence_summary.py`: requirement buckets and automatic checks;
-- `accountability.py`: agent declaration and accountable-human separation;
-- `judgment_queue.py`: human-only review work;
-- `next_step.py`: one responsibility-aligned next step;
-- `presenters.py`: JSON, Markdown, and standalone HTML;
+- `models.py`: immutable records, `BriefSemanticState`, and `WorkOwner`;
+- `compiler.py`: pure top-level compiler and technical trace index;
+- `change_summary.py`: conservative path- and declaration-based summary;
+- `risk_summary.py`: explanation of engine-recorded risk conclusions;
+- `evidence_summary.py`: requirement semantics and policy-gated checks;
+- `accountability.py`: observed, declared, attested, and inferred separation;
+- `judgment_queue.py`: provenance-constrained human review work;
+- `next_step.py`: one business-level current route;
+- `work_items.py`: owner-labelled summaries derived from existing facts;
+- `presenters.py`: JSON, Markdown, and standalone HTML; and
 - `server.py`: loopback-only GET server with no mutation route.
 
-The core API is:
+The core API remains:
 
 ```python
 compile_review_brief(
@@ -93,184 +129,148 @@ compile_review_brief(
 ) -> ReviewBriefView
 ```
 
-`GovernanceService.review_brief()` supplies the stored case, current loaded
-policy context, transition history, migration diagnostic, and actor context.
-The compiler is deterministic and performs no storage writes. The CLI writer
-persists only `brief.json`, `brief.md`, and `brief.html`.
+The returned view includes `WorkItemSummary` records. Each record names one of:
 
-## 4. Provenance model
+- `system`;
+- `contribution_side`;
+- `accountable_human`;
+- `maintainer`; or
+- `final_decision_authority`.
 
-Participant wording must keep four epistemic categories separate:
+It also states whether the item is blocking, whether the system already
+handled it, and which safe public requirement/trace references link to folded
+technical records.
 
-1. **system-confirmed** — facts AGM can verify from its own records, such as
-   current version binding, expiry, artifact presence/hash, changed-file list
-   equality, command/result field presence, attestation binding, structural
-   requirements, denied authority attempts, and unchanged state after denial;
-2. **declared** — contribution summary, rationale, impact statement, known
-   limitations, agent action scope, capability, supervision, and delegation
-   supplied by an agent or contributor;
-3. **human-confirmed** — an accountable human's explicit reviewed scope,
-   statement, reservations, and current version/material binding; and
-4. **unverified inference** — path-based component or risk-oriented summaries
-   that help navigation but do not prove source-code semantics.
+## 5. Contribution and risk summaries
 
-Agent self-report is never promoted to system observation. A recorded command
-and result is not proof that the code is correct or that the test coverage is
-sufficient. A valid attestation binding is not proof that the human statement
-is truthful. AGM is not an AI detector and does not infer human authorship
-from the absence of an agent declaration.
+`ContributionBrief` keeps two sources separate:
 
-## 5. Contribution summary
+- a contribution-side claim, labelled as a claim; and
+- a conservative inference from changed paths, matched risk areas, semantic
+  targets, and explicit structured declarations.
 
-`ContributionBrief` answers “what changed?” using two parallel descriptions:
+Path categories include authentication/authorization, configuration,
+testing, governance/runtime, documentation, application, and other project
+content. This supports navigation but does not claim function-level semantic
+understanding.
 
-- the latest usable contribution summary, clearly labelled as contributor
-  material and naming its recorded source; and
-- a conservative system inference based only on changed paths, matched risk
-  areas, supplied semantic targets, and explicit structured declarations.
+`RiskBrief` reads the case's recorded overall risk, all matched rules,
+affected paths, interaction IDs already attached to compiled obligations, and
+the already-compiled independent-review obligation. It does not perform risk
+matching in the presentation layer.
 
-Paths are grouped into components such as authentication/authorization,
-configuration/dependencies, tests, governance/runtime, documentation, and
-application code. Security, configuration, governance, and test paths remain
-separately addressable. The compiler does not claim to understand a function's
-behavior merely because a filename contains `auth` or `config`.
+## 6. Requirement semantics
 
-## 6. Risk explanation
+`RequirementBrief` remains organized by maintainer language. Its compatibility
+buckets still separate:
 
-`RiskBrief` does not calculate risk. It reads:
+- material that has completed its current formal or human-verification stage;
+- material whose content requires human judgment;
+- missing, stale, and invalid material;
+- accountable-human confirmation;
+- independent maintainer review; and
+- non-applicable requirements.
 
-- `GovernanceCase.overall_risk_level`;
-- every recorded `MatchedRule`;
-- the affected paths and selector reasons already retained by the engine;
-- interaction IDs already attached to compiled obligations; and
-- the presence of the already-compiled independent-review obligation.
+Each `RequirementItem` additionally exposes precise semantic states and a
+`WorkOwner`. Missing, stale, and invalid required material belongs to the
+contribution side. Attestation belongs to the accountable human. Content or
+independent review belongs to the maintainer. Completed formal checks belong
+to the system only in the sense that no participant action is currently
+assigned; they are not content approval.
 
-The participant sees the union of risk areas, a path-to-area explanation, the
-business meaning of interaction escalation, and whether independent review is
-required. Raw rule IDs and obligation IDs stay in technical details.
+## 7. Canonical gating for automatic checks
 
-## 7. Requirements and automatic checks
+`AutomaticCheckResult` explicitly records:
 
-`RequirementBrief` organizes work by maintainer language rather than
-obligation code. Every required item has exactly one briefing status:
+- `policy_required`;
+- `blocking`;
+- safe `requirement_refs`;
+- `informational_only`;
+- `owner`; and
+- `system_handled`.
 
-- `system_satisfied`;
-- `provided_requires_human_judgment`;
-- `missing`;
-- `stale`;
-- `invalid`;
-- `awaiting_accountable_human`;
-- `awaiting_independent_review`; or
-- `not_applicable`.
+Missing, blocking, required-to-continue, or contributor-todo wording is
+permitted only when backed by a compiled obligation, active matched rule,
+binding requirement, existing finding, transition prerequisite, or canonical
+migration diagnostic.
 
-The mapping consumes `RequirementComparison.material_status`,
-`workflow_status`, requirement type, and recorded verification. It does not
-revalidate evidence or compile policy.
+Agent involvement alone does not create `O-AGENT-SCOPE`. If that obligation is
+absent, a missing action/delegation statement is shown only as a gray
+informational observation. It does not enter missing requirements, the human
+queue, responsibility, progression, or findings.
 
-`AutomaticCheckResult` covers:
+Automatic checks distinguish system integrity checks from policy-required
+checks and informational observations. Passed checks are folded by default;
+real blocking problems remain visible.
 
-- material/current-version binding;
-- test command and result structure;
-- test material's current-version binding;
-- evidence expiry;
-- accountable-human attestation binding;
-- declared versus recorded changed-file scope;
-- recorded agent-involvement profile;
-- presence of an action/delegation declaration;
-- denied authority attempts and whether state changed; and
-- structural requirement completion.
+## 8. Human judgment provenance
 
-Automatic results use `confirmed`, `problem`, `needs_human_judgment`, or
-`not_applicable`. A “confirmed test record” means only that the command,
-environment, result, and binding are structurally checkable.
+Every `HumanJudgmentItem` contains a safe requirement reference and explicit
+provenance. Legal sources are:
 
-## 8. Contributor accountability
+- a compiled requirement whose material is ready for content review;
+- an existing maintainer-review stage;
+- an independent-review requirement;
+- an existing finding; or
+- the exact obligation scope of recorded scoped revalidation.
 
-`ContributorAccountabilityBrief` presents:
+Missing or stale material never becomes maintainer judgment. Verified or
+terminal work does not re-enter the queue. Scoped repair includes only the
+recorded affected scope.
 
-- whether the case is on an agent-mediated path;
-- capability and action-scope values from the recorded autonomy profile;
-- system-observed governance events, such as which actor identity submitted
-  evidence or supplied command records;
-- agent/contributor declarations about actions and delegation;
-- declaration source and presence;
-- accountable-human identity, reviewed scope, status, and current binding; and
-- explicit inference limitations.
+A denied attempted operation is never provenance for new human work. The
+Phase 1 fallback that selected contribution summary after a denied attempt was
+removed in Phase 1.1.
 
-`delegation_detected` describes what the declaration says, not a behavioral
-fact discovered independently by AGM.
+## 9. System-handled anomalies
 
-## 9. Human judgment queue
+Denied authority attempts are shown as **系统已处理的异常**:
 
-`HumanJudgmentItem` is the central Phase 1 output. Each item has a stable
-presentation key suitable for a future item-level action, but no Phase 1
-action is attached.
+- the attempted operation was rejected;
+- no valid maintainer verification was produced;
+- state did not change when the audit record says it did not; and
+- the participant does not need to reject it again.
 
-An item contains:
+The event remains in folded technical audit records. It may provide security
+visibility, but it cannot create an obligation, judgment target, repair, or
+finding in the briefing layer.
 
-- why automation must stop;
-- the contributor claim;
-- the system observation that motivates review;
-- a concise evidence summary;
-- concrete review focus questions;
-- possible human outcomes;
-- priority and blocking meaning; and
-- a safe public trace reference whose raw objects live only in technical
-  detail.
+## 10. Accountability boundary
 
-Queue rules are:
+`ContributorAccountabilityBrief` separates:
 
-- missing materials do not become maintainer judgment;
-- stale or invalid materials remain contribution-side work;
-- pending accountable-human confirmation is not maintainer judgment;
-- verified or terminal work does not re-enter the queue;
-- scoped repair contributes only the recorded revalidation scope;
-- a low-risk contribution may have an empty AGM judgment queue; and
-- independent review remains a human item only after its prerequisites are
-  ready.
+- system-observed governance events;
+- agent or contributor declarations;
+- accountable-human confirmation;
+- current version and material-set binding; and
+- unverified inference limitations.
 
-The queue does not ask a maintainer to repeat current-version, expiry, hash,
-field-presence, changed-file equality, or authority checks that AGM has already
-completed.
+Participant labels avoid fixture actor IDs and tool names. Complete actor IDs,
+source tools, evidence IDs, and attestation statements remain available in
+technical records.
 
-## 10. Automatic routing and next step
+## 11. Routing and acceptance
 
-`NextStepBrief` emits one current business-level route:
+`NextStepBrief` emits one current route:
 
 - contribution-side material update;
 - accountable-human confirmation;
-- policy-migration attention;
-- maintainer judgment;
-- normal code review with no extra AGM judgment;
+- policy-migration assessment;
+- maintainer content judgment;
+- normal code review with no additional AGM judgment;
 - final authorized human decision; or
 - completed/closed.
 
-The route names the responsible party, what AGM will continue to check or
-preserve, and what the human should do now. It never exposes a generic
-reject/repair/return/resubmit menu.
+Policy migration is surfaced in the top status card because an old-snapshot
+requirement list must not be mistaken for a silent migration result. It does
+not override the owner derived from current canonical work: if required
+materials are still missing, the contribution side remains responsible while
+the card also reports unchanged and revalidation counts.
 
-Routing text can describe a contribution-side todo derived from current gaps,
-but the Phase 1 compiler does not create a new domain record. Existing engine
-responsibility and lifecycle services remain authoritative.
+No generic action menu is shown. A route does not execute the underlying
+action. Verification completion and final acceptance remain separate.
 
-## 11. Information architecture
-
-The participant-visible page order is:
-
-1. contribution and changed scope;
-2. risk conclusion and reason;
-3. project requirements and completion;
-4. system-confirmed facts;
-5. system-detected problems and declared facts the system cannot judge;
-6. the human judgment queue;
-7. the one current next step; and
-8. collapsed governance process and technical detail.
-
-The five-step Reviewer Guidance workflow is not the main navigation. Raw
-states, transitions, obligation/finding/evidence/repair IDs, fingerprints, and
-generic action lists appear only inside the folded technical section.
-
-## 12. CLI and outputs
+## 12. CLI, deterministic demos, and CI
 
 ```bash
 python -m agm.vnext.cli maintainer brief \
@@ -280,36 +280,30 @@ python -m agm.vnext.cli maintainer brief \
   --serve
 ```
 
-The command writes beside the case:
+The command writes `brief.json`, `brief.md`, and `brief.html`. Serving is
+loopback-only and GET-only.
 
-- `brief.json`;
-- `brief.md`; and
-- `brief.html`.
-
-The server binds only to loopback, supports GET only, and returns method-not-
-allowed for POST. There are no action tokens because Phase 1 has no action
-endpoint.
-
-The deterministic scenario generator is:
+The eight design scenarios are regenerated and verified with:
 
 ```bash
 python scripts/generate_review_briefing_demos.py
+python scripts/check_review_briefing_demo_hashes.py
+git diff --exit-code
 ```
 
-It compiles the existing eight governance scenarios under
-`examples/review_briefing/outputs/`. These are design-review fixtures, not a
-formal experiment package, human verification, final decision, or accepted
-artifact.
+The frozen hash manifest covers all 24 JSON/Markdown/HTML outputs plus
+`manifest.json`. The repository CI runs these commands explicitly on Windows
+and Ubuntu. Fixture prose is natural participant language; generator names,
+actor IDs, internal states, and other research identifiers remain only in
+technical details.
 
-## 13. Phase 1 limitations
+## 13. Remaining limitations
 
-- Path classification is conservative and does not parse code semantics.
-- Agent capabilities and delegation are recorded configuration/declaration,
-  not complete runtime provenance.
-- The queue offers review focus and possible outcomes but no item-level
-  mutation.
-- Normal code review remains outside AGM's automatic checks.
-- External identity, signature, hosted storage, platform review, branch
-  protection, and merge authority are not implemented.
-- Human review of the information architecture is still required before
-  Phase 2 state-changing actions are designed.
+- Path classification does not parse code semantics.
+- Agent capabilities and delegation are configuration or declaration, not a
+  complete runtime provenance system.
+- Identity and truthfulness require external systems.
+- Normal code review remains outside automatic AGM checks.
+- Phase 1.1 has no item-level actions or mutation routes.
+- The artifact remains `pending_human_review`; review is not approval.
+- Phase 2 and a P92 experiment package have not started.

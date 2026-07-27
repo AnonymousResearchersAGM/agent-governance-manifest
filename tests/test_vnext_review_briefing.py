@@ -174,7 +174,8 @@ def test_declared_summary_and_system_inference_remain_distinct(
         "contribution"
     ]
     assert contribution["plain_summary"] == (
-        "Implemented the scenario contribution."
+        "本次贡献修正文档中的命令拼写，并更新一个失效链接；"
+        "未修改代码、配置、依赖或执行逻辑。"
     )
     assert contribution["summary_source"].startswith("贡献者声明")
     assert contribution["system_inferred_summary"] != contribution[
@@ -397,6 +398,9 @@ def test_unauthorized_attempt_is_rejected_without_state_change(
         if item["check_type"] == "authority_boundary"
     )
     assert check["status"] == "problem"
+    assert check["semantic_status"] == "system_handled"
+    assert check["system_handled"] is True
+    assert check["blocking"] is False
     assert "治理状态没有变化" in check["plain_result"]
     attempts = payload["governance_details"]["attempted_operations"]
     assert attempts[-1]["state_changed"] is False
@@ -452,7 +456,7 @@ def test_only_system_unanswerable_content_enters_queue(generated_briefs):
         ("01_multi_risk_missing", "awaiting_contributor"),
         ("02_material_partial_invalidation", "awaiting_contributor"),
         ("03_scoped_repair", "maintainer_judgment"),
-        ("04_unauthorized_agent_verification", "maintainer_judgment"),
+        ("04_unauthorized_agent_verification", "normal_code_review"),
         ("05_lightweight_low_risk", "normal_code_review"),
         ("06_governance_self_modification", "maintainer_judgment"),
         ("07_policy_migration_warning", "awaiting_contributor"),
@@ -519,9 +523,8 @@ def test_participant_visible_html_hides_governance_internals(
     visible = participant_text(rendered)
     assert not any(term in visible for term in FORBIDDEN_MAIN_TERMS)
     assert "<form" not in rendered
-    assert "本次贡献与修改" in visible
-    assert "现在需要你判断" in visible
-    assert "当前下一步" in visible
+    assert "本次修改与风险" in visible
+    assert "当前结论" in visible
 
 
 def test_json_main_uses_safe_refs_and_technical_details_keep_raw_ids(

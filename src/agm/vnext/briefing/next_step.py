@@ -6,9 +6,11 @@ from typing import Any
 
 from ..models import GovernanceCase
 from .models import (
+    BriefSemanticState,
     HumanJudgmentItem,
     NextStepBrief,
     RequirementBrief,
+    WorkOwner,
 )
 
 
@@ -33,13 +35,14 @@ def compile_next_step(
         accepted = decision == "accept"
         return NextStepBrief(
             status="completed",
-            display_title=(
-                "贡献已由人类维护者接受"
-                if accepted
-                else "该治理案例已经结束"
-            ),
+            display_title="本次治理案例已经关闭",
             plain_explanation=(
-                "最终决定已由获授权的人类维护者记录，并生成关闭记录。"
+                (
+                    "具有最终决定权的人类维护者已经接受本次贡献；"
+                    "最终决定和治理记录已经归档。"
+                )
+                if accepted
+                else "最终决定和治理记录已经归档。"
             ),
             responsible_party="无待处理责任方",
             system_will_do=("保留最终决定、关闭记录和完整审计轨迹。",),
@@ -53,7 +56,34 @@ def compile_next_step(
                     else "closed_without_acceptance"
                 )
             ),
+            owner=WorkOwner.SYSTEM,
+            semantic_state=(
+                BriefSemanticState.ACCEPTED.value
+                if accepted
+                else BriefSemanticState.HUMAN_VERIFIED.value
+            ),
         )
+
+    policy_changed = bool(
+        migration_diagnostic
+        and getattr(migration_diagnostic, "policy_changed", False)
+    )
+    unchanged = (
+        len(getattr(migration_diagnostic, "still_valid_obligations", ()))
+        if policy_changed
+        else 0
+    )
+    revalidation = (
+        len(
+            getattr(
+                migration_diagnostic,
+                "evidence_requiring_revalidation",
+                (),
+            )
+        )
+        if policy_changed
+        else 0
+    )
 
     contributor_items = (
         requirements.missing + requirements.stale + requirements.invalid
@@ -62,11 +92,30 @@ def compile_next_step(
         stale = bool(requirements.stale)
         return NextStepBrief(
             status="awaiting_contributor",
-            display_title="当前不能进入维护者检查",
+            display_title=(
+                "项目规则已变化，当前无需你操作"
+                if policy_changed
+                else "当前无需你操作"
+            ),
             plain_explanation=(
-                "缺少、过期或无效材料需要由贡献侧先处理。"
+                (
+                    f"规则比较显示 {unchanged} 项既有要求没有改变，"
+                    f"{revalidation} 份现有材料需要重新核对；"
+                    f"贡献侧仍需补充或更新 {len(contributor_items)} 项材料。"
+                    "系统不会把全部材料笼统判为失效，也不会静默迁移案例。"
+                )
+                if policy_changed
+                else (
+                    f"贡献侧仍需补充或更新 {len(contributor_items)} 项材料；"
+                    "材料准备完成后，AGM 才会进入维护者检查阶段。"
+                )
                 if not stale
-                else "至少一份材料仍对应旧版本，当前无需维护者判断其内容。"
+                else (
+                    "只有"
+                    + "、".join(_titles(contributor_items))
+                    + "需要按当前版本更新；"
+                    "未受影响的有效材料继续保留，当前无需维护者检查。"
+                )
             ),
             responsible_party="贡献者或贡献侧智能体",
             system_will_do=(
@@ -79,12 +128,14 @@ def compile_next_step(
                 "等待贡献侧补齐：" + "、".join(_titles(contributor_items)),
             ),
             final_acceptance_state="not_decided",
+            owner=WorkOwner.CONTRIBUTION_SIDE,
+            semantic_state=BriefSemanticState.SYSTEM_CHECKED.value,
         )
 
     if requirements.awaiting_accountable_human:
         return NextStepBrief(
             status="awaiting_accountable_human",
-            display_title="当前等待负责人确认",
+            display_title="当前无需你操作",
             plain_explanation=(
                 "负责人需要确认已审阅当前版本、智能体行动说明准确，"
                 "并愿意对明确范围负责。"
@@ -93,42 +144,51 @@ def compile_next_step(
             system_will_do=("确认后核对其版本、材料集合和审阅范围绑定。",),
             human_should_do=("维护者当前无需操作。",),
             final_acceptance_state="not_decided",
+            owner=WorkOwner.ACCOUNTABLE_HUMAN,
+            semantic_state=BriefSemanticState.SYSTEM_CHECKED.value,
         )
 
-    policy_changed = bool(
-        migration_diagnostic
-        and getattr(migration_diagnostic, "policy_changed", False)
-    )
     if policy_changed:
         return NextStepBrief(
             status="policy_migration_attention",
-            display_title="当前规则快照与项目规则不同",
+            display_title="项目治理规则已经发生变化",
             plain_explanation=(
-                "系统只报告规则变化，不会静默迁移案例或改变既有结论。"
+                f"规则比较显示 {unchanged} 项既有要求没有改变，"
+                f"{revalidation} 份现有材料需要重新核对；"
+                "系统不会把全部材料笼统判为失效，也不会静默迁移案例。"
             ),
             responsible_party="项目规则负责人或获授权的人类维护者",
-            system_will_do=("保留案例原始规则快照和当前规则比较结果。",),
-            human_should_do=("按项目权限决定是否以及如何迁移；本页面不会执行迁移。",),
+            system_will_do=(
+                "保留案例原始规则快照和当前规则比较结果。",
+                "明确列出可保留范围和需要重新评估的范围。",
+            ),
+            human_should_do=(
+                "先按项目权限决定是否以及如何迁移；本页面不会执行迁移。",
+            ),
             final_acceptance_state="not_decided",
+            owner=WorkOwner.MAINTAINER,
+            semantic_state=BriefSemanticState.HUMAN_REVIEW_REQUIRED.value,
         )
 
     if judgments:
         return NextStepBrief(
             status="maintainer_judgment",
-            display_title=f"现在轮到你检查 {len(judgments)} 项",
+            display_title=f"现在需要你检查 {len(judgments)} 项",
             plain_explanation=(
                 "形式化检查已经完成到当前阶段；下面只列出系统不能替代"
                 "人类作出的判断。"
             ),
             responsible_party="维护者侧检查人员",
             system_will_do=(
-                "继续保留系统已确认的材料和未受影响范围。",
+                "继续保留已完成形式与绑定核对的材料和未受影响范围。",
                 "检查完成后把案例路由到最终人类决定阶段。",
             ),
             human_should_do=tuple(
                 f"检查：{item.display_title}" for item in judgments
             ),
             final_acceptance_state="not_decided",
+            owner=WorkOwner.MAINTAINER,
+            semantic_state=BriefSemanticState.HUMAN_REVIEW_REQUIRED.value,
         )
 
     if case.state in {
@@ -138,7 +198,7 @@ def compile_next_step(
     }:
         return NextStepBrief(
             status="awaiting_final_human_decision",
-            display_title="维护者检查已经完成",
+            display_title="治理材料检查已经完成",
             plain_explanation=(
                 "下一阶段是由具有最终决定权的人类维护者决定是否接受贡献；"
                 "检查完成不等于贡献已被接受。"
@@ -147,12 +207,14 @@ def compile_next_step(
             system_will_do=("保留检查记录并等待最终人类决定。",),
             human_should_do=("作出明确的最终接受、拒绝、要求修改或关闭决定。",),
             final_acceptance_state="not_decided",
+            owner=WorkOwner.FINAL_DECISION_AUTHORITY,
+            semantic_state=BriefSemanticState.FINAL_DECISION_PENDING.value,
         )
 
     if case.overall_risk_level in {"low", "medium"}:
         return NextStepBrief(
             status="normal_code_review",
-            display_title="可以进入正常代码审查",
+            display_title="无需额外 AGM 治理判断",
             plain_explanation=(
                 "本次无需额外 AGM 治理判断，可以进入正常代码审查。"
             ),
@@ -160,6 +222,8 @@ def compile_next_step(
             system_will_do=("保留已完成的结构与绑定核对结果。",),
             human_should_do=("按项目常规方式审查代码质量和功能影响。",),
             final_acceptance_state="not_decided",
+            owner=WorkOwner.MAINTAINER,
+            semantic_state=BriefSemanticState.SYSTEM_CHECKED.value,
         )
 
     return NextStepBrief(
@@ -170,4 +234,6 @@ def compile_next_step(
         system_will_do=("保持当前治理结论和材料绑定不变。",),
         human_should_do=("检查页面列出的风险相关材料。",),
         final_acceptance_state="not_decided",
+        owner=WorkOwner.MAINTAINER,
+        semantic_state=BriefSemanticState.HUMAN_REVIEW_REQUIRED.value,
     )

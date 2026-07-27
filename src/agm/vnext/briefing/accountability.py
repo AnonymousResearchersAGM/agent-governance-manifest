@@ -12,6 +12,16 @@ from .change_summary import latest_evidence_value, normalize_contribution
 from .models import ContributorAccountabilityBrief
 
 
+PROFILE_VALUE_LABELS = {
+    "workspace": "可修改工作区文件并提供命令执行记录",
+    "task-bounded": "行动范围限制在本次任务内",
+    "project-bounded": "行动范围限制在本项目内",
+    "session": "仅在当前工作会话内持续",
+    "extended": "可以在较长任务周期内持续",
+    "none": "无持续性智能体会话",
+}
+
+
 def _as_lines(value: Any) -> list[str]:
     if value is None:
         return []
@@ -94,11 +104,24 @@ def compile_accountability_brief(
         action_scope = str(profile.get("action_scope", "")).strip()
         persistence = str(profile.get("persistence", "")).strip()
         if permissions:
-            capabilities.append(f"权限范围记录：{permissions}")
+            capabilities.append(
+                "权限范围："
+                + PROFILE_VALUE_LABELS.get(permissions, "已按项目配置记录")
+            )
         if action_scope:
-            capabilities.append(f"行动范围记录：{action_scope}")
+            capabilities.append(
+                "行动范围："
+                + PROFILE_VALUE_LABELS.get(
+                    action_scope, "已按项目配置记录"
+                )
+            )
         if persistence:
-            capabilities.append(f"持续性记录：{persistence}")
+            capabilities.append(
+                "持续方式："
+                + PROFILE_VALUE_LABELS.get(
+                    persistence, "已按项目配置记录"
+                )
+            )
         capabilities.extend(_as_lines(declaration.get("agent_capabilities")))
 
     scope_value, scope_source = latest_evidence_value(
@@ -195,9 +218,11 @@ def compile_accountability_brief(
     human_confirmed = []
     if latest and latest.status == "confirmed":
         human_confirmed.append(
-            f"{latest.actor} 确认审阅了明确列出的当前范围。"
+            "人类负责人确认审阅了明确列出的当前范围。"
         )
-        human_confirmed.append(f"确认声明：{latest.statement}")
+        human_confirmed.append(
+            f"确认范围包含当前记录的 {len(latest.reviewed_scope)} 个文件或审阅范围。"
+        )
         if latest.reservations:
             human_confirmed.append(
                 "保留意见：" + "；".join(latest.reservations)
@@ -209,10 +234,10 @@ def compile_accountability_brief(
         else ("missing" if agent_used else "not_required")
     )
     declaration_source = (
-        str(declaration.get("source"))
+        "贡献侧提供的智能体行动声明"
         if declaration.get("source")
         else (
-            scope_source
+            "治理材料中的智能体行动与委派声明"
             if scope_source
             else ("未记录" if agent_used else "当前不要求")
         )
@@ -228,7 +253,7 @@ def compile_accountability_brief(
         delegation_detected=_delegation_claim(scope_value, declaration),
         declaration_source=declaration_source,
         declaration_status=declaration_status,
-        accountable_human=latest.actor if latest else None,
+        accountable_human="人类负责人" if latest else None,
         attestation_status=attestation_status,
         attestation_scope=tuple(latest.reviewed_scope) if latest else (),
         attestation_version_binding=binding,

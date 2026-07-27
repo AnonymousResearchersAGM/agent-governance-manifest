@@ -1,103 +1,23 @@
 # AGM Maintainer Review Brief
 
-## 1. 本次贡献与修改
+## AGM 风险规则与执行逻辑调整
 
-### 本次贡献
+## 当前状态与下一步
 
-贡献者说明：Implemented the scenario contribution.
+### 现在需要你检查 4 项
 
-说明来源：贡献者声明，来源：contributor-agent（通过 scenario-generator 记录）
+形式化检查已经完成到当前阶段；下面只列出系统不能替代人类作出的判断。
 
-系统根据文件和声明归纳：更新治理或治理运行时文件：.agm/manifest.yml；更新治理或治理运行时文件：src/agm/vnext/risk.py
+当前责任方：维护者侧检查人员
 
-影响范围：
+- 检查：独立维护者检查
+- 检查：已知限制
+- 检查：项目规则影响说明
+- 检查：修改原因
 
-- AGM 治理与执行支持
+> 检查完成不等于贡献已被接受；最终决定仍由有权人类维护者作出。
 
-可能的行为影响：
-
-- 可能影响项目治理要求
-- 可能影响治理规则的执行结果
-
-> 归纳边界：系统归纳只依据文件路径、已匹配风险区域和明确声明，不代表系统已经证明代码的真实语义或行为。
-
-### 智能体与负责人
-
-智能体使用：当前治理案例未声明智能体参与。
-
-系统观察到的记录：
-
-- 没有额外系统观察记录
-
-智能体或贡献者声明：
-
-- 当前没有智能体行动声明
-
-人类负责人确认：
-
-- 当前风险路径不要求额外确认
-
-尚未核验的推断边界：
-
-- 能力范围来自治理配置或贡献者声明，不证明每项能力实际被使用。
-- AGM 不把智能体自述当作系统观察事实，也不检测未披露的智能体使用。
-
-## 2. 风险判断
-
-综合风险：关键
-
-为什么：
-
-- .agm/manifest.yml 触发了“项目治理规则”风险范围。
-- src/agm/vnext/risk.py 触发了“治理执行逻辑”风险范围。
-
-风险联动：
-
-- 治理规则与治理执行逻辑同时变化，形成自修改联动，需要职责分离的独立检查。
-
-因此需要独立维护者检查。
-
-## 3. 项目要求和完成情况
-
-项目要求 8 项治理材料或确认：
-
-- ✓ 可检查的测试输出或文件 — 系统已确认：已提供与当前贡献和项目规则绑定的材料。
-- ✓ 变更文件清单 — 系统已确认：已提供与当前贡献和项目规则绑定的材料。
-- ○ 独立维护者检查 — 等待独立维护者检查：需要与贡献侧分离的维护者完成独立检查；完成检查不等于接受。
-- ! 已知限制 — 已提供，需要人判断：材料已提供且结构有效；其内容是否与实际修改一致，需要人类判断。
-- ! 项目规则影响说明 — 已提供，需要人判断：材料已提供且结构有效；其内容是否与实际修改一致，需要人类判断。
-- ! 修改原因 — 已提供，需要人判断：材料已提供且结构有效；其内容是否与实际修改一致，需要人类判断。
-- ✓ 修改说明 — 系统已确认：已提供与当前贡献和项目规则绑定的材料。
-- ✓ 测试命令与结果 — 系统已确认：已提供与当前贡献和项目规则绑定的材料。
-
-## 4. 系统已经确认
-
-- ✓ 材料与当前修改版本一致：所有已提供材料都绑定当前版本，或已记录为受影响范围外的保留材料。
-- ✓ 测试是否包含命令和结果：测试材料同时包含可检查的执行说明和结果记录。
-  - 边界：系统确认的是记录完整性，不代表代码正确性，也不证明测试覆盖充分。
-- ✓ 测试材料是否对应当前版本：现有测试材料对应当前贡献版本或已按未受影响范围保留。
-  - 边界：版本一致不代表测试覆盖了所有行为风险。
-- ✓ 材料是否仍在有效期内：现有材料记录没有过期状态。
-- ✓ 声明范围与实际变更文件一致：材料中的变更文件清单与治理案例记录的实际范围一致。
-- ✓ 是否记录了智能体参与：治理案例采用直接人类贡献配置，未声明智能体参与。
-  - 边界：AGM 只呈现治理记录和声明，不是智能体使用检测器。
-- ✓ 是否存在越权操作：当前案例审计记录中没有被拒绝的越权操作。
-  - 边界：结论范围仅限 AGM 已记录的操作。
-- ✓ 结构性项目要求是否满足：当前材料的结构、必填范围和前置确认已达到进入人类判断的条件。
-  - 边界：结构满足不等于语义正确，也不等于贡献已被项目接受。
-
-## 5. 系统发现的问题
-
-- 系统当前没有发现形式化问题。
-
-### 系统无法判断，需要人检查
-
-- ? 声明内容是否与实际修改一致：系统已完成结构和绑定检查，但以下内容仍需人类语义判断：已知限制、项目规则影响说明、修改原因、独立维护者检查。
-  - 边界：系统不会把文件路径推断、贡献者声明或智能体自述当作代码语义证明。
-
-## 6. 现在需要你判断
-
-现在需要你检查 4 项。
+## 现在需要你判断的事项（4 项）
 
 ### 1. 独立维护者检查
 
@@ -125,11 +45,11 @@
 
 为什么需要人：系统能确认材料结构、范围和版本绑定，但不能自动判断声明是否准确描述代码行为和风险。
 
-贡献者说明：This remains a local research prototype.
+贡献者说明：当前结论仅覆盖本次明确列出的修改范围。
 
 系统观察：系统只能确认限制说明已提供，不能证明其完整性。
 
-材料摘要：系统确认有 1 份当前有效材料。
+材料摘要：系统记录有 1 份形式有效且对应当前版本的材料。
 
 请重点检查：
 
@@ -146,11 +66,11 @@
 
 为什么需要人：系统能确认材料结构、范围和版本绑定，但不能自动判断声明是否准确描述代码行为和风险。
 
-贡献者说明：Governance compatibility, self-modification, and migration were assessed.
+贡献者说明：修改涉及治理规则与执行逻辑的一致性、兼容性和迁移影响。
 
 系统观察：系统记录到治理规则、入口或治理执行逻辑发生变化。
 
-材料摘要：系统确认有 1 份当前有效材料。
+材料摘要：系统记录有 1 份形式有效且对应当前版本的材料。
 
 请重点检查：
 
@@ -168,11 +88,11 @@
 
 为什么需要人：系统能确认材料结构、范围和版本绑定，但不能自动判断声明是否准确描述代码行为和风险。
 
-贡献者说明：The scenario change is required by its stated objective.
+贡献者说明：这次修改用于解决贡献说明中列出的具体维护问题。
 
 系统观察：系统只能确认修改理由已提供，不能证明理由与代码语义一致。
 
-材料摘要：系统确认有 1 份当前有效材料。
+材料摘要：系统记录有 1 份形式有效且对应当前版本的材料。
 
 请重点检查：
 
@@ -185,32 +105,121 @@
 - 需要贡献侧补充或更正说明
 - 发现不可接受风险，交由有权人类维护者处理
 
-## 7. 当前下一步
+## 本次修改与风险
 
-### 现在轮到你检查 4 项
+贡献者说明：本次贡献修改项目的 AGM 风险规则和治理执行逻辑，需要职责分离的独立检查。
 
-形式化检查已经完成到当前阶段；下面只列出系统不能替代人类作出的判断。
+系统根据文件和声明归纳：
 
-当前责任方：维护者侧检查人员
+更新治理或治理运行时文件：.agm/manifest.yml；更新治理或治理运行时文件：src/agm/vnext/risk.py
 
-系统会：
+影响范围：
 
-- 继续保留系统已确认的材料和未受影响范围。
-- 检查完成后把案例路由到最终人类决定阶段。
+- AGM 治理与执行支持
 
-人类现在应当：
+综合风险：关键
 
-- 检查：独立维护者检查
-- 检查：已知限制
-- 检查：项目规则影响说明
-- 检查：修改原因
+- .agm/manifest.yml 触发了“项目治理规则”风险范围。
+- src/agm/vnext/risk.py 触发了“治理执行逻辑”风险范围。
 
-> 系统确认、维护者检查完成或具备最终决定条件，都不等于贡献已被接受；最终接受、拒绝或合并决定仍由获授权的人类维护者作出。
+- 治理规则与治理执行逻辑同时变化，形成自修改联动，需要职责分离的独立检查。
+
+> 归纳边界：系统归纳只依据文件路径、已匹配风险区域和明确声明，不代表系统已经证明代码的真实语义或行为。
+
+## 项目要求与自动检查摘要
+
+项目要求 8 项材料或确认。
+- 4 项需要维护者判断
+- 4 项已完成当前阶段的形式核对或人工检查
+
+自动检查：
+- 7 项完成形式或版本核对
+- 0 项发现问题
+- 1 项需要人工判断
+- 0 项异常已由系统处理
 
 <details>
-<summary>8. 治理过程和技术详情</summary>
+<summary>查看全部项目要求</summary>
 
-以下内容用于追溯治理状态、规则、义务、材料、问题、修复、状态变化和 fingerprint；普通审查工作不依赖先理解这些字段。
+- ✓ 可检查的测试输出或文件 — 材料与版本已核对（材料已提供；形式要求已满足；已对应当前版本；材料与版本已核对）
+  - 材料已提供，形式要求有效且对应当前版本；这只表示系统完成了可自动执行的核对，不表示内容正确。
+- ✓ 变更文件清单 — 材料与版本已核对（材料已提供；形式要求已满足；已对应当前版本；材料与版本已核对）
+  - 材料已提供，形式要求有效且对应当前版本；这只表示系统完成了可自动执行的核对，不表示内容正确。
+- ○ 独立维护者检查 — 等待独立维护者检查
+  - 需要与贡献侧分离的维护者完成独立检查；完成检查不等于接受。
+- ! 已知限制 — 材料齐备，内容待人工检查（材料已提供；形式要求已满足；已对应当前版本；内容待人工检查）
+  - 材料已提供，形式要求有效且对应当前版本；内容是否与实际修改一致仍需维护者判断。
+- ! 项目规则影响说明 — 材料齐备，内容待人工检查（材料已提供；形式要求已满足；已对应当前版本；内容待人工检查）
+  - 材料已提供，形式要求有效且对应当前版本；内容是否与实际修改一致仍需维护者判断。
+- ! 修改原因 — 材料齐备，内容待人工检查（材料已提供；形式要求已满足；已对应当前版本；内容待人工检查）
+  - 材料已提供，形式要求有效且对应当前版本；内容是否与实际修改一致仍需维护者判断。
+- ✓ 修改说明 — 材料与版本已核对（材料已提供；形式要求已满足；已对应当前版本；材料与版本已核对）
+  - 材料已提供，形式要求有效且对应当前版本；这只表示系统完成了可自动执行的核对，不表示内容正确。
+- ✓ 测试命令与结果 — 材料与版本已核对（材料已提供；形式要求已满足；已对应当前版本；材料与版本已核对）
+  - 材料已提供，形式要求有效且对应当前版本；这只表示系统完成了可自动执行的核对，不表示内容正确。
+
+</details>
+
+<details>
+<summary>查看自动检查详情</summary>
+
+- ✓ 材料与当前修改版本一致：所有已提供材料都绑定当前版本，或已记录为受影响范围外的保留材料。
+  - 类别：项目规则要求；责任：系统已处理
+- ✓ 测试是否包含命令和结果：测试材料同时包含可检查的执行说明和结果记录。
+  - 类别：项目规则要求；责任：系统已处理
+  - 结论边界：系统确认的是记录完整性，不代表代码正确性，也不证明测试覆盖充分。
+- ✓ 测试材料是否对应当前版本：现有测试材料对应当前贡献版本或已按未受影响范围保留。
+  - 类别：项目规则要求；责任：系统已处理
+  - 结论边界：版本一致不代表测试覆盖了所有行为风险。
+- ✓ 材料是否仍在有效期内：现有材料记录没有过期状态。
+  - 类别：项目规则要求；责任：系统已处理
+- – 负责人确认是否绑定当前版本：当前风险路径不要求额外负责人确认。
+  - 类别：附加信息；责任：系统已处理
+- ✓ 声明范围与实际变更文件一致：材料中的变更文件清单与治理案例记录的实际范围一致。
+  - 类别：项目规则要求；责任：系统已处理
+- i 是否记录了智能体参与：治理案例采用直接人类贡献配置，未声明智能体参与。
+  - 类别：附加信息；责任：系统已处理
+  - 结论边界：AGM 只呈现治理记录和声明，不是智能体使用检测器。
+- – 是否记录继续委派：当前案例未声明智能体参与，因此不触发委派说明要求。
+  - 类别：附加信息；责任：系统已处理
+- ✓ 是否存在越权操作：当前案例审计记录中没有被拒绝的越权操作。
+  - 类别：系统完整性核对；责任：系统已处理
+  - 结论边界：结论范围仅限 AGM 已记录的操作。
+- ✓ 结构性项目要求是否满足：当前材料的结构、必填范围和前置确认已达到进入人类判断的条件。
+  - 类别：项目规则要求；责任：系统已处理
+  - 结论边界：结构满足不等于语义正确，也不等于贡献已被项目接受。
+- ! 声明内容是否与实际修改一致：系统已完成结构和绑定检查，但以下内容仍需人类语义判断：已知限制、项目规则影响说明、修改原因、独立维护者检查。
+  - 类别：项目规则要求；责任：维护者判断
+  - 结论边界：系统不会把文件路径推断、贡献者声明或智能体自述当作代码语义证明。
+
+</details>
+
+<details>
+<summary>查看智能体与负责人材料</summary>
+
+系统观察：
+
+- 没有额外系统观察
+
+贡献侧声明：
+
+- 当前没有相关声明
+
+负责人确认：
+
+- 当前风险路径不要求额外确认
+
+边界：
+
+- 能力范围来自治理配置或贡献者声明，不证明每项能力实际被使用。
+- AGM 不把智能体自述当作系统观察事实，也不检测未披露的智能体使用。
+
+</details>
+
+<details>
+<summary>治理过程与技术详情</summary>
+
+以下内容用于追溯完整 workflow、内部状态、规则、义务、finding、transition、ID、trace 和 fingerprint。
 
 ```json
 {
@@ -493,7 +502,7 @@
       "contribution_fingerprint": "ca3c9b1db2449d4653441d68a96bb549522d33b0721d047b27ba7dece4bf5b41",
       "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
       "evidence_type": "artifact",
-      "value": "Local regression output is attached.",
+      "value": "已附上可在本地检查的测试输出。",
       "command": null,
       "environment": null,
       "artifact_path": "governance-self-mod-tests.txt",
@@ -554,7 +563,7 @@
       "contribution_fingerprint": "ca3c9b1db2449d4653441d68a96bb549522d33b0721d047b27ba7dece4bf5b41",
       "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
       "evidence_type": "known_limitations",
-      "value": "This remains a local research prototype.",
+      "value": "当前结论仅覆盖本次明确列出的修改范围。",
       "command": null,
       "environment": null,
       "artifact_path": null,
@@ -583,7 +592,7 @@
       "contribution_fingerprint": "ca3c9b1db2449d4653441d68a96bb549522d33b0721d047b27ba7dece4bf5b41",
       "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
       "evidence_type": "policy_impact",
-      "value": "Governance compatibility, self-modification, and migration were assessed.",
+      "value": "修改涉及治理规则与执行逻辑的一致性、兼容性和迁移影响。",
       "command": null,
       "environment": null,
       "artifact_path": null,
@@ -612,7 +621,7 @@
       "contribution_fingerprint": "ca3c9b1db2449d4653441d68a96bb549522d33b0721d047b27ba7dece4bf5b41",
       "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
       "evidence_type": "rationale",
-      "value": "The scenario change is required by its stated objective.",
+      "value": "这次修改用于解决贡献说明中列出的具体维护问题。",
       "command": null,
       "environment": null,
       "artifact_path": null,
@@ -641,7 +650,7 @@
       "contribution_fingerprint": "ca3c9b1db2449d4653441d68a96bb549522d33b0721d047b27ba7dece4bf5b41",
       "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
       "evidence_type": "contribution_summary",
-      "value": "Implemented the scenario contribution.",
+      "value": "本次贡献修改项目的 AGM 风险规则和治理执行逻辑，需要职责分离的独立检查。",
       "command": null,
       "environment": null,
       "artifact_path": null,
@@ -670,7 +679,7 @@
       "contribution_fingerprint": "ca3c9b1db2449d4653441d68a96bb549522d33b0721d047b27ba7dece4bf5b41",
       "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
       "evidence_type": "test_command",
-      "value": "The complete local regression suite passed.",
+      "value": "完整本地回归测试已通过。",
       "command": "python -m pytest -q",
       "environment": "Python / local scenario",
       "artifact_path": null,
@@ -3989,7 +3998,7 @@
           "contribution_fingerprint": "ca3c9b1db2449d4653441d68a96bb549522d33b0721d047b27ba7dece4bf5b41",
           "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
           "evidence_type": "artifact",
-          "value": "Local regression output is attached.",
+          "value": "已附上可在本地检查的测试输出。",
           "command": null,
           "environment": null,
           "artifact_path": "governance-self-mod-tests.txt",
@@ -4050,7 +4059,7 @@
           "contribution_fingerprint": "ca3c9b1db2449d4653441d68a96bb549522d33b0721d047b27ba7dece4bf5b41",
           "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
           "evidence_type": "known_limitations",
-          "value": "This remains a local research prototype.",
+          "value": "当前结论仅覆盖本次明确列出的修改范围。",
           "command": null,
           "environment": null,
           "artifact_path": null,
@@ -4079,7 +4088,7 @@
           "contribution_fingerprint": "ca3c9b1db2449d4653441d68a96bb549522d33b0721d047b27ba7dece4bf5b41",
           "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
           "evidence_type": "policy_impact",
-          "value": "Governance compatibility, self-modification, and migration were assessed.",
+          "value": "修改涉及治理规则与执行逻辑的一致性、兼容性和迁移影响。",
           "command": null,
           "environment": null,
           "artifact_path": null,
@@ -4108,7 +4117,7 @@
           "contribution_fingerprint": "ca3c9b1db2449d4653441d68a96bb549522d33b0721d047b27ba7dece4bf5b41",
           "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
           "evidence_type": "rationale",
-          "value": "The scenario change is required by its stated objective.",
+          "value": "这次修改用于解决贡献说明中列出的具体维护问题。",
           "command": null,
           "environment": null,
           "artifact_path": null,
@@ -4137,7 +4146,7 @@
           "contribution_fingerprint": "ca3c9b1db2449d4653441d68a96bb549522d33b0721d047b27ba7dece4bf5b41",
           "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
           "evidence_type": "contribution_summary",
-          "value": "Implemented the scenario contribution.",
+          "value": "本次贡献修改项目的 AGM 风险规则和治理执行逻辑，需要职责分离的独立检查。",
           "command": null,
           "environment": null,
           "artifact_path": null,
@@ -4166,7 +4175,7 @@
           "contribution_fingerprint": "ca3c9b1db2449d4653441d68a96bb549522d33b0721d047b27ba7dece4bf5b41",
           "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
           "evidence_type": "test_command",
-          "value": "The complete local regression suite passed.",
+          "value": "完整本地回归测试已通过。",
           "command": "python -m pytest -q",
           "environment": "Python / local scenario",
           "artifact_path": null,

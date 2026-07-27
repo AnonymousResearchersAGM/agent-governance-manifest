@@ -42,9 +42,13 @@ def latest_evidence_value(
     if not candidates:
         return None, ""
     item = candidates[-1]
-    source = f"{item.source_actor}"
-    if item.source_tool:
-        source += f"（通过 {item.source_tool} 记录）"
+    actor = item.source_actor.lower()
+    if "agent" in actor:
+        source = "贡献侧智能体声明记录"
+    elif "contributor" in actor or "贡献" in actor:
+        source = "贡献者声明记录"
+    else:
+        source = "治理材料中的贡献侧声明"
     return item.value, source
 
 

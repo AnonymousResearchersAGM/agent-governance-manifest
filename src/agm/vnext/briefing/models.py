@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import asdict, dataclass, field
+from enum import Enum
 from typing import Any
 
 
@@ -11,6 +12,29 @@ class BriefRecord:
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
+
+
+class WorkOwner(str, Enum):
+    """Business-level owner labels without exposing governance role IDs."""
+
+    SYSTEM = "system"
+    CONTRIBUTION_SIDE = "contribution_side"
+    ACCOUNTABLE_HUMAN = "accountable_human"
+    MAINTAINER = "maintainer"
+    FINAL_DECISION_AUTHORITY = "final_decision_authority"
+
+
+class BriefSemanticState(str, Enum):
+    """Non-overlapping claims the briefing layer may make about an item."""
+
+    MATERIAL_AVAILABLE = "material_available"
+    STRUCTURE_VALID = "structure_valid"
+    VERSION_BOUND = "version_bound"
+    SYSTEM_CHECKED = "system_checked"
+    HUMAN_REVIEW_REQUIRED = "human_review_required"
+    HUMAN_VERIFIED = "human_verified"
+    FINAL_DECISION_PENDING = "final_decision_pending"
+    ACCEPTED = "accepted"
 
 
 @dataclass(frozen=True)
@@ -50,6 +74,9 @@ class RequirementItem(BriefRecord):
     plain_status: str
     blocking: bool
     trace_refs: tuple[str, ...] = ()
+    semantic_states: tuple[str, ...] = ()
+    owner: WorkOwner = WorkOwner.SYSTEM
+    semantic_status: str = BriefSemanticState.SYSTEM_CHECKED.value
 
 
 @dataclass(frozen=True)
@@ -76,6 +103,13 @@ class AutomaticCheckResult(BriefRecord):
     limitations: tuple[str, ...]
     requires_human_action: bool
     trace_refs: tuple[str, ...] = ()
+    policy_required: bool = False
+    blocking: bool = False
+    requirement_refs: tuple[str, ...] = ()
+    informational_only: bool = False
+    owner: WorkOwner = WorkOwner.SYSTEM
+    system_handled: bool = False
+    semantic_status: str = BriefSemanticState.SYSTEM_CHECKED.value
 
 
 @dataclass(frozen=True)
@@ -109,6 +143,20 @@ class HumanJudgmentItem(BriefRecord):
     priority: str
     blocking: bool
     trace_refs: tuple[str, ...] = ()
+    requirement_refs: tuple[str, ...] = ()
+    provenance: tuple[str, ...] = ()
+    owner: WorkOwner = WorkOwner.MAINTAINER
+
+
+@dataclass(frozen=True)
+class WorkItemSummary(BriefRecord):
+    owner: WorkOwner
+    display_title: str
+    plain_explanation: str
+    blocking: bool
+    system_handled: bool
+    requirement_refs: tuple[str, ...] = ()
+    trace_refs: tuple[str, ...] = ()
 
 
 @dataclass(frozen=True)
@@ -120,6 +168,8 @@ class NextStepBrief(BriefRecord):
     system_will_do: tuple[str, ...]
     human_should_do: tuple[str, ...]
     final_acceptance_state: str
+    owner: WorkOwner = WorkOwner.SYSTEM
+    semantic_state: str = BriefSemanticState.SYSTEM_CHECKED.value
 
 
 @dataclass(frozen=True)
@@ -158,8 +208,10 @@ class ReviewBriefView(BriefRecord):
     human_judgments: tuple[HumanJudgmentItem, ...]
     current_next_step: NextStepBrief
     governance_details: GovernanceTechnicalDetails
+    work_items: tuple[WorkItemSummary, ...] = ()
     schema_version: str = "agm.review_brief/v0.2-dev"
     authority_notice: str = (
-        "系统确认、维护者检查完成或具备最终决定条件，都不等于贡献已被接受；"
+        "系统完成形式与版本核对、维护者完成内容检查或具备最终决定条件，"
+        "都不等于贡献已被接受；"
         "最终接受、拒绝或合并决定仍由获授权的人类维护者作出。"
     )

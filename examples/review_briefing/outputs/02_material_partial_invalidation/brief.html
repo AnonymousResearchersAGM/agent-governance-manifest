@@ -5,127 +5,138 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AGM Maintainer Review Brief</title>
 <style>
-:root { color-scheme: light; --ink:#18212f; --muted:#5d6878; --line:#dbe2ea;
---paper:#fff; --bg:#f3f6f8; --blue:#125da8; --green:#18754d; --amber:#9a5b00;
---red:#ae2f2f; --navy:#153452; }
+:root { color-scheme:light; --ink:#18212f; --muted:#5d6878; --line:#dbe2ea;
+--paper:#fff; --bg:#f3f6f8; --blue:#176b9c; --green:#18754d; --amber:#986000;
+--red:#ae2f2f; --purple:#6654a4; --navy:#153452; --gray:#66717e; }
 * { box-sizing:border-box; }
-body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.6
-system-ui,-apple-system,"Segoe UI","Microsoft YaHei",sans-serif; }
-main { width:min(1120px,calc(100% - 32px)); margin:32px auto 64px; }
+body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.55
+system-ui,-apple-system,"Segoe UI","Microsoft YaHei",sans-serif; overflow-wrap:anywhere; }
+main { width:min(1120px,calc(100% - 32px)); margin:20px auto 64px; }
 .hero { color:white; background:linear-gradient(135deg,#112f4b,#176a83);
-padding:32px; border-radius:20px; box-shadow:0 14px 34px #17324b24; }
-.hero h1 { margin:0 0 8px; font-size:clamp(1.8rem,4vw,3rem); }
-.hero p { max-width:760px; margin:.4rem 0; color:#e7f3fa; }
-section { background:var(--paper); margin:18px 0; padding:28px;
-border:1px solid var(--line); border-radius:16px; }
-h2 { margin:0 0 18px; font-size:1.5rem; color:var(--navy); }
-h3 { margin:.2rem 0 .5rem; }
-h4 { margin:1rem 0 .35rem; }
-.eyebrow { color:var(--blue); font-weight:750; letter-spacing:.06em; }
+padding:22px 28px; border-radius:18px 18px 8px 8px; }
+.hero h1 { margin:0; font-size:clamp(1.7rem,4vw,2.6rem); }
+.hero p { margin:.35rem 0 0; color:#e7f3fa; }
+section,details { background:var(--paper); margin:16px 0; padding:24px;
+border:1px solid var(--line); border-radius:14px; }
+h2 { margin:0 0 16px; font-size:1.4rem; color:var(--navy); }
+h3 { margin:.2rem 0 .5rem; } h4 { margin:1rem 0 .35rem; }
+.status-card { margin-top:0; border-width:2px; box-shadow:0 12px 28px #17324b18; }
+.status-card.waiting { border-color:var(--blue); background:#f3f9fd; }
+.status-card.accountable,.status-card.final { border-color:var(--purple); background:#f7f5ff; }
+.status-card.judgment-needed { border-color:var(--amber); background:#fff9ed; }
+.status-card.ready,.status-card.complete { border-color:var(--green); background:#f1faf5; }
+.status-title { font-size:clamp(1.5rem,4vw,2.2rem); line-height:1.25; margin:.1rem 0 .7rem; }
+.owner-line { font-size:1.05rem; }
+.acceptance-boundary { border-left:5px solid var(--amber); padding:10px 14px;
+background:#fff; border-radius:5px; font-weight:700; }
 .grid,.two-col { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; }
-.fact { border-left:4px solid #76a6bf; padding:4px 0 4px 14px; }
-.fact small,.requirement small { display:block; color:var(--muted); }
-.inference { background:#edf5f9; border-radius:12px; padding:14px; }
-.risk-level { display:inline-block; font-size:1.6rem; font-weight:800; color:white;
-background:var(--red); padding:6px 16px; border-radius:999px; }
-.requirements { list-style:none; padding:0; margin:0; display:grid; gap:10px; }
-.requirement { display:grid; grid-template-columns:34px 1fr; gap:8px;
-border:1px solid var(--line); border-radius:12px; padding:12px; }
-.requirement>span { font-size:1.4rem; font-weight:800; }
-.requirement p { margin:.25rem 0 0; }
-.system_satisfied>span,.confirmed h3 { color:var(--green); }
-.missing>span,.invalid>span,.problem h3 { color:var(--red); }
-.stale>span,.provided_requires_human_judgment>span,
-.awaiting_accountable_human>span,.awaiting_independent_review>span,
-.needs_human_judgment h3 { color:var(--amber); }
-.check { border-left:5px solid var(--line); padding:12px 16px;
-margin:10px 0; background:#fbfcfd; border-radius:8px; }
-.check.confirmed { border-color:var(--green); }
-.check.problem { border-color:var(--red); }
-.check.needs_human_judgment { border-color:var(--amber); }
-.check p { margin:.3rem 0; }
-.limit { color:var(--muted); font-size:.92rem; }
-.judgment { display:grid; grid-template-columns:48px 1fr; gap:14px;
+.summary-card { min-width:0; border:1px solid var(--line); border-radius:12px; padding:18px; }
+.risk-level { display:inline-block; font-size:1.35rem; font-weight:800; color:white;
+background:var(--red); padding:5px 14px; border-radius:999px; }
+.inference { background:#edf5f9; border-radius:10px; padding:12px; }
+.judgment { display:grid; grid-template-columns:48px minmax(0,1fr); gap:14px;
 padding:20px; margin:14px 0; border:2px solid #c8953b; border-radius:14px; }
 .judgment-number { display:grid; place-items:center; align-self:start; width:42px;
 height:42px; border-radius:50%; color:white; background:var(--amber); font-weight:800; }
-.why { color:var(--muted); }
-.next { border-color:#8ab0c9; background:#f4faff; }
-.authority { border-left:6px solid var(--amber); padding-left:14px; }
-.empty { color:var(--muted); }
-.no-work { text-align:center; padding:24px; background:#eef8f3; border-radius:12px; }
-details { background:var(--paper); border:1px solid var(--line); border-radius:14px;
-padding:18px; }
-summary { cursor:pointer; font-weight:750; color:var(--navy); }
+.why,.meta,.limit,.empty { color:var(--muted); }
+.owner-tag { display:inline-block; margin:.2rem 0 .45rem; color:var(--navy);
+background:#eaf1f6; border-radius:999px; padding:3px 10px; font-weight:750; }
+.work-item { border-left:5px solid var(--blue); padding:12px 16px;
+margin:10px 0; background:#f8fbfd; border-radius:8px; }
+.work-item h3,.work-item p { margin:.25rem 0; }
+.check { border-left:5px solid var(--line); padding:12px 16px;
+margin:10px 0; background:#fbfcfd; border-radius:8px; }
+.check.system_checked { border-color:var(--green); }
+.check.problem { border-color:var(--red); }
+.check.human_review_required { border-color:var(--amber); }
+.check.system_handled { border-color:var(--blue); }
+.check.informational,.check.not_applicable { border-color:var(--gray); background:#f5f6f7; }
+.check h3,.check p { margin:.3rem 0; }
+.system-note { color:var(--blue); font-weight:700; }
+summary { cursor:pointer; font-weight:800; color:var(--navy); }
+.requirements { list-style:none; padding:0; margin:16px 0 0; display:grid; gap:10px; }
+.requirement { display:grid; grid-template-columns:34px minmax(0,1fr); gap:8px;
+border:1px solid var(--line); border-radius:12px; padding:12px; }
+.symbol { font-size:1.4rem; font-weight:800; }
+.status-label { display:block; color:var(--muted); }
+.badges { display:flex; flex-wrap:wrap; gap:6px; margin-top:7px; }
+.semantic-badge { color:#275066; background:#eaf3f7; border-radius:999px;
+padding:2px 8px; font-size:.78rem; }
+.missing .symbol,.invalid .symbol,.problem h3 { color:var(--red); }
+.stale .symbol,.human_review_required .symbol,
+.awaiting_accountable_human .symbol,.awaiting_independent_review .symbol { color:var(--amber); }
+.system_checked .symbol,.human_verified .symbol { color:var(--green); }
 pre { max-height:70vh; overflow:auto; padding:16px; background:#111b27;
 color:#e8eef4; border-radius:10px; white-space:pre-wrap; overflow-wrap:anywhere; }
-@media (max-width:720px) { .grid,.two-col { grid-template-columns:1fr; }
-section { padding:20px; } main { width:min(100% - 18px,1120px); margin-top:10px; } }
+@media (max-width:720px) {
+  .grid,.two-col { grid-template-columns:1fr; }
+  .judgment { grid-template-columns:1fr; }
+  section,details { padding:18px; }
+  main { width:min(100% - 16px,1120px); margin-top:8px; }
+  .hero { padding:20px; }
+}
 </style>
 </head>
 <body><main>
 <header class="hero">
-<div class="eyebrow">AGM REVIEW BRIEF</div>
 <h1>维护者审查简报</h1>
-<p>先看修改、风险、系统确认和你现在真正需要判断的事项。治理流程与技术字段收在页面末尾。</p>
+<p>令牌失效说明的后续修订 · 只读治理工作说明</p>
 </header>
-<section id="contribution">
-<h2>1. 本次贡献与修改</h2>
+<section id="current-status" class="status-card waiting">
+<p class="owner-tag">当前结论</p>
+<h2 class="status-title">当前无需你操作</h2>
+<p>只有修改说明需要按当前版本更新；未受影响的有效材料继续保留，当前无需维护者检查。</p>
+<p class="owner-line"><strong>当前责任方：</strong>贡献者或贡献侧智能体</p>
+<ul><li>维护者当前无需选择拒绝、退回或修复操作。</li><li>等待贡献侧补齐：修改说明</li></ul>
+<p class="acceptance-boundary">检查完成不等于贡献已被接受；最终决定仍由有权人类维护者作出。</p>
+</section>
+
+<section id="change-risk">
+<h2>本次修改与风险</h2>
 <div class="grid">
-<div class="fact"><small>贡献者说明</small><strong>Resubmitted the changed summary scope.</strong>
-<p>贡献者声明，来源：贡献侧重新提交记录</p></div>
-<div class="fact"><small>系统归纳的影响范围</small>
-<ul><li>文档与说明</li></ul></div>
-</div>
+<article class="summary-card"><h3>这次改了什么</h3>
+<p><strong>贡献者说明：</strong>贡献者在原提交基础上进一步修改了令牌失效时间的说明；原修改说明没有覆盖这次新增内容。</p>
 <div class="inference"><strong>系统根据文件和声明归纳</strong>
-<p>更新项目文档：docs/guide.md</p>
-<small>系统归纳只依据文件路径、已匹配风险区域和明确声明，不代表系统已经证明代码的真实语义或行为。</small></div>
-<h3>智能体与负责人</h3>
-<div class="two-col">
-<div><h4>系统观察</h4><ul><li>系统记录到智能体身份提交了 3 份治理材料。</li></ul>
-<h4>智能体或贡献者声明</h4><ul><li>智能体或贡献者声明：Task-bounded workspace access under active supervision; no undeclared delegation.</li></ul></div>
-<div><h4>人类负责人确认</h4><p class="empty">当前风险路径不要求额外确认</p>
-<h4>未核验推断边界</h4><ul><li>能力范围来自治理配置或贡献者声明，不证明每项能力实际被使用。</li><li>AGM 不把智能体自述当作系统观察事实，也不检测未披露的智能体使用。</li></ul></div>
+<p>更新项目文档：docs/guide.md</p></div>
+<h4>影响范围</h4><ul><li>文档与说明</li></ul>
+</article>
+<article class="summary-card"><h3>风险判断</h3>
+<p class="risk-level">综合风险：低</p>
+<h4>为什么</h4><ul><li>docs/guide.md 触发了“文档与说明”风险范围。</li></ul>
+<h4>风险联动</h4><p class="empty">未记录风险联动</p>
+</article>
+</div>
+<p class="meta">归纳边界：系统归纳只依据文件路径、已匹配风险区域和明确声明，不代表系统已经证明代码的真实语义或行为。</p>
+</section>
+<section id="outstanding"><h2>贡献侧或负责人尚需完成</h2><article class="work-item"><p class="owner-tag">贡献侧处理</p><h3>修改说明</h3><p>现有材料对应旧版本；贡献侧需要更新后再继续。</p></article></section>
+<section id="issues"><h2>当前问题与系统处理</h2><h3>阻断性问题</h3><article class="check problem"><h3><span aria-hidden="true">✕</span> 材料与当前修改版本一致</h3><p>有 1 份材料仍绑定旧版本。</p><p class="meta">项目规则要求 · 贡献侧处理</p></article><article class="check problem"><h3><span aria-hidden="true">✕</span> 结构性项目要求是否满足</h3><p>还有 1 项材料或负责人确认未达到当前要求。</p><p class="meta">项目规则要求 · 贡献侧处理</p></article></section>
+<section id="summaries">
+<h2>项目要求与自动检查摘要</h2>
+<div class="grid">
+<article class="summary-card"><h3>项目要求</h3><ul><li>项目要求 3 项材料或确认。</li><li>- 1 项尚待贡献侧处理</li><li>- 2 项已完成当前阶段的形式核对或人工检查</li></ul></article>
+<article class="summary-card"><h3>自动检查</h3><ul><li>- 4 项完成形式或版本核对</li><li>- 2 项发现问题</li><li>- 0 项需要人工判断</li><li>- 0 项异常已由系统处理</li></ul></article>
 </div>
 </section>
-<section id="risk">
-<h2>2. 风险判断</h2>
-<p class="risk-level">综合风险：低</p>
-<h3>为什么</h3><ul><li>docs/guide.md 触发了“文档与说明”风险范围。</li></ul>
-<h3>风险联动</h3><p class="empty">未记录风险联动</p>
-<p><strong>不要求额外独立维护者检查</strong></p>
-</section>
-<section id="requirements">
-<h2>3. 项目要求和完成情况</h2>
-<p>项目要求 3 项治理材料或确认。</p>
-<ul class="requirements"><li class="requirement system_satisfied"><span aria-hidden="true">✓</span><div><strong>智能体行动与委派说明</strong><small>系统已确认</small><p>已提供与当前贡献和项目规则绑定的材料。</p></div></li><li class="requirement system_satisfied"><span aria-hidden="true">✓</span><div><strong>变更文件清单</strong><small>系统已确认</small><p>已提供与当前贡献和项目规则绑定的材料。</p></div></li><li class="requirement stale"><span aria-hidden="true">!</span><div><strong>修改说明</strong><small>需要更新</small><p>现有材料对应旧版本；贡献侧需要更新后再继续。</p></div></li></ul>
-</section>
-<section id="confirmed">
-<h2>4. 系统已经确认</h2>
-<article class="check confirmed"><h3><span aria-hidden="true">✓</span> 材料是否仍在有效期内</h3><p>现有材料记录没有过期状态。</p></article><article class="check confirmed"><h3><span aria-hidden="true">✓</span> 声明范围与实际变更文件一致</h3><p>材料中的变更文件清单与治理案例记录的实际范围一致。</p></article><article class="check confirmed"><h3><span aria-hidden="true">✓</span> 是否记录了智能体参与</h3><p>治理案例明确记录为智能体参与路径。</p><div class="limit"><strong>结论边界</strong><ul><li>AGM 只呈现治理记录和声明，不是智能体使用检测器。</li></ul></div></article><article class="check confirmed"><h3><span aria-hidden="true">✓</span> 是否记录继续委派</h3><p>系统确认已提供行动与委派声明。</p><div class="limit"><strong>结论边界</strong><ul><li>声明不是系统观察到的完整智能体行动日志。</li></ul></div></article><article class="check confirmed"><h3><span aria-hidden="true">✓</span> 是否存在越权操作</h3><p>当前案例审计记录中没有被拒绝的越权操作。</p><div class="limit"><strong>结论边界</strong><ul><li>结论范围仅限 AGM 已记录的操作。</li></ul></div></article>
-</section>
-<section id="problems">
-<h2>5. 系统发现的问题</h2>
-<article class="check problem"><h3><span aria-hidden="true">✕</span> 材料与当前修改版本一致</h3><p>有 1 份材料仍绑定旧版本。</p></article><article class="check problem"><h3><span aria-hidden="true">✕</span> 结构性项目要求是否满足</h3><p>还有 1 项材料或负责人确认未达到当前要求。</p></article>
-<h3>系统无法判断，需要人检查</h3>
-<p class="empty">当前没有额外的声明真实性检查项。</p>
-</section>
-<section id="judgments">
-<h2>6. 现在需要你判断</h2>
-<div class="no-work"><strong>当前没有额外 AGM 人类判断项。</strong><p>请按页面中的“当前下一步”继续。</p></div>
-</section>
-<section id="next" class="next">
-<h2>7. 当前下一步</h2>
-<h3>当前不能进入维护者检查</h3>
-<p>至少一份材料仍对应旧版本，当前无需维护者判断其内容。</p>
-<p><strong>当前责任方：</strong>贡献者或贡献侧智能体</p>
-<div class="two-col"><div><h4>系统会</h4><ul><li>已把需要补充或更新的内容整理为贡献侧待办。</li><li>材料更新后重新核对版本绑定、有效期和结构要求。</li><li>保留未受影响且仍有效的材料。</li></ul></div>
-<div><h4>人类现在应当</h4><ul><li>维护者当前无需选择拒绝、退回或修复操作。</li><li>等待贡献侧补齐：修改说明</li></ul></div></div>
-<p class="authority">系统确认、维护者检查完成或具备最终决定条件，都不等于贡献已被接受；最终接受、拒绝或合并决定仍由获授权的人类维护者作出。</p>
-</section>
+<details id="requirements">
+<summary>查看全部项目要求</summary>
+<ul class="requirements"><li class="requirement system_checked"><span class="symbol" aria-hidden="true">✓</span><div><strong>智能体行动与委派说明</strong><small class="status-label">材料与版本已核对</small><div class="badges"><span class="semantic-badge">材料已提供</span><span class="semantic-badge">形式要求已满足</span><span class="semantic-badge">已对应当前版本</span><span class="semantic-badge">材料与版本已核对</span></div><p>材料已提供，形式要求有效且对应当前版本；这只表示系统完成了可自动执行的核对，不表示内容正确。</p></div></li><li class="requirement system_checked"><span class="symbol" aria-hidden="true">✓</span><div><strong>变更文件清单</strong><small class="status-label">材料与版本已核对</small><div class="badges"><span class="semantic-badge">材料已提供</span><span class="semantic-badge">形式要求已满足</span><span class="semantic-badge">已对应当前版本</span><span class="semantic-badge">材料与版本已核对</span></div><p>材料已提供，形式要求有效且对应当前版本；这只表示系统完成了可自动执行的核对，不表示内容正确。</p></div></li><li class="requirement stale"><span class="symbol" aria-hidden="true">!</span><div><strong>修改说明</strong><small class="status-label">需要更新</small><div class="badges"></div><p>现有材料对应旧版本；贡献侧需要更新后再继续。</p></div></li></ul>
+</details>
+<details id="automatic-checks">
+<summary>查看自动检查详情</summary>
+<article class="check problem"><h3><span aria-hidden="true">✕</span> 材料与当前修改版本一致</h3><p>有 1 份材料仍绑定旧版本。</p><p class="meta">项目规则要求 · 贡献侧处理</p></article><article class="check not_applicable"><h3><span aria-hidden="true">–</span> 测试是否包含命令和结果</h3><p>当前风险路径没有额外要求测试命令记录。</p><p class="meta">附加信息 · 系统已处理</p></article><article class="check not_applicable"><h3><span aria-hidden="true">–</span> 测试材料是否对应当前版本</h3><p>当前没有需要核对版本绑定的测试材料。</p><p class="meta">系统完整性核对 · 系统已处理</p></article><article class="check system_checked"><h3><span aria-hidden="true">✓</span> 材料是否仍在有效期内</h3><p>现有材料记录没有过期状态。</p><p class="meta">项目规则要求 · 系统已处理</p></article><article class="check not_applicable"><h3><span aria-hidden="true">–</span> 负责人确认是否绑定当前版本</h3><p>当前风险路径不要求额外负责人确认。</p><p class="meta">附加信息 · 系统已处理</p></article><article class="check system_checked"><h3><span aria-hidden="true">✓</span> 声明范围与实际变更文件一致</h3><p>材料中的变更文件清单与治理案例记录的实际范围一致。</p><p class="meta">项目规则要求 · 系统已处理</p></article><article class="check informational"><h3><span aria-hidden="true">i</span> 是否记录了智能体参与</h3><p>治理案例明确记录为智能体参与路径。</p><p class="meta">项目规则要求 · 系统已处理</p><div class="limit"><strong>结论边界</strong><ul><li>AGM 只呈现治理记录和声明，不是智能体使用检测器。</li></ul></div></article><article class="check system_checked"><h3><span aria-hidden="true">✓</span> 是否记录继续委派</h3><p>行动与委派声明材料已提供，并通过形式与版本核对。</p><p class="meta">项目规则要求 · 系统已处理</p><div class="limit"><strong>结论边界</strong><ul><li>声明不是系统观察到的完整智能体行动日志。</li></ul></div></article><article class="check system_checked"><h3><span aria-hidden="true">✓</span> 是否存在越权操作</h3><p>当前案例审计记录中没有被拒绝的越权操作。</p><p class="meta">系统完整性核对 · 系统已处理</p><div class="limit"><strong>结论边界</strong><ul><li>结论范围仅限 AGM 已记录的操作。</li></ul></div></article><article class="check problem"><h3><span aria-hidden="true">✕</span> 结构性项目要求是否满足</h3><p>还有 1 项材料或负责人确认未达到当前要求。</p><p class="meta">项目规则要求 · 贡献侧处理</p></article>
+</details>
+<details id="accountability">
+<summary>查看智能体与负责人材料</summary>
+<div class="two-col">
+<div><h3>系统观察</h3><ul><li>系统记录到智能体身份提交了 3 份治理材料。</li></ul>
+<h3>贡献侧声明</h3><ul><li>智能体或贡献者声明：编码智能体更新了当前文档；没有修改已保留材料所覆盖的其他范围，也没有继续委派。</li></ul></div>
+<div><h3>负责人确认</h3><p class="empty">当前风险路径不要求额外确认</p>
+<h3>结论边界</h3><ul><li>能力范围来自治理配置或贡献者声明，不证明每项能力实际被使用。</li><li>AGM 不把智能体自述当作系统观察事实，也不检测未披露的智能体使用。</li></ul></div>
+</div>
+</details>
 <details id="technical">
-<summary>8. 治理过程和技术详情</summary>
-<p>这里保留完整 workflow、state、规则、义务、材料、问题、修复、状态变化、ID 和 fingerprint，供追溯使用。</p>
+<summary>治理过程与技术详情</summary>
+<p>这里保留完整 workflow、内部状态、规则、义务、材料、finding、transition、ID、trace 和 fingerprint，供追溯使用。</p>
 <pre>{
   &quot;case_id&quot;: &quot;material-partial&quot;,
   &quot;raw_state&quot;: &quot;resubmitted&quot;,
@@ -252,7 +263,7 @@ section { padding:20px; } main { width:min(100% - 18px,1120px); margin-top:10px;
       &quot;contribution_fingerprint&quot;: &quot;5f384eb5a7717daa10b7a22430e653c179747d7121bdd9ba72b631660c22072c&quot;,
       &quot;policy_fingerprint&quot;: &quot;e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564&quot;,
       &quot;evidence_type&quot;: &quot;agent_action_scope&quot;,
-      &quot;value&quot;: &quot;Task-bounded workspace access under active supervision; no undeclared delegation.&quot;,
+      &quot;value&quot;: &quot;编码智能体更新了当前文档；没有修改已保留材料所覆盖的其他范围，也没有继续委派。&quot;,
       &quot;command&quot;: null,
       &quot;environment&quot;: null,
       &quot;artifact_path&quot;: null,
@@ -310,7 +321,7 @@ section { padding:20px; } main { width:min(100% - 18px,1120px); margin-top:10px;
       &quot;contribution_fingerprint&quot;: &quot;5f384eb5a7717daa10b7a22430e653c179747d7121bdd9ba72b631660c22072c&quot;,
       &quot;policy_fingerprint&quot;: &quot;e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564&quot;,
       &quot;evidence_type&quot;: &quot;contribution_summary&quot;,
-      &quot;value&quot;: &quot;Implemented the scenario contribution.&quot;,
+      &quot;value&quot;: &quot;贡献者在原提交基础上进一步修改了令牌失效时间的说明；原修改说明没有覆盖这次新增内容。&quot;,
       &quot;command&quot;: null,
       &quot;environment&quot;: null,
       &quot;artifact_path&quot;: null,
@@ -1648,7 +1659,7 @@ section { padding:20px; } main { width:min(100% - 18px,1120px); margin-top:10px;
           &quot;contribution_fingerprint&quot;: &quot;5f384eb5a7717daa10b7a22430e653c179747d7121bdd9ba72b631660c22072c&quot;,
           &quot;policy_fingerprint&quot;: &quot;e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564&quot;,
           &quot;evidence_type&quot;: &quot;agent_action_scope&quot;,
-          &quot;value&quot;: &quot;Task-bounded workspace access under active supervision; no undeclared delegation.&quot;,
+          &quot;value&quot;: &quot;编码智能体更新了当前文档；没有修改已保留材料所覆盖的其他范围，也没有继续委派。&quot;,
           &quot;command&quot;: null,
           &quot;environment&quot;: null,
           &quot;artifact_path&quot;: null,
@@ -1706,7 +1717,7 @@ section { padding:20px; } main { width:min(100% - 18px,1120px); margin-top:10px;
           &quot;contribution_fingerprint&quot;: &quot;5f384eb5a7717daa10b7a22430e653c179747d7121bdd9ba72b631660c22072c&quot;,
           &quot;policy_fingerprint&quot;: &quot;e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564&quot;,
           &quot;evidence_type&quot;: &quot;contribution_summary&quot;,
-          &quot;value&quot;: &quot;Implemented the scenario contribution.&quot;,
+          &quot;value&quot;: &quot;贡献者在原提交基础上进一步修改了令牌失效时间的说明；原修改说明没有覆盖这次新增内容。&quot;,
           &quot;command&quot;: null,
           &quot;environment&quot;: null,
           &quot;artifact_path&quot;: null,

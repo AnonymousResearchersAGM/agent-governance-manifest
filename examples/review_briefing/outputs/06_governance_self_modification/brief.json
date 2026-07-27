@@ -1,7 +1,7 @@
 {
   "contribution": {
-    "title": "本次贡献",
-    "plain_summary": "Implemented the scenario contribution.",
+    "title": "AGM 风险规则与执行逻辑调整",
+    "plain_summary": "本次贡献修改项目的 AGM 风险规则和治理执行逻辑，需要职责分离的独立检查。",
     "changed_files": [
       ".agm/manifest.yml",
       "src/agm/vnext/risk.py"
@@ -20,7 +20,7 @@
       "更新治理或治理运行时文件：src/agm/vnext/risk.py"
     ],
     "agent_involvement": "治理案例未声明智能体参与",
-    "summary_source": "贡献者声明，来源：contributor-agent（通过 scenario-generator 记录）",
+    "summary_source": "贡献者声明，来源：贡献者提供的演示说明",
     "system_inferred_summary": "更新治理或治理运行时文件：.agm/manifest.yml；更新治理或治理运行时文件：src/agm/vnext/risk.py",
     "inference_limitations": "系统归纳只依据文件路径、已匹配风险区域和明确声明，不代表系统已经证明代码的真实语义或行为。",
     "contributor_claims": []
@@ -52,23 +52,39 @@
         "requirement_key": "reviewable-artifact",
         "display_title": "可检查的测试输出或文件",
         "status": "system_satisfied",
-        "status_label": "系统已确认",
-        "plain_status": "已提供与当前贡献和项目规则绑定的材料。",
-        "blocking": true,
+        "status_label": "材料与版本已核对",
+        "plain_status": "材料已提供，形式要求有效且对应当前版本；这只表示系统完成了可自动执行的核对，不表示内容正确。",
+        "blocking": false,
         "trace_refs": [
           "trace:requirement:reviewable-artifact"
-        ]
+        ],
+        "semantic_states": [
+          "material_available",
+          "structure_valid",
+          "version_bound",
+          "system_checked"
+        ],
+        "owner": "system",
+        "semantic_status": "system_checked"
       },
       {
         "requirement_key": "changed-files",
         "display_title": "变更文件清单",
         "status": "system_satisfied",
-        "status_label": "系统已确认",
-        "plain_status": "已提供与当前贡献和项目规则绑定的材料。",
-        "blocking": true,
+        "status_label": "材料与版本已核对",
+        "plain_status": "材料已提供，形式要求有效且对应当前版本；这只表示系统完成了可自动执行的核对，不表示内容正确。",
+        "blocking": false,
         "trace_refs": [
           "trace:requirement:changed-files"
-        ]
+        ],
+        "semantic_states": [
+          "material_available",
+          "structure_valid",
+          "version_bound",
+          "system_checked"
+        ],
+        "owner": "system",
+        "semantic_status": "system_checked"
       },
       {
         "requirement_key": "independent-review",
@@ -79,62 +95,105 @@
         "blocking": true,
         "trace_refs": [
           "trace:requirement:independent-review"
-        ]
+        ],
+        "semantic_states": [],
+        "owner": "maintainer",
+        "semantic_status": "awaiting_independent_review"
       },
       {
         "requirement_key": "known-limitations",
         "display_title": "已知限制",
         "status": "provided_requires_human_judgment",
-        "status_label": "已提供，需要人判断",
-        "plain_status": "材料已提供且结构有效；其内容是否与实际修改一致，需要人类判断。",
-        "blocking": true,
+        "status_label": "材料齐备，内容待人工检查",
+        "plain_status": "材料已提供，形式要求有效且对应当前版本；内容是否与实际修改一致仍需维护者判断。",
+        "blocking": false,
         "trace_refs": [
           "trace:requirement:known-limitations"
-        ]
+        ],
+        "semantic_states": [
+          "material_available",
+          "structure_valid",
+          "version_bound",
+          "human_review_required"
+        ],
+        "owner": "maintainer",
+        "semantic_status": "human_review_required"
       },
       {
         "requirement_key": "governance-impact",
         "display_title": "项目规则影响说明",
         "status": "provided_requires_human_judgment",
-        "status_label": "已提供，需要人判断",
-        "plain_status": "材料已提供且结构有效；其内容是否与实际修改一致，需要人类判断。",
-        "blocking": true,
+        "status_label": "材料齐备，内容待人工检查",
+        "plain_status": "材料已提供，形式要求有效且对应当前版本；内容是否与实际修改一致仍需维护者判断。",
+        "blocking": false,
         "trace_refs": [
           "trace:requirement:governance-impact"
-        ]
+        ],
+        "semantic_states": [
+          "material_available",
+          "structure_valid",
+          "version_bound",
+          "human_review_required"
+        ],
+        "owner": "maintainer",
+        "semantic_status": "human_review_required"
       },
       {
         "requirement_key": "change-rationale",
         "display_title": "修改原因",
         "status": "provided_requires_human_judgment",
-        "status_label": "已提供，需要人判断",
-        "plain_status": "材料已提供且结构有效；其内容是否与实际修改一致，需要人类判断。",
-        "blocking": true,
+        "status_label": "材料齐备，内容待人工检查",
+        "plain_status": "材料已提供，形式要求有效且对应当前版本；内容是否与实际修改一致仍需维护者判断。",
+        "blocking": false,
         "trace_refs": [
           "trace:requirement:change-rationale"
-        ]
+        ],
+        "semantic_states": [
+          "material_available",
+          "structure_valid",
+          "version_bound",
+          "human_review_required"
+        ],
+        "owner": "maintainer",
+        "semantic_status": "human_review_required"
       },
       {
         "requirement_key": "change-summary",
         "display_title": "修改说明",
         "status": "system_satisfied",
-        "status_label": "系统已确认",
-        "plain_status": "已提供与当前贡献和项目规则绑定的材料。",
-        "blocking": true,
+        "status_label": "材料与版本已核对",
+        "plain_status": "材料已提供，形式要求有效且对应当前版本；这只表示系统完成了可自动执行的核对，不表示内容正确。",
+        "blocking": false,
         "trace_refs": [
           "trace:requirement:change-summary"
-        ]
+        ],
+        "semantic_states": [
+          "material_available",
+          "structure_valid",
+          "version_bound",
+          "system_checked"
+        ],
+        "owner": "system",
+        "semantic_status": "system_checked"
       },
       {
         "requirement_key": "test-command-result",
         "display_title": "测试命令与结果",
         "status": "system_satisfied",
-        "status_label": "系统已确认",
-        "plain_status": "已提供与当前贡献和项目规则绑定的材料。",
-        "blocking": true,
+        "status_label": "材料与版本已核对",
+        "plain_status": "材料已提供，形式要求有效且对应当前版本；这只表示系统完成了可自动执行的核对，不表示内容正确。",
+        "blocking": false,
         "trace_refs": [
           "trace:requirement:test-command-result"
-        ]
+        ],
+        "semantic_states": [
+          "material_available",
+          "structure_valid",
+          "version_bound",
+          "system_checked"
+        ],
+        "owner": "system",
+        "semantic_status": "system_checked"
       }
     ],
     "system_satisfied": [
@@ -142,45 +201,77 @@
         "requirement_key": "reviewable-artifact",
         "display_title": "可检查的测试输出或文件",
         "status": "system_satisfied",
-        "status_label": "系统已确认",
-        "plain_status": "已提供与当前贡献和项目规则绑定的材料。",
-        "blocking": true,
+        "status_label": "材料与版本已核对",
+        "plain_status": "材料已提供，形式要求有效且对应当前版本；这只表示系统完成了可自动执行的核对，不表示内容正确。",
+        "blocking": false,
         "trace_refs": [
           "trace:requirement:reviewable-artifact"
-        ]
+        ],
+        "semantic_states": [
+          "material_available",
+          "structure_valid",
+          "version_bound",
+          "system_checked"
+        ],
+        "owner": "system",
+        "semantic_status": "system_checked"
       },
       {
         "requirement_key": "changed-files",
         "display_title": "变更文件清单",
         "status": "system_satisfied",
-        "status_label": "系统已确认",
-        "plain_status": "已提供与当前贡献和项目规则绑定的材料。",
-        "blocking": true,
+        "status_label": "材料与版本已核对",
+        "plain_status": "材料已提供，形式要求有效且对应当前版本；这只表示系统完成了可自动执行的核对，不表示内容正确。",
+        "blocking": false,
         "trace_refs": [
           "trace:requirement:changed-files"
-        ]
+        ],
+        "semantic_states": [
+          "material_available",
+          "structure_valid",
+          "version_bound",
+          "system_checked"
+        ],
+        "owner": "system",
+        "semantic_status": "system_checked"
       },
       {
         "requirement_key": "change-summary",
         "display_title": "修改说明",
         "status": "system_satisfied",
-        "status_label": "系统已确认",
-        "plain_status": "已提供与当前贡献和项目规则绑定的材料。",
-        "blocking": true,
+        "status_label": "材料与版本已核对",
+        "plain_status": "材料已提供，形式要求有效且对应当前版本；这只表示系统完成了可自动执行的核对，不表示内容正确。",
+        "blocking": false,
         "trace_refs": [
           "trace:requirement:change-summary"
-        ]
+        ],
+        "semantic_states": [
+          "material_available",
+          "structure_valid",
+          "version_bound",
+          "system_checked"
+        ],
+        "owner": "system",
+        "semantic_status": "system_checked"
       },
       {
         "requirement_key": "test-command-result",
         "display_title": "测试命令与结果",
         "status": "system_satisfied",
-        "status_label": "系统已确认",
-        "plain_status": "已提供与当前贡献和项目规则绑定的材料。",
-        "blocking": true,
+        "status_label": "材料与版本已核对",
+        "plain_status": "材料已提供，形式要求有效且对应当前版本；这只表示系统完成了可自动执行的核对，不表示内容正确。",
+        "blocking": false,
         "trace_refs": [
           "trace:requirement:test-command-result"
-        ]
+        ],
+        "semantic_states": [
+          "material_available",
+          "structure_valid",
+          "version_bound",
+          "system_checked"
+        ],
+        "owner": "system",
+        "semantic_status": "system_checked"
       }
     ],
     "provided_requires_human_judgment": [
@@ -188,34 +279,58 @@
         "requirement_key": "known-limitations",
         "display_title": "已知限制",
         "status": "provided_requires_human_judgment",
-        "status_label": "已提供，需要人判断",
-        "plain_status": "材料已提供且结构有效；其内容是否与实际修改一致，需要人类判断。",
-        "blocking": true,
+        "status_label": "材料齐备，内容待人工检查",
+        "plain_status": "材料已提供，形式要求有效且对应当前版本；内容是否与实际修改一致仍需维护者判断。",
+        "blocking": false,
         "trace_refs": [
           "trace:requirement:known-limitations"
-        ]
+        ],
+        "semantic_states": [
+          "material_available",
+          "structure_valid",
+          "version_bound",
+          "human_review_required"
+        ],
+        "owner": "maintainer",
+        "semantic_status": "human_review_required"
       },
       {
         "requirement_key": "governance-impact",
         "display_title": "项目规则影响说明",
         "status": "provided_requires_human_judgment",
-        "status_label": "已提供，需要人判断",
-        "plain_status": "材料已提供且结构有效；其内容是否与实际修改一致，需要人类判断。",
-        "blocking": true,
+        "status_label": "材料齐备，内容待人工检查",
+        "plain_status": "材料已提供，形式要求有效且对应当前版本；内容是否与实际修改一致仍需维护者判断。",
+        "blocking": false,
         "trace_refs": [
           "trace:requirement:governance-impact"
-        ]
+        ],
+        "semantic_states": [
+          "material_available",
+          "structure_valid",
+          "version_bound",
+          "human_review_required"
+        ],
+        "owner": "maintainer",
+        "semantic_status": "human_review_required"
       },
       {
         "requirement_key": "change-rationale",
         "display_title": "修改原因",
         "status": "provided_requires_human_judgment",
-        "status_label": "已提供，需要人判断",
-        "plain_status": "材料已提供且结构有效；其内容是否与实际修改一致，需要人类判断。",
-        "blocking": true,
+        "status_label": "材料齐备，内容待人工检查",
+        "plain_status": "材料已提供，形式要求有效且对应当前版本；内容是否与实际修改一致仍需维护者判断。",
+        "blocking": false,
         "trace_refs": [
           "trace:requirement:change-rationale"
-        ]
+        ],
+        "semantic_states": [
+          "material_available",
+          "structure_valid",
+          "version_bound",
+          "human_review_required"
+        ],
+        "owner": "maintainer",
+        "semantic_status": "human_review_required"
       }
     ],
     "missing": [],
@@ -232,7 +347,10 @@
         "blocking": true,
         "trace_refs": [
           "trace:requirement:independent-review"
-        ]
+        ],
+        "semantic_states": [],
+        "owner": "maintainer",
+        "semantic_status": "awaiting_independent_review"
       }
     ],
     "not_applicable": []
@@ -250,7 +368,23 @@
       "requires_human_action": false,
       "trace_refs": [
         "trace:automatic-check:material_version_binding"
-      ]
+      ],
+      "policy_required": true,
+      "blocking": false,
+      "requirement_refs": [
+        "reviewable-artifact",
+        "changed-files",
+        "independent-review",
+        "known-limitations",
+        "governance-impact",
+        "change-rationale",
+        "change-summary",
+        "test-command-result"
+      ],
+      "informational_only": false,
+      "owner": "system",
+      "system_handled": false,
+      "semantic_status": "system_checked"
     },
     {
       "check_type": "test_command_and_result",
@@ -258,7 +392,7 @@
       "status": "confirmed",
       "plain_result": "测试材料同时包含可检查的执行说明和结果记录。",
       "supporting_evidence": [
-        "已记录测试命令：python -m pytest -q；已记录结果：The complete local regression suite passed."
+        "已记录测试命令：python -m pytest -q；已记录结果：完整本地回归测试已通过。"
       ],
       "limitations": [
         "系统确认的是记录完整性，不代表代码正确性，也不证明测试覆盖充分。"
@@ -266,7 +400,16 @@
       "requires_human_action": false,
       "trace_refs": [
         "trace:automatic-check:test_command_and_result"
-      ]
+      ],
+      "policy_required": true,
+      "blocking": false,
+      "requirement_refs": [
+        "test-command-result"
+      ],
+      "informational_only": false,
+      "owner": "system",
+      "system_handled": false,
+      "semantic_status": "system_checked"
     },
     {
       "check_type": "test_version_binding",
@@ -282,7 +425,16 @@
       "requires_human_action": false,
       "trace_refs": [
         "trace:automatic-check:test_version_binding"
-      ]
+      ],
+      "policy_required": true,
+      "blocking": false,
+      "requirement_refs": [
+        "test-command-result"
+      ],
+      "informational_only": false,
+      "owner": "system",
+      "system_handled": false,
+      "semantic_status": "system_checked"
     },
     {
       "check_type": "evidence_freshness",
@@ -296,7 +448,23 @@
       "requires_human_action": false,
       "trace_refs": [
         "trace:automatic-check:evidence_freshness"
-      ]
+      ],
+      "policy_required": true,
+      "blocking": false,
+      "requirement_refs": [
+        "reviewable-artifact",
+        "changed-files",
+        "independent-review",
+        "known-limitations",
+        "governance-impact",
+        "change-rationale",
+        "change-summary",
+        "test-command-result"
+      ],
+      "informational_only": false,
+      "owner": "system",
+      "system_handled": false,
+      "semantic_status": "system_checked"
     },
     {
       "check_type": "attestation_version_binding",
@@ -308,7 +476,14 @@
       "requires_human_action": false,
       "trace_refs": [
         "trace:automatic-check:attestation_version_binding"
-      ]
+      ],
+      "policy_required": false,
+      "blocking": false,
+      "requirement_refs": [],
+      "informational_only": true,
+      "owner": "system",
+      "system_handled": false,
+      "semantic_status": "not_applicable"
     },
     {
       "check_type": "changed_file_scope_match",
@@ -322,15 +497,24 @@
       "requires_human_action": false,
       "trace_refs": [
         "trace:automatic-check:changed_file_scope_match"
-      ]
+      ],
+      "policy_required": true,
+      "blocking": false,
+      "requirement_refs": [
+        "changed-files"
+      ],
+      "informational_only": false,
+      "owner": "system",
+      "system_handled": false,
+      "semantic_status": "system_checked"
     },
     {
       "check_type": "agent_involvement",
       "display_title": "是否记录了智能体参与",
-      "status": "confirmed",
+      "status": "not_applicable",
       "plain_result": "治理案例采用直接人类贡献配置，未声明智能体参与。",
       "supporting_evidence": [
-        "记录的参与配置：human_direct"
+        "系统读取了案例中记录的参与方式。"
       ],
       "limitations": [
         "AGM 只呈现治理记录和声明，不是智能体使用检测器。"
@@ -338,7 +522,14 @@
       "requires_human_action": false,
       "trace_refs": [
         "trace:automatic-check:agent_involvement"
-      ]
+      ],
+      "policy_required": false,
+      "blocking": false,
+      "requirement_refs": [],
+      "informational_only": true,
+      "owner": "system",
+      "system_handled": false,
+      "semantic_status": "informational"
     },
     {
       "check_type": "recorded_delegation",
@@ -350,7 +541,14 @@
       "requires_human_action": false,
       "trace_refs": [
         "trace:automatic-check:recorded_delegation"
-      ]
+      ],
+      "policy_required": false,
+      "blocking": false,
+      "requirement_refs": [],
+      "informational_only": true,
+      "owner": "system",
+      "system_handled": false,
+      "semantic_status": "not_applicable"
     },
     {
       "check_type": "authority_boundary",
@@ -364,7 +562,14 @@
       "requires_human_action": false,
       "trace_refs": [
         "trace:automatic-check:authority_boundary"
-      ]
+      ],
+      "policy_required": false,
+      "blocking": false,
+      "requirement_refs": [],
+      "informational_only": false,
+      "owner": "system",
+      "system_handled": false,
+      "semantic_status": "system_checked"
     },
     {
       "check_type": "structural_obligations",
@@ -378,7 +583,23 @@
       "requires_human_action": false,
       "trace_refs": [
         "trace:automatic-check:structural_obligations"
-      ]
+      ],
+      "policy_required": true,
+      "blocking": false,
+      "requirement_refs": [
+        "reviewable-artifact",
+        "changed-files",
+        "independent-review",
+        "known-limitations",
+        "governance-impact",
+        "change-rationale",
+        "change-summary",
+        "test-command-result"
+      ],
+      "informational_only": false,
+      "owner": "system",
+      "system_handled": false,
+      "semantic_status": "system_checked"
     },
     {
       "check_type": "semantic_declaration_consistency",
@@ -397,7 +618,19 @@
       "requires_human_action": true,
       "trace_refs": [
         "trace:automatic-check:semantic_declaration_consistency"
-      ]
+      ],
+      "policy_required": true,
+      "blocking": true,
+      "requirement_refs": [
+        "known-limitations",
+        "governance-impact",
+        "change-rationale",
+        "independent-review"
+      ],
+      "informational_only": false,
+      "owner": "maintainer",
+      "system_handled": false,
+      "semantic_status": "human_review_required"
     }
   ],
   "contributor_accountability": {
@@ -405,7 +638,7 @@
     "agent_capabilities": [],
     "agent_actions": [],
     "delegation_detected": null,
-    "declaration_source": "当前不要求",
+    "declaration_source": "贡献侧提供的智能体行动声明",
     "declaration_status": "not_required",
     "accountable_human": null,
     "attestation_status": "当前风险路径不要求额外确认",
@@ -441,15 +674,24 @@
       "blocking": true,
       "trace_refs": [
         "trace:judgment:independent-review"
-      ]
+      ],
+      "requirement_refs": [
+        "independent-review"
+      ],
+      "provenance": [
+        "compiled_requirement",
+        "independent_review_requirement",
+        "maintainer_review_stage"
+      ],
+      "owner": "maintainer"
     },
     {
       "judgment_id": "judgment-known-limitations",
       "display_title": "已知限制",
       "why_human_is_needed": "系统能确认材料结构、范围和版本绑定，但不能自动判断声明是否准确描述代码行为和风险。",
-      "contribution_claim": "This remains a local research prototype.",
+      "contribution_claim": "当前结论仅覆盖本次明确列出的修改范围。",
       "system_observation": "系统只能确认限制说明已提供，不能证明其完整性。",
-      "evidence_summary": "系统确认有 1 份当前有效材料。",
+      "evidence_summary": "系统记录有 1 份形式有效且对应当前版本的材料。",
       "review_focus": [
         "限制说明是否覆盖当前风险范围",
         "是否存在会影响合并决定但未披露的限制"
@@ -463,15 +705,23 @@
       "blocking": true,
       "trace_refs": [
         "trace:judgment:known-limitations"
-      ]
+      ],
+      "requirement_refs": [
+        "known-limitations"
+      ],
+      "provenance": [
+        "compiled_requirement",
+        "maintainer_review_stage"
+      ],
+      "owner": "maintainer"
     },
     {
       "judgment_id": "judgment-governance-impact",
       "display_title": "项目规则影响说明",
       "why_human_is_needed": "系统能确认材料结构、范围和版本绑定，但不能自动判断声明是否准确描述代码行为和风险。",
-      "contribution_claim": "Governance compatibility, self-modification, and migration were assessed.",
+      "contribution_claim": "修改涉及治理规则与执行逻辑的一致性、兼容性和迁移影响。",
       "system_observation": "系统记录到治理规则、入口或治理执行逻辑发生变化。",
-      "evidence_summary": "系统确认有 1 份当前有效材料。",
+      "evidence_summary": "系统记录有 1 份形式有效且对应当前版本的材料。",
       "review_focus": [
         "治理规则与执行逻辑是否仍然一致",
         "是否需要兼容或迁移既有治理案例",
@@ -486,15 +736,23 @@
       "blocking": true,
       "trace_refs": [
         "trace:judgment:governance-impact"
-      ]
+      ],
+      "requirement_refs": [
+        "governance-impact"
+      ],
+      "provenance": [
+        "compiled_requirement",
+        "maintainer_review_stage"
+      ],
+      "owner": "maintainer"
     },
     {
       "judgment_id": "judgment-change-rationale",
       "display_title": "修改原因",
       "why_human_is_needed": "系统能确认材料结构、范围和版本绑定，但不能自动判断声明是否准确描述代码行为和风险。",
-      "contribution_claim": "The scenario change is required by its stated objective.",
+      "contribution_claim": "这次修改用于解决贡献说明中列出的具体维护问题。",
       "system_observation": "系统只能确认修改理由已提供，不能证明理由与代码语义一致。",
-      "evidence_summary": "系统确认有 1 份当前有效材料。",
+      "evidence_summary": "系统记录有 1 份形式有效且对应当前版本的材料。",
       "review_focus": [
         "修改理由是否与实际范围一致",
         "理由是否遗漏关键风险或兼容性影响"
@@ -508,16 +766,24 @@
       "blocking": true,
       "trace_refs": [
         "trace:judgment:change-rationale"
-      ]
+      ],
+      "requirement_refs": [
+        "change-rationale"
+      ],
+      "provenance": [
+        "compiled_requirement",
+        "maintainer_review_stage"
+      ],
+      "owner": "maintainer"
     }
   ],
   "current_next_step": {
     "status": "maintainer_judgment",
-    "display_title": "现在轮到你检查 4 项",
+    "display_title": "现在需要你检查 4 项",
     "plain_explanation": "形式化检查已经完成到当前阶段；下面只列出系统不能替代人类作出的判断。",
     "responsible_party": "维护者侧检查人员",
     "system_will_do": [
-      "继续保留系统已确认的材料和未受影响范围。",
+      "继续保留已完成形式与绑定核对的材料和未受影响范围。",
       "检查完成后把案例路由到最终人类决定阶段。"
     ],
     "human_should_do": [
@@ -526,7 +792,9 @@
       "检查：项目规则影响说明",
       "检查：修改原因"
     ],
-    "final_acceptance_state": "not_decided"
+    "final_acceptance_state": "not_decided",
+    "owner": "maintainer",
+    "semantic_state": "human_review_required"
   },
   "governance_details": {
     "case_id": "governance-self-mod",
@@ -808,7 +1076,7 @@
         "contribution_fingerprint": "ca3c9b1db2449d4653441d68a96bb549522d33b0721d047b27ba7dece4bf5b41",
         "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
         "evidence_type": "artifact",
-        "value": "Local regression output is attached.",
+        "value": "已附上可在本地检查的测试输出。",
         "command": null,
         "environment": null,
         "artifact_path": "governance-self-mod-tests.txt",
@@ -869,7 +1137,7 @@
         "contribution_fingerprint": "ca3c9b1db2449d4653441d68a96bb549522d33b0721d047b27ba7dece4bf5b41",
         "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
         "evidence_type": "known_limitations",
-        "value": "This remains a local research prototype.",
+        "value": "当前结论仅覆盖本次明确列出的修改范围。",
         "command": null,
         "environment": null,
         "artifact_path": null,
@@ -898,7 +1166,7 @@
         "contribution_fingerprint": "ca3c9b1db2449d4653441d68a96bb549522d33b0721d047b27ba7dece4bf5b41",
         "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
         "evidence_type": "policy_impact",
-        "value": "Governance compatibility, self-modification, and migration were assessed.",
+        "value": "修改涉及治理规则与执行逻辑的一致性、兼容性和迁移影响。",
         "command": null,
         "environment": null,
         "artifact_path": null,
@@ -927,7 +1195,7 @@
         "contribution_fingerprint": "ca3c9b1db2449d4653441d68a96bb549522d33b0721d047b27ba7dece4bf5b41",
         "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
         "evidence_type": "rationale",
-        "value": "The scenario change is required by its stated objective.",
+        "value": "这次修改用于解决贡献说明中列出的具体维护问题。",
         "command": null,
         "environment": null,
         "artifact_path": null,
@@ -956,7 +1224,7 @@
         "contribution_fingerprint": "ca3c9b1db2449d4653441d68a96bb549522d33b0721d047b27ba7dece4bf5b41",
         "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
         "evidence_type": "contribution_summary",
-        "value": "Implemented the scenario contribution.",
+        "value": "本次贡献修改项目的 AGM 风险规则和治理执行逻辑，需要职责分离的独立检查。",
         "command": null,
         "environment": null,
         "artifact_path": null,
@@ -985,7 +1253,7 @@
         "contribution_fingerprint": "ca3c9b1db2449d4653441d68a96bb549522d33b0721d047b27ba7dece4bf5b41",
         "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
         "evidence_type": "test_command",
-        "value": "The complete local regression suite passed.",
+        "value": "完整本地回归测试已通过。",
         "command": "python -m pytest -q",
         "environment": "Python / local scenario",
         "artifact_path": null,
@@ -4304,7 +4572,7 @@
             "contribution_fingerprint": "ca3c9b1db2449d4653441d68a96bb549522d33b0721d047b27ba7dece4bf5b41",
             "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
             "evidence_type": "artifact",
-            "value": "Local regression output is attached.",
+            "value": "已附上可在本地检查的测试输出。",
             "command": null,
             "environment": null,
             "artifact_path": "governance-self-mod-tests.txt",
@@ -4365,7 +4633,7 @@
             "contribution_fingerprint": "ca3c9b1db2449d4653441d68a96bb549522d33b0721d047b27ba7dece4bf5b41",
             "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
             "evidence_type": "known_limitations",
-            "value": "This remains a local research prototype.",
+            "value": "当前结论仅覆盖本次明确列出的修改范围。",
             "command": null,
             "environment": null,
             "artifact_path": null,
@@ -4394,7 +4662,7 @@
             "contribution_fingerprint": "ca3c9b1db2449d4653441d68a96bb549522d33b0721d047b27ba7dece4bf5b41",
             "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
             "evidence_type": "policy_impact",
-            "value": "Governance compatibility, self-modification, and migration were assessed.",
+            "value": "修改涉及治理规则与执行逻辑的一致性、兼容性和迁移影响。",
             "command": null,
             "environment": null,
             "artifact_path": null,
@@ -4423,7 +4691,7 @@
             "contribution_fingerprint": "ca3c9b1db2449d4653441d68a96bb549522d33b0721d047b27ba7dece4bf5b41",
             "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
             "evidence_type": "rationale",
-            "value": "The scenario change is required by its stated objective.",
+            "value": "这次修改用于解决贡献说明中列出的具体维护问题。",
             "command": null,
             "environment": null,
             "artifact_path": null,
@@ -4452,7 +4720,7 @@
             "contribution_fingerprint": "ca3c9b1db2449d4653441d68a96bb549522d33b0721d047b27ba7dece4bf5b41",
             "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
             "evidence_type": "contribution_summary",
-            "value": "Implemented the scenario contribution.",
+            "value": "本次贡献修改项目的 AGM 风险规则和治理执行逻辑，需要职责分离的独立检查。",
             "command": null,
             "environment": null,
             "artifact_path": null,
@@ -4481,7 +4749,7 @@
             "contribution_fingerprint": "ca3c9b1db2449d4653441d68a96bb549522d33b0721d047b27ba7dece4bf5b41",
             "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
             "evidence_type": "test_command",
-            "value": "The complete local regression suite passed.",
+            "value": "完整本地回归测试已通过。",
             "command": "python -m pytest -q",
             "environment": "Python / local scenario",
             "artifact_path": null,
@@ -7240,6 +7508,60 @@
       ]
     }
   },
+  "work_items": [
+    {
+      "owner": "maintainer",
+      "display_title": "独立维护者检查",
+      "plain_explanation": "系统能确认材料结构、范围和版本绑定，但不能自动判断声明是否准确描述代码行为和风险。",
+      "blocking": true,
+      "system_handled": false,
+      "requirement_refs": [
+        "independent-review"
+      ],
+      "trace_refs": [
+        "trace:judgment:independent-review"
+      ]
+    },
+    {
+      "owner": "maintainer",
+      "display_title": "已知限制",
+      "plain_explanation": "系统能确认材料结构、范围和版本绑定，但不能自动判断声明是否准确描述代码行为和风险。",
+      "blocking": true,
+      "system_handled": false,
+      "requirement_refs": [
+        "known-limitations"
+      ],
+      "trace_refs": [
+        "trace:judgment:known-limitations"
+      ]
+    },
+    {
+      "owner": "maintainer",
+      "display_title": "项目规则影响说明",
+      "plain_explanation": "系统能确认材料结构、范围和版本绑定，但不能自动判断声明是否准确描述代码行为和风险。",
+      "blocking": true,
+      "system_handled": false,
+      "requirement_refs": [
+        "governance-impact"
+      ],
+      "trace_refs": [
+        "trace:judgment:governance-impact"
+      ]
+    },
+    {
+      "owner": "maintainer",
+      "display_title": "修改原因",
+      "plain_explanation": "系统能确认材料结构、范围和版本绑定，但不能自动判断声明是否准确描述代码行为和风险。",
+      "blocking": true,
+      "system_handled": false,
+      "requirement_refs": [
+        "change-rationale"
+      ],
+      "trace_refs": [
+        "trace:judgment:change-rationale"
+      ]
+    }
+  ],
   "schema_version": "agm.review_brief/v0.2-dev",
-  "authority_notice": "系统确认、维护者检查完成或具备最终决定条件，都不等于贡献已被接受；最终接受、拒绝或合并决定仍由获授权的人类维护者作出。"
+  "authority_notice": "系统完成形式与版本核对、维护者完成内容检查或具备最终决定条件，都不等于贡献已被接受；最终接受、拒绝或合并决定仍由获授权的人类维护者作出。"
 }
