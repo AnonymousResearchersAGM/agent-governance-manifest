@@ -1,0 +1,54 @@
+{
+  "schema_version": "agm.review_brief_demo_manifest/v0.2-dev",
+  "scenario_count": 8,
+  "scenarios": [
+    {
+      "scenario": "01_multi_risk_missing",
+      "json": "01_multi_risk_missing/brief.json",
+      "markdown": "01_multi_risk_missing/brief.md",
+      "html": "01_multi_risk_missing/brief.html"
+    },
+    {
+      "scenario": "02_material_partial_invalidation",
+      "json": "02_material_partial_invalidation/brief.json",
+      "markdown": "02_material_partial_invalidation/brief.md",
+      "html": "02_material_partial_invalidation/brief.html"
+    },
+    {
+      "scenario": "03_scoped_repair",
+      "json": "03_scoped_repair/brief.json",
+      "markdown": "03_scoped_repair/brief.md",
+      "html": "03_scoped_repair/brief.html"
+    },
+    {
+      "scenario": "04_unauthorized_agent_verification",
+      "json": "04_unauthorized_agent_verification/brief.json",
+      "markdown": "04_unauthorized_agent_verification/brief.md",
+      "html": "04_unauthorized_agent_verification/brief.html"
+    },
+    {
+      "scenario": "05_lightweight_low_risk",
+      "json": "05_lightweight_low_risk/brief.json",
+      "markdown": "05_lightweight_low_risk/brief.md",
+      "html": "05_lightweight_low_risk/brief.html"
+    },
+    {
+      "scenario": "06_governance_self_modification",
+      "json": "06_governance_self_modification/brief.json",
+      "markdown": "06_governance_self_modification/brief.md",
+      "html": "06_governance_self_modification/brief.html"
+    },
+    {
+      "scenario": "07_policy_migration_warning",
+      "json": "07_policy_migration_warning/brief.json",
+      "markdown": "07_policy_migration_warning/brief.md",
+      "html": "07_policy_migration_warning/brief.html"
+    },
+    {
+      "scenario": "08_human_final_decision_closure",
+      "json": "08_human_final_decision_closure/brief.json",
+      "markdown": "08_human_final_decision_closure/brief.md",
+      "html": "08_human_final_decision_closure/brief.html"
+    }
+  ]
+}

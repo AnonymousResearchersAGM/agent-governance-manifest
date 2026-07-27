@@ -314,3 +314,26 @@ class CaseStorage:
             atomic_write_text(guidance_path, guidance_json)
             paths["guidance_json"] = guidance_path
         return paths
+
+    def write_review_brief(
+        self,
+        case_id: str,
+        *,
+        brief_json: str,
+        markdown: str,
+        html: str,
+    ) -> dict[str, Path]:
+        """Write briefing artifacts without replacing legacy reports."""
+
+        directory = self.case_dir(case_id)
+        if not directory.exists():
+            raise VNextError(f"Governance Case not found: {case_id}")
+        paths = {
+            "json": directory / "brief.json",
+            "markdown": directory / "brief.md",
+            "html": directory / "brief.html",
+        }
+        atomic_write_text(paths["json"], brief_json)
+        atomic_write_text(paths["markdown"], markdown)
+        atomic_write_text(paths["html"], html)
+        return paths

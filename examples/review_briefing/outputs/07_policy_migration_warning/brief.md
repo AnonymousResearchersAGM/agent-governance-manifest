@@ -1,0 +1,1598 @@
+# AGM Maintainer Review Brief
+
+## 1. 本次贡献与修改
+
+### 本次贡献
+
+贡献者说明：更新项目文档：docs/guide.md
+
+说明来源：系统根据已记录的变更路径归纳
+
+系统根据文件和声明归纳：更新项目文档：docs/guide.md
+
+影响范围：
+
+- 文档与说明
+
+可能的行为影响：
+
+- 主要影响文档和说明
+
+> 归纳边界：系统归纳只依据文件路径、已匹配风险区域和明确声明，不代表系统已经证明代码的真实语义或行为。
+
+### 智能体与负责人
+
+智能体使用：当前治理案例未声明智能体参与。
+
+系统观察到的记录：
+
+- 没有额外系统观察记录
+
+智能体或贡献者声明：
+
+- 当前没有智能体行动声明
+
+人类负责人确认：
+
+- 当前风险路径不要求额外确认
+
+尚未核验的推断边界：
+
+- 能力范围来自治理配置或贡献者声明，不证明每项能力实际被使用。
+- AGM 不把智能体自述当作系统观察事实，也不检测未披露的智能体使用。
+
+## 2. 风险判断
+
+综合风险：低
+
+为什么：
+
+- docs/guide.md 触发了“文档与说明”风险范围。
+
+风险联动：
+
+- 未记录风险联动
+
+当前治理结论不要求额外独立维护者检查。
+
+## 3. 项目要求和完成情况
+
+项目要求 2 项治理材料或确认：
+
+- ✕ 变更文件清单 — 缺少：当前没有可用于这项要求的材料。
+- ✕ 修改说明 — 缺少：当前没有可用于这项要求的材料。
+
+## 4. 系统已经确认
+
+- ✓ 是否记录了智能体参与：治理案例采用直接人类贡献配置，未声明智能体参与。
+  - 边界：AGM 只呈现治理记录和声明，不是智能体使用检测器。
+- ✓ 是否存在越权操作：当前案例审计记录中没有被拒绝的越权操作。
+  - 边界：结论范围仅限 AGM 已记录的操作。
+
+## 5. 系统发现的问题
+
+- ✕ 声明范围与实际变更文件一致：尚未提供变更文件清单，系统无法完成一致性核对。
+- ✕ 结构性项目要求是否满足：还有 2 项材料或负责人确认未达到当前要求。
+
+### 系统无法判断，需要人检查
+
+- 当前没有额外的声明真实性检查项。
+
+## 6. 现在需要你判断
+
+当前没有额外 AGM 人类判断项。
+
+请按“当前下一步”继续。
+
+## 7. 当前下一步
+
+### 当前不能进入维护者检查
+
+缺少、过期或无效材料需要由贡献侧先处理。
+
+当前责任方：贡献者或贡献侧智能体
+
+系统会：
+
+- 已把需要补充或更新的内容整理为贡献侧待办。
+- 材料更新后重新核对版本绑定、有效期和结构要求。
+- 保留未受影响且仍有效的材料。
+
+人类现在应当：
+
+- 维护者当前无需选择拒绝、退回或修复操作。
+- 等待贡献侧补齐：变更文件清单、修改说明
+
+> 系统确认、维护者检查完成或具备最终决定条件，都不等于贡献已被接受；最终接受、拒绝或合并决定仍由获授权的人类维护者作出。
+
+<details>
+<summary>8. 治理过程和技术详情</summary>
+
+以下内容用于追溯治理状态、规则、义务、材料、问题、修复、状态变化和 fingerprint；普通审查工作不依赖先理解这些字段。
+
+```json
+{
+  "case_id": "policy-migration",
+  "raw_state": "evidence_incomplete",
+  "raw_readiness": "not_ready",
+  "contribution_fingerprint": "195f75a5dadcbaf549b58dd87064f35418fbe8741065bc50cb4978840620fc1d",
+  "policy_fingerprint": "recorded-policy-fingerprint-before-change",
+  "policy_snapshot": {
+    "id": "policy-f035c15209555ea4b16dd16087492824",
+    "schema_version": "agm.policy_snapshot/v0.2-dev",
+    "manifest_version": "agm.manifest/v0.2-dev",
+    "base_commit": "demo-base",
+    "policy_fingerprint": "recorded-policy-fingerprint-before-change",
+    "resolved_at": "2026-07-26T00:00:00Z",
+    "source_paths": [
+      ".agm/manifest.yml",
+      ".agm/agents/entrypoints.yml",
+      ".agm/profiles/assurance_profiles.yml",
+      ".agm/profiles/autonomy_profiles.yml",
+      ".agm/interfaces/contributor_panel.yml",
+      ".agm/policies/evidence_profiles.yml",
+      ".agm/interfaces/governance_report.yml",
+      ".agm/policies/interaction_rules.yml",
+      ".agm/interfaces/maintainer_panel.yml",
+      ".agm/interfaces/messages.yml",
+      ".agm/roles/permissions.yml",
+      ".agm/policies/risk_rules.yml",
+      ".agm/roles/roles.yml",
+      ".agm/workflows/state_machine.yml"
+    ]
+  },
+  "matched_rules": [
+    {
+      "id": "match-documentation-low",
+      "rule_id": "documentation-low",
+      "zone": "documentation",
+      "risk_level": "low",
+      "affected_paths": [
+        "docs/guide.md"
+      ],
+      "selector_reasons": [
+        "path selectors matched: docs/guide.md"
+      ],
+      "obligation_ids": [
+        "O-SUMMARY",
+        "O-CHANGED-FILES"
+      ],
+      "case_required": false,
+      "source": "risk_rule",
+      "obligation_overrides": {}
+    }
+  ],
+  "compiled_obligations": [
+    {
+      "id": "obl-o-changed-files",
+      "obligation_id": "O-CHANGED-FILES",
+      "source_rule_ids": [
+        "documentation-low"
+      ],
+      "type": "evidence",
+      "severity": "low",
+      "blocking": true,
+      "verifier_roles": [
+        "maintainer",
+        "maintainer_verifier"
+      ],
+      "evidence_type": "changed_files",
+      "description": "Identify the files and scopes covered by the contribution.",
+      "affected_scope": [
+        "docs/guide.md"
+      ],
+      "status": "unsatisfied",
+      "interaction_ids": []
+    },
+    {
+      "id": "obl-o-summary",
+      "obligation_id": "O-SUMMARY",
+      "source_rule_ids": [
+        "documentation-low"
+      ],
+      "type": "evidence",
+      "severity": "low",
+      "blocking": true,
+      "verifier_roles": [
+        "maintainer",
+        "maintainer_verifier"
+      ],
+      "evidence_type": "contribution_summary",
+      "description": "Provide a concise factual contribution summary.",
+      "affected_scope": [
+        "docs/guide.md"
+      ],
+      "status": "unsatisfied",
+      "interaction_ids": []
+    }
+  ],
+  "evidence_records": [],
+  "attestation_records": [],
+  "findings": [],
+  "repair_requests": [],
+  "attempted_operations": [],
+  "verification_records": [],
+  "transition_history": [
+    {
+      "id": "transition-aa715f7e24aa571b86c6f72fd1803d1a",
+      "case_id": "policy-migration",
+      "actor": "agm-engine",
+      "role": "system",
+      "source_state": "case_opened",
+      "target_state": "policy_resolved",
+      "action": "resolve_policy",
+      "reason": "Resolved canonical policy against the contribution.",
+      "related_object_ids": [
+        "policy-f035c15209555ea4b16dd16087492824"
+      ],
+      "timestamp": "2026-07-26T00:00:00Z"
+    },
+    {
+      "id": "transition-fb0f1f8cf1885c6ea4cb68917a472346",
+      "case_id": "policy-migration",
+      "actor": "agm-engine",
+      "role": "system",
+      "source_state": "policy_resolved",
+      "target_state": "obligations_compiled",
+      "action": "compile_obligations",
+      "reason": "Compiled the union of matched, profile, and interaction obligations.",
+      "related_object_ids": [
+        "obl-o-changed-files",
+        "obl-o-summary"
+      ],
+      "timestamp": "2026-07-26T00:00:00Z"
+    },
+    {
+      "id": "transition-0f7594aa927c5f50ad37c3dd48ca634a",
+      "case_id": "policy-migration",
+      "actor": "agm-engine",
+      "role": "system",
+      "source_state": "obligations_compiled",
+      "target_state": "evidence_incomplete",
+      "action": "mark_evidence_state",
+      "reason": "The new case has unsatisfied evidence obligations.",
+      "related_object_ids": [
+        "obl-o-changed-files",
+        "obl-o-summary"
+      ],
+      "timestamp": "2026-07-26T00:00:00Z"
+    }
+  ],
+  "final_decision": null,
+  "closure_receipt": null,
+  "policy_migration_diagnostic": {
+    "case_id": "policy-migration",
+    "policy_changed": true,
+    "original_policy_fingerprint": "recorded-policy-fingerprint-before-change",
+    "current_policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
+    "still_valid_obligations": [
+      "O-CHANGED-FILES",
+      "O-SUMMARY"
+    ],
+    "changed_obligations": [],
+    "added_obligations": [],
+    "removed_obligations": [],
+    "evidence_requiring_revalidation": [],
+    "attestations_invalidated_if_migrated": [],
+    "may_remain_on_original_snapshot": true,
+    "must_migrate": false,
+    "reason": "Policy changed, but the case may remain on its recorded snapshot; migration must be an explicit maintainer decision."
+  },
+  "reviewer_guidance": {
+    "schema_version": "agm.reviewer_guidance/v0.2-dev",
+    "generated_from_case_fingerprint": "195f75a5dadcbaf549b58dd87064f35418fbe8741065bc50cb4978840620fc1d",
+    "actor": {
+      "actor": "human-maintainer",
+      "role": "maintainer",
+      "human": true
+    },
+    "summary": {
+      "case_id": "policy-migration",
+      "changed_files": [
+        "docs/guide.md"
+      ],
+      "risk_level": "low",
+      "risk_areas": [
+        "文档（documentation）"
+      ],
+      "autonomy_profile": "human_direct",
+      "path_kind": "lightweight",
+      "path_label": "轻量审核",
+      "current_stage": "等待贡献侧补齐或更新材料",
+      "blocking_issue_count": 2,
+      "warning_count": 1,
+      "current_responsible_parties": [
+        "人类贡献者",
+        "贡献侧智能体"
+      ],
+      "next_authorized_actor_roles": [
+        "contributor",
+        "contributor_agent"
+      ],
+      "raw_state": "evidence_incomplete",
+      "raw_readiness": "not_ready"
+    },
+    "workflow_steps": [
+      {
+        "number": 1,
+        "step_id": "identify_requirements",
+        "title": "系统识别要求",
+        "status": "completed",
+        "status_label": "已完成",
+        "symbol": "✓",
+        "explanation": "适用规则和本次要求已由 AGM 引擎生成。",
+        "internal_stages": [
+          "Resolve",
+          "Compile"
+        ],
+        "traceability": [
+          {
+            "kind": "state_transition",
+            "object_id": "transition-aa715f7e24aa571b86c6f72fd1803d1a",
+            "relationship": "primary:resolve_policy"
+          },
+          {
+            "kind": "state_transition",
+            "object_id": "transition-fb0f1f8cf1885c6ea4cb68917a472346",
+            "relationship": "primary:compile_obligations"
+          },
+          {
+            "kind": "matched_rule",
+            "object_id": "match-documentation-low",
+            "relationship": "risk_matching"
+          },
+          {
+            "kind": "compiled_obligation",
+            "object_id": "obl-o-changed-files",
+            "relationship": "obligation_compilation"
+          },
+          {
+            "kind": "compiled_obligation",
+            "object_id": "obl-o-summary",
+            "relationship": "obligation_compilation"
+          }
+        ]
+      },
+      {
+        "number": 2,
+        "step_id": "prepare_materials",
+        "title": "贡献者准备材料",
+        "status": "current",
+        "status_label": "当前阶段",
+        "symbol": "●",
+        "explanation": "贡献者正在准备或补齐本次所需材料。",
+        "internal_stages": [
+          "Bind",
+          "Repair"
+        ],
+        "traceability": [
+          {
+            "kind": "state_transition",
+            "object_id": "transition-0f7594aa927c5f50ad37c3dd48ca634a",
+            "relationship": "primary:mark_evidence_state"
+          }
+        ]
+      },
+      {
+        "number": 3,
+        "step_id": "accountable_confirmation",
+        "title": "负责人确认",
+        "status": "skipped",
+        "status_label": "本次不要求",
+        "symbol": "—",
+        "explanation": "当前义务集合不要求负责人确认。",
+        "internal_stages": [
+          "Attest"
+        ],
+        "traceability": []
+      },
+      {
+        "number": 4,
+        "step_id": "maintainer_check",
+        "title": "维护者检查",
+        "status": "pending",
+        "status_label": "尚未开始",
+        "symbol": "○",
+        "explanation": "贡献侧要求完成后才进入维护者检查。",
+        "internal_stages": [
+          "Verify",
+          "Repair"
+        ],
+        "traceability": []
+      },
+      {
+        "number": 5,
+        "step_id": "human_final_decision",
+        "title": "人类维护者最终决定",
+        "status": "pending",
+        "status_label": "尚未开始",
+        "symbol": "○",
+        "explanation": "前序治理要求完成后才进入最终决定。",
+        "internal_stages": [
+          "Decide",
+          "Record"
+        ],
+        "traceability": []
+      }
+    ],
+    "requirement_comparisons": [
+      {
+        "obligation_id": "O-CHANGED-FILES",
+        "check_item": "变更文件清单",
+        "project_requirement": "列出这次修改涉及的文件和范围。",
+        "current_situation": "尚未提供。",
+        "result": "missing",
+        "result_label": "缺少",
+        "raw_status": "unsatisfied",
+        "blocking_requirement": true,
+        "source_rule_ids": [
+          "documentation-low"
+        ],
+        "interaction_ids": [],
+        "evidence_ids": [],
+        "binding_fingerprints": [],
+        "finding_ids": [],
+        "reference_english": "Identify the files and scopes covered by the contribution.",
+        "observed_english": "no bound evidence record",
+        "traceability": [
+          {
+            "kind": "compiled_obligation",
+            "object_id": "obl-o-changed-files",
+            "relationship": "reference"
+          },
+          {
+            "kind": "risk_or_profile_rule",
+            "object_id": "documentation-low",
+            "relationship": "source"
+          }
+        ],
+        "display_name": "变更文件清单",
+        "reference_plain": "列出这次修改涉及的文件和范围。",
+        "observed_plain": "尚未提供。",
+        "observed_raw": "no bound evidence record",
+        "material_status": "missing",
+        "material_status_label": "缺少",
+        "workflow_status": "awaiting_contributor",
+        "workflow_status_label": "等待贡献者处理",
+        "currently_blocks_progression": true,
+        "affected_scope": [
+          "docs/guide.md"
+        ]
+      },
+      {
+        "obligation_id": "O-SUMMARY",
+        "check_item": "修改说明",
+        "project_requirement": "简要说明这次修改做了什么。",
+        "current_situation": "尚未提供。",
+        "result": "missing",
+        "result_label": "缺少",
+        "raw_status": "unsatisfied",
+        "blocking_requirement": true,
+        "source_rule_ids": [
+          "documentation-low"
+        ],
+        "interaction_ids": [],
+        "evidence_ids": [],
+        "binding_fingerprints": [],
+        "finding_ids": [],
+        "reference_english": "Provide a concise factual contribution summary.",
+        "observed_english": "no bound evidence record",
+        "traceability": [
+          {
+            "kind": "compiled_obligation",
+            "object_id": "obl-o-summary",
+            "relationship": "reference"
+          },
+          {
+            "kind": "risk_or_profile_rule",
+            "object_id": "documentation-low",
+            "relationship": "source"
+          }
+        ],
+        "display_name": "修改说明",
+        "reference_plain": "简要说明这次修改做了什么。",
+        "observed_plain": "尚未提供。",
+        "observed_raw": "no bound evidence record",
+        "material_status": "missing",
+        "material_status_label": "缺少",
+        "workflow_status": "awaiting_contributor",
+        "workflow_status_label": "等待贡献者处理",
+        "currently_blocks_progression": true,
+        "affected_scope": [
+          "docs/guide.md"
+        ]
+      }
+    ],
+    "diagnostics": [],
+    "available_actions": [
+      {
+        "action": "view_change_scope",
+        "title": "查看变化范围",
+        "description": "查看变更文件、风险规则、影响范围和绑定指纹。",
+        "consequence": "只读操作，不改变案例状态。",
+        "mutates_state": false,
+        "actor_role": "maintainer",
+        "default_obligation_ids": [],
+        "required_parameters": [],
+        "traceability": [
+          {
+            "kind": "permission_rule",
+            "object_id": "maintainer:view_change_scope",
+            "relationship": "authority"
+          }
+        ],
+        "relevance": "secondary",
+        "group": "other_available",
+        "primary_reason": "后端允许此操作，但它不直接处理当前主要阻断项。",
+        "selector_options": []
+      },
+      {
+        "action": "record_policy_conflict",
+        "title": "记录项目规则冲突",
+        "description": "记录无法由普通材料修复的策略冲突。",
+        "consequence": "案例转入补充处理，由项目规则负责人或维护者处理。",
+        "mutates_state": true,
+        "actor_role": "maintainer",
+        "default_obligation_ids": [
+          "O-CHANGED-FILES"
+        ],
+        "required_parameters": [
+          "obligation_ids",
+          "reason"
+        ],
+        "traceability": [
+          {
+            "kind": "permission_rule",
+            "object_id": "maintainer:record_policy_conflict",
+            "relationship": "authority"
+          },
+          {
+            "kind": "state_machine_rule",
+            "object_id": "evidence_incomplete:record_policy_conflict:repair_requested",
+            "relationship": "transition"
+          }
+        ],
+        "relevance": "secondary",
+        "group": "other_available",
+        "primary_reason": "后端允许此操作，但它不直接处理当前主要阻断项。",
+        "selector_options": [
+          {
+            "selector_token": "sel-6a174423ef0ba8f7c35ca5688a01cb34dc42c0bbbc72958cd10ee3ea954af63a",
+            "action": "record_policy_conflict",
+            "label": "变更文件清单",
+            "status_label": "缺少；等待贡献者处理",
+            "affected_scope": [
+              "docs/guide.md"
+            ],
+            "obligation_ids": [
+              "O-CHANGED-FILES"
+            ],
+            "object_type": "obligation",
+            "object_ids": [
+              "O-CHANGED-FILES"
+            ],
+            "blocking": true,
+            "material_status": "missing",
+            "workflow_status": "awaiting_contributor",
+            "technical_details": {
+              "obligation_id": "O-CHANGED-FILES",
+              "evidence_ids": [],
+              "finding_ids": []
+            },
+            "traceability": [
+              {
+                "kind": "compiled_obligation",
+                "object_id": "obl-o-changed-files",
+                "relationship": "reference"
+              },
+              {
+                "kind": "risk_or_profile_rule",
+                "object_id": "documentation-low",
+                "relationship": "source"
+              }
+            ]
+          },
+          {
+            "selector_token": "sel-0c9e5ce431b9a2103709757232a0b6f7250139ac3be3e56fd25ccbeefff67709",
+            "action": "record_policy_conflict",
+            "label": "修改说明",
+            "status_label": "缺少；等待贡献者处理",
+            "affected_scope": [
+              "docs/guide.md"
+            ],
+            "obligation_ids": [
+              "O-SUMMARY"
+            ],
+            "object_type": "obligation",
+            "object_ids": [
+              "O-SUMMARY"
+            ],
+            "blocking": true,
+            "material_status": "missing",
+            "workflow_status": "awaiting_contributor",
+            "technical_details": {
+              "obligation_id": "O-SUMMARY",
+              "evidence_ids": [],
+              "finding_ids": []
+            },
+            "traceability": [
+              {
+                "kind": "compiled_obligation",
+                "object_id": "obl-o-summary",
+                "relationship": "reference"
+              },
+              {
+                "kind": "risk_or_profile_rule",
+                "object_id": "documentation-low",
+                "relationship": "source"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "unavailable_actions": [
+      {
+        "action": "verify_evidence",
+        "title": "检查提交材料",
+        "description": "记录维护者对指定项目要求及其绑定材料的检查结果。",
+        "reason": "当前处于“等待贡献者补齐材料”，还不能执行“检查提交材料”。",
+        "next_actor_roles": [
+          "contributor",
+          "contributor_agent"
+        ],
+        "mutates_state": true,
+        "traceability": [
+          {
+            "kind": "permission_rule",
+            "object_id": "maintainer:verify_evidence",
+            "relationship": "authority"
+          }
+        ],
+        "category": "authority",
+        "required_role": [
+          "maintainer",
+          "maintainer_verifier",
+          "policy_steward"
+        ],
+        "required_state": [
+          "awaiting_maintainer_verification",
+          "resubmitted"
+        ],
+        "future_availability": "到达所需状态且对象范围满足后可能可用。"
+      },
+      {
+        "action": "request_repair",
+        "title": "要求补充或修改",
+        "description": "指出问题和受影响义务，返回贡献侧修复。",
+        "reason": "当前处于“等待贡献者补齐材料”，还不能执行“要求补充或修改”。",
+        "next_actor_roles": [
+          "contributor",
+          "contributor_agent"
+        ],
+        "mutates_state": true,
+        "traceability": [
+          {
+            "kind": "permission_rule",
+            "object_id": "maintainer:request_repair",
+            "relationship": "authority"
+          }
+        ],
+        "category": "authority",
+        "required_role": [
+          "maintainer",
+          "maintainer_verifier",
+          "policy_steward"
+        ],
+        "required_state": [
+          "awaiting_maintainer_verification",
+          "ready_for_human_decision",
+          "verification_complete"
+        ],
+        "future_availability": "到达所需状态且对象范围满足后可能可用。"
+      },
+      {
+        "action": "reject_evidence",
+        "title": "拒绝当前材料",
+        "description": "拒绝一条不能支持当前修改的具体材料。",
+        "reason": "当前处于“等待贡献者补齐材料”，还不能执行“拒绝当前材料”。",
+        "next_actor_roles": [
+          "contributor",
+          "contributor_agent"
+        ],
+        "mutates_state": true,
+        "traceability": [
+          {
+            "kind": "permission_rule",
+            "object_id": "maintainer:reject_evidence",
+            "relationship": "authority"
+          }
+        ],
+        "category": "authority",
+        "required_role": [
+          "maintainer",
+          "maintainer_verifier"
+        ],
+        "required_state": [
+          "awaiting_maintainer_verification",
+          "verification_complete"
+        ],
+        "future_availability": "到达所需状态且对象范围满足后可能可用。"
+      },
+      {
+        "action": "ask_clarification",
+        "title": "请求补充说明",
+        "description": "针对指定要求提出可审计的澄清问题。",
+        "reason": "当前处于“等待贡献者补齐材料”，还不能执行“请求补充说明”。",
+        "next_actor_roles": [
+          "contributor",
+          "contributor_agent"
+        ],
+        "mutates_state": true,
+        "traceability": [
+          {
+            "kind": "permission_rule",
+            "object_id": "maintainer:ask_clarification",
+            "relationship": "authority"
+          }
+        ],
+        "category": "authority",
+        "required_role": [
+          "maintainer",
+          "maintainer_verifier"
+        ],
+        "required_state": [
+          "awaiting_maintainer_verification",
+          "ready_for_human_decision",
+          "verification_complete"
+        ],
+        "future_availability": "到达所需状态且对象范围满足后可能可用。"
+      },
+      {
+        "action": "invalidate_attestation",
+        "title": "将旧负责人确认标记为失效",
+        "description": "使一条过时或不正确的负责人确认失效。",
+        "reason": "当前处于“等待贡献者补齐材料”，还不能执行“将旧负责人确认标记为失效”。",
+        "next_actor_roles": [
+          "contributor",
+          "contributor_agent"
+        ],
+        "mutates_state": true,
+        "traceability": [
+          {
+            "kind": "permission_rule",
+            "object_id": "maintainer:invalidate_attestation",
+            "relationship": "authority"
+          }
+        ],
+        "category": "authority",
+        "required_role": [
+          "maintainer",
+          "maintainer_verifier"
+        ],
+        "required_state": [
+          "awaiting_maintainer_verification",
+          "ready_for_human_decision",
+          "verification_complete"
+        ],
+        "future_availability": "到达所需状态且对象范围满足后可能可用。"
+      },
+      {
+        "action": "resolve_policy_conflict",
+        "title": "处理项目规则冲突",
+        "description": "由有权限的角色记录策略冲突的解决依据。",
+        "reason": "当前处于“等待贡献者补齐材料”，还不能执行“处理项目规则冲突”。",
+        "next_actor_roles": [
+          "contributor",
+          "contributor_agent"
+        ],
+        "mutates_state": true,
+        "traceability": [
+          {
+            "kind": "permission_rule",
+            "object_id": "maintainer:resolve_policy_conflict",
+            "relationship": "authority"
+          }
+        ],
+        "category": "scope",
+        "required_role": [
+          "maintainer",
+          "policy_steward"
+        ],
+        "required_state": [
+          "repair_requested"
+        ],
+        "future_availability": "到达所需状态且对象范围满足后可能可用。"
+      },
+      {
+        "action": "resubmit",
+        "title": "重新提交修改后的材料",
+        "description": "贡献侧提交补充或修改影响范围和新增材料。",
+        "reason": "当前角色没有“重新提交修改后的材料”的权限。可以执行这一步的角色：人类贡献者或贡献侧智能体。",
+        "next_actor_roles": [
+          "contributor",
+          "contributor_agent"
+        ],
+        "mutates_state": true,
+        "traceability": [
+          {
+            "kind": "permission_rule",
+            "object_id": "maintainer:resubmit",
+            "relationship": "authority"
+          }
+        ],
+        "category": "permission",
+        "required_role": [
+          "contributor",
+          "contributor_agent"
+        ],
+        "required_state": [
+          "repair_requested"
+        ],
+        "future_availability": "切换流程阶段不会改变角色权限；需要由列出的有权角色执行。"
+      },
+      {
+        "action": "confirm_attestation",
+        "title": "确认负责人声明",
+        "description": "由负责人对明确范围作出事实确认。",
+        "reason": "当前角色没有“确认负责人声明”的权限。可以执行这一步的角色：负责人。",
+        "next_actor_roles": [
+          "accountable_human"
+        ],
+        "mutates_state": true,
+        "traceability": [
+          {
+            "kind": "permission_rule",
+            "object_id": "maintainer:confirm_attestation",
+            "relationship": "authority"
+          },
+          {
+            "kind": "state_machine_rule",
+            "object_id": "evidence_incomplete:confirm_attestation:awaiting_maintainer_verification",
+            "relationship": "transition"
+          }
+        ],
+        "category": "permission",
+        "required_role": [
+          "accountable_human"
+        ],
+        "required_state": [
+          "awaiting_human_attestation",
+          "evidence_incomplete"
+        ],
+        "future_availability": "切换流程阶段不会改变角色权限；需要由列出的有权角色执行。"
+      },
+      {
+        "action": "authorized_override",
+        "title": "由有权维护者执行覆盖处理",
+        "description": "记录具备权限的维护者对明确项目要求或问题的例外处理。",
+        "reason": "当前处于“等待贡献者补齐材料”，还不能执行“由有权维护者执行覆盖处理”。",
+        "next_actor_roles": [
+          "contributor",
+          "contributor_agent"
+        ],
+        "mutates_state": true,
+        "traceability": [
+          {
+            "kind": "permission_rule",
+            "object_id": "maintainer:authorized_override",
+            "relationship": "authority"
+          }
+        ],
+        "category": "authority",
+        "required_role": [
+          "maintainer"
+        ],
+        "required_state": [
+          "ready_for_human_decision",
+          "repair_requested",
+          "verification_complete"
+        ],
+        "future_availability": "到达所需状态且对象范围满足后可能可用。"
+      },
+      {
+        "action": "decide_accept",
+        "title": "最终接受",
+        "description": "由人类维护者记录接受决定。",
+        "reason": "当前处于“等待贡献者补齐材料”，还不能执行“最终接受”。",
+        "next_actor_roles": [
+          "contributor",
+          "contributor_agent"
+        ],
+        "mutates_state": true,
+        "traceability": [
+          {
+            "kind": "permission_rule",
+            "object_id": "maintainer:decide_accept",
+            "relationship": "authority"
+          }
+        ],
+        "category": "authority",
+        "required_role": [
+          "maintainer"
+        ],
+        "required_state": [
+          "overridden",
+          "ready_for_human_decision"
+        ],
+        "future_availability": "前序阻断要求完成并进入人类最终决定阶段后可用。"
+      },
+      {
+        "action": "decide_reject",
+        "title": "最终拒绝",
+        "description": "由人类维护者记录拒绝决定。",
+        "reason": "当前处于“等待贡献者补齐材料”，还不能执行“最终拒绝”。",
+        "next_actor_roles": [
+          "contributor",
+          "contributor_agent"
+        ],
+        "mutates_state": true,
+        "traceability": [
+          {
+            "kind": "permission_rule",
+            "object_id": "maintainer:decide_reject",
+            "relationship": "authority"
+          }
+        ],
+        "category": "authority",
+        "required_role": [
+          "maintainer"
+        ],
+        "required_state": [
+          "overridden",
+          "ready_for_human_decision",
+          "repair_requested"
+        ],
+        "future_availability": "前序阻断要求完成并进入人类最终决定阶段后可用。"
+      },
+      {
+        "action": "decide_request_changes",
+        "title": "要求继续修改",
+        "description": "由人类维护者要求贡献侧继续修改。",
+        "reason": "当前处于“等待贡献者补齐材料”，还不能执行“要求继续修改”。",
+        "next_actor_roles": [
+          "contributor",
+          "contributor_agent"
+        ],
+        "mutates_state": true,
+        "traceability": [
+          {
+            "kind": "permission_rule",
+            "object_id": "maintainer:decide_request_changes",
+            "relationship": "authority"
+          }
+        ],
+        "category": "authority",
+        "required_role": [
+          "maintainer"
+        ],
+        "required_state": [
+          "overridden",
+          "ready_for_human_decision"
+        ],
+        "future_availability": "前序阻断要求完成并进入人类最终决定阶段后可用。"
+      },
+      {
+        "action": "decide_close",
+        "title": "关闭本次审核记录",
+        "description": "由人类维护者关闭案例而不表示接受或合并。",
+        "reason": "当前处于“等待贡献者补齐材料”，还不能执行“关闭本次审核记录”。",
+        "next_actor_roles": [
+          "contributor",
+          "contributor_agent"
+        ],
+        "mutates_state": true,
+        "traceability": [
+          {
+            "kind": "permission_rule",
+            "object_id": "maintainer:decide_close",
+            "relationship": "authority"
+          }
+        ],
+        "category": "authority",
+        "required_role": [
+          "maintainer"
+        ],
+        "required_state": [
+          "overridden",
+          "ready_for_human_decision",
+          "repair_requested"
+        ],
+        "future_availability": "前序阻断要求完成并进入人类最终决定阶段后可用。"
+      }
+    ],
+    "explanations": [
+      {
+        "title": "为什么本次采用轻量审核？",
+        "technical_term": "lightweight path",
+        "plain_language": "本次修改未触发高风险规则，也不要求负责人确认或独立维护者检查；所需材料较少，但最终项目决定仍由人类维护者作出。",
+        "source_references": [
+          {
+            "kind": "matched_rule",
+            "object_id": "match-documentation-low",
+            "relationship": "path_intensity"
+          }
+        ],
+        "reason_presentation": {
+          "reason_code": "lightweight_path",
+          "display_plain": "本次未触发完整治理流程，只需完成轻量审核要求。",
+          "source_english": "Structured AGM preparation was explicitly declared or requested; no claim about contributor identity is inferred.",
+          "source_code": "lightweight_path",
+          "trace_refs": [
+            {
+              "kind": "matched_rule",
+              "object_id": "match-documentation-low",
+              "relationship": "path_intensity"
+            }
+          ]
+        }
+      },
+      {
+        "title": "项目规则在案例打开后发生了变化",
+        "technical_term": "policy migration warning",
+        "plain_language": "案例记录的项目规则版本与当前版本不同；系统不会静默迁移。 迁移需要按角色权限另行决定。",
+        "source_references": [
+          {
+            "kind": "policy_snapshot",
+            "object_id": "recorded-policy-fingerprint-before-change",
+            "relationship": "recorded"
+          },
+          {
+            "kind": "policy_snapshot",
+            "object_id": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
+            "relationship": "current"
+          }
+        ],
+        "reason_presentation": {
+          "reason_code": "policy_migration_warning",
+          "display_plain": "案例记录的项目规则版本与当前版本不同；系统不会静默迁移。",
+          "source_english": "Policy changed, but the case may remain on its recorded snapshot; migration must be an explicit maintainer decision.",
+          "source_code": "policy_migration_warning",
+          "trace_refs": [
+            {
+              "kind": "policy_snapshot",
+              "object_id": "recorded-policy-fingerprint-before-change",
+              "relationship": "recorded"
+            },
+            {
+              "kind": "policy_snapshot",
+              "object_id": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
+              "relationship": "current"
+            }
+          ]
+        }
+      }
+    ],
+    "delegation_help": {
+      "title": "是否把具有独立行动能力的工作交给了另一个智能体？",
+      "technical_term": "agent action and delegation scope",
+      "plain_language": "通常算作继续委派：子智能体修改文件、执行命令、自主生成被直接采用的代码或配置、拥有独立工具权限或行动范围，或其产出直接进入当前贡献。通常不算：普通函数或工具调用、文件读取、搜索、没有独立行动权的模型调用，或只提供建议且没有修改/提交产出的辅助模型。",
+      "source_references": [
+        {
+          "kind": "autonomy_profile",
+          "object_id": "human_direct",
+          "relationship": "delegation_definition"
+        }
+      ],
+      "reason_presentation": null
+    },
+    "repair_loop": [
+      "维护者发现问题",
+      "返回修改指定部分",
+      "重新检查受影响部分",
+      "继续原流程"
+    ],
+    "technical_details": {
+      "raw_state": "evidence_incomplete",
+      "readiness": "not_ready",
+      "risk_rules": [
+        {
+          "id": "match-documentation-low",
+          "rule_id": "documentation-low",
+          "zone": "documentation",
+          "risk_level": "low",
+          "affected_paths": [
+            "docs/guide.md"
+          ],
+          "selector_reasons": [
+            "path selectors matched: docs/guide.md"
+          ],
+          "obligation_ids": [
+            "O-SUMMARY",
+            "O-CHANGED-FILES"
+          ],
+          "case_required": false,
+          "source": "risk_rule",
+          "obligation_overrides": {}
+        }
+      ],
+      "autonomy_profile": {
+        "id": "human_direct",
+        "description": "Direct human contribution; no claim about authorship is inferred from package absence.",
+        "obligation_ids": [],
+        "action_scope": "human-controlled",
+        "persistence": "none",
+        "permissions": "human account",
+        "supervision": "direct",
+        "submission_authority": "human",
+        "delegation": "none"
+      },
+      "assurance_profile": {
+        "id": "standard",
+        "description": "Project-default assurance profile.",
+        "obligation_ids": []
+      },
+      "interaction_rules": [],
+      "compiled_obligations": [
+        {
+          "id": "obl-o-changed-files",
+          "obligation_id": "O-CHANGED-FILES",
+          "source_rule_ids": [
+            "documentation-low"
+          ],
+          "type": "evidence",
+          "severity": "low",
+          "blocking": true,
+          "verifier_roles": [
+            "maintainer",
+            "maintainer_verifier"
+          ],
+          "evidence_type": "changed_files",
+          "description": "Identify the files and scopes covered by the contribution.",
+          "affected_scope": [
+            "docs/guide.md"
+          ],
+          "status": "unsatisfied",
+          "interaction_ids": []
+        },
+        {
+          "id": "obl-o-summary",
+          "obligation_id": "O-SUMMARY",
+          "source_rule_ids": [
+            "documentation-low"
+          ],
+          "type": "evidence",
+          "severity": "low",
+          "blocking": true,
+          "verifier_roles": [
+            "maintainer",
+            "maintainer_verifier"
+          ],
+          "evidence_type": "contribution_summary",
+          "description": "Provide a concise factual contribution summary.",
+          "affected_scope": [
+            "docs/guide.md"
+          ],
+          "status": "unsatisfied",
+          "interaction_ids": []
+        }
+      ],
+      "evidence_records": [],
+      "attestation_records": [],
+      "verification_records": [],
+      "findings": [],
+      "repair_requests": [],
+      "attempted_operations": [],
+      "contribution_fingerprint": "195f75a5dadcbaf549b58dd87064f35418fbe8741065bc50cb4978840620fc1d",
+      "policy_fingerprint": "recorded-policy-fingerprint-before-change",
+      "policy_snapshot": {
+        "id": "policy-f035c15209555ea4b16dd16087492824",
+        "schema_version": "agm.policy_snapshot/v0.2-dev",
+        "manifest_version": "agm.manifest/v0.2-dev",
+        "base_commit": "demo-base",
+        "policy_fingerprint": "recorded-policy-fingerprint-before-change",
+        "resolved_at": "2026-07-26T00:00:00Z",
+        "source_paths": [
+          ".agm/manifest.yml",
+          ".agm/agents/entrypoints.yml",
+          ".agm/profiles/assurance_profiles.yml",
+          ".agm/profiles/autonomy_profiles.yml",
+          ".agm/interfaces/contributor_panel.yml",
+          ".agm/policies/evidence_profiles.yml",
+          ".agm/interfaces/governance_report.yml",
+          ".agm/policies/interaction_rules.yml",
+          ".agm/interfaces/maintainer_panel.yml",
+          ".agm/interfaces/messages.yml",
+          ".agm/roles/permissions.yml",
+          ".agm/policies/risk_rules.yml",
+          ".agm/roles/roles.yml",
+          ".agm/workflows/state_machine.yml"
+        ]
+      },
+      "transition_history": [
+        {
+          "id": "transition-aa715f7e24aa571b86c6f72fd1803d1a",
+          "case_id": "policy-migration",
+          "actor": "agm-engine",
+          "role": "system",
+          "source_state": "case_opened",
+          "target_state": "policy_resolved",
+          "action": "resolve_policy",
+          "reason": "Resolved canonical policy against the contribution.",
+          "related_object_ids": [
+            "policy-f035c15209555ea4b16dd16087492824"
+          ],
+          "timestamp": "2026-07-26T00:00:00Z"
+        },
+        {
+          "id": "transition-fb0f1f8cf1885c6ea4cb68917a472346",
+          "case_id": "policy-migration",
+          "actor": "agm-engine",
+          "role": "system",
+          "source_state": "policy_resolved",
+          "target_state": "obligations_compiled",
+          "action": "compile_obligations",
+          "reason": "Compiled the union of matched, profile, and interaction obligations.",
+          "related_object_ids": [
+            "obl-o-changed-files",
+            "obl-o-summary"
+          ],
+          "timestamp": "2026-07-26T00:00:00Z"
+        },
+        {
+          "id": "transition-0f7594aa927c5f50ad37c3dd48ca634a",
+          "case_id": "policy-migration",
+          "actor": "agm-engine",
+          "role": "system",
+          "source_state": "obligations_compiled",
+          "target_state": "evidence_incomplete",
+          "action": "mark_evidence_state",
+          "reason": "The new case has unsatisfied evidence obligations.",
+          "related_object_ids": [
+            "obl-o-changed-files",
+            "obl-o-summary"
+          ],
+          "timestamp": "2026-07-26T00:00:00Z"
+        }
+      ],
+      "final_decision": null,
+      "closure_receipt": null,
+      "policy_migration_diagnostic": {
+        "case_id": "policy-migration",
+        "policy_changed": true,
+        "original_policy_fingerprint": "recorded-policy-fingerprint-before-change",
+        "current_policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
+        "still_valid_obligations": [
+          "O-CHANGED-FILES",
+          "O-SUMMARY"
+        ],
+        "changed_obligations": [],
+        "added_obligations": [],
+        "removed_obligations": [],
+        "evidence_requiring_revalidation": [],
+        "attestations_invalidated_if_migrated": [],
+        "may_remain_on_original_snapshot": true,
+        "must_migrate": false,
+        "reason": "Policy changed, but the case may remain on its recorded snapshot; migration must be an explicit maintainer decision."
+      },
+      "raw_english_specification_text": {
+        "obligations": {
+          "O-CHANGED-FILES": "Identify the files and scopes covered by the contribution.",
+          "O-SUMMARY": "Provide a concise factual contribution summary."
+        },
+        "matched_rule_reasons": {
+          "documentation-low": [
+            "path selectors matched: docs/guide.md"
+          ]
+        },
+        "interaction_rules": {},
+        "authority_notice": "Verification or readiness is not acceptance. Final decisions remain with authorized human maintainers."
+      }
+    },
+    "authority_notice": "本页面只把 AGM 的真实状态、依据和合法操作整理成人类可读形式。材料齐备、维护者检查完成，或者已经具备进入最终决定的条件，都不等于代码已经被项目接受。最终决定只属于获授权的人类维护者。",
+    "responsibility": {
+      "primary_roles": [
+        "contributor",
+        "contributor_agent"
+      ],
+      "display_label": "人类贡献者、贡献侧智能体",
+      "reason": "受影响材料尚未准备或更新完成，当前还不能进入维护者检查。",
+      "blocking_items": [
+        "变更文件清单",
+        "修改说明"
+      ],
+      "next_handoff_roles": [
+        "accountable_human",
+        "maintainer_verifier",
+        "maintainer"
+      ]
+    },
+    "current_relevant_actions": [],
+    "other_available_actions": [
+      {
+        "action": "view_change_scope",
+        "title": "查看变化范围",
+        "description": "查看变更文件、风险规则、影响范围和绑定指纹。",
+        "consequence": "只读操作，不改变案例状态。",
+        "mutates_state": false,
+        "actor_role": "maintainer",
+        "default_obligation_ids": [],
+        "required_parameters": [],
+        "traceability": [
+          {
+            "kind": "permission_rule",
+            "object_id": "maintainer:view_change_scope",
+            "relationship": "authority"
+          }
+        ],
+        "relevance": "secondary",
+        "group": "other_available",
+        "primary_reason": "后端允许此操作，但它不直接处理当前主要阻断项。",
+        "selector_options": []
+      },
+      {
+        "action": "record_policy_conflict",
+        "title": "记录项目规则冲突",
+        "description": "记录无法由普通材料修复的策略冲突。",
+        "consequence": "案例转入补充处理，由项目规则负责人或维护者处理。",
+        "mutates_state": true,
+        "actor_role": "maintainer",
+        "default_obligation_ids": [
+          "O-CHANGED-FILES"
+        ],
+        "required_parameters": [
+          "obligation_ids",
+          "reason"
+        ],
+        "traceability": [
+          {
+            "kind": "permission_rule",
+            "object_id": "maintainer:record_policy_conflict",
+            "relationship": "authority"
+          },
+          {
+            "kind": "state_machine_rule",
+            "object_id": "evidence_incomplete:record_policy_conflict:repair_requested",
+            "relationship": "transition"
+          }
+        ],
+        "relevance": "secondary",
+        "group": "other_available",
+        "primary_reason": "后端允许此操作，但它不直接处理当前主要阻断项。",
+        "selector_options": [
+          {
+            "selector_token": "sel-6a174423ef0ba8f7c35ca5688a01cb34dc42c0bbbc72958cd10ee3ea954af63a",
+            "action": "record_policy_conflict",
+            "label": "变更文件清单",
+            "status_label": "缺少；等待贡献者处理",
+            "affected_scope": [
+              "docs/guide.md"
+            ],
+            "obligation_ids": [
+              "O-CHANGED-FILES"
+            ],
+            "object_type": "obligation",
+            "object_ids": [
+              "O-CHANGED-FILES"
+            ],
+            "blocking": true,
+            "material_status": "missing",
+            "workflow_status": "awaiting_contributor",
+            "technical_details": {
+              "obligation_id": "O-CHANGED-FILES",
+              "evidence_ids": [],
+              "finding_ids": []
+            },
+            "traceability": [
+              {
+                "kind": "compiled_obligation",
+                "object_id": "obl-o-changed-files",
+                "relationship": "reference"
+              },
+              {
+                "kind": "risk_or_profile_rule",
+                "object_id": "documentation-low",
+                "relationship": "source"
+              }
+            ]
+          },
+          {
+            "selector_token": "sel-0c9e5ce431b9a2103709757232a0b6f7250139ac3be3e56fd25ccbeefff67709",
+            "action": "record_policy_conflict",
+            "label": "修改说明",
+            "status_label": "缺少；等待贡献者处理",
+            "affected_scope": [
+              "docs/guide.md"
+            ],
+            "obligation_ids": [
+              "O-SUMMARY"
+            ],
+            "object_type": "obligation",
+            "object_ids": [
+              "O-SUMMARY"
+            ],
+            "blocking": true,
+            "material_status": "missing",
+            "workflow_status": "awaiting_contributor",
+            "technical_details": {
+              "obligation_id": "O-SUMMARY",
+              "evidence_ids": [],
+              "finding_ids": []
+            },
+            "traceability": [
+              {
+                "kind": "compiled_obligation",
+                "object_id": "obl-o-summary",
+                "relationship": "reference"
+              },
+              {
+                "kind": "risk_or_profile_rule",
+                "object_id": "documentation-low",
+                "relationship": "source"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "unavailable_action_summary": "还有 13 项操作因当前阶段、权限或对象范围暂不可用",
+    "utility_actions": [
+      {
+        "action_id": "copy_missing_requirements",
+        "label": "复制缺失项清单",
+        "description": "生成可直接交给贡献侧的缺失、过时或无效材料清单。",
+        "output_type": "text/plain",
+        "output": "- 变更文件清单：缺少；等待贡献者处理；范围：docs/guide.md\n- 修改说明：缺少；等待贡献者处理；范围：docs/guide.md",
+        "trace_refs": [
+          {
+            "kind": "compiled_obligation",
+            "object_id": "obl-o-changed-files",
+            "relationship": "reference"
+          },
+          {
+            "kind": "risk_or_profile_rule",
+            "object_id": "documentation-low",
+            "relationship": "source"
+          },
+          {
+            "kind": "compiled_obligation",
+            "object_id": "obl-o-summary",
+            "relationship": "reference"
+          }
+        ],
+        "state_changing": false
+      },
+      {
+        "action_id": "export_contributor_checklist",
+        "label": "导出贡献者待办清单",
+        "description": "导出包含责任方、待处理项和范围的 Markdown 清单。",
+        "output_type": "text/markdown",
+        "output": "# 贡献者待办清单\n\n案例：policy-migration\n当前责任方：人类贡献者、贡献侧智能体\n原因：受影响材料尚未准备或更新完成，当前还不能进入维护者检查。\n\n## 待处理项\n\n- 变更文件清单：缺少；等待贡献者处理；范围：docs/guide.md\n- 修改说明：缺少；等待贡献者处理；范围：docs/guide.md\n\n完成后请按当前 repair/提交范围交回；最终决定仍由人类维护者作出。",
+        "trace_refs": [
+          {
+            "kind": "compiled_obligation",
+            "object_id": "obl-o-changed-files",
+            "relationship": "reference"
+          },
+          {
+            "kind": "risk_or_profile_rule",
+            "object_id": "documentation-low",
+            "relationship": "source"
+          },
+          {
+            "kind": "compiled_obligation",
+            "object_id": "obl-o-summary",
+            "relationship": "reference"
+          }
+        ],
+        "state_changing": false
+      },
+      {
+        "action_id": "export_reviewer_summary",
+        "label": "下载维护者摘要",
+        "description": "导出当前风险、责任方和阻断项摘要，不作接受判断。",
+        "output_type": "text/markdown",
+        "output": "# 维护者审核摘要\n\n案例：policy-migration\n当前状态：等待贡献者补齐材料\n风险：low\n当前责任方：人类贡献者、贡献侧智能体\n责任方依据：受影响材料尚未准备或更新完成，当前还不能进入维护者检查。\n\n## 阻断或待检查项\n\n- 变更文件清单：缺少；等待贡献者处理；范围：docs/guide.md\n- 修改说明：缺少；等待贡献者处理；范围：docs/guide.md\n\n本摘要是治理状态说明，不是接受决定。",
+        "trace_refs": [
+          {
+            "kind": "compiled_obligation",
+            "object_id": "obl-o-changed-files",
+            "relationship": "reference"
+          },
+          {
+            "kind": "risk_or_profile_rule",
+            "object_id": "documentation-low",
+            "relationship": "source"
+          },
+          {
+            "kind": "compiled_obligation",
+            "object_id": "obl-o-summary",
+            "relationship": "reference"
+          }
+        ],
+        "state_changing": false
+      },
+      {
+        "action_id": "view_change_scope",
+        "label": "查看变化范围",
+        "description": "查看变更文件、匹配规则和各要求的影响范围。",
+        "output_type": "application/json",
+        "output": "{\n  \"case_id\": \"policy-migration\",\n  \"changed_files\": [\n    \"docs/guide.md\"\n  ],\n  \"matched_risk_rules\": [\n    {\n      \"rule_id\": \"documentation-low\",\n      \"zone\": \"documentation\",\n      \"affected_paths\": [\n        \"docs/guide.md\"\n      ]\n    }\n  ],\n  \"requirement_scopes\": {\n    \"O-CHANGED-FILES\": [\n      \"docs/guide.md\"\n    ],\n    \"O-SUMMARY\": [\n      \"docs/guide.md\"\n    ]\n  }\n}",
+        "trace_refs": [
+          {
+            "kind": "matched_rule",
+            "object_id": "match-documentation-low",
+            "relationship": "change_scope"
+          }
+        ],
+        "state_changing": false
+      },
+      {
+        "action_id": "copy_handoff_note",
+        "label": "复制当前责任方说明",
+        "description": "生成不改变案例状态的 handoff note。",
+        "output_type": "text/plain",
+        "output": "案例 policy-migration 当前交给：人类贡献者、贡献侧智能体。\n受影响材料尚未准备或更新完成，当前还不能进入维护者检查。\n涉及：变更文件清单、修改说明。\n完成后交给角色：负责人、维护者侧检查人员或人类维护者。",
+        "trace_refs": [
+          {
+            "kind": "compiled_obligation",
+            "object_id": "obl-o-changed-files",
+            "relationship": "reference"
+          },
+          {
+            "kind": "risk_or_profile_rule",
+            "object_id": "documentation-low",
+            "relationship": "source"
+          },
+          {
+            "kind": "compiled_obligation",
+            "object_id": "obl-o-summary",
+            "relationship": "reference"
+          }
+        ],
+        "state_changing": false
+      }
+    ],
+    "materiality_declaration": null,
+    "rejected_operation_notice": null
+  },
+  "trace_index": {
+    "trace:requirement:changed-files": [
+      {
+        "kind": "compiled_obligation",
+        "object_id": "obl-o-changed-files",
+        "relationship": "source"
+      },
+      {
+        "kind": "compiled_obligation",
+        "object_id": "obl-o-changed-files",
+        "relationship": "reference"
+      },
+      {
+        "kind": "risk_or_profile_rule",
+        "object_id": "documentation-low",
+        "relationship": "source"
+      }
+    ],
+    "trace:requirement:change-summary": [
+      {
+        "kind": "compiled_obligation",
+        "object_id": "obl-o-summary",
+        "relationship": "source"
+      },
+      {
+        "kind": "compiled_obligation",
+        "object_id": "obl-o-summary",
+        "relationship": "reference"
+      },
+      {
+        "kind": "risk_or_profile_rule",
+        "object_id": "documentation-low",
+        "relationship": "source"
+      }
+    ],
+    "trace:automatic-check:material_version_binding": [],
+    "trace:automatic-check:test_command_and_result": [],
+    "trace:automatic-check:test_version_binding": [],
+    "trace:automatic-check:evidence_freshness": [],
+    "trace:automatic-check:attestation_version_binding": [],
+    "trace:automatic-check:changed_file_scope_match": [],
+    "trace:automatic-check:agent_involvement": [],
+    "trace:automatic-check:recorded_delegation": [],
+    "trace:automatic-check:authority_boundary": [],
+    "trace:automatic-check:structural_obligations": []
+  }
+}
+```
+
+</details>

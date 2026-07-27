@@ -602,3 +602,171 @@ shall preserve the raw action, current and required roles, obligation IDs,
 workflow nodes, record types, state, and trace references. This presentation
 split shall not alter authority enforcement, state transitions, scoped repair,
 responsibility derivation, selector validation, or preview purity.
+
+## 22. Review Briefing Layer — Phase 1
+
+### 22.1 Purpose and authority
+
+The Review Briefing Layer shall compile existing governance conclusions into
+ordinary maintainer work. It is a read-only presentation/compiler layer above
+Reviewer Guidance and shall not replace, delete, or change Reviewer Guidance.
+
+Phase 1 shall not perform item-level verification, request repair, reject
+evidence, resubmit, attest, override, decide, close, merge, or mutate the case.
+Its server shall expose no state-changing route.
+
+### 22.2 Core model and API
+
+The serializable model shall include:
+
+1. `ReviewBriefView`
+2. `ContributionBrief`
+3. `RiskBrief`
+4. `RequirementBrief`
+5. `RequirementItem`
+6. `AutomaticCheckResult`
+7. `ContributorAccountabilityBrief`
+8. `HumanJudgmentItem`
+9. `NextStepBrief`
+10. `GovernanceTechnicalDetails`
+
+The core API shall be:
+
+```python
+compile_review_brief(
+    *,
+    governance_case,
+    policy_snapshot,
+    contribution,
+    actor_context,
+) -> ReviewBriefView
+```
+
+Compilation shall be deterministic and side-effect free. It shall consume
+recorded case risk, matched rules, compiled obligations, stable Reviewer
+Guidance requirement comparisons and responsibility, evidence bindings,
+attestations, findings, repair scope, attempted operations, verification,
+migration diagnostics, and final decision. It shall not independently match
+risk selectors, union obligations, derive permissions, authorize an operation,
+or predict a state transition.
+
+### 22.3 Epistemic categories
+
+Participant presentation shall distinguish:
+
+- system-confirmed record facts;
+- agent or contributor declarations;
+- accountable-human confirmation; and
+- unverified path/declaration-based inference.
+
+Agent self-report shall not be labelled system-observed fact. A test command
+and passing result shall not be labelled code correctness. Verification or
+readiness shall not be labelled acceptance.
+
+### 22.4 Contribution and risk briefs
+
+`ContributionBrief` shall include title, plain summary, changed files,
+component grouping, behavioral-impact navigation, security-sensitive paths,
+configuration paths, governance paths, and agent-involvement wording. A path-
+based semantic summary shall identify itself as a system inference and state
+its limitations.
+
+`RiskBrief` shall read the case's recorded overall risk and matched rules. It
+shall explain every triggered risk area, affected-path reason, interaction
+effect, and independent-review requirement in participant language. Canonical
+rule IDs shall remain in technical detail.
+
+### 22.5 Requirements and automatic checks
+
+Every compiled requirement shall map to exactly one participant status:
+
+- `system_satisfied`;
+- `provided_requires_human_judgment`;
+- `missing`;
+- `stale`;
+- `invalid`;
+- `awaiting_accountable_human`;
+- `awaiting_independent_review`; or
+- `not_applicable`.
+
+The main organization shall use requirement meaning rather than obligation ID.
+
+Automatic checks shall cover current-version material binding, test
+command/result structure, test-version binding, expiry, attestation-version
+binding, declared versus recorded changed-file scope, recorded agent
+involvement, recorded delegation declaration, denied authority attempts, and
+structural obligations. Results shall state their evidence and limitations.
+The automatic layer shall not ask a maintainer to repeat a formal check AGM has
+already completed.
+
+### 22.6 Accountability
+
+`ContributorAccountabilityBrief` shall expose agent use, configured or
+declared capabilities, recorded actions, delegation declaration, declaration
+source/status, accountable-human identity, attestation status/scope/version
+binding, and separate system-observed, declared, human-confirmed, and
+unverified-inference groups.
+
+AGM shall not infer authorship from a `human_direct` profile or missing agent
+declaration.
+
+### 22.7 Human judgment queue
+
+Only content AGM cannot decide automatically shall enter
+`HumanJudgmentItem`. Each item shall contain a stable presentation key, plain
+title, reason a human is needed, contribution claim, system observation,
+evidence summary, review focus, possible outcomes, priority, blocking meaning,
+and a safe public trace reference.
+
+Missing, stale, invalid, pre-attestation, already verified, terminal, and
+unaffected scoped-repair items shall not enter the queue. Scoped repair shall
+produce only the recorded revalidation scope. A low-risk path may produce an
+empty queue.
+
+### 22.8 Next-step routing
+
+`NextStepBrief` shall select one business-level route and state the current
+responsible party, what the system will do, what the human should do, and
+whether final acceptance has occurred.
+
+Valid routes include contribution-side update, accountable-human confirmation,
+policy-migration attention, maintainer judgment, normal code review, final
+authorized human decision, and completed/closed. The brief shall not present a
+generic operation menu.
+
+### 22.9 Participant information architecture
+
+The main page order shall be:
+
+1. contribution and changed scope;
+2. risk judgment;
+3. project requirements and completion;
+4. system-confirmed facts;
+5. system-detected problems and system limits;
+6. current human judgment queue;
+7. current next step; and
+8. default-collapsed governance process and technical detail.
+
+The five-step workflow shall not be the primary Review Brief navigation. Raw
+state names, transition names, obligation/finding/evidence/repair IDs,
+fingerprints, and generic action lists shall not appear in the participant-
+visible main layer. Technical detail shall retain the complete records and
+Reviewer Guidance view.
+
+### 22.10 CLI, output, and scenarios
+
+The Phase 1 command shall be:
+
+```bash
+python -m agm.vnext.cli maintainer brief \
+  --case CASE --actor HUMAN --role maintainer --serve
+```
+
+It shall write `brief.json`, `brief.md`, and `brief.html` beside the case.
+Serving shall remain loopback-only and read-only.
+
+`scripts/generate_review_briefing_demos.py` shall compile the existing eight
+Reviewer Guidance governance cases into the same three output formats under
+`examples/review_briefing/outputs/`. The output is a design-review fixture, not
+a P92 experiment package, human verification, final decision, acceptance, or
+merge approval.

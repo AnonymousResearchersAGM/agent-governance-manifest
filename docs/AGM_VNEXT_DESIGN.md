@@ -132,6 +132,58 @@ retained, invalidated, and revalidation scopes for guidance traceability.
 See `docs/AGM_REVIEWER_GUIDANCE_LAYER.md` for state definitions and
 `docs/AGM_MAINTAINER_GUIDE.md` for operation guidance.
 
+## Review Briefing Layer and human-work compilation
+
+`src/agm/vnext/briefing/` adds a higher presentation/compiler layer without
+replacing Reviewer Guidance. Reviewer Guidance explains governance state,
+traceability, and legal operations to a governance-aware reviewer. Review
+Briefing explains the work itself to an ordinary maintainer:
+
+- what changed and which component paths are involved;
+- the engine-recorded risk level and its matched-rule/interaction reasons;
+- what the project requires and which items are complete, missing, stale,
+  invalid, awaiting an accountable human, or awaiting independent review;
+- formal facts the system has already checked;
+- declared content whose truth or semantic fit still needs a human;
+- contributor-agent and accountable-human provenance categories;
+- the smallest queue of concrete human judgments; and
+- one responsibility-aligned next step.
+
+This is a second compiler boundary:
+
+```text
+governance-state compiler -> Reviewer Guidance -> human-work compiler
+```
+
+The human-work compiler consumes the same `RequirementComparison`,
+responsibility derivation, matched rules, compiled obligations, bindings,
+findings, repair scope, attestation, verification, and final-decision records.
+It does not resolve policy or authority again. Its technical detail embeds the
+Reviewer Guidance view and complete canonical records, so disagreement between
+the two views is a defect rather than a permissible presentation choice.
+
+The epistemic boundary is explicit. System-confirmed binding, expiry,
+structure, scope equality, attestation binding, and denied-operation state
+effects are separate from contributor/agent declarations, accountable-human
+confirmation, and path-based inference. Test-record completeness is never
+described as code correctness. Agent self-report is never described as system-
+observed behavior.
+
+The human judgment queue excludes missing, stale, invalid, or pre-attestation
+work. Scoped repair yields only its revalidation scope; a low-risk path can
+yield no extra AGM judgment. `NextStepBrief` then routes to contribution-side
+repair, accountable-human confirmation, maintainer judgment, ordinary code
+review, final human decision, or closure without exposing a generic action
+menu.
+
+Phase 1 is entirely read-only. `maintainer brief` writes `brief.json`,
+`brief.md`, and `brief.html`; its loopback server accepts GET only. Raw
+workflow, state, obligation/finding/evidence/repair IDs, transition names, and
+fingerprints remain default-collapsed.
+
+See `docs/AGM_REVIEW_BRIEFING_LAYER.md` for the complete model, routing rules,
+information architecture, and Phase 1 limitations.
+
 ## Reviewer guidance semantic hardening
 
 Participant-facing Chinese is presentation metadata keyed by canonical
