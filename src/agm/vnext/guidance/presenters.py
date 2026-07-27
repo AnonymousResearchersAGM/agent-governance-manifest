@@ -47,8 +47,8 @@ from .workflow import STEP_DEFINITIONS, STEP_STYLES, build_workflow_steps
 
 AUTHORITY_NOTICE = (
     "本页面只把 AGM 的真实状态、依据和合法操作整理成人类可读形式。"
-    "材料齐备、核验完成或 eligible 均不等于接受；最终决定只属于获授权的"
-    "人类维护者。"
+    "材料齐备、维护者检查完成，或者已经具备进入最终决定的条件，"
+    "都不等于代码已经被项目接受。最终决定只属于获授权的人类维护者。"
 )
 
 RISK_LABELS = {
@@ -185,6 +185,7 @@ def _summary(
 def _materiality_declaration(
     case: GovernanceCase,
     comparisons: list[RequirementComparison],
+    transitions: list[StateTransition],
 ) -> MaterialityDeclarationView | None:
     latest_repair = next(
         (
@@ -245,6 +246,19 @@ def _materiality_declaration(
             "materiality_declaration",
         ),
     ]
+    attempt_id = str(attempt.get("id", "unrecorded"))
+    declaration_transition = next(
+        (
+            transition
+            for transition in reversed(transitions)
+            if transition.action == "resubmit"
+            and attempt_id in transition.related_object_ids
+        ),
+        None,
+    )
+    declared_by_role = (
+        declaration_transition.role if declaration_transition else ""
+    )
     reason = present_reason(
         reason_code=reason_code,
         source_english=str(
@@ -256,6 +270,10 @@ def _materiality_declaration(
         classification=classification,
         classification_label=labels.get(classification, classification),
         declared_by=str(attempt.get("actor", "未记录")),
+        declared_by_role=declared_by_role,
+        declared_by_display=present_role(
+            declared_by_role
+        ).display_plain,
         reason=reason.display_plain,
         reason_presentation=reason,
         affected_obligation_ids=affected,
@@ -643,7 +661,7 @@ def build_reviewer_guidance(
             case, comparisons, responsibility
         ),
         materiality_declaration=_materiality_declaration(
-            case, comparisons
+            case, comparisons, transitions
         ),
         rejected_operation_notice=_rejected_operation_notice(case),
     )
@@ -1425,7 +1443,8 @@ def render_guidance_html(
             "<section><h2>变化影响声明</h2>"
             f"<p><strong>本次变化被声明为：</strong>"
             f"{html.escape(item.classification_label)}</p>"
-            f"<p><strong>声明者：</strong>{html.escape(item.declared_by)}</p>"
+            f"<p><strong>声明者：</strong>"
+            f"{html.escape(item.declared_by_display)}</p>"
             f"<p><strong>声明理由：</strong>{html.escape(item.reason)}</p>"
             "<p><strong>尚需维护者核验：</strong>"
             f"{'是' if item.requires_maintainer_verification else '否'}</p>"

@@ -151,15 +151,27 @@ def test_material_change_preview_is_chinese_first_with_raw_terms_folded(
     result = next(item for item in results if item["scenario"] == slug)
     rendered = (output / result["html"]).read_text(encoding="utf-8")
     visible = _participant_text(rendered)
+    compact_visible = visible.replace(" ", "")
     preview = payloads[slug]["action_preview"]
 
     assert "修改说明" in visible
     assert "当前还不能进行维护者检查" in visible
     assert "贡献侧智能体" in visible
+    assert "声明者：贡献侧智能体" in compact_visible
+    assert "声明者：contributor-agent" not in compact_visible
+    assert "声明者：contributor_agent" not in compact_visible
+    assert "contributor-agent" not in visible
+    assert "contributor_agent" not in visible
     assert "verify_evidence" not in visible
     assert "O-SUMMARY" not in visible
     assert "verify_evidence" in rendered
     assert "O-SUMMARY" in rendered
+    declaration = payloads[slug]["guidance_view"][
+        "materiality_declaration"
+    ]
+    assert declaration["declared_by"] == "contributor-agent"
+    assert declaration["declared_by_role"] == "contributor_agent"
+    assert declaration["declared_by_display"] == "贡献侧智能体"
     assert preview["technical_details"]["operation"] == "verify_evidence"
     assert preview["technical_details"]["current_role"] == (
         "maintainer_verifier"
@@ -198,18 +210,51 @@ def test_scoped_repair_scenario_preserves_unaffected_records(
 def test_scoped_repair_preview_keeps_ids_out_of_participant_layer(
     generated_scenarios,
 ):
-    output, results, _ = generated_scenarios
+    output, results, payloads = generated_scenarios
     slug = "03_scoped_repair"
     result = next(item for item in results if item["scenario"] == slug)
     rendered = (output / result["html"]).read_text(encoding="utf-8")
     visible = _participant_text(rendered)
+    compact_visible = visible.replace(" ", "")
 
     assert "智能体行动与委派说明" in visible
+    assert "声明者：贡献侧智能体" in compact_visible
+    assert "声明者：contributor-agent" not in compact_visible
+    assert "声明者：contributor_agent" not in compact_visible
+    assert "contributor-agent" not in visible
+    assert "contributor_agent" not in visible
     assert "保留的未受影响材料" in visible
     assert "等待人类维护者最终决定" in visible
     assert "不等于代码已经被项目接受" in visible
     assert "evidence-" not in visible
     assert "finding-" not in visible
+    declaration = payloads[slug]["guidance_view"][
+        "materiality_declaration"
+    ]
+    assert declaration["declared_by"] == "contributor-agent"
+    assert declaration["declared_by_role"] == "contributor_agent"
+
+
+def test_authority_boundary_uses_plain_chinese_and_keeps_raw_readiness_folded(
+    generated_scenarios,
+):
+    output, results, payloads = generated_scenarios
+    expected = (
+        "材料齐备、维护者检查完成，或者已经具备进入最终决定的条件，"
+        "都不等于代码已经被项目接受。"
+    )
+
+    for result in results:
+        slug = result["scenario"]
+        rendered = (output / result["html"]).read_text(encoding="utf-8")
+        visible = _participant_text(rendered)
+        view = payloads[slug]["guidance_view"]
+
+        assert expected in visible
+        assert "eligible" not in visible
+        assert view["technical_details"]["readiness"] == (
+            view["summary"]["raw_readiness"]
+        )
 
 
 def test_e2e_transition_traces_have_one_primary_step(generated_scenarios):

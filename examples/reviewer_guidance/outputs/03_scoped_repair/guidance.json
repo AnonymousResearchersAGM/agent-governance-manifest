@@ -1455,7 +1455,7 @@
         "authority_notice": "Verification or readiness is not acceptance. Final decisions remain with authorized human maintainers."
       }
     },
-    "authority_notice": "本页面只把 AGM 的真实状态、依据和合法操作整理成人类可读形式。材料齐备、核验完成或 eligible 均不等于接受；最终决定只属于获授权的人类维护者。",
+    "authority_notice": "本页面只把 AGM 的真实状态、依据和合法操作整理成人类可读形式。材料齐备、维护者检查完成，或者已经具备进入最终决定的条件，都不等于代码已经被项目接受。最终决定只属于获授权的人类维护者。",
     "responsibility": {
       "primary_roles": [
         "maintainer_verifier",
@@ -1700,6 +1700,8 @@
       "classification": "no_material_change",
       "classification_label": "未检测到贡献指纹变化",
       "declared_by": "contributor-agent",
+      "declared_by_role": "contributor_agent",
+      "declared_by_display": "贡献侧智能体",
       "reason": "本次只澄清文字表述，不改变贡献行为。",
       "reason_presentation": {
         "reason_code": "wording_only_clarification",

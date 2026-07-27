@@ -236,6 +236,8 @@ class MaterialityDeclarationView(GuidanceRecord):
     classification: str
     classification_label: str
     declared_by: str
+    declared_by_role: str
+    declared_by_display: str
     reason: str
     reason_presentation: GuidanceReasonPresentation
     affected_obligation_ids: list[str]
