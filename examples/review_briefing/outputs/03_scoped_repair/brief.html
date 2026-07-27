@@ -166,7 +166,7 @@ color:#e8eef4; border-radius:10px; white-space:pre-wrap; overflow-wrap:anywhere;
 <p>这里保留完整 workflow、内部状态、规则、义务、材料、finding、transition、ID、trace 和 fingerprint，供追溯使用。</p>
 <pre>{
   &quot;case_id&quot;: &quot;scoped-repair&quot;,
-  &quot;raw_state&quot;: &quot;resubmitted&quot;,
+  &quot;raw_state&quot;: &quot;awaiting_maintainer_verification&quot;,
   &quot;raw_readiness&quot;: &quot;repair_required&quot;,
   &quot;contribution_fingerprint&quot;: &quot;712fcd4dc43abd39cf07328603c2a14d9da29e20b1369a6d2b1b1b8eba6080a0&quot;,
   &quot;policy_fingerprint&quot;: &quot;e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564&quot;,
@@ -585,6 +585,22 @@ color:#e8eef4; border-radius:10px; white-space:pre-wrap; overflow-wrap:anywhere;
         &quot;attempt-612807c028a75b3782f750a111c86bb9&quot;
       ],
       &quot;timestamp&quot;: &quot;2026-07-26T00:00:00Z&quot;
+    },
+    {
+      &quot;id&quot;: &quot;transition-b2cf970564f25e54b8876e1685661bd3&quot;,
+      &quot;case_id&quot;: &quot;scoped-repair&quot;,
+      &quot;actor&quot;: &quot;contributor-agent&quot;,
+      &quot;role&quot;: &quot;contributor_agent&quot;,
+      &quot;source_state&quot;: &quot;resubmitted&quot;,
+      &quot;target_state&quot;: &quot;awaiting_maintainer_verification&quot;,
+      &quot;action&quot;: &quot;submit_for_verification&quot;,
+      &quot;reason&quot;: &quot;Contributor submitted prepared evidence for maintainer verification.&quot;,
+      &quot;related_object_ids&quot;: [
+        &quot;evidence-1f877f9f9e5d5df1b4c3714ea5fec6a1&quot;,
+        &quot;evidence-0a51a227c9c15692a99d7e527b174492&quot;,
+        &quot;evidence-5c1362d33d7653c7ab21254f127c4317&quot;
+      ],
+      &quot;timestamp&quot;: &quot;2026-07-26T00:00:00Z&quot;
     }
   ],
   &quot;final_decision&quot;: null,
@@ -641,7 +657,7 @@ color:#e8eef4; border-radius:10px; white-space:pre-wrap; overflow-wrap:anywhere;
         &quot;policy_steward&quot;,
         &quot;maintainer&quot;
       ],
-      &quot;raw_state&quot;: &quot;resubmitted&quot;,
+      &quot;raw_state&quot;: &quot;awaiting_maintainer_verification&quot;,
       &quot;raw_readiness&quot;: &quot;repair_required&quot;
     },
     &quot;workflow_steps&quot;: [
@@ -697,7 +713,7 @@ color:#e8eef4; border-radius:10px; white-space:pre-wrap; overflow-wrap:anywhere;
         &quot;status&quot;: &quot;completed&quot;,
         &quot;status_label&quot;: &quot;已完成&quot;,
         &quot;symbol&quot;: &quot;✓&quot;,
-        &quot;explanation&quot;: &quot;指定范围已补交并具备可检查材料，未受影响材料继续保留。&quot;,
+        &quot;explanation&quot;: &quot;本次所需材料已提交到后续流程。&quot;,
         &quot;internal_stages&quot;: [
           &quot;Bind&quot;,
           &quot;Repair&quot;
@@ -755,7 +771,7 @@ color:#e8eef4; border-radius:10px; white-space:pre-wrap; overflow-wrap:anywhere;
         &quot;status&quot;: &quot;current&quot;,
         &quot;status_label&quot;: &quot;当前阶段&quot;,
         &quot;symbol&quot;: &quot;●&quot;,
-        &quot;explanation&quot;: &quot;当前只重新检查指定修复范围；未受影响的检查结果保留。&quot;,
+        &quot;explanation&quot;: &quot;当前轮到有权限的维护者检查材料与绑定。&quot;,
         &quot;internal_stages&quot;: [
           &quot;Verify&quot;,
           &quot;Repair&quot;
@@ -775,6 +791,11 @@ color:#e8eef4; border-radius:10px; white-space:pre-wrap; overflow-wrap:anywhere;
             &quot;kind&quot;: &quot;state_transition&quot;,
             &quot;object_id&quot;: &quot;transition-73f7594267755464b038a86d9eea8add&quot;,
             &quot;relationship&quot;: &quot;primary:request_repair&quot;
+          },
+          {
+            &quot;kind&quot;: &quot;state_transition&quot;,
+            &quot;object_id&quot;: &quot;transition-b2cf970564f25e54b8876e1685661bd3&quot;,
+            &quot;relationship&quot;: &quot;primary:submit_for_verification&quot;
           },
           {
             &quot;kind&quot;: &quot;maintainer_verification&quot;,
@@ -1061,7 +1082,7 @@ color:#e8eef4; border-radius:10px; white-space:pre-wrap; overflow-wrap:anywhere;
           },
           {
             &quot;kind&quot;: &quot;state_machine_rule&quot;,
-            &quot;object_id&quot;: &quot;resubmitted:verify_evidence:verification_complete&quot;,
+            &quot;object_id&quot;: &quot;awaiting_maintainer_verification:verify_evidence:verification_complete&quot;,
             &quot;relationship&quot;: &quot;transition&quot;
           }
         ],
@@ -1118,108 +1139,635 @@ color:#e8eef4; border-radius:10px; white-space:pre-wrap; overflow-wrap:anywhere;
             ]
           }
         ]
-      }
-    ],
-    &quot;unavailable_actions&quot;: [
+      },
       {
         &quot;action&quot;: &quot;request_repair&quot;,
         &quot;title&quot;: &quot;要求补充或修改&quot;,
         &quot;description&quot;: &quot;指出问题和受影响义务，返回贡献侧修复。&quot;,
-        &quot;reason&quot;: &quot;当前处于“已补交，等待确认材料是否齐备”，还不能执行“要求补充或修改”。&quot;,
-        &quot;next_actor_roles&quot;: [
-          &quot;maintainer_verifier&quot;,
-          &quot;policy_steward&quot;,
-          &quot;maintainer&quot;
-        ],
+        &quot;consequence&quot;: &quot;仅指定范围需要修复和重新检查，未受影响材料保留。&quot;,
         &quot;mutates_state&quot;: true,
+        &quot;actor_role&quot;: &quot;maintainer&quot;,
+        &quot;default_obligation_ids&quot;: [
+          &quot;O-AGENT-SCOPE&quot;
+        ],
+        &quot;required_parameters&quot;: [
+          &quot;obligation_ids&quot;,
+          &quot;reason&quot;
+        ],
         &quot;traceability&quot;: [
           {
             &quot;kind&quot;: &quot;permission_rule&quot;,
             &quot;object_id&quot;: &quot;maintainer:request_repair&quot;,
             &quot;relationship&quot;: &quot;authority&quot;
+          },
+          {
+            &quot;kind&quot;: &quot;state_machine_rule&quot;,
+            &quot;object_id&quot;: &quot;awaiting_maintainer_verification:request_repair:repair_requested&quot;,
+            &quot;relationship&quot;: &quot;transition&quot;
           }
         ],
-        &quot;category&quot;: &quot;authority&quot;,
-        &quot;required_role&quot;: [
-          &quot;maintainer&quot;,
-          &quot;maintainer_verifier&quot;,
-          &quot;policy_steward&quot;
-        ],
-        &quot;required_state&quot;: [
-          &quot;awaiting_maintainer_verification&quot;,
-          &quot;ready_for_human_decision&quot;,
-          &quot;verification_complete&quot;
-        ],
-        &quot;future_availability&quot;: &quot;到达所需状态且对象范围满足后可能可用。&quot;
+        &quot;relevance&quot;: &quot;current&quot;,
+        &quot;group&quot;: &quot;current_relevant&quot;,
+        &quot;primary_reason&quot;: &quot;该操作直接对应当前流程阶段或开放问题。&quot;,
+        &quot;selector_options&quot;: [
+          {
+            &quot;selector_token&quot;: &quot;sel-80a9ed6e44d1378f574c328eaeaf7ba96cd07e4aad5c449608cae2681d73ddb5&quot;,
+            &quot;action&quot;: &quot;request_repair&quot;,
+            &quot;label&quot;: &quot;智能体行动与委派说明&quot;,
+            &quot;status_label&quot;: &quot;已提供；等待维护者重新检查&quot;,
+            &quot;affected_scope&quot;: [],
+            &quot;obligation_ids&quot;: [
+              &quot;O-AGENT-SCOPE&quot;
+            ],
+            &quot;object_type&quot;: &quot;obligation&quot;,
+            &quot;object_ids&quot;: [
+              &quot;O-AGENT-SCOPE&quot;
+            ],
+            &quot;blocking&quot;: true,
+            &quot;material_status&quot;: &quot;provided&quot;,
+            &quot;workflow_status&quot;: &quot;awaiting_revalidation&quot;,
+            &quot;technical_details&quot;: {
+              &quot;obligation_id&quot;: &quot;O-AGENT-SCOPE&quot;,
+              &quot;evidence_ids&quot;: [
+                &quot;evidence-1f877f9f9e5d5df1b4c3714ea5fec6a1&quot;
+              ],
+              &quot;finding_ids&quot;: [
+                &quot;finding-8c9865b11f9455de8729c497a127546b&quot;
+              ]
+            },
+            &quot;traceability&quot;: [
+              {
+                &quot;kind&quot;: &quot;compiled_obligation&quot;,
+                &quot;object_id&quot;: &quot;obl-o-agent-scope&quot;,
+                &quot;relationship&quot;: &quot;reference&quot;
+              },
+              {
+                &quot;kind&quot;: &quot;risk_or_profile_rule&quot;,
+                &quot;object_id&quot;: &quot;autonomy:supervised_agent&quot;,
+                &quot;relationship&quot;: &quot;source&quot;
+              },
+              {
+                &quot;kind&quot;: &quot;evidence&quot;,
+                &quot;object_id&quot;: &quot;evidence-1f877f9f9e5d5df1b4c3714ea5fec6a1&quot;,
+                &quot;relationship&quot;: &quot;observed&quot;
+              },
+              {
+                &quot;kind&quot;: &quot;finding&quot;,
+                &quot;object_id&quot;: &quot;finding-8c9865b11f9455de8729c497a127546b&quot;,
+                &quot;relationship&quot;: &quot;diagnostic&quot;
+              }
+            ]
+          },
+          {
+            &quot;selector_token&quot;: &quot;sel-a0df379baa9cd51709208499e5bc735cdb78f956129ecc689d8f9ebafadcd430&quot;,
+            &quot;action&quot;: &quot;request_repair&quot;,
+            &quot;label&quot;: &quot;变更文件清单&quot;,
+            &quot;status_label&quot;: &quot;已提供；已完成&quot;,
+            &quot;affected_scope&quot;: [
+              &quot;docs/guide.md&quot;
+            ],
+            &quot;obligation_ids&quot;: [
+              &quot;O-CHANGED-FILES&quot;
+            ],
+            &quot;object_type&quot;: &quot;obligation&quot;,
+            &quot;object_ids&quot;: [
+              &quot;O-CHANGED-FILES&quot;
+            ],
+            &quot;blocking&quot;: true,
+            &quot;material_status&quot;: &quot;provided&quot;,
+            &quot;workflow_status&quot;: &quot;completed&quot;,
+            &quot;technical_details&quot;: {
+              &quot;obligation_id&quot;: &quot;O-CHANGED-FILES&quot;,
+              &quot;evidence_ids&quot;: [
+                &quot;evidence-0a51a227c9c15692a99d7e527b174492&quot;
+              ],
+              &quot;finding_ids&quot;: []
+            },
+            &quot;traceability&quot;: [
+              {
+                &quot;kind&quot;: &quot;compiled_obligation&quot;,
+                &quot;object_id&quot;: &quot;obl-o-changed-files&quot;,
+                &quot;relationship&quot;: &quot;reference&quot;
+              },
+              {
+                &quot;kind&quot;: &quot;risk_or_profile_rule&quot;,
+                &quot;object_id&quot;: &quot;documentation-low&quot;,
+                &quot;relationship&quot;: &quot;source&quot;
+              },
+              {
+                &quot;kind&quot;: &quot;evidence&quot;,
+                &quot;object_id&quot;: &quot;evidence-0a51a227c9c15692a99d7e527b174492&quot;,
+                &quot;relationship&quot;: &quot;observed&quot;
+              }
+            ]
+          },
+          {
+            &quot;selector_token&quot;: &quot;sel-f5497a7a3588ab4f15c015d60f2b1c53839a7ad9f4d009807ee059e2514ab182&quot;,
+            &quot;action&quot;: &quot;request_repair&quot;,
+            &quot;label&quot;: &quot;修改说明&quot;,
+            &quot;status_label&quot;: &quot;已提供；已完成&quot;,
+            &quot;affected_scope&quot;: [
+              &quot;docs/guide.md&quot;
+            ],
+            &quot;obligation_ids&quot;: [
+              &quot;O-SUMMARY&quot;
+            ],
+            &quot;object_type&quot;: &quot;obligation&quot;,
+            &quot;object_ids&quot;: [
+              &quot;O-SUMMARY&quot;
+            ],
+            &quot;blocking&quot;: true,
+            &quot;material_status&quot;: &quot;provided&quot;,
+            &quot;workflow_status&quot;: &quot;completed&quot;,
+            &quot;technical_details&quot;: {
+              &quot;obligation_id&quot;: &quot;O-SUMMARY&quot;,
+              &quot;evidence_ids&quot;: [
+                &quot;evidence-5c1362d33d7653c7ab21254f127c4317&quot;
+              ],
+              &quot;finding_ids&quot;: []
+            },
+            &quot;traceability&quot;: [
+              {
+                &quot;kind&quot;: &quot;compiled_obligation&quot;,
+                &quot;object_id&quot;: &quot;obl-o-summary&quot;,
+                &quot;relationship&quot;: &quot;reference&quot;
+              },
+              {
+                &quot;kind&quot;: &quot;risk_or_profile_rule&quot;,
+                &quot;object_id&quot;: &quot;documentation-low&quot;,
+                &quot;relationship&quot;: &quot;source&quot;
+              },
+              {
+                &quot;kind&quot;: &quot;evidence&quot;,
+                &quot;object_id&quot;: &quot;evidence-5c1362d33d7653c7ab21254f127c4317&quot;,
+                &quot;relationship&quot;: &quot;observed&quot;
+              }
+            ]
+          }
+        ]
       },
       {
         &quot;action&quot;: &quot;reject_evidence&quot;,
         &quot;title&quot;: &quot;拒绝当前材料&quot;,
         &quot;description&quot;: &quot;拒绝一条不能支持当前修改的具体材料。&quot;,
-        &quot;reason&quot;: &quot;当前处于“已补交，等待确认材料是否齐备”，还不能执行“拒绝当前材料”。&quot;,
-        &quot;next_actor_roles&quot;: [
-          &quot;maintainer_verifier&quot;,
-          &quot;policy_steward&quot;,
-          &quot;maintainer&quot;
-        ],
+        &quot;consequence&quot;: &quot;该材料将标记为已拒绝，并建立指定范围的补充或修改请求。&quot;,
         &quot;mutates_state&quot;: true,
+        &quot;actor_role&quot;: &quot;maintainer&quot;,
+        &quot;default_obligation_ids&quot;: [],
+        &quot;required_parameters&quot;: [
+          &quot;object_id&quot;,
+          &quot;reason&quot;
+        ],
         &quot;traceability&quot;: [
           {
             &quot;kind&quot;: &quot;permission_rule&quot;,
             &quot;object_id&quot;: &quot;maintainer:reject_evidence&quot;,
             &quot;relationship&quot;: &quot;authority&quot;
+          },
+          {
+            &quot;kind&quot;: &quot;state_machine_rule&quot;,
+            &quot;object_id&quot;: &quot;awaiting_maintainer_verification:reject_evidence:repair_requested&quot;,
+            &quot;relationship&quot;: &quot;transition&quot;
           }
         ],
-        &quot;category&quot;: &quot;authority&quot;,
-        &quot;required_role&quot;: [
-          &quot;maintainer&quot;,
-          &quot;maintainer_verifier&quot;
-        ],
-        &quot;required_state&quot;: [
-          &quot;awaiting_maintainer_verification&quot;,
-          &quot;verification_complete&quot;
-        ],
-        &quot;future_availability&quot;: &quot;到达所需状态且对象范围满足后可能可用。&quot;
+        &quot;relevance&quot;: &quot;current&quot;,
+        &quot;group&quot;: &quot;current_relevant&quot;,
+        &quot;primary_reason&quot;: &quot;该操作直接对应当前流程阶段或开放问题。&quot;,
+        &quot;selector_options&quot;: [
+          {
+            &quot;selector_token&quot;: &quot;sel-f5ec08276b893da6c7a097c371ba920091d96d4ffd7706e8e8a21f371fca4183&quot;,
+            &quot;action&quot;: &quot;reject_evidence&quot;,
+            &quot;label&quot;: &quot;智能体行动与委派说明&quot;,
+            &quot;status_label&quot;: &quot;当前材料有效，可记录拒绝依据&quot;,
+            &quot;affected_scope&quot;: [
+              &quot;docs/guide.md&quot;
+            ],
+            &quot;obligation_ids&quot;: [
+              &quot;O-AGENT-SCOPE&quot;
+            ],
+            &quot;object_type&quot;: &quot;evidence&quot;,
+            &quot;object_ids&quot;: [
+              &quot;evidence-1f877f9f9e5d5df1b4c3714ea5fec6a1&quot;
+            ],
+            &quot;blocking&quot;: true,
+            &quot;material_status&quot;: &quot;valid&quot;,
+            &quot;workflow_status&quot;: &quot;&quot;,
+            &quot;technical_details&quot;: {
+              &quot;evidence_id&quot;: &quot;evidence-1f877f9f9e5d5df1b4c3714ea5fec6a1&quot;,
+              &quot;evidence_type&quot;: &quot;agent_action_scope&quot;
+            },
+            &quot;traceability&quot;: [
+              {
+                &quot;kind&quot;: &quot;evidence&quot;,
+                &quot;object_id&quot;: &quot;evidence-1f877f9f9e5d5df1b4c3714ea5fec6a1&quot;,
+                &quot;relationship&quot;: &quot;action_target&quot;
+              }
+            ]
+          },
+          {
+            &quot;selector_token&quot;: &quot;sel-a65b60ff9f372d533e72ca54467c1ef6132c344cf1208e96606bd783e18191da&quot;,
+            &quot;action&quot;: &quot;reject_evidence&quot;,
+            &quot;label&quot;: &quot;变更文件清单&quot;,
+            &quot;status_label&quot;: &quot;当前材料有效，可记录拒绝依据&quot;,
+            &quot;affected_scope&quot;: [
+              &quot;docs/guide.md&quot;
+            ],
+            &quot;obligation_ids&quot;: [
+              &quot;O-CHANGED-FILES&quot;
+            ],
+            &quot;object_type&quot;: &quot;evidence&quot;,
+            &quot;object_ids&quot;: [
+              &quot;evidence-0a51a227c9c15692a99d7e527b174492&quot;
+            ],
+            &quot;blocking&quot;: true,
+            &quot;material_status&quot;: &quot;valid&quot;,
+            &quot;workflow_status&quot;: &quot;&quot;,
+            &quot;technical_details&quot;: {
+              &quot;evidence_id&quot;: &quot;evidence-0a51a227c9c15692a99d7e527b174492&quot;,
+              &quot;evidence_type&quot;: &quot;changed_files&quot;
+            },
+            &quot;traceability&quot;: [
+              {
+                &quot;kind&quot;: &quot;evidence&quot;,
+                &quot;object_id&quot;: &quot;evidence-0a51a227c9c15692a99d7e527b174492&quot;,
+                &quot;relationship&quot;: &quot;action_target&quot;
+              }
+            ]
+          },
+          {
+            &quot;selector_token&quot;: &quot;sel-15e0e6c942e977a2f31a241b4ee3d865640d4e5e084878bb3ca47b4d4a3db7eb&quot;,
+            &quot;action&quot;: &quot;reject_evidence&quot;,
+            &quot;label&quot;: &quot;修改说明&quot;,
+            &quot;status_label&quot;: &quot;当前材料有效，可记录拒绝依据&quot;,
+            &quot;affected_scope&quot;: [
+              &quot;docs/guide.md&quot;
+            ],
+            &quot;obligation_ids&quot;: [
+              &quot;O-SUMMARY&quot;
+            ],
+            &quot;object_type&quot;: &quot;evidence&quot;,
+            &quot;object_ids&quot;: [
+              &quot;evidence-5c1362d33d7653c7ab21254f127c4317&quot;
+            ],
+            &quot;blocking&quot;: true,
+            &quot;material_status&quot;: &quot;valid&quot;,
+            &quot;workflow_status&quot;: &quot;&quot;,
+            &quot;technical_details&quot;: {
+              &quot;evidence_id&quot;: &quot;evidence-5c1362d33d7653c7ab21254f127c4317&quot;,
+              &quot;evidence_type&quot;: &quot;contribution_summary&quot;
+            },
+            &quot;traceability&quot;: [
+              {
+                &quot;kind&quot;: &quot;evidence&quot;,
+                &quot;object_id&quot;: &quot;evidence-5c1362d33d7653c7ab21254f127c4317&quot;,
+                &quot;relationship&quot;: &quot;action_target&quot;
+              }
+            ]
+          }
+        ]
       },
       {
         &quot;action&quot;: &quot;ask_clarification&quot;,
         &quot;title&quot;: &quot;请求补充说明&quot;,
         &quot;description&quot;: &quot;针对指定要求提出可审计的澄清问题。&quot;,
-        &quot;reason&quot;: &quot;当前处于“已补交，等待确认材料是否齐备”，还不能执行“请求补充说明”。&quot;,
-        &quot;next_actor_roles&quot;: [
-          &quot;maintainer_verifier&quot;,
-          &quot;policy_steward&quot;,
-          &quot;maintainer&quot;
-        ],
+        &quot;consequence&quot;: &quot;案例返回贡献侧回答，所选范围需要重新检查。&quot;,
         &quot;mutates_state&quot;: true,
+        &quot;actor_role&quot;: &quot;maintainer&quot;,
+        &quot;default_obligation_ids&quot;: [
+          &quot;O-AGENT-SCOPE&quot;
+        ],
+        &quot;required_parameters&quot;: [
+          &quot;obligation_ids&quot;,
+          &quot;reason&quot;
+        ],
         &quot;traceability&quot;: [
           {
             &quot;kind&quot;: &quot;permission_rule&quot;,
             &quot;object_id&quot;: &quot;maintainer:ask_clarification&quot;,
             &quot;relationship&quot;: &quot;authority&quot;
+          },
+          {
+            &quot;kind&quot;: &quot;state_machine_rule&quot;,
+            &quot;object_id&quot;: &quot;awaiting_maintainer_verification:ask_clarification:repair_requested&quot;,
+            &quot;relationship&quot;: &quot;transition&quot;
           }
         ],
-        &quot;category&quot;: &quot;authority&quot;,
-        &quot;required_role&quot;: [
-          &quot;maintainer&quot;,
-          &quot;maintainer_verifier&quot;
-        ],
-        &quot;required_state&quot;: [
-          &quot;awaiting_maintainer_verification&quot;,
-          &quot;ready_for_human_decision&quot;,
-          &quot;verification_complete&quot;
-        ],
-        &quot;future_availability&quot;: &quot;到达所需状态且对象范围满足后可能可用。&quot;
+        &quot;relevance&quot;: &quot;current&quot;,
+        &quot;group&quot;: &quot;current_relevant&quot;,
+        &quot;primary_reason&quot;: &quot;该操作直接对应当前流程阶段或开放问题。&quot;,
+        &quot;selector_options&quot;: [
+          {
+            &quot;selector_token&quot;: &quot;sel-06aa442dd7376de0976c29253225cf3e2504ae05fbf85cd14c7740fe2e791e03&quot;,
+            &quot;action&quot;: &quot;ask_clarification&quot;,
+            &quot;label&quot;: &quot;智能体行动与委派说明&quot;,
+            &quot;status_label&quot;: &quot;已提供；等待维护者重新检查&quot;,
+            &quot;affected_scope&quot;: [],
+            &quot;obligation_ids&quot;: [
+              &quot;O-AGENT-SCOPE&quot;
+            ],
+            &quot;object_type&quot;: &quot;obligation&quot;,
+            &quot;object_ids&quot;: [
+              &quot;O-AGENT-SCOPE&quot;
+            ],
+            &quot;blocking&quot;: true,
+            &quot;material_status&quot;: &quot;provided&quot;,
+            &quot;workflow_status&quot;: &quot;awaiting_revalidation&quot;,
+            &quot;technical_details&quot;: {
+              &quot;obligation_id&quot;: &quot;O-AGENT-SCOPE&quot;,
+              &quot;evidence_ids&quot;: [
+                &quot;evidence-1f877f9f9e5d5df1b4c3714ea5fec6a1&quot;
+              ],
+              &quot;finding_ids&quot;: [
+                &quot;finding-8c9865b11f9455de8729c497a127546b&quot;
+              ]
+            },
+            &quot;traceability&quot;: [
+              {
+                &quot;kind&quot;: &quot;compiled_obligation&quot;,
+                &quot;object_id&quot;: &quot;obl-o-agent-scope&quot;,
+                &quot;relationship&quot;: &quot;reference&quot;
+              },
+              {
+                &quot;kind&quot;: &quot;risk_or_profile_rule&quot;,
+                &quot;object_id&quot;: &quot;autonomy:supervised_agent&quot;,
+                &quot;relationship&quot;: &quot;source&quot;
+              },
+              {
+                &quot;kind&quot;: &quot;evidence&quot;,
+                &quot;object_id&quot;: &quot;evidence-1f877f9f9e5d5df1b4c3714ea5fec6a1&quot;,
+                &quot;relationship&quot;: &quot;observed&quot;
+              },
+              {
+                &quot;kind&quot;: &quot;finding&quot;,
+                &quot;object_id&quot;: &quot;finding-8c9865b11f9455de8729c497a127546b&quot;,
+                &quot;relationship&quot;: &quot;diagnostic&quot;
+              }
+            ]
+          },
+          {
+            &quot;selector_token&quot;: &quot;sel-e65658a4f5b72be80ac6a9461bfc3afbb6c1c162d5f3b28a74a428e9b121626d&quot;,
+            &quot;action&quot;: &quot;ask_clarification&quot;,
+            &quot;label&quot;: &quot;变更文件清单&quot;,
+            &quot;status_label&quot;: &quot;已提供；已完成&quot;,
+            &quot;affected_scope&quot;: [
+              &quot;docs/guide.md&quot;
+            ],
+            &quot;obligation_ids&quot;: [
+              &quot;O-CHANGED-FILES&quot;
+            ],
+            &quot;object_type&quot;: &quot;obligation&quot;,
+            &quot;object_ids&quot;: [
+              &quot;O-CHANGED-FILES&quot;
+            ],
+            &quot;blocking&quot;: true,
+            &quot;material_status&quot;: &quot;provided&quot;,
+            &quot;workflow_status&quot;: &quot;completed&quot;,
+            &quot;technical_details&quot;: {
+              &quot;obligation_id&quot;: &quot;O-CHANGED-FILES&quot;,
+              &quot;evidence_ids&quot;: [
+                &quot;evidence-0a51a227c9c15692a99d7e527b174492&quot;
+              ],
+              &quot;finding_ids&quot;: []
+            },
+            &quot;traceability&quot;: [
+              {
+                &quot;kind&quot;: &quot;compiled_obligation&quot;,
+                &quot;object_id&quot;: &quot;obl-o-changed-files&quot;,
+                &quot;relationship&quot;: &quot;reference&quot;
+              },
+              {
+                &quot;kind&quot;: &quot;risk_or_profile_rule&quot;,
+                &quot;object_id&quot;: &quot;documentation-low&quot;,
+                &quot;relationship&quot;: &quot;source&quot;
+              },
+              {
+                &quot;kind&quot;: &quot;evidence&quot;,
+                &quot;object_id&quot;: &quot;evidence-0a51a227c9c15692a99d7e527b174492&quot;,
+                &quot;relationship&quot;: &quot;observed&quot;
+              }
+            ]
+          },
+          {
+            &quot;selector_token&quot;: &quot;sel-b921eaf9964c762866f88b8d0cb3d6f95d549096559394246722e34f2fc026a5&quot;,
+            &quot;action&quot;: &quot;ask_clarification&quot;,
+            &quot;label&quot;: &quot;修改说明&quot;,
+            &quot;status_label&quot;: &quot;已提供；已完成&quot;,
+            &quot;affected_scope&quot;: [
+              &quot;docs/guide.md&quot;
+            ],
+            &quot;obligation_ids&quot;: [
+              &quot;O-SUMMARY&quot;
+            ],
+            &quot;object_type&quot;: &quot;obligation&quot;,
+            &quot;object_ids&quot;: [
+              &quot;O-SUMMARY&quot;
+            ],
+            &quot;blocking&quot;: true,
+            &quot;material_status&quot;: &quot;provided&quot;,
+            &quot;workflow_status&quot;: &quot;completed&quot;,
+            &quot;technical_details&quot;: {
+              &quot;obligation_id&quot;: &quot;O-SUMMARY&quot;,
+              &quot;evidence_ids&quot;: [
+                &quot;evidence-5c1362d33d7653c7ab21254f127c4317&quot;
+              ],
+              &quot;finding_ids&quot;: []
+            },
+            &quot;traceability&quot;: [
+              {
+                &quot;kind&quot;: &quot;compiled_obligation&quot;,
+                &quot;object_id&quot;: &quot;obl-o-summary&quot;,
+                &quot;relationship&quot;: &quot;reference&quot;
+              },
+              {
+                &quot;kind&quot;: &quot;risk_or_profile_rule&quot;,
+                &quot;object_id&quot;: &quot;documentation-low&quot;,
+                &quot;relationship&quot;: &quot;source&quot;
+              },
+              {
+                &quot;kind&quot;: &quot;evidence&quot;,
+                &quot;object_id&quot;: &quot;evidence-5c1362d33d7653c7ab21254f127c4317&quot;,
+                &quot;relationship&quot;: &quot;observed&quot;
+              }
+            ]
+          }
+        ]
       },
+      {
+        &quot;action&quot;: &quot;record_policy_conflict&quot;,
+        &quot;title&quot;: &quot;记录项目规则冲突&quot;,
+        &quot;description&quot;: &quot;记录无法由普通材料修复的策略冲突。&quot;,
+        &quot;consequence&quot;: &quot;案例转入补充处理，由项目规则负责人或维护者处理。&quot;,
+        &quot;mutates_state&quot;: true,
+        &quot;actor_role&quot;: &quot;maintainer&quot;,
+        &quot;default_obligation_ids&quot;: [
+          &quot;O-AGENT-SCOPE&quot;
+        ],
+        &quot;required_parameters&quot;: [
+          &quot;obligation_ids&quot;,
+          &quot;reason&quot;
+        ],
+        &quot;traceability&quot;: [
+          {
+            &quot;kind&quot;: &quot;permission_rule&quot;,
+            &quot;object_id&quot;: &quot;maintainer:record_policy_conflict&quot;,
+            &quot;relationship&quot;: &quot;authority&quot;
+          },
+          {
+            &quot;kind&quot;: &quot;state_machine_rule&quot;,
+            &quot;object_id&quot;: &quot;awaiting_maintainer_verification:record_policy_conflict:repair_requested&quot;,
+            &quot;relationship&quot;: &quot;transition&quot;
+          }
+        ],
+        &quot;relevance&quot;: &quot;secondary&quot;,
+        &quot;group&quot;: &quot;other_available&quot;,
+        &quot;primary_reason&quot;: &quot;后端允许此操作，但它不直接处理当前主要阻断项。&quot;,
+        &quot;selector_options&quot;: [
+          {
+            &quot;selector_token&quot;: &quot;sel-13cc652c952536ab0042e22c9d6232b281083b0cbfb486e3e2b6ec20e9d7b7ec&quot;,
+            &quot;action&quot;: &quot;record_policy_conflict&quot;,
+            &quot;label&quot;: &quot;智能体行动与委派说明&quot;,
+            &quot;status_label&quot;: &quot;已提供；等待维护者重新检查&quot;,
+            &quot;affected_scope&quot;: [],
+            &quot;obligation_ids&quot;: [
+              &quot;O-AGENT-SCOPE&quot;
+            ],
+            &quot;object_type&quot;: &quot;obligation&quot;,
+            &quot;object_ids&quot;: [
+              &quot;O-AGENT-SCOPE&quot;
+            ],
+            &quot;blocking&quot;: true,
+            &quot;material_status&quot;: &quot;provided&quot;,
+            &quot;workflow_status&quot;: &quot;awaiting_revalidation&quot;,
+            &quot;technical_details&quot;: {
+              &quot;obligation_id&quot;: &quot;O-AGENT-SCOPE&quot;,
+              &quot;evidence_ids&quot;: [
+                &quot;evidence-1f877f9f9e5d5df1b4c3714ea5fec6a1&quot;
+              ],
+              &quot;finding_ids&quot;: [
+                &quot;finding-8c9865b11f9455de8729c497a127546b&quot;
+              ]
+            },
+            &quot;traceability&quot;: [
+              {
+                &quot;kind&quot;: &quot;compiled_obligation&quot;,
+                &quot;object_id&quot;: &quot;obl-o-agent-scope&quot;,
+                &quot;relationship&quot;: &quot;reference&quot;
+              },
+              {
+                &quot;kind&quot;: &quot;risk_or_profile_rule&quot;,
+                &quot;object_id&quot;: &quot;autonomy:supervised_agent&quot;,
+                &quot;relationship&quot;: &quot;source&quot;
+              },
+              {
+                &quot;kind&quot;: &quot;evidence&quot;,
+                &quot;object_id&quot;: &quot;evidence-1f877f9f9e5d5df1b4c3714ea5fec6a1&quot;,
+                &quot;relationship&quot;: &quot;observed&quot;
+              },
+              {
+                &quot;kind&quot;: &quot;finding&quot;,
+                &quot;object_id&quot;: &quot;finding-8c9865b11f9455de8729c497a127546b&quot;,
+                &quot;relationship&quot;: &quot;diagnostic&quot;
+              }
+            ]
+          },
+          {
+            &quot;selector_token&quot;: &quot;sel-c92112faea315c07d46a7546b2fd819b64c12fcfabedda4820d3a2adfad73068&quot;,
+            &quot;action&quot;: &quot;record_policy_conflict&quot;,
+            &quot;label&quot;: &quot;变更文件清单&quot;,
+            &quot;status_label&quot;: &quot;已提供；已完成&quot;,
+            &quot;affected_scope&quot;: [
+              &quot;docs/guide.md&quot;
+            ],
+            &quot;obligation_ids&quot;: [
+              &quot;O-CHANGED-FILES&quot;
+            ],
+            &quot;object_type&quot;: &quot;obligation&quot;,
+            &quot;object_ids&quot;: [
+              &quot;O-CHANGED-FILES&quot;
+            ],
+            &quot;blocking&quot;: true,
+            &quot;material_status&quot;: &quot;provided&quot;,
+            &quot;workflow_status&quot;: &quot;completed&quot;,
+            &quot;technical_details&quot;: {
+              &quot;obligation_id&quot;: &quot;O-CHANGED-FILES&quot;,
+              &quot;evidence_ids&quot;: [
+                &quot;evidence-0a51a227c9c15692a99d7e527b174492&quot;
+              ],
+              &quot;finding_ids&quot;: []
+            },
+            &quot;traceability&quot;: [
+              {
+                &quot;kind&quot;: &quot;compiled_obligation&quot;,
+                &quot;object_id&quot;: &quot;obl-o-changed-files&quot;,
+                &quot;relationship&quot;: &quot;reference&quot;
+              },
+              {
+                &quot;kind&quot;: &quot;risk_or_profile_rule&quot;,
+                &quot;object_id&quot;: &quot;documentation-low&quot;,
+                &quot;relationship&quot;: &quot;source&quot;
+              },
+              {
+                &quot;kind&quot;: &quot;evidence&quot;,
+                &quot;object_id&quot;: &quot;evidence-0a51a227c9c15692a99d7e527b174492&quot;,
+                &quot;relationship&quot;: &quot;observed&quot;
+              }
+            ]
+          },
+          {
+            &quot;selector_token&quot;: &quot;sel-a2ec175bb781dce35c635dfcf64baf5e59300d15cb1d805d99582382ec03c64d&quot;,
+            &quot;action&quot;: &quot;record_policy_conflict&quot;,
+            &quot;label&quot;: &quot;修改说明&quot;,
+            &quot;status_label&quot;: &quot;已提供；已完成&quot;,
+            &quot;affected_scope&quot;: [
+              &quot;docs/guide.md&quot;
+            ],
+            &quot;obligation_ids&quot;: [
+              &quot;O-SUMMARY&quot;
+            ],
+            &quot;object_type&quot;: &quot;obligation&quot;,
+            &quot;object_ids&quot;: [
+              &quot;O-SUMMARY&quot;
+            ],
+            &quot;blocking&quot;: true,
+            &quot;material_status&quot;: &quot;provided&quot;,
+            &quot;workflow_status&quot;: &quot;completed&quot;,
+            &quot;technical_details&quot;: {
+              &quot;obligation_id&quot;: &quot;O-SUMMARY&quot;,
+              &quot;evidence_ids&quot;: [
+                &quot;evidence-5c1362d33d7653c7ab21254f127c4317&quot;
+              ],
+              &quot;finding_ids&quot;: []
+            },
+            &quot;traceability&quot;: [
+              {
+                &quot;kind&quot;: &quot;compiled_obligation&quot;,
+                &quot;object_id&quot;: &quot;obl-o-summary&quot;,
+                &quot;relationship&quot;: &quot;reference&quot;
+              },
+              {
+                &quot;kind&quot;: &quot;risk_or_profile_rule&quot;,
+                &quot;object_id&quot;: &quot;documentation-low&quot;,
+                &quot;relationship&quot;: &quot;source&quot;
+              },
+              {
+                &quot;kind&quot;: &quot;evidence&quot;,
+                &quot;object_id&quot;: &quot;evidence-5c1362d33d7653c7ab21254f127c4317&quot;,
+                &quot;relationship&quot;: &quot;observed&quot;
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    &quot;unavailable_actions&quot;: [
       {
         &quot;action&quot;: &quot;invalidate_attestation&quot;,
         &quot;title&quot;: &quot;将旧负责人确认标记为失效&quot;,
         &quot;description&quot;: &quot;使一条过时或不正确的负责人确认失效。&quot;,
-        &quot;reason&quot;: &quot;当前处于“已补交，等待确认材料是否齐备”，还不能执行“将旧负责人确认标记为失效”。&quot;,
+        &quot;reason&quot;: &quot;当前没有仍然有效的负责人确认可供失效处理。&quot;,
         &quot;next_actor_roles&quot;: [
-          &quot;maintainer_verifier&quot;,
-          &quot;policy_steward&quot;,
-          &quot;maintainer&quot;
+          &quot;maintainer&quot;,
+          &quot;maintainer_verifier&quot;
         ],
         &quot;mutates_state&quot;: true,
         &quot;traceability&quot;: [
@@ -1227,6 +1775,11 @@ color:#e8eef4; border-radius:10px; white-space:pre-wrap; overflow-wrap:anywhere;
             &quot;kind&quot;: &quot;permission_rule&quot;,
             &quot;object_id&quot;: &quot;maintainer:invalidate_attestation&quot;,
             &quot;relationship&quot;: &quot;authority&quot;
+          },
+          {
+            &quot;kind&quot;: &quot;state_machine_rule&quot;,
+            &quot;object_id&quot;: &quot;awaiting_maintainer_verification:invalidate_attestation:repair_requested&quot;,
+            &quot;relationship&quot;: &quot;transition&quot;
           }
         ],
         &quot;category&quot;: &quot;authority&quot;,
@@ -1236,39 +1789,6 @@ color:#e8eef4; border-radius:10px; white-space:pre-wrap; overflow-wrap:anywhere;
         ],
         &quot;required_state&quot;: [
           &quot;awaiting_maintainer_verification&quot;,
-          &quot;ready_for_human_decision&quot;,
-          &quot;verification_complete&quot;
-        ],
-        &quot;future_availability&quot;: &quot;到达所需状态且对象范围满足后可能可用。&quot;
-      },
-      {
-        &quot;action&quot;: &quot;record_policy_conflict&quot;,
-        &quot;title&quot;: &quot;记录项目规则冲突&quot;,
-        &quot;description&quot;: &quot;记录无法由普通材料修复的策略冲突。&quot;,
-        &quot;reason&quot;: &quot;当前处于“已补交，等待确认材料是否齐备”，还不能执行“记录项目规则冲突”。&quot;,
-        &quot;next_actor_roles&quot;: [
-          &quot;maintainer_verifier&quot;,
-          &quot;policy_steward&quot;,
-          &quot;maintainer&quot;
-        ],
-        &quot;mutates_state&quot;: true,
-        &quot;traceability&quot;: [
-          {
-            &quot;kind&quot;: &quot;permission_rule&quot;,
-            &quot;object_id&quot;: &quot;maintainer:record_policy_conflict&quot;,
-            &quot;relationship&quot;: &quot;authority&quot;
-          }
-        ],
-        &quot;category&quot;: &quot;scope&quot;,
-        &quot;required_role&quot;: [
-          &quot;maintainer&quot;,
-          &quot;maintainer_verifier&quot;,
-          &quot;policy_steward&quot;
-        ],
-        &quot;required_state&quot;: [
-          &quot;awaiting_human_attestation&quot;,
-          &quot;awaiting_maintainer_verification&quot;,
-          &quot;evidence_incomplete&quot;,
           &quot;ready_for_human_decision&quot;,
           &quot;verification_complete&quot;
         ],
@@ -1278,7 +1798,7 @@ color:#e8eef4; border-radius:10px; white-space:pre-wrap; overflow-wrap:anywhere;
         &quot;action&quot;: &quot;resolve_policy_conflict&quot;,
         &quot;title&quot;: &quot;处理项目规则冲突&quot;,
         &quot;description&quot;: &quot;由有权限的角色记录策略冲突的解决依据。&quot;,
-        &quot;reason&quot;: &quot;当前处于“已补交，等待确认材料是否齐备”，还不能执行“处理项目规则冲突”。&quot;,
+        &quot;reason&quot;: &quot;当前处于“等待维护者检查”，还不能执行“处理项目规则冲突”。&quot;,
         &quot;next_actor_roles&quot;: [
           &quot;maintainer_verifier&quot;,
           &quot;policy_steward&quot;,
@@ -1359,7 +1879,7 @@ color:#e8eef4; border-radius:10px; white-space:pre-wrap; overflow-wrap:anywhere;
         &quot;action&quot;: &quot;authorized_override&quot;,
         &quot;title&quot;: &quot;由有权维护者执行覆盖处理&quot;,
         &quot;description&quot;: &quot;记录具备权限的维护者对明确项目要求或问题的例外处理。&quot;,
-        &quot;reason&quot;: &quot;当前处于“已补交，等待确认材料是否齐备”，还不能执行“由有权维护者执行覆盖处理”。&quot;,
+        &quot;reason&quot;: &quot;当前处于“等待维护者检查”，还不能执行“由有权维护者执行覆盖处理”。&quot;,
         &quot;next_actor_roles&quot;: [
           &quot;maintainer_verifier&quot;,
           &quot;policy_steward&quot;,
@@ -1388,7 +1908,7 @@ color:#e8eef4; border-radius:10px; white-space:pre-wrap; overflow-wrap:anywhere;
         &quot;action&quot;: &quot;decide_accept&quot;,
         &quot;title&quot;: &quot;最终接受&quot;,
         &quot;description&quot;: &quot;由人类维护者记录接受决定。&quot;,
-        &quot;reason&quot;: &quot;当前处于“已补交，等待确认材料是否齐备”，还不能执行“最终接受”。&quot;,
+        &quot;reason&quot;: &quot;当前处于“等待维护者检查”，还不能执行“最终接受”。&quot;,
         &quot;next_actor_roles&quot;: [
           &quot;maintainer_verifier&quot;,
           &quot;policy_steward&quot;,
@@ -1416,7 +1936,7 @@ color:#e8eef4; border-radius:10px; white-space:pre-wrap; overflow-wrap:anywhere;
         &quot;action&quot;: &quot;decide_reject&quot;,
         &quot;title&quot;: &quot;最终拒绝&quot;,
         &quot;description&quot;: &quot;由人类维护者记录拒绝决定。&quot;,
-        &quot;reason&quot;: &quot;当前处于“已补交，等待确认材料是否齐备”，还不能执行“最终拒绝”。&quot;,
+        &quot;reason&quot;: &quot;当前处于“等待维护者检查”，还不能执行“最终拒绝”。&quot;,
         &quot;next_actor_roles&quot;: [
           &quot;maintainer_verifier&quot;,
           &quot;policy_steward&quot;,
@@ -1445,7 +1965,7 @@ color:#e8eef4; border-radius:10px; white-space:pre-wrap; overflow-wrap:anywhere;
         &quot;action&quot;: &quot;decide_request_changes&quot;,
         &quot;title&quot;: &quot;要求继续修改&quot;,
         &quot;description&quot;: &quot;由人类维护者要求贡献侧继续修改。&quot;,
-        &quot;reason&quot;: &quot;当前处于“已补交，等待确认材料是否齐备”，还不能执行“要求继续修改”。&quot;,
+        &quot;reason&quot;: &quot;当前处于“等待维护者检查”，还不能执行“要求继续修改”。&quot;,
         &quot;next_actor_roles&quot;: [
           &quot;maintainer_verifier&quot;,
           &quot;policy_steward&quot;,
@@ -1473,7 +1993,7 @@ color:#e8eef4; border-radius:10px; white-space:pre-wrap; overflow-wrap:anywhere;
         &quot;action&quot;: &quot;decide_close&quot;,
         &quot;title&quot;: &quot;关闭本次审核记录&quot;,
         &quot;description&quot;: &quot;由人类维护者关闭案例而不表示接受或合并。&quot;,
-        &quot;reason&quot;: &quot;当前处于“已补交，等待确认材料是否齐备”，还不能执行“关闭本次审核记录”。&quot;,
+        &quot;reason&quot;: &quot;当前处于“等待维护者检查”，还不能执行“关闭本次审核记录”。&quot;,
         &quot;next_actor_roles&quot;: [
           &quot;maintainer_verifier&quot;,
           &quot;policy_steward&quot;,
@@ -1596,7 +2116,7 @@ color:#e8eef4; border-radius:10px; white-space:pre-wrap; overflow-wrap:anywhere;
       &quot;继续原流程&quot;
     ],
     &quot;technical_details&quot;: {
-      &quot;raw_state&quot;: &quot;resubmitted&quot;,
+      &quot;raw_state&quot;: &quot;awaiting_maintainer_verification&quot;,
       &quot;readiness&quot;: &quot;repair_required&quot;,
       &quot;risk_rules&quot;: [
         {
@@ -2034,6 +2554,22 @@ color:#e8eef4; border-radius:10px; white-space:pre-wrap; overflow-wrap:anywhere;
             &quot;attempt-612807c028a75b3782f750a111c86bb9&quot;
           ],
           &quot;timestamp&quot;: &quot;2026-07-26T00:00:00Z&quot;
+        },
+        {
+          &quot;id&quot;: &quot;transition-b2cf970564f25e54b8876e1685661bd3&quot;,
+          &quot;case_id&quot;: &quot;scoped-repair&quot;,
+          &quot;actor&quot;: &quot;contributor-agent&quot;,
+          &quot;role&quot;: &quot;contributor_agent&quot;,
+          &quot;source_state&quot;: &quot;resubmitted&quot;,
+          &quot;target_state&quot;: &quot;awaiting_maintainer_verification&quot;,
+          &quot;action&quot;: &quot;submit_for_verification&quot;,
+          &quot;reason&quot;: &quot;Contributor submitted prepared evidence for maintainer verification.&quot;,
+          &quot;related_object_ids&quot;: [
+            &quot;evidence-1f877f9f9e5d5df1b4c3714ea5fec6a1&quot;,
+            &quot;evidence-0a51a227c9c15692a99d7e527b174492&quot;,
+            &quot;evidence-5c1362d33d7653c7ab21254f127c4317&quot;
+          ],
+          &quot;timestamp&quot;: &quot;2026-07-26T00:00:00Z&quot;
         }
       ],
       &quot;final_decision&quot;: null,
@@ -2110,7 +2646,7 @@ color:#e8eef4; border-radius:10px; white-space:pre-wrap; overflow-wrap:anywhere;
           },
           {
             &quot;kind&quot;: &quot;state_machine_rule&quot;,
-            &quot;object_id&quot;: &quot;resubmitted:verify_evidence:verification_complete&quot;,
+            &quot;object_id&quot;: &quot;awaiting_maintainer_verification:verify_evidence:verification_complete&quot;,
             &quot;relationship&quot;: &quot;transition&quot;
           }
         ],
@@ -2167,6 +2703,458 @@ color:#e8eef4; border-radius:10px; white-space:pre-wrap; overflow-wrap:anywhere;
             ]
           }
         ]
+      },
+      {
+        &quot;action&quot;: &quot;request_repair&quot;,
+        &quot;title&quot;: &quot;要求补充或修改&quot;,
+        &quot;description&quot;: &quot;指出问题和受影响义务，返回贡献侧修复。&quot;,
+        &quot;consequence&quot;: &quot;仅指定范围需要修复和重新检查，未受影响材料保留。&quot;,
+        &quot;mutates_state&quot;: true,
+        &quot;actor_role&quot;: &quot;maintainer&quot;,
+        &quot;default_obligation_ids&quot;: [
+          &quot;O-AGENT-SCOPE&quot;
+        ],
+        &quot;required_parameters&quot;: [
+          &quot;obligation_ids&quot;,
+          &quot;reason&quot;
+        ],
+        &quot;traceability&quot;: [
+          {
+            &quot;kind&quot;: &quot;permission_rule&quot;,
+            &quot;object_id&quot;: &quot;maintainer:request_repair&quot;,
+            &quot;relationship&quot;: &quot;authority&quot;
+          },
+          {
+            &quot;kind&quot;: &quot;state_machine_rule&quot;,
+            &quot;object_id&quot;: &quot;awaiting_maintainer_verification:request_repair:repair_requested&quot;,
+            &quot;relationship&quot;: &quot;transition&quot;
+          }
+        ],
+        &quot;relevance&quot;: &quot;current&quot;,
+        &quot;group&quot;: &quot;current_relevant&quot;,
+        &quot;primary_reason&quot;: &quot;该操作直接对应当前流程阶段或开放问题。&quot;,
+        &quot;selector_options&quot;: [
+          {
+            &quot;selector_token&quot;: &quot;sel-80a9ed6e44d1378f574c328eaeaf7ba96cd07e4aad5c449608cae2681d73ddb5&quot;,
+            &quot;action&quot;: &quot;request_repair&quot;,
+            &quot;label&quot;: &quot;智能体行动与委派说明&quot;,
+            &quot;status_label&quot;: &quot;已提供；等待维护者重新检查&quot;,
+            &quot;affected_scope&quot;: [],
+            &quot;obligation_ids&quot;: [
+              &quot;O-AGENT-SCOPE&quot;
+            ],
+            &quot;object_type&quot;: &quot;obligation&quot;,
+            &quot;object_ids&quot;: [
+              &quot;O-AGENT-SCOPE&quot;
+            ],
+            &quot;blocking&quot;: true,
+            &quot;material_status&quot;: &quot;provided&quot;,
+            &quot;workflow_status&quot;: &quot;awaiting_revalidation&quot;,
+            &quot;technical_details&quot;: {
+              &quot;obligation_id&quot;: &quot;O-AGENT-SCOPE&quot;,
+              &quot;evidence_ids&quot;: [
+                &quot;evidence-1f877f9f9e5d5df1b4c3714ea5fec6a1&quot;
+              ],
+              &quot;finding_ids&quot;: [
+                &quot;finding-8c9865b11f9455de8729c497a127546b&quot;
+              ]
+            },
+            &quot;traceability&quot;: [
+              {
+                &quot;kind&quot;: &quot;compiled_obligation&quot;,
+                &quot;object_id&quot;: &quot;obl-o-agent-scope&quot;,
+                &quot;relationship&quot;: &quot;reference&quot;
+              },
+              {
+                &quot;kind&quot;: &quot;risk_or_profile_rule&quot;,
+                &quot;object_id&quot;: &quot;autonomy:supervised_agent&quot;,
+                &quot;relationship&quot;: &quot;source&quot;
+              },
+              {
+                &quot;kind&quot;: &quot;evidence&quot;,
+                &quot;object_id&quot;: &quot;evidence-1f877f9f9e5d5df1b4c3714ea5fec6a1&quot;,
+                &quot;relationship&quot;: &quot;observed&quot;
+              },
+              {
+                &quot;kind&quot;: &quot;finding&quot;,
+                &quot;object_id&quot;: &quot;finding-8c9865b11f9455de8729c497a127546b&quot;,
+                &quot;relationship&quot;: &quot;diagnostic&quot;
+              }
+            ]
+          },
+          {
+            &quot;selector_token&quot;: &quot;sel-a0df379baa9cd51709208499e5bc735cdb78f956129ecc689d8f9ebafadcd430&quot;,
+            &quot;action&quot;: &quot;request_repair&quot;,
+            &quot;label&quot;: &quot;变更文件清单&quot;,
+            &quot;status_label&quot;: &quot;已提供；已完成&quot;,
+            &quot;affected_scope&quot;: [
+              &quot;docs/guide.md&quot;
+            ],
+            &quot;obligation_ids&quot;: [
+              &quot;O-CHANGED-FILES&quot;
+            ],
+            &quot;object_type&quot;: &quot;obligation&quot;,
+            &quot;object_ids&quot;: [
+              &quot;O-CHANGED-FILES&quot;
+            ],
+            &quot;blocking&quot;: true,
+            &quot;material_status&quot;: &quot;provided&quot;,
+            &quot;workflow_status&quot;: &quot;completed&quot;,
+            &quot;technical_details&quot;: {
+              &quot;obligation_id&quot;: &quot;O-CHANGED-FILES&quot;,
+              &quot;evidence_ids&quot;: [
+                &quot;evidence-0a51a227c9c15692a99d7e527b174492&quot;
+              ],
+              &quot;finding_ids&quot;: []
+            },
+            &quot;traceability&quot;: [
+              {
+                &quot;kind&quot;: &quot;compiled_obligation&quot;,
+                &quot;object_id&quot;: &quot;obl-o-changed-files&quot;,
+                &quot;relationship&quot;: &quot;reference&quot;
+              },
+              {
+                &quot;kind&quot;: &quot;risk_or_profile_rule&quot;,
+                &quot;object_id&quot;: &quot;documentation-low&quot;,
+                &quot;relationship&quot;: &quot;source&quot;
+              },
+              {
+                &quot;kind&quot;: &quot;evidence&quot;,
+                &quot;object_id&quot;: &quot;evidence-0a51a227c9c15692a99d7e527b174492&quot;,
+                &quot;relationship&quot;: &quot;observed&quot;
+              }
+            ]
+          },
+          {
+            &quot;selector_token&quot;: &quot;sel-f5497a7a3588ab4f15c015d60f2b1c53839a7ad9f4d009807ee059e2514ab182&quot;,
+            &quot;action&quot;: &quot;request_repair&quot;,
+            &quot;label&quot;: &quot;修改说明&quot;,
+            &quot;status_label&quot;: &quot;已提供；已完成&quot;,
+            &quot;affected_scope&quot;: [
+              &quot;docs/guide.md&quot;
+            ],
+            &quot;obligation_ids&quot;: [
+              &quot;O-SUMMARY&quot;
+            ],
+            &quot;object_type&quot;: &quot;obligation&quot;,
+            &quot;object_ids&quot;: [
+              &quot;O-SUMMARY&quot;
+            ],
+            &quot;blocking&quot;: true,
+            &quot;material_status&quot;: &quot;provided&quot;,
+            &quot;workflow_status&quot;: &quot;completed&quot;,
+            &quot;technical_details&quot;: {
+              &quot;obligation_id&quot;: &quot;O-SUMMARY&quot;,
+              &quot;evidence_ids&quot;: [
+                &quot;evidence-5c1362d33d7653c7ab21254f127c4317&quot;
+              ],
+              &quot;finding_ids&quot;: []
+            },
+            &quot;traceability&quot;: [
+              {
+                &quot;kind&quot;: &quot;compiled_obligation&quot;,
+                &quot;object_id&quot;: &quot;obl-o-summary&quot;,
+                &quot;relationship&quot;: &quot;reference&quot;
+              },
+              {
+                &quot;kind&quot;: &quot;risk_or_profile_rule&quot;,
+                &quot;object_id&quot;: &quot;documentation-low&quot;,
+                &quot;relationship&quot;: &quot;source&quot;
+              },
+              {
+                &quot;kind&quot;: &quot;evidence&quot;,
+                &quot;object_id&quot;: &quot;evidence-5c1362d33d7653c7ab21254f127c4317&quot;,
+                &quot;relationship&quot;: &quot;observed&quot;
+              }
+            ]
+          }
+        ]
+      },
+      {
+        &quot;action&quot;: &quot;reject_evidence&quot;,
+        &quot;title&quot;: &quot;拒绝当前材料&quot;,
+        &quot;description&quot;: &quot;拒绝一条不能支持当前修改的具体材料。&quot;,
+        &quot;consequence&quot;: &quot;该材料将标记为已拒绝，并建立指定范围的补充或修改请求。&quot;,
+        &quot;mutates_state&quot;: true,
+        &quot;actor_role&quot;: &quot;maintainer&quot;,
+        &quot;default_obligation_ids&quot;: [],
+        &quot;required_parameters&quot;: [
+          &quot;object_id&quot;,
+          &quot;reason&quot;
+        ],
+        &quot;traceability&quot;: [
+          {
+            &quot;kind&quot;: &quot;permission_rule&quot;,
+            &quot;object_id&quot;: &quot;maintainer:reject_evidence&quot;,
+            &quot;relationship&quot;: &quot;authority&quot;
+          },
+          {
+            &quot;kind&quot;: &quot;state_machine_rule&quot;,
+            &quot;object_id&quot;: &quot;awaiting_maintainer_verification:reject_evidence:repair_requested&quot;,
+            &quot;relationship&quot;: &quot;transition&quot;
+          }
+        ],
+        &quot;relevance&quot;: &quot;current&quot;,
+        &quot;group&quot;: &quot;current_relevant&quot;,
+        &quot;primary_reason&quot;: &quot;该操作直接对应当前流程阶段或开放问题。&quot;,
+        &quot;selector_options&quot;: [
+          {
+            &quot;selector_token&quot;: &quot;sel-f5ec08276b893da6c7a097c371ba920091d96d4ffd7706e8e8a21f371fca4183&quot;,
+            &quot;action&quot;: &quot;reject_evidence&quot;,
+            &quot;label&quot;: &quot;智能体行动与委派说明&quot;,
+            &quot;status_label&quot;: &quot;当前材料有效，可记录拒绝依据&quot;,
+            &quot;affected_scope&quot;: [
+              &quot;docs/guide.md&quot;
+            ],
+            &quot;obligation_ids&quot;: [
+              &quot;O-AGENT-SCOPE&quot;
+            ],
+            &quot;object_type&quot;: &quot;evidence&quot;,
+            &quot;object_ids&quot;: [
+              &quot;evidence-1f877f9f9e5d5df1b4c3714ea5fec6a1&quot;
+            ],
+            &quot;blocking&quot;: true,
+            &quot;material_status&quot;: &quot;valid&quot;,
+            &quot;workflow_status&quot;: &quot;&quot;,
+            &quot;technical_details&quot;: {
+              &quot;evidence_id&quot;: &quot;evidence-1f877f9f9e5d5df1b4c3714ea5fec6a1&quot;,
+              &quot;evidence_type&quot;: &quot;agent_action_scope&quot;
+            },
+            &quot;traceability&quot;: [
+              {
+                &quot;kind&quot;: &quot;evidence&quot;,
+                &quot;object_id&quot;: &quot;evidence-1f877f9f9e5d5df1b4c3714ea5fec6a1&quot;,
+                &quot;relationship&quot;: &quot;action_target&quot;
+              }
+            ]
+          },
+          {
+            &quot;selector_token&quot;: &quot;sel-a65b60ff9f372d533e72ca54467c1ef6132c344cf1208e96606bd783e18191da&quot;,
+            &quot;action&quot;: &quot;reject_evidence&quot;,
+            &quot;label&quot;: &quot;变更文件清单&quot;,
+            &quot;status_label&quot;: &quot;当前材料有效，可记录拒绝依据&quot;,
+            &quot;affected_scope&quot;: [
+              &quot;docs/guide.md&quot;
+            ],
+            &quot;obligation_ids&quot;: [
+              &quot;O-CHANGED-FILES&quot;
+            ],
+            &quot;object_type&quot;: &quot;evidence&quot;,
+            &quot;object_ids&quot;: [
+              &quot;evidence-0a51a227c9c15692a99d7e527b174492&quot;
+            ],
+            &quot;blocking&quot;: true,
+            &quot;material_status&quot;: &quot;valid&quot;,
+            &quot;workflow_status&quot;: &quot;&quot;,
+            &quot;technical_details&quot;: {
+              &quot;evidence_id&quot;: &quot;evidence-0a51a227c9c15692a99d7e527b174492&quot;,
+              &quot;evidence_type&quot;: &quot;changed_files&quot;
+            },
+            &quot;traceability&quot;: [
+              {
+                &quot;kind&quot;: &quot;evidence&quot;,
+                &quot;object_id&quot;: &quot;evidence-0a51a227c9c15692a99d7e527b174492&quot;,
+                &quot;relationship&quot;: &quot;action_target&quot;
+              }
+            ]
+          },
+          {
+            &quot;selector_token&quot;: &quot;sel-15e0e6c942e977a2f31a241b4ee3d865640d4e5e084878bb3ca47b4d4a3db7eb&quot;,
+            &quot;action&quot;: &quot;reject_evidence&quot;,
+            &quot;label&quot;: &quot;修改说明&quot;,
+            &quot;status_label&quot;: &quot;当前材料有效，可记录拒绝依据&quot;,
+            &quot;affected_scope&quot;: [
+              &quot;docs/guide.md&quot;
+            ],
+            &quot;obligation_ids&quot;: [
+              &quot;O-SUMMARY&quot;
+            ],
+            &quot;object_type&quot;: &quot;evidence&quot;,
+            &quot;object_ids&quot;: [
+              &quot;evidence-5c1362d33d7653c7ab21254f127c4317&quot;
+            ],
+            &quot;blocking&quot;: true,
+            &quot;material_status&quot;: &quot;valid&quot;,
+            &quot;workflow_status&quot;: &quot;&quot;,
+            &quot;technical_details&quot;: {
+              &quot;evidence_id&quot;: &quot;evidence-5c1362d33d7653c7ab21254f127c4317&quot;,
+              &quot;evidence_type&quot;: &quot;contribution_summary&quot;
+            },
+            &quot;traceability&quot;: [
+              {
+                &quot;kind&quot;: &quot;evidence&quot;,
+                &quot;object_id&quot;: &quot;evidence-5c1362d33d7653c7ab21254f127c4317&quot;,
+                &quot;relationship&quot;: &quot;action_target&quot;
+              }
+            ]
+          }
+        ]
+      },
+      {
+        &quot;action&quot;: &quot;ask_clarification&quot;,
+        &quot;title&quot;: &quot;请求补充说明&quot;,
+        &quot;description&quot;: &quot;针对指定要求提出可审计的澄清问题。&quot;,
+        &quot;consequence&quot;: &quot;案例返回贡献侧回答，所选范围需要重新检查。&quot;,
+        &quot;mutates_state&quot;: true,
+        &quot;actor_role&quot;: &quot;maintainer&quot;,
+        &quot;default_obligation_ids&quot;: [
+          &quot;O-AGENT-SCOPE&quot;
+        ],
+        &quot;required_parameters&quot;: [
+          &quot;obligation_ids&quot;,
+          &quot;reason&quot;
+        ],
+        &quot;traceability&quot;: [
+          {
+            &quot;kind&quot;: &quot;permission_rule&quot;,
+            &quot;object_id&quot;: &quot;maintainer:ask_clarification&quot;,
+            &quot;relationship&quot;: &quot;authority&quot;
+          },
+          {
+            &quot;kind&quot;: &quot;state_machine_rule&quot;,
+            &quot;object_id&quot;: &quot;awaiting_maintainer_verification:ask_clarification:repair_requested&quot;,
+            &quot;relationship&quot;: &quot;transition&quot;
+          }
+        ],
+        &quot;relevance&quot;: &quot;current&quot;,
+        &quot;group&quot;: &quot;current_relevant&quot;,
+        &quot;primary_reason&quot;: &quot;该操作直接对应当前流程阶段或开放问题。&quot;,
+        &quot;selector_options&quot;: [
+          {
+            &quot;selector_token&quot;: &quot;sel-06aa442dd7376de0976c29253225cf3e2504ae05fbf85cd14c7740fe2e791e03&quot;,
+            &quot;action&quot;: &quot;ask_clarification&quot;,
+            &quot;label&quot;: &quot;智能体行动与委派说明&quot;,
+            &quot;status_label&quot;: &quot;已提供；等待维护者重新检查&quot;,
+            &quot;affected_scope&quot;: [],
+            &quot;obligation_ids&quot;: [
+              &quot;O-AGENT-SCOPE&quot;
+            ],
+            &quot;object_type&quot;: &quot;obligation&quot;,
+            &quot;object_ids&quot;: [
+              &quot;O-AGENT-SCOPE&quot;
+            ],
+            &quot;blocking&quot;: true,
+            &quot;material_status&quot;: &quot;provided&quot;,
+            &quot;workflow_status&quot;: &quot;awaiting_revalidation&quot;,
+            &quot;technical_details&quot;: {
+              &quot;obligation_id&quot;: &quot;O-AGENT-SCOPE&quot;,
+              &quot;evidence_ids&quot;: [
+                &quot;evidence-1f877f9f9e5d5df1b4c3714ea5fec6a1&quot;
+              ],
+              &quot;finding_ids&quot;: [
+                &quot;finding-8c9865b11f9455de8729c497a127546b&quot;
+              ]
+            },
+            &quot;traceability&quot;: [
+              {
+                &quot;kind&quot;: &quot;compiled_obligation&quot;,
+                &quot;object_id&quot;: &quot;obl-o-agent-scope&quot;,
+                &quot;relationship&quot;: &quot;reference&quot;
+              },
+              {
+                &quot;kind&quot;: &quot;risk_or_profile_rule&quot;,
+                &quot;object_id&quot;: &quot;autonomy:supervised_agent&quot;,
+                &quot;relationship&quot;: &quot;source&quot;
+              },
+              {
+                &quot;kind&quot;: &quot;evidence&quot;,
+                &quot;object_id&quot;: &quot;evidence-1f877f9f9e5d5df1b4c3714ea5fec6a1&quot;,
+                &quot;relationship&quot;: &quot;observed&quot;
+              },
+              {
+                &quot;kind&quot;: &quot;finding&quot;,
+                &quot;object_id&quot;: &quot;finding-8c9865b11f9455de8729c497a127546b&quot;,
+                &quot;relationship&quot;: &quot;diagnostic&quot;
+              }
+            ]
+          },
+          {
+            &quot;selector_token&quot;: &quot;sel-e65658a4f5b72be80ac6a9461bfc3afbb6c1c162d5f3b28a74a428e9b121626d&quot;,
+            &quot;action&quot;: &quot;ask_clarification&quot;,
+            &quot;label&quot;: &quot;变更文件清单&quot;,
+            &quot;status_label&quot;: &quot;已提供；已完成&quot;,
+            &quot;affected_scope&quot;: [
+              &quot;docs/guide.md&quot;
+            ],
+            &quot;obligation_ids&quot;: [
+              &quot;O-CHANGED-FILES&quot;
+            ],
+            &quot;object_type&quot;: &quot;obligation&quot;,
+            &quot;object_ids&quot;: [
+              &quot;O-CHANGED-FILES&quot;
+            ],
+            &quot;blocking&quot;: true,
+            &quot;material_status&quot;: &quot;provided&quot;,
+            &quot;workflow_status&quot;: &quot;completed&quot;,
+            &quot;technical_details&quot;: {
+              &quot;obligation_id&quot;: &quot;O-CHANGED-FILES&quot;,
+              &quot;evidence_ids&quot;: [
+                &quot;evidence-0a51a227c9c15692a99d7e527b174492&quot;
+              ],
+              &quot;finding_ids&quot;: []
+            },
+            &quot;traceability&quot;: [
+              {
+                &quot;kind&quot;: &quot;compiled_obligation&quot;,
+                &quot;object_id&quot;: &quot;obl-o-changed-files&quot;,
+                &quot;relationship&quot;: &quot;reference&quot;
+              },
+              {
+                &quot;kind&quot;: &quot;risk_or_profile_rule&quot;,
+                &quot;object_id&quot;: &quot;documentation-low&quot;,
+                &quot;relationship&quot;: &quot;source&quot;
+              },
+              {
+                &quot;kind&quot;: &quot;evidence&quot;,
+                &quot;object_id&quot;: &quot;evidence-0a51a227c9c15692a99d7e527b174492&quot;,
+                &quot;relationship&quot;: &quot;observed&quot;
+              }
+            ]
+          },
+          {
+            &quot;selector_token&quot;: &quot;sel-b921eaf9964c762866f88b8d0cb3d6f95d549096559394246722e34f2fc026a5&quot;,
+            &quot;action&quot;: &quot;ask_clarification&quot;,
+            &quot;label&quot;: &quot;修改说明&quot;,
+            &quot;status_label&quot;: &quot;已提供；已完成&quot;,
+            &quot;affected_scope&quot;: [
+              &quot;docs/guide.md&quot;
+            ],
+            &quot;obligation_ids&quot;: [
+              &quot;O-SUMMARY&quot;
+            ],
+            &quot;object_type&quot;: &quot;obligation&quot;,
+            &quot;object_ids&quot;: [
+              &quot;O-SUMMARY&quot;
+            ],
+            &quot;blocking&quot;: true,
+            &quot;material_status&quot;: &quot;provided&quot;,
+            &quot;workflow_status&quot;: &quot;completed&quot;,
+            &quot;technical_details&quot;: {
+              &quot;obligation_id&quot;: &quot;O-SUMMARY&quot;,
+              &quot;evidence_ids&quot;: [
+                &quot;evidence-5c1362d33d7653c7ab21254f127c4317&quot;
+              ],
+              &quot;finding_ids&quot;: []
+            },
+            &quot;traceability&quot;: [
+              {
+                &quot;kind&quot;: &quot;compiled_obligation&quot;,
+                &quot;object_id&quot;: &quot;obl-o-summary&quot;,
+                &quot;relationship&quot;: &quot;reference&quot;
+              },
+              {
+                &quot;kind&quot;: &quot;risk_or_profile_rule&quot;,
+                &quot;object_id&quot;: &quot;documentation-low&quot;,
+                &quot;relationship&quot;: &quot;source&quot;
+              },
+              {
+                &quot;kind&quot;: &quot;evidence&quot;,
+                &quot;object_id&quot;: &quot;evidence-5c1362d33d7653c7ab21254f127c4317&quot;,
+                &quot;relationship&quot;: &quot;observed&quot;
+              }
+            ]
+          }
+        ]
       }
     ],
     &quot;other_available_actions&quot;: [
@@ -2190,9 +3178,175 @@ color:#e8eef4; border-radius:10px; white-space:pre-wrap; overflow-wrap:anywhere;
         &quot;group&quot;: &quot;other_available&quot;,
         &quot;primary_reason&quot;: &quot;后端允许此操作，但它不直接处理当前主要阻断项。&quot;,
         &quot;selector_options&quot;: []
+      },
+      {
+        &quot;action&quot;: &quot;record_policy_conflict&quot;,
+        &quot;title&quot;: &quot;记录项目规则冲突&quot;,
+        &quot;description&quot;: &quot;记录无法由普通材料修复的策略冲突。&quot;,
+        &quot;consequence&quot;: &quot;案例转入补充处理，由项目规则负责人或维护者处理。&quot;,
+        &quot;mutates_state&quot;: true,
+        &quot;actor_role&quot;: &quot;maintainer&quot;,
+        &quot;default_obligation_ids&quot;: [
+          &quot;O-AGENT-SCOPE&quot;
+        ],
+        &quot;required_parameters&quot;: [
+          &quot;obligation_ids&quot;,
+          &quot;reason&quot;
+        ],
+        &quot;traceability&quot;: [
+          {
+            &quot;kind&quot;: &quot;permission_rule&quot;,
+            &quot;object_id&quot;: &quot;maintainer:record_policy_conflict&quot;,
+            &quot;relationship&quot;: &quot;authority&quot;
+          },
+          {
+            &quot;kind&quot;: &quot;state_machine_rule&quot;,
+            &quot;object_id&quot;: &quot;awaiting_maintainer_verification:record_policy_conflict:repair_requested&quot;,
+            &quot;relationship&quot;: &quot;transition&quot;
+          }
+        ],
+        &quot;relevance&quot;: &quot;secondary&quot;,
+        &quot;group&quot;: &quot;other_available&quot;,
+        &quot;primary_reason&quot;: &quot;后端允许此操作，但它不直接处理当前主要阻断项。&quot;,
+        &quot;selector_options&quot;: [
+          {
+            &quot;selector_token&quot;: &quot;sel-13cc652c952536ab0042e22c9d6232b281083b0cbfb486e3e2b6ec20e9d7b7ec&quot;,
+            &quot;action&quot;: &quot;record_policy_conflict&quot;,
+            &quot;label&quot;: &quot;智能体行动与委派说明&quot;,
+            &quot;status_label&quot;: &quot;已提供；等待维护者重新检查&quot;,
+            &quot;affected_scope&quot;: [],
+            &quot;obligation_ids&quot;: [
+              &quot;O-AGENT-SCOPE&quot;
+            ],
+            &quot;object_type&quot;: &quot;obligation&quot;,
+            &quot;object_ids&quot;: [
+              &quot;O-AGENT-SCOPE&quot;
+            ],
+            &quot;blocking&quot;: true,
+            &quot;material_status&quot;: &quot;provided&quot;,
+            &quot;workflow_status&quot;: &quot;awaiting_revalidation&quot;,
+            &quot;technical_details&quot;: {
+              &quot;obligation_id&quot;: &quot;O-AGENT-SCOPE&quot;,
+              &quot;evidence_ids&quot;: [
+                &quot;evidence-1f877f9f9e5d5df1b4c3714ea5fec6a1&quot;
+              ],
+              &quot;finding_ids&quot;: [
+                &quot;finding-8c9865b11f9455de8729c497a127546b&quot;
+              ]
+            },
+            &quot;traceability&quot;: [
+              {
+                &quot;kind&quot;: &quot;compiled_obligation&quot;,
+                &quot;object_id&quot;: &quot;obl-o-agent-scope&quot;,
+                &quot;relationship&quot;: &quot;reference&quot;
+              },
+              {
+                &quot;kind&quot;: &quot;risk_or_profile_rule&quot;,
+                &quot;object_id&quot;: &quot;autonomy:supervised_agent&quot;,
+                &quot;relationship&quot;: &quot;source&quot;
+              },
+              {
+                &quot;kind&quot;: &quot;evidence&quot;,
+                &quot;object_id&quot;: &quot;evidence-1f877f9f9e5d5df1b4c3714ea5fec6a1&quot;,
+                &quot;relationship&quot;: &quot;observed&quot;
+              },
+              {
+                &quot;kind&quot;: &quot;finding&quot;,
+                &quot;object_id&quot;: &quot;finding-8c9865b11f9455de8729c497a127546b&quot;,
+                &quot;relationship&quot;: &quot;diagnostic&quot;
+              }
+            ]
+          },
+          {
+            &quot;selector_token&quot;: &quot;sel-c92112faea315c07d46a7546b2fd819b64c12fcfabedda4820d3a2adfad73068&quot;,
+            &quot;action&quot;: &quot;record_policy_conflict&quot;,
+            &quot;label&quot;: &quot;变更文件清单&quot;,
+            &quot;status_label&quot;: &quot;已提供；已完成&quot;,
+            &quot;affected_scope&quot;: [
+              &quot;docs/guide.md&quot;
+            ],
+            &quot;obligation_ids&quot;: [
+              &quot;O-CHANGED-FILES&quot;
+            ],
+            &quot;object_type&quot;: &quot;obligation&quot;,
+            &quot;object_ids&quot;: [
+              &quot;O-CHANGED-FILES&quot;
+            ],
+            &quot;blocking&quot;: true,
+            &quot;material_status&quot;: &quot;provided&quot;,
+            &quot;workflow_status&quot;: &quot;completed&quot;,
+            &quot;technical_details&quot;: {
+              &quot;obligation_id&quot;: &quot;O-CHANGED-FILES&quot;,
+              &quot;evidence_ids&quot;: [
+                &quot;evidence-0a51a227c9c15692a99d7e527b174492&quot;
+              ],
+              &quot;finding_ids&quot;: []
+            },
+            &quot;traceability&quot;: [
+              {
+                &quot;kind&quot;: &quot;compiled_obligation&quot;,
+                &quot;object_id&quot;: &quot;obl-o-changed-files&quot;,
+                &quot;relationship&quot;: &quot;reference&quot;
+              },
+              {
+                &quot;kind&quot;: &quot;risk_or_profile_rule&quot;,
+                &quot;object_id&quot;: &quot;documentation-low&quot;,
+                &quot;relationship&quot;: &quot;source&quot;
+              },
+              {
+                &quot;kind&quot;: &quot;evidence&quot;,
+                &quot;object_id&quot;: &quot;evidence-0a51a227c9c15692a99d7e527b174492&quot;,
+                &quot;relationship&quot;: &quot;observed&quot;
+              }
+            ]
+          },
+          {
+            &quot;selector_token&quot;: &quot;sel-a2ec175bb781dce35c635dfcf64baf5e59300d15cb1d805d99582382ec03c64d&quot;,
+            &quot;action&quot;: &quot;record_policy_conflict&quot;,
+            &quot;label&quot;: &quot;修改说明&quot;,
+            &quot;status_label&quot;: &quot;已提供；已完成&quot;,
+            &quot;affected_scope&quot;: [
+              &quot;docs/guide.md&quot;
+            ],
+            &quot;obligation_ids&quot;: [
+              &quot;O-SUMMARY&quot;
+            ],
+            &quot;object_type&quot;: &quot;obligation&quot;,
+            &quot;object_ids&quot;: [
+              &quot;O-SUMMARY&quot;
+            ],
+            &quot;blocking&quot;: true,
+            &quot;material_status&quot;: &quot;provided&quot;,
+            &quot;workflow_status&quot;: &quot;completed&quot;,
+            &quot;technical_details&quot;: {
+              &quot;obligation_id&quot;: &quot;O-SUMMARY&quot;,
+              &quot;evidence_ids&quot;: [
+                &quot;evidence-5c1362d33d7653c7ab21254f127c4317&quot;
+              ],
+              &quot;finding_ids&quot;: []
+            },
+            &quot;traceability&quot;: [
+              {
+                &quot;kind&quot;: &quot;compiled_obligation&quot;,
+                &quot;object_id&quot;: &quot;obl-o-summary&quot;,
+                &quot;relationship&quot;: &quot;reference&quot;
+              },
+              {
+                &quot;kind&quot;: &quot;risk_or_profile_rule&quot;,
+                &quot;object_id&quot;: &quot;documentation-low&quot;,
+                &quot;relationship&quot;: &quot;source&quot;
+              },
+              {
+                &quot;kind&quot;: &quot;evidence&quot;,
+                &quot;object_id&quot;: &quot;evidence-5c1362d33d7653c7ab21254f127c4317&quot;,
+                &quot;relationship&quot;: &quot;observed&quot;
+              }
+            ]
+          }
+        ]
       }
     ],
-    &quot;unavailable_action_summary&quot;: &quot;还有 13 项操作因当前阶段、权限或对象范围暂不可用&quot;,
+    &quot;unavailable_action_summary&quot;: &quot;还有 9 项操作因当前阶段、权限或对象范围暂不可用&quot;,
     &quot;utility_actions&quot;: [
       {
         &quot;action_id&quot;: &quot;copy_missing_requirements&quot;,
@@ -2217,7 +3371,7 @@ color:#e8eef4; border-radius:10px; white-space:pre-wrap; overflow-wrap:anywhere;
         &quot;label&quot;: &quot;下载维护者摘要&quot;,
         &quot;description&quot;: &quot;导出当前风险、责任方和阻断项摘要，不作接受判断。&quot;,
         &quot;output_type&quot;: &quot;text/markdown&quot;,
-        &quot;output&quot;: &quot;# 维护者审核摘要\n\n案例：scoped-repair\n当前状态：已补交，等待确认材料是否齐备\n风险：low\n当前责任方：维护者侧检查人员、项目规则负责人、人类维护者\n责任方依据：受影响材料已补充或仍然有效；当前只需重新检查指定修复范围。\n\n## 阻断或待检查项\n\n- 智能体行动与委派说明：已提供；等待维护者重新检查；范围：当前贡献范围\n\n本摘要是治理状态说明，不是接受决定。&quot;,
+        &quot;output&quot;: &quot;# 维护者审核摘要\n\n案例：scoped-repair\n当前状态：等待维护者检查\n风险：low\n当前责任方：维护者侧检查人员、项目规则负责人、人类维护者\n责任方依据：受影响材料已补充或仍然有效；当前只需重新检查指定修复范围。\n\n## 阻断或待检查项\n\n- 智能体行动与委派说明：已提供；等待维护者重新检查；范围：当前贡献范围\n\n本摘要是治理状态说明，不是接受决定。&quot;,
         &quot;trace_refs&quot;: [
           {
             &quot;kind&quot;: &quot;compiled_obligation&quot;,

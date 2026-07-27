@@ -55,6 +55,9 @@ class ReviewActionView(ActionRecord):
     can_save_draft: bool
     can_preview: bool
     unavailable_reason: str | None
+    maintainer_stage_ready: bool
+    current_stage: str
+    stage_unavailable_reason: str | None
     current_next_step: dict[str, Any]
     system_handled_anomalies: tuple[dict[str, Any], ...] = ()
     final_decision_entry_available: bool = False

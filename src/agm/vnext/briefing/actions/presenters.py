@@ -94,6 +94,7 @@ def render_interactive_review_html(
     *,
     draft: ReviewDecisionDraft | None = None,
     assessment: DraftAssessment | None = None,
+    draft_status: str | None = None,
     csrf_token: str | None = None,
     notice: str | None = None,
 ) -> str:
@@ -108,15 +109,34 @@ def render_interactive_review_html(
             f"系统已自动拒绝 {len(view.system_handled_anomalies)} 次越权操作。"
             "</strong><p>该操作未生效，你无需额外处理。</p></aside>"
         )
-    draft_class = "draft-banner stale" if assessment and assessment.stale else "draft-banner"
+    draft_class = (
+        "draft-banner stale"
+        if assessment and assessment.stale
+        else "draft-banner"
+    )
     if assessment and assessment.stale:
-        draft_text = "因 case 变化已失效。请放弃草稿并重新判断。"
+        draft_text = "贡献或规则已经变化，之前的选择已失效。"
+    elif draft_status == "previewed":
+        draft_text = "预览完成，尚未正式提交。"
+    elif draft_status == "submitted":
+        draft_text = ""
     elif draft and draft.judgment_decisions:
         draft_text = (
             f"你的选择尚未提交（已选择 {len(draft.judgment_decisions)} 项）。"
         )
     else:
-        draft_text = "你的选择尚未提交。"
+        draft_text = "尚未选择处理结果。"
+    actionable_items = any(
+        any(option.authorized for option in item.options)
+        for item in view.items
+    )
+    show_draft_banner = bool(
+        draft_text
+        and (
+            actionable_items
+            or (draft and draft.judgment_decisions)
+        )
+    )
     cards = []
     for index, item in enumerate(view.items, start=1):
         selected = draft_by_id.get(item.judgment_id)
@@ -185,8 +205,8 @@ def render_interactive_review_html(
             )
         elif not view.live_actions_enabled:
             controls = (
-                '<section class="unavailable">静态演示：live_actions_enabled=false；'
-                "不会包含 CSRF、session 或 preview token。</section>"
+                '<section class="unavailable">静态演示页面仅用于视觉复核，'
+                "不能在此提交选择。</section>"
             )
         else:
             controls = (
@@ -225,14 +245,20 @@ def render_interactive_review_html(
         if notice
         else ""
     )
+    draft_banner = (
+        f'<section class="{draft_class}"><strong>'
+        f"{html.escape(draft_text)}</strong></section>"
+        if show_draft_banner
+        else ""
+    )
     body = (
         f'<section class="status"><h2>{html.escape(str(next_step.get("display_title", "当前状态")))}</h2>'
         f'<p>{html.escape(str(next_step.get("plain_explanation", "")))}</p>'
         f'<p><strong>当前责任方：</strong>{html.escape(str(next_step.get("responsible_party", "")))}</p>'
         '<p class="boundary">检查不等于最终接受；最终决定必须在独立页面完成。</p>'
         f"{anomaly}</section>{notice_html}"
-        f'<section class="{draft_class}"><strong>{html.escape(draft_text)}</strong></section>'
-        f"{form}{final_link}<details><summary>治理过程与技术详情</summary>"
+        f"{draft_banner}{form}{final_link}"
+        "<details><summary>治理过程与技术详情</summary>"
         f"<pre>{technical}</pre></details>"
     )
     return _page(
@@ -253,6 +279,8 @@ def render_review_preview_html(
         f"<li>{html.escape(item)}</li>" for item in preview.summary_lines
     )
     body = (
+        '<section class="draft-banner"><strong>'
+        "预览完成，尚未正式提交。</strong></section>"
         '<section class="status"><h2>预览本次处理</h2>'
         '<p class="boundary">这是无副作用预览；提交检查不等于接受贡献。</p>'
         f'<ul class="preview-list">{lines}</ul></section>'
@@ -297,17 +325,13 @@ def render_final_decision_html(
     *,
     csrf_token: str | None = None,
 ) -> str:
-    summaries = (
-        view.contribution_summary,
-        view.risk_summary,
+    completed = (
         view.requirement_summary,
         view.verification_summary,
         view.unresolved_finding_summary,
-        view.final_authority_summary,
-        view.acceptance_boundary,
     )
-    summary_html = "".join(
-        f"<li>{html.escape(item)}</li>" for item in summaries
+    completed_html = "".join(
+        f"<li>✓ {html.escape(item)}</li>" for item in completed
     )
     options = "".join(
             '<label class="option">'
@@ -316,6 +340,7 @@ def render_final_decision_html(
             f"<strong>{html.escape(option.display_label)}</strong>"
             f"<p>{html.escape(option.plain_consequence)}</p></label>"
             for option in view.options
+            if option.authorized
     )
     if view.available and csrf_token:
         action = (
@@ -331,21 +356,33 @@ def render_final_decision_html(
     elif view.available:
         action = (
             f'<div class="options">{options}</div>'
-            '<section class="unavailable">静态演示：最终决定操作未启用，'
-            "不会包含实时 token。</section>"
+            '<section class="unavailable">静态演示页面仅用于视觉复核，'
+            "不能在此提交最终选择。</section>"
         )
     else:
         action = (
             f'<section class="unavailable">{html.escape(view.unavailable_reason or "当前没有可执行的最终决定。")}</section>'
         )
+    technical = html.escape(
+        json.dumps(view.to_dict(), ensure_ascii=False, indent=2)
+    )
     body = (
-        '<section class="status"><h2>最终决定边界</h2>'
-        f"<ul>{summary_html}</ul></section>{action}"
+        '<section class="status"><h2>现在需要你作出最终决定</h2>'
+        '<p>治理材料和维护者检查已经完成。</p>'
+        f"<p>{html.escape(view.final_authority_summary)}</p>"
+        f'<p class="boundary">{html.escape(view.acceptance_boundary)}</p>'
+        '</section><section><h2>已完成</h2>'
+        f"<ul>{completed_html}</ul></section>"
+        '<section><h2>本次贡献</h2>'
+        f"<p>{html.escape(view.contribution_summary)}</p>"
+        f"<p>{html.escape(view.risk_summary)}</p></section>"
+        f"{action}<details><summary>治理过程与技术详情</summary>"
+        f"<pre>{technical}</pre></details>"
     )
     return _page(
         title="AGM Final Human Decision",
         header_title="最终人类决定",
-        header_subtitle="与维护者检查彻底分开的 authority-controlled 操作",
+        header_subtitle="请根据本次贡献、风险和已完成检查作出项目决定",
         body=body,
         final=True,
     )
@@ -360,9 +397,11 @@ def render_final_preview_html(
         f"<li>{html.escape(item)}</li>" for item in preview.summary_lines
     )
     body = (
+        '<section class="draft-banner"><strong>'
+        "预览完成，尚未正式提交。</strong></section>"
         '<section class="status"><h2>预览最终决定</h2>'
         f"<ul>{lines}</ul><p><strong>原因：</strong>{html.escape(preview.reason)}</p>"
-        '<p class="boundary">这是独立 final-decision preview，不是 verification。</p>'
+        '<p class="boundary">这是正式提交前的预览；返回不会修改治理案例。</p>'
         '</section><form method="post" action="/final/execute">'
         f'<input type="hidden" name="csrf_token" value="{html.escape(csrf_token)}">'
         f'<input type="hidden" name="preview_token" value="{html.escape(preview.preview_token or "")}">'
@@ -372,7 +411,7 @@ def render_final_preview_html(
     return _page(
         title="AGM Final Decision Preview",
         header_title="最终人类决定预览",
-        header_subtitle="一次性确认；不会与维护者检查混用",
+        header_subtitle="请确认本次项目决定及其业务后果",
         body=body,
         final=True,
     )
@@ -383,13 +422,13 @@ def render_final_result_html(result: FinalDecisionResult) -> str:
         '<section class="status success"><h2>最终人类决定已提交</h2>'
         f"<p>{html.escape(result.message)}</p>"
         f"<p>当前状态：{html.escape(result.next_review_brief.governance_details.raw_state)}</p>"
-        '<p class="boundary">最终决定记录与维护者 verification 保持分离。</p>'
+        '<p class="boundary">最终决定记录与前一阶段的维护者检查分别保存。</p>'
         '<a class="button" href="/">返回治理状态</a></section>'
     )
     return _page(
         title="AGM Final Decision Result",
         header_title="最终人类决定结果",
-        header_subtitle="已使用既有 state machine operation",
+        header_subtitle="项目决定已经记录",
         body=body,
         final=True,
     )

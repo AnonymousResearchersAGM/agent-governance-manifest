@@ -64,7 +64,7 @@ code { overflow-wrap: anywhere; }
 <p><strong>变更文件：</strong>docs/guide.md</p>
 <p><strong>风险区域：</strong>文档（documentation）</p>
 <p><strong>为什么现在轮到这一方：</strong>受影响材料已补充或仍然有效；当前只需重新检查指定修复范围。</p>
-<details><summary>技术状态</summary><p>State: <code>resubmitted</code> · Readiness: <code>repair_required</code> · Autonomy: <code>supervised_agent</code></p></details>
+<details><summary>技术状态</summary><p>State: <code>awaiting_maintainer_verification</code> · Readiness: <code>repair_required</code> · Autonomy: <code>supervised_agent</code></p></details>
 </header>
 
 <section>
@@ -100,7 +100,7 @@ code { overflow-wrap: anywhere; }
     &quot;object_id&quot;: &quot;obl-o-summary&quot;,
     &quot;relationship&quot;: &quot;obligation_compilation&quot;
   }
-]</pre></details></li><li class="workflow-step status-completed" data-status="completed"><span class="symbol" aria-hidden="true">✓</span><strong>2. 贡献者准备材料</strong><span class="state-text">已完成</span><p>指定范围已补交并具备可检查材料，未受影响材料继续保留。</p><details><summary>内部阶段与依据</summary><p>Bind, Repair</p><pre>[
+]</pre></details></li><li class="workflow-step status-completed" data-status="completed"><span class="symbol" aria-hidden="true">✓</span><strong>2. 贡献者准备材料</strong><span class="state-text">已完成</span><p>本次所需材料已提交到后续流程。</p><details><summary>内部阶段与依据</summary><p>Bind, Repair</p><pre>[
   {
     &quot;kind&quot;: &quot;state_transition&quot;,
     &quot;object_id&quot;: &quot;transition-ecaa52c8137a5e78b1a666f080861a2c&quot;,
@@ -131,7 +131,7 @@ code { overflow-wrap: anywhere; }
     &quot;object_id&quot;: &quot;repair-cb5bf46ed270569b89e88c9153331193&quot;,
     &quot;relationship&quot;: &quot;repair_scope&quot;
   }
-]</pre></details></li><li class="workflow-step status-skipped" data-status="skipped"><span class="symbol" aria-hidden="true">—</span><strong>3. 负责人确认</strong><span class="state-text">本次不要求</span><p>当前义务集合不要求负责人确认。</p><details><summary>内部阶段与依据</summary><p>Attest</p><pre>[]</pre></details></li><li class="workflow-step status-current" data-status="current"><span class="symbol" aria-hidden="true">●</span><strong>4. 维护者检查</strong><span class="state-text">当前阶段</span><p>当前只重新检查指定修复范围；未受影响的检查结果保留。</p><details><summary>内部阶段与依据</summary><p>Verify, Repair</p><pre>[
+]</pre></details></li><li class="workflow-step status-skipped" data-status="skipped"><span class="symbol" aria-hidden="true">—</span><strong>3. 负责人确认</strong><span class="state-text">本次不要求</span><p>当前义务集合不要求负责人确认。</p><details><summary>内部阶段与依据</summary><p>Attest</p><pre>[]</pre></details></li><li class="workflow-step status-current" data-status="current"><span class="symbol" aria-hidden="true">●</span><strong>4. 维护者检查</strong><span class="state-text">当前阶段</span><p>当前轮到有权限的维护者检查材料与绑定。</p><details><summary>内部阶段与依据</summary><p>Verify, Repair</p><pre>[
   {
     &quot;kind&quot;: &quot;state_transition&quot;,
     &quot;object_id&quot;: &quot;transition-f6f404c026065d37b2d9aac0badf72b4&quot;,
@@ -146,6 +146,11 @@ code { overflow-wrap: anywhere; }
     &quot;kind&quot;: &quot;state_transition&quot;,
     &quot;object_id&quot;: &quot;transition-a4cf31c3da0a5f02ae23162314d82686&quot;,
     &quot;relationship&quot;: &quot;primary:request_repair&quot;
+  },
+  {
+    &quot;kind&quot;: &quot;state_transition&quot;,
+    &quot;object_id&quot;: &quot;transition-a89fe0ba563e576790b2b4a8090466f3&quot;,
+    &quot;relationship&quot;: &quot;primary:submit_for_verification&quot;
   },
   {
     &quot;kind&quot;: &quot;maintainer_verification&quot;,
@@ -427,7 +432,7 @@ code { overflow-wrap: anywhere; }
     &quot;relationship&quot;: &quot;agent_scope_requirement&quot;
   }
 ]</pre></details></section>
-<section class="preview" id="action-preview"><h2>操作前预览</h2><p>你准备执行：<strong>只重新检查“智能体行动与委派说明”</strong></p><p>当前角色和案例状态允许生成此操作计划。</p><p><strong>当前可以继续处理的角色：</strong>人类维护者</p><p><strong>将处理：</strong>智能体行动与委派说明</p><ul><li><strong>案例流程</strong>: 已补充，等待重新检查 → 等待人类维护者最终决定<br>受影响项会记录维护者检查；全部阻断项完成后进入人类最终决定。</li><li><strong>智能体行动与委派说明</strong>: 材料已满足 → 已检查<br>受影响项会记录维护者检查；全部阻断项完成后进入人类最终决定。</li><li><strong>本次问题</strong>: 待处理 → 已关闭<br>本次重新检查通过后，关联问题将关闭。</li><li><strong>本次修复请求</strong>: 已补充，等待重新检查 → 已关闭<br>所关联的问题在本次重新检查后关闭。</li></ul><p><strong>保留的未受影响材料：</strong>变更文件清单、修改说明</p><p><strong>将失效：</strong>无</p><p><strong>责任方变化：</strong>维护者侧检查人员、项目规则负责人、人类维护者 → 人类维护者</p><p><strong>流程位置变化：</strong>维护者检查 → 人类维护者最终决定</p><p><strong>执行后：</strong></p><ul><li>本次指定材料将被标记为已检查。</li><li>关联的问题和修复请求将被关闭。</li><li>当前责任方将转交给人类维护者。</li><li>案例将进入“人类维护者最终决定”。</li><li>这不等于代码已经被项目接受。</li></ul><p><strong>后续仍需负责人确认：</strong>否；<strong>后续仍需维护者检查：</strong>否；<strong>最终接受是否已经发生：</strong>否</p><p><strong>此预览本身不会修改案例：</strong>是</p><details><summary>技术操作、内部 ID 与原始状态</summary><pre>{
+<section class="preview" id="action-preview"><h2>操作前预览</h2><p>你准备执行：<strong>只重新检查“智能体行动与委派说明”</strong></p><p>当前角色和案例状态允许生成此操作计划。</p><p><strong>当前可以继续处理的角色：</strong>人类维护者</p><p><strong>将处理：</strong>智能体行动与委派说明</p><ul><li><strong>案例流程</strong>: 等待维护者检查 → 等待人类维护者最终决定<br>受影响项会记录维护者检查；全部阻断项完成后进入人类最终决定。</li><li><strong>智能体行动与委派说明</strong>: 材料已满足 → 已检查<br>受影响项会记录维护者检查；全部阻断项完成后进入人类最终决定。</li><li><strong>本次问题</strong>: 待处理 → 已关闭<br>本次重新检查通过后，关联问题将关闭。</li><li><strong>本次修复请求</strong>: 已补充，等待重新检查 → 已关闭<br>所关联的问题在本次重新检查后关闭。</li></ul><p><strong>保留的未受影响材料：</strong>变更文件清单、修改说明</p><p><strong>将失效：</strong>无</p><p><strong>责任方变化：</strong>维护者侧检查人员、项目规则负责人、人类维护者 → 人类维护者</p><p><strong>流程位置变化：</strong>维护者检查 → 人类维护者最终决定</p><p><strong>执行后：</strong></p><ul><li>本次指定材料将被标记为已检查。</li><li>关联的问题和修复请求将被关闭。</li><li>当前责任方将转交给人类维护者。</li><li>案例将进入“人类维护者最终决定”。</li><li>这不等于代码已经被项目接受。</li></ul><p><strong>后续仍需负责人确认：</strong>否；<strong>后续仍需维护者检查：</strong>否；<strong>最终接受是否已经发生：</strong>否</p><p><strong>此预览本身不会修改案例：</strong>是</p><details><summary>技术操作、内部 ID 与原始状态</summary><pre>{
   &quot;operation&quot;: &quot;verify_evidence&quot;,
   &quot;current_role&quot;: &quot;maintainer_verifier&quot;,
   &quot;required_roles&quot;: [
@@ -435,16 +440,16 @@ code { overflow-wrap: anywhere; }
     &quot;maintainer_verifier&quot;,
     &quot;policy_steward&quot;
   ],
-  &quot;source_state&quot;: &quot;resubmitted&quot;,
+  &quot;source_state&quot;: &quot;awaiting_maintainer_verification&quot;,
   &quot;target_state&quot;: &quot;ready_for_human_decision&quot;,
   &quot;effects&quot;: [
     {
       &quot;target&quot;: &quot;案例状态&quot;,
-      &quot;before&quot;: &quot;resubmitted&quot;,
+      &quot;before&quot;: &quot;awaiting_maintainer_verification&quot;,
       &quot;after&quot;: &quot;ready_for_human_decision&quot;,
       &quot;explanation&quot;: &quot;受影响项会记录维护者检查；全部阻断项完成后进入人类最终决定。&quot;,
       &quot;source_object_ids&quot;: [
-        &quot;transition-96fdfbcc786957ca913e285c9e517b18&quot;
+        &quot;transition-a89fe0ba563e576790b2b4a8090466f3&quot;
       ]
     },
     {
@@ -496,7 +501,7 @@ code { overflow-wrap: anywhere; }
     &quot;state_transition&quot;,
     &quot;maintainer_verification&quot;
   ],
-  &quot;preview_fingerprint&quot;: &quot;7cf68059960a1c57513cbc21d3bda1e89c20fe164318c2d66f4b48fa198dfcdf&quot;,
+  &quot;preview_fingerprint&quot;: &quot;d07af4c15950bd54bb1dd0dbfb5c8df159a2e242d4f641d1e8dfee5ae1c80e17&quot;,
   &quot;traceability&quot;: [
     {
       &quot;kind&quot;: &quot;permission_rule&quot;,
@@ -510,7 +515,7 @@ code { overflow-wrap: anywhere; }
     },
     {
       &quot;kind&quot;: &quot;state_machine_rule&quot;,
-      &quot;object_id&quot;: &quot;resubmitted:verify_evidence:verification_complete&quot;,
+      &quot;object_id&quot;: &quot;awaiting_maintainer_verification:verify_evidence:verification_complete&quot;,
       &quot;relationship&quot;: &quot;transition_plan&quot;
     }
   ]
@@ -528,14 +533,56 @@ code { overflow-wrap: anywhere; }
     },
     {
       &quot;kind&quot;: &quot;state_machine_rule&quot;,
-      &quot;object_id&quot;: &quot;resubmitted:verify_evidence:verification_complete&quot;,
+      &quot;object_id&quot;: &quot;awaiting_maintainer_verification:verify_evidence:verification_complete&quot;,
+      &quot;relationship&quot;: &quot;transition&quot;
+    }
+  ]
+}</pre></details></article><article class="action-card available"><h3>要求补充或修改</h3><p>指出问题和受影响义务，返回贡献侧修复。</p><p><strong>为什么现在相关：</strong>该操作直接对应当前流程阶段或开放问题。</p><p><strong>执行后：</strong>仅指定范围需要修复和重新检查，未受影响材料保留。</p><details><summary>技术操作标识与依据</summary><pre>{
+  &quot;action&quot;: &quot;request_repair&quot;,
+  &quot;traceability&quot;: [
+    {
+      &quot;kind&quot;: &quot;permission_rule&quot;,
+      &quot;object_id&quot;: &quot;maintainer_verifier:request_repair&quot;,
+      &quot;relationship&quot;: &quot;authority&quot;
+    },
+    {
+      &quot;kind&quot;: &quot;state_machine_rule&quot;,
+      &quot;object_id&quot;: &quot;awaiting_maintainer_verification:request_repair:repair_requested&quot;,
+      &quot;relationship&quot;: &quot;transition&quot;
+    }
+  ]
+}</pre></details></article><article class="action-card available"><h3>拒绝当前材料</h3><p>拒绝一条不能支持当前修改的具体材料。</p><p><strong>为什么现在相关：</strong>该操作直接对应当前流程阶段或开放问题。</p><p><strong>执行后：</strong>该材料将标记为已拒绝，并建立指定范围的补充或修改请求。</p><details><summary>技术操作标识与依据</summary><pre>{
+  &quot;action&quot;: &quot;reject_evidence&quot;,
+  &quot;traceability&quot;: [
+    {
+      &quot;kind&quot;: &quot;permission_rule&quot;,
+      &quot;object_id&quot;: &quot;maintainer_verifier:reject_evidence&quot;,
+      &quot;relationship&quot;: &quot;authority&quot;
+    },
+    {
+      &quot;kind&quot;: &quot;state_machine_rule&quot;,
+      &quot;object_id&quot;: &quot;awaiting_maintainer_verification:reject_evidence:repair_requested&quot;,
+      &quot;relationship&quot;: &quot;transition&quot;
+    }
+  ]
+}</pre></details></article><article class="action-card available"><h3>请求补充说明</h3><p>针对指定要求提出可审计的澄清问题。</p><p><strong>为什么现在相关：</strong>该操作直接对应当前流程阶段或开放问题。</p><p><strong>执行后：</strong>案例返回贡献侧回答，所选范围需要重新检查。</p><details><summary>技术操作标识与依据</summary><pre>{
+  &quot;action&quot;: &quot;ask_clarification&quot;,
+  &quot;traceability&quot;: [
+    {
+      &quot;kind&quot;: &quot;permission_rule&quot;,
+      &quot;object_id&quot;: &quot;maintainer_verifier:ask_clarification&quot;,
+      &quot;relationship&quot;: &quot;authority&quot;
+    },
+    {
+      &quot;kind&quot;: &quot;state_machine_rule&quot;,
+      &quot;object_id&quot;: &quot;awaiting_maintainer_verification:ask_clarification:repair_requested&quot;,
       &quot;relationship&quot;: &quot;transition&quot;
     }
   ]
 }</pre></details></article></div>
 </section>
 <section>
-<details><summary>其他可用操作（1 项）</summary>
+<details><summary>其他可用操作（2 项）</summary>
 <div class="actions"><article class="action-card available"><h3>查看变化范围</h3><p>查看变更文件、风险规则、影响范围和绑定指纹。</p><p><strong>为什么现在相关：</strong>后端允许此操作，但它不直接处理当前主要阻断项。</p><p><strong>执行后：</strong>只读操作，不改变案例状态。</p><details><summary>技术操作标识与依据</summary><pre>{
   &quot;action&quot;: &quot;view_change_scope&quot;,
   &quot;traceability&quot;: [
@@ -543,6 +590,20 @@ code { overflow-wrap: anywhere; }
       &quot;kind&quot;: &quot;permission_rule&quot;,
       &quot;object_id&quot;: &quot;maintainer_verifier:view_change_scope&quot;,
       &quot;relationship&quot;: &quot;authority&quot;
+    }
+  ]
+}</pre></details></article><article class="action-card available"><h3>记录项目规则冲突</h3><p>记录无法由普通材料修复的策略冲突。</p><p><strong>为什么现在相关：</strong>后端允许此操作，但它不直接处理当前主要阻断项。</p><p><strong>执行后：</strong>案例转入补充处理，由项目规则负责人或维护者处理。</p><details><summary>技术操作标识与依据</summary><pre>{
+  &quot;action&quot;: &quot;record_policy_conflict&quot;,
+  &quot;traceability&quot;: [
+    {
+      &quot;kind&quot;: &quot;permission_rule&quot;,
+      &quot;object_id&quot;: &quot;maintainer_verifier:record_policy_conflict&quot;,
+      &quot;relationship&quot;: &quot;authority&quot;
+    },
+    {
+      &quot;kind&quot;: &quot;state_machine_rule&quot;,
+      &quot;object_id&quot;: &quot;awaiting_maintainer_verification:record_policy_conflict:repair_requested&quot;,
+      &quot;relationship&quot;: &quot;transition&quot;
     }
   ]
 }</pre></details></article></div>
@@ -564,7 +625,7 @@ code { overflow-wrap: anywhere; }
 完成后请按当前 repair/提交范围交回；最终决定仍由人类维护者作出。</pre></details></article><article class="action-card utility"><h3>下载维护者摘要</h3><p>导出当前风险、责任方和阻断项摘要，不作接受判断。</p><a class="button-link" href="/utility?action_id=export_reviewer_summary">打开只读输出</a><details><summary>在页面中预览</summary><pre># 维护者审核摘要
 
 案例：scoped-repair
-当前状态：已补交，等待确认材料是否齐备
+当前状态：等待维护者检查
 风险：low
 当前责任方：维护者侧检查人员、项目规则负责人、人类维护者
 责任方依据：受影响材料已补充或仍然有效；当前只需重新检查指定修复范围。
@@ -602,104 +663,16 @@ code { overflow-wrap: anywhere; }
 完成后交给角色：人类维护者。</pre></details></article></div>
 </section>
 <section>
-<details><summary>还有 13 项操作因当前阶段、权限或对象范围暂不可用</summary>
+<details><summary>还有 9 项操作因当前阶段、权限或对象范围暂不可用</summary>
 <p>展开后可查看不可用原因、所需角色、所需状态及以后是否可能开放。后端权限检查始终保留。</p>
-<div class="actions"><article class="action-card unavailable" aria-disabled="true"><h3>要求补充或修改 <span>当前不可用</span></h3><p>指出问题和受影响义务，返回贡献侧修复。</p><p><strong>原因：</strong>当前处于“已补交，等待确认材料是否齐备”，还不能执行“要求补充或修改”。</p><p><strong>所需角色：</strong>人类维护者、维护者侧检查人员、项目规则负责人</p><p><strong>所需流程位置：</strong>等待维护者检查、等待人类维护者最终决定或维护者检查完成，正在确认可决策状态</p><p><strong>以后是否可能可用：</strong>到达所需状态且对象范围满足后可能可用。</p><details><summary>技术操作标识与依据</summary><pre>{
-  &quot;action&quot;: &quot;request_repair&quot;,
-  &quot;title&quot;: &quot;要求补充或修改&quot;,
-  &quot;description&quot;: &quot;指出问题和受影响义务，返回贡献侧修复。&quot;,
-  &quot;reason&quot;: &quot;当前处于“已补交，等待确认材料是否齐备”，还不能执行“要求补充或修改”。&quot;,
-  &quot;next_actor_roles&quot;: [
-    &quot;maintainer_verifier&quot;,
-    &quot;policy_steward&quot;,
-    &quot;maintainer&quot;
-  ],
-  &quot;mutates_state&quot;: true,
-  &quot;traceability&quot;: [
-    {
-      &quot;kind&quot;: &quot;permission_rule&quot;,
-      &quot;object_id&quot;: &quot;maintainer_verifier:request_repair&quot;,
-      &quot;relationship&quot;: &quot;authority&quot;
-    }
-  ],
-  &quot;category&quot;: &quot;authority&quot;,
-  &quot;required_role&quot;: [
-    &quot;maintainer&quot;,
-    &quot;maintainer_verifier&quot;,
-    &quot;policy_steward&quot;
-  ],
-  &quot;required_state&quot;: [
-    &quot;awaiting_maintainer_verification&quot;,
-    &quot;ready_for_human_decision&quot;,
-    &quot;verification_complete&quot;
-  ],
-  &quot;future_availability&quot;: &quot;到达所需状态且对象范围满足后可能可用。&quot;
-}</pre></details></article><article class="action-card unavailable" aria-disabled="true"><h3>拒绝当前材料 <span>当前不可用</span></h3><p>拒绝一条不能支持当前修改的具体材料。</p><p><strong>原因：</strong>当前处于“已补交，等待确认材料是否齐备”，还不能执行“拒绝当前材料”。</p><p><strong>所需角色：</strong>人类维护者、维护者侧检查人员</p><p><strong>所需流程位置：</strong>等待维护者检查或维护者检查完成，正在确认可决策状态</p><p><strong>以后是否可能可用：</strong>到达所需状态且对象范围满足后可能可用。</p><details><summary>技术操作标识与依据</summary><pre>{
-  &quot;action&quot;: &quot;reject_evidence&quot;,
-  &quot;title&quot;: &quot;拒绝当前材料&quot;,
-  &quot;description&quot;: &quot;拒绝一条不能支持当前修改的具体材料。&quot;,
-  &quot;reason&quot;: &quot;当前处于“已补交，等待确认材料是否齐备”，还不能执行“拒绝当前材料”。&quot;,
-  &quot;next_actor_roles&quot;: [
-    &quot;maintainer_verifier&quot;,
-    &quot;policy_steward&quot;,
-    &quot;maintainer&quot;
-  ],
-  &quot;mutates_state&quot;: true,
-  &quot;traceability&quot;: [
-    {
-      &quot;kind&quot;: &quot;permission_rule&quot;,
-      &quot;object_id&quot;: &quot;maintainer_verifier:reject_evidence&quot;,
-      &quot;relationship&quot;: &quot;authority&quot;
-    }
-  ],
-  &quot;category&quot;: &quot;authority&quot;,
-  &quot;required_role&quot;: [
-    &quot;maintainer&quot;,
-    &quot;maintainer_verifier&quot;
-  ],
-  &quot;required_state&quot;: [
-    &quot;awaiting_maintainer_verification&quot;,
-    &quot;verification_complete&quot;
-  ],
-  &quot;future_availability&quot;: &quot;到达所需状态且对象范围满足后可能可用。&quot;
-}</pre></details></article><article class="action-card unavailable" aria-disabled="true"><h3>请求补充说明 <span>当前不可用</span></h3><p>针对指定要求提出可审计的澄清问题。</p><p><strong>原因：</strong>当前处于“已补交，等待确认材料是否齐备”，还不能执行“请求补充说明”。</p><p><strong>所需角色：</strong>人类维护者、维护者侧检查人员</p><p><strong>所需流程位置：</strong>等待维护者检查、等待人类维护者最终决定或维护者检查完成，正在确认可决策状态</p><p><strong>以后是否可能可用：</strong>到达所需状态且对象范围满足后可能可用。</p><details><summary>技术操作标识与依据</summary><pre>{
-  &quot;action&quot;: &quot;ask_clarification&quot;,
-  &quot;title&quot;: &quot;请求补充说明&quot;,
-  &quot;description&quot;: &quot;针对指定要求提出可审计的澄清问题。&quot;,
-  &quot;reason&quot;: &quot;当前处于“已补交，等待确认材料是否齐备”，还不能执行“请求补充说明”。&quot;,
-  &quot;next_actor_roles&quot;: [
-    &quot;maintainer_verifier&quot;,
-    &quot;policy_steward&quot;,
-    &quot;maintainer&quot;
-  ],
-  &quot;mutates_state&quot;: true,
-  &quot;traceability&quot;: [
-    {
-      &quot;kind&quot;: &quot;permission_rule&quot;,
-      &quot;object_id&quot;: &quot;maintainer_verifier:ask_clarification&quot;,
-      &quot;relationship&quot;: &quot;authority&quot;
-    }
-  ],
-  &quot;category&quot;: &quot;authority&quot;,
-  &quot;required_role&quot;: [
-    &quot;maintainer&quot;,
-    &quot;maintainer_verifier&quot;
-  ],
-  &quot;required_state&quot;: [
-    &quot;awaiting_maintainer_verification&quot;,
-    &quot;ready_for_human_decision&quot;,
-    &quot;verification_complete&quot;
-  ],
-  &quot;future_availability&quot;: &quot;到达所需状态且对象范围满足后可能可用。&quot;
-}</pre></details></article><article class="action-card unavailable" aria-disabled="true"><h3>将旧负责人确认标记为失效 <span>当前不可用</span></h3><p>使一条过时或不正确的负责人确认失效。</p><p><strong>原因：</strong>当前处于“已补交，等待确认材料是否齐备”，还不能执行“将旧负责人确认标记为失效”。</p><p><strong>所需角色：</strong>人类维护者、维护者侧检查人员</p><p><strong>所需流程位置：</strong>等待维护者检查、等待人类维护者最终决定或维护者检查完成，正在确认可决策状态</p><p><strong>以后是否可能可用：</strong>到达所需状态且对象范围满足后可能可用。</p><details><summary>技术操作标识与依据</summary><pre>{
+<div class="actions"><article class="action-card unavailable" aria-disabled="true"><h3>将旧负责人确认标记为失效 <span>当前不可用</span></h3><p>使一条过时或不正确的负责人确认失效。</p><p><strong>原因：</strong>当前没有仍然有效的负责人确认可供失效处理。</p><p><strong>所需角色：</strong>人类维护者、维护者侧检查人员</p><p><strong>所需流程位置：</strong>等待维护者检查、等待人类维护者最终决定或维护者检查完成，正在确认可决策状态</p><p><strong>以后是否可能可用：</strong>到达所需状态且对象范围满足后可能可用。</p><details><summary>技术操作标识与依据</summary><pre>{
   &quot;action&quot;: &quot;invalidate_attestation&quot;,
   &quot;title&quot;: &quot;将旧负责人确认标记为失效&quot;,
   &quot;description&quot;: &quot;使一条过时或不正确的负责人确认失效。&quot;,
-  &quot;reason&quot;: &quot;当前处于“已补交，等待确认材料是否齐备”，还不能执行“将旧负责人确认标记为失效”。&quot;,
+  &quot;reason&quot;: &quot;当前没有仍然有效的负责人确认可供失效处理。&quot;,
   &quot;next_actor_roles&quot;: [
-    &quot;maintainer_verifier&quot;,
-    &quot;policy_steward&quot;,
-    &quot;maintainer&quot;
+    &quot;maintainer&quot;,
+    &quot;maintainer_verifier&quot;
   ],
   &quot;mutates_state&quot;: true,
   &quot;traceability&quot;: [
@@ -707,6 +680,11 @@ code { overflow-wrap: anywhere; }
       &quot;kind&quot;: &quot;permission_rule&quot;,
       &quot;object_id&quot;: &quot;maintainer_verifier:invalidate_attestation&quot;,
       &quot;relationship&quot;: &quot;authority&quot;
+    },
+    {
+      &quot;kind&quot;: &quot;state_machine_rule&quot;,
+      &quot;object_id&quot;: &quot;awaiting_maintainer_verification:invalidate_attestation:repair_requested&quot;,
+      &quot;relationship&quot;: &quot;transition&quot;
     }
   ],
   &quot;category&quot;: &quot;authority&quot;,
@@ -716,38 +694,6 @@ code { overflow-wrap: anywhere; }
   ],
   &quot;required_state&quot;: [
     &quot;awaiting_maintainer_verification&quot;,
-    &quot;ready_for_human_decision&quot;,
-    &quot;verification_complete&quot;
-  ],
-  &quot;future_availability&quot;: &quot;到达所需状态且对象范围满足后可能可用。&quot;
-}</pre></details></article><article class="action-card unavailable" aria-disabled="true"><h3>记录项目规则冲突 <span>当前不可用</span></h3><p>记录无法由普通材料修复的策略冲突。</p><p><strong>原因：</strong>当前处于“已补交，等待确认材料是否齐备”，还不能执行“记录项目规则冲突”。</p><p><strong>所需角色：</strong>人类维护者、维护者侧检查人员、项目规则负责人</p><p><strong>所需流程位置：</strong>等待负责人确认、等待维护者检查、等待贡献者补齐材料、等待人类维护者最终决定或维护者检查完成，正在确认可决策状态</p><p><strong>以后是否可能可用：</strong>到达所需状态且对象范围满足后可能可用。</p><details><summary>技术操作标识与依据</summary><pre>{
-  &quot;action&quot;: &quot;record_policy_conflict&quot;,
-  &quot;title&quot;: &quot;记录项目规则冲突&quot;,
-  &quot;description&quot;: &quot;记录无法由普通材料修复的策略冲突。&quot;,
-  &quot;reason&quot;: &quot;当前处于“已补交，等待确认材料是否齐备”，还不能执行“记录项目规则冲突”。&quot;,
-  &quot;next_actor_roles&quot;: [
-    &quot;maintainer_verifier&quot;,
-    &quot;policy_steward&quot;,
-    &quot;maintainer&quot;
-  ],
-  &quot;mutates_state&quot;: true,
-  &quot;traceability&quot;: [
-    {
-      &quot;kind&quot;: &quot;permission_rule&quot;,
-      &quot;object_id&quot;: &quot;maintainer_verifier:record_policy_conflict&quot;,
-      &quot;relationship&quot;: &quot;authority&quot;
-    }
-  ],
-  &quot;category&quot;: &quot;scope&quot;,
-  &quot;required_role&quot;: [
-    &quot;maintainer&quot;,
-    &quot;maintainer_verifier&quot;,
-    &quot;policy_steward&quot;
-  ],
-  &quot;required_state&quot;: [
-    &quot;awaiting_human_attestation&quot;,
-    &quot;awaiting_maintainer_verification&quot;,
-    &quot;evidence_incomplete&quot;,
     &quot;ready_for_human_decision&quot;,
     &quot;verification_complete&quot;
   ],
@@ -963,7 +909,7 @@ code { overflow-wrap: anywhere; }
 <section id="technical">
 <details class="technical-details"><summary>技术详情（默认折叠）</summary>
 <pre>{
-  &quot;raw_state&quot;: &quot;resubmitted&quot;,
+  &quot;raw_state&quot;: &quot;awaiting_maintainer_verification&quot;,
   &quot;readiness&quot;: &quot;repair_required&quot;,
   &quot;risk_rules&quot;: [
     {
@@ -1399,6 +1345,22 @@ code { overflow-wrap: anywhere; }
       &quot;reason&quot;: &quot;Clarified delegation wording without changing the contribution.&quot;,
       &quot;related_object_ids&quot;: [
         &quot;attempt-5edb54f0dd405c4bbe986bdc73db8b5a&quot;
+      ],
+      &quot;timestamp&quot;: &quot;2026-07-26T00:00:00Z&quot;
+    },
+    {
+      &quot;id&quot;: &quot;transition-a89fe0ba563e576790b2b4a8090466f3&quot;,
+      &quot;case_id&quot;: &quot;scoped-repair&quot;,
+      &quot;actor&quot;: &quot;contributor-agent&quot;,
+      &quot;role&quot;: &quot;contributor_agent&quot;,
+      &quot;source_state&quot;: &quot;resubmitted&quot;,
+      &quot;target_state&quot;: &quot;awaiting_maintainer_verification&quot;,
+      &quot;action&quot;: &quot;submit_for_verification&quot;,
+      &quot;reason&quot;: &quot;Contributor submitted prepared evidence for maintainer verification.&quot;,
+      &quot;related_object_ids&quot;: [
+        &quot;evidence-78d4d1c1ff665bb4808d6623ad98935f&quot;,
+        &quot;evidence-7525c42fd5d650df850b5f6ebf095485&quot;,
+        &quot;evidence-2cb3732e2b49561598dc8daee791f8d9&quot;
       ],
       &quot;timestamp&quot;: &quot;2026-07-26T00:00:00Z&quot;
     }

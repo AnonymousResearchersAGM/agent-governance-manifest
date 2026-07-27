@@ -49,29 +49,31 @@ OPTION_DEFINITIONS = (
 FINAL_DEFINITIONS = (
     (
         "accept",
-        "接受贡献",
-        "记录既有 final-decision 接受操作；这不是维护者检查。",
+        "接受本次贡献",
+        "项目正式接受本次贡献。",
         "decide_accept",
     ),
     (
         "reject",
-        "拒绝贡献",
-        "记录既有 final-decision 拒绝操作，并结束当前案例。",
+        "拒绝本次贡献",
+        "项目不接受本次贡献，并记录拒绝原因。",
         "decide_reject",
     ),
     (
         "request_changes",
-        "要求修改后再决定",
-        "使用既有 final-decision operation 返回贡献侧修复。",
+        "要求修改后重新决定",
+        "本次不作最终接受决定，贡献者需要根据意见修改后重新提交。",
         "decide_request_changes",
     ),
     (
         "close",
-        "关闭案例",
-        "使用既有 closure operation 关闭案例，不把关闭描述为接受。",
+        "关闭本次审查",
+        "结束本次治理案例并归档当前决定。",
         "decide_close",
     ),
 )
+
+MAINTAINER_REVIEW_STAGE = "awaiting_maintainer_verification"
 
 
 def _canonical_judgments(
@@ -99,6 +101,29 @@ def _canonical_judgments(
     return result
 
 
+def _interactive_next_step(
+    review_brief: ReviewBriefView,
+    case: GovernanceCase,
+) -> dict[str, object]:
+    if case.state != "resubmitted":
+        return review_brief.current_next_step.to_dict()
+    return {
+        "status": "contribution_preparation",
+        "display_title": "当前无需你操作",
+        "responsible_party": "贡献侧",
+        "plain_explanation": (
+            "贡献侧已经补交材料，AGM 正在重新编译要求并提交维护者检查。"
+            "材料正式进入维护者阶段后，你将收到需要检查的具体事项。"
+        ),
+        "participant_should_do": (),
+        "system_will_do": (
+            "重新校验材料结构、版本绑定和当前要求。",
+            "使用既有贡献侧提交操作进入维护者检查阶段。",
+        ),
+        "blocking": False,
+    }
+
+
 def compile_contextual_actions(
     *,
     review_brief: ReviewBriefView,
@@ -111,8 +136,23 @@ def compile_contextual_actions(
 
     case = governance_case
     actor = actor_from_context(actor_context)
+    maintainer_stage_ready = case.state == MAINTAINER_REVIEW_STAGE
+    stage_unavailable_reason = (
+        None
+        if maintainer_stage_ready
+        else (
+            "材料已经补交，等待 AGM 提交维护者检查。"
+            if case.state == "resubmitted"
+            else "当前案例尚未进入维护者检查阶段。"
+        )
+    )
     items = []
-    for judgment, obligation in _canonical_judgments(review_brief, case):
+    canonical_judgments = (
+        _canonical_judgments(review_brief, case)
+        if maintainer_stage_ready
+        else ()
+    )
+    for judgment, obligation in canonical_judgments:
         options = []
         for (
             option_id,
@@ -164,7 +204,10 @@ def compile_contextual_actions(
     )
     unavailable_reason = None
     if not items:
-        unavailable_reason = "当前没有需要该参与者完成的人类治理判断。"
+        unavailable_reason = (
+            stage_unavailable_reason
+            or "当前没有需要该参与者完成的人类治理判断。"
+        )
     elif not all_items_authorized:
         unavailable_reason = "当前参与者无权完成至少一项必需判断。"
     anomalies = tuple(
@@ -186,7 +229,10 @@ def compile_contextual_actions(
         can_save_draft=live_actions_enabled and all_items_authorized,
         can_preview=live_actions_enabled and all_items_authorized,
         unavailable_reason=unavailable_reason,
-        current_next_step=review_brief.current_next_step.to_dict(),
+        maintainer_stage_ready=maintainer_stage_ready,
+        current_stage=case.state,
+        stage_unavailable_reason=stage_unavailable_reason,
+        current_next_step=_interactive_next_step(review_brief, case),
         system_handled_anomalies=anomalies,
         final_decision_entry_available=(
             case.state in {"ready_for_human_decision", "overridden"}
@@ -249,25 +295,28 @@ def compile_final_decision_view(
         case_state=case.state,
         contribution_summary=review_brief.contribution.plain_summary,
         risk_summary=(
-            f"综合风险：{review_brief.risk.display_level}；"
+            f"风险等级：{review_brief.risk.display_level}。"
+            + "主要风险："
             + "；".join(review_brief.risk.plain_reasons)
         ),
-        requirement_summary=(
-            f"共 {review_brief.requirements.total_required} 项治理要求；"
-            "当前状态已由 Review Briefing Compiler 重新编译。"
+        requirement_summary="项目要求的材料已经齐备。",
+        verification_summary=(
+            "负责人已经确认当前版本，维护者已经完成必要检查。"
+            if verified
+            else "当前版本尚未完成必要的维护者检查。"
         ),
-        verification_summary=f"已记录 {verified} 次维护者检查。",
         unresolved_finding_summary=(
-            f"仍有 {len(open_findings)} 项未解决 finding。"
+            f"仍有 {len(open_findings)} 项阻断问题需要处理。"
             if open_findings
-            else "当前没有未解决 finding。"
+            else "当前没有尚未解决的阻断问题。"
         ),
         final_authority_summary=(
-            "只有 canonical maintainer 角色可作出最终决定；"
-            "本地 actor 身份真实性仍依赖运行环境。"
+            "现在需要由具有最终决定权限的人类维护者决定，"
+            "本次贡献是否可以被项目接受。"
         ),
         acceptance_boundary=(
-            "维护者 verification 不等于接受；接受也不等于普通代码合并。"
+            "完成本页决定前，项目尚未接受本次贡献；"
+            "接受后仍需按项目流程完成代码合并。"
         ),
         options=tuple(options),
         available=authorized,

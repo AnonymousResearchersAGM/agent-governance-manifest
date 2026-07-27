@@ -20,6 +20,7 @@ sys.path.insert(0, str(ROOT / "src"))
 sys.path.insert(0, str(ROOT / "scripts"))
 
 from agm.vnext.briefing.actions import (  # noqa: E402
+    DraftAssessment,
     PreviewTokenRegistry,
     ReviewDraftStore,
     compile_contextual_actions,
@@ -30,6 +31,7 @@ from agm.vnext.briefing.actions import (  # noqa: E402
     preview_review_submission,
     render_final_decision_html,
     render_interactive_review_html,
+    render_review_preview_html,
 )
 from agm.vnext.briefing.actions.server import (  # noqa: E402
     _handler_class,
@@ -60,7 +62,11 @@ HUMAN = ActorContext(
 
 
 @contextmanager
-def demo_service(tmp_path: Path, scenario: str):
+def demo_service(
+    tmp_path: Path,
+    scenario: str,
+    **builder_kwargs,
+):
     with use_execution_context(
         DemoExecutionContext(
             scenario_namespace=f"phase-2-{scenario}",
@@ -70,7 +76,7 @@ def demo_service(tmp_path: Path, scenario: str):
     ):
         root = make_project(tmp_path, scenario)
         service = GovernanceService(root)
-        built = BUILDERS[scenario](service)
+        built = BUILDERS[scenario](service, **builder_kwargs)
         yield service, built["case_id"]
 
 
@@ -277,17 +283,69 @@ def test_independent_judgment_authority_is_server_compiled(
         assert not view.can_save_draft
 
 
-def test_resubmitted_repair_limitation_is_fail_closed(tmp_path):
+def test_scoped_repair_resubmission_enters_maintainer_stage_legally(
+    tmp_path,
+):
     with demo_service(
         tmp_path, "03_scoped_repair"
     ) as (service, case_id):
+        case = service.storage.load_case(case_id)
+        transitions = service.storage.read_transitions(case_id)
         view = action_view(service, case_id)
+
+        assert case.state == "awaiting_maintainer_verification"
+        assert transitions[-2].action == "resubmit"
+        assert transitions[-2].target_state == "resubmitted"
+        assert transitions[-1].action == "submit_for_verification"
+        assert transitions[-1].source_state == "resubmitted"
+        assert transitions[-1].target_state == (
+            "awaiting_maintainer_verification"
+        )
+        assert transitions[-1].actor == "contributor-agent"
+        assert transitions[-1].role == "contributor_agent"
+        assert view.maintainer_stage_ready
+        assert view.current_stage == "awaiting_maintainer_verification"
         assert len(view.items) == 1
         options = {item.option_id: item for item in view.items[0].options}
-        assert options["sufficient"].authorized
-        assert not options["supplement"].authorized
-        assert not options["material-risk"].authorized
-        assert "当前案例阶段" in options["supplement"].unavailable_reason
+        assert all(option.authorized for option in options.values())
+
+
+def test_raw_resubmitted_remains_contribution_side_and_has_no_actions(
+    tmp_path,
+):
+    with demo_service(
+        tmp_path,
+        "03_scoped_repair",
+        submit_for_verification=False,
+    ) as (service, case_id):
+        before = service.storage.read_transitions(case_id)
+        case = service.storage.load_case(case_id)
+        view = action_view(service, case_id)
+
+        assert case.state == "resubmitted"
+        assert not view.maintainer_stage_ready
+        assert view.current_stage == "resubmitted"
+        assert view.items == ()
+        assert view.current_next_step["display_title"] == (
+            "当前无需你操作"
+        )
+        assert view.current_next_step["responsible_party"] == "贡献侧"
+        assert "正在重新编译要求并提交维护者检查" in (
+            view.current_next_step["plain_explanation"]
+        )
+        assert not view.can_save_draft
+        assert not view.can_preview
+
+        with pytest.raises(VNextError):
+            service.request_repair(
+                case_id,
+                actor=HUMAN.actor,
+                role=HUMAN.role,
+                message="Forged maintainer repair request.",
+                affected_obligation_ids=["O-AGENT-SCOPE"],
+            )
+        assert service.storage.load_case(case_id).state == "resubmitted"
+        assert service.storage.read_transitions(case_id) == before
 
 
 def test_draft_roundtrip_binding_and_no_governance_mutation(tmp_path):
@@ -620,6 +678,145 @@ def test_execute_sufficient_uses_existing_verification_and_is_replay_safe(
         assert "重放请求被拒绝" in rejected
 
 
+@pytest.mark.parametrize(
+    (
+        "option_id",
+        "reason",
+        "expected_operation",
+        "expected_state",
+        "preview_phrases",
+    ),
+    [
+        (
+            "sufficient",
+            "",
+            "verify_evidence",
+            "ready_for_human_decision",
+            (
+                "完成“智能体行动与委派说明”的维护者检查",
+                "将案例推进到等待最终人类决定",
+                "不会自动接受贡献",
+            ),
+        ),
+        (
+            "supplement",
+            "需要补充具体的委派边界。",
+            "request_repair",
+            "repair_requested",
+            (
+                "生成补充请求",
+                "将处理责任交回贡献侧",
+                "修复完成后仅重新检查这一项",
+                "不会拒绝整个贡献",
+            ),
+        ),
+        (
+            "material-risk",
+            "发现未受约束的委派路径，需要阻断处理。",
+            "request_repair",
+            "repair_requested",
+            (
+                "标记为阻断性风险",
+                "阻止案例进入最终决定",
+                "不会自动作出最终拒绝决定",
+            ),
+        ),
+    ],
+)
+def test_scoped_repair_three_options_preview_and_execute(
+    tmp_path,
+    option_id,
+    reason,
+    expected_operation,
+    expected_state,
+    preview_phrases,
+):
+    with demo_service(
+        tmp_path, "03_scoped_repair"
+    ) as (service, case_id):
+        view = action_view(service, case_id)
+        target = view.items[0]
+        before_case = service.storage.load_case(case_id)
+        unaffected = {
+            evidence.id
+            for evidence in before_case.evidence
+            if "O-AGENT-SCOPE" not in evidence.obligation_ids
+            and evidence.validity_state in {"valid", "verified"}
+        }
+        before_transitions = service.storage.read_transitions(case_id)
+        case_path = service.storage.case_dir(case_id) / "case.yml"
+        before_bytes = case_path.read_bytes()
+        store = ReviewDraftStore(service.storage)
+        draft = store.save(
+            action_view=view,
+            selections={
+                target.judgment_id: {
+                    "option_id": option_id,
+                    "reason": reason,
+                }
+            },
+        )
+        registry = PreviewTokenRegistry(
+            token_factory=lambda: f"scenario-3-{option_id}"
+        )
+        preview = preview_review_submission(
+            service=service,
+            actor_context=HUMAN,
+            review_draft=draft,
+            token_registry=registry,
+        )
+
+        assert case_path.read_bytes() == before_bytes
+        assert service.storage.read_transitions(case_id) == (
+            before_transitions
+        )
+        assert preview.operation_plans[0].operation == expected_operation
+        summary = " ".join(preview.summary_lines)
+        for phrase in preview_phrases:
+            assert phrase in summary
+
+        execute_review_submission(
+            service=service,
+            actor_context=HUMAN,
+            case_id=case_id,
+            preview_token=preview.preview_token,
+            token_registry=registry,
+            draft_store=store,
+        )
+        case = service.storage.load_case(case_id)
+        appended = service.storage.read_transitions(case_id)[
+            len(before_transitions):
+        ]
+        assert case.state == expected_state
+        assert case.final_decision is None
+        assert case.state not in {"accepted", "closed", "rejected"}
+        assert appended[0].action == expected_operation
+        assert {
+            evidence.id
+            for evidence in case.evidence
+            if evidence.validity_state in {"valid", "verified"}
+        } >= unaffected
+
+        if option_id == "sufficient":
+            assert [item.action for item in appended] == [
+                "verify_evidence",
+                "mark_ready",
+            ]
+        else:
+            repair = case.repair_requests[-1]
+            finding = case.findings[-1]
+            assert repair.affected_obligation_ids == ["O-AGENT-SCOPE"]
+            assert finding.affected_obligation_ids == ["O-AGENT-SCOPE"]
+            assert finding.blocking
+            assert finding.severity == "high"
+            assert reason in finding.message
+            audit = (
+                service.storage.case_dir(case_id)
+                / "review_submissions.jsonl"
+            ).read_text(encoding="utf-8")
+            assert f'"selected_option_id": "{option_id}"' in audit
+
+
 def test_supplement_routes_scoped_repair_and_preserves_other_evidence(
     tmp_path,
 ):
@@ -658,7 +855,9 @@ def test_supplement_routes_scoped_repair_and_preserves_other_evidence(
         assert [plan.operation for plan in preview.operation_plans] == [
             "request_repair"
         ]
-        assert "不伪造 verification" in " ".join(preview.summary_lines)
+        assert "本次不会完成这些检查" in " ".join(
+            preview.summary_lines
+        )
         execute_review_submission(
             service=service,
             actor_context=HUMAN,
@@ -759,7 +958,143 @@ def test_review_and_final_decision_are_separate(tmp_path):
             csrf_token="csrf",
         )
         assert "最终人类决定" in final_html
-        assert "接受贡献" in final_html
+        assert "接受本次贡献" in final_html
+
+
+def test_draft_banner_matches_real_interaction_state(tmp_path):
+    with demo_service(
+        tmp_path, "03_scoped_repair"
+    ) as (service, case_id):
+        view = action_view(service, case_id)
+        empty = render_interactive_review_html(view)
+        assert "尚未选择处理结果" in empty
+        assert "你的选择尚未提交" not in empty
+
+        store = ReviewDraftStore(service.storage)
+        draft = store.save(
+            action_view=view,
+            selections=all_sufficient(view),
+        )
+        selected = render_interactive_review_html(view, draft=draft)
+        assert "你的选择尚未提交" in selected
+
+        preview = preview_review_submission(
+            service=service,
+            actor_context=HUMAN,
+            review_draft=draft,
+            token_registry=PreviewTokenRegistry(
+                token_factory=lambda: "banner-preview"
+            ),
+        )
+        previewed = render_review_preview_html(
+            preview,
+            csrf_token="csrf",
+        )
+        assert "预览完成，尚未正式提交" in previewed
+
+        stale = render_interactive_review_html(
+            view,
+            draft=draft,
+            assessment=DraftAssessment(
+                stale=True,
+                complete=False,
+                reasons=("贡献版本已经变化。",),
+                missing_judgment_ids=(),
+                changed_judgment_ids=(),
+            ),
+        )
+        assert "贡献或规则已经变化，之前的选择已失效" in stale
+
+        submitted = render_interactive_review_html(
+            view,
+            draft=draft,
+            draft_status="submitted",
+        )
+        assert '<section class="draft-banner' not in submitted
+        participant = submitted.split("<details>", 1)[0]
+        assert "尚未选择处理结果" not in participant
+        assert "你的选择尚未提交" not in participant
+        assert "预览完成，尚未正式提交" not in participant
+
+
+def test_no_task_or_no_authority_pages_have_no_draft_banner(tmp_path):
+    for scenario in (
+        "01_multi_risk_missing",
+        "04_unauthorized_agent_verification",
+        "05_lightweight_low_risk",
+        "07_policy_migration_warning",
+        "08_human_final_decision_closure",
+    ):
+        with demo_service(tmp_path, scenario) as (service, case_id):
+            rendered = render_interactive_review_html(
+                action_view(service, case_id)
+            ).split("<details>", 1)[0]
+            assert "尚未选择处理结果" not in rendered
+            assert "你的选择尚未提交" not in rendered
+
+    with demo_service(
+        tmp_path, "03_scoped_repair"
+    ) as (service, case_id):
+        unauthorized = action_view(
+            service,
+            case_id,
+            ActorContext("reviewer-agent", "maintainer", False),
+        )
+        rendered = render_interactive_review_html(
+            unauthorized
+        ).split("<details>", 1)[0]
+        assert "尚未选择处理结果" not in rendered
+        assert "你的选择尚未提交" not in rendered
+
+
+def test_final_decision_participant_surface_uses_plain_language(tmp_path):
+    with demo_service(
+        tmp_path, "03_scoped_repair"
+    ) as (service, case_id):
+        make_ready(service, case_id)
+        case = service.storage.load_case(case_id)
+        brief = service.review_brief(
+            case_id,
+            actor=HUMAN.actor,
+            role=HUMAN.role,
+        )
+        view = compile_final_decision_view(
+            review_brief=brief,
+            governance_case=case,
+            actor_context=HUMAN,
+            policy_config=service.config,
+        )
+        rendered = render_final_decision_html(view)
+        participant = rendered.split("<details>", 1)[0]
+        required = (
+            "最终人类决定",
+            "治理材料和维护者检查已经完成",
+            "接受本次贡献",
+            "拒绝本次贡献",
+            "要求修改后重新决定",
+        )
+        for text in required:
+            assert text in participant
+        forbidden = (
+            "actor",
+            "canonical maintainer",
+            "authority-controlled",
+            "finding",
+            "verification operation",
+            "final-decision operation",
+            "closure operation",
+            "transition",
+            "obligation",
+            "compiler",
+            "CSRF",
+            "preview token",
+            "live_actions_enabled",
+        )
+        lowered = participant.lower()
+        for text in forbidden:
+            assert text.lower() not in lowered
+        assert "<details>" in rendered
+        assert "<details open" not in rendered
 
 
 def test_final_decision_has_independent_preview_and_authority(tmp_path):
@@ -982,3 +1317,54 @@ def test_server_escapes_xss_reason_and_ignores_operation_injection(
             assert service.storage.load_case(case_id).state == (
                 "repair_requested"
             )
+
+
+def test_raw_resubmitted_server_rejects_forged_maintainer_action(
+    tmp_path,
+):
+    with demo_service(
+        tmp_path,
+        "03_scoped_repair",
+        submit_for_verification=False,
+    ) as (service, case_id):
+        before = service.storage.read_transitions(case_id)
+        with live_server(service, case_id) as (port, csrf):
+            origin = f"http://127.0.0.1:{port}"
+            status, page = request(port, "GET", "/")
+            assert status == HTTPStatus.OK
+            participant = page.split("<details>", 1)[0]
+            assert "当前无需你操作" in participant
+            assert "当前责任方：</strong>贡献侧" in participant
+            assert "要求补充或修正" not in participant
+            assert "标记重大风险" not in participant
+            assert "尚未选择处理结果" not in participant
+            assert "你的选择尚未提交" not in participant
+
+            status, payload = request(
+                port,
+                "POST",
+                "/draft",
+                body=urlencode(
+                    {
+                        "csrf_token": csrf,
+                        "decision:1": "supplement",
+                        "reason:1:supplement": (
+                            "Forged maintainer repair."
+                        ),
+                        "operation": "request_repair",
+                        "transition": "repair_requested",
+                    }
+                ),
+                origin=origin,
+            )
+            assert status == HTTPStatus.BAD_REQUEST
+            assert "等待 AGM 提交维护者检查" in payload
+
+        assert service.storage.load_case(case_id).state == "resubmitted"
+        assert service.storage.read_transitions(case_id) == before
+        audit = (
+            service.storage.case_dir(case_id)
+            / "review_action_attempts.jsonl"
+        ).read_text(encoding="utf-8")
+        assert '"result": "denied"' in audit
+        assert '"state_changed": false' in audit
