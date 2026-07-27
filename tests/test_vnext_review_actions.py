@@ -1317,3 +1317,54 @@ def test_server_escapes_xss_reason_and_ignores_operation_injection(
             assert service.storage.load_case(case_id).state == (
                 "repair_requested"
             )
+
+
+def test_raw_resubmitted_server_rejects_forged_maintainer_action(
+    tmp_path,
+):
+    with demo_service(
+        tmp_path,
+        "03_scoped_repair",
+        submit_for_verification=False,
+    ) as (service, case_id):
+        before = service.storage.read_transitions(case_id)
+        with live_server(service, case_id) as (port, csrf):
+            origin = f"http://127.0.0.1:{port}"
+            status, page = request(port, "GET", "/")
+            assert status == HTTPStatus.OK
+            participant = page.split("<details>", 1)[0]
+            assert "当前无需你操作" in participant
+            assert "当前责任方：</strong>贡献侧" in participant
+            assert "要求补充或修正" not in participant
+            assert "标记重大风险" not in participant
+            assert "尚未选择处理结果" not in participant
+            assert "你的选择尚未提交" not in participant
+
+            status, payload = request(
+                port,
+                "POST",
+                "/draft",
+                body=urlencode(
+                    {
+                        "csrf_token": csrf,
+                        "decision:1": "supplement",
+                        "reason:1:supplement": (
+                            "Forged maintainer repair."
+                        ),
+                        "operation": "request_repair",
+                        "transition": "repair_requested",
+                    }
+                ),
+                origin=origin,
+            )
+            assert status == HTTPStatus.BAD_REQUEST
+            assert "等待 AGM 提交维护者检查" in payload
+
+        assert service.storage.load_case(case_id).state == "resubmitted"
+        assert service.storage.read_transitions(case_id) == before
+        audit = (
+            service.storage.case_dir(case_id)
+            / "review_action_attempts.jsonl"
+        ).read_text(encoding="utf-8")
+        assert '"result": "denied"' in audit
+        assert '"state_changed": false' in audit
