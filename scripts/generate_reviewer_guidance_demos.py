@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import argparse
 import json
-import shutil
 import sys
 import tempfile
 from contextlib import nullcontext
@@ -35,6 +34,7 @@ FIXED_TIME = "2026-07-26T00:00:00Z"
 # This key is intentionally confined to generated public research fixtures.  It
 # is never installed in the default/production execution context.
 DEMO_TOKEN_SECRET = b"agm-reviewer-guidance-public-demo-fixtures-v1"
+DEMO_TEXT_SUFFIXES = {".json", ".md", ".py", ".txt", ".yaml", ".yml"}
 
 EVIDENCE_VALUES = {
     "contribution_summary": "Implemented the scenario contribution.",
@@ -59,24 +59,72 @@ EVIDENCE_VALUES = {
 }
 
 
+def normalize_demo_text(
+    content: str,
+    *,
+    final_newline: bool = True,
+) -> bytes:
+    """Return platform-independent UTF-8 bytes for a research fixture."""
+
+    normalized = content.replace("\r\n", "\n").replace("\r", "\n")
+    normalized = normalized.rstrip("\n")
+    if final_newline:
+        normalized += "\n"
+    return normalized.encode("utf-8")
+
+
+def write_demo_text(
+    path: Path,
+    content: str,
+    *,
+    final_newline: bool = True,
+) -> None:
+    """Write a demo text fixture without operating-system newline handling."""
+
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_bytes(
+        normalize_demo_text(
+            content,
+            final_newline=final_newline,
+        )
+    )
+
+
+def copy_demo_text_tree(source: Path, destination: Path) -> None:
+    """Copy a UTF-8 fixture tree with canonical LF bytes and stable order."""
+
+    for source_path in sorted(
+        (item for item in source.rglob("*") if item.is_file()),
+        key=lambda item: item.relative_to(source).as_posix(),
+    ):
+        relative = source_path.relative_to(source)
+        target = destination / relative
+        if source_path.suffix.lower() in DEMO_TEXT_SUFFIXES:
+            write_demo_text(
+                target,
+                source_path.read_bytes().decode("utf-8"),
+            )
+        else:
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes(source_path.read_bytes())
+
+
+def demo_relative_path(path: Path, root: Path) -> str:
+    """Serialize a repository-relative demo path with POSIX separators."""
+
+    return path.relative_to(root).as_posix()
+
+
 def make_project(parent: Path, name: str) -> Path:
     root = parent / name
-    shutil.copytree(REPOSITORY_ROOT / ".agm", root / ".agm")
-    shutil.copytree(REPOSITORY_ROOT / "skills", root / "skills")
-    (root / "docs").mkdir()
-    (root / "docs" / "guide.md").write_text(
-        "reviewer guidance\n", encoding="utf-8"
-    )
-    (root / "demo_app").mkdir()
-    (root / "demo_app" / "auth.py").write_text(
-        "AUTH = True\n", encoding="utf-8"
-    )
-    (root / "demo_app" / "config.py").write_text(
-        "SECURE = True\n", encoding="utf-8"
-    )
-    (root / "src" / "agm" / "vnext").mkdir(parents=True)
-    (root / "src" / "agm" / "vnext" / "risk.py").write_text(
-        "# governance runtime\n", encoding="utf-8"
+    copy_demo_text_tree(REPOSITORY_ROOT / ".agm", root / ".agm")
+    copy_demo_text_tree(REPOSITORY_ROOT / "skills", root / "skills")
+    write_demo_text(root / "docs" / "guide.md", "reviewer guidance")
+    write_demo_text(root / "demo_app" / "auth.py", "AUTH = True")
+    write_demo_text(root / "demo_app" / "config.py", "SECURE = True")
+    write_demo_text(
+        root / "src" / "agm" / "vnext" / "risk.py",
+        "# governance runtime",
     )
     return root
 
@@ -110,7 +158,7 @@ def add_all_evidence(
 ) -> None:
     case = service.storage.load_case(case_id)
     artifact = service.root / f"{case_id}-tests.txt"
-    artifact.write_text("all tests passed\n", encoding="utf-8")
+    write_demo_text(artifact, "all tests passed")
     for obligation in case.obligations:
         if obligation.type != "evidence":
             continue
@@ -544,11 +592,18 @@ def generate(
                 results.append(
                     {
                         "scenario": slug,
-                        "json": str(json_path.relative_to(output_root)),
-                        "markdown": str(
-                            markdown_path.relative_to(output_root)
+                        "json": demo_relative_path(
+                            json_path,
+                            output_root,
                         ),
-                        "html": str(html_path.relative_to(output_root)),
+                        "markdown": demo_relative_path(
+                            markdown_path,
+                            output_root,
+                        ),
+                        "html": demo_relative_path(
+                            html_path,
+                            output_root,
+                        ),
                     }
                 )
     manifest_path = output_root / "manifest.json"

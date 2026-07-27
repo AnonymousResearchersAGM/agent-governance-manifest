@@ -4,51 +4,51 @@
   "scenarios": [
     {
       "scenario": "01_multi_risk_missing",
-      "json": "01_multi_risk_missing\\guidance.json",
-      "markdown": "01_multi_risk_missing\\report.md",
-      "html": "01_multi_risk_missing\\report.html"
+      "json": "01_multi_risk_missing/guidance.json",
+      "markdown": "01_multi_risk_missing/report.md",
+      "html": "01_multi_risk_missing/report.html"
     },
     {
       "scenario": "02_material_partial_invalidation",
-      "json": "02_material_partial_invalidation\\guidance.json",
-      "markdown": "02_material_partial_invalidation\\report.md",
-      "html": "02_material_partial_invalidation\\report.html"
+      "json": "02_material_partial_invalidation/guidance.json",
+      "markdown": "02_material_partial_invalidation/report.md",
+      "html": "02_material_partial_invalidation/report.html"
     },
     {
       "scenario": "03_scoped_repair",
-      "json": "03_scoped_repair\\guidance.json",
-      "markdown": "03_scoped_repair\\report.md",
-      "html": "03_scoped_repair\\report.html"
+      "json": "03_scoped_repair/guidance.json",
+      "markdown": "03_scoped_repair/report.md",
+      "html": "03_scoped_repair/report.html"
     },
     {
       "scenario": "04_unauthorized_agent_verification",
-      "json": "04_unauthorized_agent_verification\\guidance.json",
-      "markdown": "04_unauthorized_agent_verification\\report.md",
-      "html": "04_unauthorized_agent_verification\\report.html"
+      "json": "04_unauthorized_agent_verification/guidance.json",
+      "markdown": "04_unauthorized_agent_verification/report.md",
+      "html": "04_unauthorized_agent_verification/report.html"
     },
     {
       "scenario": "05_lightweight_low_risk",
-      "json": "05_lightweight_low_risk\\guidance.json",
-      "markdown": "05_lightweight_low_risk\\report.md",
-      "html": "05_lightweight_low_risk\\report.html"
+      "json": "05_lightweight_low_risk/guidance.json",
+      "markdown": "05_lightweight_low_risk/report.md",
+      "html": "05_lightweight_low_risk/report.html"
     },
     {
       "scenario": "06_governance_self_modification",
-      "json": "06_governance_self_modification\\guidance.json",
-      "markdown": "06_governance_self_modification\\report.md",
-      "html": "06_governance_self_modification\\report.html"
+      "json": "06_governance_self_modification/guidance.json",
+      "markdown": "06_governance_self_modification/report.md",
+      "html": "06_governance_self_modification/report.html"
     },
     {
       "scenario": "07_policy_migration_warning",
-      "json": "07_policy_migration_warning\\guidance.json",
-      "markdown": "07_policy_migration_warning\\report.md",
-      "html": "07_policy_migration_warning\\report.html"
+      "json": "07_policy_migration_warning/guidance.json",
+      "markdown": "07_policy_migration_warning/report.md",
+      "html": "07_policy_migration_warning/report.html"
     },
     {
       "scenario": "08_human_final_decision_closure",
-      "json": "08_human_final_decision_closure\\guidance.json",
-      "markdown": "08_human_final_decision_closure\\report.md",
-      "html": "08_human_final_decision_closure\\report.html"
+      "json": "08_human_final_decision_closure/guidance.json",
+      "markdown": "08_human_final_decision_closure/report.md",
+      "html": "08_human_final_decision_closure/report.html"
     }
   ]
 }

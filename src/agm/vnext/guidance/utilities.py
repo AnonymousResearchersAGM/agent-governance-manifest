@@ -11,6 +11,11 @@ from .models import (
     ResponsibilityView,
     TraceReference,
 )
+from .term_presentations import (
+    format_presented_terms,
+    present_role,
+    present_state,
+)
 
 
 def _trace_rows(
@@ -72,7 +77,7 @@ def build_guidance_utilities(
         "# 维护者审核摘要",
         "",
         f"案例：{case.id}",
-        f"当前状态：{case.state}",
+        f"当前状态：{present_state(case.state).display_plain}",
         f"风险：{case.overall_risk_level}",
         f"当前责任方：{responsibility.display_label}",
         f"责任方依据：{responsibility.reason}",
@@ -94,7 +99,10 @@ def build_guidance_utilities(
     if responsibility.next_handoff_roles:
         handoff.append(
             "完成后交给角色："
-            + "、".join(responsibility.next_handoff_roles)
+            + format_presented_terms(
+                responsibility.next_handoff_roles,
+                present_role,
+            )
             + "。"
         )
     change_scope = json.dumps(

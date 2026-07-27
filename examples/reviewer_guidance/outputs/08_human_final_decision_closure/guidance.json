@@ -4,7 +4,7 @@
   "notes": "Verification, final decision, and closure receipt remain separate records.",
   "guidance_view": {
     "schema_version": "agm.reviewer_guidance/v0.2-dev",
-    "generated_from_case_fingerprint": "91d4654f97e096f13211d6f1e50de376057d725b7eccdf4980c366131a4e54a2",
+    "generated_from_case_fingerprint": "159400577f1ab6619edb85a104337a8708142766cfebb85c92d32a26511eb524",
     "actor": {
       "actor": "human-maintainer",
       "role": "maintainer",
@@ -198,7 +198,7 @@
           "evidence-41ca16ed791f5f6e8a57ddec6ac09610"
         ],
         "binding_fingerprints": [
-          "91d4654f97e096f13211d6f1e50de376057d725b7eccdf4980c366131a4e54a2"
+          "159400577f1ab6619edb85a104337a8708142766cfebb85c92d32a26511eb524"
         ],
         "finding_ids": [],
         "reference_english": "Identify the files and scopes covered by the contribution.",
@@ -250,7 +250,7 @@
           "evidence-661f729aab135d11a9828ba5ea54ea26"
         ],
         "binding_fingerprints": [
-          "91d4654f97e096f13211d6f1e50de376057d725b7eccdf4980c366131a4e54a2"
+          "159400577f1ab6619edb85a104337a8708142766cfebb85c92d32a26511eb524"
         ],
         "finding_ids": [],
         "reference_english": "Provide a concise factual contribution summary.",
@@ -291,7 +291,7 @@
       {
         "action": "view_change_scope",
         "title": "查看变化范围",
-        "description": "查看 changed files、风险规则、影响范围和绑定 fingerprint。",
+        "description": "查看变更文件、风险规则、影响范围和绑定指纹。",
         "consequence": "只读操作，不改变案例状态。",
         "mutates_state": false,
         "actor_role": "maintainer",
@@ -313,9 +313,9 @@
     "unavailable_actions": [
       {
         "action": "verify_evidence",
-        "title": "检查待核验项",
-        "description": "记录维护者对指定义务及其绑定材料的检查结果。",
-        "reason": "操作 verify_evidence 不能从当前状态 accepted 执行。",
+        "title": "检查提交材料",
+        "description": "记录维护者对指定项目要求及其绑定材料的检查结果。",
+        "reason": "当前处于“人类维护者已接受并关闭”，还不能执行“检查提交材料”。",
         "next_actor_roles": [],
         "mutates_state": true,
         "traceability": [
@@ -325,7 +325,7 @@
             "relationship": "authority"
           }
         ],
-        "category": "stage",
+        "category": "authority",
         "required_role": [
           "maintainer",
           "maintainer_verifier",
@@ -339,9 +339,9 @@
       },
       {
         "action": "request_repair",
-        "title": "请求补充或更新材料",
+        "title": "要求补充或修改",
         "description": "指出问题和受影响义务，返回贡献侧修复。",
-        "reason": "操作 request_repair 不能从当前状态 accepted 执行。",
+        "reason": "当前处于“人类维护者已接受并关闭”，还不能执行“要求补充或修改”。",
         "next_actor_roles": [],
         "mutates_state": true,
         "traceability": [
@@ -351,7 +351,7 @@
             "relationship": "authority"
           }
         ],
-        "category": "stage",
+        "category": "authority",
         "required_role": [
           "maintainer",
           "maintainer_verifier",
@@ -366,9 +366,9 @@
       },
       {
         "action": "reject_evidence",
-        "title": "拒绝无效材料",
+        "title": "拒绝当前材料",
         "description": "拒绝一条不能支持当前修改的具体材料。",
-        "reason": "操作 reject_evidence 不能从当前状态 accepted 执行。",
+        "reason": "当前处于“人类维护者已接受并关闭”，还不能执行“拒绝当前材料”。",
         "next_actor_roles": [],
         "mutates_state": true,
         "traceability": [
@@ -378,7 +378,7 @@
             "relationship": "authority"
           }
         ],
-        "category": "stage",
+        "category": "authority",
         "required_role": [
           "maintainer",
           "maintainer_verifier"
@@ -391,9 +391,9 @@
       },
       {
         "action": "ask_clarification",
-        "title": "请求说明",
+        "title": "请求补充说明",
         "description": "针对指定要求提出可审计的澄清问题。",
-        "reason": "操作 ask_clarification 不能从当前状态 accepted 执行。",
+        "reason": "当前处于“人类维护者已接受并关闭”，还不能执行“请求补充说明”。",
         "next_actor_roles": [],
         "mutates_state": true,
         "traceability": [
@@ -403,7 +403,7 @@
             "relationship": "authority"
           }
         ],
-        "category": "stage",
+        "category": "authority",
         "required_role": [
           "maintainer",
           "maintainer_verifier"
@@ -417,9 +417,9 @@
       },
       {
         "action": "invalidate_attestation",
-        "title": "要求负责人重新确认",
+        "title": "将旧负责人确认标记为失效",
         "description": "使一条过时或不正确的负责人确认失效。",
-        "reason": "操作 invalidate_attestation 不能从当前状态 accepted 执行。",
+        "reason": "当前处于“人类维护者已接受并关闭”，还不能执行“将旧负责人确认标记为失效”。",
         "next_actor_roles": [],
         "mutates_state": true,
         "traceability": [
@@ -429,7 +429,7 @@
             "relationship": "authority"
           }
         ],
-        "category": "stage",
+        "category": "authority",
         "required_role": [
           "maintainer",
           "maintainer_verifier"
@@ -445,7 +445,7 @@
         "action": "record_policy_conflict",
         "title": "记录项目规则冲突",
         "description": "记录无法由普通材料修复的策略冲突。",
-        "reason": "操作 record_policy_conflict 不能从当前状态 accepted 执行。",
+        "reason": "当前处于“人类维护者已接受并关闭”，还不能执行“记录项目规则冲突”。",
         "next_actor_roles": [],
         "mutates_state": true,
         "traceability": [
@@ -455,7 +455,7 @@
             "relationship": "authority"
           }
         ],
-        "category": "stage",
+        "category": "scope",
         "required_role": [
           "maintainer",
           "maintainer_verifier",
@@ -472,9 +472,9 @@
       },
       {
         "action": "resolve_policy_conflict",
-        "title": "解决项目规则冲突",
+        "title": "处理项目规则冲突",
         "description": "由有权限的角色记录策略冲突的解决依据。",
-        "reason": "操作 resolve_policy_conflict 不能从当前状态 accepted 执行。",
+        "reason": "当前处于“人类维护者已接受并关闭”，还不能执行“处理项目规则冲突”。",
         "next_actor_roles": [],
         "mutates_state": true,
         "traceability": [
@@ -484,7 +484,7 @@
             "relationship": "authority"
           }
         ],
-        "category": "stage",
+        "category": "scope",
         "required_role": [
           "maintainer",
           "policy_steward"
@@ -496,9 +496,9 @@
       },
       {
         "action": "resubmit",
-        "title": "补交指定范围",
-        "description": "贡献侧提交 repair 影响范围和新增材料。",
-        "reason": "当前角色没有 resubmit 权限。 可执行角色：contributor, contributor_agent。",
+        "title": "重新提交修改后的材料",
+        "description": "贡献侧提交补充或修改影响范围和新增材料。",
+        "reason": "当前角色没有“重新提交修改后的材料”的权限。可以执行这一步的角色：人类贡献者或贡献侧智能体。",
         "next_actor_roles": [
           "contributor",
           "contributor_agent"
@@ -523,9 +523,9 @@
       },
       {
         "action": "confirm_attestation",
-        "title": "负责人确认当前范围",
-        "description": "由 accountable human 对明确范围作出事实确认。",
-        "reason": "当前角色没有 confirm_attestation 权限。 可执行角色：accountable_human。",
+        "title": "确认负责人声明",
+        "description": "由负责人对明确范围作出事实确认。",
+        "reason": "当前角色没有“确认负责人声明”的权限。可以执行这一步的角色：负责人。",
         "next_actor_roles": [
           "accountable_human"
         ],
@@ -549,9 +549,9 @@
       },
       {
         "action": "authorized_override",
-        "title": "执行有权覆盖",
-        "description": "记录具备权限的维护者对明确义务或 finding 的例外处理。",
-        "reason": "操作 authorized_override 不能从当前状态 accepted 执行。",
+        "title": "由有权维护者执行覆盖处理",
+        "description": "记录具备权限的维护者对明确项目要求或问题的例外处理。",
+        "reason": "当前处于“人类维护者已接受并关闭”，还不能执行“由有权维护者执行覆盖处理”。",
         "next_actor_roles": [],
         "mutates_state": true,
         "traceability": [
@@ -561,7 +561,7 @@
             "relationship": "authority"
           }
         ],
-        "category": "stage",
+        "category": "authority",
         "required_role": [
           "maintainer"
         ],
@@ -574,9 +574,9 @@
       },
       {
         "action": "decide_accept",
-        "title": "提交人类最终接受决定",
+        "title": "最终接受",
         "description": "由人类维护者记录接受决定。",
-        "reason": "操作 decide_accept 不能从当前状态 accepted 执行。",
+        "reason": "当前处于“人类维护者已接受并关闭”，还不能执行“最终接受”。",
         "next_actor_roles": [],
         "mutates_state": true,
         "traceability": [
@@ -586,7 +586,7 @@
             "relationship": "authority"
           }
         ],
-        "category": "stage",
+        "category": "authority",
         "required_role": [
           "maintainer"
         ],
@@ -598,9 +598,9 @@
       },
       {
         "action": "decide_reject",
-        "title": "提交人类最终拒绝决定",
+        "title": "最终拒绝",
         "description": "由人类维护者记录拒绝决定。",
-        "reason": "操作 decide_reject 不能从当前状态 accepted 执行。",
+        "reason": "当前处于“人类维护者已接受并关闭”，还不能执行“最终拒绝”。",
         "next_actor_roles": [],
         "mutates_state": true,
         "traceability": [
@@ -610,7 +610,7 @@
             "relationship": "authority"
           }
         ],
-        "category": "stage",
+        "category": "authority",
         "required_role": [
           "maintainer"
         ],
@@ -623,9 +623,9 @@
       },
       {
         "action": "decide_request_changes",
-        "title": "提交人类修改决定",
+        "title": "要求继续修改",
         "description": "由人类维护者要求贡献侧继续修改。",
-        "reason": "操作 decide_request_changes 不能从当前状态 accepted 执行。",
+        "reason": "当前处于“人类维护者已接受并关闭”，还不能执行“要求继续修改”。",
         "next_actor_roles": [],
         "mutates_state": true,
         "traceability": [
@@ -635,7 +635,7 @@
             "relationship": "authority"
           }
         ],
-        "category": "stage",
+        "category": "authority",
         "required_role": [
           "maintainer"
         ],
@@ -647,9 +647,9 @@
       },
       {
         "action": "decide_close",
-        "title": "关闭案例",
+        "title": "关闭本次审核记录",
         "description": "由人类维护者关闭案例而不表示接受或合并。",
-        "reason": "操作 decide_close 不能从当前状态 accepted 执行。",
+        "reason": "当前处于“人类维护者已接受并关闭”，还不能执行“关闭本次审核记录”。",
         "next_actor_roles": [],
         "mutates_state": true,
         "traceability": [
@@ -659,7 +659,7 @@
             "relationship": "authority"
           }
         ],
-        "category": "stage",
+        "category": "authority",
         "required_role": [
           "maintainer"
         ],
@@ -811,7 +811,7 @@
           "affected_scope": [
             "docs/guide.md"
           ],
-          "contribution_fingerprint": "91d4654f97e096f13211d6f1e50de376057d725b7eccdf4980c366131a4e54a2",
+          "contribution_fingerprint": "159400577f1ab6619edb85a104337a8708142766cfebb85c92d32a26511eb524",
           "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
           "evidence_type": "changed_files",
           "value": [
@@ -841,7 +841,7 @@
           "affected_scope": [
             "docs/guide.md"
           ],
-          "contribution_fingerprint": "91d4654f97e096f13211d6f1e50de376057d725b7eccdf4980c366131a4e54a2",
+          "contribution_fingerprint": "159400577f1ab6619edb85a104337a8708142766cfebb85c92d32a26511eb524",
           "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
           "evidence_type": "contribution_summary",
           "value": "Implemented the scenario contribution.",
@@ -880,13 +880,13 @@
           "outcome": "verified",
           "reason": "Evidence independently checked.",
           "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
-          "contribution_fingerprint": "91d4654f97e096f13211d6f1e50de376057d725b7eccdf4980c366131a4e54a2"
+          "contribution_fingerprint": "159400577f1ab6619edb85a104337a8708142766cfebb85c92d32a26511eb524"
         }
       ],
       "findings": [],
       "repair_requests": [],
       "attempted_operations": [],
-      "contribution_fingerprint": "91d4654f97e096f13211d6f1e50de376057d725b7eccdf4980c366131a4e54a2",
+      "contribution_fingerprint": "159400577f1ab6619edb85a104337a8708142766cfebb85c92d32a26511eb524",
       "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
       "policy_snapshot": {
         "id": "policy-cab5ec65413651bfa0c4ef4b4abdf3b2",
@@ -1030,7 +1030,7 @@
         "case_id": "human-final-closure",
         "created_at": "2026-07-26T00:00:00Z",
         "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
-        "contribution_fingerprint": "91d4654f97e096f13211d6f1e50de376057d725b7eccdf4980c366131a4e54a2",
+        "contribution_fingerprint": "159400577f1ab6619edb85a104337a8708142766cfebb85c92d32a26511eb524",
         "final_state": "accepted",
         "final_decision_id": "decision-46db7a481b1c5e92818b386121fc0b71",
         "matched_rule_ids": [
@@ -1097,7 +1097,7 @@
       {
         "action": "view_change_scope",
         "title": "查看变化范围",
-        "description": "查看 changed files、风险规则、影响范围和绑定 fingerprint。",
+        "description": "查看变更文件、风险规则、影响范围和绑定指纹。",
         "consequence": "只读操作，不改变案例状态。",
         "mutates_state": false,
         "actor_role": "maintainer",
@@ -1141,7 +1141,7 @@
         "label": "下载维护者摘要",
         "description": "导出当前风险、责任方和阻断项摘要，不作接受判断。",
         "output_type": "text/markdown",
-        "output": "# 维护者审核摘要\n\n案例：human-final-closure\n当前状态：accepted\n风险：low\n当前责任方：流程已结束\n责任方依据：人类最终决定和关闭记录已经生成，当前没有待交接操作。\n\n## 阻断或待检查项\n\n- 当前没有阻断项。\n\n本摘要是治理状态说明，不是接受决定。",
+        "output": "# 维护者审核摘要\n\n案例：human-final-closure\n当前状态：人类维护者已接受并关闭\n风险：low\n当前责任方：流程已结束\n责任方依据：人类最终决定和关闭记录已经生成，当前没有待交接操作。\n\n## 阻断或待检查项\n\n- 当前没有阻断项。\n\n本摘要是治理状态说明，不是接受决定。",
         "trace_refs": [
           {
             "kind": "compiled_obligation",
@@ -1270,7 +1270,7 @@
         "evidence-41ca16ed791f5f6e8a57ddec6ac09610"
       ],
       "binding_fingerprints": [
-        "91d4654f97e096f13211d6f1e50de376057d725b7eccdf4980c366131a4e54a2"
+        "159400577f1ab6619edb85a104337a8708142766cfebb85c92d32a26511eb524"
       ],
       "finding_ids": [],
       "reference_english": "Identify the files and scopes covered by the contribution.",
@@ -1322,7 +1322,7 @@
         "evidence-661f729aab135d11a9828ba5ea54ea26"
       ],
       "binding_fingerprints": [
-        "91d4654f97e096f13211d6f1e50de376057d725b7eccdf4980c366131a4e54a2"
+        "159400577f1ab6619edb85a104337a8708142766cfebb85c92d32a26511eb524"
       ],
       "finding_ids": [],
       "reference_english": "Provide a concise factual contribution summary.",
@@ -1458,7 +1458,7 @@
     {
       "action": "view_change_scope",
       "title": "查看变化范围",
-      "description": "查看 changed files、风险规则、影响范围和绑定 fingerprint。",
+      "description": "查看变更文件、风险规则、影响范围和绑定指纹。",
       "consequence": "只读操作，不改变案例状态。",
       "mutates_state": false,
       "actor_role": "maintainer",
@@ -1480,9 +1480,9 @@
   "unavailable_actions": [
     {
       "action": "verify_evidence",
-      "title": "检查待核验项",
-      "description": "记录维护者对指定义务及其绑定材料的检查结果。",
-      "reason": "操作 verify_evidence 不能从当前状态 accepted 执行。",
+      "title": "检查提交材料",
+      "description": "记录维护者对指定项目要求及其绑定材料的检查结果。",
+      "reason": "当前处于“人类维护者已接受并关闭”，还不能执行“检查提交材料”。",
       "next_actor_roles": [],
       "mutates_state": true,
       "traceability": [
@@ -1492,7 +1492,7 @@
           "relationship": "authority"
         }
       ],
-      "category": "stage",
+      "category": "authority",
       "required_role": [
         "maintainer",
         "maintainer_verifier",
@@ -1506,9 +1506,9 @@
     },
     {
       "action": "request_repair",
-      "title": "请求补充或更新材料",
+      "title": "要求补充或修改",
       "description": "指出问题和受影响义务，返回贡献侧修复。",
-      "reason": "操作 request_repair 不能从当前状态 accepted 执行。",
+      "reason": "当前处于“人类维护者已接受并关闭”，还不能执行“要求补充或修改”。",
       "next_actor_roles": [],
       "mutates_state": true,
       "traceability": [
@@ -1518,7 +1518,7 @@
           "relationship": "authority"
         }
       ],
-      "category": "stage",
+      "category": "authority",
       "required_role": [
         "maintainer",
         "maintainer_verifier",
@@ -1533,9 +1533,9 @@
     },
     {
       "action": "reject_evidence",
-      "title": "拒绝无效材料",
+      "title": "拒绝当前材料",
       "description": "拒绝一条不能支持当前修改的具体材料。",
-      "reason": "操作 reject_evidence 不能从当前状态 accepted 执行。",
+      "reason": "当前处于“人类维护者已接受并关闭”，还不能执行“拒绝当前材料”。",
       "next_actor_roles": [],
       "mutates_state": true,
       "traceability": [
@@ -1545,7 +1545,7 @@
           "relationship": "authority"
         }
       ],
-      "category": "stage",
+      "category": "authority",
       "required_role": [
         "maintainer",
         "maintainer_verifier"
@@ -1558,9 +1558,9 @@
     },
     {
       "action": "ask_clarification",
-      "title": "请求说明",
+      "title": "请求补充说明",
       "description": "针对指定要求提出可审计的澄清问题。",
-      "reason": "操作 ask_clarification 不能从当前状态 accepted 执行。",
+      "reason": "当前处于“人类维护者已接受并关闭”，还不能执行“请求补充说明”。",
       "next_actor_roles": [],
       "mutates_state": true,
       "traceability": [
@@ -1570,7 +1570,7 @@
           "relationship": "authority"
         }
       ],
-      "category": "stage",
+      "category": "authority",
       "required_role": [
         "maintainer",
         "maintainer_verifier"
@@ -1584,9 +1584,9 @@
     },
     {
       "action": "invalidate_attestation",
-      "title": "要求负责人重新确认",
+      "title": "将旧负责人确认标记为失效",
       "description": "使一条过时或不正确的负责人确认失效。",
-      "reason": "操作 invalidate_attestation 不能从当前状态 accepted 执行。",
+      "reason": "当前处于“人类维护者已接受并关闭”，还不能执行“将旧负责人确认标记为失效”。",
       "next_actor_roles": [],
       "mutates_state": true,
       "traceability": [
@@ -1596,7 +1596,7 @@
           "relationship": "authority"
         }
       ],
-      "category": "stage",
+      "category": "authority",
       "required_role": [
         "maintainer",
         "maintainer_verifier"
@@ -1612,7 +1612,7 @@
       "action": "record_policy_conflict",
       "title": "记录项目规则冲突",
       "description": "记录无法由普通材料修复的策略冲突。",
-      "reason": "操作 record_policy_conflict 不能从当前状态 accepted 执行。",
+      "reason": "当前处于“人类维护者已接受并关闭”，还不能执行“记录项目规则冲突”。",
       "next_actor_roles": [],
       "mutates_state": true,
       "traceability": [
@@ -1622,7 +1622,7 @@
           "relationship": "authority"
         }
       ],
-      "category": "stage",
+      "category": "scope",
       "required_role": [
         "maintainer",
         "maintainer_verifier",
@@ -1639,9 +1639,9 @@
     },
     {
       "action": "resolve_policy_conflict",
-      "title": "解决项目规则冲突",
+      "title": "处理项目规则冲突",
       "description": "由有权限的角色记录策略冲突的解决依据。",
-      "reason": "操作 resolve_policy_conflict 不能从当前状态 accepted 执行。",
+      "reason": "当前处于“人类维护者已接受并关闭”，还不能执行“处理项目规则冲突”。",
       "next_actor_roles": [],
       "mutates_state": true,
       "traceability": [
@@ -1651,7 +1651,7 @@
           "relationship": "authority"
         }
       ],
-      "category": "stage",
+      "category": "scope",
       "required_role": [
         "maintainer",
         "policy_steward"
@@ -1663,9 +1663,9 @@
     },
     {
       "action": "resubmit",
-      "title": "补交指定范围",
-      "description": "贡献侧提交 repair 影响范围和新增材料。",
-      "reason": "当前角色没有 resubmit 权限。 可执行角色：contributor, contributor_agent。",
+      "title": "重新提交修改后的材料",
+      "description": "贡献侧提交补充或修改影响范围和新增材料。",
+      "reason": "当前角色没有“重新提交修改后的材料”的权限。可以执行这一步的角色：人类贡献者或贡献侧智能体。",
       "next_actor_roles": [
         "contributor",
         "contributor_agent"
@@ -1690,9 +1690,9 @@
     },
     {
       "action": "confirm_attestation",
-      "title": "负责人确认当前范围",
-      "description": "由 accountable human 对明确范围作出事实确认。",
-      "reason": "当前角色没有 confirm_attestation 权限。 可执行角色：accountable_human。",
+      "title": "确认负责人声明",
+      "description": "由负责人对明确范围作出事实确认。",
+      "reason": "当前角色没有“确认负责人声明”的权限。可以执行这一步的角色：负责人。",
       "next_actor_roles": [
         "accountable_human"
       ],
@@ -1716,9 +1716,9 @@
     },
     {
       "action": "authorized_override",
-      "title": "执行有权覆盖",
-      "description": "记录具备权限的维护者对明确义务或 finding 的例外处理。",
-      "reason": "操作 authorized_override 不能从当前状态 accepted 执行。",
+      "title": "由有权维护者执行覆盖处理",
+      "description": "记录具备权限的维护者对明确项目要求或问题的例外处理。",
+      "reason": "当前处于“人类维护者已接受并关闭”，还不能执行“由有权维护者执行覆盖处理”。",
       "next_actor_roles": [],
       "mutates_state": true,
       "traceability": [
@@ -1728,7 +1728,7 @@
           "relationship": "authority"
         }
       ],
-      "category": "stage",
+      "category": "authority",
       "required_role": [
         "maintainer"
       ],
@@ -1741,9 +1741,9 @@
     },
     {
       "action": "decide_accept",
-      "title": "提交人类最终接受决定",
+      "title": "最终接受",
       "description": "由人类维护者记录接受决定。",
-      "reason": "操作 decide_accept 不能从当前状态 accepted 执行。",
+      "reason": "当前处于“人类维护者已接受并关闭”，还不能执行“最终接受”。",
       "next_actor_roles": [],
       "mutates_state": true,
       "traceability": [
@@ -1753,7 +1753,7 @@
           "relationship": "authority"
         }
       ],
-      "category": "stage",
+      "category": "authority",
       "required_role": [
         "maintainer"
       ],
@@ -1765,9 +1765,9 @@
     },
     {
       "action": "decide_reject",
-      "title": "提交人类最终拒绝决定",
+      "title": "最终拒绝",
       "description": "由人类维护者记录拒绝决定。",
-      "reason": "操作 decide_reject 不能从当前状态 accepted 执行。",
+      "reason": "当前处于“人类维护者已接受并关闭”，还不能执行“最终拒绝”。",
       "next_actor_roles": [],
       "mutates_state": true,
       "traceability": [
@@ -1777,7 +1777,7 @@
           "relationship": "authority"
         }
       ],
-      "category": "stage",
+      "category": "authority",
       "required_role": [
         "maintainer"
       ],
@@ -1790,9 +1790,9 @@
     },
     {
       "action": "decide_request_changes",
-      "title": "提交人类修改决定",
+      "title": "要求继续修改",
       "description": "由人类维护者要求贡献侧继续修改。",
-      "reason": "操作 decide_request_changes 不能从当前状态 accepted 执行。",
+      "reason": "当前处于“人类维护者已接受并关闭”，还不能执行“要求继续修改”。",
       "next_actor_roles": [],
       "mutates_state": true,
       "traceability": [
@@ -1802,7 +1802,7 @@
           "relationship": "authority"
         }
       ],
-      "category": "stage",
+      "category": "authority",
       "required_role": [
         "maintainer"
       ],
@@ -1814,9 +1814,9 @@
     },
     {
       "action": "decide_close",
-      "title": "关闭案例",
+      "title": "关闭本次审核记录",
       "description": "由人类维护者关闭案例而不表示接受或合并。",
-      "reason": "操作 decide_close 不能从当前状态 accepted 执行。",
+      "reason": "当前处于“人类维护者已接受并关闭”，还不能执行“关闭本次审核记录”。",
       "next_actor_roles": [],
       "mutates_state": true,
       "traceability": [
@@ -1826,7 +1826,7 @@
           "relationship": "authority"
         }
       ],
-      "category": "stage",
+      "category": "authority",
       "required_role": [
         "maintainer"
       ],
@@ -1839,7 +1839,7 @@
     }
   ],
   "action_preview": {
-    "title": "提交人类最终接受决定",
+    "title": "最终接受",
     "actor": {
       "actor": "human-maintainer",
       "role": "maintainer",
@@ -1852,7 +1852,7 @@
         "display_label": "案例流程",
         "before_label": "等待人类维护者最终决定",
         "after_label": "人类维护者已接受并关闭",
-        "display_description": "案例 accepted 并生成 closure receipt；该动作不是自动合并。"
+        "display_description": "案例记录接受状态并生成审核关闭记录；该动作不是自动合并。"
       }
     ],
     "affected_items": [],
@@ -1866,6 +1866,10 @@
     "mutates_case": false,
     "technical_details": {
       "operation": "decide_accept",
+      "current_role": "maintainer",
+      "required_roles": [
+        "maintainer"
+      ],
       "source_state": "ready_for_human_decision",
       "target_state": "accepted",
       "effects": [
@@ -1873,13 +1877,14 @@
           "target": "案例状态",
           "before": "ready_for_human_decision",
           "after": "accepted",
-          "explanation": "案例 accepted 并生成 closure receipt；该动作不是自动合并。",
+          "explanation": "案例记录接受状态并生成审核关闭记录；该动作不是自动合并。",
           "source_object_ids": [
             "transition-ba3e2834196459f189cf12bd8df834dd"
           ]
         }
       ],
       "affected_obligation_ids": [],
+      "requested_obligation_ids": [],
       "retained_evidence_ids": [
         "evidence-41ca16ed791f5f6e8a57ddec6ac09610",
         "evidence-661f729aab135d11a9828ba5ea54ea26"
@@ -1894,7 +1899,7 @@
         "final_decision",
         "closure_receipt"
       ],
-      "preview_fingerprint": "2a014cb9eef33a65ece8483c33ba0139875ec110f763de906f27c3f589f5d5c9",
+      "preview_fingerprint": "4a3272d79f46ceded8478f41f2eafef8a35677d3d3170e3d4cf0d8c4db9e5664",
       "traceability": [
         {
           "kind": "permission_rule",
@@ -1956,6 +1961,6 @@
     "outcome": "verified",
     "reason": "Evidence independently checked.",
     "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
-    "contribution_fingerprint": "91d4654f97e096f13211d6f1e50de376057d725b7eccdf4980c366131a4e54a2"
+    "contribution_fingerprint": "159400577f1ab6619edb85a104337a8708142766cfebb85c92d32a26511eb524"
   }
 }

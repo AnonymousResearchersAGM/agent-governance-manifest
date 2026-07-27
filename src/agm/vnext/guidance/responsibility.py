@@ -13,21 +13,13 @@ from .models import (
     RequirementComparison,
     ResponsibilityView,
 )
-
-
-ROLE_LABELS = {
-    "system": "AGM 系统",
-    "contributor_agent": "贡献侧智能体",
-    "contributor": "贡献者",
-    "accountable_human": "负责人",
-    "maintainer_verifier": "维护者核验人",
-    "policy_steward": "项目规则负责人",
-    "maintainer": "人类维护者",
-}
+from .term_presentations import present_role
 
 
 def _label(roles: list[str]) -> str:
-    return "、".join(ROLE_LABELS.get(item, item) for item in roles)
+    return "、".join(
+        present_role(item).display_plain for item in roles
+    )
 
 
 def _view(

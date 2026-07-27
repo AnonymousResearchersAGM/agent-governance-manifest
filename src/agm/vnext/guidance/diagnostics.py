@@ -17,6 +17,10 @@ from .models import (
     TraceReference,
 )
 from .reason_presentations import present_reason
+from .term_presentations import (
+    CURRENT_STATE_LABELS,
+    OBLIGATION_PRESENTATIONS,
+)
 
 
 RESULT_LABELS = {
@@ -68,75 +72,32 @@ CHECK_ITEM_LABELS = {
     "independent_review": "独立维护者检查",
 }
 
-# This dictionary is presentation metadata only. Canonical English remains in
-# CompiledObligation.description and the .agm policy is never rewritten.
-OBLIGATION_PRESENTATION = {
-    "O-SUMMARY": (
-        "修改说明",
-        "简要说明这次修改做了什么。",
-    ),
-    "O-CHANGED-FILES": (
-        "变更文件清单",
-        "列出这次修改涉及的文件和范围。",
-    ),
-    "O-RATIONALE": (
-        "修改理由",
-        "说明为什么需要这次修改。",
-    ),
-    "O-TEST-EXPLANATION": (
-        "测试覆盖说明",
-        "说明测试覆盖了什么，以及它如何支持本次修改。",
-    ),
-    "O-TEST-COMMAND": (
-        "测试命令与结果",
-        "提供测试命令、运行环境和实际结果。",
-    ),
-    "O-ARTIFACT": (
-        "可核验测试制品",
-        "提供可以实际检查的测试输出或文件。",
-    ),
-    "O-LIMITATIONS": (
-        "已知限制",
-        "说明已知限制；没有已知限制也要明确说明。",
-    ),
-    "O-AUTH-IMPACT": (
-        "登录、认证与权限影响",
-        "说明本次修改是否改变登录、认证或权限行为。",
-    ),
-    "O-POLICY-IMPACT": (
-        "项目规则与治理影响",
-        "说明本次修改是否影响项目规则或治理流程。",
-    ),
+# Canonical English remains in CompiledObligation.description. These
+# presentation descriptions never rewrite the .agm policy.
+OBLIGATION_DESCRIPTIONS = {
+    "O-SUMMARY": "简要说明这次修改做了什么。",
+    "O-CHANGED-FILES": "列出这次修改涉及的文件和范围。",
+    "O-RATIONALE": "说明为什么需要这次修改。",
+    "O-TEST-EXPLANATION": "说明测试覆盖了什么，以及它如何支持本次修改。",
+    "O-TEST-COMMAND": "提供测试命令、运行环境和实际结果。",
+    "O-ARTIFACT": "提供可以实际检查的测试输出或文件。",
+    "O-LIMITATIONS": "说明已知限制；没有已知限制也要明确说明。",
+    "O-AUTH-IMPACT": "说明本次修改是否改变登录、认证或权限行为。",
+    "O-POLICY-IMPACT": "说明本次修改是否影响项目规则或治理流程。",
     "O-AGENT-SCOPE": (
-        "智能体行动与委派说明",
-        "说明智能体做了什么、用了哪些权限、是否有人监督，以及是否把具有独立行动能力的工作继续交给了另一个智能体。",
+        "说明智能体做了什么、用了哪些权限、是否有人监督，以及是否把具有"
+        "独立行动能力的工作继续交给了另一个智能体。"
     ),
-    "O-HUMAN-ATTEST": (
-        "负责人确认",
-        "由负责人确认自己审阅了当前代码版本、材料和明确范围。",
-    ),
-    "O-INDEPENDENT-REVIEW": (
-        "独立维护者检查",
-        "由另一名具备权限且与贡献侧分离的维护者独立检查。",
-    ),
+    "O-HUMAN-ATTEST": "由负责人确认自己审阅了当前代码版本、材料和明确范围。",
+    "O-INDEPENDENT-REVIEW": "由另一名具备权限且与贡献侧分离的维护者独立检查。",
 }
 
-CURRENT_STATE_LABELS = {
-    "case_opened": "系统正在识别项目要求",
-    "policy_resolved": "系统已识别适用规则",
-    "obligations_compiled": "系统已整理本次要求",
-    "evidence_incomplete": "等待贡献者补齐材料",
-    "awaiting_human_attestation": "等待负责人确认",
-    "awaiting_maintainer_verification": "等待维护者检查",
-    "repair_requested": "发现问题，等待指定范围修改",
-    "resubmitted": "已补交，等待确认材料是否齐备",
-    "verification_complete": "维护者检查完成，正在确认可决策状态",
-    "ready_for_human_decision": "等待人类维护者最终决定",
-    "overridden": "有权覆盖已记录，等待人类维护者最终决定",
-    "accepted": "人类维护者已接受并关闭",
-    "rejected": "人类维护者已拒绝并关闭",
-    "closed": "案例已关闭",
-    "ordinary_unmanaged": "按普通项目流程处理",
+OBLIGATION_PRESENTATION = {
+    canonical: (
+        term.display_plain,
+        OBLIGATION_DESCRIPTIONS[canonical],
+    )
+    for canonical, term in OBLIGATION_PRESENTATIONS.items()
 }
 
 
@@ -176,7 +137,7 @@ def obligation_presentation(
         return configured
     name = CHECK_ITEM_LABELS.get(
         obligation.evidence_type,
-        f"项目要求（{obligation.obligation_id or '未命名'}）",
+        "某项项目要求",
     )
     plain = (
         f"请按照项目记录完成“{name}”，英文原文和完整依据见技术详情。"

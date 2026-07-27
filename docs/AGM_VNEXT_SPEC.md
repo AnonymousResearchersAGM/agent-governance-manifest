@@ -562,3 +562,43 @@ selector tokens, scenario isolation, unchanged semantics versus runtime-random
 mode, and a clean Git worktree after the second generation. These outputs
 remain development research artifacts pending human review, not a formal
 participant experiment package.
+
+### 21.14 Cross-platform canonical research bytes
+
+Research-demo text fixtures shall be UTF-8 with LF line endings and an explicit
+final-newline policy before contribution fingerprinting. CRLF and CR input
+shall normalize to the same bytes. Temporary textual policy/skill fixtures may
+be normalized, but the canonical tracked `.agm` policy shall not be rewritten.
+Binary fixtures shall bypass text normalization.
+
+Serialized repository-relative paths shall use POSIX `/` separators. Absolute
+temporary roots, local timezone/locale, platform permission modes, and
+implicit filesystem enumeration order shall not enter research output or its
+fingerprints. JSON, Markdown, and HTML outputs shall use stable ordering and LF
+output bytes.
+
+One frozen manifest,
+`examples/reviewer_guidance/expected_sha256.json`, shall contain the canonical
+SHA-256 values for exactly 25 generated files. Normal validation shall fail on
+a missing, extra, or mismatched file and shall not update the freeze.
+`scripts/check_reviewer_guidance_demo_hashes.py --update` is reserved for an
+explicit researcher-reviewed change. Windows and Linux CI jobs shall both
+generate and compare against this same manifest before running the complete
+tests and a clean-diff check.
+
+### 21.15 Participant-facing canonical term presentation
+
+Reviewer-facing actions, roles, obligations, workflow nodes, record types, and
+states shall use a backend `PresentedTerm(display_plain, canonical)` registry.
+Known values shall have stable Chinese labels. Unknown values shall use a
+neutral participant-facing fallback while retaining the unchanged canonical
+value in technical details.
+
+The Action Preview and rejected-operation main layers shall not lead with raw
+values such as `verify_evidence`, `contributor_agent`, `O-SUMMARY`,
+`maintainer_check`, or `maintainer_verification`. They shall show the
+participant label and affected/retained consequence. Folded technical details
+shall preserve the raw action, current and required roles, obligation IDs,
+workflow nodes, record types, state, and trace references. This presentation
+split shall not alter authority enforcement, state transitions, scoped repair,
+responsibility derivation, selector validation, or preview purity.

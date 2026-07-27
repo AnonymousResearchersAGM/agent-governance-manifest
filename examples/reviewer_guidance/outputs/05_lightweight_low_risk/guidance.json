@@ -4,7 +4,7 @@
   "notes": "No attestation or independent-review obligation; final decision remains human.",
   "guidance_view": {
     "schema_version": "agm.reviewer_guidance/v0.2-dev",
-    "generated_from_case_fingerprint": "73fd2b8969b9783204be0cdaf8c41541ce85a134187c87443f7872143ab64d9b",
+    "generated_from_case_fingerprint": "264f34d2908db2beb33bc8f88a5cec47c671e67e48de687a2a1ebce1d9871041",
     "actor": {
       "actor": "verifier-1",
       "role": "maintainer_verifier",
@@ -26,7 +26,7 @@
       "blocking_issue_count": 0,
       "warning_count": 0,
       "current_responsible_parties": [
-        "维护者核验人",
+        "维护者侧检查人员",
         "项目规则负责人",
         "人类维护者"
       ],
@@ -175,7 +175,7 @@
           "evidence-25ba94a5df425a8785f9aae745aaade8"
         ],
         "binding_fingerprints": [
-          "73fd2b8969b9783204be0cdaf8c41541ce85a134187c87443f7872143ab64d9b"
+          "264f34d2908db2beb33bc8f88a5cec47c671e67e48de687a2a1ebce1d9871041"
         ],
         "finding_ids": [],
         "reference_english": "Identify the files and scopes covered by the contribution.",
@@ -227,7 +227,7 @@
           "evidence-1c539cd83057591199b1b750d7e93f70"
         ],
         "binding_fingerprints": [
-          "73fd2b8969b9783204be0cdaf8c41541ce85a134187c87443f7872143ab64d9b"
+          "264f34d2908db2beb33bc8f88a5cec47c671e67e48de687a2a1ebce1d9871041"
         ],
         "finding_ids": [],
         "reference_english": "Provide a concise factual contribution summary.",
@@ -268,7 +268,7 @@
       {
         "action": "view_change_scope",
         "title": "查看变化范围",
-        "description": "查看 changed files、风险规则、影响范围和绑定 fingerprint。",
+        "description": "查看变更文件、风险规则、影响范围和绑定指纹。",
         "consequence": "只读操作，不改变案例状态。",
         "mutates_state": false,
         "actor_role": "maintainer_verifier",
@@ -288,8 +288,8 @@
       },
       {
         "action": "verify_evidence",
-        "title": "检查待核验项",
-        "description": "记录维护者对指定义务及其绑定材料的检查结果。",
+        "title": "检查提交材料",
+        "description": "记录维护者对指定项目要求及其绑定材料的检查结果。",
         "consequence": "受影响项会记录维护者检查；全部阻断项完成后进入人类最终决定。",
         "mutates_state": true,
         "actor_role": "maintainer_verifier",
@@ -317,7 +317,7 @@
         "primary_reason": "该操作直接对应当前流程阶段或开放问题。",
         "selector_options": [
           {
-            "selector_token": "sel-479cf473272084cb84cc78a1d1de4dfc00bd525c8e9e984da029be73fc5f8507",
+            "selector_token": "sel-04a1f62acbaca88473631fa4881e29f77747d125b119c590c5b64c632753bbb3",
             "action": "verify_evidence",
             "label": "变更文件清单",
             "status_label": "已提供；已完成",
@@ -360,7 +360,7 @@
             ]
           },
           {
-            "selector_token": "sel-2e294175907424a77ca974d26b67a1b33bb9e2d17965b4f12ec3bb1ac8709815",
+            "selector_token": "sel-dcb262c685f913d5bf16b0dd70e97c6b528b967c35a847179841ace143bff0cc",
             "action": "verify_evidence",
             "label": "修改说明",
             "status_label": "已提供；已完成",
@@ -406,7 +406,7 @@
       },
       {
         "action": "request_repair",
-        "title": "请求补充或更新材料",
+        "title": "要求补充或修改",
         "description": "指出问题和受影响义务，返回贡献侧修复。",
         "consequence": "仅指定范围需要修复和重新检查，未受影响材料保留。",
         "mutates_state": true,
@@ -433,7 +433,7 @@
         "primary_reason": "该操作直接对应当前流程阶段或开放问题。",
         "selector_options": [
           {
-            "selector_token": "sel-6b75342b6bb7f7347ceb44b203e055a736c374e6b4f669042b861c3303379e3d",
+            "selector_token": "sel-fb0cb5650253e37f9010c686b539982dc6384a37eb790e1a0b49fc98028e5a10",
             "action": "request_repair",
             "label": "变更文件清单",
             "status_label": "已提供；已完成",
@@ -476,7 +476,7 @@
             ]
           },
           {
-            "selector_token": "sel-a37be9876944c38bd109f3a2b178b6eceddd2bab75e07b10cc2a6a347a1fc4cf",
+            "selector_token": "sel-f06fc0d52c1627e9039b9fd38ee8466116cf2d275fea2fd9d10bd4e93a820e7e",
             "action": "request_repair",
             "label": "修改说明",
             "status_label": "已提供；已完成",
@@ -522,9 +522,9 @@
       },
       {
         "action": "reject_evidence",
-        "title": "拒绝无效材料",
+        "title": "拒绝当前材料",
         "description": "拒绝一条不能支持当前修改的具体材料。",
-        "consequence": "该材料标记为 rejected，并建立 scoped repair。",
+        "consequence": "该材料将标记为已拒绝，并建立指定范围的补充或修改请求。",
         "mutates_state": true,
         "actor_role": "maintainer_verifier",
         "default_obligation_ids": [],
@@ -549,7 +549,7 @@
         "primary_reason": "该操作直接对应当前流程阶段或开放问题。",
         "selector_options": [
           {
-            "selector_token": "sel-7f837845a75380fc81de5ec100d50b81f6cd4c211947a33b5cb04dc6febc19ac",
+            "selector_token": "sel-2b6676baf482a36d60d3ddf9329f3a2fdfeb822416462e6c3bdd31336c0ed30a",
             "action": "reject_evidence",
             "label": "变更文件清单",
             "status_label": "当前材料有效，可记录拒绝依据",
@@ -579,7 +579,7 @@
             ]
           },
           {
-            "selector_token": "sel-0b5f19275bcd970c5abcde87dd43112054f3a5890b70aee98db5e330bbc92bf4",
+            "selector_token": "sel-0fcb9ab441f968ba03e3e790edccd1ced05a9bf2cbc21d1a3850935377f19c53",
             "action": "reject_evidence",
             "label": "修改说明",
             "status_label": "当前材料有效，可记录拒绝依据",
@@ -612,7 +612,7 @@
       },
       {
         "action": "ask_clarification",
-        "title": "请求说明",
+        "title": "请求补充说明",
         "description": "针对指定要求提出可审计的澄清问题。",
         "consequence": "案例返回贡献侧回答，所选范围需要重新检查。",
         "mutates_state": true,
@@ -639,7 +639,7 @@
         "primary_reason": "该操作直接对应当前流程阶段或开放问题。",
         "selector_options": [
           {
-            "selector_token": "sel-5feaa82bb3561f775ce5b943199787408874ad227fb0ad7afe94b09cadea43e6",
+            "selector_token": "sel-850f591c92e41f79c14432c7544654af5f73a56ee457c32733f66fd1b88523a2",
             "action": "ask_clarification",
             "label": "变更文件清单",
             "status_label": "已提供；已完成",
@@ -682,7 +682,7 @@
             ]
           },
           {
-            "selector_token": "sel-d5e4e752c9f1ba644f38e688e93249b40ed288623b59b44cfda2839788b9535a",
+            "selector_token": "sel-65a554a2e9c0c1cc43255b18387431fa90419e09e9d9b90a013af5410747ab97",
             "action": "ask_clarification",
             "label": "修改说明",
             "status_label": "已提供；已完成",
@@ -730,7 +730,7 @@
         "action": "record_policy_conflict",
         "title": "记录项目规则冲突",
         "description": "记录无法由普通材料修复的策略冲突。",
-        "consequence": "案例转入 repair，由 policy steward 或维护者处理。",
+        "consequence": "案例转入补充处理，由项目规则负责人或维护者处理。",
         "mutates_state": true,
         "actor_role": "maintainer_verifier",
         "default_obligation_ids": [],
@@ -755,7 +755,7 @@
         "primary_reason": "后端允许此操作，但它不直接处理当前主要阻断项。",
         "selector_options": [
           {
-            "selector_token": "sel-39f2c832f4c7f9e77cbb71470198a1e3ccdf533f68c0053e0d0fc998cf8f2280",
+            "selector_token": "sel-004f54ea8912f32720afce36b6e097f9a0b95bcd59898d1777c81c006f152675",
             "action": "record_policy_conflict",
             "label": "变更文件清单",
             "status_label": "已提供；已完成",
@@ -798,7 +798,7 @@
             ]
           },
           {
-            "selector_token": "sel-c8441a7d8ede909229ca6c57f3151b2bc272f97067c98d487b8e15a3feacff44",
+            "selector_token": "sel-8d6d126e0792351e2f3003b1deb7abaa13dee0be9d612aeaae895f2115c532c4",
             "action": "record_policy_conflict",
             "label": "修改说明",
             "status_label": "已提供；已完成",
@@ -846,7 +846,7 @@
     "unavailable_actions": [
       {
         "action": "invalidate_attestation",
-        "title": "要求负责人重新确认",
+        "title": "将旧负责人确认标记为失效",
         "description": "使一条过时或不正确的负责人确认失效。",
         "reason": "当前没有仍然有效的负责人确认可供失效处理。",
         "next_actor_roles": [
@@ -880,9 +880,9 @@
       },
       {
         "action": "resolve_policy_conflict",
-        "title": "解决项目规则冲突",
+        "title": "处理项目规则冲突",
         "description": "由有权限的角色记录策略冲突的解决依据。",
-        "reason": "当前角色没有 resolve_policy_conflict 权限。 可执行角色：maintainer, policy_steward。",
+        "reason": "当前角色没有“处理项目规则冲突”的权限。可以执行这一步的角色：人类维护者或项目规则负责人。",
         "next_actor_roles": [
           "maintainer",
           "policy_steward"
@@ -907,9 +907,9 @@
       },
       {
         "action": "resubmit",
-        "title": "补交指定范围",
-        "description": "贡献侧提交 repair 影响范围和新增材料。",
-        "reason": "当前角色没有 resubmit 权限。 可执行角色：contributor, contributor_agent。",
+        "title": "重新提交修改后的材料",
+        "description": "贡献侧提交补充或修改影响范围和新增材料。",
+        "reason": "当前角色没有“重新提交修改后的材料”的权限。可以执行这一步的角色：人类贡献者或贡献侧智能体。",
         "next_actor_roles": [
           "contributor",
           "contributor_agent"
@@ -934,9 +934,9 @@
       },
       {
         "action": "confirm_attestation",
-        "title": "负责人确认当前范围",
-        "description": "由 accountable human 对明确范围作出事实确认。",
-        "reason": "当前角色没有 confirm_attestation 权限。 可执行角色：accountable_human。",
+        "title": "确认负责人声明",
+        "description": "由负责人对明确范围作出事实确认。",
+        "reason": "当前角色没有“确认负责人声明”的权限。可以执行这一步的角色：负责人。",
         "next_actor_roles": [
           "accountable_human"
         ],
@@ -960,9 +960,9 @@
       },
       {
         "action": "authorized_override",
-        "title": "执行有权覆盖",
-        "description": "记录具备权限的维护者对明确义务或 finding 的例外处理。",
-        "reason": "当前角色没有 authorized_override 权限。 可执行角色：maintainer。",
+        "title": "由有权维护者执行覆盖处理",
+        "description": "记录具备权限的维护者对明确项目要求或问题的例外处理。",
+        "reason": "当前角色没有“由有权维护者执行覆盖处理”的权限。可以执行这一步的角色：人类维护者。",
         "next_actor_roles": [
           "maintainer"
         ],
@@ -987,9 +987,9 @@
       },
       {
         "action": "decide_accept",
-        "title": "提交人类最终接受决定",
+        "title": "最终接受",
         "description": "由人类维护者记录接受决定。",
-        "reason": "当前角色没有 decide_accept 权限。 可执行角色：maintainer。",
+        "reason": "当前角色没有“最终接受”的权限。可以执行这一步的角色：人类维护者。",
         "next_actor_roles": [
           "maintainer"
         ],
@@ -1013,9 +1013,9 @@
       },
       {
         "action": "decide_reject",
-        "title": "提交人类最终拒绝决定",
+        "title": "最终拒绝",
         "description": "由人类维护者记录拒绝决定。",
-        "reason": "当前角色没有 decide_reject 权限。 可执行角色：maintainer。",
+        "reason": "当前角色没有“最终拒绝”的权限。可以执行这一步的角色：人类维护者。",
         "next_actor_roles": [
           "maintainer"
         ],
@@ -1040,9 +1040,9 @@
       },
       {
         "action": "decide_request_changes",
-        "title": "提交人类修改决定",
+        "title": "要求继续修改",
         "description": "由人类维护者要求贡献侧继续修改。",
-        "reason": "当前角色没有 decide_request_changes 权限。 可执行角色：maintainer。",
+        "reason": "当前角色没有“要求继续修改”的权限。可以执行这一步的角色：人类维护者。",
         "next_actor_roles": [
           "maintainer"
         ],
@@ -1066,9 +1066,9 @@
       },
       {
         "action": "decide_close",
-        "title": "关闭案例",
+        "title": "关闭本次审核记录",
         "description": "由人类维护者关闭案例而不表示接受或合并。",
-        "reason": "当前角色没有 decide_close 权限。 可执行角色：maintainer。",
+        "reason": "当前角色没有“关闭本次审核记录”的权限。可以执行这一步的角色：人类维护者。",
         "next_actor_roles": [
           "maintainer"
         ],
@@ -1232,7 +1232,7 @@
           "affected_scope": [
             "docs/guide.md"
           ],
-          "contribution_fingerprint": "73fd2b8969b9783204be0cdaf8c41541ce85a134187c87443f7872143ab64d9b",
+          "contribution_fingerprint": "264f34d2908db2beb33bc8f88a5cec47c671e67e48de687a2a1ebce1d9871041",
           "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
           "evidence_type": "changed_files",
           "value": [
@@ -1262,7 +1262,7 @@
           "affected_scope": [
             "docs/guide.md"
           ],
-          "contribution_fingerprint": "73fd2b8969b9783204be0cdaf8c41541ce85a134187c87443f7872143ab64d9b",
+          "contribution_fingerprint": "264f34d2908db2beb33bc8f88a5cec47c671e67e48de687a2a1ebce1d9871041",
           "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
           "evidence_type": "contribution_summary",
           "value": "Implemented the scenario contribution.",
@@ -1288,7 +1288,7 @@
       "findings": [],
       "repair_requests": [],
       "attempted_operations": [],
-      "contribution_fingerprint": "73fd2b8969b9783204be0cdaf8c41541ce85a134187c87443f7872143ab64d9b",
+      "contribution_fingerprint": "264f34d2908db2beb33bc8f88a5cec47c671e67e48de687a2a1ebce1d9871041",
       "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
       "policy_snapshot": {
         "id": "policy-96a6f90aa6bf538a87bef886cd0b04e6",
@@ -1416,7 +1416,7 @@
         "policy_steward",
         "maintainer"
       ],
-      "display_label": "维护者核验人、项目规则负责人、人类维护者",
+      "display_label": "维护者侧检查人员、项目规则负责人、人类维护者",
       "reason": "贡献侧要求已经满足，当前轮到有权限的维护者检查；检查完成仍不等于接受。",
       "blocking_items": [],
       "next_handoff_roles": [
@@ -1426,8 +1426,8 @@
     "current_relevant_actions": [
       {
         "action": "verify_evidence",
-        "title": "检查待核验项",
-        "description": "记录维护者对指定义务及其绑定材料的检查结果。",
+        "title": "检查提交材料",
+        "description": "记录维护者对指定项目要求及其绑定材料的检查结果。",
         "consequence": "受影响项会记录维护者检查；全部阻断项完成后进入人类最终决定。",
         "mutates_state": true,
         "actor_role": "maintainer_verifier",
@@ -1455,7 +1455,7 @@
         "primary_reason": "该操作直接对应当前流程阶段或开放问题。",
         "selector_options": [
           {
-            "selector_token": "sel-479cf473272084cb84cc78a1d1de4dfc00bd525c8e9e984da029be73fc5f8507",
+            "selector_token": "sel-04a1f62acbaca88473631fa4881e29f77747d125b119c590c5b64c632753bbb3",
             "action": "verify_evidence",
             "label": "变更文件清单",
             "status_label": "已提供；已完成",
@@ -1498,7 +1498,7 @@
             ]
           },
           {
-            "selector_token": "sel-2e294175907424a77ca974d26b67a1b33bb9e2d17965b4f12ec3bb1ac8709815",
+            "selector_token": "sel-dcb262c685f913d5bf16b0dd70e97c6b528b967c35a847179841ace143bff0cc",
             "action": "verify_evidence",
             "label": "修改说明",
             "status_label": "已提供；已完成",
@@ -1544,7 +1544,7 @@
       },
       {
         "action": "request_repair",
-        "title": "请求补充或更新材料",
+        "title": "要求补充或修改",
         "description": "指出问题和受影响义务，返回贡献侧修复。",
         "consequence": "仅指定范围需要修复和重新检查，未受影响材料保留。",
         "mutates_state": true,
@@ -1571,7 +1571,7 @@
         "primary_reason": "该操作直接对应当前流程阶段或开放问题。",
         "selector_options": [
           {
-            "selector_token": "sel-6b75342b6bb7f7347ceb44b203e055a736c374e6b4f669042b861c3303379e3d",
+            "selector_token": "sel-fb0cb5650253e37f9010c686b539982dc6384a37eb790e1a0b49fc98028e5a10",
             "action": "request_repair",
             "label": "变更文件清单",
             "status_label": "已提供；已完成",
@@ -1614,7 +1614,7 @@
             ]
           },
           {
-            "selector_token": "sel-a37be9876944c38bd109f3a2b178b6eceddd2bab75e07b10cc2a6a347a1fc4cf",
+            "selector_token": "sel-f06fc0d52c1627e9039b9fd38ee8466116cf2d275fea2fd9d10bd4e93a820e7e",
             "action": "request_repair",
             "label": "修改说明",
             "status_label": "已提供；已完成",
@@ -1660,9 +1660,9 @@
       },
       {
         "action": "reject_evidence",
-        "title": "拒绝无效材料",
+        "title": "拒绝当前材料",
         "description": "拒绝一条不能支持当前修改的具体材料。",
-        "consequence": "该材料标记为 rejected，并建立 scoped repair。",
+        "consequence": "该材料将标记为已拒绝，并建立指定范围的补充或修改请求。",
         "mutates_state": true,
         "actor_role": "maintainer_verifier",
         "default_obligation_ids": [],
@@ -1687,7 +1687,7 @@
         "primary_reason": "该操作直接对应当前流程阶段或开放问题。",
         "selector_options": [
           {
-            "selector_token": "sel-7f837845a75380fc81de5ec100d50b81f6cd4c211947a33b5cb04dc6febc19ac",
+            "selector_token": "sel-2b6676baf482a36d60d3ddf9329f3a2fdfeb822416462e6c3bdd31336c0ed30a",
             "action": "reject_evidence",
             "label": "变更文件清单",
             "status_label": "当前材料有效，可记录拒绝依据",
@@ -1717,7 +1717,7 @@
             ]
           },
           {
-            "selector_token": "sel-0b5f19275bcd970c5abcde87dd43112054f3a5890b70aee98db5e330bbc92bf4",
+            "selector_token": "sel-0fcb9ab441f968ba03e3e790edccd1ced05a9bf2cbc21d1a3850935377f19c53",
             "action": "reject_evidence",
             "label": "修改说明",
             "status_label": "当前材料有效，可记录拒绝依据",
@@ -1750,7 +1750,7 @@
       },
       {
         "action": "ask_clarification",
-        "title": "请求说明",
+        "title": "请求补充说明",
         "description": "针对指定要求提出可审计的澄清问题。",
         "consequence": "案例返回贡献侧回答，所选范围需要重新检查。",
         "mutates_state": true,
@@ -1777,7 +1777,7 @@
         "primary_reason": "该操作直接对应当前流程阶段或开放问题。",
         "selector_options": [
           {
-            "selector_token": "sel-5feaa82bb3561f775ce5b943199787408874ad227fb0ad7afe94b09cadea43e6",
+            "selector_token": "sel-850f591c92e41f79c14432c7544654af5f73a56ee457c32733f66fd1b88523a2",
             "action": "ask_clarification",
             "label": "变更文件清单",
             "status_label": "已提供；已完成",
@@ -1820,7 +1820,7 @@
             ]
           },
           {
-            "selector_token": "sel-d5e4e752c9f1ba644f38e688e93249b40ed288623b59b44cfda2839788b9535a",
+            "selector_token": "sel-65a554a2e9c0c1cc43255b18387431fa90419e09e9d9b90a013af5410747ab97",
             "action": "ask_clarification",
             "label": "修改说明",
             "status_label": "已提供；已完成",
@@ -1869,7 +1869,7 @@
       {
         "action": "view_change_scope",
         "title": "查看变化范围",
-        "description": "查看 changed files、风险规则、影响范围和绑定 fingerprint。",
+        "description": "查看变更文件、风险规则、影响范围和绑定指纹。",
         "consequence": "只读操作，不改变案例状态。",
         "mutates_state": false,
         "actor_role": "maintainer_verifier",
@@ -1891,7 +1891,7 @@
         "action": "record_policy_conflict",
         "title": "记录项目规则冲突",
         "description": "记录无法由普通材料修复的策略冲突。",
-        "consequence": "案例转入 repair，由 policy steward 或维护者处理。",
+        "consequence": "案例转入补充处理，由项目规则负责人或维护者处理。",
         "mutates_state": true,
         "actor_role": "maintainer_verifier",
         "default_obligation_ids": [],
@@ -1916,7 +1916,7 @@
         "primary_reason": "后端允许此操作，但它不直接处理当前主要阻断项。",
         "selector_options": [
           {
-            "selector_token": "sel-39f2c832f4c7f9e77cbb71470198a1e3ccdf533f68c0053e0d0fc998cf8f2280",
+            "selector_token": "sel-004f54ea8912f32720afce36b6e097f9a0b95bcd59898d1777c81c006f152675",
             "action": "record_policy_conflict",
             "label": "变更文件清单",
             "status_label": "已提供；已完成",
@@ -1959,7 +1959,7 @@
             ]
           },
           {
-            "selector_token": "sel-c8441a7d8ede909229ca6c57f3151b2bc272f97067c98d487b8e15a3feacff44",
+            "selector_token": "sel-8d6d126e0792351e2f3003b1deb7abaa13dee0be9d612aeaae895f2115c532c4",
             "action": "record_policy_conflict",
             "label": "修改说明",
             "status_label": "已提供；已完成",
@@ -2020,7 +2020,7 @@
         "label": "导出贡献者待办清单",
         "description": "导出包含责任方、待处理项和范围的 Markdown 清单。",
         "output_type": "text/markdown",
-        "output": "# 贡献者待办清单\n\n案例：lightweight-low\n当前责任方：维护者核验人、项目规则负责人、人类维护者\n原因：贡献侧要求已经满足，当前轮到有权限的维护者检查；检查完成仍不等于接受。\n\n## 待处理项\n\n当前没有需要贡献侧补充或更新的材料。\n\n完成后请按当前 repair/提交范围交回；最终决定仍由人类维护者作出。",
+        "output": "# 贡献者待办清单\n\n案例：lightweight-low\n当前责任方：维护者侧检查人员、项目规则负责人、人类维护者\n原因：贡献侧要求已经满足，当前轮到有权限的维护者检查；检查完成仍不等于接受。\n\n## 待处理项\n\n当前没有需要贡献侧补充或更新的材料。\n\n完成后请按当前 repair/提交范围交回；最终决定仍由人类维护者作出。",
         "trace_refs": [],
         "state_changing": false
       },
@@ -2029,7 +2029,7 @@
         "label": "下载维护者摘要",
         "description": "导出当前风险、责任方和阻断项摘要，不作接受判断。",
         "output_type": "text/markdown",
-        "output": "# 维护者审核摘要\n\n案例：lightweight-low\n当前状态：awaiting_maintainer_verification\n风险：low\n当前责任方：维护者核验人、项目规则负责人、人类维护者\n责任方依据：贡献侧要求已经满足，当前轮到有权限的维护者检查；检查完成仍不等于接受。\n\n## 阻断或待检查项\n\n- 当前没有阻断项。\n\n本摘要是治理状态说明，不是接受决定。",
+        "output": "# 维护者审核摘要\n\n案例：lightweight-low\n当前状态：等待维护者检查\n风险：low\n当前责任方：维护者侧检查人员、项目规则负责人、人类维护者\n责任方依据：贡献侧要求已经满足，当前轮到有权限的维护者检查；检查完成仍不等于接受。\n\n## 阻断或待检查项\n\n- 当前没有阻断项。\n\n本摘要是治理状态说明，不是接受决定。",
         "trace_refs": [
           {
             "kind": "compiled_obligation",
@@ -2079,7 +2079,7 @@
         "label": "复制当前责任方说明",
         "description": "生成不改变案例状态的 handoff note。",
         "output_type": "text/plain",
-        "output": "案例 lightweight-low 当前交给：维护者核验人、项目规则负责人、人类维护者。\n贡献侧要求已经满足，当前轮到有权限的维护者检查；检查完成仍不等于接受。\n完成后交给角色：maintainer。",
+        "output": "案例 lightweight-low 当前交给：维护者侧检查人员、项目规则负责人、人类维护者。\n贡献侧要求已经满足，当前轮到有权限的维护者检查；检查完成仍不等于接受。\n完成后交给角色：人类维护者。",
         "trace_refs": [
           {
             "kind": "compiled_obligation",
@@ -2158,7 +2158,7 @@
         "evidence-25ba94a5df425a8785f9aae745aaade8"
       ],
       "binding_fingerprints": [
-        "73fd2b8969b9783204be0cdaf8c41541ce85a134187c87443f7872143ab64d9b"
+        "264f34d2908db2beb33bc8f88a5cec47c671e67e48de687a2a1ebce1d9871041"
       ],
       "finding_ids": [],
       "reference_english": "Identify the files and scopes covered by the contribution.",
@@ -2210,7 +2210,7 @@
         "evidence-1c539cd83057591199b1b750d7e93f70"
       ],
       "binding_fingerprints": [
-        "73fd2b8969b9783204be0cdaf8c41541ce85a134187c87443f7872143ab64d9b"
+        "264f34d2908db2beb33bc8f88a5cec47c671e67e48de687a2a1ebce1d9871041"
       ],
       "finding_ids": [],
       "reference_english": "Provide a concise factual contribution summary.",
@@ -2252,7 +2252,7 @@
       "policy_steward",
       "maintainer"
     ],
-    "display_label": "维护者核验人、项目规则负责人、人类维护者",
+    "display_label": "维护者侧检查人员、项目规则负责人、人类维护者",
     "reason": "贡献侧要求已经满足，当前轮到有权限的维护者检查；检查完成仍不等于接受。",
     "blocking_items": [],
     "next_handoff_roles": [
@@ -2262,8 +2262,8 @@
   "current_relevant_actions": [
     {
       "action": "verify_evidence",
-      "title": "检查待核验项",
-      "description": "记录维护者对指定义务及其绑定材料的检查结果。",
+      "title": "检查提交材料",
+      "description": "记录维护者对指定项目要求及其绑定材料的检查结果。",
       "consequence": "受影响项会记录维护者检查；全部阻断项完成后进入人类最终决定。",
       "mutates_state": true,
       "actor_role": "maintainer_verifier",
@@ -2291,7 +2291,7 @@
       "primary_reason": "该操作直接对应当前流程阶段或开放问题。",
       "selector_options": [
         {
-          "selector_token": "sel-479cf473272084cb84cc78a1d1de4dfc00bd525c8e9e984da029be73fc5f8507",
+          "selector_token": "sel-04a1f62acbaca88473631fa4881e29f77747d125b119c590c5b64c632753bbb3",
           "action": "verify_evidence",
           "label": "变更文件清单",
           "status_label": "已提供；已完成",
@@ -2334,7 +2334,7 @@
           ]
         },
         {
-          "selector_token": "sel-2e294175907424a77ca974d26b67a1b33bb9e2d17965b4f12ec3bb1ac8709815",
+          "selector_token": "sel-dcb262c685f913d5bf16b0dd70e97c6b528b967c35a847179841ace143bff0cc",
           "action": "verify_evidence",
           "label": "修改说明",
           "status_label": "已提供；已完成",
@@ -2380,7 +2380,7 @@
     },
     {
       "action": "request_repair",
-      "title": "请求补充或更新材料",
+      "title": "要求补充或修改",
       "description": "指出问题和受影响义务，返回贡献侧修复。",
       "consequence": "仅指定范围需要修复和重新检查，未受影响材料保留。",
       "mutates_state": true,
@@ -2407,7 +2407,7 @@
       "primary_reason": "该操作直接对应当前流程阶段或开放问题。",
       "selector_options": [
         {
-          "selector_token": "sel-6b75342b6bb7f7347ceb44b203e055a736c374e6b4f669042b861c3303379e3d",
+          "selector_token": "sel-fb0cb5650253e37f9010c686b539982dc6384a37eb790e1a0b49fc98028e5a10",
           "action": "request_repair",
           "label": "变更文件清单",
           "status_label": "已提供；已完成",
@@ -2450,7 +2450,7 @@
           ]
         },
         {
-          "selector_token": "sel-a37be9876944c38bd109f3a2b178b6eceddd2bab75e07b10cc2a6a347a1fc4cf",
+          "selector_token": "sel-f06fc0d52c1627e9039b9fd38ee8466116cf2d275fea2fd9d10bd4e93a820e7e",
           "action": "request_repair",
           "label": "修改说明",
           "status_label": "已提供；已完成",
@@ -2496,9 +2496,9 @@
     },
     {
       "action": "reject_evidence",
-      "title": "拒绝无效材料",
+      "title": "拒绝当前材料",
       "description": "拒绝一条不能支持当前修改的具体材料。",
-      "consequence": "该材料标记为 rejected，并建立 scoped repair。",
+      "consequence": "该材料将标记为已拒绝，并建立指定范围的补充或修改请求。",
       "mutates_state": true,
       "actor_role": "maintainer_verifier",
       "default_obligation_ids": [],
@@ -2523,7 +2523,7 @@
       "primary_reason": "该操作直接对应当前流程阶段或开放问题。",
       "selector_options": [
         {
-          "selector_token": "sel-7f837845a75380fc81de5ec100d50b81f6cd4c211947a33b5cb04dc6febc19ac",
+          "selector_token": "sel-2b6676baf482a36d60d3ddf9329f3a2fdfeb822416462e6c3bdd31336c0ed30a",
           "action": "reject_evidence",
           "label": "变更文件清单",
           "status_label": "当前材料有效，可记录拒绝依据",
@@ -2553,7 +2553,7 @@
           ]
         },
         {
-          "selector_token": "sel-0b5f19275bcd970c5abcde87dd43112054f3a5890b70aee98db5e330bbc92bf4",
+          "selector_token": "sel-0fcb9ab441f968ba03e3e790edccd1ced05a9bf2cbc21d1a3850935377f19c53",
           "action": "reject_evidence",
           "label": "修改说明",
           "status_label": "当前材料有效，可记录拒绝依据",
@@ -2586,7 +2586,7 @@
     },
     {
       "action": "ask_clarification",
-      "title": "请求说明",
+      "title": "请求补充说明",
       "description": "针对指定要求提出可审计的澄清问题。",
       "consequence": "案例返回贡献侧回答，所选范围需要重新检查。",
       "mutates_state": true,
@@ -2613,7 +2613,7 @@
       "primary_reason": "该操作直接对应当前流程阶段或开放问题。",
       "selector_options": [
         {
-          "selector_token": "sel-5feaa82bb3561f775ce5b943199787408874ad227fb0ad7afe94b09cadea43e6",
+          "selector_token": "sel-850f591c92e41f79c14432c7544654af5f73a56ee457c32733f66fd1b88523a2",
           "action": "ask_clarification",
           "label": "变更文件清单",
           "status_label": "已提供；已完成",
@@ -2656,7 +2656,7 @@
           ]
         },
         {
-          "selector_token": "sel-d5e4e752c9f1ba644f38e688e93249b40ed288623b59b44cfda2839788b9535a",
+          "selector_token": "sel-65a554a2e9c0c1cc43255b18387431fa90419e09e9d9b90a013af5410747ab97",
           "action": "ask_clarification",
           "label": "修改说明",
           "status_label": "已提供；已完成",
@@ -2705,7 +2705,7 @@
   "context_selector_data": {
     "verify_evidence": [
       {
-        "selector_token": "sel-479cf473272084cb84cc78a1d1de4dfc00bd525c8e9e984da029be73fc5f8507",
+        "selector_token": "sel-04a1f62acbaca88473631fa4881e29f77747d125b119c590c5b64c632753bbb3",
         "action": "verify_evidence",
         "label": "变更文件清单",
         "status_label": "已提供；已完成",
@@ -2748,7 +2748,7 @@
         ]
       },
       {
-        "selector_token": "sel-2e294175907424a77ca974d26b67a1b33bb9e2d17965b4f12ec3bb1ac8709815",
+        "selector_token": "sel-dcb262c685f913d5bf16b0dd70e97c6b528b967c35a847179841ace143bff0cc",
         "action": "verify_evidence",
         "label": "修改说明",
         "status_label": "已提供；已完成",
@@ -2793,7 +2793,7 @@
     ],
     "request_repair": [
       {
-        "selector_token": "sel-6b75342b6bb7f7347ceb44b203e055a736c374e6b4f669042b861c3303379e3d",
+        "selector_token": "sel-fb0cb5650253e37f9010c686b539982dc6384a37eb790e1a0b49fc98028e5a10",
         "action": "request_repair",
         "label": "变更文件清单",
         "status_label": "已提供；已完成",
@@ -2836,7 +2836,7 @@
         ]
       },
       {
-        "selector_token": "sel-a37be9876944c38bd109f3a2b178b6eceddd2bab75e07b10cc2a6a347a1fc4cf",
+        "selector_token": "sel-f06fc0d52c1627e9039b9fd38ee8466116cf2d275fea2fd9d10bd4e93a820e7e",
         "action": "request_repair",
         "label": "修改说明",
         "status_label": "已提供；已完成",
@@ -2881,7 +2881,7 @@
     ],
     "reject_evidence": [
       {
-        "selector_token": "sel-7f837845a75380fc81de5ec100d50b81f6cd4c211947a33b5cb04dc6febc19ac",
+        "selector_token": "sel-2b6676baf482a36d60d3ddf9329f3a2fdfeb822416462e6c3bdd31336c0ed30a",
         "action": "reject_evidence",
         "label": "变更文件清单",
         "status_label": "当前材料有效，可记录拒绝依据",
@@ -2911,7 +2911,7 @@
         ]
       },
       {
-        "selector_token": "sel-0b5f19275bcd970c5abcde87dd43112054f3a5890b70aee98db5e330bbc92bf4",
+        "selector_token": "sel-0fcb9ab441f968ba03e3e790edccd1ced05a9bf2cbc21d1a3850935377f19c53",
         "action": "reject_evidence",
         "label": "修改说明",
         "status_label": "当前材料有效，可记录拒绝依据",
@@ -2943,7 +2943,7 @@
     ],
     "ask_clarification": [
       {
-        "selector_token": "sel-5feaa82bb3561f775ce5b943199787408874ad227fb0ad7afe94b09cadea43e6",
+        "selector_token": "sel-850f591c92e41f79c14432c7544654af5f73a56ee457c32733f66fd1b88523a2",
         "action": "ask_clarification",
         "label": "变更文件清单",
         "status_label": "已提供；已完成",
@@ -2986,7 +2986,7 @@
         ]
       },
       {
-        "selector_token": "sel-d5e4e752c9f1ba644f38e688e93249b40ed288623b59b44cfda2839788b9535a",
+        "selector_token": "sel-65a554a2e9c0c1cc43255b18387431fa90419e09e9d9b90a013af5410747ab97",
         "action": "ask_clarification",
         "label": "修改说明",
         "status_label": "已提供；已完成",
@@ -3031,7 +3031,7 @@
     ],
     "record_policy_conflict": [
       {
-        "selector_token": "sel-39f2c832f4c7f9e77cbb71470198a1e3ccdf533f68c0053e0d0fc998cf8f2280",
+        "selector_token": "sel-004f54ea8912f32720afce36b6e097f9a0b95bcd59898d1777c81c006f152675",
         "action": "record_policy_conflict",
         "label": "变更文件清单",
         "status_label": "已提供；已完成",
@@ -3074,7 +3074,7 @@
         ]
       },
       {
-        "selector_token": "sel-c8441a7d8ede909229ca6c57f3151b2bc272f97067c98d487b8e15a3feacff44",
+        "selector_token": "sel-8d6d126e0792351e2f3003b1deb7abaa13dee0be9d612aeaae895f2115c532c4",
         "action": "record_policy_conflict",
         "label": "修改说明",
         "status_label": "已提供；已完成",
@@ -3177,7 +3177,7 @@
     {
       "action": "view_change_scope",
       "title": "查看变化范围",
-      "description": "查看 changed files、风险规则、影响范围和绑定 fingerprint。",
+      "description": "查看变更文件、风险规则、影响范围和绑定指纹。",
       "consequence": "只读操作，不改变案例状态。",
       "mutates_state": false,
       "actor_role": "maintainer_verifier",
@@ -3197,8 +3197,8 @@
     },
     {
       "action": "verify_evidence",
-      "title": "检查待核验项",
-      "description": "记录维护者对指定义务及其绑定材料的检查结果。",
+      "title": "检查提交材料",
+      "description": "记录维护者对指定项目要求及其绑定材料的检查结果。",
       "consequence": "受影响项会记录维护者检查；全部阻断项完成后进入人类最终决定。",
       "mutates_state": true,
       "actor_role": "maintainer_verifier",
@@ -3226,7 +3226,7 @@
       "primary_reason": "该操作直接对应当前流程阶段或开放问题。",
       "selector_options": [
         {
-          "selector_token": "sel-479cf473272084cb84cc78a1d1de4dfc00bd525c8e9e984da029be73fc5f8507",
+          "selector_token": "sel-04a1f62acbaca88473631fa4881e29f77747d125b119c590c5b64c632753bbb3",
           "action": "verify_evidence",
           "label": "变更文件清单",
           "status_label": "已提供；已完成",
@@ -3269,7 +3269,7 @@
           ]
         },
         {
-          "selector_token": "sel-2e294175907424a77ca974d26b67a1b33bb9e2d17965b4f12ec3bb1ac8709815",
+          "selector_token": "sel-dcb262c685f913d5bf16b0dd70e97c6b528b967c35a847179841ace143bff0cc",
           "action": "verify_evidence",
           "label": "修改说明",
           "status_label": "已提供；已完成",
@@ -3315,7 +3315,7 @@
     },
     {
       "action": "request_repair",
-      "title": "请求补充或更新材料",
+      "title": "要求补充或修改",
       "description": "指出问题和受影响义务，返回贡献侧修复。",
       "consequence": "仅指定范围需要修复和重新检查，未受影响材料保留。",
       "mutates_state": true,
@@ -3342,7 +3342,7 @@
       "primary_reason": "该操作直接对应当前流程阶段或开放问题。",
       "selector_options": [
         {
-          "selector_token": "sel-6b75342b6bb7f7347ceb44b203e055a736c374e6b4f669042b861c3303379e3d",
+          "selector_token": "sel-fb0cb5650253e37f9010c686b539982dc6384a37eb790e1a0b49fc98028e5a10",
           "action": "request_repair",
           "label": "变更文件清单",
           "status_label": "已提供；已完成",
@@ -3385,7 +3385,7 @@
           ]
         },
         {
-          "selector_token": "sel-a37be9876944c38bd109f3a2b178b6eceddd2bab75e07b10cc2a6a347a1fc4cf",
+          "selector_token": "sel-f06fc0d52c1627e9039b9fd38ee8466116cf2d275fea2fd9d10bd4e93a820e7e",
           "action": "request_repair",
           "label": "修改说明",
           "status_label": "已提供；已完成",
@@ -3431,9 +3431,9 @@
     },
     {
       "action": "reject_evidence",
-      "title": "拒绝无效材料",
+      "title": "拒绝当前材料",
       "description": "拒绝一条不能支持当前修改的具体材料。",
-      "consequence": "该材料标记为 rejected，并建立 scoped repair。",
+      "consequence": "该材料将标记为已拒绝，并建立指定范围的补充或修改请求。",
       "mutates_state": true,
       "actor_role": "maintainer_verifier",
       "default_obligation_ids": [],
@@ -3458,7 +3458,7 @@
       "primary_reason": "该操作直接对应当前流程阶段或开放问题。",
       "selector_options": [
         {
-          "selector_token": "sel-7f837845a75380fc81de5ec100d50b81f6cd4c211947a33b5cb04dc6febc19ac",
+          "selector_token": "sel-2b6676baf482a36d60d3ddf9329f3a2fdfeb822416462e6c3bdd31336c0ed30a",
           "action": "reject_evidence",
           "label": "变更文件清单",
           "status_label": "当前材料有效，可记录拒绝依据",
@@ -3488,7 +3488,7 @@
           ]
         },
         {
-          "selector_token": "sel-0b5f19275bcd970c5abcde87dd43112054f3a5890b70aee98db5e330bbc92bf4",
+          "selector_token": "sel-0fcb9ab441f968ba03e3e790edccd1ced05a9bf2cbc21d1a3850935377f19c53",
           "action": "reject_evidence",
           "label": "修改说明",
           "status_label": "当前材料有效，可记录拒绝依据",
@@ -3521,7 +3521,7 @@
     },
     {
       "action": "ask_clarification",
-      "title": "请求说明",
+      "title": "请求补充说明",
       "description": "针对指定要求提出可审计的澄清问题。",
       "consequence": "案例返回贡献侧回答，所选范围需要重新检查。",
       "mutates_state": true,
@@ -3548,7 +3548,7 @@
       "primary_reason": "该操作直接对应当前流程阶段或开放问题。",
       "selector_options": [
         {
-          "selector_token": "sel-5feaa82bb3561f775ce5b943199787408874ad227fb0ad7afe94b09cadea43e6",
+          "selector_token": "sel-850f591c92e41f79c14432c7544654af5f73a56ee457c32733f66fd1b88523a2",
           "action": "ask_clarification",
           "label": "变更文件清单",
           "status_label": "已提供；已完成",
@@ -3591,7 +3591,7 @@
           ]
         },
         {
-          "selector_token": "sel-d5e4e752c9f1ba644f38e688e93249b40ed288623b59b44cfda2839788b9535a",
+          "selector_token": "sel-65a554a2e9c0c1cc43255b18387431fa90419e09e9d9b90a013af5410747ab97",
           "action": "ask_clarification",
           "label": "修改说明",
           "status_label": "已提供；已完成",
@@ -3639,7 +3639,7 @@
       "action": "record_policy_conflict",
       "title": "记录项目规则冲突",
       "description": "记录无法由普通材料修复的策略冲突。",
-      "consequence": "案例转入 repair，由 policy steward 或维护者处理。",
+      "consequence": "案例转入补充处理，由项目规则负责人或维护者处理。",
       "mutates_state": true,
       "actor_role": "maintainer_verifier",
       "default_obligation_ids": [],
@@ -3664,7 +3664,7 @@
       "primary_reason": "后端允许此操作，但它不直接处理当前主要阻断项。",
       "selector_options": [
         {
-          "selector_token": "sel-39f2c832f4c7f9e77cbb71470198a1e3ccdf533f68c0053e0d0fc998cf8f2280",
+          "selector_token": "sel-004f54ea8912f32720afce36b6e097f9a0b95bcd59898d1777c81c006f152675",
           "action": "record_policy_conflict",
           "label": "变更文件清单",
           "status_label": "已提供；已完成",
@@ -3707,7 +3707,7 @@
           ]
         },
         {
-          "selector_token": "sel-c8441a7d8ede909229ca6c57f3151b2bc272f97067c98d487b8e15a3feacff44",
+          "selector_token": "sel-8d6d126e0792351e2f3003b1deb7abaa13dee0be9d612aeaae895f2115c532c4",
           "action": "record_policy_conflict",
           "label": "修改说明",
           "status_label": "已提供；已完成",
@@ -3755,7 +3755,7 @@
   "unavailable_actions": [
     {
       "action": "invalidate_attestation",
-      "title": "要求负责人重新确认",
+      "title": "将旧负责人确认标记为失效",
       "description": "使一条过时或不正确的负责人确认失效。",
       "reason": "当前没有仍然有效的负责人确认可供失效处理。",
       "next_actor_roles": [
@@ -3789,9 +3789,9 @@
     },
     {
       "action": "resolve_policy_conflict",
-      "title": "解决项目规则冲突",
+      "title": "处理项目规则冲突",
       "description": "由有权限的角色记录策略冲突的解决依据。",
-      "reason": "当前角色没有 resolve_policy_conflict 权限。 可执行角色：maintainer, policy_steward。",
+      "reason": "当前角色没有“处理项目规则冲突”的权限。可以执行这一步的角色：人类维护者或项目规则负责人。",
       "next_actor_roles": [
         "maintainer",
         "policy_steward"
@@ -3816,9 +3816,9 @@
     },
     {
       "action": "resubmit",
-      "title": "补交指定范围",
-      "description": "贡献侧提交 repair 影响范围和新增材料。",
-      "reason": "当前角色没有 resubmit 权限。 可执行角色：contributor, contributor_agent。",
+      "title": "重新提交修改后的材料",
+      "description": "贡献侧提交补充或修改影响范围和新增材料。",
+      "reason": "当前角色没有“重新提交修改后的材料”的权限。可以执行这一步的角色：人类贡献者或贡献侧智能体。",
       "next_actor_roles": [
         "contributor",
         "contributor_agent"
@@ -3843,9 +3843,9 @@
     },
     {
       "action": "confirm_attestation",
-      "title": "负责人确认当前范围",
-      "description": "由 accountable human 对明确范围作出事实确认。",
-      "reason": "当前角色没有 confirm_attestation 权限。 可执行角色：accountable_human。",
+      "title": "确认负责人声明",
+      "description": "由负责人对明确范围作出事实确认。",
+      "reason": "当前角色没有“确认负责人声明”的权限。可以执行这一步的角色：负责人。",
       "next_actor_roles": [
         "accountable_human"
       ],
@@ -3869,9 +3869,9 @@
     },
     {
       "action": "authorized_override",
-      "title": "执行有权覆盖",
-      "description": "记录具备权限的维护者对明确义务或 finding 的例外处理。",
-      "reason": "当前角色没有 authorized_override 权限。 可执行角色：maintainer。",
+      "title": "由有权维护者执行覆盖处理",
+      "description": "记录具备权限的维护者对明确项目要求或问题的例外处理。",
+      "reason": "当前角色没有“由有权维护者执行覆盖处理”的权限。可以执行这一步的角色：人类维护者。",
       "next_actor_roles": [
         "maintainer"
       ],
@@ -3896,9 +3896,9 @@
     },
     {
       "action": "decide_accept",
-      "title": "提交人类最终接受决定",
+      "title": "最终接受",
       "description": "由人类维护者记录接受决定。",
-      "reason": "当前角色没有 decide_accept 权限。 可执行角色：maintainer。",
+      "reason": "当前角色没有“最终接受”的权限。可以执行这一步的角色：人类维护者。",
       "next_actor_roles": [
         "maintainer"
       ],
@@ -3922,9 +3922,9 @@
     },
     {
       "action": "decide_reject",
-      "title": "提交人类最终拒绝决定",
+      "title": "最终拒绝",
       "description": "由人类维护者记录拒绝决定。",
-      "reason": "当前角色没有 decide_reject 权限。 可执行角色：maintainer。",
+      "reason": "当前角色没有“最终拒绝”的权限。可以执行这一步的角色：人类维护者。",
       "next_actor_roles": [
         "maintainer"
       ],
@@ -3949,9 +3949,9 @@
     },
     {
       "action": "decide_request_changes",
-      "title": "提交人类修改决定",
+      "title": "要求继续修改",
       "description": "由人类维护者要求贡献侧继续修改。",
-      "reason": "当前角色没有 decide_request_changes 权限。 可执行角色：maintainer。",
+      "reason": "当前角色没有“要求继续修改”的权限。可以执行这一步的角色：人类维护者。",
       "next_actor_roles": [
         "maintainer"
       ],
@@ -3975,9 +3975,9 @@
     },
     {
       "action": "decide_close",
-      "title": "关闭案例",
+      "title": "关闭本次审核记录",
       "description": "由人类维护者关闭案例而不表示接受或合并。",
-      "reason": "当前角色没有 decide_close 权限。 可执行角色：maintainer。",
+      "reason": "当前角色没有“关闭本次审核记录”的权限。可以执行这一步的角色：人类维护者。",
       "next_actor_roles": [
         "maintainer"
       ],
@@ -4043,6 +4043,12 @@
     "mutates_case": false,
     "technical_details": {
       "operation": "verify_evidence",
+      "current_role": "maintainer_verifier",
+      "required_roles": [
+        "maintainer",
+        "maintainer_verifier",
+        "policy_steward"
+      ],
       "source_state": "awaiting_maintainer_verification",
       "target_state": "ready_for_human_decision",
       "effects": [
@@ -4078,6 +4084,7 @@
         "O-CHANGED-FILES",
         "O-SUMMARY"
       ],
+      "requested_obligation_ids": [],
       "retained_evidence_ids": [],
       "invalidated_attestation_ids": [],
       "invalidated_evidence_ids": [],
@@ -4091,7 +4098,7 @@
         "state_transition",
         "maintainer_verification"
       ],
-      "preview_fingerprint": "c8278e40da38678700dce8658ee5a40548e8b65f87098254c5560c9033621798",
+      "preview_fingerprint": "ed389aacfe6e475e585560790bdd598d3be9dfd9444e65730f84673a26fa0ebf",
       "traceability": [
         {
           "kind": "permission_rule",
@@ -4116,7 +4123,7 @@
         "policy_steward",
         "maintainer"
       ],
-      "display_label": "维护者核验人、项目规则负责人、人类维护者",
+      "display_label": "维护者侧检查人员、项目规则负责人、人类维护者",
       "reason": "贡献侧要求已经满足，当前轮到有权限的维护者检查；检查完成仍不等于接受。",
       "blocking_items": [],
       "next_handoff_roles": [

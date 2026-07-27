@@ -4,6 +4,7 @@ import hashlib
 import json
 import subprocess
 import sys
+from html.parser import HTMLParser
 from pathlib import Path
 
 import pytest
@@ -13,6 +14,39 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
 from generate_reviewer_guidance_demos import generate  # noqa: E402
+
+
+class _ParticipantTextParser(HTMLParser):
+    """Collect visible participant text while excluding folded details."""
+
+    def __init__(self):
+        super().__init__()
+        self.folded_depth = 0
+        self.ignored_depth = 0
+        self.values: list[str] = []
+
+    def handle_starttag(self, tag, attrs):
+        del attrs
+        if tag == "details":
+            self.folded_depth += 1
+        elif tag in {"style", "script"}:
+            self.ignored_depth += 1
+
+    def handle_endtag(self, tag):
+        if tag == "details":
+            self.folded_depth -= 1
+        elif tag in {"style", "script"}:
+            self.ignored_depth -= 1
+
+    def handle_data(self, data):
+        if not self.folded_depth and not self.ignored_depth:
+            self.values.append(data)
+
+
+def _participant_text(rendered: str) -> str:
+    parser = _ParticipantTextParser()
+    parser.feed(rendered)
+    return " ".join(" ".join(parser.values).split())
 
 
 @pytest.fixture(scope="module")
@@ -109,6 +143,32 @@ def test_material_change_scenario_records_partial_invalidation(
     ]
 
 
+def test_material_change_preview_is_chinese_first_with_raw_terms_folded(
+    generated_scenarios,
+):
+    output, results, payloads = generated_scenarios
+    slug = "02_material_partial_invalidation"
+    result = next(item for item in results if item["scenario"] == slug)
+    rendered = (output / result["html"]).read_text(encoding="utf-8")
+    visible = _participant_text(rendered)
+    preview = payloads[slug]["action_preview"]
+
+    assert "修改说明" in visible
+    assert "当前还不能进行维护者检查" in visible
+    assert "贡献侧智能体" in visible
+    assert "verify_evidence" not in visible
+    assert "O-SUMMARY" not in visible
+    assert "verify_evidence" in rendered
+    assert "O-SUMMARY" in rendered
+    assert preview["technical_details"]["operation"] == "verify_evidence"
+    assert preview["technical_details"]["current_role"] == (
+        "maintainer_verifier"
+    )
+    assert preview["technical_details"]["affected_obligation_ids"] == [
+        "O-SUMMARY"
+    ]
+
+
 def test_scoped_repair_scenario_preserves_unaffected_records(
     generated_scenarios,
 ):
@@ -133,6 +193,23 @@ def test_scoped_repair_scenario_preserves_unaffected_records(
     )
     assert row["material_status"] in {"provided", "retained", "verified"}
     assert row["workflow_status"] == "awaiting_revalidation"
+
+
+def test_scoped_repair_preview_keeps_ids_out_of_participant_layer(
+    generated_scenarios,
+):
+    output, results, _ = generated_scenarios
+    slug = "03_scoped_repair"
+    result = next(item for item in results if item["scenario"] == slug)
+    rendered = (output / result["html"]).read_text(encoding="utf-8")
+    visible = _participant_text(rendered)
+
+    assert "智能体行动与委派说明" in visible
+    assert "保留的未受影响材料" in visible
+    assert "等待人类维护者最终决定" in visible
+    assert "不等于代码已经被项目接受" in visible
+    assert "evidence-" not in visible
+    assert "finding-" not in visible
 
 
 def test_e2e_transition_traces_have_one_primary_step(generated_scenarios):
@@ -165,6 +242,31 @@ def test_unauthorized_agent_scenario_does_not_advance_state(
     assert "verify_evidence" in {
         item["action"] for item in payload["unavailable_actions"]
     }
+
+
+def test_unauthorized_notice_presents_action_and_roles_without_raw_terms(
+    generated_scenarios,
+):
+    output, results, payloads = generated_scenarios
+    slug = "04_unauthorized_agent_verification"
+    result = next(item for item in results if item["scenario"] == slug)
+    rendered = (output / result["html"]).read_text(encoding="utf-8")
+    visible = _participant_text(rendered)
+    notice = payloads[slug]["guidance_view"][
+        "rejected_operation_notice"
+    ]
+
+    assert "最近一次操作未生效" in visible
+    assert "检查提交材料" in visible
+    assert "贡献侧智能体" in visible
+    assert "维护者侧检查人员" in visible
+    assert "案例状态没有变化" in visible
+    assert "verify_evidence" not in visible
+    assert "contributor_agent" not in visible
+    assert "maintainer_verifier" not in visible
+    assert notice["operation"] == "verify_evidence"
+    assert notice["actor_role"] == "contributor_agent"
+    assert "maintainer_verifier" in notice["required_roles"]
 
 
 def test_lightweight_scenario_separates_intensity_from_authority(

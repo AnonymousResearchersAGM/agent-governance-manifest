@@ -43,20 +43,20 @@
 ## 暂不可用操作摘要
 
 - 还有 14 项操作因当前阶段、权限或对象范围暂不可用
-  - 检查待核验项: 操作 verify_evidence 不能从当前状态 accepted 执行。
-  - 请求补充或更新材料: 操作 request_repair 不能从当前状态 accepted 执行。
-  - 拒绝无效材料: 操作 reject_evidence 不能从当前状态 accepted 执行。
-  - 请求说明: 操作 ask_clarification 不能从当前状态 accepted 执行。
-  - 要求负责人重新确认: 操作 invalidate_attestation 不能从当前状态 accepted 执行。
-  - 记录项目规则冲突: 操作 record_policy_conflict 不能从当前状态 accepted 执行。
-  - 解决项目规则冲突: 操作 resolve_policy_conflict 不能从当前状态 accepted 执行。
-  - 补交指定范围: 当前角色没有 resubmit 权限。 可执行角色：contributor, contributor_agent。
-  - 负责人确认当前范围: 当前角色没有 confirm_attestation 权限。 可执行角色：accountable_human。
-  - 执行有权覆盖: 操作 authorized_override 不能从当前状态 accepted 执行。
-  - 提交人类最终接受决定: 操作 decide_accept 不能从当前状态 accepted 执行。
-  - 提交人类最终拒绝决定: 操作 decide_reject 不能从当前状态 accepted 执行。
-  - 提交人类修改决定: 操作 decide_request_changes 不能从当前状态 accepted 执行。
-  - 关闭案例: 操作 decide_close 不能从当前状态 accepted 执行。
+  - 检查提交材料: 当前处于“人类维护者已接受并关闭”，还不能执行“检查提交材料”。
+  - 要求补充或修改: 当前处于“人类维护者已接受并关闭”，还不能执行“要求补充或修改”。
+  - 拒绝当前材料: 当前处于“人类维护者已接受并关闭”，还不能执行“拒绝当前材料”。
+  - 请求补充说明: 当前处于“人类维护者已接受并关闭”，还不能执行“请求补充说明”。
+  - 将旧负责人确认标记为失效: 当前处于“人类维护者已接受并关闭”，还不能执行“将旧负责人确认标记为失效”。
+  - 记录项目规则冲突: 当前处于“人类维护者已接受并关闭”，还不能执行“记录项目规则冲突”。
+  - 处理项目规则冲突: 当前处于“人类维护者已接受并关闭”，还不能执行“处理项目规则冲突”。
+  - 重新提交修改后的材料: 当前角色没有“重新提交修改后的材料”的权限。可以执行这一步的角色：人类贡献者或贡献侧智能体。
+  - 确认负责人声明: 当前角色没有“确认负责人声明”的权限。可以执行这一步的角色：负责人。
+  - 由有权维护者执行覆盖处理: 当前处于“人类维护者已接受并关闭”，还不能执行“由有权维护者执行覆盖处理”。
+  - 最终接受: 当前处于“人类维护者已接受并关闭”，还不能执行“最终接受”。
+  - 最终拒绝: 当前处于“人类维护者已接受并关闭”，还不能执行“最终拒绝”。
+  - 要求继续修改: 当前处于“人类维护者已接受并关闭”，还不能执行“要求继续修改”。
+  - 关闭本次审核记录: 当前处于“人类维护者已接受并关闭”，还不能执行“关闭本次审核记录”。
 
 ## Authority boundary
 
@@ -65,9 +65,11 @@
 
 ## 操作预览
 
-你准备执行：**提交人类最终接受决定**
+你准备执行：**最终接受**
 
 当前角色和案例状态允许生成此操作计划。
+
+当前没有待交接角色。
 
 ### 将处理
 
@@ -80,7 +82,7 @@
 
 ### 预计变化
 
-- 案例流程：等待人类维护者最终决定 → 人类维护者已接受并关闭。案例 accepted 并生成 closure receipt；该动作不是自动合并。
+- 案例流程：等待人类维护者最终决定 → 人类维护者已接受并关闭。案例记录接受状态并生成审核关闭记录；该动作不是自动合并。
 
 ### 执行后
 
@@ -93,6 +95,10 @@
 ```json
 {
   "operation": "decide_accept",
+  "current_role": "maintainer",
+  "required_roles": [
+    "maintainer"
+  ],
   "source_state": "ready_for_human_decision",
   "target_state": "accepted",
   "effects": [
@@ -100,13 +106,14 @@
       "target": "案例状态",
       "before": "ready_for_human_decision",
       "after": "accepted",
-      "explanation": "案例 accepted 并生成 closure receipt；该动作不是自动合并。",
+      "explanation": "案例记录接受状态并生成审核关闭记录；该动作不是自动合并。",
       "source_object_ids": [
         "transition-ba3e2834196459f189cf12bd8df834dd"
       ]
     }
   ],
   "affected_obligation_ids": [],
+  "requested_obligation_ids": [],
   "retained_evidence_ids": [
     "evidence-41ca16ed791f5f6e8a57ddec6ac09610",
     "evidence-661f729aab135d11a9828ba5ea54ea26"
@@ -121,7 +128,7 @@
     "final_decision",
     "closure_receipt"
   ],
-  "preview_fingerprint": "2a014cb9eef33a65ece8483c33ba0139875ec110f763de906f27c3f589f5d5c9",
+  "preview_fingerprint": "4a3272d79f46ceded8478f41f2eafef8a35677d3d3170e3d4cf0d8c4db9e5664",
   "traceability": [
     {
       "kind": "permission_rule",

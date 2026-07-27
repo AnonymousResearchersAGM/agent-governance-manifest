@@ -4,7 +4,7 @@
   "notes": "The governance-self-modification interaction requires separation of duty.",
   "guidance_view": {
     "schema_version": "agm.reviewer_guidance/v0.2-dev",
-    "generated_from_case_fingerprint": "86d2eedb24226e3e8979417172fc9e9636751e89ecb8511db2669ee92970bc6e",
+    "generated_from_case_fingerprint": "ca3c9b1db2449d4653441d68a96bb549522d33b0721d047b27ba7dece4bf5b41",
     "actor": {
       "actor": "independent-maintainer",
       "role": "maintainer",
@@ -223,7 +223,7 @@
     "requirement_comparisons": [
       {
         "obligation_id": "O-ARTIFACT",
-        "check_item": "可核验测试制品",
+        "check_item": "可检查的测试输出或文件",
         "project_requirement": "提供可以实际检查的测试输出或文件。",
         "current_situation": "已提供与当前贡献和项目规则绑定的材料。",
         "result": "meets_requirement",
@@ -239,7 +239,7 @@
           "evidence-b4dc6ccde1095ec3902b08fd6b2d774e"
         ],
         "binding_fingerprints": [
-          "86d2eedb24226e3e8979417172fc9e9636751e89ecb8511db2669ee92970bc6e"
+          "ca3c9b1db2449d4653441d68a96bb549522d33b0721d047b27ba7dece4bf5b41"
         ],
         "finding_ids": [],
         "reference_english": "Provide a locally checkable artifact or test output.",
@@ -266,7 +266,7 @@
             "relationship": "observed"
           }
         ],
-        "display_name": "可核验测试制品",
+        "display_name": "可检查的测试输出或文件",
         "reference_plain": "提供可以实际检查的测试输出或文件。",
         "observed_plain": "已提供与当前贡献和项目规则绑定的材料。",
         "observed_raw": "valid bound evidence is present",
@@ -298,7 +298,7 @@
           "evidence-6fea51033ea75f69bd34ad575b912b71"
         ],
         "binding_fingerprints": [
-          "86d2eedb24226e3e8979417172fc9e9636751e89ecb8511db2669ee92970bc6e"
+          "ca3c9b1db2449d4653441d68a96bb549522d33b0721d047b27ba7dece4bf5b41"
         ],
         "finding_ids": [],
         "reference_english": "Identify the files and scopes covered by the contribution.",
@@ -408,7 +408,7 @@
           "evidence-2e22e76b97f05db284335c8aca3a0c72"
         ],
         "binding_fingerprints": [
-          "86d2eedb24226e3e8979417172fc9e9636751e89ecb8511db2669ee92970bc6e"
+          "ca3c9b1db2449d4653441d68a96bb549522d33b0721d047b27ba7dece4bf5b41"
         ],
         "finding_ids": [],
         "reference_english": "State known limitations or explicitly state none.",
@@ -451,7 +451,7 @@
       },
       {
         "obligation_id": "O-POLICY-IMPACT",
-        "check_item": "项目规则与治理影响",
+        "check_item": "项目规则影响说明",
         "project_requirement": "说明本次修改是否影响项目规则或治理流程。",
         "current_situation": "已提供与当前贡献和项目规则绑定的材料。",
         "result": "meets_requirement",
@@ -467,7 +467,7 @@
           "evidence-f6e6a9bff8fa521caf3f937e9c71bce6"
         ],
         "binding_fingerprints": [
-          "86d2eedb24226e3e8979417172fc9e9636751e89ecb8511db2669ee92970bc6e"
+          "ca3c9b1db2449d4653441d68a96bb549522d33b0721d047b27ba7dece4bf5b41"
         ],
         "finding_ids": [],
         "reference_english": "Describe policy compatibility, migration, and self-modification impact.",
@@ -494,7 +494,7 @@
             "relationship": "observed"
           }
         ],
-        "display_name": "项目规则与治理影响",
+        "display_name": "项目规则影响说明",
         "reference_plain": "说明本次修改是否影响项目规则或治理流程。",
         "observed_plain": "已提供与当前贡献和项目规则绑定的材料。",
         "observed_raw": "valid bound evidence is present",
@@ -510,7 +510,7 @@
       },
       {
         "obligation_id": "O-RATIONALE",
-        "check_item": "修改理由",
+        "check_item": "修改原因",
         "project_requirement": "说明为什么需要这次修改。",
         "current_situation": "已提供与当前贡献和项目规则绑定的材料。",
         "result": "meets_requirement",
@@ -526,7 +526,7 @@
           "evidence-6f50d94dd4685b5cb2f0af3a32f9ff9e"
         ],
         "binding_fingerprints": [
-          "86d2eedb24226e3e8979417172fc9e9636751e89ecb8511db2669ee92970bc6e"
+          "ca3c9b1db2449d4653441d68a96bb549522d33b0721d047b27ba7dece4bf5b41"
         ],
         "finding_ids": [],
         "reference_english": "Explain why the change is needed without disclosing private reasoning.",
@@ -553,7 +553,7 @@
             "relationship": "observed"
           }
         ],
-        "display_name": "修改理由",
+        "display_name": "修改原因",
         "reference_plain": "说明为什么需要这次修改。",
         "observed_plain": "已提供与当前贡献和项目规则绑定的材料。",
         "observed_raw": "valid bound evidence is present",
@@ -585,7 +585,7 @@
           "evidence-472110c16da752aca16c4077fc222e7c"
         ],
         "binding_fingerprints": [
-          "86d2eedb24226e3e8979417172fc9e9636751e89ecb8511db2669ee92970bc6e"
+          "ca3c9b1db2449d4653441d68a96bb549522d33b0721d047b27ba7dece4bf5b41"
         ],
         "finding_ids": [],
         "reference_english": "Provide a concise factual contribution summary.",
@@ -644,7 +644,7 @@
           "evidence-d6562c3c9eeb5765960dbd75dbff7a28"
         ],
         "binding_fingerprints": [
-          "86d2eedb24226e3e8979417172fc9e9636751e89ecb8511db2669ee92970bc6e"
+          "ca3c9b1db2449d4653441d68a96bb549522d33b0721d047b27ba7dece4bf5b41"
         ],
         "finding_ids": [],
         "reference_english": "Provide a concrete test command, environment, and outcome.",
@@ -691,7 +691,7 @@
       {
         "action": "view_change_scope",
         "title": "查看变化范围",
-        "description": "查看 changed files、风险规则、影响范围和绑定 fingerprint。",
+        "description": "查看变更文件、风险规则、影响范围和绑定指纹。",
         "consequence": "只读操作，不改变案例状态。",
         "mutates_state": false,
         "actor_role": "maintainer",
@@ -711,8 +711,8 @@
       },
       {
         "action": "verify_evidence",
-        "title": "检查待核验项",
-        "description": "记录维护者对指定义务及其绑定材料的检查结果。",
+        "title": "检查提交材料",
+        "description": "记录维护者对指定项目要求及其绑定材料的检查结果。",
         "consequence": "受影响项会记录维护者检查；全部阻断项完成后进入人类最终决定。",
         "mutates_state": true,
         "actor_role": "maintainer",
@@ -746,9 +746,9 @@
         "primary_reason": "该操作直接对应当前流程阶段或开放问题。",
         "selector_options": [
           {
-            "selector_token": "sel-bb699feb5efac4234e2c417fb99da34ca575d828bcd83ef7311a241b7945140e",
+            "selector_token": "sel-8ccdf082e824be8d301649f38703521ae445c77c9ce0862d12c162df49eab6e3",
             "action": "verify_evidence",
-            "label": "可核验测试制品",
+            "label": "可检查的测试输出或文件",
             "status_label": "已提供；已完成",
             "affected_scope": [
               ".agm/manifest.yml",
@@ -795,7 +795,7 @@
             ]
           },
           {
-            "selector_token": "sel-8e96cc7394c7659c490dfc31989dfe98f25e9662d7e9753781a2acfda81d4d14",
+            "selector_token": "sel-e483405b5609c845ce1ff9b54fe633f9c7a554354ffa35fa0b237531c346e283",
             "action": "verify_evidence",
             "label": "变更文件清单",
             "status_label": "已提供；已完成",
@@ -844,7 +844,7 @@
             ]
           },
           {
-            "selector_token": "sel-055340d1063ac3491a3d1a32604674ba5558d095ea771335aacddd1c3592a0ac",
+            "selector_token": "sel-facc54272168bf64847ca6722c041d73e366be2307b82a28d649f9a4ccaf5efb",
             "action": "verify_evidence",
             "label": "独立维护者检查",
             "status_label": "缺少；阻止继续",
@@ -886,7 +886,7 @@
             ]
           },
           {
-            "selector_token": "sel-3488c42bcae8f17edf7e8d06c5e9989af8ba59a6995da8230b5a85b76439a1a4",
+            "selector_token": "sel-443e6f25168695a2a86387842d98b589236b985e79f086e648e37b7a243e3508",
             "action": "verify_evidence",
             "label": "已知限制",
             "status_label": "已提供；已完成",
@@ -935,9 +935,9 @@
             ]
           },
           {
-            "selector_token": "sel-73cf1729602d740b9e6e40b946afe324cfdda8b5572a22cda7f0bc352bfdae30",
+            "selector_token": "sel-2d7fff2f097557c10d97aebab2a0a0d0cad7adc8a4f4a8cdbb691ad0252c1844",
             "action": "verify_evidence",
-            "label": "项目规则与治理影响",
+            "label": "项目规则影响说明",
             "status_label": "已提供；已完成",
             "affected_scope": [
               ".agm/manifest.yml",
@@ -984,9 +984,9 @@
             ]
           },
           {
-            "selector_token": "sel-96091f20d639626c71ccaa3f5c495dc5982719754064d6c2e10ff59aa0445ac8",
+            "selector_token": "sel-37976165aa5345bc40c64335d80beb3f3d3d30ba488f51dc86300462ca0af9a0",
             "action": "verify_evidence",
-            "label": "修改理由",
+            "label": "修改原因",
             "status_label": "已提供；已完成",
             "affected_scope": [
               ".agm/manifest.yml",
@@ -1033,7 +1033,7 @@
             ]
           },
           {
-            "selector_token": "sel-17bb0e7eca5e0b0a59d64822a766e63ab72c7b08a829babbffc21ced42d96d71",
+            "selector_token": "sel-373f0f5cb8b060b6be29b9880e19283fb9ba24deb374d4bdf20e93c611c1c07e",
             "action": "verify_evidence",
             "label": "修改说明",
             "status_label": "已提供；已完成",
@@ -1082,7 +1082,7 @@
             ]
           },
           {
-            "selector_token": "sel-3487131835e6aac59262c1bc54fd018cf1618f1e3dfb714e83dc99fd6f96b75c",
+            "selector_token": "sel-e8dd036ba8127f5cf124b227612118073d1ea6c2621eacf34a5c39c461c83d99",
             "action": "verify_evidence",
             "label": "测试命令与结果",
             "status_label": "已提供；已完成",
@@ -1134,7 +1134,7 @@
       },
       {
         "action": "request_repair",
-        "title": "请求补充或更新材料",
+        "title": "要求补充或修改",
         "description": "指出问题和受影响义务，返回贡献侧修复。",
         "consequence": "仅指定范围需要修复和重新检查，未受影响材料保留。",
         "mutates_state": true,
@@ -1163,9 +1163,9 @@
         "primary_reason": "该操作直接对应当前流程阶段或开放问题。",
         "selector_options": [
           {
-            "selector_token": "sel-70ad87ce9829f11405a4ebfd4b7eeb8173442c2b5f696b758bf9530da940c7ea",
+            "selector_token": "sel-30e00ae19371786d9a76312d078fd82ed0e8ee08fed80665082d40900518cf40",
             "action": "request_repair",
-            "label": "可核验测试制品",
+            "label": "可检查的测试输出或文件",
             "status_label": "已提供；已完成",
             "affected_scope": [
               ".agm/manifest.yml",
@@ -1212,7 +1212,7 @@
             ]
           },
           {
-            "selector_token": "sel-3d2e54d3a1bc859b389263d7fb7a7a3c4237fb040a2ea0550af9315c78d89224",
+            "selector_token": "sel-a2957458b991236cf5568440be1d7d2faef72b17cfe2cf47b1d8962f4b23c571",
             "action": "request_repair",
             "label": "变更文件清单",
             "status_label": "已提供；已完成",
@@ -1261,7 +1261,7 @@
             ]
           },
           {
-            "selector_token": "sel-1fdac5c699a97da6b6423101dab7bcc5eeced5f539587ba7465779c1384ceec8",
+            "selector_token": "sel-3c983a57a5698a3194791c6f6eb54ac4d4267dbd90ab55f375aec69b8e3178f7",
             "action": "request_repair",
             "label": "独立维护者检查",
             "status_label": "缺少；阻止继续",
@@ -1303,7 +1303,7 @@
             ]
           },
           {
-            "selector_token": "sel-16ac6b6d648700c138e4795a67dcc3e2696c870fedbc03c7e5a903167a0c2a31",
+            "selector_token": "sel-c6b86f1a7a66f301b4af5275c6ca8e4a33a6741610fc1f84530f8305e6127670",
             "action": "request_repair",
             "label": "已知限制",
             "status_label": "已提供；已完成",
@@ -1352,9 +1352,9 @@
             ]
           },
           {
-            "selector_token": "sel-0892fa59959f2093f7868b6734e39e608865ba87caaddbfb1e86b54b02aa47bc",
+            "selector_token": "sel-7a8b617bb89ad0ec7a61c002fb3f9692655c1dcc896a6edefe656bf27892feeb",
             "action": "request_repair",
-            "label": "项目规则与治理影响",
+            "label": "项目规则影响说明",
             "status_label": "已提供；已完成",
             "affected_scope": [
               ".agm/manifest.yml",
@@ -1401,9 +1401,9 @@
             ]
           },
           {
-            "selector_token": "sel-9ab0eec10c6dbd2a25668fbe56dce1df3e4ec5b0771e152f4c413e7bbdec7d8e",
+            "selector_token": "sel-4417ef98f1bedb75a0969e5e00061a547149924c8021ebebed2c6a6f6ba28e4b",
             "action": "request_repair",
-            "label": "修改理由",
+            "label": "修改原因",
             "status_label": "已提供；已完成",
             "affected_scope": [
               ".agm/manifest.yml",
@@ -1450,7 +1450,7 @@
             ]
           },
           {
-            "selector_token": "sel-84990ac698cda1bb3f6558a45555c277c5461455a1ef14dcc507c686e096a7c9",
+            "selector_token": "sel-3fb5c21150eacf28ab36800d3c64d4b8a955bba6159921160461fc0fb6543337",
             "action": "request_repair",
             "label": "修改说明",
             "status_label": "已提供；已完成",
@@ -1499,7 +1499,7 @@
             ]
           },
           {
-            "selector_token": "sel-cdfaaf9de881c63590a8f269835eb0191c82580d4c90b281b352b6679f8e7b33",
+            "selector_token": "sel-d0198008ac561f27b7fb14e21075270724937e5cd10f4470bff2ee40658c0125",
             "action": "request_repair",
             "label": "测试命令与结果",
             "status_label": "已提供；已完成",
@@ -1551,9 +1551,9 @@
       },
       {
         "action": "reject_evidence",
-        "title": "拒绝无效材料",
+        "title": "拒绝当前材料",
         "description": "拒绝一条不能支持当前修改的具体材料。",
-        "consequence": "该材料标记为 rejected，并建立 scoped repair。",
+        "consequence": "该材料将标记为已拒绝，并建立指定范围的补充或修改请求。",
         "mutates_state": true,
         "actor_role": "maintainer",
         "default_obligation_ids": [],
@@ -1578,9 +1578,9 @@
         "primary_reason": "该操作直接对应当前流程阶段或开放问题。",
         "selector_options": [
           {
-            "selector_token": "sel-da78a7650934939da64862ec5a24c15e94eae746712b2667ab02eb85b4e0e498",
+            "selector_token": "sel-6bcd83b2abf6520a07c9ed09439fff9f6cb1b554171dbed826e7c0384f5d9639",
             "action": "reject_evidence",
-            "label": "可核验测试制品",
+            "label": "可检查的测试输出或文件",
             "status_label": "当前材料有效，可记录拒绝依据",
             "affected_scope": [
               ".agm/manifest.yml",
@@ -1609,7 +1609,7 @@
             ]
           },
           {
-            "selector_token": "sel-e1e2527b03eca1ece7edc9dd2eb2ee8a0f0c0c656d3f34e891d3696e942899f1",
+            "selector_token": "sel-6fde907f1fe5f5e24f188d76558568a9d526fd403db40407faa42d6c657563c6",
             "action": "reject_evidence",
             "label": "变更文件清单",
             "status_label": "当前材料有效，可记录拒绝依据",
@@ -1640,7 +1640,7 @@
             ]
           },
           {
-            "selector_token": "sel-baba2f777f2b77230456117c0d4107e656447f676ab9a111796c2b48c67876af",
+            "selector_token": "sel-c29c3f6250512c43834973d9ecc8d56178351c555140fff37ea1db0b993bff8f",
             "action": "reject_evidence",
             "label": "已知限制",
             "status_label": "当前材料有效，可记录拒绝依据",
@@ -1671,9 +1671,9 @@
             ]
           },
           {
-            "selector_token": "sel-9b191559eaa6c1a0c89bbdbf77298e3663116f77f6dc63f3a0010fde180605bd",
+            "selector_token": "sel-ed8e32ce502110c436cea0aba75e2c8d622e99b36111ff328e9c4fccfab6dc55",
             "action": "reject_evidence",
-            "label": "项目规则与治理影响",
+            "label": "项目规则影响说明",
             "status_label": "当前材料有效，可记录拒绝依据",
             "affected_scope": [
               ".agm/manifest.yml",
@@ -1702,9 +1702,9 @@
             ]
           },
           {
-            "selector_token": "sel-0db40b937fb97405190304ff09aa4965bd4d9ee34da21af70dbc1dc0dbce07bd",
+            "selector_token": "sel-e3ac52757f53d882b754d2f2a2984b3b1906bf089f802f72effee28044b0c678",
             "action": "reject_evidence",
-            "label": "修改理由",
+            "label": "修改原因",
             "status_label": "当前材料有效，可记录拒绝依据",
             "affected_scope": [
               ".agm/manifest.yml",
@@ -1733,7 +1733,7 @@
             ]
           },
           {
-            "selector_token": "sel-90781e4f415863d51aa6603fa0b2cddadbd89222b0a9f48bd8d9b6e5ecda3583",
+            "selector_token": "sel-bc73dc4f948c72adda3e6c8c43987735eff6ed5d21ebdd1e7fa442a80775e72d",
             "action": "reject_evidence",
             "label": "修改说明",
             "status_label": "当前材料有效，可记录拒绝依据",
@@ -1764,7 +1764,7 @@
             ]
           },
           {
-            "selector_token": "sel-cca00490ac81196bce26107e79c4cfa1dbf225847ca3f4ef837770d62091f378",
+            "selector_token": "sel-4d9ef3ce1c96c49b1fcadc435f07b90ea342361bc0c3e5d1e3683c5a6c168cca",
             "action": "reject_evidence",
             "label": "测试命令与结果",
             "status_label": "当前材料有效，可记录拒绝依据",
@@ -1798,7 +1798,7 @@
       },
       {
         "action": "ask_clarification",
-        "title": "请求说明",
+        "title": "请求补充说明",
         "description": "针对指定要求提出可审计的澄清问题。",
         "consequence": "案例返回贡献侧回答，所选范围需要重新检查。",
         "mutates_state": true,
@@ -1827,9 +1827,9 @@
         "primary_reason": "该操作直接对应当前流程阶段或开放问题。",
         "selector_options": [
           {
-            "selector_token": "sel-a901ae2c3165b77183f1ee265345b793b153ca806a5b5e1e0bc9bcc17ac725b5",
+            "selector_token": "sel-8927f5a9fc4d9e8ac6a8c919e90009369355bca71d55d3638e5349e56a865834",
             "action": "ask_clarification",
-            "label": "可核验测试制品",
+            "label": "可检查的测试输出或文件",
             "status_label": "已提供；已完成",
             "affected_scope": [
               ".agm/manifest.yml",
@@ -1876,7 +1876,7 @@
             ]
           },
           {
-            "selector_token": "sel-b96ad9191041c944182a38ebc29ce740d2e35bebd5bc26461c0c14f7a5d0deb3",
+            "selector_token": "sel-c014f8c9de647a5d394c4cb06daf0861487c15dcc16df4fa429eceedbf145917",
             "action": "ask_clarification",
             "label": "变更文件清单",
             "status_label": "已提供；已完成",
@@ -1925,7 +1925,7 @@
             ]
           },
           {
-            "selector_token": "sel-23b3423ebd22d8264f05134c12ec8435988d0122629fa2d29dfb2ef3d6a26d10",
+            "selector_token": "sel-361114ec976f3724cdb6b293395fab69ac4903950c0c512acabd042fd9a05494",
             "action": "ask_clarification",
             "label": "独立维护者检查",
             "status_label": "缺少；阻止继续",
@@ -1967,7 +1967,7 @@
             ]
           },
           {
-            "selector_token": "sel-c3b715bda527fbc44482bc58ba120670006e72532b3169960db7e7d709bdf565",
+            "selector_token": "sel-e7e6b05f498779ae9e853557b65ff95fc58ba140b01a090722fc248ddc982b56",
             "action": "ask_clarification",
             "label": "已知限制",
             "status_label": "已提供；已完成",
@@ -2016,9 +2016,9 @@
             ]
           },
           {
-            "selector_token": "sel-d1f53a57d01fcb1f9754ab53e23ad79c5abd6683c3f612d29f7cf8cd163fab2c",
+            "selector_token": "sel-8c20a9667e25aed0616cdf1f3ed4c3335724843d5d3fb252d08c806153eaed78",
             "action": "ask_clarification",
-            "label": "项目规则与治理影响",
+            "label": "项目规则影响说明",
             "status_label": "已提供；已完成",
             "affected_scope": [
               ".agm/manifest.yml",
@@ -2065,9 +2065,9 @@
             ]
           },
           {
-            "selector_token": "sel-920e0f956d94ccfd38b40d5a74125cf23af4961081a8c7ddf078d98c26410dae",
+            "selector_token": "sel-63ea7dbe0b4a88539672d38c923f008d1d928b6b1e503aa1eb6fb76213db83f6",
             "action": "ask_clarification",
-            "label": "修改理由",
+            "label": "修改原因",
             "status_label": "已提供；已完成",
             "affected_scope": [
               ".agm/manifest.yml",
@@ -2114,7 +2114,7 @@
             ]
           },
           {
-            "selector_token": "sel-0475d9e967da8ba729da3f5054de6c96ba277401db5753e815d1c54f7fbefaf5",
+            "selector_token": "sel-c2ddeb05709066382dc2e20ebf41722913f20aa900ad0570c4498b0a1a151aa1",
             "action": "ask_clarification",
             "label": "修改说明",
             "status_label": "已提供；已完成",
@@ -2163,7 +2163,7 @@
             ]
           },
           {
-            "selector_token": "sel-6d5d5717ff2a160a539558a5b273bbd764b1bb218610d988d3c6d4936fc1af9b",
+            "selector_token": "sel-37afb0a4d7222141ef10a378900cd3ed1edae869e6dd38771110e47518bb003a",
             "action": "ask_clarification",
             "label": "测试命令与结果",
             "status_label": "已提供；已完成",
@@ -2217,7 +2217,7 @@
         "action": "record_policy_conflict",
         "title": "记录项目规则冲突",
         "description": "记录无法由普通材料修复的策略冲突。",
-        "consequence": "案例转入 repair，由 policy steward 或维护者处理。",
+        "consequence": "案例转入补充处理，由项目规则负责人或维护者处理。",
         "mutates_state": true,
         "actor_role": "maintainer",
         "default_obligation_ids": [
@@ -2244,9 +2244,9 @@
         "primary_reason": "后端允许此操作，但它不直接处理当前主要阻断项。",
         "selector_options": [
           {
-            "selector_token": "sel-6848f4152ad76617b8b6f32143a4f8259d9c892debfe856ce6c319ea89de2995",
+            "selector_token": "sel-65697e19800d8014cc81c36516b74e6a78df09efc442f2d4e745c76558b971af",
             "action": "record_policy_conflict",
-            "label": "可核验测试制品",
+            "label": "可检查的测试输出或文件",
             "status_label": "已提供；已完成",
             "affected_scope": [
               ".agm/manifest.yml",
@@ -2293,7 +2293,7 @@
             ]
           },
           {
-            "selector_token": "sel-7998948232befc5faf3dc29c425ef1f1f1924cfde5b6d93d2ab4813e56d2885b",
+            "selector_token": "sel-b6b488449c2d3c9043aaec23b8efd68cdb002713f714294856bf787fea822e70",
             "action": "record_policy_conflict",
             "label": "变更文件清单",
             "status_label": "已提供；已完成",
@@ -2342,7 +2342,7 @@
             ]
           },
           {
-            "selector_token": "sel-d9738d9faf5cc9d9862df2869cc69fcc316c76bfd769aab144fe2e7436e8b0b0",
+            "selector_token": "sel-9d754ced1f8b63a36ebf41df15db8db78517576b0e84270fbdcb3c1acb2b023d",
             "action": "record_policy_conflict",
             "label": "独立维护者检查",
             "status_label": "缺少；阻止继续",
@@ -2384,7 +2384,7 @@
             ]
           },
           {
-            "selector_token": "sel-e42726c5c2df95da253bc7a636057cd3e426a502d33a193809d472a711e054c4",
+            "selector_token": "sel-789f6baaa10b5c335c12509ce8c5b9d09a3da9f733b38f34380ce319d5ca86cd",
             "action": "record_policy_conflict",
             "label": "已知限制",
             "status_label": "已提供；已完成",
@@ -2433,9 +2433,9 @@
             ]
           },
           {
-            "selector_token": "sel-222250b677a27da9bcd25f0add3e20d897fa6266384dce24b080099dc950ac1d",
+            "selector_token": "sel-5fb4a2160d1ae521be848c74e393ce3d589073efe4a615e7a9157f16e1faa489",
             "action": "record_policy_conflict",
-            "label": "项目规则与治理影响",
+            "label": "项目规则影响说明",
             "status_label": "已提供；已完成",
             "affected_scope": [
               ".agm/manifest.yml",
@@ -2482,9 +2482,9 @@
             ]
           },
           {
-            "selector_token": "sel-12d093fd0691ac470cd9e2d7502410b25ea33c2cf16d4946b024ded1f8afcb35",
+            "selector_token": "sel-d211d11e9313c97f6701fd188efafcdf79ee7a52b4669c922a0fa2652f431c5d",
             "action": "record_policy_conflict",
-            "label": "修改理由",
+            "label": "修改原因",
             "status_label": "已提供；已完成",
             "affected_scope": [
               ".agm/manifest.yml",
@@ -2531,7 +2531,7 @@
             ]
           },
           {
-            "selector_token": "sel-6262c42922a47beb41dac592b59ee0ed67bcb57050a54f82e7f013bb323f5625",
+            "selector_token": "sel-4ba72cbe5c37976f77d03efeed55b6112c7f02b02b53da86fdd6ce4ecb4d919a",
             "action": "record_policy_conflict",
             "label": "修改说明",
             "status_label": "已提供；已完成",
@@ -2580,7 +2580,7 @@
             ]
           },
           {
-            "selector_token": "sel-ed2446d4f608a16dc0f8914697924266165f6a975882d6c39db0206857021b4a",
+            "selector_token": "sel-2f85aae848c959712fba06d4278f4b1f20e018d7e0fda2b5c2146a66be150359",
             "action": "record_policy_conflict",
             "label": "测试命令与结果",
             "status_label": "已提供；已完成",
@@ -2634,7 +2634,7 @@
     "unavailable_actions": [
       {
         "action": "invalidate_attestation",
-        "title": "要求负责人重新确认",
+        "title": "将旧负责人确认标记为失效",
         "description": "使一条过时或不正确的负责人确认失效。",
         "reason": "当前没有仍然有效的负责人确认可供失效处理。",
         "next_actor_roles": [
@@ -2668,9 +2668,9 @@
       },
       {
         "action": "resolve_policy_conflict",
-        "title": "解决项目规则冲突",
+        "title": "处理项目规则冲突",
         "description": "由有权限的角色记录策略冲突的解决依据。",
-        "reason": "操作 resolve_policy_conflict 不能从当前状态 awaiting_maintainer_verification 执行。",
+        "reason": "当前处于“等待维护者检查”，还不能执行“处理项目规则冲突”。",
         "next_actor_roles": [
           "maintainer_verifier",
           "policy_steward",
@@ -2684,7 +2684,7 @@
             "relationship": "authority"
           }
         ],
-        "category": "stage",
+        "category": "scope",
         "required_role": [
           "maintainer",
           "policy_steward"
@@ -2696,9 +2696,9 @@
       },
       {
         "action": "resubmit",
-        "title": "补交指定范围",
-        "description": "贡献侧提交 repair 影响范围和新增材料。",
-        "reason": "当前角色没有 resubmit 权限。 可执行角色：contributor, contributor_agent。",
+        "title": "重新提交修改后的材料",
+        "description": "贡献侧提交补充或修改影响范围和新增材料。",
+        "reason": "当前角色没有“重新提交修改后的材料”的权限。可以执行这一步的角色：人类贡献者或贡献侧智能体。",
         "next_actor_roles": [
           "contributor",
           "contributor_agent"
@@ -2723,9 +2723,9 @@
       },
       {
         "action": "confirm_attestation",
-        "title": "负责人确认当前范围",
-        "description": "由 accountable human 对明确范围作出事实确认。",
-        "reason": "当前角色没有 confirm_attestation 权限。 可执行角色：accountable_human。",
+        "title": "确认负责人声明",
+        "description": "由负责人对明确范围作出事实确认。",
+        "reason": "当前角色没有“确认负责人声明”的权限。可以执行这一步的角色：负责人。",
         "next_actor_roles": [
           "accountable_human"
         ],
@@ -2749,9 +2749,9 @@
       },
       {
         "action": "authorized_override",
-        "title": "执行有权覆盖",
-        "description": "记录具备权限的维护者对明确义务或 finding 的例外处理。",
-        "reason": "操作 authorized_override 不能从当前状态 awaiting_maintainer_verification 执行。",
+        "title": "由有权维护者执行覆盖处理",
+        "description": "记录具备权限的维护者对明确项目要求或问题的例外处理。",
+        "reason": "当前处于“等待维护者检查”，还不能执行“由有权维护者执行覆盖处理”。",
         "next_actor_roles": [
           "maintainer_verifier",
           "policy_steward",
@@ -2765,7 +2765,7 @@
             "relationship": "authority"
           }
         ],
-        "category": "stage",
+        "category": "authority",
         "required_role": [
           "maintainer"
         ],
@@ -2778,9 +2778,9 @@
       },
       {
         "action": "decide_accept",
-        "title": "提交人类最终接受决定",
+        "title": "最终接受",
         "description": "由人类维护者记录接受决定。",
-        "reason": "操作 decide_accept 不能从当前状态 awaiting_maintainer_verification 执行。",
+        "reason": "当前处于“等待维护者检查”，还不能执行“最终接受”。",
         "next_actor_roles": [
           "maintainer_verifier",
           "policy_steward",
@@ -2794,7 +2794,7 @@
             "relationship": "authority"
           }
         ],
-        "category": "stage",
+        "category": "authority",
         "required_role": [
           "maintainer"
         ],
@@ -2806,9 +2806,9 @@
       },
       {
         "action": "decide_reject",
-        "title": "提交人类最终拒绝决定",
+        "title": "最终拒绝",
         "description": "由人类维护者记录拒绝决定。",
-        "reason": "操作 decide_reject 不能从当前状态 awaiting_maintainer_verification 执行。",
+        "reason": "当前处于“等待维护者检查”，还不能执行“最终拒绝”。",
         "next_actor_roles": [
           "maintainer_verifier",
           "policy_steward",
@@ -2822,7 +2822,7 @@
             "relationship": "authority"
           }
         ],
-        "category": "stage",
+        "category": "authority",
         "required_role": [
           "maintainer"
         ],
@@ -2835,9 +2835,9 @@
       },
       {
         "action": "decide_request_changes",
-        "title": "提交人类修改决定",
+        "title": "要求继续修改",
         "description": "由人类维护者要求贡献侧继续修改。",
-        "reason": "操作 decide_request_changes 不能从当前状态 awaiting_maintainer_verification 执行。",
+        "reason": "当前处于“等待维护者检查”，还不能执行“要求继续修改”。",
         "next_actor_roles": [
           "maintainer_verifier",
           "policy_steward",
@@ -2851,7 +2851,7 @@
             "relationship": "authority"
           }
         ],
-        "category": "stage",
+        "category": "authority",
         "required_role": [
           "maintainer"
         ],
@@ -2863,9 +2863,9 @@
       },
       {
         "action": "decide_close",
-        "title": "关闭案例",
+        "title": "关闭本次审核记录",
         "description": "由人类维护者关闭案例而不表示接受或合并。",
-        "reason": "操作 decide_close 不能从当前状态 awaiting_maintainer_verification 执行。",
+        "reason": "当前处于“等待维护者检查”，还不能执行“关闭本次审核记录”。",
         "next_actor_roles": [
           "maintainer_verifier",
           "policy_steward",
@@ -2879,7 +2879,7 @@
             "relationship": "authority"
           }
         ],
-        "category": "stage",
+        "category": "authority",
         "required_role": [
           "maintainer"
         ],
@@ -3192,14 +3192,14 @@
             ".agm/manifest.yml",
             "src/agm/vnext/risk.py"
           ],
-          "contribution_fingerprint": "86d2eedb24226e3e8979417172fc9e9636751e89ecb8511db2669ee92970bc6e",
+          "contribution_fingerprint": "ca3c9b1db2449d4653441d68a96bb549522d33b0721d047b27ba7dece4bf5b41",
           "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
           "evidence_type": "artifact",
           "value": "Local regression output is attached.",
           "command": null,
           "environment": null,
           "artifact_path": "governance-self-mod-tests.txt",
-          "artifact_hash": "d334f42e5e92edf2f04bef2fc53fababe9c7266f378947883f23df9c9218f9c7",
+          "artifact_hash": "e0336ec5117948a0d59de5ef8da8324ef52cccc1ce150c2ca56e1208c89bbb8f",
           "observed_at": "2026-07-26T00:05:00Z",
           "expires_at": null,
           "source_actor": "contributor-agent",
@@ -3221,7 +3221,7 @@
             ".agm/manifest.yml",
             "src/agm/vnext/risk.py"
           ],
-          "contribution_fingerprint": "86d2eedb24226e3e8979417172fc9e9636751e89ecb8511db2669ee92970bc6e",
+          "contribution_fingerprint": "ca3c9b1db2449d4653441d68a96bb549522d33b0721d047b27ba7dece4bf5b41",
           "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
           "evidence_type": "changed_files",
           "value": [
@@ -3253,7 +3253,7 @@
             ".agm/manifest.yml",
             "src/agm/vnext/risk.py"
           ],
-          "contribution_fingerprint": "86d2eedb24226e3e8979417172fc9e9636751e89ecb8511db2669ee92970bc6e",
+          "contribution_fingerprint": "ca3c9b1db2449d4653441d68a96bb549522d33b0721d047b27ba7dece4bf5b41",
           "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
           "evidence_type": "known_limitations",
           "value": "This remains a local research prototype.",
@@ -3282,7 +3282,7 @@
             ".agm/manifest.yml",
             "src/agm/vnext/risk.py"
           ],
-          "contribution_fingerprint": "86d2eedb24226e3e8979417172fc9e9636751e89ecb8511db2669ee92970bc6e",
+          "contribution_fingerprint": "ca3c9b1db2449d4653441d68a96bb549522d33b0721d047b27ba7dece4bf5b41",
           "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
           "evidence_type": "policy_impact",
           "value": "Governance compatibility, self-modification, and migration were assessed.",
@@ -3311,7 +3311,7 @@
             ".agm/manifest.yml",
             "src/agm/vnext/risk.py"
           ],
-          "contribution_fingerprint": "86d2eedb24226e3e8979417172fc9e9636751e89ecb8511db2669ee92970bc6e",
+          "contribution_fingerprint": "ca3c9b1db2449d4653441d68a96bb549522d33b0721d047b27ba7dece4bf5b41",
           "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
           "evidence_type": "rationale",
           "value": "The scenario change is required by its stated objective.",
@@ -3340,7 +3340,7 @@
             ".agm/manifest.yml",
             "src/agm/vnext/risk.py"
           ],
-          "contribution_fingerprint": "86d2eedb24226e3e8979417172fc9e9636751e89ecb8511db2669ee92970bc6e",
+          "contribution_fingerprint": "ca3c9b1db2449d4653441d68a96bb549522d33b0721d047b27ba7dece4bf5b41",
           "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
           "evidence_type": "contribution_summary",
           "value": "Implemented the scenario contribution.",
@@ -3369,7 +3369,7 @@
             ".agm/manifest.yml",
             "src/agm/vnext/risk.py"
           ],
-          "contribution_fingerprint": "86d2eedb24226e3e8979417172fc9e9636751e89ecb8511db2669ee92970bc6e",
+          "contribution_fingerprint": "ca3c9b1db2449d4653441d68a96bb549522d33b0721d047b27ba7dece4bf5b41",
           "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
           "evidence_type": "test_command",
           "value": "The complete local regression suite passed.",
@@ -3395,7 +3395,7 @@
       "findings": [],
       "repair_requests": [],
       "attempted_operations": [],
-      "contribution_fingerprint": "86d2eedb24226e3e8979417172fc9e9636751e89ecb8511db2669ee92970bc6e",
+      "contribution_fingerprint": "ca3c9b1db2449d4653441d68a96bb549522d33b0721d047b27ba7dece4bf5b41",
       "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
       "policy_snapshot": {
         "id": "policy-04224373c223578c85bff2ed1e818bfa",
@@ -3565,8 +3565,8 @@
     "current_relevant_actions": [
       {
         "action": "verify_evidence",
-        "title": "检查待核验项",
-        "description": "记录维护者对指定义务及其绑定材料的检查结果。",
+        "title": "检查提交材料",
+        "description": "记录维护者对指定项目要求及其绑定材料的检查结果。",
         "consequence": "受影响项会记录维护者检查；全部阻断项完成后进入人类最终决定。",
         "mutates_state": true,
         "actor_role": "maintainer",
@@ -3600,9 +3600,9 @@
         "primary_reason": "该操作直接对应当前流程阶段或开放问题。",
         "selector_options": [
           {
-            "selector_token": "sel-bb699feb5efac4234e2c417fb99da34ca575d828bcd83ef7311a241b7945140e",
+            "selector_token": "sel-8ccdf082e824be8d301649f38703521ae445c77c9ce0862d12c162df49eab6e3",
             "action": "verify_evidence",
-            "label": "可核验测试制品",
+            "label": "可检查的测试输出或文件",
             "status_label": "已提供；已完成",
             "affected_scope": [
               ".agm/manifest.yml",
@@ -3649,7 +3649,7 @@
             ]
           },
           {
-            "selector_token": "sel-8e96cc7394c7659c490dfc31989dfe98f25e9662d7e9753781a2acfda81d4d14",
+            "selector_token": "sel-e483405b5609c845ce1ff9b54fe633f9c7a554354ffa35fa0b237531c346e283",
             "action": "verify_evidence",
             "label": "变更文件清单",
             "status_label": "已提供；已完成",
@@ -3698,7 +3698,7 @@
             ]
           },
           {
-            "selector_token": "sel-055340d1063ac3491a3d1a32604674ba5558d095ea771335aacddd1c3592a0ac",
+            "selector_token": "sel-facc54272168bf64847ca6722c041d73e366be2307b82a28d649f9a4ccaf5efb",
             "action": "verify_evidence",
             "label": "独立维护者检查",
             "status_label": "缺少；阻止继续",
@@ -3740,7 +3740,7 @@
             ]
           },
           {
-            "selector_token": "sel-3488c42bcae8f17edf7e8d06c5e9989af8ba59a6995da8230b5a85b76439a1a4",
+            "selector_token": "sel-443e6f25168695a2a86387842d98b589236b985e79f086e648e37b7a243e3508",
             "action": "verify_evidence",
             "label": "已知限制",
             "status_label": "已提供；已完成",
@@ -3789,9 +3789,9 @@
             ]
           },
           {
-            "selector_token": "sel-73cf1729602d740b9e6e40b946afe324cfdda8b5572a22cda7f0bc352bfdae30",
+            "selector_token": "sel-2d7fff2f097557c10d97aebab2a0a0d0cad7adc8a4f4a8cdbb691ad0252c1844",
             "action": "verify_evidence",
-            "label": "项目规则与治理影响",
+            "label": "项目规则影响说明",
             "status_label": "已提供；已完成",
             "affected_scope": [
               ".agm/manifest.yml",
@@ -3838,9 +3838,9 @@
             ]
           },
           {
-            "selector_token": "sel-96091f20d639626c71ccaa3f5c495dc5982719754064d6c2e10ff59aa0445ac8",
+            "selector_token": "sel-37976165aa5345bc40c64335d80beb3f3d3d30ba488f51dc86300462ca0af9a0",
             "action": "verify_evidence",
-            "label": "修改理由",
+            "label": "修改原因",
             "status_label": "已提供；已完成",
             "affected_scope": [
               ".agm/manifest.yml",
@@ -3887,7 +3887,7 @@
             ]
           },
           {
-            "selector_token": "sel-17bb0e7eca5e0b0a59d64822a766e63ab72c7b08a829babbffc21ced42d96d71",
+            "selector_token": "sel-373f0f5cb8b060b6be29b9880e19283fb9ba24deb374d4bdf20e93c611c1c07e",
             "action": "verify_evidence",
             "label": "修改说明",
             "status_label": "已提供；已完成",
@@ -3936,7 +3936,7 @@
             ]
           },
           {
-            "selector_token": "sel-3487131835e6aac59262c1bc54fd018cf1618f1e3dfb714e83dc99fd6f96b75c",
+            "selector_token": "sel-e8dd036ba8127f5cf124b227612118073d1ea6c2621eacf34a5c39c461c83d99",
             "action": "verify_evidence",
             "label": "测试命令与结果",
             "status_label": "已提供；已完成",
@@ -3988,7 +3988,7 @@
       },
       {
         "action": "request_repair",
-        "title": "请求补充或更新材料",
+        "title": "要求补充或修改",
         "description": "指出问题和受影响义务，返回贡献侧修复。",
         "consequence": "仅指定范围需要修复和重新检查，未受影响材料保留。",
         "mutates_state": true,
@@ -4017,9 +4017,9 @@
         "primary_reason": "该操作直接对应当前流程阶段或开放问题。",
         "selector_options": [
           {
-            "selector_token": "sel-70ad87ce9829f11405a4ebfd4b7eeb8173442c2b5f696b758bf9530da940c7ea",
+            "selector_token": "sel-30e00ae19371786d9a76312d078fd82ed0e8ee08fed80665082d40900518cf40",
             "action": "request_repair",
-            "label": "可核验测试制品",
+            "label": "可检查的测试输出或文件",
             "status_label": "已提供；已完成",
             "affected_scope": [
               ".agm/manifest.yml",
@@ -4066,7 +4066,7 @@
             ]
           },
           {
-            "selector_token": "sel-3d2e54d3a1bc859b389263d7fb7a7a3c4237fb040a2ea0550af9315c78d89224",
+            "selector_token": "sel-a2957458b991236cf5568440be1d7d2faef72b17cfe2cf47b1d8962f4b23c571",
             "action": "request_repair",
             "label": "变更文件清单",
             "status_label": "已提供；已完成",
@@ -4115,7 +4115,7 @@
             ]
           },
           {
-            "selector_token": "sel-1fdac5c699a97da6b6423101dab7bcc5eeced5f539587ba7465779c1384ceec8",
+            "selector_token": "sel-3c983a57a5698a3194791c6f6eb54ac4d4267dbd90ab55f375aec69b8e3178f7",
             "action": "request_repair",
             "label": "独立维护者检查",
             "status_label": "缺少；阻止继续",
@@ -4157,7 +4157,7 @@
             ]
           },
           {
-            "selector_token": "sel-16ac6b6d648700c138e4795a67dcc3e2696c870fedbc03c7e5a903167a0c2a31",
+            "selector_token": "sel-c6b86f1a7a66f301b4af5275c6ca8e4a33a6741610fc1f84530f8305e6127670",
             "action": "request_repair",
             "label": "已知限制",
             "status_label": "已提供；已完成",
@@ -4206,9 +4206,9 @@
             ]
           },
           {
-            "selector_token": "sel-0892fa59959f2093f7868b6734e39e608865ba87caaddbfb1e86b54b02aa47bc",
+            "selector_token": "sel-7a8b617bb89ad0ec7a61c002fb3f9692655c1dcc896a6edefe656bf27892feeb",
             "action": "request_repair",
-            "label": "项目规则与治理影响",
+            "label": "项目规则影响说明",
             "status_label": "已提供；已完成",
             "affected_scope": [
               ".agm/manifest.yml",
@@ -4255,9 +4255,9 @@
             ]
           },
           {
-            "selector_token": "sel-9ab0eec10c6dbd2a25668fbe56dce1df3e4ec5b0771e152f4c413e7bbdec7d8e",
+            "selector_token": "sel-4417ef98f1bedb75a0969e5e00061a547149924c8021ebebed2c6a6f6ba28e4b",
             "action": "request_repair",
-            "label": "修改理由",
+            "label": "修改原因",
             "status_label": "已提供；已完成",
             "affected_scope": [
               ".agm/manifest.yml",
@@ -4304,7 +4304,7 @@
             ]
           },
           {
-            "selector_token": "sel-84990ac698cda1bb3f6558a45555c277c5461455a1ef14dcc507c686e096a7c9",
+            "selector_token": "sel-3fb5c21150eacf28ab36800d3c64d4b8a955bba6159921160461fc0fb6543337",
             "action": "request_repair",
             "label": "修改说明",
             "status_label": "已提供；已完成",
@@ -4353,7 +4353,7 @@
             ]
           },
           {
-            "selector_token": "sel-cdfaaf9de881c63590a8f269835eb0191c82580d4c90b281b352b6679f8e7b33",
+            "selector_token": "sel-d0198008ac561f27b7fb14e21075270724937e5cd10f4470bff2ee40658c0125",
             "action": "request_repair",
             "label": "测试命令与结果",
             "status_label": "已提供；已完成",
@@ -4405,9 +4405,9 @@
       },
       {
         "action": "reject_evidence",
-        "title": "拒绝无效材料",
+        "title": "拒绝当前材料",
         "description": "拒绝一条不能支持当前修改的具体材料。",
-        "consequence": "该材料标记为 rejected，并建立 scoped repair。",
+        "consequence": "该材料将标记为已拒绝，并建立指定范围的补充或修改请求。",
         "mutates_state": true,
         "actor_role": "maintainer",
         "default_obligation_ids": [],
@@ -4432,9 +4432,9 @@
         "primary_reason": "该操作直接对应当前流程阶段或开放问题。",
         "selector_options": [
           {
-            "selector_token": "sel-da78a7650934939da64862ec5a24c15e94eae746712b2667ab02eb85b4e0e498",
+            "selector_token": "sel-6bcd83b2abf6520a07c9ed09439fff9f6cb1b554171dbed826e7c0384f5d9639",
             "action": "reject_evidence",
-            "label": "可核验测试制品",
+            "label": "可检查的测试输出或文件",
             "status_label": "当前材料有效，可记录拒绝依据",
             "affected_scope": [
               ".agm/manifest.yml",
@@ -4463,7 +4463,7 @@
             ]
           },
           {
-            "selector_token": "sel-e1e2527b03eca1ece7edc9dd2eb2ee8a0f0c0c656d3f34e891d3696e942899f1",
+            "selector_token": "sel-6fde907f1fe5f5e24f188d76558568a9d526fd403db40407faa42d6c657563c6",
             "action": "reject_evidence",
             "label": "变更文件清单",
             "status_label": "当前材料有效，可记录拒绝依据",
@@ -4494,7 +4494,7 @@
             ]
           },
           {
-            "selector_token": "sel-baba2f777f2b77230456117c0d4107e656447f676ab9a111796c2b48c67876af",
+            "selector_token": "sel-c29c3f6250512c43834973d9ecc8d56178351c555140fff37ea1db0b993bff8f",
             "action": "reject_evidence",
             "label": "已知限制",
             "status_label": "当前材料有效，可记录拒绝依据",
@@ -4525,9 +4525,9 @@
             ]
           },
           {
-            "selector_token": "sel-9b191559eaa6c1a0c89bbdbf77298e3663116f77f6dc63f3a0010fde180605bd",
+            "selector_token": "sel-ed8e32ce502110c436cea0aba75e2c8d622e99b36111ff328e9c4fccfab6dc55",
             "action": "reject_evidence",
-            "label": "项目规则与治理影响",
+            "label": "项目规则影响说明",
             "status_label": "当前材料有效，可记录拒绝依据",
             "affected_scope": [
               ".agm/manifest.yml",
@@ -4556,9 +4556,9 @@
             ]
           },
           {
-            "selector_token": "sel-0db40b937fb97405190304ff09aa4965bd4d9ee34da21af70dbc1dc0dbce07bd",
+            "selector_token": "sel-e3ac52757f53d882b754d2f2a2984b3b1906bf089f802f72effee28044b0c678",
             "action": "reject_evidence",
-            "label": "修改理由",
+            "label": "修改原因",
             "status_label": "当前材料有效，可记录拒绝依据",
             "affected_scope": [
               ".agm/manifest.yml",
@@ -4587,7 +4587,7 @@
             ]
           },
           {
-            "selector_token": "sel-90781e4f415863d51aa6603fa0b2cddadbd89222b0a9f48bd8d9b6e5ecda3583",
+            "selector_token": "sel-bc73dc4f948c72adda3e6c8c43987735eff6ed5d21ebdd1e7fa442a80775e72d",
             "action": "reject_evidence",
             "label": "修改说明",
             "status_label": "当前材料有效，可记录拒绝依据",
@@ -4618,7 +4618,7 @@
             ]
           },
           {
-            "selector_token": "sel-cca00490ac81196bce26107e79c4cfa1dbf225847ca3f4ef837770d62091f378",
+            "selector_token": "sel-4d9ef3ce1c96c49b1fcadc435f07b90ea342361bc0c3e5d1e3683c5a6c168cca",
             "action": "reject_evidence",
             "label": "测试命令与结果",
             "status_label": "当前材料有效，可记录拒绝依据",
@@ -4652,7 +4652,7 @@
       },
       {
         "action": "ask_clarification",
-        "title": "请求说明",
+        "title": "请求补充说明",
         "description": "针对指定要求提出可审计的澄清问题。",
         "consequence": "案例返回贡献侧回答，所选范围需要重新检查。",
         "mutates_state": true,
@@ -4681,9 +4681,9 @@
         "primary_reason": "该操作直接对应当前流程阶段或开放问题。",
         "selector_options": [
           {
-            "selector_token": "sel-a901ae2c3165b77183f1ee265345b793b153ca806a5b5e1e0bc9bcc17ac725b5",
+            "selector_token": "sel-8927f5a9fc4d9e8ac6a8c919e90009369355bca71d55d3638e5349e56a865834",
             "action": "ask_clarification",
-            "label": "可核验测试制品",
+            "label": "可检查的测试输出或文件",
             "status_label": "已提供；已完成",
             "affected_scope": [
               ".agm/manifest.yml",
@@ -4730,7 +4730,7 @@
             ]
           },
           {
-            "selector_token": "sel-b96ad9191041c944182a38ebc29ce740d2e35bebd5bc26461c0c14f7a5d0deb3",
+            "selector_token": "sel-c014f8c9de647a5d394c4cb06daf0861487c15dcc16df4fa429eceedbf145917",
             "action": "ask_clarification",
             "label": "变更文件清单",
             "status_label": "已提供；已完成",
@@ -4779,7 +4779,7 @@
             ]
           },
           {
-            "selector_token": "sel-23b3423ebd22d8264f05134c12ec8435988d0122629fa2d29dfb2ef3d6a26d10",
+            "selector_token": "sel-361114ec976f3724cdb6b293395fab69ac4903950c0c512acabd042fd9a05494",
             "action": "ask_clarification",
             "label": "独立维护者检查",
             "status_label": "缺少；阻止继续",
@@ -4821,7 +4821,7 @@
             ]
           },
           {
-            "selector_token": "sel-c3b715bda527fbc44482bc58ba120670006e72532b3169960db7e7d709bdf565",
+            "selector_token": "sel-e7e6b05f498779ae9e853557b65ff95fc58ba140b01a090722fc248ddc982b56",
             "action": "ask_clarification",
             "label": "已知限制",
             "status_label": "已提供；已完成",
@@ -4870,9 +4870,9 @@
             ]
           },
           {
-            "selector_token": "sel-d1f53a57d01fcb1f9754ab53e23ad79c5abd6683c3f612d29f7cf8cd163fab2c",
+            "selector_token": "sel-8c20a9667e25aed0616cdf1f3ed4c3335724843d5d3fb252d08c806153eaed78",
             "action": "ask_clarification",
-            "label": "项目规则与治理影响",
+            "label": "项目规则影响说明",
             "status_label": "已提供；已完成",
             "affected_scope": [
               ".agm/manifest.yml",
@@ -4919,9 +4919,9 @@
             ]
           },
           {
-            "selector_token": "sel-920e0f956d94ccfd38b40d5a74125cf23af4961081a8c7ddf078d98c26410dae",
+            "selector_token": "sel-63ea7dbe0b4a88539672d38c923f008d1d928b6b1e503aa1eb6fb76213db83f6",
             "action": "ask_clarification",
-            "label": "修改理由",
+            "label": "修改原因",
             "status_label": "已提供；已完成",
             "affected_scope": [
               ".agm/manifest.yml",
@@ -4968,7 +4968,7 @@
             ]
           },
           {
-            "selector_token": "sel-0475d9e967da8ba729da3f5054de6c96ba277401db5753e815d1c54f7fbefaf5",
+            "selector_token": "sel-c2ddeb05709066382dc2e20ebf41722913f20aa900ad0570c4498b0a1a151aa1",
             "action": "ask_clarification",
             "label": "修改说明",
             "status_label": "已提供；已完成",
@@ -5017,7 +5017,7 @@
             ]
           },
           {
-            "selector_token": "sel-6d5d5717ff2a160a539558a5b273bbd764b1bb218610d988d3c6d4936fc1af9b",
+            "selector_token": "sel-37afb0a4d7222141ef10a378900cd3ed1edae869e6dd38771110e47518bb003a",
             "action": "ask_clarification",
             "label": "测试命令与结果",
             "status_label": "已提供；已完成",
@@ -5072,7 +5072,7 @@
       {
         "action": "view_change_scope",
         "title": "查看变化范围",
-        "description": "查看 changed files、风险规则、影响范围和绑定 fingerprint。",
+        "description": "查看变更文件、风险规则、影响范围和绑定指纹。",
         "consequence": "只读操作，不改变案例状态。",
         "mutates_state": false,
         "actor_role": "maintainer",
@@ -5094,7 +5094,7 @@
         "action": "record_policy_conflict",
         "title": "记录项目规则冲突",
         "description": "记录无法由普通材料修复的策略冲突。",
-        "consequence": "案例转入 repair，由 policy steward 或维护者处理。",
+        "consequence": "案例转入补充处理，由项目规则负责人或维护者处理。",
         "mutates_state": true,
         "actor_role": "maintainer",
         "default_obligation_ids": [
@@ -5121,9 +5121,9 @@
         "primary_reason": "后端允许此操作，但它不直接处理当前主要阻断项。",
         "selector_options": [
           {
-            "selector_token": "sel-6848f4152ad76617b8b6f32143a4f8259d9c892debfe856ce6c319ea89de2995",
+            "selector_token": "sel-65697e19800d8014cc81c36516b74e6a78df09efc442f2d4e745c76558b971af",
             "action": "record_policy_conflict",
-            "label": "可核验测试制品",
+            "label": "可检查的测试输出或文件",
             "status_label": "已提供；已完成",
             "affected_scope": [
               ".agm/manifest.yml",
@@ -5170,7 +5170,7 @@
             ]
           },
           {
-            "selector_token": "sel-7998948232befc5faf3dc29c425ef1f1f1924cfde5b6d93d2ab4813e56d2885b",
+            "selector_token": "sel-b6b488449c2d3c9043aaec23b8efd68cdb002713f714294856bf787fea822e70",
             "action": "record_policy_conflict",
             "label": "变更文件清单",
             "status_label": "已提供；已完成",
@@ -5219,7 +5219,7 @@
             ]
           },
           {
-            "selector_token": "sel-d9738d9faf5cc9d9862df2869cc69fcc316c76bfd769aab144fe2e7436e8b0b0",
+            "selector_token": "sel-9d754ced1f8b63a36ebf41df15db8db78517576b0e84270fbdcb3c1acb2b023d",
             "action": "record_policy_conflict",
             "label": "独立维护者检查",
             "status_label": "缺少；阻止继续",
@@ -5261,7 +5261,7 @@
             ]
           },
           {
-            "selector_token": "sel-e42726c5c2df95da253bc7a636057cd3e426a502d33a193809d472a711e054c4",
+            "selector_token": "sel-789f6baaa10b5c335c12509ce8c5b9d09a3da9f733b38f34380ce319d5ca86cd",
             "action": "record_policy_conflict",
             "label": "已知限制",
             "status_label": "已提供；已完成",
@@ -5310,9 +5310,9 @@
             ]
           },
           {
-            "selector_token": "sel-222250b677a27da9bcd25f0add3e20d897fa6266384dce24b080099dc950ac1d",
+            "selector_token": "sel-5fb4a2160d1ae521be848c74e393ce3d589073efe4a615e7a9157f16e1faa489",
             "action": "record_policy_conflict",
-            "label": "项目规则与治理影响",
+            "label": "项目规则影响说明",
             "status_label": "已提供；已完成",
             "affected_scope": [
               ".agm/manifest.yml",
@@ -5359,9 +5359,9 @@
             ]
           },
           {
-            "selector_token": "sel-12d093fd0691ac470cd9e2d7502410b25ea33c2cf16d4946b024ded1f8afcb35",
+            "selector_token": "sel-d211d11e9313c97f6701fd188efafcdf79ee7a52b4669c922a0fa2652f431c5d",
             "action": "record_policy_conflict",
-            "label": "修改理由",
+            "label": "修改原因",
             "status_label": "已提供；已完成",
             "affected_scope": [
               ".agm/manifest.yml",
@@ -5408,7 +5408,7 @@
             ]
           },
           {
-            "selector_token": "sel-6262c42922a47beb41dac592b59ee0ed67bcb57050a54f82e7f013bb323f5625",
+            "selector_token": "sel-4ba72cbe5c37976f77d03efeed55b6112c7f02b02b53da86fdd6ce4ecb4d919a",
             "action": "record_policy_conflict",
             "label": "修改说明",
             "status_label": "已提供；已完成",
@@ -5457,7 +5457,7 @@
             ]
           },
           {
-            "selector_token": "sel-ed2446d4f608a16dc0f8914697924266165f6a975882d6c39db0206857021b4a",
+            "selector_token": "sel-2f85aae848c959712fba06d4278f4b1f20e018d7e0fda2b5c2146a66be150359",
             "action": "record_policy_conflict",
             "label": "测试命令与结果",
             "status_label": "已提供；已完成",
@@ -5533,7 +5533,7 @@
         "label": "下载维护者摘要",
         "description": "导出当前风险、责任方和阻断项摘要，不作接受判断。",
         "output_type": "text/markdown",
-        "output": "# 维护者审核摘要\n\n案例：governance-self-mod\n当前状态：awaiting_maintainer_verification\n风险：critical\n当前责任方：人类维护者\n责任方依据：贡献侧要求已经满足，当前轮到有权限的维护者检查；检查完成仍不等于接受。\n\n## 阻断或待检查项\n\n- 独立维护者检查：缺少；阻止继续；范围：.agm/manifest.yml、src/agm/vnext/risk.py\n\n本摘要是治理状态说明，不是接受决定。",
+        "output": "# 维护者审核摘要\n\n案例：governance-self-mod\n当前状态：等待维护者检查\n风险：critical\n当前责任方：人类维护者\n责任方依据：贡献侧要求已经满足，当前轮到有权限的维护者检查；检查完成仍不等于接受。\n\n## 阻断或待检查项\n\n- 独立维护者检查：缺少；阻止继续；范围：.agm/manifest.yml、src/agm/vnext/risk.py\n\n本摘要是治理状态说明，不是接受决定。",
         "trace_refs": [
           {
             "kind": "compiled_obligation",
@@ -5658,7 +5658,7 @@
         "label": "复制当前责任方说明",
         "description": "生成不改变案例状态的 handoff note。",
         "output_type": "text/plain",
-        "output": "案例 governance-self-mod 当前交给：人类维护者。\n贡献侧要求已经满足，当前轮到有权限的维护者检查；检查完成仍不等于接受。\n完成后交给角色：maintainer。",
+        "output": "案例 governance-self-mod 当前交给：人类维护者。\n贡献侧要求已经满足，当前轮到有权限的维护者检查；检查完成仍不等于接受。\n完成后交给角色：人类维护者。",
         "trace_refs": [
           {
             "kind": "compiled_obligation",
@@ -5712,7 +5712,7 @@
   "expected_requirement_comparison": [
     {
       "obligation_id": "O-ARTIFACT",
-      "check_item": "可核验测试制品",
+      "check_item": "可检查的测试输出或文件",
       "project_requirement": "提供可以实际检查的测试输出或文件。",
       "current_situation": "已提供与当前贡献和项目规则绑定的材料。",
       "result": "meets_requirement",
@@ -5728,7 +5728,7 @@
         "evidence-b4dc6ccde1095ec3902b08fd6b2d774e"
       ],
       "binding_fingerprints": [
-        "86d2eedb24226e3e8979417172fc9e9636751e89ecb8511db2669ee92970bc6e"
+        "ca3c9b1db2449d4653441d68a96bb549522d33b0721d047b27ba7dece4bf5b41"
       ],
       "finding_ids": [],
       "reference_english": "Provide a locally checkable artifact or test output.",
@@ -5755,7 +5755,7 @@
           "relationship": "observed"
         }
       ],
-      "display_name": "可核验测试制品",
+      "display_name": "可检查的测试输出或文件",
       "reference_plain": "提供可以实际检查的测试输出或文件。",
       "observed_plain": "已提供与当前贡献和项目规则绑定的材料。",
       "observed_raw": "valid bound evidence is present",
@@ -5787,7 +5787,7 @@
         "evidence-6fea51033ea75f69bd34ad575b912b71"
       ],
       "binding_fingerprints": [
-        "86d2eedb24226e3e8979417172fc9e9636751e89ecb8511db2669ee92970bc6e"
+        "ca3c9b1db2449d4653441d68a96bb549522d33b0721d047b27ba7dece4bf5b41"
       ],
       "finding_ids": [],
       "reference_english": "Identify the files and scopes covered by the contribution.",
@@ -5897,7 +5897,7 @@
         "evidence-2e22e76b97f05db284335c8aca3a0c72"
       ],
       "binding_fingerprints": [
-        "86d2eedb24226e3e8979417172fc9e9636751e89ecb8511db2669ee92970bc6e"
+        "ca3c9b1db2449d4653441d68a96bb549522d33b0721d047b27ba7dece4bf5b41"
       ],
       "finding_ids": [],
       "reference_english": "State known limitations or explicitly state none.",
@@ -5940,7 +5940,7 @@
     },
     {
       "obligation_id": "O-POLICY-IMPACT",
-      "check_item": "项目规则与治理影响",
+      "check_item": "项目规则影响说明",
       "project_requirement": "说明本次修改是否影响项目规则或治理流程。",
       "current_situation": "已提供与当前贡献和项目规则绑定的材料。",
       "result": "meets_requirement",
@@ -5956,7 +5956,7 @@
         "evidence-f6e6a9bff8fa521caf3f937e9c71bce6"
       ],
       "binding_fingerprints": [
-        "86d2eedb24226e3e8979417172fc9e9636751e89ecb8511db2669ee92970bc6e"
+        "ca3c9b1db2449d4653441d68a96bb549522d33b0721d047b27ba7dece4bf5b41"
       ],
       "finding_ids": [],
       "reference_english": "Describe policy compatibility, migration, and self-modification impact.",
@@ -5983,7 +5983,7 @@
           "relationship": "observed"
         }
       ],
-      "display_name": "项目规则与治理影响",
+      "display_name": "项目规则影响说明",
       "reference_plain": "说明本次修改是否影响项目规则或治理流程。",
       "observed_plain": "已提供与当前贡献和项目规则绑定的材料。",
       "observed_raw": "valid bound evidence is present",
@@ -5999,7 +5999,7 @@
     },
     {
       "obligation_id": "O-RATIONALE",
-      "check_item": "修改理由",
+      "check_item": "修改原因",
       "project_requirement": "说明为什么需要这次修改。",
       "current_situation": "已提供与当前贡献和项目规则绑定的材料。",
       "result": "meets_requirement",
@@ -6015,7 +6015,7 @@
         "evidence-6f50d94dd4685b5cb2f0af3a32f9ff9e"
       ],
       "binding_fingerprints": [
-        "86d2eedb24226e3e8979417172fc9e9636751e89ecb8511db2669ee92970bc6e"
+        "ca3c9b1db2449d4653441d68a96bb549522d33b0721d047b27ba7dece4bf5b41"
       ],
       "finding_ids": [],
       "reference_english": "Explain why the change is needed without disclosing private reasoning.",
@@ -6042,7 +6042,7 @@
           "relationship": "observed"
         }
       ],
-      "display_name": "修改理由",
+      "display_name": "修改原因",
       "reference_plain": "说明为什么需要这次修改。",
       "observed_plain": "已提供与当前贡献和项目规则绑定的材料。",
       "observed_raw": "valid bound evidence is present",
@@ -6074,7 +6074,7 @@
         "evidence-472110c16da752aca16c4077fc222e7c"
       ],
       "binding_fingerprints": [
-        "86d2eedb24226e3e8979417172fc9e9636751e89ecb8511db2669ee92970bc6e"
+        "ca3c9b1db2449d4653441d68a96bb549522d33b0721d047b27ba7dece4bf5b41"
       ],
       "finding_ids": [],
       "reference_english": "Provide a concise factual contribution summary.",
@@ -6133,7 +6133,7 @@
         "evidence-d6562c3c9eeb5765960dbd75dbff7a28"
       ],
       "binding_fingerprints": [
-        "86d2eedb24226e3e8979417172fc9e9636751e89ecb8511db2669ee92970bc6e"
+        "ca3c9b1db2449d4653441d68a96bb549522d33b0721d047b27ba7dece4bf5b41"
       ],
       "finding_ids": [],
       "reference_english": "Provide a concrete test command, environment, and outcome.",
@@ -6189,8 +6189,8 @@
   "current_relevant_actions": [
     {
       "action": "verify_evidence",
-      "title": "检查待核验项",
-      "description": "记录维护者对指定义务及其绑定材料的检查结果。",
+      "title": "检查提交材料",
+      "description": "记录维护者对指定项目要求及其绑定材料的检查结果。",
       "consequence": "受影响项会记录维护者检查；全部阻断项完成后进入人类最终决定。",
       "mutates_state": true,
       "actor_role": "maintainer",
@@ -6224,9 +6224,9 @@
       "primary_reason": "该操作直接对应当前流程阶段或开放问题。",
       "selector_options": [
         {
-          "selector_token": "sel-bb699feb5efac4234e2c417fb99da34ca575d828bcd83ef7311a241b7945140e",
+          "selector_token": "sel-8ccdf082e824be8d301649f38703521ae445c77c9ce0862d12c162df49eab6e3",
           "action": "verify_evidence",
-          "label": "可核验测试制品",
+          "label": "可检查的测试输出或文件",
           "status_label": "已提供；已完成",
           "affected_scope": [
             ".agm/manifest.yml",
@@ -6273,7 +6273,7 @@
           ]
         },
         {
-          "selector_token": "sel-8e96cc7394c7659c490dfc31989dfe98f25e9662d7e9753781a2acfda81d4d14",
+          "selector_token": "sel-e483405b5609c845ce1ff9b54fe633f9c7a554354ffa35fa0b237531c346e283",
           "action": "verify_evidence",
           "label": "变更文件清单",
           "status_label": "已提供；已完成",
@@ -6322,7 +6322,7 @@
           ]
         },
         {
-          "selector_token": "sel-055340d1063ac3491a3d1a32604674ba5558d095ea771335aacddd1c3592a0ac",
+          "selector_token": "sel-facc54272168bf64847ca6722c041d73e366be2307b82a28d649f9a4ccaf5efb",
           "action": "verify_evidence",
           "label": "独立维护者检查",
           "status_label": "缺少；阻止继续",
@@ -6364,7 +6364,7 @@
           ]
         },
         {
-          "selector_token": "sel-3488c42bcae8f17edf7e8d06c5e9989af8ba59a6995da8230b5a85b76439a1a4",
+          "selector_token": "sel-443e6f25168695a2a86387842d98b589236b985e79f086e648e37b7a243e3508",
           "action": "verify_evidence",
           "label": "已知限制",
           "status_label": "已提供；已完成",
@@ -6413,9 +6413,9 @@
           ]
         },
         {
-          "selector_token": "sel-73cf1729602d740b9e6e40b946afe324cfdda8b5572a22cda7f0bc352bfdae30",
+          "selector_token": "sel-2d7fff2f097557c10d97aebab2a0a0d0cad7adc8a4f4a8cdbb691ad0252c1844",
           "action": "verify_evidence",
-          "label": "项目规则与治理影响",
+          "label": "项目规则影响说明",
           "status_label": "已提供；已完成",
           "affected_scope": [
             ".agm/manifest.yml",
@@ -6462,9 +6462,9 @@
           ]
         },
         {
-          "selector_token": "sel-96091f20d639626c71ccaa3f5c495dc5982719754064d6c2e10ff59aa0445ac8",
+          "selector_token": "sel-37976165aa5345bc40c64335d80beb3f3d3d30ba488f51dc86300462ca0af9a0",
           "action": "verify_evidence",
-          "label": "修改理由",
+          "label": "修改原因",
           "status_label": "已提供；已完成",
           "affected_scope": [
             ".agm/manifest.yml",
@@ -6511,7 +6511,7 @@
           ]
         },
         {
-          "selector_token": "sel-17bb0e7eca5e0b0a59d64822a766e63ab72c7b08a829babbffc21ced42d96d71",
+          "selector_token": "sel-373f0f5cb8b060b6be29b9880e19283fb9ba24deb374d4bdf20e93c611c1c07e",
           "action": "verify_evidence",
           "label": "修改说明",
           "status_label": "已提供；已完成",
@@ -6560,7 +6560,7 @@
           ]
         },
         {
-          "selector_token": "sel-3487131835e6aac59262c1bc54fd018cf1618f1e3dfb714e83dc99fd6f96b75c",
+          "selector_token": "sel-e8dd036ba8127f5cf124b227612118073d1ea6c2621eacf34a5c39c461c83d99",
           "action": "verify_evidence",
           "label": "测试命令与结果",
           "status_label": "已提供；已完成",
@@ -6612,7 +6612,7 @@
     },
     {
       "action": "request_repair",
-      "title": "请求补充或更新材料",
+      "title": "要求补充或修改",
       "description": "指出问题和受影响义务，返回贡献侧修复。",
       "consequence": "仅指定范围需要修复和重新检查，未受影响材料保留。",
       "mutates_state": true,
@@ -6641,9 +6641,9 @@
       "primary_reason": "该操作直接对应当前流程阶段或开放问题。",
       "selector_options": [
         {
-          "selector_token": "sel-70ad87ce9829f11405a4ebfd4b7eeb8173442c2b5f696b758bf9530da940c7ea",
+          "selector_token": "sel-30e00ae19371786d9a76312d078fd82ed0e8ee08fed80665082d40900518cf40",
           "action": "request_repair",
-          "label": "可核验测试制品",
+          "label": "可检查的测试输出或文件",
           "status_label": "已提供；已完成",
           "affected_scope": [
             ".agm/manifest.yml",
@@ -6690,7 +6690,7 @@
           ]
         },
         {
-          "selector_token": "sel-3d2e54d3a1bc859b389263d7fb7a7a3c4237fb040a2ea0550af9315c78d89224",
+          "selector_token": "sel-a2957458b991236cf5568440be1d7d2faef72b17cfe2cf47b1d8962f4b23c571",
           "action": "request_repair",
           "label": "变更文件清单",
           "status_label": "已提供；已完成",
@@ -6739,7 +6739,7 @@
           ]
         },
         {
-          "selector_token": "sel-1fdac5c699a97da6b6423101dab7bcc5eeced5f539587ba7465779c1384ceec8",
+          "selector_token": "sel-3c983a57a5698a3194791c6f6eb54ac4d4267dbd90ab55f375aec69b8e3178f7",
           "action": "request_repair",
           "label": "独立维护者检查",
           "status_label": "缺少；阻止继续",
@@ -6781,7 +6781,7 @@
           ]
         },
         {
-          "selector_token": "sel-16ac6b6d648700c138e4795a67dcc3e2696c870fedbc03c7e5a903167a0c2a31",
+          "selector_token": "sel-c6b86f1a7a66f301b4af5275c6ca8e4a33a6741610fc1f84530f8305e6127670",
           "action": "request_repair",
           "label": "已知限制",
           "status_label": "已提供；已完成",
@@ -6830,9 +6830,9 @@
           ]
         },
         {
-          "selector_token": "sel-0892fa59959f2093f7868b6734e39e608865ba87caaddbfb1e86b54b02aa47bc",
+          "selector_token": "sel-7a8b617bb89ad0ec7a61c002fb3f9692655c1dcc896a6edefe656bf27892feeb",
           "action": "request_repair",
-          "label": "项目规则与治理影响",
+          "label": "项目规则影响说明",
           "status_label": "已提供；已完成",
           "affected_scope": [
             ".agm/manifest.yml",
@@ -6879,9 +6879,9 @@
           ]
         },
         {
-          "selector_token": "sel-9ab0eec10c6dbd2a25668fbe56dce1df3e4ec5b0771e152f4c413e7bbdec7d8e",
+          "selector_token": "sel-4417ef98f1bedb75a0969e5e00061a547149924c8021ebebed2c6a6f6ba28e4b",
           "action": "request_repair",
-          "label": "修改理由",
+          "label": "修改原因",
           "status_label": "已提供；已完成",
           "affected_scope": [
             ".agm/manifest.yml",
@@ -6928,7 +6928,7 @@
           ]
         },
         {
-          "selector_token": "sel-84990ac698cda1bb3f6558a45555c277c5461455a1ef14dcc507c686e096a7c9",
+          "selector_token": "sel-3fb5c21150eacf28ab36800d3c64d4b8a955bba6159921160461fc0fb6543337",
           "action": "request_repair",
           "label": "修改说明",
           "status_label": "已提供；已完成",
@@ -6977,7 +6977,7 @@
           ]
         },
         {
-          "selector_token": "sel-cdfaaf9de881c63590a8f269835eb0191c82580d4c90b281b352b6679f8e7b33",
+          "selector_token": "sel-d0198008ac561f27b7fb14e21075270724937e5cd10f4470bff2ee40658c0125",
           "action": "request_repair",
           "label": "测试命令与结果",
           "status_label": "已提供；已完成",
@@ -7029,9 +7029,9 @@
     },
     {
       "action": "reject_evidence",
-      "title": "拒绝无效材料",
+      "title": "拒绝当前材料",
       "description": "拒绝一条不能支持当前修改的具体材料。",
-      "consequence": "该材料标记为 rejected，并建立 scoped repair。",
+      "consequence": "该材料将标记为已拒绝，并建立指定范围的补充或修改请求。",
       "mutates_state": true,
       "actor_role": "maintainer",
       "default_obligation_ids": [],
@@ -7056,9 +7056,9 @@
       "primary_reason": "该操作直接对应当前流程阶段或开放问题。",
       "selector_options": [
         {
-          "selector_token": "sel-da78a7650934939da64862ec5a24c15e94eae746712b2667ab02eb85b4e0e498",
+          "selector_token": "sel-6bcd83b2abf6520a07c9ed09439fff9f6cb1b554171dbed826e7c0384f5d9639",
           "action": "reject_evidence",
-          "label": "可核验测试制品",
+          "label": "可检查的测试输出或文件",
           "status_label": "当前材料有效，可记录拒绝依据",
           "affected_scope": [
             ".agm/manifest.yml",
@@ -7087,7 +7087,7 @@
           ]
         },
         {
-          "selector_token": "sel-e1e2527b03eca1ece7edc9dd2eb2ee8a0f0c0c656d3f34e891d3696e942899f1",
+          "selector_token": "sel-6fde907f1fe5f5e24f188d76558568a9d526fd403db40407faa42d6c657563c6",
           "action": "reject_evidence",
           "label": "变更文件清单",
           "status_label": "当前材料有效，可记录拒绝依据",
@@ -7118,7 +7118,7 @@
           ]
         },
         {
-          "selector_token": "sel-baba2f777f2b77230456117c0d4107e656447f676ab9a111796c2b48c67876af",
+          "selector_token": "sel-c29c3f6250512c43834973d9ecc8d56178351c555140fff37ea1db0b993bff8f",
           "action": "reject_evidence",
           "label": "已知限制",
           "status_label": "当前材料有效，可记录拒绝依据",
@@ -7149,9 +7149,9 @@
           ]
         },
         {
-          "selector_token": "sel-9b191559eaa6c1a0c89bbdbf77298e3663116f77f6dc63f3a0010fde180605bd",
+          "selector_token": "sel-ed8e32ce502110c436cea0aba75e2c8d622e99b36111ff328e9c4fccfab6dc55",
           "action": "reject_evidence",
-          "label": "项目规则与治理影响",
+          "label": "项目规则影响说明",
           "status_label": "当前材料有效，可记录拒绝依据",
           "affected_scope": [
             ".agm/manifest.yml",
@@ -7180,9 +7180,9 @@
           ]
         },
         {
-          "selector_token": "sel-0db40b937fb97405190304ff09aa4965bd4d9ee34da21af70dbc1dc0dbce07bd",
+          "selector_token": "sel-e3ac52757f53d882b754d2f2a2984b3b1906bf089f802f72effee28044b0c678",
           "action": "reject_evidence",
-          "label": "修改理由",
+          "label": "修改原因",
           "status_label": "当前材料有效，可记录拒绝依据",
           "affected_scope": [
             ".agm/manifest.yml",
@@ -7211,7 +7211,7 @@
           ]
         },
         {
-          "selector_token": "sel-90781e4f415863d51aa6603fa0b2cddadbd89222b0a9f48bd8d9b6e5ecda3583",
+          "selector_token": "sel-bc73dc4f948c72adda3e6c8c43987735eff6ed5d21ebdd1e7fa442a80775e72d",
           "action": "reject_evidence",
           "label": "修改说明",
           "status_label": "当前材料有效，可记录拒绝依据",
@@ -7242,7 +7242,7 @@
           ]
         },
         {
-          "selector_token": "sel-cca00490ac81196bce26107e79c4cfa1dbf225847ca3f4ef837770d62091f378",
+          "selector_token": "sel-4d9ef3ce1c96c49b1fcadc435f07b90ea342361bc0c3e5d1e3683c5a6c168cca",
           "action": "reject_evidence",
           "label": "测试命令与结果",
           "status_label": "当前材料有效，可记录拒绝依据",
@@ -7276,7 +7276,7 @@
     },
     {
       "action": "ask_clarification",
-      "title": "请求说明",
+      "title": "请求补充说明",
       "description": "针对指定要求提出可审计的澄清问题。",
       "consequence": "案例返回贡献侧回答，所选范围需要重新检查。",
       "mutates_state": true,
@@ -7305,9 +7305,9 @@
       "primary_reason": "该操作直接对应当前流程阶段或开放问题。",
       "selector_options": [
         {
-          "selector_token": "sel-a901ae2c3165b77183f1ee265345b793b153ca806a5b5e1e0bc9bcc17ac725b5",
+          "selector_token": "sel-8927f5a9fc4d9e8ac6a8c919e90009369355bca71d55d3638e5349e56a865834",
           "action": "ask_clarification",
-          "label": "可核验测试制品",
+          "label": "可检查的测试输出或文件",
           "status_label": "已提供；已完成",
           "affected_scope": [
             ".agm/manifest.yml",
@@ -7354,7 +7354,7 @@
           ]
         },
         {
-          "selector_token": "sel-b96ad9191041c944182a38ebc29ce740d2e35bebd5bc26461c0c14f7a5d0deb3",
+          "selector_token": "sel-c014f8c9de647a5d394c4cb06daf0861487c15dcc16df4fa429eceedbf145917",
           "action": "ask_clarification",
           "label": "变更文件清单",
           "status_label": "已提供；已完成",
@@ -7403,7 +7403,7 @@
           ]
         },
         {
-          "selector_token": "sel-23b3423ebd22d8264f05134c12ec8435988d0122629fa2d29dfb2ef3d6a26d10",
+          "selector_token": "sel-361114ec976f3724cdb6b293395fab69ac4903950c0c512acabd042fd9a05494",
           "action": "ask_clarification",
           "label": "独立维护者检查",
           "status_label": "缺少；阻止继续",
@@ -7445,7 +7445,7 @@
           ]
         },
         {
-          "selector_token": "sel-c3b715bda527fbc44482bc58ba120670006e72532b3169960db7e7d709bdf565",
+          "selector_token": "sel-e7e6b05f498779ae9e853557b65ff95fc58ba140b01a090722fc248ddc982b56",
           "action": "ask_clarification",
           "label": "已知限制",
           "status_label": "已提供；已完成",
@@ -7494,9 +7494,9 @@
           ]
         },
         {
-          "selector_token": "sel-d1f53a57d01fcb1f9754ab53e23ad79c5abd6683c3f612d29f7cf8cd163fab2c",
+          "selector_token": "sel-8c20a9667e25aed0616cdf1f3ed4c3335724843d5d3fb252d08c806153eaed78",
           "action": "ask_clarification",
-          "label": "项目规则与治理影响",
+          "label": "项目规则影响说明",
           "status_label": "已提供；已完成",
           "affected_scope": [
             ".agm/manifest.yml",
@@ -7543,9 +7543,9 @@
           ]
         },
         {
-          "selector_token": "sel-920e0f956d94ccfd38b40d5a74125cf23af4961081a8c7ddf078d98c26410dae",
+          "selector_token": "sel-63ea7dbe0b4a88539672d38c923f008d1d928b6b1e503aa1eb6fb76213db83f6",
           "action": "ask_clarification",
-          "label": "修改理由",
+          "label": "修改原因",
           "status_label": "已提供；已完成",
           "affected_scope": [
             ".agm/manifest.yml",
@@ -7592,7 +7592,7 @@
           ]
         },
         {
-          "selector_token": "sel-0475d9e967da8ba729da3f5054de6c96ba277401db5753e815d1c54f7fbefaf5",
+          "selector_token": "sel-c2ddeb05709066382dc2e20ebf41722913f20aa900ad0570c4498b0a1a151aa1",
           "action": "ask_clarification",
           "label": "修改说明",
           "status_label": "已提供；已完成",
@@ -7641,7 +7641,7 @@
           ]
         },
         {
-          "selector_token": "sel-6d5d5717ff2a160a539558a5b273bbd764b1bb218610d988d3c6d4936fc1af9b",
+          "selector_token": "sel-37afb0a4d7222141ef10a378900cd3ed1edae869e6dd38771110e47518bb003a",
           "action": "ask_clarification",
           "label": "测试命令与结果",
           "status_label": "已提供；已完成",
@@ -7696,9 +7696,9 @@
   "context_selector_data": {
     "verify_evidence": [
       {
-        "selector_token": "sel-bb699feb5efac4234e2c417fb99da34ca575d828bcd83ef7311a241b7945140e",
+        "selector_token": "sel-8ccdf082e824be8d301649f38703521ae445c77c9ce0862d12c162df49eab6e3",
         "action": "verify_evidence",
-        "label": "可核验测试制品",
+        "label": "可检查的测试输出或文件",
         "status_label": "已提供；已完成",
         "affected_scope": [
           ".agm/manifest.yml",
@@ -7745,7 +7745,7 @@
         ]
       },
       {
-        "selector_token": "sel-8e96cc7394c7659c490dfc31989dfe98f25e9662d7e9753781a2acfda81d4d14",
+        "selector_token": "sel-e483405b5609c845ce1ff9b54fe633f9c7a554354ffa35fa0b237531c346e283",
         "action": "verify_evidence",
         "label": "变更文件清单",
         "status_label": "已提供；已完成",
@@ -7794,7 +7794,7 @@
         ]
       },
       {
-        "selector_token": "sel-055340d1063ac3491a3d1a32604674ba5558d095ea771335aacddd1c3592a0ac",
+        "selector_token": "sel-facc54272168bf64847ca6722c041d73e366be2307b82a28d649f9a4ccaf5efb",
         "action": "verify_evidence",
         "label": "独立维护者检查",
         "status_label": "缺少；阻止继续",
@@ -7836,7 +7836,7 @@
         ]
       },
       {
-        "selector_token": "sel-3488c42bcae8f17edf7e8d06c5e9989af8ba59a6995da8230b5a85b76439a1a4",
+        "selector_token": "sel-443e6f25168695a2a86387842d98b589236b985e79f086e648e37b7a243e3508",
         "action": "verify_evidence",
         "label": "已知限制",
         "status_label": "已提供；已完成",
@@ -7885,9 +7885,9 @@
         ]
       },
       {
-        "selector_token": "sel-73cf1729602d740b9e6e40b946afe324cfdda8b5572a22cda7f0bc352bfdae30",
+        "selector_token": "sel-2d7fff2f097557c10d97aebab2a0a0d0cad7adc8a4f4a8cdbb691ad0252c1844",
         "action": "verify_evidence",
-        "label": "项目规则与治理影响",
+        "label": "项目规则影响说明",
         "status_label": "已提供；已完成",
         "affected_scope": [
           ".agm/manifest.yml",
@@ -7934,9 +7934,9 @@
         ]
       },
       {
-        "selector_token": "sel-96091f20d639626c71ccaa3f5c495dc5982719754064d6c2e10ff59aa0445ac8",
+        "selector_token": "sel-37976165aa5345bc40c64335d80beb3f3d3d30ba488f51dc86300462ca0af9a0",
         "action": "verify_evidence",
-        "label": "修改理由",
+        "label": "修改原因",
         "status_label": "已提供；已完成",
         "affected_scope": [
           ".agm/manifest.yml",
@@ -7983,7 +7983,7 @@
         ]
       },
       {
-        "selector_token": "sel-17bb0e7eca5e0b0a59d64822a766e63ab72c7b08a829babbffc21ced42d96d71",
+        "selector_token": "sel-373f0f5cb8b060b6be29b9880e19283fb9ba24deb374d4bdf20e93c611c1c07e",
         "action": "verify_evidence",
         "label": "修改说明",
         "status_label": "已提供；已完成",
@@ -8032,7 +8032,7 @@
         ]
       },
       {
-        "selector_token": "sel-3487131835e6aac59262c1bc54fd018cf1618f1e3dfb714e83dc99fd6f96b75c",
+        "selector_token": "sel-e8dd036ba8127f5cf124b227612118073d1ea6c2621eacf34a5c39c461c83d99",
         "action": "verify_evidence",
         "label": "测试命令与结果",
         "status_label": "已提供；已完成",
@@ -8083,9 +8083,9 @@
     ],
     "request_repair": [
       {
-        "selector_token": "sel-70ad87ce9829f11405a4ebfd4b7eeb8173442c2b5f696b758bf9530da940c7ea",
+        "selector_token": "sel-30e00ae19371786d9a76312d078fd82ed0e8ee08fed80665082d40900518cf40",
         "action": "request_repair",
-        "label": "可核验测试制品",
+        "label": "可检查的测试输出或文件",
         "status_label": "已提供；已完成",
         "affected_scope": [
           ".agm/manifest.yml",
@@ -8132,7 +8132,7 @@
         ]
       },
       {
-        "selector_token": "sel-3d2e54d3a1bc859b389263d7fb7a7a3c4237fb040a2ea0550af9315c78d89224",
+        "selector_token": "sel-a2957458b991236cf5568440be1d7d2faef72b17cfe2cf47b1d8962f4b23c571",
         "action": "request_repair",
         "label": "变更文件清单",
         "status_label": "已提供；已完成",
@@ -8181,7 +8181,7 @@
         ]
       },
       {
-        "selector_token": "sel-1fdac5c699a97da6b6423101dab7bcc5eeced5f539587ba7465779c1384ceec8",
+        "selector_token": "sel-3c983a57a5698a3194791c6f6eb54ac4d4267dbd90ab55f375aec69b8e3178f7",
         "action": "request_repair",
         "label": "独立维护者检查",
         "status_label": "缺少；阻止继续",
@@ -8223,7 +8223,7 @@
         ]
       },
       {
-        "selector_token": "sel-16ac6b6d648700c138e4795a67dcc3e2696c870fedbc03c7e5a903167a0c2a31",
+        "selector_token": "sel-c6b86f1a7a66f301b4af5275c6ca8e4a33a6741610fc1f84530f8305e6127670",
         "action": "request_repair",
         "label": "已知限制",
         "status_label": "已提供；已完成",
@@ -8272,9 +8272,9 @@
         ]
       },
       {
-        "selector_token": "sel-0892fa59959f2093f7868b6734e39e608865ba87caaddbfb1e86b54b02aa47bc",
+        "selector_token": "sel-7a8b617bb89ad0ec7a61c002fb3f9692655c1dcc896a6edefe656bf27892feeb",
         "action": "request_repair",
-        "label": "项目规则与治理影响",
+        "label": "项目规则影响说明",
         "status_label": "已提供；已完成",
         "affected_scope": [
           ".agm/manifest.yml",
@@ -8321,9 +8321,9 @@
         ]
       },
       {
-        "selector_token": "sel-9ab0eec10c6dbd2a25668fbe56dce1df3e4ec5b0771e152f4c413e7bbdec7d8e",
+        "selector_token": "sel-4417ef98f1bedb75a0969e5e00061a547149924c8021ebebed2c6a6f6ba28e4b",
         "action": "request_repair",
-        "label": "修改理由",
+        "label": "修改原因",
         "status_label": "已提供；已完成",
         "affected_scope": [
           ".agm/manifest.yml",
@@ -8370,7 +8370,7 @@
         ]
       },
       {
-        "selector_token": "sel-84990ac698cda1bb3f6558a45555c277c5461455a1ef14dcc507c686e096a7c9",
+        "selector_token": "sel-3fb5c21150eacf28ab36800d3c64d4b8a955bba6159921160461fc0fb6543337",
         "action": "request_repair",
         "label": "修改说明",
         "status_label": "已提供；已完成",
@@ -8419,7 +8419,7 @@
         ]
       },
       {
-        "selector_token": "sel-cdfaaf9de881c63590a8f269835eb0191c82580d4c90b281b352b6679f8e7b33",
+        "selector_token": "sel-d0198008ac561f27b7fb14e21075270724937e5cd10f4470bff2ee40658c0125",
         "action": "request_repair",
         "label": "测试命令与结果",
         "status_label": "已提供；已完成",
@@ -8470,9 +8470,9 @@
     ],
     "reject_evidence": [
       {
-        "selector_token": "sel-da78a7650934939da64862ec5a24c15e94eae746712b2667ab02eb85b4e0e498",
+        "selector_token": "sel-6bcd83b2abf6520a07c9ed09439fff9f6cb1b554171dbed826e7c0384f5d9639",
         "action": "reject_evidence",
-        "label": "可核验测试制品",
+        "label": "可检查的测试输出或文件",
         "status_label": "当前材料有效，可记录拒绝依据",
         "affected_scope": [
           ".agm/manifest.yml",
@@ -8501,7 +8501,7 @@
         ]
       },
       {
-        "selector_token": "sel-e1e2527b03eca1ece7edc9dd2eb2ee8a0f0c0c656d3f34e891d3696e942899f1",
+        "selector_token": "sel-6fde907f1fe5f5e24f188d76558568a9d526fd403db40407faa42d6c657563c6",
         "action": "reject_evidence",
         "label": "变更文件清单",
         "status_label": "当前材料有效，可记录拒绝依据",
@@ -8532,7 +8532,7 @@
         ]
       },
       {
-        "selector_token": "sel-baba2f777f2b77230456117c0d4107e656447f676ab9a111796c2b48c67876af",
+        "selector_token": "sel-c29c3f6250512c43834973d9ecc8d56178351c555140fff37ea1db0b993bff8f",
         "action": "reject_evidence",
         "label": "已知限制",
         "status_label": "当前材料有效，可记录拒绝依据",
@@ -8563,9 +8563,9 @@
         ]
       },
       {
-        "selector_token": "sel-9b191559eaa6c1a0c89bbdbf77298e3663116f77f6dc63f3a0010fde180605bd",
+        "selector_token": "sel-ed8e32ce502110c436cea0aba75e2c8d622e99b36111ff328e9c4fccfab6dc55",
         "action": "reject_evidence",
-        "label": "项目规则与治理影响",
+        "label": "项目规则影响说明",
         "status_label": "当前材料有效，可记录拒绝依据",
         "affected_scope": [
           ".agm/manifest.yml",
@@ -8594,9 +8594,9 @@
         ]
       },
       {
-        "selector_token": "sel-0db40b937fb97405190304ff09aa4965bd4d9ee34da21af70dbc1dc0dbce07bd",
+        "selector_token": "sel-e3ac52757f53d882b754d2f2a2984b3b1906bf089f802f72effee28044b0c678",
         "action": "reject_evidence",
-        "label": "修改理由",
+        "label": "修改原因",
         "status_label": "当前材料有效，可记录拒绝依据",
         "affected_scope": [
           ".agm/manifest.yml",
@@ -8625,7 +8625,7 @@
         ]
       },
       {
-        "selector_token": "sel-90781e4f415863d51aa6603fa0b2cddadbd89222b0a9f48bd8d9b6e5ecda3583",
+        "selector_token": "sel-bc73dc4f948c72adda3e6c8c43987735eff6ed5d21ebdd1e7fa442a80775e72d",
         "action": "reject_evidence",
         "label": "修改说明",
         "status_label": "当前材料有效，可记录拒绝依据",
@@ -8656,7 +8656,7 @@
         ]
       },
       {
-        "selector_token": "sel-cca00490ac81196bce26107e79c4cfa1dbf225847ca3f4ef837770d62091f378",
+        "selector_token": "sel-4d9ef3ce1c96c49b1fcadc435f07b90ea342361bc0c3e5d1e3683c5a6c168cca",
         "action": "reject_evidence",
         "label": "测试命令与结果",
         "status_label": "当前材料有效，可记录拒绝依据",
@@ -8689,9 +8689,9 @@
     ],
     "ask_clarification": [
       {
-        "selector_token": "sel-a901ae2c3165b77183f1ee265345b793b153ca806a5b5e1e0bc9bcc17ac725b5",
+        "selector_token": "sel-8927f5a9fc4d9e8ac6a8c919e90009369355bca71d55d3638e5349e56a865834",
         "action": "ask_clarification",
-        "label": "可核验测试制品",
+        "label": "可检查的测试输出或文件",
         "status_label": "已提供；已完成",
         "affected_scope": [
           ".agm/manifest.yml",
@@ -8738,7 +8738,7 @@
         ]
       },
       {
-        "selector_token": "sel-b96ad9191041c944182a38ebc29ce740d2e35bebd5bc26461c0c14f7a5d0deb3",
+        "selector_token": "sel-c014f8c9de647a5d394c4cb06daf0861487c15dcc16df4fa429eceedbf145917",
         "action": "ask_clarification",
         "label": "变更文件清单",
         "status_label": "已提供；已完成",
@@ -8787,7 +8787,7 @@
         ]
       },
       {
-        "selector_token": "sel-23b3423ebd22d8264f05134c12ec8435988d0122629fa2d29dfb2ef3d6a26d10",
+        "selector_token": "sel-361114ec976f3724cdb6b293395fab69ac4903950c0c512acabd042fd9a05494",
         "action": "ask_clarification",
         "label": "独立维护者检查",
         "status_label": "缺少；阻止继续",
@@ -8829,7 +8829,7 @@
         ]
       },
       {
-        "selector_token": "sel-c3b715bda527fbc44482bc58ba120670006e72532b3169960db7e7d709bdf565",
+        "selector_token": "sel-e7e6b05f498779ae9e853557b65ff95fc58ba140b01a090722fc248ddc982b56",
         "action": "ask_clarification",
         "label": "已知限制",
         "status_label": "已提供；已完成",
@@ -8878,9 +8878,9 @@
         ]
       },
       {
-        "selector_token": "sel-d1f53a57d01fcb1f9754ab53e23ad79c5abd6683c3f612d29f7cf8cd163fab2c",
+        "selector_token": "sel-8c20a9667e25aed0616cdf1f3ed4c3335724843d5d3fb252d08c806153eaed78",
         "action": "ask_clarification",
-        "label": "项目规则与治理影响",
+        "label": "项目规则影响说明",
         "status_label": "已提供；已完成",
         "affected_scope": [
           ".agm/manifest.yml",
@@ -8927,9 +8927,9 @@
         ]
       },
       {
-        "selector_token": "sel-920e0f956d94ccfd38b40d5a74125cf23af4961081a8c7ddf078d98c26410dae",
+        "selector_token": "sel-63ea7dbe0b4a88539672d38c923f008d1d928b6b1e503aa1eb6fb76213db83f6",
         "action": "ask_clarification",
-        "label": "修改理由",
+        "label": "修改原因",
         "status_label": "已提供；已完成",
         "affected_scope": [
           ".agm/manifest.yml",
@@ -8976,7 +8976,7 @@
         ]
       },
       {
-        "selector_token": "sel-0475d9e967da8ba729da3f5054de6c96ba277401db5753e815d1c54f7fbefaf5",
+        "selector_token": "sel-c2ddeb05709066382dc2e20ebf41722913f20aa900ad0570c4498b0a1a151aa1",
         "action": "ask_clarification",
         "label": "修改说明",
         "status_label": "已提供；已完成",
@@ -9025,7 +9025,7 @@
         ]
       },
       {
-        "selector_token": "sel-6d5d5717ff2a160a539558a5b273bbd764b1bb218610d988d3c6d4936fc1af9b",
+        "selector_token": "sel-37afb0a4d7222141ef10a378900cd3ed1edae869e6dd38771110e47518bb003a",
         "action": "ask_clarification",
         "label": "测试命令与结果",
         "status_label": "已提供；已完成",
@@ -9076,9 +9076,9 @@
     ],
     "record_policy_conflict": [
       {
-        "selector_token": "sel-6848f4152ad76617b8b6f32143a4f8259d9c892debfe856ce6c319ea89de2995",
+        "selector_token": "sel-65697e19800d8014cc81c36516b74e6a78df09efc442f2d4e745c76558b971af",
         "action": "record_policy_conflict",
-        "label": "可核验测试制品",
+        "label": "可检查的测试输出或文件",
         "status_label": "已提供；已完成",
         "affected_scope": [
           ".agm/manifest.yml",
@@ -9125,7 +9125,7 @@
         ]
       },
       {
-        "selector_token": "sel-7998948232befc5faf3dc29c425ef1f1f1924cfde5b6d93d2ab4813e56d2885b",
+        "selector_token": "sel-b6b488449c2d3c9043aaec23b8efd68cdb002713f714294856bf787fea822e70",
         "action": "record_policy_conflict",
         "label": "变更文件清单",
         "status_label": "已提供；已完成",
@@ -9174,7 +9174,7 @@
         ]
       },
       {
-        "selector_token": "sel-d9738d9faf5cc9d9862df2869cc69fcc316c76bfd769aab144fe2e7436e8b0b0",
+        "selector_token": "sel-9d754ced1f8b63a36ebf41df15db8db78517576b0e84270fbdcb3c1acb2b023d",
         "action": "record_policy_conflict",
         "label": "独立维护者检查",
         "status_label": "缺少；阻止继续",
@@ -9216,7 +9216,7 @@
         ]
       },
       {
-        "selector_token": "sel-e42726c5c2df95da253bc7a636057cd3e426a502d33a193809d472a711e054c4",
+        "selector_token": "sel-789f6baaa10b5c335c12509ce8c5b9d09a3da9f733b38f34380ce319d5ca86cd",
         "action": "record_policy_conflict",
         "label": "已知限制",
         "status_label": "已提供；已完成",
@@ -9265,9 +9265,9 @@
         ]
       },
       {
-        "selector_token": "sel-222250b677a27da9bcd25f0add3e20d897fa6266384dce24b080099dc950ac1d",
+        "selector_token": "sel-5fb4a2160d1ae521be848c74e393ce3d589073efe4a615e7a9157f16e1faa489",
         "action": "record_policy_conflict",
-        "label": "项目规则与治理影响",
+        "label": "项目规则影响说明",
         "status_label": "已提供；已完成",
         "affected_scope": [
           ".agm/manifest.yml",
@@ -9314,9 +9314,9 @@
         ]
       },
       {
-        "selector_token": "sel-12d093fd0691ac470cd9e2d7502410b25ea33c2cf16d4946b024ded1f8afcb35",
+        "selector_token": "sel-d211d11e9313c97f6701fd188efafcdf79ee7a52b4669c922a0fa2652f431c5d",
         "action": "record_policy_conflict",
-        "label": "修改理由",
+        "label": "修改原因",
         "status_label": "已提供；已完成",
         "affected_scope": [
           ".agm/manifest.yml",
@@ -9363,7 +9363,7 @@
         ]
       },
       {
-        "selector_token": "sel-6262c42922a47beb41dac592b59ee0ed67bcb57050a54f82e7f013bb323f5625",
+        "selector_token": "sel-4ba72cbe5c37976f77d03efeed55b6112c7f02b02b53da86fdd6ce4ecb4d919a",
         "action": "record_policy_conflict",
         "label": "修改说明",
         "status_label": "已提供；已完成",
@@ -9412,7 +9412,7 @@
         ]
       },
       {
-        "selector_token": "sel-ed2446d4f608a16dc0f8914697924266165f6a975882d6c39db0206857021b4a",
+        "selector_token": "sel-2f85aae848c959712fba06d4278f4b1f20e018d7e0fda2b5c2146a66be150359",
         "action": "record_policy_conflict",
         "label": "测试命令与结果",
         "status_label": "已提供；已完成",
@@ -9586,7 +9586,7 @@
     {
       "action": "view_change_scope",
       "title": "查看变化范围",
-      "description": "查看 changed files、风险规则、影响范围和绑定 fingerprint。",
+      "description": "查看变更文件、风险规则、影响范围和绑定指纹。",
       "consequence": "只读操作，不改变案例状态。",
       "mutates_state": false,
       "actor_role": "maintainer",
@@ -9606,8 +9606,8 @@
     },
     {
       "action": "verify_evidence",
-      "title": "检查待核验项",
-      "description": "记录维护者对指定义务及其绑定材料的检查结果。",
+      "title": "检查提交材料",
+      "description": "记录维护者对指定项目要求及其绑定材料的检查结果。",
       "consequence": "受影响项会记录维护者检查；全部阻断项完成后进入人类最终决定。",
       "mutates_state": true,
       "actor_role": "maintainer",
@@ -9641,9 +9641,9 @@
       "primary_reason": "该操作直接对应当前流程阶段或开放问题。",
       "selector_options": [
         {
-          "selector_token": "sel-bb699feb5efac4234e2c417fb99da34ca575d828bcd83ef7311a241b7945140e",
+          "selector_token": "sel-8ccdf082e824be8d301649f38703521ae445c77c9ce0862d12c162df49eab6e3",
           "action": "verify_evidence",
-          "label": "可核验测试制品",
+          "label": "可检查的测试输出或文件",
           "status_label": "已提供；已完成",
           "affected_scope": [
             ".agm/manifest.yml",
@@ -9690,7 +9690,7 @@
           ]
         },
         {
-          "selector_token": "sel-8e96cc7394c7659c490dfc31989dfe98f25e9662d7e9753781a2acfda81d4d14",
+          "selector_token": "sel-e483405b5609c845ce1ff9b54fe633f9c7a554354ffa35fa0b237531c346e283",
           "action": "verify_evidence",
           "label": "变更文件清单",
           "status_label": "已提供；已完成",
@@ -9739,7 +9739,7 @@
           ]
         },
         {
-          "selector_token": "sel-055340d1063ac3491a3d1a32604674ba5558d095ea771335aacddd1c3592a0ac",
+          "selector_token": "sel-facc54272168bf64847ca6722c041d73e366be2307b82a28d649f9a4ccaf5efb",
           "action": "verify_evidence",
           "label": "独立维护者检查",
           "status_label": "缺少；阻止继续",
@@ -9781,7 +9781,7 @@
           ]
         },
         {
-          "selector_token": "sel-3488c42bcae8f17edf7e8d06c5e9989af8ba59a6995da8230b5a85b76439a1a4",
+          "selector_token": "sel-443e6f25168695a2a86387842d98b589236b985e79f086e648e37b7a243e3508",
           "action": "verify_evidence",
           "label": "已知限制",
           "status_label": "已提供；已完成",
@@ -9830,9 +9830,9 @@
           ]
         },
         {
-          "selector_token": "sel-73cf1729602d740b9e6e40b946afe324cfdda8b5572a22cda7f0bc352bfdae30",
+          "selector_token": "sel-2d7fff2f097557c10d97aebab2a0a0d0cad7adc8a4f4a8cdbb691ad0252c1844",
           "action": "verify_evidence",
-          "label": "项目规则与治理影响",
+          "label": "项目规则影响说明",
           "status_label": "已提供；已完成",
           "affected_scope": [
             ".agm/manifest.yml",
@@ -9879,9 +9879,9 @@
           ]
         },
         {
-          "selector_token": "sel-96091f20d639626c71ccaa3f5c495dc5982719754064d6c2e10ff59aa0445ac8",
+          "selector_token": "sel-37976165aa5345bc40c64335d80beb3f3d3d30ba488f51dc86300462ca0af9a0",
           "action": "verify_evidence",
-          "label": "修改理由",
+          "label": "修改原因",
           "status_label": "已提供；已完成",
           "affected_scope": [
             ".agm/manifest.yml",
@@ -9928,7 +9928,7 @@
           ]
         },
         {
-          "selector_token": "sel-17bb0e7eca5e0b0a59d64822a766e63ab72c7b08a829babbffc21ced42d96d71",
+          "selector_token": "sel-373f0f5cb8b060b6be29b9880e19283fb9ba24deb374d4bdf20e93c611c1c07e",
           "action": "verify_evidence",
           "label": "修改说明",
           "status_label": "已提供；已完成",
@@ -9977,7 +9977,7 @@
           ]
         },
         {
-          "selector_token": "sel-3487131835e6aac59262c1bc54fd018cf1618f1e3dfb714e83dc99fd6f96b75c",
+          "selector_token": "sel-e8dd036ba8127f5cf124b227612118073d1ea6c2621eacf34a5c39c461c83d99",
           "action": "verify_evidence",
           "label": "测试命令与结果",
           "status_label": "已提供；已完成",
@@ -10029,7 +10029,7 @@
     },
     {
       "action": "request_repair",
-      "title": "请求补充或更新材料",
+      "title": "要求补充或修改",
       "description": "指出问题和受影响义务，返回贡献侧修复。",
       "consequence": "仅指定范围需要修复和重新检查，未受影响材料保留。",
       "mutates_state": true,
@@ -10058,9 +10058,9 @@
       "primary_reason": "该操作直接对应当前流程阶段或开放问题。",
       "selector_options": [
         {
-          "selector_token": "sel-70ad87ce9829f11405a4ebfd4b7eeb8173442c2b5f696b758bf9530da940c7ea",
+          "selector_token": "sel-30e00ae19371786d9a76312d078fd82ed0e8ee08fed80665082d40900518cf40",
           "action": "request_repair",
-          "label": "可核验测试制品",
+          "label": "可检查的测试输出或文件",
           "status_label": "已提供；已完成",
           "affected_scope": [
             ".agm/manifest.yml",
@@ -10107,7 +10107,7 @@
           ]
         },
         {
-          "selector_token": "sel-3d2e54d3a1bc859b389263d7fb7a7a3c4237fb040a2ea0550af9315c78d89224",
+          "selector_token": "sel-a2957458b991236cf5568440be1d7d2faef72b17cfe2cf47b1d8962f4b23c571",
           "action": "request_repair",
           "label": "变更文件清单",
           "status_label": "已提供；已完成",
@@ -10156,7 +10156,7 @@
           ]
         },
         {
-          "selector_token": "sel-1fdac5c699a97da6b6423101dab7bcc5eeced5f539587ba7465779c1384ceec8",
+          "selector_token": "sel-3c983a57a5698a3194791c6f6eb54ac4d4267dbd90ab55f375aec69b8e3178f7",
           "action": "request_repair",
           "label": "独立维护者检查",
           "status_label": "缺少；阻止继续",
@@ -10198,7 +10198,7 @@
           ]
         },
         {
-          "selector_token": "sel-16ac6b6d648700c138e4795a67dcc3e2696c870fedbc03c7e5a903167a0c2a31",
+          "selector_token": "sel-c6b86f1a7a66f301b4af5275c6ca8e4a33a6741610fc1f84530f8305e6127670",
           "action": "request_repair",
           "label": "已知限制",
           "status_label": "已提供；已完成",
@@ -10247,9 +10247,9 @@
           ]
         },
         {
-          "selector_token": "sel-0892fa59959f2093f7868b6734e39e608865ba87caaddbfb1e86b54b02aa47bc",
+          "selector_token": "sel-7a8b617bb89ad0ec7a61c002fb3f9692655c1dcc896a6edefe656bf27892feeb",
           "action": "request_repair",
-          "label": "项目规则与治理影响",
+          "label": "项目规则影响说明",
           "status_label": "已提供；已完成",
           "affected_scope": [
             ".agm/manifest.yml",
@@ -10296,9 +10296,9 @@
           ]
         },
         {
-          "selector_token": "sel-9ab0eec10c6dbd2a25668fbe56dce1df3e4ec5b0771e152f4c413e7bbdec7d8e",
+          "selector_token": "sel-4417ef98f1bedb75a0969e5e00061a547149924c8021ebebed2c6a6f6ba28e4b",
           "action": "request_repair",
-          "label": "修改理由",
+          "label": "修改原因",
           "status_label": "已提供；已完成",
           "affected_scope": [
             ".agm/manifest.yml",
@@ -10345,7 +10345,7 @@
           ]
         },
         {
-          "selector_token": "sel-84990ac698cda1bb3f6558a45555c277c5461455a1ef14dcc507c686e096a7c9",
+          "selector_token": "sel-3fb5c21150eacf28ab36800d3c64d4b8a955bba6159921160461fc0fb6543337",
           "action": "request_repair",
           "label": "修改说明",
           "status_label": "已提供；已完成",
@@ -10394,7 +10394,7 @@
           ]
         },
         {
-          "selector_token": "sel-cdfaaf9de881c63590a8f269835eb0191c82580d4c90b281b352b6679f8e7b33",
+          "selector_token": "sel-d0198008ac561f27b7fb14e21075270724937e5cd10f4470bff2ee40658c0125",
           "action": "request_repair",
           "label": "测试命令与结果",
           "status_label": "已提供；已完成",
@@ -10446,9 +10446,9 @@
     },
     {
       "action": "reject_evidence",
-      "title": "拒绝无效材料",
+      "title": "拒绝当前材料",
       "description": "拒绝一条不能支持当前修改的具体材料。",
-      "consequence": "该材料标记为 rejected，并建立 scoped repair。",
+      "consequence": "该材料将标记为已拒绝，并建立指定范围的补充或修改请求。",
       "mutates_state": true,
       "actor_role": "maintainer",
       "default_obligation_ids": [],
@@ -10473,9 +10473,9 @@
       "primary_reason": "该操作直接对应当前流程阶段或开放问题。",
       "selector_options": [
         {
-          "selector_token": "sel-da78a7650934939da64862ec5a24c15e94eae746712b2667ab02eb85b4e0e498",
+          "selector_token": "sel-6bcd83b2abf6520a07c9ed09439fff9f6cb1b554171dbed826e7c0384f5d9639",
           "action": "reject_evidence",
-          "label": "可核验测试制品",
+          "label": "可检查的测试输出或文件",
           "status_label": "当前材料有效，可记录拒绝依据",
           "affected_scope": [
             ".agm/manifest.yml",
@@ -10504,7 +10504,7 @@
           ]
         },
         {
-          "selector_token": "sel-e1e2527b03eca1ece7edc9dd2eb2ee8a0f0c0c656d3f34e891d3696e942899f1",
+          "selector_token": "sel-6fde907f1fe5f5e24f188d76558568a9d526fd403db40407faa42d6c657563c6",
           "action": "reject_evidence",
           "label": "变更文件清单",
           "status_label": "当前材料有效，可记录拒绝依据",
@@ -10535,7 +10535,7 @@
           ]
         },
         {
-          "selector_token": "sel-baba2f777f2b77230456117c0d4107e656447f676ab9a111796c2b48c67876af",
+          "selector_token": "sel-c29c3f6250512c43834973d9ecc8d56178351c555140fff37ea1db0b993bff8f",
           "action": "reject_evidence",
           "label": "已知限制",
           "status_label": "当前材料有效，可记录拒绝依据",
@@ -10566,9 +10566,9 @@
           ]
         },
         {
-          "selector_token": "sel-9b191559eaa6c1a0c89bbdbf77298e3663116f77f6dc63f3a0010fde180605bd",
+          "selector_token": "sel-ed8e32ce502110c436cea0aba75e2c8d622e99b36111ff328e9c4fccfab6dc55",
           "action": "reject_evidence",
-          "label": "项目规则与治理影响",
+          "label": "项目规则影响说明",
           "status_label": "当前材料有效，可记录拒绝依据",
           "affected_scope": [
             ".agm/manifest.yml",
@@ -10597,9 +10597,9 @@
           ]
         },
         {
-          "selector_token": "sel-0db40b937fb97405190304ff09aa4965bd4d9ee34da21af70dbc1dc0dbce07bd",
+          "selector_token": "sel-e3ac52757f53d882b754d2f2a2984b3b1906bf089f802f72effee28044b0c678",
           "action": "reject_evidence",
-          "label": "修改理由",
+          "label": "修改原因",
           "status_label": "当前材料有效，可记录拒绝依据",
           "affected_scope": [
             ".agm/manifest.yml",
@@ -10628,7 +10628,7 @@
           ]
         },
         {
-          "selector_token": "sel-90781e4f415863d51aa6603fa0b2cddadbd89222b0a9f48bd8d9b6e5ecda3583",
+          "selector_token": "sel-bc73dc4f948c72adda3e6c8c43987735eff6ed5d21ebdd1e7fa442a80775e72d",
           "action": "reject_evidence",
           "label": "修改说明",
           "status_label": "当前材料有效，可记录拒绝依据",
@@ -10659,7 +10659,7 @@
           ]
         },
         {
-          "selector_token": "sel-cca00490ac81196bce26107e79c4cfa1dbf225847ca3f4ef837770d62091f378",
+          "selector_token": "sel-4d9ef3ce1c96c49b1fcadc435f07b90ea342361bc0c3e5d1e3683c5a6c168cca",
           "action": "reject_evidence",
           "label": "测试命令与结果",
           "status_label": "当前材料有效，可记录拒绝依据",
@@ -10693,7 +10693,7 @@
     },
     {
       "action": "ask_clarification",
-      "title": "请求说明",
+      "title": "请求补充说明",
       "description": "针对指定要求提出可审计的澄清问题。",
       "consequence": "案例返回贡献侧回答，所选范围需要重新检查。",
       "mutates_state": true,
@@ -10722,9 +10722,9 @@
       "primary_reason": "该操作直接对应当前流程阶段或开放问题。",
       "selector_options": [
         {
-          "selector_token": "sel-a901ae2c3165b77183f1ee265345b793b153ca806a5b5e1e0bc9bcc17ac725b5",
+          "selector_token": "sel-8927f5a9fc4d9e8ac6a8c919e90009369355bca71d55d3638e5349e56a865834",
           "action": "ask_clarification",
-          "label": "可核验测试制品",
+          "label": "可检查的测试输出或文件",
           "status_label": "已提供；已完成",
           "affected_scope": [
             ".agm/manifest.yml",
@@ -10771,7 +10771,7 @@
           ]
         },
         {
-          "selector_token": "sel-b96ad9191041c944182a38ebc29ce740d2e35bebd5bc26461c0c14f7a5d0deb3",
+          "selector_token": "sel-c014f8c9de647a5d394c4cb06daf0861487c15dcc16df4fa429eceedbf145917",
           "action": "ask_clarification",
           "label": "变更文件清单",
           "status_label": "已提供；已完成",
@@ -10820,7 +10820,7 @@
           ]
         },
         {
-          "selector_token": "sel-23b3423ebd22d8264f05134c12ec8435988d0122629fa2d29dfb2ef3d6a26d10",
+          "selector_token": "sel-361114ec976f3724cdb6b293395fab69ac4903950c0c512acabd042fd9a05494",
           "action": "ask_clarification",
           "label": "独立维护者检查",
           "status_label": "缺少；阻止继续",
@@ -10862,7 +10862,7 @@
           ]
         },
         {
-          "selector_token": "sel-c3b715bda527fbc44482bc58ba120670006e72532b3169960db7e7d709bdf565",
+          "selector_token": "sel-e7e6b05f498779ae9e853557b65ff95fc58ba140b01a090722fc248ddc982b56",
           "action": "ask_clarification",
           "label": "已知限制",
           "status_label": "已提供；已完成",
@@ -10911,9 +10911,9 @@
           ]
         },
         {
-          "selector_token": "sel-d1f53a57d01fcb1f9754ab53e23ad79c5abd6683c3f612d29f7cf8cd163fab2c",
+          "selector_token": "sel-8c20a9667e25aed0616cdf1f3ed4c3335724843d5d3fb252d08c806153eaed78",
           "action": "ask_clarification",
-          "label": "项目规则与治理影响",
+          "label": "项目规则影响说明",
           "status_label": "已提供；已完成",
           "affected_scope": [
             ".agm/manifest.yml",
@@ -10960,9 +10960,9 @@
           ]
         },
         {
-          "selector_token": "sel-920e0f956d94ccfd38b40d5a74125cf23af4961081a8c7ddf078d98c26410dae",
+          "selector_token": "sel-63ea7dbe0b4a88539672d38c923f008d1d928b6b1e503aa1eb6fb76213db83f6",
           "action": "ask_clarification",
-          "label": "修改理由",
+          "label": "修改原因",
           "status_label": "已提供；已完成",
           "affected_scope": [
             ".agm/manifest.yml",
@@ -11009,7 +11009,7 @@
           ]
         },
         {
-          "selector_token": "sel-0475d9e967da8ba729da3f5054de6c96ba277401db5753e815d1c54f7fbefaf5",
+          "selector_token": "sel-c2ddeb05709066382dc2e20ebf41722913f20aa900ad0570c4498b0a1a151aa1",
           "action": "ask_clarification",
           "label": "修改说明",
           "status_label": "已提供；已完成",
@@ -11058,7 +11058,7 @@
           ]
         },
         {
-          "selector_token": "sel-6d5d5717ff2a160a539558a5b273bbd764b1bb218610d988d3c6d4936fc1af9b",
+          "selector_token": "sel-37afb0a4d7222141ef10a378900cd3ed1edae869e6dd38771110e47518bb003a",
           "action": "ask_clarification",
           "label": "测试命令与结果",
           "status_label": "已提供；已完成",
@@ -11112,7 +11112,7 @@
       "action": "record_policy_conflict",
       "title": "记录项目规则冲突",
       "description": "记录无法由普通材料修复的策略冲突。",
-      "consequence": "案例转入 repair，由 policy steward 或维护者处理。",
+      "consequence": "案例转入补充处理，由项目规则负责人或维护者处理。",
       "mutates_state": true,
       "actor_role": "maintainer",
       "default_obligation_ids": [
@@ -11139,9 +11139,9 @@
       "primary_reason": "后端允许此操作，但它不直接处理当前主要阻断项。",
       "selector_options": [
         {
-          "selector_token": "sel-6848f4152ad76617b8b6f32143a4f8259d9c892debfe856ce6c319ea89de2995",
+          "selector_token": "sel-65697e19800d8014cc81c36516b74e6a78df09efc442f2d4e745c76558b971af",
           "action": "record_policy_conflict",
-          "label": "可核验测试制品",
+          "label": "可检查的测试输出或文件",
           "status_label": "已提供；已完成",
           "affected_scope": [
             ".agm/manifest.yml",
@@ -11188,7 +11188,7 @@
           ]
         },
         {
-          "selector_token": "sel-7998948232befc5faf3dc29c425ef1f1f1924cfde5b6d93d2ab4813e56d2885b",
+          "selector_token": "sel-b6b488449c2d3c9043aaec23b8efd68cdb002713f714294856bf787fea822e70",
           "action": "record_policy_conflict",
           "label": "变更文件清单",
           "status_label": "已提供；已完成",
@@ -11237,7 +11237,7 @@
           ]
         },
         {
-          "selector_token": "sel-d9738d9faf5cc9d9862df2869cc69fcc316c76bfd769aab144fe2e7436e8b0b0",
+          "selector_token": "sel-9d754ced1f8b63a36ebf41df15db8db78517576b0e84270fbdcb3c1acb2b023d",
           "action": "record_policy_conflict",
           "label": "独立维护者检查",
           "status_label": "缺少；阻止继续",
@@ -11279,7 +11279,7 @@
           ]
         },
         {
-          "selector_token": "sel-e42726c5c2df95da253bc7a636057cd3e426a502d33a193809d472a711e054c4",
+          "selector_token": "sel-789f6baaa10b5c335c12509ce8c5b9d09a3da9f733b38f34380ce319d5ca86cd",
           "action": "record_policy_conflict",
           "label": "已知限制",
           "status_label": "已提供；已完成",
@@ -11328,9 +11328,9 @@
           ]
         },
         {
-          "selector_token": "sel-222250b677a27da9bcd25f0add3e20d897fa6266384dce24b080099dc950ac1d",
+          "selector_token": "sel-5fb4a2160d1ae521be848c74e393ce3d589073efe4a615e7a9157f16e1faa489",
           "action": "record_policy_conflict",
-          "label": "项目规则与治理影响",
+          "label": "项目规则影响说明",
           "status_label": "已提供；已完成",
           "affected_scope": [
             ".agm/manifest.yml",
@@ -11377,9 +11377,9 @@
           ]
         },
         {
-          "selector_token": "sel-12d093fd0691ac470cd9e2d7502410b25ea33c2cf16d4946b024ded1f8afcb35",
+          "selector_token": "sel-d211d11e9313c97f6701fd188efafcdf79ee7a52b4669c922a0fa2652f431c5d",
           "action": "record_policy_conflict",
-          "label": "修改理由",
+          "label": "修改原因",
           "status_label": "已提供；已完成",
           "affected_scope": [
             ".agm/manifest.yml",
@@ -11426,7 +11426,7 @@
           ]
         },
         {
-          "selector_token": "sel-6262c42922a47beb41dac592b59ee0ed67bcb57050a54f82e7f013bb323f5625",
+          "selector_token": "sel-4ba72cbe5c37976f77d03efeed55b6112c7f02b02b53da86fdd6ce4ecb4d919a",
           "action": "record_policy_conflict",
           "label": "修改说明",
           "status_label": "已提供；已完成",
@@ -11475,7 +11475,7 @@
           ]
         },
         {
-          "selector_token": "sel-ed2446d4f608a16dc0f8914697924266165f6a975882d6c39db0206857021b4a",
+          "selector_token": "sel-2f85aae848c959712fba06d4278f4b1f20e018d7e0fda2b5c2146a66be150359",
           "action": "record_policy_conflict",
           "label": "测试命令与结果",
           "status_label": "已提供；已完成",
@@ -11529,7 +11529,7 @@
   "unavailable_actions": [
     {
       "action": "invalidate_attestation",
-      "title": "要求负责人重新确认",
+      "title": "将旧负责人确认标记为失效",
       "description": "使一条过时或不正确的负责人确认失效。",
       "reason": "当前没有仍然有效的负责人确认可供失效处理。",
       "next_actor_roles": [
@@ -11563,9 +11563,9 @@
     },
     {
       "action": "resolve_policy_conflict",
-      "title": "解决项目规则冲突",
+      "title": "处理项目规则冲突",
       "description": "由有权限的角色记录策略冲突的解决依据。",
-      "reason": "操作 resolve_policy_conflict 不能从当前状态 awaiting_maintainer_verification 执行。",
+      "reason": "当前处于“等待维护者检查”，还不能执行“处理项目规则冲突”。",
       "next_actor_roles": [
         "maintainer_verifier",
         "policy_steward",
@@ -11579,7 +11579,7 @@
           "relationship": "authority"
         }
       ],
-      "category": "stage",
+      "category": "scope",
       "required_role": [
         "maintainer",
         "policy_steward"
@@ -11591,9 +11591,9 @@
     },
     {
       "action": "resubmit",
-      "title": "补交指定范围",
-      "description": "贡献侧提交 repair 影响范围和新增材料。",
-      "reason": "当前角色没有 resubmit 权限。 可执行角色：contributor, contributor_agent。",
+      "title": "重新提交修改后的材料",
+      "description": "贡献侧提交补充或修改影响范围和新增材料。",
+      "reason": "当前角色没有“重新提交修改后的材料”的权限。可以执行这一步的角色：人类贡献者或贡献侧智能体。",
       "next_actor_roles": [
         "contributor",
         "contributor_agent"
@@ -11618,9 +11618,9 @@
     },
     {
       "action": "confirm_attestation",
-      "title": "负责人确认当前范围",
-      "description": "由 accountable human 对明确范围作出事实确认。",
-      "reason": "当前角色没有 confirm_attestation 权限。 可执行角色：accountable_human。",
+      "title": "确认负责人声明",
+      "description": "由负责人对明确范围作出事实确认。",
+      "reason": "当前角色没有“确认负责人声明”的权限。可以执行这一步的角色：负责人。",
       "next_actor_roles": [
         "accountable_human"
       ],
@@ -11644,9 +11644,9 @@
     },
     {
       "action": "authorized_override",
-      "title": "执行有权覆盖",
-      "description": "记录具备权限的维护者对明确义务或 finding 的例外处理。",
-      "reason": "操作 authorized_override 不能从当前状态 awaiting_maintainer_verification 执行。",
+      "title": "由有权维护者执行覆盖处理",
+      "description": "记录具备权限的维护者对明确项目要求或问题的例外处理。",
+      "reason": "当前处于“等待维护者检查”，还不能执行“由有权维护者执行覆盖处理”。",
       "next_actor_roles": [
         "maintainer_verifier",
         "policy_steward",
@@ -11660,7 +11660,7 @@
           "relationship": "authority"
         }
       ],
-      "category": "stage",
+      "category": "authority",
       "required_role": [
         "maintainer"
       ],
@@ -11673,9 +11673,9 @@
     },
     {
       "action": "decide_accept",
-      "title": "提交人类最终接受决定",
+      "title": "最终接受",
       "description": "由人类维护者记录接受决定。",
-      "reason": "操作 decide_accept 不能从当前状态 awaiting_maintainer_verification 执行。",
+      "reason": "当前处于“等待维护者检查”，还不能执行“最终接受”。",
       "next_actor_roles": [
         "maintainer_verifier",
         "policy_steward",
@@ -11689,7 +11689,7 @@
           "relationship": "authority"
         }
       ],
-      "category": "stage",
+      "category": "authority",
       "required_role": [
         "maintainer"
       ],
@@ -11701,9 +11701,9 @@
     },
     {
       "action": "decide_reject",
-      "title": "提交人类最终拒绝决定",
+      "title": "最终拒绝",
       "description": "由人类维护者记录拒绝决定。",
-      "reason": "操作 decide_reject 不能从当前状态 awaiting_maintainer_verification 执行。",
+      "reason": "当前处于“等待维护者检查”，还不能执行“最终拒绝”。",
       "next_actor_roles": [
         "maintainer_verifier",
         "policy_steward",
@@ -11717,7 +11717,7 @@
           "relationship": "authority"
         }
       ],
-      "category": "stage",
+      "category": "authority",
       "required_role": [
         "maintainer"
       ],
@@ -11730,9 +11730,9 @@
     },
     {
       "action": "decide_request_changes",
-      "title": "提交人类修改决定",
+      "title": "要求继续修改",
       "description": "由人类维护者要求贡献侧继续修改。",
-      "reason": "操作 decide_request_changes 不能从当前状态 awaiting_maintainer_verification 执行。",
+      "reason": "当前处于“等待维护者检查”，还不能执行“要求继续修改”。",
       "next_actor_roles": [
         "maintainer_verifier",
         "policy_steward",
@@ -11746,7 +11746,7 @@
           "relationship": "authority"
         }
       ],
-      "category": "stage",
+      "category": "authority",
       "required_role": [
         "maintainer"
       ],
@@ -11758,9 +11758,9 @@
     },
     {
       "action": "decide_close",
-      "title": "关闭案例",
+      "title": "关闭本次审核记录",
       "description": "由人类维护者关闭案例而不表示接受或合并。",
-      "reason": "操作 decide_close 不能从当前状态 awaiting_maintainer_verification 执行。",
+      "reason": "当前处于“等待维护者检查”，还不能执行“关闭本次审核记录”。",
       "next_actor_roles": [
         "maintainer_verifier",
         "policy_steward",
@@ -11774,7 +11774,7 @@
           "relationship": "authority"
         }
       ],
-      "category": "stage",
+      "category": "authority",
       "required_role": [
         "maintainer"
       ],
@@ -11787,7 +11787,7 @@
     }
   ],
   "action_preview": {
-    "title": "检查指定范围：可核验测试制品、变更文件清单、独立维护者检查、已知限制、项目规则与治理影响、修改理由、修改说明、测试命令与结果",
+    "title": "检查指定范围：可检查的测试输出或文件、变更文件清单、独立维护者检查、已知限制、项目规则影响说明、修改原因、修改说明、测试命令与结果",
     "actor": {
       "actor": "independent-maintainer",
       "role": "maintainer",
@@ -11803,7 +11803,7 @@
         "display_description": "受影响项会记录维护者检查；全部阻断项完成后进入人类最终决定。"
       },
       {
-        "display_label": "可核验测试制品",
+        "display_label": "可检查的测试输出或文件",
         "before_label": "材料已满足",
         "after_label": "已检查",
         "display_description": "受影响项会记录维护者检查；全部阻断项完成后进入人类最终决定。"
@@ -11827,13 +11827,13 @@
         "display_description": "受影响项会记录维护者检查；全部阻断项完成后进入人类最终决定。"
       },
       {
-        "display_label": "项目规则与治理影响",
+        "display_label": "项目规则影响说明",
         "before_label": "材料已满足",
         "after_label": "已检查",
         "display_description": "受影响项会记录维护者检查；全部阻断项完成后进入人类最终决定。"
       },
       {
-        "display_label": "修改理由",
+        "display_label": "修改原因",
         "before_label": "材料已满足",
         "after_label": "已检查",
         "display_description": "受影响项会记录维护者检查；全部阻断项完成后进入人类最终决定。"
@@ -11852,12 +11852,12 @@
       }
     ],
     "affected_items": [
-      "可核验测试制品",
+      "可检查的测试输出或文件",
       "变更文件清单",
       "独立维护者检查",
       "已知限制",
-      "项目规则与治理影响",
-      "修改理由",
+      "项目规则影响说明",
+      "修改原因",
       "修改说明",
       "测试命令与结果"
     ],
@@ -11870,6 +11870,12 @@
     "mutates_case": false,
     "technical_details": {
       "operation": "verify_evidence",
+      "current_role": "maintainer",
+      "required_roles": [
+        "maintainer",
+        "maintainer_verifier",
+        "policy_steward"
+      ],
       "source_state": "awaiting_maintainer_verification",
       "target_state": "ready_for_human_decision",
       "effects": [
@@ -11965,6 +11971,7 @@
         "O-SUMMARY",
         "O-TEST-COMMAND"
       ],
+      "requested_obligation_ids": [],
       "retained_evidence_ids": [],
       "invalidated_attestation_ids": [],
       "invalidated_evidence_ids": [],
@@ -11984,7 +11991,7 @@
         "state_transition",
         "maintainer_verification"
       ],
-      "preview_fingerprint": "c584d3e89306b0de8d32376bc34a27bd92a4325189c6d1084758937132413a8c",
+      "preview_fingerprint": "7cc3a83442a9da08a91b2a6f8cfd097415bfc99ff1494973a680b91fc17ebaef",
       "traceability": [
         {
           "kind": "permission_rule",

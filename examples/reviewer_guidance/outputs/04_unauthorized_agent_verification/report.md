@@ -6,7 +6,7 @@
 - 风险: 低
 - 阻断问题: 0
 - 需要关注: 0
-- 当前责任方: 维护者核验人、项目规则负责人、人类维护者
+- 当前责任方: 维护者侧检查人员、项目规则负责人、人类维护者
 - 责任方依据: 贡献侧要求已经满足，当前轮到有权限的维护者检查；检查完成仍不等于接受。
 
 ## 五步流程
@@ -19,13 +19,13 @@
 
 ## 最近一次操作未生效
 
-贡献侧智能体尝试执行维护者检查。
+贡献侧智能体尝试执行“检查提交材料”。
 
-系统已拒绝该操作，因为该角色没有执行此操作所需的权限。
+系统拒绝了该操作，因为这一操作必须由维护者侧角色执行。
 
 - 案例状态没有变化
 - 当前仍处于：等待维护者检查
-- 下一步需要：人类维护者、维护者核验人、项目规则负责人
+- 下一步需要：人类维护者、维护者侧检查人员或项目规则负责人
 
 ## 项目要求对比
 
@@ -53,20 +53,20 @@
 ## 暂不可用操作摘要
 
 - 还有 14 项操作因当前阶段、权限或对象范围暂不可用
-  - 检查待核验项: 当前角色没有 verify_evidence 权限。 可执行角色：maintainer, maintainer_verifier, policy_steward。
-  - 请求补充或更新材料: 当前角色没有 request_repair 权限。 可执行角色：maintainer, maintainer_verifier, policy_steward。
-  - 拒绝无效材料: 当前角色没有 reject_evidence 权限。 可执行角色：maintainer, maintainer_verifier。
-  - 请求说明: 当前角色没有 ask_clarification 权限。 可执行角色：maintainer, maintainer_verifier。
-  - 要求负责人重新确认: 当前角色没有 invalidate_attestation 权限。 可执行角色：maintainer, maintainer_verifier。
-  - 记录项目规则冲突: 当前角色没有 record_policy_conflict 权限。 可执行角色：maintainer, maintainer_verifier, policy_steward。
-  - 解决项目规则冲突: 当前角色没有 resolve_policy_conflict 权限。 可执行角色：maintainer, policy_steward。
-  - 补交指定范围: 操作 resubmit 不能从当前状态 awaiting_maintainer_verification 执行。
-  - 负责人确认当前范围: 当前角色没有 confirm_attestation 权限。 可执行角色：accountable_human。
-  - 执行有权覆盖: 当前角色没有 authorized_override 权限。 可执行角色：maintainer。
-  - 提交人类最终接受决定: 当前角色没有 decide_accept 权限。 可执行角色：maintainer。
-  - 提交人类最终拒绝决定: 当前角色没有 decide_reject 权限。 可执行角色：maintainer。
-  - 提交人类修改决定: 当前角色没有 decide_request_changes 权限。 可执行角色：maintainer。
-  - 关闭案例: 当前角色没有 decide_close 权限。 可执行角色：maintainer。
+  - 检查提交材料: 当前角色没有“检查提交材料”的权限。可以执行这一步的角色：人类维护者、维护者侧检查人员或项目规则负责人。
+  - 要求补充或修改: 当前角色没有“要求补充或修改”的权限。可以执行这一步的角色：人类维护者、维护者侧检查人员或项目规则负责人。
+  - 拒绝当前材料: 当前角色没有“拒绝当前材料”的权限。可以执行这一步的角色：人类维护者或维护者侧检查人员。
+  - 请求补充说明: 当前角色没有“请求补充说明”的权限。可以执行这一步的角色：人类维护者或维护者侧检查人员。
+  - 将旧负责人确认标记为失效: 当前角色没有“将旧负责人确认标记为失效”的权限。可以执行这一步的角色：人类维护者或维护者侧检查人员。
+  - 记录项目规则冲突: 当前角色没有“记录项目规则冲突”的权限。可以执行这一步的角色：人类维护者、维护者侧检查人员或项目规则负责人。
+  - 处理项目规则冲突: 当前角色没有“处理项目规则冲突”的权限。可以执行这一步的角色：人类维护者或项目规则负责人。
+  - 重新提交修改后的材料: 当前处于“等待维护者检查”，还不能执行“重新提交修改后的材料”。
+  - 确认负责人声明: 当前角色没有“确认负责人声明”的权限。可以执行这一步的角色：负责人。
+  - 由有权维护者执行覆盖处理: 当前角色没有“由有权维护者执行覆盖处理”的权限。可以执行这一步的角色：人类维护者。
+  - 最终接受: 当前角色没有“最终接受”的权限。可以执行这一步的角色：人类维护者。
+  - 最终拒绝: 当前角色没有“最终拒绝”的权限。可以执行这一步的角色：人类维护者。
+  - 要求继续修改: 当前角色没有“要求继续修改”的权限。可以执行这一步的角色：人类维护者。
+  - 关闭本次审核记录: 当前角色没有“关闭本次审核记录”的权限。可以执行这一步的角色：人类维护者。
 
 ## Authority boundary
 
@@ -77,7 +77,9 @@
 
 你准备执行：**检查指定范围：变更文件清单、修改说明**
 
-当前角色没有 verify_evidence 权限。 可执行角色：maintainer, maintainer_verifier, policy_steward。
+当前角色没有“检查提交材料”的权限。可以执行这一步的角色：人类维护者、维护者侧检查人员或项目规则负责人。
+
+当前可以继续处理的角色：维护者侧检查人员、项目规则负责人或人类维护者。
 
 ### 将处理
 
@@ -95,7 +97,7 @@
 ### 执行后
 
 - 本次操作不会改变案例状态。
-- 当前责任方仍是维护者核验人、项目规则负责人、人类维护者。
+- 当前责任方仍是维护者侧检查人员、项目规则负责人、人类维护者。
 - 这不等于代码已经被项目接受。
 
 <details>
@@ -104,6 +106,12 @@
 ```json
 {
   "operation": "verify_evidence",
+  "current_role": "contributor_agent",
+  "required_roles": [
+    "maintainer",
+    "maintainer_verifier",
+    "policy_steward"
+  ],
   "source_state": "awaiting_maintainer_verification",
   "target_state": "awaiting_maintainer_verification",
   "effects": [],
@@ -111,6 +119,7 @@
     "O-CHANGED-FILES",
     "O-SUMMARY"
   ],
+  "requested_obligation_ids": [],
   "retained_evidence_ids": [],
   "invalidated_attestation_ids": [],
   "invalidated_evidence_ids": [],
@@ -121,7 +130,7 @@
   "workflow_step_before": "maintainer_check",
   "workflow_step_after": "maintainer_check",
   "creates_records": [],
-  "preview_fingerprint": "c6df705b5e29913c897e9e95511d9cdfd93cf675fc5688caf5b9edfd13d65189",
+  "preview_fingerprint": "d9be5cba214c3248754fbf5024069cd268e7f4cc46b6f62eef4599134c8f149a",
   "traceability": [
     {
       "kind": "permission_rule",

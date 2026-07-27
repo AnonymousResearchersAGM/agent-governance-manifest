@@ -186,6 +186,14 @@ should not be needed for routine review.
 The preview is read-only. Confirm only after checking the scope. If the case
 changes before confirmation, the panel rejects the stale preview.
 
+The preview main layer uses Chinese names for the action, current/next roles,
+affected requirements, workflow position, and created-record effect. Canonical
+values remain available under “技术操作、内部 ID 与原始状态”. For example,
+“检查提交材料” maps to `verify_evidence`, “维护者侧检查人员” maps to
+`maintainer_verifier`, and “修改说明” maps to `O-SUMMARY`. The translated
+label does not change permission or state rules: backend checks continue to
+use the canonical value.
+
 Available operations are choices, not recommendations. Unavailable operations
 remain visible with a reason. Frontend state never bypasses backend authority.
 
@@ -242,15 +250,23 @@ required.
 
 ```bash
 PYTHONPATH=src python scripts/generate_reviewer_guidance_demos.py
-sha256sum examples/reviewer_guidance/outputs/**/*
+python scripts/check_reviewer_guidance_demo_hashes.py
 PYTHONPATH=src python scripts/generate_reviewer_guidance_demos.py
-sha256sum examples/reviewer_guidance/outputs/**/*
+python scripts/check_reviewer_guidance_demo_hashes.py
 git status --short
-python -m pytest -q tests/test_vnext_reviewer_guidance.py
-python -m pytest -q tests/test_vnext_guidance_e2e.py
+python -m pytest
 ```
 
-The two SHA-256 sets must be identical and the final Git status must be empty.
+Both checks must match the same 25-file freeze in
+`examples/reviewer_guidance/expected_sha256.json`, and the final Git status
+must be empty. The checker rejects missing, extra, or mismatched outputs.
+`--update` is an explicit researcher-controlled freeze change, not part of
+normal regeneration.
+
+Fixture text is written as UTF-8/LF bytes with an explicit final newline, and
+repository-relative paths are serialized with `/`. The CI workflow
+`.github/workflows/reviewer-guidance-reproducibility.yml` repeats generation,
+hash validation, tests, and `git diff --exit-code` on Windows and Ubuntu.
 The generator uses fixed clock/UUID5/demo-secret services only inside its
 scenario-scoped deterministic context. Production IDs and selector secrets
 remain random. Use `--runtime-random` only to compare semantics during

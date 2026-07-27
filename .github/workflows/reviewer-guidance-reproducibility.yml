@@ -1,0 +1,41 @@
+name: Reviewer Guidance cross-platform reproducibility
+
+on:
+  pull_request:
+  push:
+    branches:
+      - "codex/**"
+
+jobs:
+  canonical-demo:
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - windows-latest
+          - ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install test dependencies
+        run: python -m pip install -r requirements.txt
+
+      - name: Generate deterministic research demos
+        env:
+          PYTHONPATH: src
+        run: python scripts/generate_reviewer_guidance_demos.py
+
+      - name: Check frozen cross-platform SHA-256 values
+        run: python scripts/check_reviewer_guidance_demo_hashes.py
+
+      - name: Run complete test suite
+        run: python -m pytest
+
+      - name: Confirm regeneration leaves tracked files unchanged
+        run: git diff --exit-code

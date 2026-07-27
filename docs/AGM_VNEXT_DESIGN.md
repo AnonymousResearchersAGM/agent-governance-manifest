@@ -229,3 +229,28 @@ real UTC clock, and process-random selector secret material. The deterministic
 context is installed only around demo generation and is restored afterward.
 Consequently a fixed demo key cannot leak into ordinary sessions and
 `--runtime-random` exercises the normal path for semantic comparison.
+
+Cross-platform byte identity is established before fingerprinting rather than
+by rewriting rendered output. A single deterministic fixture writer
+normalizes CRLF/CR to LF, encodes UTF-8 directly, and controls the final
+newline. Temporary copies of textual policy and skill fixtures use that
+writer, which makes the governance self-modification scenario independent of
+Git checkout newline settings without changing tracked `.agm` files.
+Repository-relative paths are POSIX-serialized and output enumeration is
+ordered. Fingerprints intentionally ignore filesystem permission mode unless a
+future policy explicitly makes mode a governance input.
+
+The 25 generated files are frozen in
+`examples/reviewer_guidance/expected_sha256.json` and checked by
+`scripts/check_reviewer_guidance_demo_hashes.py`. The freeze is shared by the
+Windows/Ubuntu CI matrix; same-process equality alone is insufficient.
+Updating the freeze is an explicit researcher action.
+
+Participant-facing canonical vocabulary is centralized in a presentation
+registry. `PresentedTerm` carries `display_plain` and `canonical`, with
+registries for actions, roles, obligations, workflow nodes, record types, and
+states. Builders and error formatters consume the registry, so HTML templates
+do not become an independent translation authority. Main-layer preview and
+audit text uses display labels; canonical values remain available in folded
+technical details and continue to drive authority checks, selectors,
+projection, execution, and trace mapping.
