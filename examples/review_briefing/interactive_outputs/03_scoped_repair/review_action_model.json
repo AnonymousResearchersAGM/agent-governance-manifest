@@ -1,0 +1,87 @@
+{
+  "case_id": "scoped-repair",
+  "actor_id": "human-maintainer",
+  "role": "maintainer",
+  "contribution_fingerprint": "712fcd4dc43abd39cf07328603c2a14d9da29e20b1369a6d2b1b1b8eba6080a0",
+  "policy_snapshot_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
+  "case_state": "resubmitted",
+  "items": [
+    {
+      "judgment_id": "judgment-agent-actions-delegation",
+      "display_title": "智能体行动与委派说明",
+      "why_human_is_needed": "系统能确认材料结构、范围和版本绑定，但不能自动判断声明是否准确描述代码行为和风险。",
+      "contribution_claim": "编码智能体仅处理本次文档贡献并运行既有检查；没有继续委派，补充说明覆盖当前版本。",
+      "system_observation": "治理案例记录为智能体参与路径，并存在相应行动范围材料。",
+      "evidence_summary": "系统记录有 1 份形式有效且对应当前版本的材料。",
+      "review_focus": [
+        "声明范围是否覆盖实际变更和命令记录",
+        "是否存在未披露的子智能体行动或继续委派",
+        "负责人审阅范围是否覆盖当前版本和智能体行动说明"
+      ],
+      "options": [
+        {
+          "option_id": "sufficient",
+          "display_label": "确认材料充分",
+          "plain_consequence": "你确认该说明与当前贡献基本一致，可以完成此项维护者检查。",
+          "requires_reason": false,
+          "consequence_type": "sufficient",
+          "authorized": true,
+          "unavailable_reason": null,
+          "existing_operation_ref": "verify_evidence"
+        },
+        {
+          "option_id": "supplement",
+          "display_label": "要求补充或修正",
+          "plain_consequence": "该材料不足以支持当前检查。AGM 将针对这一项生成贡献侧待办。",
+          "requires_reason": true,
+          "consequence_type": "supplement",
+          "authorized": false,
+          "unavailable_reason": "当前案例阶段不允许执行该治理操作。",
+          "existing_operation_ref": null
+        },
+        {
+          "option_id": "material-risk",
+          "display_label": "标记重大风险",
+          "plain_consequence": "你认为该项暴露出需要阻断当前进展的实质风险。",
+          "requires_reason": true,
+          "consequence_type": "material_risk",
+          "authorized": false,
+          "unavailable_reason": "当前案例阶段不允许执行该治理操作。",
+          "existing_operation_ref": null
+        }
+      ],
+      "blocking": true,
+      "requirement_refs": [
+        "agent-actions-delegation"
+      ],
+      "provenance_refs": [
+        "compiled_requirement",
+        "scoped_revalidation",
+        "existing_finding"
+      ]
+    }
+  ],
+  "live_actions_enabled": false,
+  "can_save_draft": false,
+  "can_preview": false,
+  "unavailable_reason": null,
+  "current_next_step": {
+    "status": "maintainer_judgment",
+    "display_title": "现在需要你检查 1 项",
+    "plain_explanation": "形式化检查已经完成到当前阶段；下面只列出系统不能替代人类作出的判断。",
+    "responsible_party": "维护者侧检查人员",
+    "system_will_do": [
+      "继续保留已完成形式与绑定核对的材料和未受影响范围。",
+      "检查完成后把案例路由到最终人类决定阶段。"
+    ],
+    "human_should_do": [
+      "检查：智能体行动与委派说明"
+    ],
+    "final_acceptance_state": "not_decided",
+    "owner": "maintainer",
+    "semantic_state": "human_review_required"
+  },
+  "system_handled_anomalies": [],
+  "final_decision_entry_available": false,
+  "schema_version": "agm.review_action_view/v0.2-dev"
+}

@@ -1,0 +1,89 @@
+{
+  "schema_version": "agm.review_interaction_demo/v0.2-dev",
+  "live_actions_enabled": false,
+  "review_actions": {
+    "case_id": "scoped-repair",
+    "actor_id": "human-maintainer",
+    "role": "maintainer",
+    "contribution_fingerprint": "712fcd4dc43abd39cf07328603c2a14d9da29e20b1369a6d2b1b1b8eba6080a0",
+    "policy_snapshot_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
+    "case_state": "ready_for_human_decision",
+    "items": [],
+    "live_actions_enabled": false,
+    "can_save_draft": false,
+    "can_preview": false,
+    "unavailable_reason": "当前没有需要该参与者完成的人类治理判断。",
+    "current_next_step": {
+      "status": "awaiting_final_human_decision",
+      "display_title": "治理材料检查已经完成",
+      "plain_explanation": "下一阶段是由具有最终决定权的人类维护者决定是否接受贡献；检查完成不等于贡献已被接受。",
+      "responsible_party": "具有最终决定权的人类维护者",
+      "system_will_do": [
+        "保留检查记录并等待最终人类决定。"
+      ],
+      "human_should_do": [
+        "作出明确的最终接受、拒绝、要求修改或关闭决定。"
+      ],
+      "final_acceptance_state": "not_decided",
+      "owner": "final_decision_authority",
+      "semantic_state": "final_decision_pending"
+    },
+    "system_handled_anomalies": [],
+    "final_decision_entry_available": true,
+    "schema_version": "agm.review_action_view/v0.2-dev"
+  },
+  "final_decision": {
+    "case_id": "scoped-repair",
+    "actor_id": "human-maintainer",
+    "role": "maintainer",
+    "case_state": "ready_for_human_decision",
+    "contribution_summary": "贡献者补充了智能体行动与委派说明；本次补充未修改代码、测试结果或安全影响说明。",
+    "risk_summary": "综合风险：低；docs/guide.md 触发了“文档与说明”风险范围。",
+    "requirement_summary": "共 3 项治理要求；当前状态已由 Review Briefing Compiler 重新编译。",
+    "verification_summary": "已记录 2 次维护者检查。",
+    "unresolved_finding_summary": "当前没有未解决 finding。",
+    "final_authority_summary": "只有 canonical maintainer 角色可作出最终决定；本地 actor 身份真实性仍依赖运行环境。",
+    "acceptance_boundary": "维护者 verification 不等于接受；接受也不等于普通代码合并。",
+    "options": [
+      {
+        "decision_id": "accept",
+        "display_label": "接受贡献",
+        "plain_consequence": "记录既有 final-decision 接受操作；这不是维护者检查。",
+        "requires_reason": true,
+        "authorized": true,
+        "unavailable_reason": null,
+        "existing_operation_ref": "decide_accept"
+      },
+      {
+        "decision_id": "reject",
+        "display_label": "拒绝贡献",
+        "plain_consequence": "记录既有 final-decision 拒绝操作，并结束当前案例。",
+        "requires_reason": true,
+        "authorized": true,
+        "unavailable_reason": null,
+        "existing_operation_ref": "decide_reject"
+      },
+      {
+        "decision_id": "request_changes",
+        "display_label": "要求修改后再决定",
+        "plain_consequence": "使用既有 final-decision operation 返回贡献侧修复。",
+        "requires_reason": true,
+        "authorized": true,
+        "unavailable_reason": null,
+        "existing_operation_ref": "decide_request_changes"
+      },
+      {
+        "decision_id": "close",
+        "display_label": "关闭案例",
+        "plain_consequence": "使用既有 closure operation 关闭案例，不把关闭描述为接受。",
+        "requires_reason": true,
+        "authorized": true,
+        "unavailable_reason": null,
+        "existing_operation_ref": "decide_close"
+      }
+    ],
+    "available": true,
+    "unavailable_reason": null,
+    "schema_version": "agm.final_decision_view/v0.2-dev"
+  }
+}

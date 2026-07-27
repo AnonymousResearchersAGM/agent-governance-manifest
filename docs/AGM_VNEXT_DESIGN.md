@@ -319,3 +319,53 @@ do not become an independent translation authority. Main-layer preview and
 audit text uses display labels; canonical values remain available in folded
 technical details and continue to drive authority checks, selectors,
 projection, execution, and trace mapping.
+
+## Phase 2 contextual human-judgment actions
+
+Phase 2 extends the Human-Work Compiler without changing the governance-state
+compiler:
+
+```text
+Canonical Governance Objects
+        -> Review Briefing Compiler
+        -> ReviewBriefView
+        -> Contextual Action Compiler
+        -> Interactive Maintainer Review
+```
+
+`JudgmentOption` belongs to one canonical `HumanJudgmentItem`. The default
+business outcomes are material sufficient, supplement/correct, and material
+risk. Availability is server/domain data derived from current state,
+canonical human role, permissions, obligation verifier roles, and recorded
+separation-of-duty facts. Templates only render that result.
+
+Selections first enter a `ReviewDecisionDraft` under `.agm-work`. A draft
+binds actor, role, case, contribution fingerprint, policy snapshot,
+requirement references, and judgment provenance. It is not verification or
+governance state. Any binding or judgment change makes it stale.
+
+Preview reloads the case, recompiles `ReviewBriefView`, rechecks authority and
+all bindings, and returns a short-lived one-time session token. Execution
+accepts only that token and maps the plan to existing domain operations:
+
+- an all-sufficient batch uses `verify_evidence` and the existing system
+  `mark_ready` route;
+- supplement and material-risk results use the existing blocking
+  `request_repair`/finding mechanism with obligation-scoped revalidation; and
+- no review action calls `decide_*`.
+
+If the state machine has no semantically correct operation, the option is
+disabled. In particular, `resubmitted` supports verification but no
+repair-request transition. Phase 2 does not add one or route through a false
+verification.
+
+The final decision is a different compiler and page. It appears only in
+`ready_for_human_decision` or `overridden`, rechecks final authority, exposes
+only supported `decide_*` operations, and requires a separate preview. Review
+completion never performs, redirects into, or implies final acceptance.
+
+The local service remains loopback-only. Mutations are POST-only and require
+a session CSRF token, loopback host/origin, fixed case/actor context, safe
+content type and size, current fingerprints/provenance, and an unused,
+unexpired preview token. Submitted interaction records and rejected attempts
+are append-only runtime audit facts; they are not canonical `.agm` policy.

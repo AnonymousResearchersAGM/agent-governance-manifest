@@ -1,0 +1,247 @@
+{
+  "case_id": "governance-self-mod",
+  "actor_id": "human-maintainer",
+  "role": "maintainer",
+  "contribution_fingerprint": "ca3c9b1db2449d4653441d68a96bb549522d33b0721d047b27ba7dece4bf5b41",
+  "policy_snapshot_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
+  "case_state": "awaiting_maintainer_verification",
+  "items": [
+    {
+      "judgment_id": "judgment-independent-review",
+      "display_title": "独立维护者检查",
+      "why_human_is_needed": "系统能确认材料结构、范围和版本绑定，但不能自动判断声明是否准确描述代码行为和风险。",
+      "contribution_claim": "没有可引用的贡献者说明。",
+      "system_observation": "现有治理结论要求职责分离的独立维护者检查。",
+      "evidence_summary": "前置材料已达到进入独立检查的结构条件。",
+      "review_focus": [
+        "贡献侧与检查者是否保持职责分离",
+        "高风险联动影响是否得到独立检查",
+        "检查结论是否只代表 verification，而非最终接受"
+      ],
+      "options": [
+        {
+          "option_id": "sufficient",
+          "display_label": "确认材料充分",
+          "plain_consequence": "你确认该说明与当前贡献基本一致，可以完成此项维护者检查。",
+          "requires_reason": false,
+          "consequence_type": "sufficient",
+          "authorized": true,
+          "unavailable_reason": null,
+          "existing_operation_ref": "verify_evidence"
+        },
+        {
+          "option_id": "supplement",
+          "display_label": "要求补充或修正",
+          "plain_consequence": "该材料不足以支持当前检查。AGM 将针对这一项生成贡献侧待办。",
+          "requires_reason": true,
+          "consequence_type": "supplement",
+          "authorized": true,
+          "unavailable_reason": null,
+          "existing_operation_ref": "request_repair"
+        },
+        {
+          "option_id": "material-risk",
+          "display_label": "标记重大风险",
+          "plain_consequence": "你认为该项暴露出需要阻断当前进展的实质风险。",
+          "requires_reason": true,
+          "consequence_type": "material_risk",
+          "authorized": true,
+          "unavailable_reason": null,
+          "existing_operation_ref": "request_repair"
+        }
+      ],
+      "blocking": true,
+      "requirement_refs": [
+        "independent-review"
+      ],
+      "provenance_refs": [
+        "compiled_requirement",
+        "independent_review_requirement",
+        "maintainer_review_stage"
+      ]
+    },
+    {
+      "judgment_id": "judgment-known-limitations",
+      "display_title": "已知限制",
+      "why_human_is_needed": "系统能确认材料结构、范围和版本绑定，但不能自动判断声明是否准确描述代码行为和风险。",
+      "contribution_claim": "当前结论仅覆盖本次明确列出的修改范围。",
+      "system_observation": "系统只能确认限制说明已提供，不能证明其完整性。",
+      "evidence_summary": "系统记录有 1 份形式有效且对应当前版本的材料。",
+      "review_focus": [
+        "限制说明是否覆盖当前风险范围",
+        "是否存在会影响合并决定但未披露的限制"
+      ],
+      "options": [
+        {
+          "option_id": "sufficient",
+          "display_label": "确认材料充分",
+          "plain_consequence": "你确认该说明与当前贡献基本一致，可以完成此项维护者检查。",
+          "requires_reason": false,
+          "consequence_type": "sufficient",
+          "authorized": true,
+          "unavailable_reason": null,
+          "existing_operation_ref": "verify_evidence"
+        },
+        {
+          "option_id": "supplement",
+          "display_label": "要求补充或修正",
+          "plain_consequence": "该材料不足以支持当前检查。AGM 将针对这一项生成贡献侧待办。",
+          "requires_reason": true,
+          "consequence_type": "supplement",
+          "authorized": true,
+          "unavailable_reason": null,
+          "existing_operation_ref": "request_repair"
+        },
+        {
+          "option_id": "material-risk",
+          "display_label": "标记重大风险",
+          "plain_consequence": "你认为该项暴露出需要阻断当前进展的实质风险。",
+          "requires_reason": true,
+          "consequence_type": "material_risk",
+          "authorized": true,
+          "unavailable_reason": null,
+          "existing_operation_ref": "request_repair"
+        }
+      ],
+      "blocking": true,
+      "requirement_refs": [
+        "known-limitations"
+      ],
+      "provenance_refs": [
+        "compiled_requirement",
+        "maintainer_review_stage"
+      ]
+    },
+    {
+      "judgment_id": "judgment-governance-impact",
+      "display_title": "项目规则影响说明",
+      "why_human_is_needed": "系统能确认材料结构、范围和版本绑定，但不能自动判断声明是否准确描述代码行为和风险。",
+      "contribution_claim": "修改涉及治理规则与执行逻辑的一致性、兼容性和迁移影响。",
+      "system_observation": "系统记录到治理规则、入口或治理执行逻辑发生变化。",
+      "evidence_summary": "系统记录有 1 份形式有效且对应当前版本的材料。",
+      "review_focus": [
+        "治理规则与执行逻辑是否仍然一致",
+        "是否需要兼容或迁移既有治理案例",
+        "自修改是否可能削弱职责分离或权威边界"
+      ],
+      "options": [
+        {
+          "option_id": "sufficient",
+          "display_label": "确认材料充分",
+          "plain_consequence": "你确认该说明与当前贡献基本一致，可以完成此项维护者检查。",
+          "requires_reason": false,
+          "consequence_type": "sufficient",
+          "authorized": true,
+          "unavailable_reason": null,
+          "existing_operation_ref": "verify_evidence"
+        },
+        {
+          "option_id": "supplement",
+          "display_label": "要求补充或修正",
+          "plain_consequence": "该材料不足以支持当前检查。AGM 将针对这一项生成贡献侧待办。",
+          "requires_reason": true,
+          "consequence_type": "supplement",
+          "authorized": true,
+          "unavailable_reason": null,
+          "existing_operation_ref": "request_repair"
+        },
+        {
+          "option_id": "material-risk",
+          "display_label": "标记重大风险",
+          "plain_consequence": "你认为该项暴露出需要阻断当前进展的实质风险。",
+          "requires_reason": true,
+          "consequence_type": "material_risk",
+          "authorized": true,
+          "unavailable_reason": null,
+          "existing_operation_ref": "request_repair"
+        }
+      ],
+      "blocking": true,
+      "requirement_refs": [
+        "governance-impact"
+      ],
+      "provenance_refs": [
+        "compiled_requirement",
+        "maintainer_review_stage"
+      ]
+    },
+    {
+      "judgment_id": "judgment-change-rationale",
+      "display_title": "修改原因",
+      "why_human_is_needed": "系统能确认材料结构、范围和版本绑定，但不能自动判断声明是否准确描述代码行为和风险。",
+      "contribution_claim": "这次修改用于解决贡献说明中列出的具体维护问题。",
+      "system_observation": "系统只能确认修改理由已提供，不能证明理由与代码语义一致。",
+      "evidence_summary": "系统记录有 1 份形式有效且对应当前版本的材料。",
+      "review_focus": [
+        "修改理由是否与实际范围一致",
+        "理由是否遗漏关键风险或兼容性影响"
+      ],
+      "options": [
+        {
+          "option_id": "sufficient",
+          "display_label": "确认材料充分",
+          "plain_consequence": "你确认该说明与当前贡献基本一致，可以完成此项维护者检查。",
+          "requires_reason": false,
+          "consequence_type": "sufficient",
+          "authorized": true,
+          "unavailable_reason": null,
+          "existing_operation_ref": "verify_evidence"
+        },
+        {
+          "option_id": "supplement",
+          "display_label": "要求补充或修正",
+          "plain_consequence": "该材料不足以支持当前检查。AGM 将针对这一项生成贡献侧待办。",
+          "requires_reason": true,
+          "consequence_type": "supplement",
+          "authorized": true,
+          "unavailable_reason": null,
+          "existing_operation_ref": "request_repair"
+        },
+        {
+          "option_id": "material-risk",
+          "display_label": "标记重大风险",
+          "plain_consequence": "你认为该项暴露出需要阻断当前进展的实质风险。",
+          "requires_reason": true,
+          "consequence_type": "material_risk",
+          "authorized": true,
+          "unavailable_reason": null,
+          "existing_operation_ref": "request_repair"
+        }
+      ],
+      "blocking": true,
+      "requirement_refs": [
+        "change-rationale"
+      ],
+      "provenance_refs": [
+        "compiled_requirement",
+        "maintainer_review_stage"
+      ]
+    }
+  ],
+  "live_actions_enabled": false,
+  "can_save_draft": false,
+  "can_preview": false,
+  "unavailable_reason": null,
+  "current_next_step": {
+    "status": "maintainer_judgment",
+    "display_title": "现在需要你检查 4 项",
+    "plain_explanation": "形式化检查已经完成到当前阶段；下面只列出系统不能替代人类作出的判断。",
+    "responsible_party": "维护者侧检查人员",
+    "system_will_do": [
+      "继续保留已完成形式与绑定核对的材料和未受影响范围。",
+      "检查完成后把案例路由到最终人类决定阶段。"
+    ],
+    "human_should_do": [
+      "检查：独立维护者检查",
+      "检查：已知限制",
+      "检查：项目规则影响说明",
+      "检查：修改原因"
+    ],
+    "final_acceptance_state": "not_decided",
+    "owner": "maintainer",
+    "semantic_state": "human_review_required"
+  },
+  "system_handled_anomalies": [],
+  "final_decision_entry_available": false,
+  "schema_version": "agm.review_action_view/v0.2-dev"
+}

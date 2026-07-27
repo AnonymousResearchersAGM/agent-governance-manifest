@@ -1,16 +1,18 @@
 # AGM Review Briefing Layer
 
-Status: Phase 1.1 read-only prototype (`agm.review_brief/v0.2-dev`)
+Status: Phase 2 contextual-action prototype (`agm.review_action_view/v0.2-dev`)
 
 The Review Briefing Layer is AGM's human-work compiler. It translates an
 already-resolved governance case into the current conclusion, owner, blocking
 work, irreducibly human judgment, and supporting explanation that an ordinary
 maintainer can use without first learning the AGM lifecycle.
 
-Phase 1.1 changes information hierarchy and semantic precision only. It does
-not add actions, findings, obligations, repair requests, attestations,
-verification, decisions, transitions, or case mutations. Phase 2 has not
-started.
+The Phase 1.1 `brief` command remains read-only. Phase 2 adds a separate
+interactive `review` command. It compiles each existing
+`HumanJudgmentItem` into item-bound business outcomes, actor/case/version-bound
+drafts, side-effect-free previews, and adapters to existing legal domain
+operations. It does not add canonical obligations, authority, transitions, or
+final-decision semantics.
 
 ## 1. Two compiler boundaries
 
@@ -37,6 +39,13 @@ governance state, traceability, legal operation surface
         v
 Review Brief View
 current conclusion, owner, human work, explanation
+        |
+        v
+Contextual Action Compiler
+item-bound outcomes, authorization, draft/preview binding
+        |
+        v
+Interactive Maintainer Review
 ```
 
 The brief may compile directly from stable domain records, but it reuses
@@ -103,7 +112,7 @@ final acceptance.
 
 ## 4. Domain records and API
 
-The implementation lives in `src/agm/vnext/briefing/`:
+The read-only implementation lives in `src/agm/vnext/briefing/`:
 
 - `models.py`: immutable records, `BriefSemanticState`, and `WorkOwner`;
 - `compiler.py`: pure top-level compiler and technical trace index;
@@ -116,6 +125,19 @@ The implementation lives in `src/agm/vnext/briefing/`:
 - `work_items.py`: owner-labelled summaries derived from existing facts;
 - `presenters.py`: JSON, Markdown, and standalone HTML; and
 - `server.py`: loopback-only GET server with no mutation route.
+
+Phase 2 lives in `src/agm/vnext/briefing/actions/`:
+
+- `models.py`: contextual option, draft, preview, result, and separate
+  final-decision records;
+- `compiler.py`: item-bound options and final-decision view compilation;
+- `authorization.py` and `binding.py`: canonical authority and stale binding;
+- `draft.py`: non-canonical `.agm-work` persistence and interaction audit;
+- `preview.py`: current-state recompilation and one-time tokens;
+- `executor.py`: adapters to existing domain operations;
+- `presenters.py`: review, preview, result, and final-decision HTML; and
+- `server.py`: loopback POST service with CSRF, origin, host, content-type,
+  expiry, and replay checks.
 
 The core API remains:
 
@@ -235,6 +257,10 @@ The event remains in folded technical audit records. It may provide security
 visibility, but it cannot create an obligation, judgment target, repair, or
 finding in the briefing layer.
 
+Phase 1.1.1 also places a neutral summary in the first status card: the system
+rejected the attempt, the operation did not take effect, and no participant
+action is required. Full actor, operation, and transition data remain folded.
+
 ## 10. Accountability boundary
 
 `ContributorAccountabilityBrief` separates:
@@ -283,11 +309,29 @@ python -m agm.vnext.cli maintainer brief \
 The command writes `brief.json`, `brief.md`, and `brief.html`. Serving is
 loopback-only and GET-only.
 
+The separate Phase 2 command is:
+
+```bash
+python -m agm.vnext.cli maintainer review \
+  --case CASE \
+  --actor HUMAN \
+  --role maintainer \
+  --serve
+```
+
+Without `--serve`, it writes a deterministic action model and static HTML
+without secrets. With `--serve`, draft saving is non-canonical; a governance
+mutation requires a new preview and one-time actor/case-bound token. The
+review page never exposes final accept, reject, or close controls. A ready
+case shows only an entry to a separate **最终人类决定** page.
+
 The eight design scenarios are regenerated and verified with:
 
 ```bash
 python scripts/generate_review_briefing_demos.py
 python scripts/check_review_briefing_demo_hashes.py
+python scripts/generate_review_interactive_demos.py
+python scripts/check_review_interactive_demo_hashes.py
 git diff --exit-code
 ```
 
@@ -304,6 +348,13 @@ technical details.
   complete runtime provenance system.
 - Identity and truthfulness require external systems.
 - Normal code review remains outside automatic AGM checks.
-- Phase 1.1 has no item-level actions or mutation routes.
+- The canonical state machine has no `request_repair` transition from
+  `resubmitted`. Phase 2 disables supplement/material-risk outcomes at that
+  stage instead of inventing a transition or falsely verifying material.
+- In a mixed sufficient/repair batch, the adapter executes only scoped repair.
+  Sufficient selections remain in append-only interaction audit; it does not
+  fabricate a maintainer verification transition.
+- The loopback CLI binds an asserted actor and canonical role but cannot prove
+  the real-world identity behind that local assertion.
 - The artifact remains `pending_human_review`; review is not approval.
-- Phase 2 and a P92 experiment package have not started.
+- No P92 experiment package has been generated.

@@ -113,8 +113,25 @@ Scenario-specific checks:
   committed HTML fixtures.
 - The artifact remains `pending_human_review`.
 
-## 5. Explicit phase boundary
+## 5. Phase 1.1.1 independent-review follow-up
 
-Phase 2 has not started. No item-level mutation, verification, repair,
-attestation, rejection, acceptance, closure, or merge control was added.
-No P92 experiment package was generated.
+The Phase 1.1.1 hardening commit addressed the three remaining small findings:
+
+- risk labels use stable `risk-low`, `risk-medium`, `risk-high`,
+  `risk-critical`, and `risk-unknown` classes with readable foreground and
+  background pairs; risk text and the underlying risk value remain unchanged;
+- important denied operations appear in the first status card as neutral,
+  non-blocking, system-owned anomalies that explicitly say the operation did
+  not take effect; and
+- both Review Briefing test files initialize `src` and `scripts` themselves
+  and run in independent pytest processes.
+
+This addendum is implementation evidence, not human visual acceptance or
+maintainer approval.
+
+## 6. Explicit phase boundary
+
+At the Phase 1.1 freeze, no item-level mutation, verification, repair,
+attestation, rejection, acceptance, closure, or merge control had been added.
+Phase 2 is developed on a separate descendant branch and preserves the
+read-only command unchanged. No P92 experiment package was generated.

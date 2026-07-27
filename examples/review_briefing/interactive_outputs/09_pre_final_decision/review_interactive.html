@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AGM Final Human Decision</title><style>
+:root{color-scheme:light;--ink:#18212f;--muted:#5d6878;--line:#dbe2ea;
+--paper:#fff;--bg:#f3f6f8;--blue:#176b9c;--green:#18754d;
+--amber:#8a5700;--red:#982525;--purple:#6654a4;--navy:#153452}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);
+font:16px/1.55 system-ui,-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;
+overflow-wrap:anywhere}main{width:min(1040px,calc(100% - 32px));margin:20px auto 64px}
+header{color:#fff;background:linear-gradient(135deg,#112f4b,#176a83);
+padding:22px 28px;border-radius:18px 18px 8px 8px}header.final{
+background:linear-gradient(135deg,#33245d,#6654a4)}h1{margin:0;
+font-size:clamp(1.7rem,4vw,2.5rem)}header p{margin:.35rem 0 0}
+section,details{background:var(--paper);margin:16px 0;padding:24px;
+border:1px solid var(--line);border-radius:14px}h2{margin:0 0 14px;color:var(--navy)}
+.status{border:2px solid var(--blue);box-shadow:0 12px 28px #17324b18}
+.boundary{border-left:5px solid var(--amber);padding:10px 14px;
+background:#fff8e8;font-weight:750}.draft-banner{position:sticky;top:0;z-index:3;
+border:2px solid var(--amber);background:#fff5d9}.stale{border-color:var(--red);
+background:#fff0f0}.anomaly{border-left:5px solid var(--blue);
+background:#edf7fb}.judgment{border:2px solid #c8953b}.judgment h2{
+display:flex;gap:10px;align-items:center}.number{display:inline-grid;place-items:center;
+width:36px;height:36px;border-radius:50%;color:#fff;background:var(--amber);
+font-size:1rem}.context{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.context article{padding:12px;border:1px solid var(--line);border-radius:10px;
+min-width:0}.options{display:grid;gap:10px;margin-top:16px}.option{display:block;
+padding:14px;border:1px solid #b7c4cf;border-radius:10px;background:#fbfcfd}
+.option:has(input:checked){border:2px solid var(--blue);background:#eef7fc}
+.option strong{display:block}.option p{margin:.3rem 0;color:var(--muted)}
+textarea{display:block;width:100%;min-height:70px;margin-top:8px;padding:10px;
+font:inherit;border:1px solid #aab6c1;border-radius:8px;resize:vertical}
+.actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+button,.button{display:inline-block;border:0;border-radius:9px;padding:10px 16px;
+font:inherit;font-weight:750;color:#fff;background:var(--blue);cursor:pointer;
+text-decoration:none}.secondary{background:#66717e}.danger{background:var(--red)}
+button:disabled{cursor:not-allowed;opacity:.55}.meta,.unavailable{color:var(--muted)}
+.unavailable{padding:10px;background:#f0f2f4;border-radius:8px}.preview-list{
+font-size:1.05rem}.success{border-color:var(--green);background:#effaf4}
+summary{cursor:pointer;font-weight:800;color:var(--navy)}pre{max-height:65vh;
+overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;padding:15px;
+color:#e8eef4;background:#111b27;border-radius:10px}
+@media(max-width:720px){main{width:min(100% - 16px,1040px);margin-top:8px}
+header,section,details{padding:18px}.context{grid-template-columns:1fr}
+.actions{align-items:stretch;flex-direction:column}.actions>*{width:100%}
+pre{font-size:.78rem}}
+</style></head>
+<body><main><header class="final">
+<h1>最终人类决定</h1>
+<p>与维护者检查彻底分开的 authority-controlled 操作</p></header><section class="status"><h2>最终决定边界</h2><ul><li>贡献者补充了智能体行动与委派说明；本次补充未修改代码、测试结果或安全影响说明。</li><li>综合风险：低；docs/guide.md 触发了“文档与说明”风险范围。</li><li>共 3 项治理要求；当前状态已由 Review Briefing Compiler 重新编译。</li><li>已记录 2 次维护者检查。</li><li>当前没有未解决 finding。</li><li>只有 canonical maintainer 角色可作出最终决定；本地 actor 身份真实性仍依赖运行环境。</li><li>维护者 verification 不等于接受；接受也不等于普通代码合并。</li></ul></section><div class="options"><label class="option"><input type="radio" name="decision_id" value="accept" disabled><strong>接受贡献</strong><p>记录既有 final-decision 接受操作；这不是维护者检查。</p></label><label class="option"><input type="radio" name="decision_id" value="reject" disabled><strong>拒绝贡献</strong><p>记录既有 final-decision 拒绝操作，并结束当前案例。</p></label><label class="option"><input type="radio" name="decision_id" value="request_changes" disabled><strong>要求修改后再决定</strong><p>使用既有 final-decision operation 返回贡献侧修复。</p></label><label class="option"><input type="radio" name="decision_id" value="close" disabled><strong>关闭案例</strong><p>使用既有 closure operation 关闭案例，不把关闭描述为接受。</p></label></div><section class="unavailable">静态演示：最终决定操作未启用，不会包含实时 token。</section></main></body></html>
