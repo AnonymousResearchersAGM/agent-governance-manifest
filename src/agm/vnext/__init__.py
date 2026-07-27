@@ -5,6 +5,7 @@ preserves the reported v0.1 behavior.
 """
 
 from .models import (
+    AttemptedOperation,
     BoundEvidence,
     ClosureReceipt,
     CompiledObligation,
@@ -19,14 +20,17 @@ from .models import (
     StateTransition,
     VNextError,
 )
+from .runtime import DemoExecutionContext, use_execution_context
 
 __all__ = [
+    "AttemptedOperation",
     "BoundEvidence",
     "ClosureReceipt",
     "CompiledObligation",
     "FinalDecision",
     "GovernanceCase",
     "GovernanceFinding",
+    "DemoExecutionContext",
     "HumanAttestation",
     "MaintainerVerification",
     "MatchedRule",
@@ -34,4 +38,5 @@ __all__ = [
     "RepairRequest",
     "StateTransition",
     "VNextError",
+    "use_execution_context",
 ]

@@ -144,6 +144,19 @@ Material and workflow state are deliberately separate:
 | `overridden` | An authorized exception covers the requirement. |
 | `not_applicable` | This path does not require the material. |
 
+Two boolean fields make the policy property and current consequence explicit:
+
+| Field | Meaning |
+| --- | --- |
+| `blocking_requirement` | The compiled requirement is blocking by policy design. |
+| `currently_blocks_progression` | The requirement is unresolved in a way that blocks the case now. |
+
+A satisfied blocking requirement therefore serializes as
+`blocking_requirement=true` and `currently_blocks_progression=false`. The
+former Python properties `blocking` and `blocks_progression` remain
+deprecated read-only aliases for source compatibility; default JSON contains
+only the new names.
+
 Workflow states are `blocks_progression`, `awaiting_contributor`,
 `awaiting_attestation`, `awaiting_revalidation`, `awaiting_final_decision`,
 and `completed`. Thus a repaired item can be `provided` or `retained` while
@@ -180,8 +193,17 @@ show:
 
 ## Diagnostics
 
-Plain-language diagnostics are presentation translations, not a second
-governance rule engine. Examples include:
+Plain-language diagnostics are presentation translations keyed by structured
+finding/reason codes, not a second governance rule engine and not a lookup by
+demo filename or complete English sentence. `GuidanceReasonPresentation`
+carries `reason_code`, `display_plain`, `source_english`, `source_code`, and
+typed `trace_refs`. Unknown codes use the conservative Chinese fallback
+“系统记录了一项需要维护者查看的说明。” while preserving the complete source.
+
+This presentation is used for finding messages, repair reasons, materiality and
+scope reasons, retained evidence, invalidated attestations, authorization
+denials, migration warnings, and lightweight/no-package explanations. Examples
+include:
 
 ```text
 这份材料已经过时
@@ -308,8 +330,11 @@ availability. This grouping does not remove or weaken domain authorization.
 The web panel uses action-specific `ContextSelectorOption` records instead of
 free-text evidence, finding, attestation, repair or obligation IDs. Selector
 tokens are opaque and bound to case ID, contribution fingerprint, action,
-object type and scope. On every POST the server rebuilds current valid options
-and rejects forged, stale, wrong-case, wrong-action or wrong-scope tokens.
+object type and scope. Tokens are authenticated with HMAC. Normal execution
+uses runtime secret material; deterministic demo secret material exists only
+inside the research-fixture execution context. On every POST the server
+rebuilds current valid options and rejects forged, stale, wrong-case,
+wrong-action or wrong-scope tokens.
 Non-interactive CLI operations may continue to accept explicit canonical IDs.
 
 ### Read-only handoff utilities
@@ -341,10 +366,18 @@ preview_reviewer_action(
 ) -> ActionPreview
 ```
 
-It returns the source and predicted target states, affected obligations,
-retained evidence, potentially invalidated attestations, effects, authority
-reason, next actor roles, trace references, and a deterministic preview
-fingerprint. `mutates_case` is always false.
+`ActionPreview` has two explicit layers. `display_effects`, `affected_items`,
+`retained_items`, `invalidated_items`, responsibility/workflow labels, and
+`next_steps` form the Chinese-first main layer. It contains material names and
+human consequences, including which unaffected materials remain valid and
+whether final acceptance is still outstanding.
+
+`technical_details` contains the operation name, source/target raw states,
+canonical obligation/evidence/finding/repair IDs, raw before/after effects,
+internal workflow nodes, created record types, trace references, and the
+preview fingerprint. HTML and Markdown fold this layer by default. The
+deprecated object-level accessors used by early Python callers resolve into the
+technical layer but are not duplicated in default JSON.
 
 The hardened preview also projects responsibility and workflow position,
 lists processed objects, retained and invalidated evidence, invalidated
@@ -360,6 +393,20 @@ The local panel uses two requests:
 Confirmation fails if the case or inputs changed after preview. The backend
 then authorizes and performs the real operation. The preview does not promise
 that an external actor identity is genuine.
+
+## Rejected attempted operations
+
+An authorization or operation-scope failure is an audit fact, not a governance
+finding and not a successful state transition. `AttemptedOperation` records the
+operation, actor/role, time, denial reason, required roles, state before/after,
+and `state_changed=false`. It is appended to the case audit collection without
+closing findings or advancing workflow state.
+
+`RejectedOperationView` presents only the most recent relevant denial in the
+main page as “最近一次操作未生效”. It states that the case did not move, shows
+the current workflow position, and identifies the next authorized roles.
+Historical denials and raw operation/role/reason fields stay in default-folded
+technical detail. Successful operations never enter this audit collection.
 
 ## Delegation help
 
@@ -388,8 +435,8 @@ compiled.
 The default-collapsed technical section includes raw state and readiness,
 risk rules, autonomy and assurance profiles, interaction rules, compiled
 obligations, evidence, attestations, verifications, findings, repair requests,
-both fingerprints, transitions, migration diagnostic, final decision, closure
-receipt, and raw English text.
+rejected attempted operations, both fingerprints, transitions, migration
+diagnostic, final decision, closure receipt, and raw English text.
 
 Routine review is possible without opening it, while every summary remains
 traceable.
@@ -416,8 +463,32 @@ five nodes.
 Run:
 
 ```bash
-python scripts/generate_reviewer_guidance_demos.py
+PYTHONPATH=src python scripts/generate_reviewer_guidance_demos.py
 ```
+
+The demo generator defaults to deterministic research-fixture mode. Each
+scenario installs a `DemoExecutionContext` with a fixed UTC clock, UUID5 IDs
+derived from `scenario namespace + object type + stable ordinal`, and a
+scenario-derived demo-only selector secret. Case/transition/evidence/finding/
+repair/verification/attestation IDs, timestamps, selector tokens, and
+fingerprints that depend on those records are therefore stable at file level.
+Normal service execution remains random; `--runtime-random` is available only
+for debugging the generator's ordinary runtime path.
+
+Verify a frozen checkout with:
+
+```bash
+PYTHONPATH=src python scripts/generate_reviewer_guidance_demos.py
+sha256sum examples/reviewer_guidance/outputs/**/*
+PYTHONPATH=src python scripts/generate_reviewer_guidance_demos.py
+sha256sum examples/reviewer_guidance/outputs/**/*
+git status --short
+```
+
+The two hash sets must match and `git status --short` must be empty. This is
+source-generation reproducibility; no generated page is post-processed to
+replace IDs, and the fixed demo selector secret is never used for real
+sessions.
 
 Outputs are written to `examples/reviewer_guidance/outputs/`. Eight scenarios
 cover multi-risk missing material, partial invalidation, scoped repair,

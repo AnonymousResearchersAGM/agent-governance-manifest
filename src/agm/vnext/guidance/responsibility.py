@@ -103,7 +103,7 @@ def derive_current_responsibility(
     contribution_rows = [
         row
         for row in requirement_comparisons
-        if row.blocking
+        if row.blocking_requirement
         and row.material_status in {"missing", "stale", "invalid"}
         and row.workflow_status
         in {"awaiting_contributor", "blocks_progression"}
@@ -153,7 +153,7 @@ def derive_current_responsibility(
         for row in requirement_comparisons
         if row.obligation_id == "O-HUMAN-ATTEST"
         and row.material_status in {"missing", "invalid", "stale"}
-        and row.blocking
+        and row.blocking_requirement
     ]
     invalidated = any(item.status == "invalidated" for item in attestations)
     if attestation_rows and (
@@ -204,7 +204,7 @@ def derive_current_responsibility(
     verification_rows = [
         row
         for row in requirement_comparisons
-        if row.blocking
+        if row.blocking_requirement
         and (
             row.obligation_id == "O-INDEPENDENT-REVIEW"
             or row.workflow_status
@@ -251,7 +251,7 @@ def derive_current_responsibility(
         [
             row.display_name
             for row in requirement_comparisons
-            if row.blocks_progression
+            if row.currently_blocks_progression
         ],
         ["accountable_human", "maintainer_verifier", "maintainer"],
     )

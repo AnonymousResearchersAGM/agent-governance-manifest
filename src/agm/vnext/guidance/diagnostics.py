@@ -16,6 +16,7 @@ from .models import (
     RequirementComparison,
     TraceReference,
 )
+from .reason_presentations import present_reason
 
 
 RESULT_LABELS = {
@@ -522,7 +523,7 @@ def build_requirement_comparisons(
                 result=state.result,
                 result_label=RESULT_LABELS[state.result],
                 raw_status=obligation.status,
-                blocking=obligation.blocking,
+                blocking_requirement=obligation.blocking,
                 source_rule_ids=list(obligation.source_rule_ids),
                 interaction_ids=list(obligation.interaction_ids),
                 evidence_ids=evidence_ids,
@@ -543,7 +544,7 @@ def build_requirement_comparisons(
                 workflow_status_label=WORKFLOW_STATUS_LABELS[
                     state.workflow_status
                 ],
-                blocks_progression=state.blocks_progression,
+                currently_blocks_progression=state.blocks_progression,
                 affected_scope=list(obligation.affected_scope),
             )
         )
@@ -558,11 +559,24 @@ def build_finding_views(case: GovernanceCase) -> list[DiagnosticFindingView]:
             for item in case.repair_requests
             if finding.id in item.finding_ids
         ]
+        traces = [
+            TraceReference("finding", finding.id, "diagnostic"),
+            *[
+                TraceReference("repair_request", item.id, "repair")
+                for item in repairs
+            ],
+        ]
+        reason = present_reason(
+            reason_code=finding.code,
+            source_english=finding.message,
+            trace_refs=traces,
+        )
         result.append(
             DiagnosticFindingView(
                 finding_id=finding.id,
                 title="阻断问题" if finding.blocking else "需要关注的问题",
-                plain_language=finding.message,
+                plain_language=reason.display_plain,
+                reason_presentation=reason,
                 severity=finding.severity,
                 blocking=finding.blocking,
                 status=finding.status,
@@ -570,13 +584,7 @@ def build_finding_views(case: GovernanceCase) -> list[DiagnosticFindingView]:
                     finding.affected_obligation_ids
                 ),
                 repair_request_ids=[item.id for item in repairs],
-                traceability=[
-                    TraceReference("finding", finding.id, "diagnostic"),
-                    *[
-                        TraceReference("repair_request", item.id, "repair")
-                        for item in repairs
-                    ],
-                ],
+                traceability=traces,
             )
         )
     return result

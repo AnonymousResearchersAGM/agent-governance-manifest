@@ -12,6 +12,7 @@ from typing import Any
 import yaml
 
 from .models import (
+    AttemptedOperation,
     GovernanceCase,
     StateTransition,
     VNextError,
@@ -152,6 +153,21 @@ class CaseStorage:
             ),
         )
         atomic_write_text(
+            directory / "attempted_operations.yml",
+            dump_yaml(
+                {
+                    "schema_version": (
+                        "agm.attempted_operation_audit/v0.2-dev"
+                    ),
+                    "append_only": True,
+                    "items": [
+                        item.to_dict()
+                        for item in case.attempted_operations
+                    ],
+                }
+            ),
+        )
+        atomic_write_text(
             directory / "verifications.yml",
             dump_yaml(
                 {
@@ -182,6 +198,14 @@ class CaseStorage:
         case = GovernanceCase.from_dict(data)
         if case.id != case_id:
             raise VNextError("Stored Governance Case ID does not match directory")
+        audit_events = self.read_attempted_operations(case_id)
+        if audit_events:
+            by_id = {
+                item.id: item for item in case.attempted_operations
+            }
+            for item in audit_events:
+                by_id[item.id] = item
+            case.attempted_operations = list(by_id.values())
         return case
 
     def append_transition(self, transition: StateTransition) -> Path:
@@ -215,6 +239,52 @@ class CaseStorage:
                     f"Malformed transition JSONL at line {line_number}"
                 ) from exc
             result.append(StateTransition.from_dict(raw))
+        return result
+
+    def append_attempted_operation(
+        self,
+        attempt: AttemptedOperation,
+    ) -> Path:
+        """Append a rejected-operation audit fact without a state transition."""
+
+        directory = self.case_dir(attempt.case_id)
+        if not directory.exists():
+            raise VNextError(
+                "Cannot append attempted operation for missing case: "
+                f"{attempt.case_id}"
+            )
+        path = directory / "attempted_operations.jsonl"
+        line = json.dumps(
+            attempt.to_dict(),
+            ensure_ascii=False,
+            sort_keys=True,
+        ) + "\n"
+        with path.open("a", encoding="utf-8", newline="\n") as handle:
+            handle.write(line)
+            handle.flush()
+            os.fsync(handle.fileno())
+        return path
+
+    def read_attempted_operations(
+        self,
+        case_id: str,
+    ) -> list[AttemptedOperation]:
+        path = self.case_dir(case_id) / "attempted_operations.jsonl"
+        if not path.exists():
+            return []
+        result = []
+        for line_number, line in enumerate(
+            path.read_text(encoding="utf-8").splitlines(),
+            start=1,
+        ):
+            try:
+                raw = json.loads(line)
+            except json.JSONDecodeError as exc:
+                raise VNextError(
+                    "Malformed attempted-operation JSONL at line "
+                    f"{line_number}"
+                ) from exc
+            result.append(AttemptedOperation.from_dict(raw))
         return result
 
     def transition_log_hash(self, case_id: str) -> str:

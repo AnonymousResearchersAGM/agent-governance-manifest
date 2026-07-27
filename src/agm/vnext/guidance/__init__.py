@@ -6,6 +6,7 @@ from .action_planner import (
 )
 from .models import (
     ActionPreview,
+    ActionPreviewDisplayEffect,
     ActorContext,
     AvailableAction,
     ContributionSummary,
@@ -13,7 +14,9 @@ from .models import (
     DiagnosticFindingView,
     GuidanceUtilityAction,
     GuidanceExplanation,
+    GuidanceReasonPresentation,
     MaterialityDeclarationView,
+    RejectedOperationView,
     RequirementComparison,
     ResponsibilityView,
     ReviewerGuidanceView,
@@ -32,10 +35,12 @@ from .presenters import (
     build_reviewer_guidance,
     render_guidance_html,
     render_guidance_markdown,
+    render_action_preview_markdown,
 )
 
 __all__ = [
     "ActionPreview",
+    "ActionPreviewDisplayEffect",
     "ActorContext",
     "AvailableAction",
     "ContributionSummary",
@@ -43,7 +48,9 @@ __all__ = [
     "DiagnosticFindingView",
     "GuidanceUtilityAction",
     "GuidanceExplanation",
+    "GuidanceReasonPresentation",
     "MaterialityDeclarationView",
+    "RejectedOperationView",
     "RequirementComparison",
     "ResponsibilityView",
     "ReviewerGuidanceView",
@@ -60,5 +67,6 @@ __all__ = [
     "resolve_selector_tokens",
     "render_guidance_html",
     "render_guidance_markdown",
+    "render_action_preview_markdown",
     "utility_output",
 ]

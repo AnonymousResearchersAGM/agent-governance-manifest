@@ -73,17 +73,34 @@
 
 ## 操作预览
 
+你准备执行：**请求补充或更新材料**
+
+操作 request_repair 不能从当前状态 evidence_incomplete 执行。
+
+### 将处理
+
+- 登录、认证与权限影响
+
+### 将保留
+
+- 无
+
+### 预计变化
+
+- 案例不会发生变化。
+
+### 执行后
+
+- 本次操作不会改变案例状态。
+- 当前责任方仍是贡献者、贡献侧智能体。
+- 这不等于代码已经被项目接受。
+
+<details>
+<summary>技术操作、内部 ID 与原始状态</summary>
+
 ```json
 {
-  "action": "request_repair",
-  "title": "请求补充或更新材料",
-  "actor": {
-    "actor": "human-maintainer",
-    "role": "maintainer",
-    "human": true
-  },
-  "authorized": false,
-  "authorization_reason": "操作 request_repair 不能从当前状态 evidence_incomplete 执行。",
+  "operation": "request_repair",
   "source_state": "evidence_incomplete",
   "target_state": "evidence_incomplete",
   "effects": [],
@@ -92,12 +109,13 @@
   ],
   "retained_evidence_ids": [],
   "invalidated_attestation_ids": [],
-  "next_authorized_actor_roles": [
-    "contributor",
-    "contributor_agent"
+  "invalidated_evidence_ids": [],
+  "processed_objects": [
+    "O-AUTH-IMPACT"
   ],
-  "requires_confirmation": false,
-  "mutates_case": false,
+  "workflow_step_before": "prepare_materials",
+  "workflow_step_after": "prepare_materials",
+  "creates_records": [],
   "preview_fingerprint": "8025aa30042039553fd8e7e5a3788b197815ce8169271433cd4212fc7a2c3e0d",
   "traceability": [
     {
@@ -110,63 +128,8 @@
       "object_id": "multi-risk-missing",
       "relationship": "source_state"
     }
-  ],
-  "processed_objects": [
-    "O-AUTH-IMPACT"
-  ],
-  "invalidated_evidence_ids": [],
-  "responsibility_before": {
-    "primary_roles": [
-      "contributor",
-      "contributor_agent"
-    ],
-    "display_label": "贡献者、贡献侧智能体",
-    "reason": "受影响材料尚未准备或更新完成，当前还不能进入维护者检查。",
-    "blocking_items": [
-      "智能体行动与委派说明",
-      "可核验测试制品",
-      "登录、认证与权限影响",
-      "变更文件清单",
-      "已知限制",
-      "修改理由",
-      "修改说明",
-      "测试命令与结果"
-    ],
-    "next_handoff_roles": [
-      "accountable_human",
-      "maintainer_verifier",
-      "maintainer"
-    ]
-  },
-  "responsibility_after": {
-    "primary_roles": [
-      "contributor",
-      "contributor_agent"
-    ],
-    "display_label": "贡献者、贡献侧智能体",
-    "reason": "受影响材料尚未准备或更新完成，当前还不能进入维护者检查。",
-    "blocking_items": [
-      "智能体行动与委派说明",
-      "可核验测试制品",
-      "登录、认证与权限影响",
-      "变更文件清单",
-      "已知限制",
-      "修改理由",
-      "修改说明",
-      "测试命令与结果"
-    ],
-    "next_handoff_roles": [
-      "accountable_human",
-      "maintainer_verifier",
-      "maintainer"
-    ]
-  },
-  "workflow_step_before": "prepare_materials",
-  "workflow_step_after": "prepare_materials",
-  "creates_records": [],
-  "requires_human_attestation_after": true,
-  "requires_maintainer_verification_after": true,
-  "final_acceptance_recorded": false,
-  "final_acceptance_still_required": true
+  ]
 }
 ```
+
+</details>

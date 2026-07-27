@@ -65,17 +65,34 @@
 
 ## 操作预览
 
+你准备执行：**提交人类最终接受决定**
+
+当前角色和案例状态允许生成此操作计划。
+
+### 将处理
+
+- 无
+
+### 将保留
+
+- 变更文件清单
+- 修改说明
+
+### 预计变化
+
+- 案例流程：等待人类维护者最终决定 → 人类维护者已接受并关闭。案例 accepted 并生成 closure receipt；该动作不是自动合并。
+
+### 执行后
+
+- 当前责任方将转交给流程已结束。
+- 案例将进入“人类维护者最终决定”。
+
+<details>
+<summary>技术操作、内部 ID 与原始状态</summary>
+
 ```json
 {
-  "action": "decide_accept",
-  "title": "提交人类最终接受决定",
-  "actor": {
-    "actor": "human-maintainer",
-    "role": "maintainer",
-    "human": true
-  },
-  "authorized": true,
-  "authorization_reason": "当前角色和案例状态允许生成此操作计划。",
+  "operation": "decide_accept",
   "source_state": "ready_for_human_decision",
   "target_state": "accepted",
   "effects": [
@@ -85,19 +102,25 @@
       "after": "accepted",
       "explanation": "案例 accepted 并生成 closure receipt；该动作不是自动合并。",
       "source_object_ids": [
-        "transition-833d4aee3f724954813bb730c3533d62"
+        "transition-ba3e2834196459f189cf12bd8df834dd"
       ]
     }
   ],
   "affected_obligation_ids": [],
   "retained_evidence_ids": [
-    "evidence-c701f892009b4bd3af410126d26dc906",
-    "evidence-2e006840991340b0a0e8000551050a08"
+    "evidence-41ca16ed791f5f6e8a57ddec6ac09610",
+    "evidence-661f729aab135d11a9828ba5ea54ea26"
   ],
   "invalidated_attestation_ids": [],
-  "next_authorized_actor_roles": [],
-  "requires_confirmation": true,
-  "mutates_case": false,
+  "invalidated_evidence_ids": [],
+  "processed_objects": [],
+  "workflow_step_before": "human_final_decision",
+  "workflow_step_after": "human_final_decision",
+  "creates_records": [
+    "state_transition",
+    "final_decision",
+    "closure_receipt"
+  ],
   "preview_fingerprint": "2a014cb9eef33a65ece8483c33ba0139875ec110f763de906f27c3f589f5d5c9",
   "traceability": [
     {
@@ -115,35 +138,8 @@
       "object_id": "ready_for_human_decision:decide_accept:accepted",
       "relationship": "transition_plan"
     }
-  ],
-  "processed_objects": [],
-  "invalidated_evidence_ids": [],
-  "responsibility_before": {
-    "primary_roles": [
-      "maintainer"
-    ],
-    "display_label": "人类维护者",
-    "reason": "治理检查已经达到可决策状态，但最终接受、拒绝或要求修改仍须由人类维护者明确记录。",
-    "blocking_items": [],
-    "next_handoff_roles": []
-  },
-  "responsibility_after": {
-    "primary_roles": [],
-    "display_label": "流程已结束",
-    "reason": "人类最终决定和关闭记录已经生成，当前没有待交接操作。",
-    "blocking_items": [],
-    "next_handoff_roles": []
-  },
-  "workflow_step_before": "human_final_decision",
-  "workflow_step_after": "human_final_decision",
-  "creates_records": [
-    "state_transition",
-    "final_decision",
-    "closure_receipt"
-  ],
-  "requires_human_attestation_after": false,
-  "requires_maintainer_verification_after": false,
-  "final_acceptance_recorded": true,
-  "final_acceptance_still_required": false
+  ]
 }
 ```
+
+</details>

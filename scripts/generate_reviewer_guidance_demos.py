@@ -7,6 +7,7 @@ import json
 import shutil
 import sys
 import tempfile
+from contextlib import nullcontext
 from pathlib import Path
 from typing import Any, Callable
 
@@ -17,15 +18,23 @@ sys.path.insert(0, str(REPOSITORY_ROOT / "src"))
 from agm.vnext.guidance import (  # noqa: E402
     ActorContext,
     build_reviewer_guidance,
+    render_action_preview_markdown,
     render_guidance_html,
     render_guidance_markdown,
 )
 from agm.vnext.models import VNextError  # noqa: E402
+from agm.vnext.runtime import (  # noqa: E402
+    DemoExecutionContext,
+    use_execution_context,
+)
 from agm.vnext.service import GovernanceService  # noqa: E402
 from agm.vnext.storage import atomic_write_text  # noqa: E402
 
 
 FIXED_TIME = "2026-07-26T00:00:00Z"
+# This key is intentionally confined to generated public research fixtures.  It
+# is never installed in the default/production execution context.
+DEMO_TOKEN_SECRET = b"agm-reviewer-guidance-public-demo-fixtures-v1"
 
 EVIDENCE_VALUES = {
     "contribution_summary": "Implemented the scenario contribution.",
@@ -195,6 +204,7 @@ def material_partial_invalidation(
         role="maintainer_verifier",
         message="The summary must be updated after a material scope change.",
         affected_obligation_ids=["O-SUMMARY"],
+        finding_code="material_scope_change",
     )
     service.resubmit(
         "material-partial",
@@ -239,6 +249,7 @@ def scoped_repair(service: GovernanceService) -> dict[str, Any]:
         role="maintainer_verifier",
         message="Clarify agent action and delegation scope only.",
         affected_obligation_ids=["O-AGENT-SCOPE"],
+        finding_code="agent_delegation_clarification",
     )
     service.resubmit(
         "scoped-repair",
@@ -404,128 +415,142 @@ SCENARIOS: list[tuple[str, Callable[[GovernanceService], dict[str, Any]]]] = [
 ]
 
 
-def generate(output_root: Path) -> list[dict[str, str]]:
+def generate(
+    output_root: Path,
+    *,
+    deterministic: bool = True,
+) -> list[dict[str, str]]:
     output_root.mkdir(parents=True, exist_ok=True)
     results: list[dict[str, str]] = []
     with tempfile.TemporaryDirectory(prefix="agm-guidance-demos-") as raw:
         temporary = Path(raw)
         for slug, builder in SCENARIOS:
-            root = make_project(temporary, slug)
-            service = GovernanceService(root)
-            scenario = builder(service)
-            case_id = scenario["case_id"]
-            actor: ActorContext = scenario["actor"]
-            case = service.storage.load_case(case_id)
-            transitions = service.storage.read_transitions(case_id)
-            view = build_reviewer_guidance(
-                case,
-                service.config,
-                transitions,
-                actor,
-                migration_diagnostic=service.migration_check(case_id),
-            )
-            preview = scenario.get("prepared_preview")
-            if preview is None:
-                preview = service.preview_reviewer_action(
-                    case_id,
-                    actor=actor.actor,
-                    role=actor.role,
-                    action=scenario["preview_action"],
-                    parameters=scenario.get("preview_parameters"),
+            execution = (
+                use_execution_context(
+                    DemoExecutionContext(
+                        scenario_namespace=slug,
+                        fixed_timestamp=FIXED_TIME,
+                        token_secret=DEMO_TOKEN_SECRET,
+                    )
                 )
-            final_verification = scenario.get(
-                "final_verification_record",
-                (
-                    case.maintainer_verifications[-1].to_dict()
-                    if case.maintainer_verifications
-                    else None
-                ),
+                if deterministic
+                else nullcontext()
             )
-            payload = {
-                "schema_version": "agm.reviewer_guidance_demo/v0.2-dev",
-                "scenario": slug,
-                "notes": scenario.get("notes"),
-                "guidance_view": view.to_dict(),
-                "expected_workflow_steps": [
-                    {
-                        "step_id": item.step_id,
-                        "title": item.title,
-                        "status": item.status,
-                    }
-                    for item in view.workflow_steps
-                ],
-                "expected_requirement_comparison": [
-                    item.to_dict()
-                    for item in view.requirement_comparisons
-                ],
-                "current_responsibility": (
-                    view.responsibility.to_dict()
-                    if view.responsibility
-                    else None
-                ),
-                "current_relevant_actions": [
-                    item.to_dict()
-                    for item in view.current_relevant_actions
-                ],
-                "unavailable_action_summary": (
-                    view.unavailable_action_summary
-                ),
-                "context_selector_data": {
-                    item.action: [
-                        option.to_dict()
-                        for option in item.selector_options
-                    ]
-                    for item in view.available_actions
-                    if item.selector_options
-                },
-                "trace_mapping": {
-                    item.step_id: [
-                        trace.to_dict()
-                        for trace in item.traceability
-                    ]
-                    for item in view.workflow_steps
-                },
-                "available_actions": [
-                    item.to_dict() for item in view.available_actions
-                ],
-                "unavailable_actions": [
-                    item.to_dict() for item in view.unavailable_actions
-                ],
-                "action_preview": preview.to_dict(),
-                "final_verification_record": final_verification,
-            }
-            scenario_root = output_root / slug
-            scenario_root.mkdir(parents=True, exist_ok=True)
-            json_path = scenario_root / "guidance.json"
-            markdown_path = scenario_root / "report.md"
-            html_path = scenario_root / "report.html"
-            atomic_write_text(
-                json_path,
-                json.dumps(payload, indent=2, ensure_ascii=False) + "\n",
-            )
-            atomic_write_text(
-                markdown_path,
-                render_guidance_markdown(view)
-                + "\n\n## 操作预览\n\n```json\n"
-                + json.dumps(
-                    preview.to_dict(), indent=2, ensure_ascii=False
+            with execution:
+                root = make_project(temporary, slug)
+                service = GovernanceService(root)
+                scenario = builder(service)
+                case_id = scenario["case_id"]
+                actor: ActorContext = scenario["actor"]
+                case = service.storage.load_case(case_id)
+                transitions = service.storage.read_transitions(case_id)
+                view = build_reviewer_guidance(
+                    case,
+                    service.config,
+                    transitions,
+                    actor,
+                    migration_diagnostic=service.migration_check(case_id),
                 )
-                + "\n```\n",
-            )
-            atomic_write_text(
-                html_path,
-                render_guidance_html(view, preview=preview),
-            )
-            results.append(
-                {
-                    "scenario": slug,
-                    "json": str(json_path.relative_to(output_root)),
-                    "markdown": str(
-                        markdown_path.relative_to(output_root)
+                preview = scenario.get("prepared_preview")
+                if preview is None:
+                    preview = service.preview_reviewer_action(
+                        case_id,
+                        actor=actor.actor,
+                        role=actor.role,
+                        action=scenario["preview_action"],
+                        parameters=scenario.get("preview_parameters"),
+                    )
+                final_verification = scenario.get(
+                    "final_verification_record",
+                    (
+                        case.maintainer_verifications[-1].to_dict()
+                        if case.maintainer_verifications
+                        else None
                     ),
-                    "html": str(html_path.relative_to(output_root)),
+                )
+                payload = {
+                    "schema_version": "agm.reviewer_guidance_demo/v0.2-dev",
+                    "scenario": slug,
+                    "notes": scenario.get("notes"),
+                    "guidance_view": view.to_dict(),
+                    "expected_workflow_steps": [
+                        {
+                            "step_id": item.step_id,
+                            "title": item.title,
+                            "status": item.status,
+                        }
+                        for item in view.workflow_steps
+                    ],
+                    "expected_requirement_comparison": [
+                        item.to_dict()
+                        for item in view.requirement_comparisons
+                    ],
+                    "current_responsibility": (
+                        view.responsibility.to_dict()
+                        if view.responsibility
+                        else None
+                    ),
+                    "current_relevant_actions": [
+                        item.to_dict()
+                        for item in view.current_relevant_actions
+                    ],
+                    "unavailable_action_summary": (
+                        view.unavailable_action_summary
+                    ),
+                    "context_selector_data": {
+                        item.action: [
+                            option.to_dict()
+                            for option in item.selector_options
+                        ]
+                        for item in view.available_actions
+                        if item.selector_options
+                    },
+                    "trace_mapping": {
+                        item.step_id: [
+                            trace.to_dict()
+                            for trace in item.traceability
+                        ]
+                        for item in view.workflow_steps
+                    },
+                    "available_actions": [
+                        item.to_dict() for item in view.available_actions
+                    ],
+                    "unavailable_actions": [
+                        item.to_dict() for item in view.unavailable_actions
+                    ],
+                    "action_preview": preview.to_dict(),
+                    "final_verification_record": final_verification,
                 }
-            )
+                scenario_root = output_root / slug
+                scenario_root.mkdir(parents=True, exist_ok=True)
+                json_path = scenario_root / "guidance.json"
+                markdown_path = scenario_root / "report.md"
+                html_path = scenario_root / "report.html"
+                atomic_write_text(
+                    json_path,
+                    json.dumps(payload, indent=2, ensure_ascii=False) + "\n",
+                )
+                atomic_write_text(
+                    markdown_path,
+                    render_guidance_markdown(view)
+                    + "\n\n"
+                    + render_action_preview_markdown(preview)
+                    + "\n",
+                )
+                atomic_write_text(
+                    html_path,
+                    render_guidance_html(view, preview=preview),
+                )
+                results.append(
+                    {
+                        "scenario": slug,
+                        "json": str(json_path.relative_to(output_root)),
+                        "markdown": str(
+                            markdown_path.relative_to(output_root)
+                        ),
+                        "html": str(html_path.relative_to(output_root)),
+                    }
+                )
     manifest_path = output_root / "manifest.json"
     atomic_write_text(
         manifest_path,
@@ -555,8 +580,19 @@ def main() -> int:
             / "outputs"
         ),
     )
+    parser.add_argument(
+        "--runtime-random",
+        action="store_true",
+        help=(
+            "Use normal runtime randomness for debugging. The default public "
+            "research-demo mode is deterministic."
+        ),
+    )
     args = parser.parse_args()
-    results = generate(args.output.resolve())
+    results = generate(
+        args.output.resolve(),
+        deterministic=not args.runtime_random,
+    )
     print(
         json.dumps(
             {"generated": len(results), "outputs": results},

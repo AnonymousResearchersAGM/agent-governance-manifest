@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 
+from functools import wraps
 from pathlib import Path
-from typing import Any
+from typing import Any, Callable
 
 from .attestations import (
     apply_attestation_status,
@@ -19,6 +20,7 @@ from .evidence import (
 )
 from .migration import MigrationDiagnostic, check_migration
 from .models import (
+    AttemptedOperation,
     ClosureReceipt,
     FinalDecision,
     GovernanceCase,
@@ -46,6 +48,41 @@ from .repair import (
 from .risk import RiskResolution, resolve_risk
 from .state_machine import authorize, transition_case
 from .storage import CaseStorage
+
+
+def audit_rejected_operation(
+    operation: str | Callable[[dict[str, Any]], str],
+):
+    """Record a failed state-changing call without inventing a transition."""
+
+    def decorator(method):
+        @wraps(method)
+        def wrapped(self, case_id: str, *args, **kwargs):
+            try:
+                state_before = self.storage.load_case(case_id).state
+            except VNextError:
+                state_before = ""
+            try:
+                return method(self, case_id, *args, **kwargs)
+            except VNextError as exc:
+                action = (
+                    operation(kwargs)
+                    if callable(operation)
+                    else operation
+                )
+                self._record_rejected_operation(
+                    case_id,
+                    operation=action,
+                    actor=str(kwargs.get("actor", "")),
+                    role=str(kwargs.get("role", "")),
+                    reason_raw=str(exc),
+                    state_before=state_before,
+                )
+                raise
+
+        return wrapped
+
+    return decorator
 
 
 class GovernanceService:
@@ -915,6 +952,7 @@ class GovernanceService:
         self.storage.save_case(case)
         return case
 
+    @audit_rejected_operation("verify_evidence")
     def verify(
         self,
         case_id: str,
@@ -1047,6 +1085,7 @@ class GovernanceService:
         self.storage.save_case(case)
         return verification
 
+    @audit_rejected_operation("authorized_override")
     def override(
         self,
         case_id: str,
@@ -1118,6 +1157,17 @@ class GovernanceService:
         self.storage.save_case(case)
         return case
 
+    @audit_rejected_operation(
+        lambda kwargs: {
+            "accept": "decide_accept",
+            "reject": "decide_reject",
+            "request_changes": "decide_request_changes",
+            "close": "decide_close",
+        }.get(
+            str(kwargs.get("decision", "")),
+            "final_decision",
+        )
+    )
     def decide(
         self,
         case_id: str,
@@ -1248,6 +1298,46 @@ class GovernanceService:
         transition = transition_case(self.config, case, **kwargs)
         self.storage.append_transition(transition)
         return transition
+
+    def _record_rejected_operation(
+        self,
+        case_id: str,
+        *,
+        operation: str,
+        actor: str,
+        role: str,
+        reason_raw: str,
+        state_before: str,
+    ) -> None:
+        """Append a denied audit event while preserving governance state."""
+
+        try:
+            case = self.storage.load_case(case_id)
+        except VNextError:
+            return
+        state_after = case.state
+        required_roles = sorted(
+            role_id
+            for role_id, permissions in self.config.permissions.items()
+            if operation in permissions
+        )
+        attempt = AttemptedOperation(
+            id=new_id("attempted-operation"),
+            case_id=case.id,
+            operation=operation,
+            actor=actor,
+            actor_role=role,
+            attempted_at=utc_now(),
+            result="denied",
+            reason_raw=reason_raw,
+            state_before=state_before or state_after,
+            state_after=state_after,
+            state_changed=(state_before or state_after) != state_after,
+            required_roles=required_roles,
+        )
+        self.storage.append_attempted_operation(attempt)
+        case.attempted_operations.append(attempt)
+        self.storage.save_case(case)
 
     def _closure_receipt(self, case: GovernanceCase) -> ClosureReceipt:
         if not case.final_decision:

@@ -306,6 +306,12 @@ Its serializable domain records include:
 13. `ContextSelectorOption`
 14. `GuidanceUtilityAction`
 15. `MaterialityDeclarationView`
+16. `GuidanceReasonPresentation`
+17. `RejectedOperationView`
+18. `ActionPreviewDisplayEffect`
+
+The underlying case may also contain append-only `AttemptedOperation` audit
+records for denied operations. These are not findings or state transitions.
 
 The core API is:
 
@@ -353,10 +359,13 @@ preview_reviewer_action(
 )
 ```
 
-It shall not mutate the case, transition list, or storage. It shall expose the
-authority result, source and predicted target states, effects, affected
-obligations, retained evidence, attestation invalidation, next actors,
-traceability, and a deterministic preview fingerprint.
+It shall not mutate the case, transition list, or storage. Its display layer
+shall expose Chinese human-readable effects, affected and retained material
+names, responsibility/workflow movement, next steps, and whether final
+acceptance remains outstanding. Its default-collapsed `technical_details`
+shall expose the operation, source/predicted target raw states, canonical IDs,
+raw effects, internal workflow nodes, expected record types, next actors,
+traceability, and deterministic preview fingerprint.
 
 The local maintainer panel shall require preview before confirmation.
 Confirmation shall be rejected when the preview fingerprint no longer matches
@@ -407,6 +416,20 @@ directories with `guidance.json`, `report.md`, and `report.html` under
 outputs are not a formal experimental package, human verification, or an
 acceptance record.
 
+The generator shall default to deterministic research-fixture execution.
+Deterministic identity shall arise while constructing domain records, never by
+post-processing rendered HTML/Markdown/JSON. A scenario execution context shall
+cover case, transition, evidence, finding, repair, verification, attestation
+and other generated IDs; timestamps; authenticated selector tokens; and
+fingerprints dependent on those runtime values. Scenario namespaces shall
+prevent cross-scenario collisions.
+
+Normal runtime execution shall retain random IDs, the real clock, and
+non-public selector signing material. A fixed research-demo selector key shall
+never process an ordinary user session. Running the generator twice in a
+checkout with frozen outputs shall yield identical per-file SHA-256 hashes and
+an empty `git status --short`.
+
 ## 21. Guidance semantic hardening requirements
 
 ### 21.1 Presentation boundary
@@ -419,8 +442,12 @@ conservative fallback.
 
 ### 21.2 Dual requirement state
 
-`RequirementComparison` shall carry `material_status`, `workflow_status`, and
-`blocks_progression` in addition to compatibility result fields. Material
+`RequirementComparison` shall carry `material_status`, `workflow_status`,
+`blocking_requirement`, and `currently_blocks_progression` in addition to
+compatibility result fields. `blocking_requirement` states whether the
+compiled policy defines a blocking requirement;
+`currently_blocks_progression` states whether that row blocks the case now.
+Material
 states are `missing`, `invalid`, `stale`, `provided`, `retained`, `verified`,
 `overridden`, and `not_applicable`. Workflow states are
 `blocks_progression`, `awaiting_contributor`, `awaiting_attestation`,
@@ -428,6 +455,11 @@ states are `missing`, `invalid`, `stale`, `provided`, `retained`, `verified`,
 
 Provided or retained repaired material awaiting maintainer revalidation shall
 not be presented as missing or invalid.
+
+The former Python properties `blocking` and `blocks_progression` may remain
+read-only aliases with `DeprecationWarning`. Default new JSON shall emit only
+the new names. A compatibility serializer may emit old names only when
+explicitly requested.
 
 ### 21.3 Responsibility
 
@@ -477,6 +509,11 @@ attestation and verification, and whether final acceptance occurred. The
 preview fingerprint shall cover current case identity and submitted inputs.
 Real execution shall repeat canonical authorization and scope validation.
 
+The main preview shall not expose long evidence, finding, repair, transition,
+or other opaque IDs. Obligation IDs may appear only as secondary/technical
+text. The technical layer shall retain every canonical ID and raw state needed
+to compare preview with actual execution.
+
 ### 21.9 Materiality, delegation, and lightweight paths
 
 Materiality shall be presented as a declaration with declarer and reason,
@@ -490,3 +527,38 @@ model calls, and advice-only assistance.
 Lightweight/no-package paths shall be non-failure outcomes. Reduced process
 intensity shall never authorize an agent to attest, verify, override, or make
 the final project decision.
+
+### 21.10 Reason presentation
+
+Finding, repair, materiality and scope reasons shall use a structured
+`GuidanceReasonPresentation` with Chinese `display_plain`, complete
+`source_english`, optional `source_code`, and typed `trace_refs`. Selection
+shall prefer reason/finding code or structured type and shall not depend on
+demo filenames or exact full-sentence English matching. Unknown codes shall use
+“系统记录了一项需要维护者查看的说明。” while retaining the source.
+
+### 21.11 Rejected attempted operations
+
+A denied operation shall be recorded as `AttemptedOperation` with operation,
+actor/role, time, result, raw reason, required roles, before/after state, and
+`state_changed`. It shall not advance case state, append a successful
+transition, close a finding, or fabricate a new finding. The main page shall
+show only the latest relevant `RejectedOperationView`; historical attempts
+remain in technical detail. Successful operations shall not enter the rejected
+collection.
+
+### 21.12 Audit events versus transitions
+
+`StateTransition` proves that an authorized lifecycle mutation took effect.
+`AttemptedOperation` proves only that a call was attempted and rejected. Audit
+display and analysis shall preserve this distinction, including transition
+counts and finding status.
+
+### 21.13 File-level reproducibility
+
+The eight research demos shall be byte-for-byte reproducible across consecutive
+generation runs. Tests shall cover stable IDs, timestamps, fingerprints,
+selector tokens, scenario isolation, unchanged semantics versus runtime-random
+mode, and a clean Git worktree after the second generation. These outputs
+remain development research artifacts pending human review, not a formal
+participant experiment package.

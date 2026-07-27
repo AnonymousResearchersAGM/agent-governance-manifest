@@ -1,6 +1,8 @@
 from __future__ import annotations
 
+import hashlib
 import json
+import subprocess
 import sys
 from pathlib import Path
 
@@ -119,7 +121,9 @@ def test_scoped_repair_scenario_preserves_unaffected_records(
     assert repair["revalidation_required"] == ["O-AGENT-SCOPE"]
     assert attempt["retained_evidence_ids"]
     assert payload["action_preview"]["authorized"] is True
-    assert payload["action_preview"]["affected_obligation_ids"] == [
+    assert payload["action_preview"]["technical_details"][
+        "affected_obligation_ids"
+    ] == [
         "O-AGENT-SCOPE"
     ]
     row = next(
@@ -177,7 +181,9 @@ def test_lightweight_scenario_separates_intensity_from_authority(
         workflow["accountable_confirmation"]["status"] == "skipped"
     )
     assert view["authority_notice"]
-    assert payload["action_preview"]["target_state"] == (
+    assert payload["action_preview"]["technical_details"][
+        "target_state"
+    ] == (
         "ready_for_human_decision"
     )
 
@@ -229,8 +235,173 @@ def test_human_final_scenario_has_separate_verification_and_closure(
     view = payload["guidance_view"]
 
     assert payload["final_verification_record"]["outcome"] == "verified"
-    assert payload["action_preview"]["action"] == "decide_accept"
+    assert payload["action_preview"]["technical_details"][
+        "operation"
+    ] == "decide_accept"
     assert payload["action_preview"]["authorized"] is True
     assert view["summary"]["raw_state"] == "accepted"
     assert view["technical_details"]["final_decision"]["decision"] == "accept"
     assert view["technical_details"]["closure_receipt"] is not None
+
+
+def _output_hashes(output: Path) -> dict[str, str]:
+    return {
+        str(path.relative_to(output)): hashlib.sha256(
+            path.read_bytes()
+        ).hexdigest()
+        for path in sorted(output.rglob("*"))
+        if path.is_file() and ".git" not in path.parts
+    }
+
+
+def test_deterministic_generation_is_byte_stable_and_git_clean(tmp_path):
+    output = tmp_path / "deterministic-outputs"
+    generate(output)
+    first = _output_hashes(output)
+    subprocess.run(["git", "init", "-q"], cwd=output, check=True)
+    subprocess.run(
+        ["git", "config", "user.email", "agm-test@example.invalid"],
+        cwd=output,
+        check=True,
+    )
+    subprocess.run(
+        ["git", "config", "user.name", "AGM Test"],
+        cwd=output,
+        check=True,
+    )
+    subprocess.run(["git", "add", "."], cwd=output, check=True)
+    subprocess.run(
+        ["git", "commit", "-qm", "freeze deterministic fixtures"],
+        cwd=output,
+        check=True,
+    )
+
+    generate(output)
+    second = _output_hashes(output)
+    status = subprocess.run(
+        ["git", "status", "--short"],
+        cwd=output,
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout
+
+    assert second == first
+    assert status == ""
+
+
+def test_deterministic_payload_stabilizes_runtime_values_and_namespaces(
+    generated_scenarios,
+    tmp_path,
+):
+    first_payloads = generated_scenarios[2]
+    second_output = tmp_path / "second"
+    second_results = generate(second_output)
+    second_payloads = {
+        item["scenario"]: json.loads(
+            (second_output / item["json"]).read_text(encoding="utf-8")
+        )
+        for item in second_results
+    }
+
+    assert second_payloads == first_payloads
+    notice = first_payloads[
+        "04_unauthorized_agent_verification"
+    ]["guidance_view"]["rejected_operation_notice"]
+    assert notice["attempted_at"] == "2026-07-26T00:00:00Z"
+    scenario_tokens = {}
+    scenario_ids = {}
+    for slug, payload in first_payloads.items():
+        technical = payload["guidance_view"]["technical_details"]
+        scenario_ids[slug] = {
+            item["id"] for item in technical["evidence_records"]
+        }
+        scenario_tokens[slug] = {
+            option["selector_token"]
+            for options in payload["context_selector_data"].values()
+            for option in options
+        }
+    assert all(
+        scenario_ids[left].isdisjoint(scenario_ids[right])
+        for index, left in enumerate(scenario_ids)
+        for right in list(scenario_ids)[index + 1 :]
+    )
+    assert all(
+        scenario_tokens[left].isdisjoint(scenario_tokens[right])
+        for index, left in enumerate(scenario_tokens)
+        for right in list(scenario_tokens)[index + 1 :]
+    )
+
+
+def test_runtime_random_mode_keeps_scenario_semantics(
+    generated_scenarios,
+    tmp_path,
+):
+    random_output = tmp_path / "runtime-random"
+    results = generate(random_output, deterministic=False)
+    random_payloads = {
+        item["scenario"]: json.loads(
+            (random_output / item["json"]).read_text(encoding="utf-8")
+        )
+        for item in results
+    }
+    deterministic_payloads = generated_scenarios[2]
+
+    for slug, random_payload in random_payloads.items():
+        deterministic = deterministic_payloads[slug]
+        assert random_payload["expected_workflow_steps"] == deterministic[
+            "expected_workflow_steps"
+        ]
+        assert [
+            (
+                item["obligation_id"],
+                item["material_status"],
+                item["workflow_status"],
+                item["blocking_requirement"],
+                item["currently_blocks_progression"],
+            )
+            for item in random_payload["expected_requirement_comparison"]
+        ] == [
+            (
+                item["obligation_id"],
+                item["material_status"],
+                item["workflow_status"],
+                item["blocking_requirement"],
+                item["currently_blocks_progression"],
+            )
+            for item in deterministic[
+                "expected_requirement_comparison"
+            ]
+        ]
+        assert random_payload["action_preview"]["authorized"] == (
+            deterministic["action_preview"]["authorized"]
+        )
+
+    deterministic_id = deterministic_payloads[
+        "05_lightweight_low_risk"
+    ]["guidance_view"]["technical_details"]["evidence_records"][0]["id"]
+    random_id = random_payloads[
+        "05_lightweight_low_risk"
+    ]["guidance_view"]["technical_details"]["evidence_records"][0]["id"]
+    assert random_id != deterministic_id
+
+
+def test_guidance_json_uses_only_clear_blocking_field_names(
+    generated_scenarios,
+):
+    for payload in generated_scenarios[2].values():
+        for row in payload["expected_requirement_comparison"]:
+            assert "blocking_requirement" in row
+            assert "currently_blocks_progression" in row
+            assert "blocking" not in row
+            assert "blocks_progression" not in row
+
+    for path in (
+        ROOT / "docs" / "AGM_REVIEWER_GUIDANCE_LAYER.md",
+        ROOT / "docs" / "AGM_MAINTAINER_GUIDE.md",
+        ROOT / "docs" / "AGM_VNEXT_DESIGN.md",
+        ROOT / "docs" / "AGM_VNEXT_SPEC.md",
+    ):
+        text = path.read_text(encoding="utf-8")
+        assert "blocking_requirement" in text
+        assert "currently_blocks_progression" in text

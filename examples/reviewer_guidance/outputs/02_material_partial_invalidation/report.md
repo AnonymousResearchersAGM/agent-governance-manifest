@@ -66,17 +66,35 @@
 
 ## 操作预览
 
+你准备执行：**只重新检查“修改说明”**
+
+这些项目的材料或负责人确认尚未满足，当前不能核验：O-SUMMARY
+
+### 将处理
+
+- 修改说明
+
+### 将保留
+
+- 智能体行动与委派说明
+- 变更文件清单
+
+### 预计变化
+
+- 案例不会发生变化。
+
+### 执行后
+
+- 本次操作不会改变案例状态。
+- 当前责任方仍是贡献者、贡献侧智能体。
+- 这不等于代码已经被项目接受。
+
+<details>
+<summary>技术操作、内部 ID 与原始状态</summary>
+
 ```json
 {
-  "action": "verify_evidence",
-  "title": "检查待核验项",
-  "actor": {
-    "actor": "verifier-1",
-    "role": "maintainer_verifier",
-    "human": true
-  },
-  "authorized": false,
-  "authorization_reason": "这些项目的材料或负责人确认尚未满足，当前不能核验：O-SUMMARY",
+  "operation": "verify_evidence",
   "source_state": "resubmitted",
   "target_state": "resubmitted",
   "effects": [],
@@ -84,17 +102,18 @@
     "O-SUMMARY"
   ],
   "retained_evidence_ids": [
-    "evidence-ff9a84de45064d098b889c7a8b04c52f",
-    "evidence-4790b765290e447d92c34a364a38d36b"
+    "evidence-21a5e799211750549f4431fed5c1fe17",
+    "evidence-bfd103c74f3354579e37edff1ec857ed"
   ],
   "invalidated_attestation_ids": [],
-  "next_authorized_actor_roles": [
-    "contributor",
-    "contributor_agent"
+  "invalidated_evidence_ids": [],
+  "processed_objects": [
+    "O-SUMMARY"
   ],
-  "requires_confirmation": false,
-  "mutates_case": false,
-  "preview_fingerprint": "69298465fceed0695549f5cdfc33431ef4ef45657532df9d048b0e26b599a93b",
+  "workflow_step_before": "prepare_materials",
+  "workflow_step_after": "prepare_materials",
+  "creates_records": [],
+  "preview_fingerprint": "3cdfa61de86dd86f13fa397dcda26c012bef974bd44fcb7e037f763463bee5f3",
   "traceability": [
     {
       "kind": "permission_rule",
@@ -111,49 +130,8 @@
       "object_id": "resubmitted:verify_evidence:verification_complete",
       "relationship": "transition_plan"
     }
-  ],
-  "processed_objects": [
-    "O-SUMMARY"
-  ],
-  "invalidated_evidence_ids": [],
-  "responsibility_before": {
-    "primary_roles": [
-      "contributor",
-      "contributor_agent"
-    ],
-    "display_label": "贡献者、贡献侧智能体",
-    "reason": "受影响材料尚未准备或更新完成，当前还不能进入维护者检查。",
-    "blocking_items": [
-      "修改说明"
-    ],
-    "next_handoff_roles": [
-      "accountable_human",
-      "maintainer_verifier",
-      "maintainer"
-    ]
-  },
-  "responsibility_after": {
-    "primary_roles": [
-      "contributor",
-      "contributor_agent"
-    ],
-    "display_label": "贡献者、贡献侧智能体",
-    "reason": "受影响材料尚未准备或更新完成，当前还不能进入维护者检查。",
-    "blocking_items": [
-      "修改说明"
-    ],
-    "next_handoff_roles": [
-      "accountable_human",
-      "maintainer_verifier",
-      "maintainer"
-    ]
-  },
-  "workflow_step_before": "prepare_materials",
-  "workflow_step_after": "prepare_materials",
-  "creates_records": [],
-  "requires_human_attestation_after": false,
-  "requires_maintainer_verification_after": true,
-  "final_acceptance_recorded": false,
-  "final_acceptance_still_required": true
+  ]
 }
 ```
+
+</details>

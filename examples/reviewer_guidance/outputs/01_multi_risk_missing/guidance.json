@@ -54,12 +54,12 @@
         "traceability": [
           {
             "kind": "state_transition",
-            "object_id": "transition-1e1b7732b4504f9b9fbb5ae031231bd3",
+            "object_id": "transition-dfc4829d0fb45db0ba836df6b6d5bc59",
             "relationship": "primary:resolve_policy"
           },
           {
             "kind": "state_transition",
-            "object_id": "transition-66f971deae5249088e90ec465df9388a",
+            "object_id": "transition-eee21e3a4c8a5ba3a8cf1d64899835dd",
             "relationship": "primary:compile_obligations"
           },
           {
@@ -144,7 +144,7 @@
         "traceability": [
           {
             "kind": "state_transition",
-            "object_id": "transition-51bda88fa6ac42dc9228448aa671f935",
+            "object_id": "transition-ad1fadf8d5be505fa531b3eef015603e",
             "relationship": "primary:mark_evidence_state"
           }
         ]
@@ -200,7 +200,7 @@
         "result": "missing",
         "result_label": "缺少",
         "raw_status": "unsatisfied",
-        "blocking": true,
+        "blocking_requirement": true,
         "source_rule_ids": [
           "autonomy:supervised_agent"
         ],
@@ -230,7 +230,7 @@
         "material_status_label": "缺少",
         "workflow_status": "awaiting_contributor",
         "workflow_status_label": "等待贡献者处理",
-        "blocks_progression": true,
+        "currently_blocks_progression": true,
         "affected_scope": []
       },
       {
@@ -241,7 +241,7 @@
         "result": "missing",
         "result_label": "缺少",
         "raw_status": "unsatisfied",
-        "blocking": true,
+        "blocking_requirement": true,
         "source_rule_ids": [
           "authentication-critical",
           "configuration-high"
@@ -277,7 +277,7 @@
         "material_status_label": "缺少",
         "workflow_status": "awaiting_contributor",
         "workflow_status_label": "等待贡献者处理",
-        "blocks_progression": true,
+        "currently_blocks_progression": true,
         "affected_scope": [
           "demo_app/auth.py",
           "demo_app/config.py"
@@ -291,7 +291,7 @@
         "result": "missing",
         "result_label": "缺少",
         "raw_status": "unsatisfied",
-        "blocking": true,
+        "blocking_requirement": true,
         "source_rule_ids": [
           "authentication-critical"
         ],
@@ -321,7 +321,7 @@
         "material_status_label": "缺少",
         "workflow_status": "awaiting_contributor",
         "workflow_status_label": "等待贡献者处理",
-        "blocks_progression": true,
+        "currently_blocks_progression": true,
         "affected_scope": [
           "demo_app/auth.py"
         ]
@@ -334,7 +334,7 @@
         "result": "missing",
         "result_label": "缺少",
         "raw_status": "unsatisfied",
-        "blocking": true,
+        "blocking_requirement": true,
         "source_rule_ids": [
           "authentication-critical",
           "configuration-high"
@@ -370,7 +370,7 @@
         "material_status_label": "缺少",
         "workflow_status": "awaiting_contributor",
         "workflow_status_label": "等待贡献者处理",
-        "blocks_progression": true,
+        "currently_blocks_progression": true,
         "affected_scope": [
           "demo_app/auth.py",
           "demo_app/config.py"
@@ -384,7 +384,7 @@
         "result": "not_started",
         "result_label": "尚未进行",
         "raw_status": "unsatisfied",
-        "blocking": true,
+        "blocking_requirement": true,
         "source_rule_ids": [
           "authentication-critical"
         ],
@@ -414,7 +414,7 @@
         "material_status_label": "缺少",
         "workflow_status": "awaiting_attestation",
         "workflow_status_label": "等待负责人确认",
-        "blocks_progression": false,
+        "currently_blocks_progression": false,
         "affected_scope": [
           "demo_app/auth.py"
         ]
@@ -427,7 +427,7 @@
         "result": "not_started",
         "result_label": "尚未进行",
         "raw_status": "unsatisfied",
-        "blocking": true,
+        "blocking_requirement": true,
         "source_rule_ids": [
           "authentication-configuration"
         ],
@@ -464,7 +464,7 @@
         "material_status_label": "缺少",
         "workflow_status": "blocks_progression",
         "workflow_status_label": "阻止继续",
-        "blocks_progression": false,
+        "currently_blocks_progression": false,
         "affected_scope": [
           "demo_app/auth.py",
           "demo_app/config.py"
@@ -478,7 +478,7 @@
         "result": "missing",
         "result_label": "缺少",
         "raw_status": "unsatisfied",
-        "blocking": true,
+        "blocking_requirement": true,
         "source_rule_ids": [
           "authentication-critical",
           "configuration-high"
@@ -514,7 +514,7 @@
         "material_status_label": "缺少",
         "workflow_status": "awaiting_contributor",
         "workflow_status_label": "等待贡献者处理",
-        "blocks_progression": true,
+        "currently_blocks_progression": true,
         "affected_scope": [
           "demo_app/auth.py",
           "demo_app/config.py"
@@ -528,7 +528,7 @@
         "result": "missing",
         "result_label": "缺少",
         "raw_status": "unsatisfied",
-        "blocking": true,
+        "blocking_requirement": true,
         "source_rule_ids": [
           "authentication-critical",
           "configuration-high"
@@ -564,7 +564,7 @@
         "material_status_label": "缺少",
         "workflow_status": "awaiting_contributor",
         "workflow_status_label": "等待贡献者处理",
-        "blocks_progression": true,
+        "currently_blocks_progression": true,
         "affected_scope": [
           "demo_app/auth.py",
           "demo_app/config.py"
@@ -578,7 +578,7 @@
         "result": "missing",
         "result_label": "缺少",
         "raw_status": "unsatisfied",
-        "blocking": true,
+        "blocking_requirement": true,
         "source_rule_ids": [
           "authentication-critical",
           "configuration-high"
@@ -614,7 +614,7 @@
         "material_status_label": "缺少",
         "workflow_status": "awaiting_contributor",
         "workflow_status_label": "等待贡献者处理",
-        "blocks_progression": true,
+        "currently_blocks_progression": true,
         "affected_scope": [
           "demo_app/auth.py",
           "demo_app/config.py"
@@ -628,7 +628,7 @@
         "result": "missing",
         "result_label": "缺少",
         "raw_status": "unsatisfied",
-        "blocking": true,
+        "blocking_requirement": true,
         "source_rule_ids": [
           "authentication-critical",
           "configuration-high"
@@ -664,7 +664,7 @@
         "material_status_label": "缺少",
         "workflow_status": "awaiting_contributor",
         "workflow_status_label": "等待贡献者处理",
-        "blocks_progression": true,
+        "currently_blocks_progression": true,
         "affected_scope": [
           "demo_app/auth.py",
           "demo_app/config.py"
@@ -725,7 +725,7 @@
         "primary_reason": "后端允许此操作，但它不直接处理当前主要阻断项。",
         "selector_options": [
           {
-            "selector_token": "sel-82b0afae33b775380c73c076bf3979fd59b17cd0ccd3c9b7f2d972ae268b544c",
+            "selector_token": "sel-a22be89969559667685020bfa7f7a3afa78142e3abe1be1718764cca99252f2c",
             "action": "record_policy_conflict",
             "label": "智能体行动与委派说明",
             "status_label": "缺少；等待贡献者处理",
@@ -759,7 +759,7 @@
             ]
           },
           {
-            "selector_token": "sel-3060e3bb8546f5f183bff59b77dbfa58a4fe75fbb020b14a62eee3e09407e107",
+            "selector_token": "sel-e0518fa73e15a9b083be59fbefe5cbb4a40c4b2a246c0f88de657c368f13326b",
             "action": "record_policy_conflict",
             "label": "可核验测试制品",
             "status_label": "缺少；等待贡献者处理",
@@ -801,7 +801,7 @@
             ]
           },
           {
-            "selector_token": "sel-6169c4c46941f0630dd598994b33fc382d8d47ef1bbacf492a4cd8343bdbe160",
+            "selector_token": "sel-c8c113c93dfacba781dd68f7d09f2fcd4e679cbc28493e2a1af30ab8a754aa7c",
             "action": "record_policy_conflict",
             "label": "登录、认证与权限影响",
             "status_label": "缺少；等待贡献者处理",
@@ -837,7 +837,7 @@
             ]
           },
           {
-            "selector_token": "sel-87c21f5f1cef47c19c66c5ea0714492530743be03497f251ac144ab7a517824d",
+            "selector_token": "sel-6250df2fffee81728c78604d5bd4266e76b3b0d7acd5ff4138853a62fc6556e5",
             "action": "record_policy_conflict",
             "label": "变更文件清单",
             "status_label": "缺少；等待贡献者处理",
@@ -879,7 +879,7 @@
             ]
           },
           {
-            "selector_token": "sel-df04a4bc800eaf6bf27ab8429ef192251d3a0a623b32ef511809a8a795f3aaf9",
+            "selector_token": "sel-820807f526932863f2faf6e3212984db01ee70f5ead41b72ef8d9d4f2cc425b4",
             "action": "record_policy_conflict",
             "label": "负责人确认",
             "status_label": "缺少；等待负责人确认",
@@ -915,7 +915,7 @@
             ]
           },
           {
-            "selector_token": "sel-2fbae7c9a88143cdec2655efebd4e57aecabc3b1ff1c668d7b097659f089ef83",
+            "selector_token": "sel-e42af89c75f2211ebb099cf55564fc3e8717895f50397f9c5a0247d372f360ec",
             "action": "record_policy_conflict",
             "label": "独立维护者检查",
             "status_label": "缺少；阻止继续",
@@ -957,7 +957,7 @@
             ]
           },
           {
-            "selector_token": "sel-fecbd3b295fb87ec5771ccf3bc160d6012cfc81ba3f34a8b402da6dc5cbe6957",
+            "selector_token": "sel-36a7bcb4cfd2b0d4901e39bee3d86ad75879a1ebf4626d2b637e2e0113077827",
             "action": "record_policy_conflict",
             "label": "已知限制",
             "status_label": "缺少；等待贡献者处理",
@@ -999,7 +999,7 @@
             ]
           },
           {
-            "selector_token": "sel-9e39dac50b2f94b40a72ceb1ca71c996b250573a6f0a74df40e9da3ef7fd89a9",
+            "selector_token": "sel-332875878277502a69727ddf6ee7a3f4efbc0e0f9c8329ccd5a00cbbd4607147",
             "action": "record_policy_conflict",
             "label": "修改理由",
             "status_label": "缺少；等待贡献者处理",
@@ -1041,7 +1041,7 @@
             ]
           },
           {
-            "selector_token": "sel-96bc77f56b899a921d482c7c34db9b8c558b3a37f1c129328ac8f2067f3fd365",
+            "selector_token": "sel-1adb485bbe8800eee5e987babe2701211441602ca1f0288a5d9b7a83e523502e",
             "action": "record_policy_conflict",
             "label": "修改说明",
             "status_label": "缺少；等待贡献者处理",
@@ -1083,7 +1083,7 @@
             ]
           },
           {
-            "selector_token": "sel-e56dce2b71cd627e03e7f174cafd09d5e6112f6ba6b029d70ea8c339eaed08cb",
+            "selector_token": "sel-9c205484e4ec76a75cc182eb4e0f711bc0890fbae23184e126d3504513e24478",
             "action": "record_policy_conflict",
             "label": "测试命令与结果",
             "status_label": "缺少；等待贡献者处理",
@@ -1513,7 +1513,8 @@
           "object_id": "obl-o-agent-scope",
           "relationship": "agent_scope_requirement"
         }
-      ]
+      ],
+      "reason_presentation": null
     },
     "repair_loop": [
       "维护者发现问题",
@@ -1836,10 +1837,11 @@
       "verification_records": [],
       "findings": [],
       "repair_requests": [],
+      "attempted_operations": [],
       "contribution_fingerprint": "c3323431536bbbb95ba1b08b6e69fd082ab89accf9a348306c042228fe49e2ef",
       "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
       "policy_snapshot": {
-        "id": "policy-3655904bf4104eb98127ad2040c37e69",
+        "id": "policy-57dc31e37e16513f8a3aaaaed32a842c",
         "schema_version": "agm.policy_snapshot/v0.2-dev",
         "manifest_version": "agm.manifest/v0.2-dev",
         "base_commit": "demo-base",
@@ -1864,7 +1866,7 @@
       },
       "transition_history": [
         {
-          "id": "transition-1e1b7732b4504f9b9fbb5ae031231bd3",
+          "id": "transition-dfc4829d0fb45db0ba836df6b6d5bc59",
           "case_id": "multi-risk-missing",
           "actor": "agm-engine",
           "role": "system",
@@ -1873,12 +1875,12 @@
           "action": "resolve_policy",
           "reason": "Resolved canonical policy against the contribution.",
           "related_object_ids": [
-            "policy-3655904bf4104eb98127ad2040c37e69"
+            "policy-57dc31e37e16513f8a3aaaaed32a842c"
           ],
           "timestamp": "2026-07-26T00:00:00Z"
         },
         {
-          "id": "transition-66f971deae5249088e90ec465df9388a",
+          "id": "transition-eee21e3a4c8a5ba3a8cf1d64899835dd",
           "case_id": "multi-risk-missing",
           "actor": "agm-engine",
           "role": "system",
@@ -1901,7 +1903,7 @@
           "timestamp": "2026-07-26T00:00:00Z"
         },
         {
-          "id": "transition-51bda88fa6ac42dc9228448aa671f935",
+          "id": "transition-ad1fadf8d5be505fa531b3eef015603e",
           "case_id": "multi-risk-missing",
           "actor": "agm-engine",
           "role": "system",
@@ -2055,7 +2057,7 @@
         "primary_reason": "后端允许此操作，但它不直接处理当前主要阻断项。",
         "selector_options": [
           {
-            "selector_token": "sel-82b0afae33b775380c73c076bf3979fd59b17cd0ccd3c9b7f2d972ae268b544c",
+            "selector_token": "sel-a22be89969559667685020bfa7f7a3afa78142e3abe1be1718764cca99252f2c",
             "action": "record_policy_conflict",
             "label": "智能体行动与委派说明",
             "status_label": "缺少；等待贡献者处理",
@@ -2089,7 +2091,7 @@
             ]
           },
           {
-            "selector_token": "sel-3060e3bb8546f5f183bff59b77dbfa58a4fe75fbb020b14a62eee3e09407e107",
+            "selector_token": "sel-e0518fa73e15a9b083be59fbefe5cbb4a40c4b2a246c0f88de657c368f13326b",
             "action": "record_policy_conflict",
             "label": "可核验测试制品",
             "status_label": "缺少；等待贡献者处理",
@@ -2131,7 +2133,7 @@
             ]
           },
           {
-            "selector_token": "sel-6169c4c46941f0630dd598994b33fc382d8d47ef1bbacf492a4cd8343bdbe160",
+            "selector_token": "sel-c8c113c93dfacba781dd68f7d09f2fcd4e679cbc28493e2a1af30ab8a754aa7c",
             "action": "record_policy_conflict",
             "label": "登录、认证与权限影响",
             "status_label": "缺少；等待贡献者处理",
@@ -2167,7 +2169,7 @@
             ]
           },
           {
-            "selector_token": "sel-87c21f5f1cef47c19c66c5ea0714492530743be03497f251ac144ab7a517824d",
+            "selector_token": "sel-6250df2fffee81728c78604d5bd4266e76b3b0d7acd5ff4138853a62fc6556e5",
             "action": "record_policy_conflict",
             "label": "变更文件清单",
             "status_label": "缺少；等待贡献者处理",
@@ -2209,7 +2211,7 @@
             ]
           },
           {
-            "selector_token": "sel-df04a4bc800eaf6bf27ab8429ef192251d3a0a623b32ef511809a8a795f3aaf9",
+            "selector_token": "sel-820807f526932863f2faf6e3212984db01ee70f5ead41b72ef8d9d4f2cc425b4",
             "action": "record_policy_conflict",
             "label": "负责人确认",
             "status_label": "缺少；等待负责人确认",
@@ -2245,7 +2247,7 @@
             ]
           },
           {
-            "selector_token": "sel-2fbae7c9a88143cdec2655efebd4e57aecabc3b1ff1c668d7b097659f089ef83",
+            "selector_token": "sel-e42af89c75f2211ebb099cf55564fc3e8717895f50397f9c5a0247d372f360ec",
             "action": "record_policy_conflict",
             "label": "独立维护者检查",
             "status_label": "缺少；阻止继续",
@@ -2287,7 +2289,7 @@
             ]
           },
           {
-            "selector_token": "sel-fecbd3b295fb87ec5771ccf3bc160d6012cfc81ba3f34a8b402da6dc5cbe6957",
+            "selector_token": "sel-36a7bcb4cfd2b0d4901e39bee3d86ad75879a1ebf4626d2b637e2e0113077827",
             "action": "record_policy_conflict",
             "label": "已知限制",
             "status_label": "缺少；等待贡献者处理",
@@ -2329,7 +2331,7 @@
             ]
           },
           {
-            "selector_token": "sel-9e39dac50b2f94b40a72ceb1ca71c996b250573a6f0a74df40e9da3ef7fd89a9",
+            "selector_token": "sel-332875878277502a69727ddf6ee7a3f4efbc0e0f9c8329ccd5a00cbbd4607147",
             "action": "record_policy_conflict",
             "label": "修改理由",
             "status_label": "缺少；等待贡献者处理",
@@ -2371,7 +2373,7 @@
             ]
           },
           {
-            "selector_token": "sel-96bc77f56b899a921d482c7c34db9b8c558b3a37f1c129328ac8f2067f3fd365",
+            "selector_token": "sel-1adb485bbe8800eee5e987babe2701211441602ca1f0288a5d9b7a83e523502e",
             "action": "record_policy_conflict",
             "label": "修改说明",
             "status_label": "缺少；等待贡献者处理",
@@ -2413,7 +2415,7 @@
             ]
           },
           {
-            "selector_token": "sel-e56dce2b71cd627e03e7f174cafd09d5e6112f6ba6b029d70ea8c339eaed08cb",
+            "selector_token": "sel-9c205484e4ec76a75cc182eb4e0f711bc0890fbae23184e126d3504513e24478",
             "action": "record_policy_conflict",
             "label": "测试命令与结果",
             "status_label": "缺少；等待贡献者处理",
@@ -2770,7 +2772,8 @@
         "state_changing": false
       }
     ],
-    "materiality_declaration": null
+    "materiality_declaration": null,
+    "rejected_operation_notice": null
   },
   "expected_workflow_steps": [
     {
@@ -2808,7 +2811,7 @@
       "result": "missing",
       "result_label": "缺少",
       "raw_status": "unsatisfied",
-      "blocking": true,
+      "blocking_requirement": true,
       "source_rule_ids": [
         "autonomy:supervised_agent"
       ],
@@ -2838,7 +2841,7 @@
       "material_status_label": "缺少",
       "workflow_status": "awaiting_contributor",
       "workflow_status_label": "等待贡献者处理",
-      "blocks_progression": true,
+      "currently_blocks_progression": true,
       "affected_scope": []
     },
     {
@@ -2849,7 +2852,7 @@
       "result": "missing",
       "result_label": "缺少",
       "raw_status": "unsatisfied",
-      "blocking": true,
+      "blocking_requirement": true,
       "source_rule_ids": [
         "authentication-critical",
         "configuration-high"
@@ -2885,7 +2888,7 @@
       "material_status_label": "缺少",
       "workflow_status": "awaiting_contributor",
       "workflow_status_label": "等待贡献者处理",
-      "blocks_progression": true,
+      "currently_blocks_progression": true,
       "affected_scope": [
         "demo_app/auth.py",
         "demo_app/config.py"
@@ -2899,7 +2902,7 @@
       "result": "missing",
       "result_label": "缺少",
       "raw_status": "unsatisfied",
-      "blocking": true,
+      "blocking_requirement": true,
       "source_rule_ids": [
         "authentication-critical"
       ],
@@ -2929,7 +2932,7 @@
       "material_status_label": "缺少",
       "workflow_status": "awaiting_contributor",
       "workflow_status_label": "等待贡献者处理",
-      "blocks_progression": true,
+      "currently_blocks_progression": true,
       "affected_scope": [
         "demo_app/auth.py"
       ]
@@ -2942,7 +2945,7 @@
       "result": "missing",
       "result_label": "缺少",
       "raw_status": "unsatisfied",
-      "blocking": true,
+      "blocking_requirement": true,
       "source_rule_ids": [
         "authentication-critical",
         "configuration-high"
@@ -2978,7 +2981,7 @@
       "material_status_label": "缺少",
       "workflow_status": "awaiting_contributor",
       "workflow_status_label": "等待贡献者处理",
-      "blocks_progression": true,
+      "currently_blocks_progression": true,
       "affected_scope": [
         "demo_app/auth.py",
         "demo_app/config.py"
@@ -2992,7 +2995,7 @@
       "result": "not_started",
       "result_label": "尚未进行",
       "raw_status": "unsatisfied",
-      "blocking": true,
+      "blocking_requirement": true,
       "source_rule_ids": [
         "authentication-critical"
       ],
@@ -3022,7 +3025,7 @@
       "material_status_label": "缺少",
       "workflow_status": "awaiting_attestation",
       "workflow_status_label": "等待负责人确认",
-      "blocks_progression": false,
+      "currently_blocks_progression": false,
       "affected_scope": [
         "demo_app/auth.py"
       ]
@@ -3035,7 +3038,7 @@
       "result": "not_started",
       "result_label": "尚未进行",
       "raw_status": "unsatisfied",
-      "blocking": true,
+      "blocking_requirement": true,
       "source_rule_ids": [
         "authentication-configuration"
       ],
@@ -3072,7 +3075,7 @@
       "material_status_label": "缺少",
       "workflow_status": "blocks_progression",
       "workflow_status_label": "阻止继续",
-      "blocks_progression": false,
+      "currently_blocks_progression": false,
       "affected_scope": [
         "demo_app/auth.py",
         "demo_app/config.py"
@@ -3086,7 +3089,7 @@
       "result": "missing",
       "result_label": "缺少",
       "raw_status": "unsatisfied",
-      "blocking": true,
+      "blocking_requirement": true,
       "source_rule_ids": [
         "authentication-critical",
         "configuration-high"
@@ -3122,7 +3125,7 @@
       "material_status_label": "缺少",
       "workflow_status": "awaiting_contributor",
       "workflow_status_label": "等待贡献者处理",
-      "blocks_progression": true,
+      "currently_blocks_progression": true,
       "affected_scope": [
         "demo_app/auth.py",
         "demo_app/config.py"
@@ -3136,7 +3139,7 @@
       "result": "missing",
       "result_label": "缺少",
       "raw_status": "unsatisfied",
-      "blocking": true,
+      "blocking_requirement": true,
       "source_rule_ids": [
         "authentication-critical",
         "configuration-high"
@@ -3172,7 +3175,7 @@
       "material_status_label": "缺少",
       "workflow_status": "awaiting_contributor",
       "workflow_status_label": "等待贡献者处理",
-      "blocks_progression": true,
+      "currently_blocks_progression": true,
       "affected_scope": [
         "demo_app/auth.py",
         "demo_app/config.py"
@@ -3186,7 +3189,7 @@
       "result": "missing",
       "result_label": "缺少",
       "raw_status": "unsatisfied",
-      "blocking": true,
+      "blocking_requirement": true,
       "source_rule_ids": [
         "authentication-critical",
         "configuration-high"
@@ -3222,7 +3225,7 @@
       "material_status_label": "缺少",
       "workflow_status": "awaiting_contributor",
       "workflow_status_label": "等待贡献者处理",
-      "blocks_progression": true,
+      "currently_blocks_progression": true,
       "affected_scope": [
         "demo_app/auth.py",
         "demo_app/config.py"
@@ -3236,7 +3239,7 @@
       "result": "missing",
       "result_label": "缺少",
       "raw_status": "unsatisfied",
-      "blocking": true,
+      "blocking_requirement": true,
       "source_rule_ids": [
         "authentication-critical",
         "configuration-high"
@@ -3272,7 +3275,7 @@
       "material_status_label": "缺少",
       "workflow_status": "awaiting_contributor",
       "workflow_status_label": "等待贡献者处理",
-      "blocks_progression": true,
+      "currently_blocks_progression": true,
       "affected_scope": [
         "demo_app/auth.py",
         "demo_app/config.py"
@@ -3307,7 +3310,7 @@
   "context_selector_data": {
     "record_policy_conflict": [
       {
-        "selector_token": "sel-82b0afae33b775380c73c076bf3979fd59b17cd0ccd3c9b7f2d972ae268b544c",
+        "selector_token": "sel-a22be89969559667685020bfa7f7a3afa78142e3abe1be1718764cca99252f2c",
         "action": "record_policy_conflict",
         "label": "智能体行动与委派说明",
         "status_label": "缺少；等待贡献者处理",
@@ -3341,7 +3344,7 @@
         ]
       },
       {
-        "selector_token": "sel-3060e3bb8546f5f183bff59b77dbfa58a4fe75fbb020b14a62eee3e09407e107",
+        "selector_token": "sel-e0518fa73e15a9b083be59fbefe5cbb4a40c4b2a246c0f88de657c368f13326b",
         "action": "record_policy_conflict",
         "label": "可核验测试制品",
         "status_label": "缺少；等待贡献者处理",
@@ -3383,7 +3386,7 @@
         ]
       },
       {
-        "selector_token": "sel-6169c4c46941f0630dd598994b33fc382d8d47ef1bbacf492a4cd8343bdbe160",
+        "selector_token": "sel-c8c113c93dfacba781dd68f7d09f2fcd4e679cbc28493e2a1af30ab8a754aa7c",
         "action": "record_policy_conflict",
         "label": "登录、认证与权限影响",
         "status_label": "缺少；等待贡献者处理",
@@ -3419,7 +3422,7 @@
         ]
       },
       {
-        "selector_token": "sel-87c21f5f1cef47c19c66c5ea0714492530743be03497f251ac144ab7a517824d",
+        "selector_token": "sel-6250df2fffee81728c78604d5bd4266e76b3b0d7acd5ff4138853a62fc6556e5",
         "action": "record_policy_conflict",
         "label": "变更文件清单",
         "status_label": "缺少；等待贡献者处理",
@@ -3461,7 +3464,7 @@
         ]
       },
       {
-        "selector_token": "sel-df04a4bc800eaf6bf27ab8429ef192251d3a0a623b32ef511809a8a795f3aaf9",
+        "selector_token": "sel-820807f526932863f2faf6e3212984db01ee70f5ead41b72ef8d9d4f2cc425b4",
         "action": "record_policy_conflict",
         "label": "负责人确认",
         "status_label": "缺少；等待负责人确认",
@@ -3497,7 +3500,7 @@
         ]
       },
       {
-        "selector_token": "sel-2fbae7c9a88143cdec2655efebd4e57aecabc3b1ff1c668d7b097659f089ef83",
+        "selector_token": "sel-e42af89c75f2211ebb099cf55564fc3e8717895f50397f9c5a0247d372f360ec",
         "action": "record_policy_conflict",
         "label": "独立维护者检查",
         "status_label": "缺少；阻止继续",
@@ -3539,7 +3542,7 @@
         ]
       },
       {
-        "selector_token": "sel-fecbd3b295fb87ec5771ccf3bc160d6012cfc81ba3f34a8b402da6dc5cbe6957",
+        "selector_token": "sel-36a7bcb4cfd2b0d4901e39bee3d86ad75879a1ebf4626d2b637e2e0113077827",
         "action": "record_policy_conflict",
         "label": "已知限制",
         "status_label": "缺少；等待贡献者处理",
@@ -3581,7 +3584,7 @@
         ]
       },
       {
-        "selector_token": "sel-9e39dac50b2f94b40a72ceb1ca71c996b250573a6f0a74df40e9da3ef7fd89a9",
+        "selector_token": "sel-332875878277502a69727ddf6ee7a3f4efbc0e0f9c8329ccd5a00cbbd4607147",
         "action": "record_policy_conflict",
         "label": "修改理由",
         "status_label": "缺少；等待贡献者处理",
@@ -3623,7 +3626,7 @@
         ]
       },
       {
-        "selector_token": "sel-96bc77f56b899a921d482c7c34db9b8c558b3a37f1c129328ac8f2067f3fd365",
+        "selector_token": "sel-1adb485bbe8800eee5e987babe2701211441602ca1f0288a5d9b7a83e523502e",
         "action": "record_policy_conflict",
         "label": "修改说明",
         "status_label": "缺少；等待贡献者处理",
@@ -3665,7 +3668,7 @@
         ]
       },
       {
-        "selector_token": "sel-e56dce2b71cd627e03e7f174cafd09d5e6112f6ba6b029d70ea8c339eaed08cb",
+        "selector_token": "sel-9c205484e4ec76a75cc182eb4e0f711bc0890fbae23184e126d3504513e24478",
         "action": "record_policy_conflict",
         "label": "测试命令与结果",
         "status_label": "缺少；等待贡献者处理",
@@ -3712,12 +3715,12 @@
     "identify_requirements": [
       {
         "kind": "state_transition",
-        "object_id": "transition-1e1b7732b4504f9b9fbb5ae031231bd3",
+        "object_id": "transition-dfc4829d0fb45db0ba836df6b6d5bc59",
         "relationship": "primary:resolve_policy"
       },
       {
         "kind": "state_transition",
-        "object_id": "transition-66f971deae5249088e90ec465df9388a",
+        "object_id": "transition-eee21e3a4c8a5ba3a8cf1d64899835dd",
         "relationship": "primary:compile_obligations"
       },
       {
@@ -3789,7 +3792,7 @@
     "prepare_materials": [
       {
         "kind": "state_transition",
-        "object_id": "transition-51bda88fa6ac42dc9228448aa671f935",
+        "object_id": "transition-ad1fadf8d5be505fa531b3eef015603e",
         "relationship": "primary:mark_evidence_state"
       }
     ],
@@ -3850,7 +3853,7 @@
       "primary_reason": "后端允许此操作，但它不直接处理当前主要阻断项。",
       "selector_options": [
         {
-          "selector_token": "sel-82b0afae33b775380c73c076bf3979fd59b17cd0ccd3c9b7f2d972ae268b544c",
+          "selector_token": "sel-a22be89969559667685020bfa7f7a3afa78142e3abe1be1718764cca99252f2c",
           "action": "record_policy_conflict",
           "label": "智能体行动与委派说明",
           "status_label": "缺少；等待贡献者处理",
@@ -3884,7 +3887,7 @@
           ]
         },
         {
-          "selector_token": "sel-3060e3bb8546f5f183bff59b77dbfa58a4fe75fbb020b14a62eee3e09407e107",
+          "selector_token": "sel-e0518fa73e15a9b083be59fbefe5cbb4a40c4b2a246c0f88de657c368f13326b",
           "action": "record_policy_conflict",
           "label": "可核验测试制品",
           "status_label": "缺少；等待贡献者处理",
@@ -3926,7 +3929,7 @@
           ]
         },
         {
-          "selector_token": "sel-6169c4c46941f0630dd598994b33fc382d8d47ef1bbacf492a4cd8343bdbe160",
+          "selector_token": "sel-c8c113c93dfacba781dd68f7d09f2fcd4e679cbc28493e2a1af30ab8a754aa7c",
           "action": "record_policy_conflict",
           "label": "登录、认证与权限影响",
           "status_label": "缺少；等待贡献者处理",
@@ -3962,7 +3965,7 @@
           ]
         },
         {
-          "selector_token": "sel-87c21f5f1cef47c19c66c5ea0714492530743be03497f251ac144ab7a517824d",
+          "selector_token": "sel-6250df2fffee81728c78604d5bd4266e76b3b0d7acd5ff4138853a62fc6556e5",
           "action": "record_policy_conflict",
           "label": "变更文件清单",
           "status_label": "缺少；等待贡献者处理",
@@ -4004,7 +4007,7 @@
           ]
         },
         {
-          "selector_token": "sel-df04a4bc800eaf6bf27ab8429ef192251d3a0a623b32ef511809a8a795f3aaf9",
+          "selector_token": "sel-820807f526932863f2faf6e3212984db01ee70f5ead41b72ef8d9d4f2cc425b4",
           "action": "record_policy_conflict",
           "label": "负责人确认",
           "status_label": "缺少；等待负责人确认",
@@ -4040,7 +4043,7 @@
           ]
         },
         {
-          "selector_token": "sel-2fbae7c9a88143cdec2655efebd4e57aecabc3b1ff1c668d7b097659f089ef83",
+          "selector_token": "sel-e42af89c75f2211ebb099cf55564fc3e8717895f50397f9c5a0247d372f360ec",
           "action": "record_policy_conflict",
           "label": "独立维护者检查",
           "status_label": "缺少；阻止继续",
@@ -4082,7 +4085,7 @@
           ]
         },
         {
-          "selector_token": "sel-fecbd3b295fb87ec5771ccf3bc160d6012cfc81ba3f34a8b402da6dc5cbe6957",
+          "selector_token": "sel-36a7bcb4cfd2b0d4901e39bee3d86ad75879a1ebf4626d2b637e2e0113077827",
           "action": "record_policy_conflict",
           "label": "已知限制",
           "status_label": "缺少；等待贡献者处理",
@@ -4124,7 +4127,7 @@
           ]
         },
         {
-          "selector_token": "sel-9e39dac50b2f94b40a72ceb1ca71c996b250573a6f0a74df40e9da3ef7fd89a9",
+          "selector_token": "sel-332875878277502a69727ddf6ee7a3f4efbc0e0f9c8329ccd5a00cbbd4607147",
           "action": "record_policy_conflict",
           "label": "修改理由",
           "status_label": "缺少；等待贡献者处理",
@@ -4166,7 +4169,7 @@
           ]
         },
         {
-          "selector_token": "sel-96bc77f56b899a921d482c7c34db9b8c558b3a37f1c129328ac8f2067f3fd365",
+          "selector_token": "sel-1adb485bbe8800eee5e987babe2701211441602ca1f0288a5d9b7a83e523502e",
           "action": "record_policy_conflict",
           "label": "修改说明",
           "status_label": "缺少；等待贡献者处理",
@@ -4208,7 +4211,7 @@
           ]
         },
         {
-          "selector_token": "sel-e56dce2b71cd627e03e7f174cafd09d5e6112f6ba6b029d70ea8c339eaed08cb",
+          "selector_token": "sel-9c205484e4ec76a75cc182eb4e0f711bc0890fbae23184e126d3504513e24478",
           "action": "record_policy_conflict",
           "label": "测试命令与结果",
           "status_label": "缺少；等待贡献者处理",
@@ -4623,7 +4626,6 @@
     }
   ],
   "action_preview": {
-    "action": "request_repair",
     "title": "请求补充或更新材料",
     "actor": {
       "actor": "human-maintainer",
@@ -4632,37 +4634,49 @@
     },
     "authorized": false,
     "authorization_reason": "操作 request_repair 不能从当前状态 evidence_incomplete 执行。",
-    "source_state": "evidence_incomplete",
-    "target_state": "evidence_incomplete",
-    "effects": [],
-    "affected_obligation_ids": [
-      "O-AUTH-IMPACT"
+    "display_effects": [],
+    "affected_items": [
+      "登录、认证与权限影响"
     ],
-    "retained_evidence_ids": [],
-    "invalidated_attestation_ids": [],
+    "retained_items": [],
+    "invalidated_items": [],
     "next_authorized_actor_roles": [
       "contributor",
       "contributor_agent"
     ],
     "requires_confirmation": false,
     "mutates_case": false,
-    "preview_fingerprint": "8025aa30042039553fd8e7e5a3788b197815ce8169271433cd4212fc7a2c3e0d",
-    "traceability": [
-      {
-        "kind": "permission_rule",
-        "object_id": "maintainer:request_repair",
-        "relationship": "authority"
-      },
-      {
-        "kind": "governance_case",
-        "object_id": "multi-risk-missing",
-        "relationship": "source_state"
-      }
-    ],
-    "processed_objects": [
-      "O-AUTH-IMPACT"
-    ],
-    "invalidated_evidence_ids": [],
+    "technical_details": {
+      "operation": "request_repair",
+      "source_state": "evidence_incomplete",
+      "target_state": "evidence_incomplete",
+      "effects": [],
+      "affected_obligation_ids": [
+        "O-AUTH-IMPACT"
+      ],
+      "retained_evidence_ids": [],
+      "invalidated_attestation_ids": [],
+      "invalidated_evidence_ids": [],
+      "processed_objects": [
+        "O-AUTH-IMPACT"
+      ],
+      "workflow_step_before": "prepare_materials",
+      "workflow_step_after": "prepare_materials",
+      "creates_records": [],
+      "preview_fingerprint": "8025aa30042039553fd8e7e5a3788b197815ce8169271433cd4212fc7a2c3e0d",
+      "traceability": [
+        {
+          "kind": "permission_rule",
+          "object_id": "maintainer:request_repair",
+          "relationship": "authority"
+        },
+        {
+          "kind": "governance_case",
+          "object_id": "multi-risk-missing",
+          "relationship": "source_state"
+        }
+      ]
+    },
     "responsibility_before": {
       "primary_roles": [
         "contributor",
@@ -4709,9 +4723,13 @@
         "maintainer"
       ]
     },
-    "workflow_step_before": "prepare_materials",
-    "workflow_step_after": "prepare_materials",
-    "creates_records": [],
+    "workflow_position_before": "贡献者准备材料",
+    "workflow_position_after": "贡献者准备材料",
+    "next_steps": [
+      "本次操作不会改变案例状态。",
+      "当前责任方仍是贡献者、贡献侧智能体。",
+      "这不等于代码已经被项目接受。"
+    ],
     "requires_human_attestation_after": true,
     "requires_maintainer_verification_after": true,
     "final_acceptance_recorded": false,

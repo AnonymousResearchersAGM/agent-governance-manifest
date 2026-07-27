@@ -25,6 +25,7 @@ from .models import (
     GuidanceUtilityAction,
     GuidanceExplanation,
     MaterialityDeclarationView,
+    RejectedOperationView,
     RequirementComparison,
     ResponsibilityView,
     ReviewerGuidanceView,
@@ -36,6 +37,7 @@ from .responsibility import (
     ROLE_LABELS,
     derive_current_responsibility,
 )
+from .reason_presentations import present_reason
 from .utilities import build_guidance_utilities
 from .workflow import STEP_DEFINITIONS, STEP_STYLES, build_workflow_steps
 
@@ -68,6 +70,16 @@ AUTONOMY_LABELS = {
     "supervised_agent": "智能体执行、有人监督",
     "delegated_agent": "存在继续委派的智能体工作",
     "autonomous_agent": "智能体具有较高独立行动范围",
+}
+
+OPERATION_LABELS = {
+    "verify_evidence": "维护者检查",
+    "decide_accept": "接受决定",
+    "decide_reject": "拒绝决定",
+    "decide_request_changes": "要求修改的最终决定",
+    "decide_close": "关闭决定",
+    "final_decision": "最终决定",
+    "authorized_override": "有权覆盖",
 }
 
 
@@ -118,7 +130,7 @@ def _summary(
     blocking_count = sum(
         1
         for item in comparisons
-        if item.blocking and item.result in blocking_results
+        if item.blocking_requirement and item.result in blocking_results
     )
     warning_count = sum(
         1
@@ -134,7 +146,7 @@ def _summary(
     path_kind, path_label = _path_kind(case)
     current_stage = CURRENT_STATE_LABELS.get(case.state, case.state)
     if any(
-        item.blocking
+        item.blocking_requirement
         and item.material_status in {"missing", "stale", "invalid"}
         and item.workflow_status == "awaiting_contributor"
         for item in comparisons
@@ -220,11 +232,40 @@ def _materiality_declaration(
         for item in comparisons
         if item.obligation_id not in set(affected)
     ]
+    reason_code = str(
+        assessment.get("change_reason_code")
+        or (
+            "partial_affected_scope"
+            if classification == "partial_material_change"
+            else (
+                "wording_only_clarification"
+                if classification in {"non_material", "no_material_change"}
+                and affected == ["O-AGENT-SCOPE"]
+                else classification
+            )
+        )
+    )
+    traces = [
+        TraceReference("repair_request", latest_repair.id, "source"),
+        TraceReference(
+            "resubmission_attempt",
+            str(attempt.get("id", "unrecorded")),
+            "materiality_declaration",
+        ),
+    ]
+    reason = present_reason(
+        reason_code=reason_code,
+        source_english=str(
+            assessment.get("change_reason", "No source reason recorded.")
+        ),
+        trace_refs=traces,
+    )
     return MaterialityDeclarationView(
         classification=classification,
         classification_label=labels.get(classification, classification),
         declared_by=str(attempt.get("actor", "未记录")),
-        reason=str(assessment.get("change_reason", "未记录说明")),
+        reason=reason.display_plain,
+        reason_presentation=reason,
         affected_obligation_ids=affected,
         affected_labels=[by_id.get(item, item) for item in affected],
         unaffected_obligation_ids=unaffected,
@@ -239,13 +280,58 @@ def _materiality_declaration(
             assessment.get("invalidated_attestation_ids", [])
         ),
         requires_maintainer_verification=True,
-        traceability=[
-            TraceReference("repair_request", latest_repair.id, "source"),
+        traceability=traces,
+    )
+
+
+def _rejected_operation_notice(
+    case: GovernanceCase,
+) -> RejectedOperationView | None:
+    attempt = next(
+        (
+            item
+            for item in reversed(case.attempted_operations)
+            if item.result == "denied"
+        ),
+        None,
+    )
+    if attempt is None:
+        return None
+    actor_label = ROLE_LABELS.get(attempt.actor_role, attempt.actor_role)
+    operation_label = OPERATION_LABELS.get(
+        attempt.operation,
+        "受治理控制的操作",
+    )
+    permission_denied = attempt.actor_role not in attempt.required_roles
+    reason_plain = (
+        "系统已拒绝该操作，因为该角色没有执行此操作所需的权限。"
+        if permission_denied
+        else "系统已拒绝该操作，因为操作范围或当前流程位置不符合要求。"
+    )
+    return RejectedOperationView(
+        attempt_id=attempt.id,
+        operation=attempt.operation,
+        actor=attempt.actor,
+        actor_role=attempt.actor_role,
+        attempted_at=attempt.attempted_at,
+        result=attempt.result,
+        display_title="最近一次操作未生效",
+        display_message=f"{actor_label}尝试执行{operation_label}。",
+        reason_plain=reason_plain,
+        reason_raw=attempt.reason_raw,
+        state_changed=attempt.state_changed,
+        current_state=attempt.state_after,
+        current_state_label=CURRENT_STATE_LABELS.get(
+            attempt.state_after,
+            attempt.state_after,
+        ),
+        required_roles=list(attempt.required_roles),
+        trace_refs=[
             TraceReference(
-                "resubmission_attempt",
-                str(attempt.get("id", "unrecorded")),
-                "materiality_declaration",
-            ),
+                "attempted_operation",
+                attempt.id,
+                "denied_audit_event",
+            )
         ],
     )
 
@@ -258,6 +344,17 @@ def _explanations(
     result = []
     path_kind, _ = _path_kind(case)
     if path_kind == "lightweight":
+        traces = [
+            TraceReference(
+                "matched_rule", item.id, "path_intensity"
+            )
+            for item in case.matched_rules
+        ]
+        reason = present_reason(
+            reason_code="lightweight_path",
+            source_english=case.mode_reason,
+            trace_refs=traces,
+        )
         result.append(
             GuidanceExplanation(
                 title="为什么本次采用轻量审核？",
@@ -266,12 +363,8 @@ def _explanations(
                     "本次修改未触发高风险规则，也不要求负责人确认或独立维护者"
                     "检查；所需材料较少，但最终项目决定仍由人类维护者作出。"
                 ),
-                source_references=[
-                    TraceReference(
-                        "matched_rule", item.id, "path_intensity"
-                    )
-                    for item in case.matched_rules
-                ],
+                source_references=traces,
+                reason_presentation=reason,
             )
         )
     by_result = {item.result for item in comparisons}
@@ -295,6 +388,13 @@ def _explanations(
             )
         )
     if any(item.status == "invalidated" for item in case.attestations):
+        traces = [
+            TraceReference(
+                "human_attestation", item.id, "invalidated"
+            )
+            for item in case.attestations
+            if item.status == "invalidated"
+        ]
         result.append(
             GuidanceExplanation(
                 title="旧的负责人确认已不能使用",
@@ -302,13 +402,19 @@ def _explanations(
                 plain_language=(
                     "受影响范围或材料绑定发生变化，需要负责人对当前范围重新确认。"
                 ),
-                source_references=[
-                    TraceReference(
-                        "human_attestation", item.id, "invalidated"
-                    )
-                    for item in case.attestations
-                    if item.status == "invalidated"
-                ],
+                source_references=traces,
+                reason_presentation=present_reason(
+                    reason_code="invalidated_attestation",
+                    source_english=next(
+                        (
+                            item.invalidation_reason
+                            for item in reversed(case.attestations)
+                            if item.status == "invalidated"
+                        ),
+                        None,
+                    ),
+                    trace_refs=traces,
+                ),
             )
         )
     for repair in case.repair_requests:
@@ -316,6 +422,13 @@ def _explanations(
             continue
         latest = repair.attempts[-1] if repair.attempts else {}
         retained = latest.get("retained_evidence_ids", [])
+        traces = [
+            TraceReference("repair_request", repair.id, "scope"),
+            *[
+                TraceReference("evidence", item, "retained")
+                for item in retained
+            ],
+        ]
         result.append(
             GuidanceExplanation(
                 title="本次只重新检查受影响部分",
@@ -324,36 +437,45 @@ def _explanations(
                     f"需要重新检查：{', '.join(repair.revalidation_required) or '未指定'}。"
                     f" 保留的材料：{', '.join(retained) or '由绑定状态决定'}。"
                 ),
-                source_references=[
-                    TraceReference("repair_request", repair.id, "scope"),
-                    *[
-                        TraceReference("evidence", item, "retained")
-                        for item in retained
-                    ],
-                ],
+                source_references=traces,
+                reason_presentation=present_reason(
+                    reason_code="retained_unaffected_evidence",
+                    source_english=(
+                        "Unaffected evidence remains bound to the current "
+                        "contribution fingerprint."
+                    ),
+                    trace_refs=traces,
+                ),
             )
         )
     if migration and migration.policy_changed:
+        traces = [
+            TraceReference(
+                "policy_snapshot",
+                migration.original_policy_fingerprint,
+                "recorded",
+            ),
+            TraceReference(
+                "policy_snapshot",
+                migration.current_policy_fingerprint,
+                "current",
+            ),
+        ]
+        reason = present_reason(
+            reason_code="policy_migration_warning",
+            source_english=migration.reason,
+            trace_refs=traces,
+        )
         result.append(
             GuidanceExplanation(
                 title="项目规则在案例打开后发生了变化",
                 technical_term="policy migration warning",
                 plain_language=(
-                    migration.reason
-                    + " 迁移不会由诊断层静默执行，需要按权限另行决定。"
+                    reason.display_plain
+                    + " 迁移需要按角色权限另行决定。"
                 ),
-                source_references=[
-                    TraceReference(
-                        "policy_snapshot",
-                        migration.original_policy_fingerprint,
-                        "recorded",
-                    ),
-                    TraceReference(
-                        "policy_snapshot",
-                        migration.current_policy_fingerprint,
-                        "current",
-                    ),
-                ],
+                source_references=traces,
+                reason_presentation=reason,
             )
         )
     return result
@@ -390,6 +512,9 @@ def _technical_details(
         "findings": [item.to_dict() for item in case.findings],
         "repair_requests": [
             item.to_dict() for item in case.repair_requests
+        ],
+        "attempted_operations": [
+            item.to_dict() for item in case.attempted_operations
         ],
         "contribution_fingerprint": case.contribution_fingerprint,
         "policy_fingerprint": case.policy_snapshot.policy_fingerprint,
@@ -519,6 +644,7 @@ def build_reviewer_guidance(
         materiality_declaration=_materiality_declaration(
             case, comparisons
         ),
+        rejected_operation_notice=_rejected_operation_notice(case),
     )
 
 
@@ -545,7 +671,7 @@ def build_no_package_guidance(
         result="not_applicable",
         result_label=RESULT_LABELS["not_applicable"],
         raw_status="no_agm_package_submitted",
-        blocking=False,
+        blocking_requirement=False,
         source_rule_ids=[
             item.get("rule_id", "") for item in matched_rules
         ],
@@ -576,7 +702,7 @@ def build_no_package_guidance(
         material_status_label="本次不要求",
         workflow_status="completed",
         workflow_status_label="已完成",
-        blocks_progression=False,
+        currently_blocks_progression=False,
         affected_scope=changed_files,
     )
     workflow = []
@@ -697,6 +823,11 @@ def build_no_package_guidance(
                     "人类独立完成。"
                 ),
                 source_references=requirement.traceability,
+                reason_presentation=present_reason(
+                    reason_code="no_package",
+                    source_english=requirement.observed_english,
+                    trace_refs=requirement.traceability,
+                ),
             )
         ],
         delegation_help=GuidanceExplanation(
@@ -733,6 +864,7 @@ def build_no_package_guidance(
         ),
         utility_actions=utilities,
         materiality_declaration=None,
+        rejected_operation_notice=None,
     )
 
 
@@ -770,6 +902,28 @@ def render_guidance_markdown(view: ReviewerGuidanceView) -> str:
         lines.append(
             f"{item.number}. {item.symbol} **{item.title}** — "
             f"{item.status_label}：{item.explanation}"
+        )
+    if view.rejected_operation_notice:
+        notice = view.rejected_operation_notice
+        lines.extend(
+            [
+                "",
+                f"## {notice.display_title}",
+                "",
+                notice.display_message,
+                "",
+                notice.reason_plain,
+                "",
+                "- 案例状态没有变化"
+                if not notice.state_changed
+                else "- 案例状态发生变化，请核对审计记录",
+                f"- 当前仍处于：{notice.current_state_label}",
+                "- 下一步需要："
+                + "、".join(
+                    ROLE_LABELS.get(role, role)
+                    for role in notice.required_roles
+                ),
+            ]
         )
     lines.extend(
         [
@@ -827,6 +981,63 @@ def render_guidance_markdown(view: ReviewerGuidanceView) -> str:
     return "\n".join(lines)
 
 
+def render_action_preview_markdown(preview: ActionPreview) -> str:
+    """Render the preview display layer first and fold raw identifiers."""
+
+    lines = [
+        "## 操作预览",
+        "",
+        f"你准备执行：**{preview.title}**",
+        "",
+        preview.authorization_reason,
+        "",
+        "### 将处理",
+        "",
+        *(
+            [f"- {item}" for item in preview.affected_items]
+            or ["- 无"]
+        ),
+        "",
+        "### 将保留",
+        "",
+        *(
+            [f"- {item}" for item in preview.retained_items]
+            or ["- 无"]
+        ),
+        "",
+        "### 预计变化",
+        "",
+        *(
+            [
+                (
+                    f"- {item.display_label}：{item.before_label} → "
+                    f"{item.after_label}。{item.display_description}"
+                )
+                for item in preview.display_effects
+            ]
+            or ["- 案例不会发生变化。"]
+        ),
+        "",
+        "### 执行后",
+        "",
+        *([f"- {item}" for item in preview.next_steps] or ["- 无"]),
+        "",
+        "<details>",
+        "<summary>技术操作、内部 ID 与原始状态</summary>",
+        "",
+        "```json",
+        json.dumps(
+            preview.technical_details,
+            indent=2,
+            ensure_ascii=False,
+        ),
+        "```",
+        "",
+        "</details>",
+    ]
+    return "\n".join(lines)
+
+
 def _json_block(value: Any) -> str:
     return html.escape(
         json.dumps(value, ensure_ascii=False, indent=2, default=str)
@@ -846,6 +1057,8 @@ def _trace_details(row: RequirementComparison) -> str:
         "raw_status": row.raw_status,
         "material_status": row.material_status,
         "workflow_status": row.workflow_status,
+        "blocking_requirement": row.blocking_requirement,
+        "currently_blocks_progression": row.currently_blocks_progression,
         "traceability": [
             item.to_dict() for item in row.traceability
         ],
@@ -862,39 +1075,21 @@ def _action_preview_html(
     action_token: str | None,
     form_values: dict[str, list[str]] | None,
 ) -> str:
-    status_labels = {
-        "unsatisfied": "尚未满足",
-        "satisfied": "材料已满足",
-        "verified": "已检查",
-        "overridden": "已由有权维护者覆盖",
-        "needs_update": "需要更新",
-        "policy_conflict": "项目规则冲突",
-        "revalidation_required": "等待重新检查",
-        "valid": "有效",
-        "rejected": "已拒绝",
-        "confirmed": "已确认",
-        "invalidated": "已失效",
-        "resolved": "已解决",
-    }
-    def effect_label(target: str, value: str) -> str:
-        if target == "案例状态":
-            return CURRENT_STATE_LABELS.get(value, value)
-        return status_labels.get(value, value)
-
     effects = "".join(
         "<li>"
-        f"<strong>{html.escape(item.target)}</strong>: "
-        f"{html.escape(effect_label(item.target, item.before))} → "
-        f"{html.escape(effect_label(item.target, item.after))}"
-        f"<br>{html.escape(item.explanation)}"
+        f"<strong>{html.escape(item.display_label)}</strong>: "
+        f"{html.escape(item.before_label)} → "
+        f"{html.escape(item.after_label)}"
+        f"<br>{html.escape(item.display_description)}"
         "</li>"
-        for item in preview.effects
+        for item in preview.display_effects
     )
-    retained = ", ".join(preview.retained_evidence_ids) or "无"
-    invalidated_evidence = (
-        ", ".join(preview.invalidated_evidence_ids) or "无"
+    affected = "、".join(preview.affected_items) or "无"
+    retained = "、".join(preview.retained_items) or "无"
+    invalidated = "、".join(preview.invalidated_items) or "无"
+    next_steps = "".join(
+        f"<li>{html.escape(item)}</li>" for item in preview.next_steps
     )
-    invalidated = ", ".join(preview.invalidated_attestation_ids) or "无"
     confirmation = ""
     if (
         preview.authorized
@@ -941,19 +1136,18 @@ def _action_preview_html(
         "<h2>操作前预览</h2>"
         f"<p>你准备执行：<strong>{html.escape(preview.title)}</strong></p>"
         f"<p>{html.escape(preview.authorization_reason)}</p>"
+        f"<p><strong>将处理：</strong>{html.escape(affected)}</p>"
         f"<ul>{effects or '<li>不会改变案例。</li>'}</ul>"
         f"<p><strong>保留的未受影响材料：</strong>{html.escape(retained)}</p>"
-        f"<p><strong>将失效的材料：</strong>{html.escape(invalidated_evidence)}</p>"
-        f"<p><strong>将失效的负责人确认：</strong>{html.escape(invalidated)}</p>"
+        f"<p><strong>将失效：</strong>{html.escape(invalidated)}</p>"
         "<p><strong>责任方变化：</strong>"
         f"{html.escape(preview.responsibility_before.display_label if preview.responsibility_before else '未推导')}"
         " → "
         f"{html.escape(preview.responsibility_after.display_label if preview.responsibility_after else '未推导')}</p>"
         "<p><strong>流程位置变化：</strong>"
-        f"{html.escape(preview.workflow_step_before)} → "
-        f"{html.escape(preview.workflow_step_after)}</p>"
-        "<p><strong>预计新增记录：</strong>"
-        f"{html.escape('、'.join(preview.creates_records) or '无')}</p>"
+        f"{html.escape(preview.workflow_position_before)} → "
+        f"{html.escape(preview.workflow_position_after)}</p>"
+        f"<p><strong>执行后：</strong></p><ul>{next_steps}</ul>"
         "<p><strong>后续仍需负责人确认：</strong>"
         f"{'是' if preview.requires_human_attestation_after else '否'}；"
         "<strong>后续仍需维护者检查：</strong>"
@@ -961,6 +1155,8 @@ def _action_preview_html(
         "<strong>最终接受是否已经发生：</strong>"
         f"{'是' if preview.final_acceptance_recorded else '否'}</p>"
         "<p><strong>此预览本身不会修改案例：</strong>是</p>"
+        "<details><summary>技术操作、内部 ID 与原始状态</summary>"
+        f"<pre>{_json_block(preview.technical_details)}</pre></details>"
         f"{confirmation}</section>"
     )
 
@@ -1097,7 +1293,7 @@ def render_guidance_html(
         f"{html.escape(item.workflow_status_label)}</span>"
         + (
             "<br><strong>案例暂时不能继续</strong>"
-            if item.blocks_progression
+            if item.currently_blocks_progression
             else ""
         )
         + f"{_trace_details(item)}</td>"
@@ -1160,6 +1356,27 @@ def render_guidance_html(
         "</li>"
         for item in view.diagnostics
     ) or "<li>当前没有已记录的问题。</li>"
+    rejected_notice = ""
+    if view.rejected_operation_notice:
+        notice = view.rejected_operation_notice
+        required = "、".join(
+            ROLE_LABELS.get(role, role)
+            for role in notice.required_roles
+        ) or "具备相应权限的角色"
+        rejected_notice = (
+            '<section class="rejected-notice">'
+            f"<h2>{html.escape(notice.display_title)}</h2>"
+            f"<p>{html.escape(notice.display_message)}</p>"
+            f"<p>{html.escape(notice.reason_plain)}</p>"
+            "<ul>"
+            f"<li>案例状态{'没有变化' if not notice.state_changed else '发生了变化'}</li>"
+            f"<li>当前仍在：{html.escape(notice.current_state_label)}</li>"
+            f"<li>下一步需要由：{html.escape(required)}处理</li>"
+            "</ul>"
+            "<details><summary>查看操作、权限和审计依据</summary>"
+            f"<pre>{_json_block(notice.to_dict())}</pre></details>"
+            "</section>"
+        )
     preview_html = (
         _action_preview_html(
             preview,
@@ -1225,6 +1442,7 @@ input, select, textarea {{ box-sizing: border-box; width: 100%; padding: .6rem; 
 button {{ padding: .65rem .9rem; margin-top: .8rem; cursor: pointer; }}
 button.danger {{ background: #8c2818; color: white; border: 0; border-radius: 5px; margin-right: .6rem; }}
 .preview {{ border: 3px solid #9b6a00; }}
+.rejected-notice {{ border: 3px solid #9b3d23; }}
 .authority {{ border-left: 7px solid #9b6a00; }}
 details {{ margin-top: .45rem; }}
 summary {{ cursor: pointer; font-weight: 700; }}
@@ -1254,6 +1472,7 @@ code {{ overflow-wrap: anywhere; }}
 <p><strong>为什么现在轮到这一方：</strong>{html.escape(view.responsibility.reason if view.responsibility else '未推导')}</p>
 <details><summary>技术状态</summary><p>State: <code>{html.escape(summary.raw_state)}</code> · Readiness: <code>{html.escape(summary.raw_readiness)}</code> · Autonomy: <code>{html.escape(summary.autonomy_profile)}</code></p></details>
 </header>
+{rejected_notice}
 <section>
 <h2>治理流程导航器</h2>
 <ol class="workflow">{workflow}</ol>

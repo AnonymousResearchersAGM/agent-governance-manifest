@@ -46,12 +46,12 @@
         "traceability": [
           {
             "kind": "state_transition",
-            "object_id": "transition-770979f456264f10b06671a70f37917e",
+            "object_id": "transition-2f28d3319ff9522792e471454f352d67",
             "relationship": "primary:resolve_policy"
           },
           {
             "kind": "state_transition",
-            "object_id": "transition-2fa26aada3a649cb929bbf6d289c7b3c",
+            "object_id": "transition-7161cae53aba5f12ab94b144f737f20e",
             "relationship": "primary:compile_obligations"
           },
           {
@@ -86,17 +86,17 @@
         "traceability": [
           {
             "kind": "state_transition",
-            "object_id": "transition-664133fde6704c6e9d17bbdaf23d11c7",
+            "object_id": "transition-66c206cc530755f99b7f7f5300c615ee",
             "relationship": "primary:mark_evidence_state"
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-c701f892009b4bd3af410126d26dc906",
+            "object_id": "evidence-41ca16ed791f5f6e8a57ddec6ac09610",
             "relationship": "binding_or_retention"
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-2e006840991340b0a0e8000551050a08",
+            "object_id": "evidence-661f729aab135d11a9828ba5ea54ea26",
             "relationship": "binding_or_retention"
           }
         ]
@@ -129,17 +129,17 @@
         "traceability": [
           {
             "kind": "state_transition",
-            "object_id": "transition-8287b4c003774148a51aace269665704",
+            "object_id": "transition-d9b41a0725a359e5831cbf8b249403f4",
             "relationship": "primary:submit_for_verification"
           },
           {
             "kind": "state_transition",
-            "object_id": "transition-603ee3961f63421480424bafeb2f32b2",
+            "object_id": "transition-68be84dfe5ce5b40aa18a11a6b588ed2",
             "relationship": "primary:verify_evidence"
           },
           {
             "kind": "maintainer_verification",
-            "object_id": "verification-e46fb7ce77b14baea2d7ce2a24e33238",
+            "object_id": "verification-ae0eb67a5165516eb4198b4c824e96a2",
             "relationship": "verified"
           }
         ]
@@ -159,22 +159,22 @@
         "traceability": [
           {
             "kind": "state_transition",
-            "object_id": "transition-833d4aee3f724954813bb730c3533d62",
+            "object_id": "transition-ba3e2834196459f189cf12bd8df834dd",
             "relationship": "primary:mark_ready"
           },
           {
             "kind": "state_transition",
-            "object_id": "transition-f5f3fe6b205f4e67907e1ddfb7230d2d",
+            "object_id": "transition-1e62c0ace9c05e429fa016aebd71c10a",
             "relationship": "primary:decide_accept"
           },
           {
             "kind": "final_decision",
-            "object_id": "decision-1964e79b65b547b6a648f6e5ad49ef6f",
+            "object_id": "decision-46db7a481b1c5e92818b386121fc0b71",
             "relationship": "accept"
           },
           {
             "kind": "closure_receipt",
-            "object_id": "closure-5c842d8e02784af697001aa957f984a2",
+            "object_id": "closure-47ec43584583509ca5783fff53e24de9",
             "relationship": "closure"
           }
         ]
@@ -189,13 +189,13 @@
         "result": "verified",
         "result_label": "维护者已检查",
         "raw_status": "verified",
-        "blocking": true,
+        "blocking_requirement": true,
         "source_rule_ids": [
           "documentation-low"
         ],
         "interaction_ids": [],
         "evidence_ids": [
-          "evidence-c701f892009b4bd3af410126d26dc906"
+          "evidence-41ca16ed791f5f6e8a57ddec6ac09610"
         ],
         "binding_fingerprints": [
           "91d4654f97e096f13211d6f1e50de376057d725b7eccdf4980c366131a4e54a2"
@@ -216,7 +216,7 @@
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-c701f892009b4bd3af410126d26dc906",
+            "object_id": "evidence-41ca16ed791f5f6e8a57ddec6ac09610",
             "relationship": "observed"
           }
         ],
@@ -228,7 +228,7 @@
         "material_status_label": "已检查",
         "workflow_status": "completed",
         "workflow_status_label": "已完成",
-        "blocks_progression": false,
+        "currently_blocks_progression": false,
         "affected_scope": [
           "docs/guide.md"
         ]
@@ -241,13 +241,13 @@
         "result": "verified",
         "result_label": "维护者已检查",
         "raw_status": "verified",
-        "blocking": true,
+        "blocking_requirement": true,
         "source_rule_ids": [
           "documentation-low"
         ],
         "interaction_ids": [],
         "evidence_ids": [
-          "evidence-2e006840991340b0a0e8000551050a08"
+          "evidence-661f729aab135d11a9828ba5ea54ea26"
         ],
         "binding_fingerprints": [
           "91d4654f97e096f13211d6f1e50de376057d725b7eccdf4980c366131a4e54a2"
@@ -268,7 +268,7 @@
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-2e006840991340b0a0e8000551050a08",
+            "object_id": "evidence-661f729aab135d11a9828ba5ea54ea26",
             "relationship": "observed"
           }
         ],
@@ -280,7 +280,7 @@
         "material_status_label": "已检查",
         "workflow_status": "completed",
         "workflow_status_label": "已完成",
-        "blocks_progression": false,
+        "currently_blocks_progression": false,
         "affected_scope": [
           "docs/guide.md"
         ]
@@ -682,7 +682,20 @@
             "object_id": "match-documentation-low",
             "relationship": "path_intensity"
           }
-        ]
+        ],
+        "reason_presentation": {
+          "reason_code": "lightweight_path",
+          "display_plain": "本次未触发完整治理流程，只需完成轻量审核要求。",
+          "source_english": "Structured AGM preparation was explicitly declared or requested; no claim about contributor identity is inferred.",
+          "source_code": "lightweight_path",
+          "trace_refs": [
+            {
+              "kind": "matched_rule",
+              "object_id": "match-documentation-low",
+              "relationship": "path_intensity"
+            }
+          ]
+        }
       }
     ],
     "delegation_help": {
@@ -695,7 +708,8 @@
           "object_id": "human_direct",
           "relationship": "delegation_definition"
         }
-      ]
+      ],
+      "reason_presentation": null
     },
     "repair_loop": [
       "维护者发现问题",
@@ -790,7 +804,7 @@
       ],
       "evidence_records": [
         {
-          "id": "evidence-c701f892009b4bd3af410126d26dc906",
+          "id": "evidence-41ca16ed791f5f6e8a57ddec6ac09610",
           "obligation_ids": [
             "O-CHANGED-FILES"
           ],
@@ -820,7 +834,7 @@
           "invalid_reasons": []
         },
         {
-          "id": "evidence-2e006840991340b0a0e8000551050a08",
+          "id": "evidence-661f729aab135d11a9828ba5ea54ea26",
           "obligation_ids": [
             "O-SUMMARY"
           ],
@@ -851,7 +865,7 @@
       "attestation_records": [],
       "verification_records": [
         {
-          "id": "verification-e46fb7ce77b14baea2d7ce2a24e33238",
+          "id": "verification-ae0eb67a5165516eb4198b4c824e96a2",
           "actor": "verifier-1",
           "role": "maintainer_verifier",
           "timestamp": "2026-07-26T00:20:00Z",
@@ -860,8 +874,8 @@
             "O-SUMMARY"
           ],
           "evidence_ids": [
-            "evidence-2e006840991340b0a0e8000551050a08",
-            "evidence-c701f892009b4bd3af410126d26dc906"
+            "evidence-41ca16ed791f5f6e8a57ddec6ac09610",
+            "evidence-661f729aab135d11a9828ba5ea54ea26"
           ],
           "outcome": "verified",
           "reason": "Evidence independently checked.",
@@ -871,10 +885,11 @@
       ],
       "findings": [],
       "repair_requests": [],
+      "attempted_operations": [],
       "contribution_fingerprint": "91d4654f97e096f13211d6f1e50de376057d725b7eccdf4980c366131a4e54a2",
       "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
       "policy_snapshot": {
-        "id": "policy-c1d5986e6ced4d5c87fef963a94402e1",
+        "id": "policy-cab5ec65413651bfa0c4ef4b4abdf3b2",
         "schema_version": "agm.policy_snapshot/v0.2-dev",
         "manifest_version": "agm.manifest/v0.2-dev",
         "base_commit": "demo-base",
@@ -899,7 +914,7 @@
       },
       "transition_history": [
         {
-          "id": "transition-770979f456264f10b06671a70f37917e",
+          "id": "transition-2f28d3319ff9522792e471454f352d67",
           "case_id": "human-final-closure",
           "actor": "agm-engine",
           "role": "system",
@@ -908,12 +923,12 @@
           "action": "resolve_policy",
           "reason": "Resolved canonical policy against the contribution.",
           "related_object_ids": [
-            "policy-c1d5986e6ced4d5c87fef963a94402e1"
+            "policy-cab5ec65413651bfa0c4ef4b4abdf3b2"
           ],
           "timestamp": "2026-07-26T00:00:00Z"
         },
         {
-          "id": "transition-2fa26aada3a649cb929bbf6d289c7b3c",
+          "id": "transition-7161cae53aba5f12ab94b144f737f20e",
           "case_id": "human-final-closure",
           "actor": "agm-engine",
           "role": "system",
@@ -928,7 +943,7 @@
           "timestamp": "2026-07-26T00:00:00Z"
         },
         {
-          "id": "transition-664133fde6704c6e9d17bbdaf23d11c7",
+          "id": "transition-66c206cc530755f99b7f7f5300c615ee",
           "case_id": "human-final-closure",
           "actor": "agm-engine",
           "role": "system",
@@ -943,7 +958,7 @@
           "timestamp": "2026-07-26T00:00:00Z"
         },
         {
-          "id": "transition-8287b4c003774148a51aace269665704",
+          "id": "transition-d9b41a0725a359e5831cbf8b249403f4",
           "case_id": "human-final-closure",
           "actor": "contributor-agent",
           "role": "contributor_agent",
@@ -952,13 +967,13 @@
           "action": "submit_for_verification",
           "reason": "Contributor submitted prepared evidence for maintainer verification.",
           "related_object_ids": [
-            "evidence-c701f892009b4bd3af410126d26dc906",
-            "evidence-2e006840991340b0a0e8000551050a08"
+            "evidence-41ca16ed791f5f6e8a57ddec6ac09610",
+            "evidence-661f729aab135d11a9828ba5ea54ea26"
           ],
-          "timestamp": "2026-07-26T13:27:36Z"
+          "timestamp": "2026-07-26T00:00:00Z"
         },
         {
-          "id": "transition-603ee3961f63421480424bafeb2f32b2",
+          "id": "transition-68be84dfe5ce5b40aa18a11a6b588ed2",
           "case_id": "human-final-closure",
           "actor": "verifier-1",
           "role": "maintainer_verifier",
@@ -967,12 +982,12 @@
           "action": "verify_evidence",
           "reason": "Evidence independently checked.",
           "related_object_ids": [
-            "verification-e46fb7ce77b14baea2d7ce2a24e33238"
+            "verification-ae0eb67a5165516eb4198b4c824e96a2"
           ],
           "timestamp": "2026-07-26T00:20:00Z"
         },
         {
-          "id": "transition-833d4aee3f724954813bb730c3533d62",
+          "id": "transition-ba3e2834196459f189cf12bd8df834dd",
           "case_id": "human-final-closure",
           "actor": "agm-engine",
           "role": "system",
@@ -981,12 +996,12 @@
           "action": "mark_ready",
           "reason": "All blocking obligations are satisfied or verified; the case is ready for an authorized human decision, not accepted.",
           "related_object_ids": [
-            "verification-e46fb7ce77b14baea2d7ce2a24e33238"
+            "verification-ae0eb67a5165516eb4198b4c824e96a2"
           ],
           "timestamp": "2026-07-26T00:20:00Z"
         },
         {
-          "id": "transition-f5f3fe6b205f4e67907e1ddfb7230d2d",
+          "id": "transition-1e62c0ace9c05e429fa016aebd71c10a",
           "case_id": "human-final-closure",
           "actor": "human-maintainer",
           "role": "maintainer",
@@ -995,13 +1010,13 @@
           "action": "decide_accept",
           "reason": "Human maintainer accepted after independent review.",
           "related_object_ids": [
-            "decision-1964e79b65b547b6a648f6e5ad49ef6f"
+            "decision-46db7a481b1c5e92818b386121fc0b71"
           ],
           "timestamp": "2026-07-26T00:30:00Z"
         }
       ],
       "final_decision": {
-        "id": "decision-1964e79b65b547b6a648f6e5ad49ef6f",
+        "id": "decision-46db7a481b1c5e92818b386121fc0b71",
         "actor": "human-maintainer",
         "role": "maintainer",
         "timestamp": "2026-07-26T00:30:00Z",
@@ -1011,13 +1026,13 @@
         "unresolved_exception_ids": []
       },
       "closure_receipt": {
-        "id": "closure-5c842d8e02784af697001aa957f984a2",
+        "id": "closure-47ec43584583509ca5783fff53e24de9",
         "case_id": "human-final-closure",
-        "created_at": "2026-07-26T13:27:36Z",
+        "created_at": "2026-07-26T00:00:00Z",
         "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
         "contribution_fingerprint": "91d4654f97e096f13211d6f1e50de376057d725b7eccdf4980c366131a4e54a2",
         "final_state": "accepted",
-        "final_decision_id": "decision-1964e79b65b547b6a648f6e5ad49ef6f",
+        "final_decision_id": "decision-46db7a481b1c5e92818b386121fc0b71",
         "matched_rule_ids": [
           "documentation-low"
         ],
@@ -1026,16 +1041,16 @@
           "O-SUMMARY": "verified"
         },
         "evidence_ids": [
-          "evidence-2e006840991340b0a0e8000551050a08",
-          "evidence-c701f892009b4bd3af410126d26dc906"
+          "evidence-41ca16ed791f5f6e8a57ddec6ac09610",
+          "evidence-661f729aab135d11a9828ba5ea54ea26"
         ],
         "attestation_ids": [],
         "verification_ids": [
-          "verification-e46fb7ce77b14baea2d7ce2a24e33238"
+          "verification-ae0eb67a5165516eb4198b4c824e96a2"
         ],
         "repair_request_ids": [],
         "unresolved_exception_ids": [],
-        "transition_log_hash": "313515bd0f03fa25f23fbb026916f4234e610c64af4f9df4b627dc0074b499d3"
+        "transition_log_hash": "07676e66309a24a6f43a711a4b08b67bdb2c870365440b46b21248eaf369d04b"
       },
       "policy_migration_diagnostic": {
         "case_id": "human-final-closure",
@@ -1140,7 +1155,7 @@
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-c701f892009b4bd3af410126d26dc906",
+            "object_id": "evidence-41ca16ed791f5f6e8a57ddec6ac09610",
             "relationship": "observed"
           },
           {
@@ -1150,7 +1165,7 @@
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-2e006840991340b0a0e8000551050a08",
+            "object_id": "evidence-661f729aab135d11a9828ba5ea54ea26",
             "relationship": "observed"
           }
         ],
@@ -1190,7 +1205,7 @@
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-c701f892009b4bd3af410126d26dc906",
+            "object_id": "evidence-41ca16ed791f5f6e8a57ddec6ac09610",
             "relationship": "observed"
           },
           {
@@ -1200,14 +1215,15 @@
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-2e006840991340b0a0e8000551050a08",
+            "object_id": "evidence-661f729aab135d11a9828ba5ea54ea26",
             "relationship": "observed"
           }
         ],
         "state_changing": false
       }
     ],
-    "materiality_declaration": null
+    "materiality_declaration": null,
+    "rejected_operation_notice": null
   },
   "expected_workflow_steps": [
     {
@@ -1245,13 +1261,13 @@
       "result": "verified",
       "result_label": "维护者已检查",
       "raw_status": "verified",
-      "blocking": true,
+      "blocking_requirement": true,
       "source_rule_ids": [
         "documentation-low"
       ],
       "interaction_ids": [],
       "evidence_ids": [
-        "evidence-c701f892009b4bd3af410126d26dc906"
+        "evidence-41ca16ed791f5f6e8a57ddec6ac09610"
       ],
       "binding_fingerprints": [
         "91d4654f97e096f13211d6f1e50de376057d725b7eccdf4980c366131a4e54a2"
@@ -1272,7 +1288,7 @@
         },
         {
           "kind": "evidence",
-          "object_id": "evidence-c701f892009b4bd3af410126d26dc906",
+          "object_id": "evidence-41ca16ed791f5f6e8a57ddec6ac09610",
           "relationship": "observed"
         }
       ],
@@ -1284,7 +1300,7 @@
       "material_status_label": "已检查",
       "workflow_status": "completed",
       "workflow_status_label": "已完成",
-      "blocks_progression": false,
+      "currently_blocks_progression": false,
       "affected_scope": [
         "docs/guide.md"
       ]
@@ -1297,13 +1313,13 @@
       "result": "verified",
       "result_label": "维护者已检查",
       "raw_status": "verified",
-      "blocking": true,
+      "blocking_requirement": true,
       "source_rule_ids": [
         "documentation-low"
       ],
       "interaction_ids": [],
       "evidence_ids": [
-        "evidence-2e006840991340b0a0e8000551050a08"
+        "evidence-661f729aab135d11a9828ba5ea54ea26"
       ],
       "binding_fingerprints": [
         "91d4654f97e096f13211d6f1e50de376057d725b7eccdf4980c366131a4e54a2"
@@ -1324,7 +1340,7 @@
         },
         {
           "kind": "evidence",
-          "object_id": "evidence-2e006840991340b0a0e8000551050a08",
+          "object_id": "evidence-661f729aab135d11a9828ba5ea54ea26",
           "relationship": "observed"
         }
       ],
@@ -1336,7 +1352,7 @@
       "material_status_label": "已检查",
       "workflow_status": "completed",
       "workflow_status_label": "已完成",
-      "blocks_progression": false,
+      "currently_blocks_progression": false,
       "affected_scope": [
         "docs/guide.md"
       ]
@@ -1356,12 +1372,12 @@
     "identify_requirements": [
       {
         "kind": "state_transition",
-        "object_id": "transition-770979f456264f10b06671a70f37917e",
+        "object_id": "transition-2f28d3319ff9522792e471454f352d67",
         "relationship": "primary:resolve_policy"
       },
       {
         "kind": "state_transition",
-        "object_id": "transition-2fa26aada3a649cb929bbf6d289c7b3c",
+        "object_id": "transition-7161cae53aba5f12ab94b144f737f20e",
         "relationship": "primary:compile_obligations"
       },
       {
@@ -1383,17 +1399,17 @@
     "prepare_materials": [
       {
         "kind": "state_transition",
-        "object_id": "transition-664133fde6704c6e9d17bbdaf23d11c7",
+        "object_id": "transition-66c206cc530755f99b7f7f5300c615ee",
         "relationship": "primary:mark_evidence_state"
       },
       {
         "kind": "evidence",
-        "object_id": "evidence-c701f892009b4bd3af410126d26dc906",
+        "object_id": "evidence-41ca16ed791f5f6e8a57ddec6ac09610",
         "relationship": "binding_or_retention"
       },
       {
         "kind": "evidence",
-        "object_id": "evidence-2e006840991340b0a0e8000551050a08",
+        "object_id": "evidence-661f729aab135d11a9828ba5ea54ea26",
         "relationship": "binding_or_retention"
       }
     ],
@@ -1401,39 +1417,39 @@
     "maintainer_check": [
       {
         "kind": "state_transition",
-        "object_id": "transition-8287b4c003774148a51aace269665704",
+        "object_id": "transition-d9b41a0725a359e5831cbf8b249403f4",
         "relationship": "primary:submit_for_verification"
       },
       {
         "kind": "state_transition",
-        "object_id": "transition-603ee3961f63421480424bafeb2f32b2",
+        "object_id": "transition-68be84dfe5ce5b40aa18a11a6b588ed2",
         "relationship": "primary:verify_evidence"
       },
       {
         "kind": "maintainer_verification",
-        "object_id": "verification-e46fb7ce77b14baea2d7ce2a24e33238",
+        "object_id": "verification-ae0eb67a5165516eb4198b4c824e96a2",
         "relationship": "verified"
       }
     ],
     "human_final_decision": [
       {
         "kind": "state_transition",
-        "object_id": "transition-833d4aee3f724954813bb730c3533d62",
+        "object_id": "transition-ba3e2834196459f189cf12bd8df834dd",
         "relationship": "primary:mark_ready"
       },
       {
         "kind": "state_transition",
-        "object_id": "transition-f5f3fe6b205f4e67907e1ddfb7230d2d",
+        "object_id": "transition-1e62c0ace9c05e429fa016aebd71c10a",
         "relationship": "primary:decide_accept"
       },
       {
         "kind": "final_decision",
-        "object_id": "decision-1964e79b65b547b6a648f6e5ad49ef6f",
+        "object_id": "decision-46db7a481b1c5e92818b386121fc0b71",
         "relationship": "accept"
       },
       {
         "kind": "closure_receipt",
-        "object_id": "closure-5c842d8e02784af697001aa957f984a2",
+        "object_id": "closure-47ec43584583509ca5783fff53e24de9",
         "relationship": "closure"
       }
     ]
@@ -1823,7 +1839,6 @@
     }
   ],
   "action_preview": {
-    "action": "decide_accept",
     "title": "提交人类最终接受决定",
     "actor": {
       "actor": "human-maintainer",
@@ -1832,48 +1847,72 @@
     },
     "authorized": true,
     "authorization_reason": "当前角色和案例状态允许生成此操作计划。",
-    "source_state": "ready_for_human_decision",
-    "target_state": "accepted",
-    "effects": [
+    "display_effects": [
       {
-        "target": "案例状态",
-        "before": "ready_for_human_decision",
-        "after": "accepted",
-        "explanation": "案例 accepted 并生成 closure receipt；该动作不是自动合并。",
-        "source_object_ids": [
-          "transition-833d4aee3f724954813bb730c3533d62"
-        ]
+        "display_label": "案例流程",
+        "before_label": "等待人类维护者最终决定",
+        "after_label": "人类维护者已接受并关闭",
+        "display_description": "案例 accepted 并生成 closure receipt；该动作不是自动合并。"
       }
     ],
-    "affected_obligation_ids": [],
-    "retained_evidence_ids": [
-      "evidence-c701f892009b4bd3af410126d26dc906",
-      "evidence-2e006840991340b0a0e8000551050a08"
+    "affected_items": [],
+    "retained_items": [
+      "变更文件清单",
+      "修改说明"
     ],
-    "invalidated_attestation_ids": [],
+    "invalidated_items": [],
     "next_authorized_actor_roles": [],
     "requires_confirmation": true,
     "mutates_case": false,
-    "preview_fingerprint": "2a014cb9eef33a65ece8483c33ba0139875ec110f763de906f27c3f589f5d5c9",
-    "traceability": [
-      {
-        "kind": "permission_rule",
-        "object_id": "maintainer:decide_accept",
-        "relationship": "authority"
-      },
-      {
-        "kind": "governance_case",
-        "object_id": "human-final-closure",
-        "relationship": "source_state"
-      },
-      {
-        "kind": "state_machine_rule",
-        "object_id": "ready_for_human_decision:decide_accept:accepted",
-        "relationship": "transition_plan"
-      }
-    ],
-    "processed_objects": [],
-    "invalidated_evidence_ids": [],
+    "technical_details": {
+      "operation": "decide_accept",
+      "source_state": "ready_for_human_decision",
+      "target_state": "accepted",
+      "effects": [
+        {
+          "target": "案例状态",
+          "before": "ready_for_human_decision",
+          "after": "accepted",
+          "explanation": "案例 accepted 并生成 closure receipt；该动作不是自动合并。",
+          "source_object_ids": [
+            "transition-ba3e2834196459f189cf12bd8df834dd"
+          ]
+        }
+      ],
+      "affected_obligation_ids": [],
+      "retained_evidence_ids": [
+        "evidence-41ca16ed791f5f6e8a57ddec6ac09610",
+        "evidence-661f729aab135d11a9828ba5ea54ea26"
+      ],
+      "invalidated_attestation_ids": [],
+      "invalidated_evidence_ids": [],
+      "processed_objects": [],
+      "workflow_step_before": "human_final_decision",
+      "workflow_step_after": "human_final_decision",
+      "creates_records": [
+        "state_transition",
+        "final_decision",
+        "closure_receipt"
+      ],
+      "preview_fingerprint": "2a014cb9eef33a65ece8483c33ba0139875ec110f763de906f27c3f589f5d5c9",
+      "traceability": [
+        {
+          "kind": "permission_rule",
+          "object_id": "maintainer:decide_accept",
+          "relationship": "authority"
+        },
+        {
+          "kind": "governance_case",
+          "object_id": "human-final-closure",
+          "relationship": "source_state"
+        },
+        {
+          "kind": "state_machine_rule",
+          "object_id": "ready_for_human_decision:decide_accept:accepted",
+          "relationship": "transition_plan"
+        }
+      ]
+    },
     "responsibility_before": {
       "primary_roles": [
         "maintainer"
@@ -1890,12 +1929,11 @@
       "blocking_items": [],
       "next_handoff_roles": []
     },
-    "workflow_step_before": "human_final_decision",
-    "workflow_step_after": "human_final_decision",
-    "creates_records": [
-      "state_transition",
-      "final_decision",
-      "closure_receipt"
+    "workflow_position_before": "人类维护者最终决定",
+    "workflow_position_after": "人类维护者最终决定",
+    "next_steps": [
+      "当前责任方将转交给流程已结束。",
+      "案例将进入“人类维护者最终决定”。"
     ],
     "requires_human_attestation_after": false,
     "requires_maintainer_verification_after": false,
@@ -1903,7 +1941,7 @@
     "final_acceptance_still_required": false
   },
   "final_verification_record": {
-    "id": "verification-e46fb7ce77b14baea2d7ce2a24e33238",
+    "id": "verification-ae0eb67a5165516eb4198b4c824e96a2",
     "actor": "verifier-1",
     "role": "maintainer_verifier",
     "timestamp": "2026-07-26T00:20:00Z",
@@ -1912,8 +1950,8 @@
       "O-SUMMARY"
     ],
     "evidence_ids": [
-      "evidence-2e006840991340b0a0e8000551050a08",
-      "evidence-c701f892009b4bd3af410126d26dc906"
+      "evidence-41ca16ed791f5f6e8a57ddec6ac09610",
+      "evidence-661f729aab135d11a9828ba5ea54ea26"
     ],
     "outcome": "verified",
     "reason": "Evidence independently checked.",

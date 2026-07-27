@@ -58,12 +58,12 @@
         "traceability": [
           {
             "kind": "state_transition",
-            "object_id": "transition-e76e8cb1fd1a427ba58db207089b9c2f",
+            "object_id": "transition-120a65a2e2da5a068e944e768812876e",
             "relationship": "primary:resolve_policy"
           },
           {
             "kind": "state_transition",
-            "object_id": "transition-3ca72aa23fa54a5992f5a5fb942367ca",
+            "object_id": "transition-fdb346ef5d4a5c368db472d7f83ba2c5",
             "relationship": "primary:compile_obligations"
           },
           {
@@ -98,17 +98,17 @@
         "traceability": [
           {
             "kind": "state_transition",
-            "object_id": "transition-9e7bcad889a9416098604424926b01a9",
+            "object_id": "transition-c09cd917c29b508bbe98eca3a57a4aca",
             "relationship": "primary:mark_evidence_state"
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-643cfb6ba5984911a2d24f62763472b5",
+            "object_id": "evidence-ef4dab7d611158b9abd243b7cd8aad10",
             "relationship": "binding_or_retention"
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-f2e3fde55f164289a63af1fd842a3592",
+            "object_id": "evidence-a95312d489285e3cb65053a2045d303e",
             "relationship": "binding_or_retention"
           }
         ]
@@ -141,7 +141,7 @@
         "traceability": [
           {
             "kind": "state_transition",
-            "object_id": "transition-c25ef804d8c54c2282770d072dd10271",
+            "object_id": "transition-89002f3870345fdd8ffddbc208d360db",
             "relationship": "primary:submit_for_verification"
           }
         ]
@@ -170,13 +170,13 @@
         "result": "meets_requirement",
         "result_label": "符合要求",
         "raw_status": "satisfied",
-        "blocking": true,
+        "blocking_requirement": true,
         "source_rule_ids": [
           "documentation-low"
         ],
         "interaction_ids": [],
         "evidence_ids": [
-          "evidence-643cfb6ba5984911a2d24f62763472b5"
+          "evidence-ef4dab7d611158b9abd243b7cd8aad10"
         ],
         "binding_fingerprints": [
           "a0f5344b373cb8b07ca2a27dac543248200f012933c03da5368a25e8729b2833"
@@ -197,7 +197,7 @@
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-643cfb6ba5984911a2d24f62763472b5",
+            "object_id": "evidence-ef4dab7d611158b9abd243b7cd8aad10",
             "relationship": "observed"
           }
         ],
@@ -209,7 +209,7 @@
         "material_status_label": "已提供",
         "workflow_status": "completed",
         "workflow_status_label": "已完成",
-        "blocks_progression": false,
+        "currently_blocks_progression": false,
         "affected_scope": [
           "docs/guide.md"
         ]
@@ -222,13 +222,13 @@
         "result": "meets_requirement",
         "result_label": "符合要求",
         "raw_status": "satisfied",
-        "blocking": true,
+        "blocking_requirement": true,
         "source_rule_ids": [
           "documentation-low"
         ],
         "interaction_ids": [],
         "evidence_ids": [
-          "evidence-f2e3fde55f164289a63af1fd842a3592"
+          "evidence-a95312d489285e3cb65053a2045d303e"
         ],
         "binding_fingerprints": [
           "a0f5344b373cb8b07ca2a27dac543248200f012933c03da5368a25e8729b2833"
@@ -249,7 +249,7 @@
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-f2e3fde55f164289a63af1fd842a3592",
+            "object_id": "evidence-a95312d489285e3cb65053a2045d303e",
             "relationship": "observed"
           }
         ],
@@ -261,7 +261,7 @@
         "material_status_label": "已提供",
         "workflow_status": "completed",
         "workflow_status_label": "已完成",
-        "blocks_progression": false,
+        "currently_blocks_progression": false,
         "affected_scope": [
           "docs/guide.md"
         ]
@@ -728,7 +728,20 @@
             "object_id": "match-documentation-low",
             "relationship": "path_intensity"
           }
-        ]
+        ],
+        "reason_presentation": {
+          "reason_code": "lightweight_path",
+          "display_plain": "本次未触发完整治理流程，只需完成轻量审核要求。",
+          "source_english": "Structured AGM preparation was explicitly declared or requested; no claim about contributor identity is inferred.",
+          "source_code": "lightweight_path",
+          "trace_refs": [
+            {
+              "kind": "matched_rule",
+              "object_id": "match-documentation-low",
+              "relationship": "path_intensity"
+            }
+          ]
+        }
       }
     ],
     "delegation_help": {
@@ -741,7 +754,8 @@
           "object_id": "human_direct",
           "relationship": "delegation_definition"
         }
-      ]
+      ],
+      "reason_presentation": null
     },
     "repair_loop": [
       "维护者发现问题",
@@ -836,7 +850,7 @@
       ],
       "evidence_records": [
         {
-          "id": "evidence-643cfb6ba5984911a2d24f62763472b5",
+          "id": "evidence-ef4dab7d611158b9abd243b7cd8aad10",
           "obligation_ids": [
             "O-CHANGED-FILES"
           ],
@@ -866,7 +880,7 @@
           "invalid_reasons": []
         },
         {
-          "id": "evidence-f2e3fde55f164289a63af1fd842a3592",
+          "id": "evidence-a95312d489285e3cb65053a2045d303e",
           "obligation_ids": [
             "O-SUMMARY"
           ],
@@ -898,10 +912,30 @@
       "verification_records": [],
       "findings": [],
       "repair_requests": [],
+      "attempted_operations": [
+        {
+          "id": "attempted-operation-16ebfd3b1654534dada33821fc5fabeb",
+          "case_id": "unauthorized-agent",
+          "operation": "verify_evidence",
+          "actor": "contributor-agent",
+          "actor_role": "contributor_agent",
+          "attempted_at": "2026-07-26T00:00:00Z",
+          "result": "denied",
+          "reason_raw": "Role contributor_agent is not authorized for action verify_evidence",
+          "state_before": "awaiting_maintainer_verification",
+          "state_after": "awaiting_maintainer_verification",
+          "state_changed": false,
+          "required_roles": [
+            "maintainer",
+            "maintainer_verifier",
+            "policy_steward"
+          ]
+        }
+      ],
       "contribution_fingerprint": "a0f5344b373cb8b07ca2a27dac543248200f012933c03da5368a25e8729b2833",
       "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
       "policy_snapshot": {
-        "id": "policy-1611f99b14b24ff8bbc8599c721aad5e",
+        "id": "policy-1cb9be26b75459e289f7d3341997137f",
         "schema_version": "agm.policy_snapshot/v0.2-dev",
         "manifest_version": "agm.manifest/v0.2-dev",
         "base_commit": "demo-base",
@@ -926,7 +960,7 @@
       },
       "transition_history": [
         {
-          "id": "transition-e76e8cb1fd1a427ba58db207089b9c2f",
+          "id": "transition-120a65a2e2da5a068e944e768812876e",
           "case_id": "unauthorized-agent",
           "actor": "agm-engine",
           "role": "system",
@@ -935,12 +969,12 @@
           "action": "resolve_policy",
           "reason": "Resolved canonical policy against the contribution.",
           "related_object_ids": [
-            "policy-1611f99b14b24ff8bbc8599c721aad5e"
+            "policy-1cb9be26b75459e289f7d3341997137f"
           ],
           "timestamp": "2026-07-26T00:00:00Z"
         },
         {
-          "id": "transition-3ca72aa23fa54a5992f5a5fb942367ca",
+          "id": "transition-fdb346ef5d4a5c368db472d7f83ba2c5",
           "case_id": "unauthorized-agent",
           "actor": "agm-engine",
           "role": "system",
@@ -955,7 +989,7 @@
           "timestamp": "2026-07-26T00:00:00Z"
         },
         {
-          "id": "transition-9e7bcad889a9416098604424926b01a9",
+          "id": "transition-c09cd917c29b508bbe98eca3a57a4aca",
           "case_id": "unauthorized-agent",
           "actor": "agm-engine",
           "role": "system",
@@ -970,7 +1004,7 @@
           "timestamp": "2026-07-26T00:00:00Z"
         },
         {
-          "id": "transition-c25ef804d8c54c2282770d072dd10271",
+          "id": "transition-89002f3870345fdd8ffddbc208d360db",
           "case_id": "unauthorized-agent",
           "actor": "contributor-agent",
           "role": "contributor_agent",
@@ -979,10 +1013,10 @@
           "action": "submit_for_verification",
           "reason": "Contributor submitted prepared evidence for maintainer verification.",
           "related_object_ids": [
-            "evidence-643cfb6ba5984911a2d24f62763472b5",
-            "evidence-f2e3fde55f164289a63af1fd842a3592"
+            "evidence-ef4dab7d611158b9abd243b7cd8aad10",
+            "evidence-a95312d489285e3cb65053a2045d303e"
           ],
-          "timestamp": "2026-07-26T13:27:34Z"
+          "timestamp": "2026-07-26T00:00:00Z"
         }
       ],
       "final_decision": null,
@@ -1096,7 +1130,7 @@
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-643cfb6ba5984911a2d24f62763472b5",
+            "object_id": "evidence-ef4dab7d611158b9abd243b7cd8aad10",
             "relationship": "observed"
           },
           {
@@ -1106,7 +1140,7 @@
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-f2e3fde55f164289a63af1fd842a3592",
+            "object_id": "evidence-a95312d489285e3cb65053a2045d303e",
             "relationship": "observed"
           }
         ],
@@ -1146,7 +1180,7 @@
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-643cfb6ba5984911a2d24f62763472b5",
+            "object_id": "evidence-ef4dab7d611158b9abd243b7cd8aad10",
             "relationship": "observed"
           },
           {
@@ -1156,14 +1190,41 @@
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-f2e3fde55f164289a63af1fd842a3592",
+            "object_id": "evidence-a95312d489285e3cb65053a2045d303e",
             "relationship": "observed"
           }
         ],
         "state_changing": false
       }
     ],
-    "materiality_declaration": null
+    "materiality_declaration": null,
+    "rejected_operation_notice": {
+      "attempt_id": "attempted-operation-16ebfd3b1654534dada33821fc5fabeb",
+      "operation": "verify_evidence",
+      "actor": "contributor-agent",
+      "actor_role": "contributor_agent",
+      "attempted_at": "2026-07-26T00:00:00Z",
+      "result": "denied",
+      "display_title": "最近一次操作未生效",
+      "display_message": "贡献侧智能体尝试执行维护者检查。",
+      "reason_plain": "系统已拒绝该操作，因为该角色没有执行此操作所需的权限。",
+      "reason_raw": "Role contributor_agent is not authorized for action verify_evidence",
+      "state_changed": false,
+      "current_state": "awaiting_maintainer_verification",
+      "current_state_label": "等待维护者检查",
+      "required_roles": [
+        "maintainer",
+        "maintainer_verifier",
+        "policy_steward"
+      ],
+      "trace_refs": [
+        {
+          "kind": "attempted_operation",
+          "object_id": "attempted-operation-16ebfd3b1654534dada33821fc5fabeb",
+          "relationship": "denied_audit_event"
+        }
+      ]
+    }
   },
   "expected_workflow_steps": [
     {
@@ -1201,13 +1262,13 @@
       "result": "meets_requirement",
       "result_label": "符合要求",
       "raw_status": "satisfied",
-      "blocking": true,
+      "blocking_requirement": true,
       "source_rule_ids": [
         "documentation-low"
       ],
       "interaction_ids": [],
       "evidence_ids": [
-        "evidence-643cfb6ba5984911a2d24f62763472b5"
+        "evidence-ef4dab7d611158b9abd243b7cd8aad10"
       ],
       "binding_fingerprints": [
         "a0f5344b373cb8b07ca2a27dac543248200f012933c03da5368a25e8729b2833"
@@ -1228,7 +1289,7 @@
         },
         {
           "kind": "evidence",
-          "object_id": "evidence-643cfb6ba5984911a2d24f62763472b5",
+          "object_id": "evidence-ef4dab7d611158b9abd243b7cd8aad10",
           "relationship": "observed"
         }
       ],
@@ -1240,7 +1301,7 @@
       "material_status_label": "已提供",
       "workflow_status": "completed",
       "workflow_status_label": "已完成",
-      "blocks_progression": false,
+      "currently_blocks_progression": false,
       "affected_scope": [
         "docs/guide.md"
       ]
@@ -1253,13 +1314,13 @@
       "result": "meets_requirement",
       "result_label": "符合要求",
       "raw_status": "satisfied",
-      "blocking": true,
+      "blocking_requirement": true,
       "source_rule_ids": [
         "documentation-low"
       ],
       "interaction_ids": [],
       "evidence_ids": [
-        "evidence-f2e3fde55f164289a63af1fd842a3592"
+        "evidence-a95312d489285e3cb65053a2045d303e"
       ],
       "binding_fingerprints": [
         "a0f5344b373cb8b07ca2a27dac543248200f012933c03da5368a25e8729b2833"
@@ -1280,7 +1341,7 @@
         },
         {
           "kind": "evidence",
-          "object_id": "evidence-f2e3fde55f164289a63af1fd842a3592",
+          "object_id": "evidence-a95312d489285e3cb65053a2045d303e",
           "relationship": "observed"
         }
       ],
@@ -1292,7 +1353,7 @@
       "material_status_label": "已提供",
       "workflow_status": "completed",
       "workflow_status_label": "已完成",
-      "blocks_progression": false,
+      "currently_blocks_progression": false,
       "affected_scope": [
         "docs/guide.md"
       ]
@@ -1318,12 +1379,12 @@
     "identify_requirements": [
       {
         "kind": "state_transition",
-        "object_id": "transition-e76e8cb1fd1a427ba58db207089b9c2f",
+        "object_id": "transition-120a65a2e2da5a068e944e768812876e",
         "relationship": "primary:resolve_policy"
       },
       {
         "kind": "state_transition",
-        "object_id": "transition-3ca72aa23fa54a5992f5a5fb942367ca",
+        "object_id": "transition-fdb346ef5d4a5c368db472d7f83ba2c5",
         "relationship": "primary:compile_obligations"
       },
       {
@@ -1345,17 +1406,17 @@
     "prepare_materials": [
       {
         "kind": "state_transition",
-        "object_id": "transition-9e7bcad889a9416098604424926b01a9",
+        "object_id": "transition-c09cd917c29b508bbe98eca3a57a4aca",
         "relationship": "primary:mark_evidence_state"
       },
       {
         "kind": "evidence",
-        "object_id": "evidence-643cfb6ba5984911a2d24f62763472b5",
+        "object_id": "evidence-ef4dab7d611158b9abd243b7cd8aad10",
         "relationship": "binding_or_retention"
       },
       {
         "kind": "evidence",
-        "object_id": "evidence-f2e3fde55f164289a63af1fd842a3592",
+        "object_id": "evidence-a95312d489285e3cb65053a2045d303e",
         "relationship": "binding_or_retention"
       }
     ],
@@ -1363,7 +1424,7 @@
     "maintainer_check": [
       {
         "kind": "state_transition",
-        "object_id": "transition-c25ef804d8c54c2282770d072dd10271",
+        "object_id": "transition-89002f3870345fdd8ffddbc208d360db",
         "relationship": "primary:submit_for_verification"
       }
     ],
@@ -1819,8 +1880,7 @@
     }
   ],
   "action_preview": {
-    "action": "verify_evidence",
-    "title": "检查待核验项",
+    "title": "检查指定范围：变更文件清单、修改说明",
     "actor": {
       "actor": "contributor-agent",
       "role": "contributor_agent",
@@ -1828,15 +1888,13 @@
     },
     "authorized": false,
     "authorization_reason": "当前角色没有 verify_evidence 权限。 可执行角色：maintainer, maintainer_verifier, policy_steward。",
-    "source_state": "awaiting_maintainer_verification",
-    "target_state": "awaiting_maintainer_verification",
-    "effects": [],
-    "affected_obligation_ids": [
-      "O-CHANGED-FILES",
-      "O-SUMMARY"
+    "display_effects": [],
+    "affected_items": [
+      "变更文件清单",
+      "修改说明"
     ],
-    "retained_evidence_ids": [],
-    "invalidated_attestation_ids": [],
+    "retained_items": [],
+    "invalidated_items": [],
     "next_authorized_actor_roles": [
       "maintainer_verifier",
       "policy_steward",
@@ -1844,29 +1902,44 @@
     ],
     "requires_confirmation": false,
     "mutates_case": false,
-    "preview_fingerprint": "5bfd1b340e04f53e98f9bf0763623264359ff34310966f791fe4ea8f477280e1",
-    "traceability": [
-      {
-        "kind": "permission_rule",
-        "object_id": "contributor_agent:verify_evidence",
-        "relationship": "authority"
-      },
-      {
-        "kind": "governance_case",
-        "object_id": "unauthorized-agent",
-        "relationship": "source_state"
-      },
-      {
-        "kind": "state_machine_rule",
-        "object_id": "awaiting_maintainer_verification:verify_evidence:verification_complete",
-        "relationship": "transition_plan"
-      }
-    ],
-    "processed_objects": [
-      "O-CHANGED-FILES",
-      "O-SUMMARY"
-    ],
-    "invalidated_evidence_ids": [],
+    "technical_details": {
+      "operation": "verify_evidence",
+      "source_state": "awaiting_maintainer_verification",
+      "target_state": "awaiting_maintainer_verification",
+      "effects": [],
+      "affected_obligation_ids": [
+        "O-CHANGED-FILES",
+        "O-SUMMARY"
+      ],
+      "retained_evidence_ids": [],
+      "invalidated_attestation_ids": [],
+      "invalidated_evidence_ids": [],
+      "processed_objects": [
+        "O-CHANGED-FILES",
+        "O-SUMMARY"
+      ],
+      "workflow_step_before": "maintainer_check",
+      "workflow_step_after": "maintainer_check",
+      "creates_records": [],
+      "preview_fingerprint": "c6df705b5e29913c897e9e95511d9cdfd93cf675fc5688caf5b9edfd13d65189",
+      "traceability": [
+        {
+          "kind": "permission_rule",
+          "object_id": "contributor_agent:verify_evidence",
+          "relationship": "authority"
+        },
+        {
+          "kind": "governance_case",
+          "object_id": "unauthorized-agent",
+          "relationship": "source_state"
+        },
+        {
+          "kind": "state_machine_rule",
+          "object_id": "awaiting_maintainer_verification:verify_evidence:verification_complete",
+          "relationship": "transition_plan"
+        }
+      ]
+    },
     "responsibility_before": {
       "primary_roles": [
         "maintainer_verifier",
@@ -1893,9 +1966,13 @@
         "maintainer"
       ]
     },
-    "workflow_step_before": "maintainer_check",
-    "workflow_step_after": "maintainer_check",
-    "creates_records": [],
+    "workflow_position_before": "维护者检查",
+    "workflow_position_after": "维护者检查",
+    "next_steps": [
+      "本次操作不会改变案例状态。",
+      "当前责任方仍是维护者核验人、项目规则负责人、人类维护者。",
+      "这不等于代码已经被项目接受。"
+    ],
     "requires_human_attestation_after": false,
     "requires_maintainer_verification_after": true,
     "final_acceptance_recorded": false,

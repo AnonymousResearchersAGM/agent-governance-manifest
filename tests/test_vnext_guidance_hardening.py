@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import copy
+import json
+import re
 import shutil
 import sys
 from pathlib import Path
@@ -13,6 +15,7 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from agm.vnext.guidance import (  # noqa: E402
     ActorContext,
+    TraceReference,
     build_context_selector_options,
     build_no_package_guidance,
     build_reviewer_guidance,
@@ -25,7 +28,15 @@ from agm.vnext.guidance.diagnostics import (  # noqa: E402
     build_requirement_comparisons,
     obligation_presentation,
 )
-from agm.vnext.models import CompiledObligation, VNextError  # noqa: E402
+from agm.vnext.guidance.reason_presentations import (  # noqa: E402
+    UNKNOWN_REASON_FALLBACK,
+    present_reason,
+)
+from agm.vnext.models import (  # noqa: E402
+    CompiledObligation,
+    VNextError,
+)
+from agm.vnext.repair import create_finding  # noqa: E402
 from agm.vnext.service import GovernanceService  # noqa: E402
 
 
@@ -631,6 +642,424 @@ def test_no_package_remains_non_failure_with_human_final_authority(tmp_path):
     row = guidance.requirement_comparisons[0]
 
     assert row.material_status == "not_applicable"
-    assert row.blocks_progression is False
+    assert row.currently_blocks_progression is False
     assert guidance.responsibility.primary_roles == ["maintainer"]
     assert guidance.summary.blocking_issue_count == 0
+
+
+@pytest.mark.parametrize(
+    ("reason_code", "expected"),
+    [
+        ("material_scope_change", "实质变化"),
+        ("partial_affected_scope", "只影响"),
+        ("wording_only_clarification", "文字表述"),
+        ("agent_delegation_clarification", "继续委派"),
+        ("retained_unaffected_evidence", "继续有效"),
+        ("invalidated_attestation", "已失效"),
+        ("unauthorized_operation", "没有执行"),
+        ("policy_migration_warning", "不会静默迁移"),
+        ("lightweight_path", "轻量审核"),
+        ("no_package", "不要求完整 AGM"),
+    ],
+)
+def test_known_reason_codes_are_chinese_first_and_keep_source(
+    reason_code,
+    expected,
+):
+    trace = TraceReference("finding", "finding-source", "source")
+    presented = present_reason(
+        reason_code=reason_code,
+        source_english="Canonical English source.",
+        trace_refs=[trace],
+    )
+
+    assert expected in presented.display_plain
+    assert presented.source_english == "Canonical English source."
+    assert presented.source_code == reason_code
+    assert presented.trace_refs == [trace]
+
+
+def test_unknown_reason_uses_safe_fallback_without_losing_source():
+    presented = present_reason(
+        reason_code="future_reason_code",
+        source_english="Future reason supplied by a policy extension.",
+    )
+
+    assert presented.display_plain == UNKNOWN_REASON_FALLBACK
+    assert (
+        presented.source_english
+        == "Future reason supplied by a policy extension."
+    )
+
+
+def test_reason_presentation_does_not_depend_on_demo_filename_or_edit_policy(
+    tmp_path,
+):
+    service = GovernanceService(project(tmp_path))
+    before = service.config.policy_fingerprint
+
+    first = present_reason(
+        reason_code="material_scope_change",
+        source_english="Source A.",
+    )
+    second = present_reason(
+        reason_code="material_scope_change",
+        source_english="Source B.",
+    )
+
+    assert first.display_plain == second.display_plain
+    assert "01_multi_risk" not in first.display_plain
+    assert service.config.policy_fingerprint == before
+
+
+def _scoped_repair_preview(service: GovernanceService, case_id: str):
+    open_case(
+        service,
+        case_id,
+        autonomy_profile="supervised_agent",
+    )
+    add_all_evidence(service, case_id)
+    service.prepare_case(
+        case_id,
+        actor="agent-1",
+        actor_role="contributor_agent",
+    )
+    service.verify(
+        case_id,
+        actor="verifier-1",
+        role="maintainer_verifier",
+        reason="Initial evidence check.",
+    )
+    service.request_repair(
+        case_id,
+        actor="verifier-1",
+        role="maintainer_verifier",
+        message="Clarify agent action and delegation scope only.",
+        affected_obligation_ids=["O-AGENT-SCOPE"],
+        finding_code="agent_delegation_clarification",
+    )
+    service.resubmit(
+        case_id,
+        actor="agent-1",
+        role="contributor_agent",
+        summary="Clarified wording.",
+        affected_obligation_ids=["O-AGENT-SCOPE"],
+        diff_material=f"{case_id}:initial",
+        change_classification="non_material",
+        change_reason="Wording only.",
+    )
+    case = service.storage.load_case(case_id)
+    before = copy.deepcopy(case.to_dict())
+    transitions = service.storage.read_transitions(case_id)
+    preview = preview_reviewer_action(
+        case,
+        service.config,
+        transitions,
+        ActorContext("verifier-1", "maintainer_verifier"),
+        "verify_evidence",
+        {
+            "obligation_ids": ["O-AGENT-SCOPE"],
+            "reason": "Scoped revalidation.",
+        },
+    )
+    return case, before, transitions, preview
+
+
+def test_preview_separates_plain_effects_from_canonical_ids(tmp_path):
+    service = GovernanceService(project(tmp_path))
+    case, before, transitions, preview = _scoped_repair_preview(
+        service,
+        "preview-layers",
+    )
+
+    display = json.dumps(
+        [item.to_dict() for item in preview.display_effects],
+        ensure_ascii=False,
+    )
+    assert not re.search(
+        r"(?:evidence|finding|repair|transition)-[0-9a-f]{16,}",
+        display,
+    )
+    assert preview.affected_items == ["智能体行动与委派说明"]
+    assert {"修改说明", "变更文件清单"} <= set(
+        preview.retained_items
+    )
+    assert preview.technical_details["affected_obligation_ids"] == [
+        "O-AGENT-SCOPE"
+    ]
+    assert preview.technical_details["retained_evidence_ids"]
+    assert any(
+        effect["source_object_ids"]
+        for effect in preview.technical_details["effects"]
+    )
+    assert {
+        effect["target"]
+        for effect in preview.technical_details["effects"]
+        if effect["after"] == "resolved"
+    } >= {
+        case.findings[-1].id,
+        "指定修复请求",
+    }
+    assert preview.responsibility_after.primary_roles == ["maintainer"]
+    assert any("修复请求将被关闭" in item for item in preview.next_steps)
+    assert any("不等于代码已经被项目接受" in item for item in preview.next_steps)
+    assert preview.final_acceptance_recorded is False
+    assert case.to_dict() == before
+    assert service.storage.read_transitions(case.id) == transitions
+
+
+def test_preview_display_and_execution_stay_aligned(tmp_path):
+    service = GovernanceService(project(tmp_path))
+    case, _, _, preview = _scoped_repair_preview(
+        service,
+        "preview-aligned",
+    )
+
+    service.verify(
+        case.id,
+        actor="verifier-1",
+        role="maintainer_verifier",
+        reason="Scoped revalidation.",
+        obligation_ids=["O-AGENT-SCOPE"],
+    )
+    after = service.storage.load_case(case.id)
+
+    assert after.state == preview.technical_details["target_state"]
+    assert after.obligation("O-AGENT-SCOPE").status == "verified"
+    assert all(
+        item.status == "resolved" for item in after.repair_requests
+    )
+
+
+def test_denied_verification_creates_audit_notice_not_transition_or_finding(
+    tmp_path,
+):
+    service = GovernanceService(project(tmp_path))
+    prepare_docs_for_verification(service, "denied-verification")
+    before = service.storage.load_case("denied-verification")
+    transitions = service.storage.read_transitions(before.id)
+    finding_ids = [item.id for item in before.findings]
+
+    with pytest.raises(VNextError, match="not authorized"):
+        service.verify(
+            before.id,
+            actor="agent-1",
+            role="contributor_agent",
+            reason="Attempted verification.",
+        )
+
+    after = service.storage.load_case(before.id)
+    guidance = view(
+        service,
+        before.id,
+        actor="agent-1",
+        role="contributor_agent",
+    )
+    notice = guidance.rejected_operation_notice
+    assert after.state == before.state
+    assert service.storage.read_transitions(before.id) == transitions
+    assert [item.id for item in after.findings] == finding_ids
+    assert len(after.attempted_operations) == 1
+    audit_path = (
+        service.storage.case_dir(before.id)
+        / "attempted_operations.jsonl"
+    )
+    assert audit_path.is_file()
+    assert len(audit_path.read_text(encoding="utf-8").splitlines()) == 1
+    assert notice is not None
+    assert notice.operation == "verify_evidence"
+    assert notice.state_changed is False
+    assert "maintainer_verifier" in notice.required_roles
+    assert notice.current_state_label == "等待维护者检查"
+    assert guidance.diagnostics == []
+
+
+def test_denied_final_decision_is_audited_without_state_change(tmp_path):
+    service = GovernanceService(project(tmp_path))
+    prepare_docs_for_verification(service, "denied-decision")
+    service.verify(
+        "denied-decision",
+        actor="verifier-1",
+        role="maintainer_verifier",
+        reason="Evidence checked.",
+    )
+    before = service.storage.load_case("denied-decision")
+
+    with pytest.raises(VNextError, match="not authorized"):
+        service.decide(
+            before.id,
+            actor="agent-1",
+            role="contributor_agent",
+            decision="accept",
+            reason="Attempted acceptance.",
+        )
+
+    after = service.storage.load_case(before.id)
+    assert after.state == before.state
+    assert after.final_decision is None
+    assert after.attempted_operations[-1].operation == "decide_accept"
+    assert after.attempted_operations[-1].required_roles == ["maintainer"]
+
+
+def test_invalid_override_is_audited_without_fake_transition(tmp_path):
+    service = GovernanceService(project(tmp_path))
+    prepare_docs_for_verification(service, "invalid-override")
+    before = service.storage.load_case("invalid-override")
+    transitions = service.storage.read_transitions(before.id)
+
+    with pytest.raises(VNextError, match="unknown findings"):
+        service.override(
+            before.id,
+            actor="human-maintainer",
+            role="maintainer",
+            reason="Invalid scope.",
+            finding_ids=["finding-does-not-exist"],
+        )
+
+    after = service.storage.load_case(before.id)
+    assert after.state == before.state
+    assert service.storage.read_transitions(before.id) == transitions
+    assert (
+        after.attempted_operations[-1].operation
+        == "authorized_override"
+    )
+    assert after.attempted_operations[-1].state_changed is False
+
+
+def test_successful_operation_is_not_added_to_rejected_audit(tmp_path):
+    service = GovernanceService(project(tmp_path))
+    prepare_docs_for_verification(service, "successful-verification")
+
+    service.verify(
+        "successful-verification",
+        actor="verifier-1",
+        role="maintainer_verifier",
+        reason="Authorized verification.",
+    )
+
+    after = service.storage.load_case("successful-verification")
+    guidance = view(service, after.id)
+    assert after.attempted_operations == []
+    assert guidance.rejected_operation_notice is None
+
+
+def test_blocking_requirement_missing_currently_blocks(tmp_path):
+    service = GovernanceService(project(tmp_path))
+    case = open_case(service, "blocking-missing")
+    row = next(
+        item
+        for item in build_requirement_comparisons(case)
+        if item.obligation_id == "O-SUMMARY"
+    )
+
+    assert row.blocking_requirement is True
+    assert row.currently_blocks_progression is True
+
+
+def test_satisfied_blocking_requirement_no_longer_blocks(tmp_path):
+    service = GovernanceService(project(tmp_path))
+    case = open_case(service, "blocking-satisfied")
+    add_all_evidence(service, case.id)
+    case = service.storage.load_case(case.id)
+    row = next(
+        item
+        for item in build_requirement_comparisons(case)
+        if item.obligation_id == "O-SUMMARY"
+    )
+
+    assert row.blocking_requirement is True
+    assert row.currently_blocks_progression is False
+
+
+def test_nonblocking_warning_has_both_blocking_axes_false(tmp_path):
+    service = GovernanceService(project(tmp_path))
+    case = open_case(service, "nonblocking-warning")
+    obligation = case.obligation("O-SUMMARY")
+    obligation.blocking = False
+    create_finding(
+        case,
+        code="future_warning",
+        severity="low",
+        message="Future non-blocking warning.",
+        blocking=False,
+        affected_obligation_ids=["O-SUMMARY"],
+    )
+    row = next(
+        item
+        for item in build_requirement_comparisons(case)
+        if item.obligation_id == "O-SUMMARY"
+    )
+
+    assert row.blocking_requirement is False
+    assert row.currently_blocks_progression is False
+
+
+def test_scoped_revalidation_and_override_keep_blocking_axes_distinct(
+    tmp_path,
+):
+    service = GovernanceService(project(tmp_path))
+    case, _, _, preview = _scoped_repair_preview(
+        service,
+        "blocking-scoped",
+    )
+    row = next(
+        item
+        for item in build_requirement_comparisons(case)
+        if item.obligation_id == "O-AGENT-SCOPE"
+    )
+    assert row.blocking_requirement is True
+    assert row.currently_blocks_progression is True
+    assert preview.final_acceptance_still_required is True
+
+    prepare_docs_for_verification(service, "blocking-override")
+    service.verify(
+        "blocking-override",
+        actor="verifier-1",
+        role="maintainer_verifier",
+        reason="Initial evidence check.",
+    )
+    service.request_repair(
+        "blocking-override",
+        actor="verifier-1",
+        role="maintainer_verifier",
+        message="Summary exception.",
+        affected_obligation_ids=["O-SUMMARY"],
+    )
+    override_case = service.storage.load_case("blocking-override")
+    finding_id = override_case.findings[-1].id
+    service.override(
+        override_case.id,
+        actor="human-maintainer",
+        role="maintainer",
+        reason="Authorized exception.",
+        obligation_ids=["O-SUMMARY"],
+        finding_ids=[finding_id],
+    )
+    overridden = service.storage.load_case(override_case.id)
+    row = next(
+        item
+        for item in build_requirement_comparisons(overridden)
+        if item.obligation_id == "O-SUMMARY"
+    )
+    assert row.blocking_requirement is True
+    assert row.currently_blocks_progression is False
+
+
+def test_blocking_compatibility_alias_is_deprecated_and_not_serialized(
+    tmp_path,
+):
+    service = GovernanceService(project(tmp_path))
+    row = build_requirement_comparisons(
+        open_case(service, "blocking-alias")
+    )[0]
+
+    with pytest.warns(DeprecationWarning):
+        assert row.blocking == row.blocking_requirement
+    with pytest.warns(DeprecationWarning):
+        assert (
+            row.blocks_progression
+            == row.currently_blocks_progression
+        )
+    payload = row.to_dict()
+    assert "blocking" not in payload
+    assert "blocks_progression" not in payload

@@ -98,6 +98,15 @@ Important distinctions:
 A row may say “材料已补充” and “等待维护者重新检查” at the same time. This is
 the correct scoped-repair state and must not be treated as missing material.
 
+When consuming JSON, read the two boolean axes separately:
+
+- `blocking_requirement`: this requirement is blocking by policy design;
+- `currently_blocks_progression`: this row blocks the current case now.
+
+Thus a satisfied blocking requirement is `true/false`, not a contradiction.
+The old `blocking` and `blocks_progression` Python accessors are deprecated and
+are not emitted by default JSON.
+
 ## Check the current responsibility
 
 Read both the responsibility label and its reason. The derivation considers
@@ -137,6 +146,11 @@ For a resubmission, inspect:
 - invalidated/retained attestations; and
 - revalidation scope.
 
+The main view gives the finding, repair, materiality and scope reason in
+Chinese. Expand “原始依据” for `source_english`, `source_code`, and trace
+references. An unknown reason deliberately shows a neutral fallback rather
+than guessing; the unmodified source remains in detail.
+
 Challenge an unsupported classification. The prototype records and applies a
 scope; it does not prove that the declaration is semantically correct.
 
@@ -154,20 +168,20 @@ delegation.
 
 ## Preview, then confirm
 
-Every state-changing panel operation first displays:
+Every state-changing panel operation first displays a plain layer:
 
-- action and actor role;
-- source and predicted target state;
-- affected obligations;
-- records expected to change;
-- retained evidence;
-- attestation invalidation;
-- next actor role; and
-- traceable permission/transition rules.
+- the human-readable action;
+- affected material names;
+- retained unaffected material names;
+- plain before/after effects;
+- responsibility and workflow movement;
+- next steps; and
+- whether final acceptance remains outstanding.
 
-The preview additionally shows responsibility and workflow movement, records
-that would be created, retained/invalidated evidence, remaining attestation or
-verification, and whether final acceptance actually occurred.
+Expand the technical layer for operation/raw-state names, canonical IDs,
+internal workflow nodes, records that would be created, traceable
+permission/transition rules, and the preview fingerprint. Long opaque IDs
+should not be needed for routine review.
 
 The preview is read-only. Confirm only after checking the scope. If the case
 changes before confirmation, the panel rejects the stale preview.
@@ -194,6 +208,21 @@ requirements, export contributor/reviewer checklists, inspect changed scope,
 or generate a handoff note. These outputs do not change case state or append
 transitions.
 
+## Read a rejected-operation notice
+
+“最近一次操作未生效” is separate from the finding list. It means an actual
+attempt was denied by permission, workflow state, or object-scope validation.
+Check:
+
+- the attempted action and actor role;
+- `state_changed=false`;
+- the unchanged current workflow position; and
+- the required authorized roles for the next step.
+
+The event does not close a finding, create a successful transition, or imply a
+governance defect. Older denied attempts are available in technical detail.
+A successful operation is never listed as rejected.
+
 ## Authority reminders
 
 - Contributor agents cannot attest, verify, override, or decide.
@@ -212,10 +241,20 @@ required.
 ## Reproduce the demonstrations
 
 ```bash
-python scripts/generate_reviewer_guidance_demos.py
+PYTHONPATH=src python scripts/generate_reviewer_guidance_demos.py
+sha256sum examples/reviewer_guidance/outputs/**/*
+PYTHONPATH=src python scripts/generate_reviewer_guidance_demos.py
+sha256sum examples/reviewer_guidance/outputs/**/*
+git status --short
 python -m pytest -q tests/test_vnext_reviewer_guidance.py
 python -m pytest -q tests/test_vnext_guidance_e2e.py
 ```
+
+The two SHA-256 sets must be identical and the final Git status must be empty.
+The generator uses fixed clock/UUID5/demo-secret services only inside its
+scenario-scoped deterministic context. Production IDs and selector secrets
+remain random. Use `--runtime-random` only to compare semantics during
+development.
 
 Generated examples live in one directory per scenario under
 `examples/reviewer_guidance/outputs/`; each contains `guidance.json`,

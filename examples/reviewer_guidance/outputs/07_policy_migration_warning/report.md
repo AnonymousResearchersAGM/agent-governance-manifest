@@ -65,17 +65,35 @@
 
 ## 操作预览
 
+你准备执行：**记录项目规则冲突**
+
+当前角色和案例状态允许生成此操作计划。
+
+### 将处理
+
+- 修改说明
+
+### 将保留
+
+- 无
+
+### 预计变化
+
+- 案例流程：等待贡献者补齐材料 → 发现问题，等待指定范围修改。案例转入 repair，由 policy steward 或维护者处理。
+- 修改说明：尚未满足 → 项目规则冲突。案例转入 repair，由 policy steward 或维护者处理。
+
+### 执行后
+
+- 当前责任方将转交给项目规则负责人、人类维护者。
+- 案例将进入“贡献者准备材料”。
+- 这不等于代码已经被项目接受。
+
+<details>
+<summary>技术操作、内部 ID 与原始状态</summary>
+
 ```json
 {
-  "action": "record_policy_conflict",
-  "title": "记录项目规则冲突",
-  "actor": {
-    "actor": "policy-reviewer",
-    "role": "policy_steward",
-    "human": true
-  },
-  "authorized": true,
-  "authorization_reason": "当前角色和案例状态允许生成此操作计划。",
+  "operation": "record_policy_conflict",
   "source_state": "evidence_incomplete",
   "target_state": "repair_requested",
   "effects": [
@@ -85,7 +103,7 @@
       "after": "repair_requested",
       "explanation": "案例转入 repair，由 policy steward 或维护者处理。",
       "source_object_ids": [
-        "transition-a3387af59dfd4db28c555a80ea33bc6d"
+        "transition-fb1c3eb898d154ed98f2004b45dc4d73"
       ]
     },
     {
@@ -103,12 +121,17 @@
   ],
   "retained_evidence_ids": [],
   "invalidated_attestation_ids": [],
-  "next_authorized_actor_roles": [
-    "policy_steward",
-    "maintainer"
+  "invalidated_evidence_ids": [],
+  "processed_objects": [
+    "O-SUMMARY"
   ],
-  "requires_confirmation": true,
-  "mutates_case": false,
+  "workflow_step_before": "prepare_materials",
+  "workflow_step_after": "prepare_materials",
+  "creates_records": [
+    "state_transition",
+    "finding",
+    "repair_request"
+  ],
   "preview_fingerprint": "00e0d82c9c29a56cdf8e4d7e5dcb078ddf8b0561119be2c73f2e5d11576a2fea",
   "traceability": [
     {
@@ -126,53 +149,8 @@
       "object_id": "evidence_incomplete:record_policy_conflict:repair_requested",
       "relationship": "transition_plan"
     }
-  ],
-  "processed_objects": [
-    "O-SUMMARY"
-  ],
-  "invalidated_evidence_ids": [],
-  "responsibility_before": {
-    "primary_roles": [
-      "contributor",
-      "contributor_agent"
-    ],
-    "display_label": "贡献者、贡献侧智能体",
-    "reason": "受影响材料尚未准备或更新完成，当前还不能进入维护者检查。",
-    "blocking_items": [
-      "变更文件清单",
-      "修改说明"
-    ],
-    "next_handoff_roles": [
-      "accountable_human",
-      "maintainer_verifier",
-      "maintainer"
-    ]
-  },
-  "responsibility_after": {
-    "primary_roles": [
-      "policy_steward",
-      "maintainer"
-    ],
-    "display_label": "项目规则负责人、人类维护者",
-    "reason": "项目规则之间存在未解决冲突，需要具备相应权限的人类角色先记录解决依据。",
-    "blocking_items": [
-      "修改说明"
-    ],
-    "next_handoff_roles": [
-      "contributor",
-      "maintainer_verifier"
-    ]
-  },
-  "workflow_step_before": "prepare_materials",
-  "workflow_step_after": "prepare_materials",
-  "creates_records": [
-    "state_transition",
-    "finding",
-    "repair_request"
-  ],
-  "requires_human_attestation_after": false,
-  "requires_maintainer_verification_after": true,
-  "final_acceptance_recorded": false,
-  "final_acceptance_still_required": true
+  ]
 }
 ```
+
+</details>

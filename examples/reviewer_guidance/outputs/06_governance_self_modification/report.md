@@ -70,17 +70,50 @@
 
 ## 操作预览
 
+你准备执行：**检查指定范围：可核验测试制品、变更文件清单、独立维护者检查、已知限制、项目规则与治理影响、修改理由、修改说明、测试命令与结果**
+
+当前角色和案例状态允许生成此操作计划。
+
+### 将处理
+
+- 可核验测试制品
+- 变更文件清单
+- 独立维护者检查
+- 已知限制
+- 项目规则与治理影响
+- 修改理由
+- 修改说明
+- 测试命令与结果
+
+### 将保留
+
+- 无
+
+### 预计变化
+
+- 案例流程：等待维护者检查 → 等待人类维护者最终决定。受影响项会记录维护者检查；全部阻断项完成后进入人类最终决定。
+- 可核验测试制品：材料已满足 → 已检查。受影响项会记录维护者检查；全部阻断项完成后进入人类最终决定。
+- 变更文件清单：材料已满足 → 已检查。受影响项会记录维护者检查；全部阻断项完成后进入人类最终决定。
+- 独立维护者检查：尚未满足 → 已检查。受影响项会记录维护者检查；全部阻断项完成后进入人类最终决定。
+- 已知限制：材料已满足 → 已检查。受影响项会记录维护者检查；全部阻断项完成后进入人类最终决定。
+- 项目规则与治理影响：材料已满足 → 已检查。受影响项会记录维护者检查；全部阻断项完成后进入人类最终决定。
+- 修改理由：材料已满足 → 已检查。受影响项会记录维护者检查；全部阻断项完成后进入人类最终决定。
+- 修改说明：材料已满足 → 已检查。受影响项会记录维护者检查；全部阻断项完成后进入人类最终决定。
+- 测试命令与结果：材料已满足 → 已检查。受影响项会记录维护者检查；全部阻断项完成后进入人类最终决定。
+
+### 执行后
+
+- 本次指定材料将被标记为已检查。
+- 当前责任方将转交给人类维护者。
+- 案例将进入“人类维护者最终决定”。
+- 这不等于代码已经被项目接受。
+
+<details>
+<summary>技术操作、内部 ID 与原始状态</summary>
+
 ```json
 {
-  "action": "verify_evidence",
-  "title": "检查待核验项",
-  "actor": {
-    "actor": "independent-maintainer",
-    "role": "maintainer",
-    "human": true
-  },
-  "authorized": true,
-  "authorization_reason": "当前角色和案例状态允许生成此操作计划。",
+  "operation": "verify_evidence",
   "source_state": "awaiting_maintainer_verification",
   "target_state": "ready_for_human_decision",
   "effects": [
@@ -90,7 +123,7 @@
       "after": "ready_for_human_decision",
       "explanation": "受影响项会记录维护者检查；全部阻断项完成后进入人类最终决定。",
       "source_object_ids": [
-        "transition-01e145b640864caba91d7a8ee2a41bf6"
+        "transition-e906bb0294f65fdaaaafaceecd8bcc6f"
       ]
     },
     {
@@ -178,12 +211,24 @@
   ],
   "retained_evidence_ids": [],
   "invalidated_attestation_ids": [],
-  "next_authorized_actor_roles": [
-    "maintainer"
+  "invalidated_evidence_ids": [],
+  "processed_objects": [
+    "O-ARTIFACT",
+    "O-CHANGED-FILES",
+    "O-INDEPENDENT-REVIEW",
+    "O-LIMITATIONS",
+    "O-POLICY-IMPACT",
+    "O-RATIONALE",
+    "O-SUMMARY",
+    "O-TEST-COMMAND"
   ],
-  "requires_confirmation": true,
-  "mutates_case": false,
-  "preview_fingerprint": "1e8cd8b3f3e9712847aa1ee833283e9e9f7f50bb7955c92671dcad3f2309b899",
+  "workflow_step_before": "maintainer_check",
+  "workflow_step_after": "human_final_decision",
+  "creates_records": [
+    "state_transition",
+    "maintainer_verification"
+  ],
+  "preview_fingerprint": "c584d3e89306b0de8d32376bc34a27bd92a4325189c6d1084758937132413a8c",
   "traceability": [
     {
       "kind": "permission_rule",
@@ -200,47 +245,8 @@
       "object_id": "awaiting_maintainer_verification:verify_evidence:verification_complete",
       "relationship": "transition_plan"
     }
-  ],
-  "processed_objects": [
-    "O-ARTIFACT",
-    "O-CHANGED-FILES",
-    "O-INDEPENDENT-REVIEW",
-    "O-LIMITATIONS",
-    "O-POLICY-IMPACT",
-    "O-RATIONALE",
-    "O-SUMMARY",
-    "O-TEST-COMMAND"
-  ],
-  "invalidated_evidence_ids": [],
-  "responsibility_before": {
-    "primary_roles": [
-      "maintainer"
-    ],
-    "display_label": "人类维护者",
-    "reason": "贡献侧要求已经满足，当前轮到有权限的维护者检查；检查完成仍不等于接受。",
-    "blocking_items": [],
-    "next_handoff_roles": [
-      "maintainer"
-    ]
-  },
-  "responsibility_after": {
-    "primary_roles": [
-      "maintainer"
-    ],
-    "display_label": "人类维护者",
-    "reason": "治理检查已经达到可决策状态，但最终接受、拒绝或要求修改仍须由人类维护者明确记录。",
-    "blocking_items": [],
-    "next_handoff_roles": []
-  },
-  "workflow_step_before": "maintainer_check",
-  "workflow_step_after": "human_final_decision",
-  "creates_records": [
-    "state_transition",
-    "maintainer_verification"
-  ],
-  "requires_human_attestation_after": false,
-  "requires_maintainer_verification_after": false,
-  "final_acceptance_recorded": false,
-  "final_acceptance_still_required": true
+  ]
 }
 ```
+
+</details>

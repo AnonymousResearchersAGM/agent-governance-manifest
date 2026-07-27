@@ -4,10 +4,10 @@ from __future__ import annotations
 
 import hashlib
 import json
-import uuid
 from dataclasses import asdict, dataclass, field
-from datetime import UTC, datetime
 from typing import Any, TypeVar
+
+from .runtime import current_timestamp, new_record_id
 
 
 RISK_RANK = {"low": 1, "medium": 2, "high": 3, "critical": 4}
@@ -20,12 +20,12 @@ class VNextError(ValueError):
 
 def utc_now() -> str:
     """Return a stable, timezone-explicit UTC timestamp."""
-    return datetime.now(UTC).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+    return current_timestamp()
 
 
 def new_id(prefix: str) -> str:
     """Return an opaque record ID with a readable type prefix."""
-    return f"{prefix}-{uuid.uuid4().hex}"
+    return new_record_id(prefix)
 
 
 def canonical_json(value: Any) -> str:
@@ -177,6 +177,24 @@ class StateTransition(RecordMixin):
 
 
 @dataclass
+class AttemptedOperation(RecordMixin):
+    """Append-only audit fact for an operation that did not take effect."""
+
+    id: str
+    case_id: str
+    operation: str
+    actor: str
+    actor_role: str
+    attempted_at: str
+    result: str
+    reason_raw: str
+    state_before: str
+    state_after: str
+    state_changed: bool
+    required_roles: list[str] = field(default_factory=list)
+
+
+@dataclass
 class MaintainerVerification(RecordMixin):
     id: str
     actor: str
@@ -244,6 +262,7 @@ class GovernanceCase(RecordMixin):
     attestations: list[HumanAttestation] = field(default_factory=list)
     findings: list[GovernanceFinding] = field(default_factory=list)
     repair_requests: list[RepairRequest] = field(default_factory=list)
+    attempted_operations: list[AttemptedOperation] = field(default_factory=list)
     maintainer_verifications: list[MaintainerVerification] = field(default_factory=list)
     final_decision: FinalDecision | None = None
     closure_receipt: ClosureReceipt | None = None
@@ -266,6 +285,10 @@ class GovernanceCase(RecordMixin):
         ]
         payload["repair_requests"] = [
             RepairRequest.from_dict(item) for item in payload.get("repair_requests", [])
+        ]
+        payload["attempted_operations"] = [
+            AttemptedOperation.from_dict(item)
+            for item in payload.get("attempted_operations", [])
         ]
         payload["maintainer_verifications"] = [
             MaintainerVerification.from_dict(item)

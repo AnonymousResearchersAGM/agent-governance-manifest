@@ -36,6 +36,7 @@ input, select, textarea { box-sizing: border-box; width: 100%; padding: .6rem; m
 button { padding: .65rem .9rem; margin-top: .8rem; cursor: pointer; }
 button.danger { background: #8c2818; color: white; border: 0; border-radius: 5px; margin-right: .6rem; }
 .preview { border: 3px solid #9b6a00; }
+.rejected-notice { border: 3px solid #9b3d23; }
 .authority { border-left: 7px solid #9b6a00; }
 details { margin-top: .45rem; }
 summary { cursor: pointer; font-weight: 700; }
@@ -65,17 +66,18 @@ code { overflow-wrap: anywhere; }
 <p><strong>为什么现在轮到这一方：</strong>受影响材料尚未准备或更新完成，当前还不能进入维护者检查。</p>
 <details><summary>技术状态</summary><p>State: <code>evidence_incomplete</code> · Readiness: <code>not_ready</code> · Autonomy: <code>supervised_agent</code></p></details>
 </header>
+
 <section>
 <h2>治理流程导航器</h2>
 <ol class="workflow"><li class="workflow-step status-completed" data-status="completed"><span class="symbol" aria-hidden="true">✓</span><strong>1. 系统识别要求</strong><span class="state-text">已完成</span><p>适用规则和本次要求已由 AGM 引擎生成。</p><details><summary>内部阶段与依据</summary><p>Resolve, Compile</p><pre>[
   {
     &quot;kind&quot;: &quot;state_transition&quot;,
-    &quot;object_id&quot;: &quot;transition-1e1b7732b4504f9b9fbb5ae031231bd3&quot;,
+    &quot;object_id&quot;: &quot;transition-dfc4829d0fb45db0ba836df6b6d5bc59&quot;,
     &quot;relationship&quot;: &quot;primary:resolve_policy&quot;
   },
   {
     &quot;kind&quot;: &quot;state_transition&quot;,
-    &quot;object_id&quot;: &quot;transition-66f971deae5249088e90ec465df9388a&quot;,
+    &quot;object_id&quot;: &quot;transition-eee21e3a4c8a5ba3a8cf1d64899835dd&quot;,
     &quot;relationship&quot;: &quot;primary:compile_obligations&quot;
   },
   {
@@ -146,7 +148,7 @@ code { overflow-wrap: anywhere; }
 ]</pre></details></li><li class="workflow-step status-current" data-status="current"><span class="symbol" aria-hidden="true">●</span><strong>2. 贡献者准备材料</strong><span class="state-text">当前阶段</span><p>贡献者正在准备或补齐本次所需材料。</p><details><summary>内部阶段与依据</summary><p>Bind, Repair</p><pre>[
   {
     &quot;kind&quot;: &quot;state_transition&quot;,
-    &quot;object_id&quot;: &quot;transition-51bda88fa6ac42dc9228448aa671f935&quot;,
+    &quot;object_id&quot;: &quot;transition-ad1fadf8d5be505fa531b3eef015603e&quot;,
     &quot;relationship&quot;: &quot;primary:mark_evidence_state&quot;
   }
 ]</pre></details></li><li class="workflow-step status-pending" data-status="pending"><span class="symbol" aria-hidden="true">○</span><strong>3. 负责人确认</strong><span class="state-text">尚未开始</span><p>材料准备完成后才进入负责人确认。</p><details><summary>内部阶段与依据</summary><p>Attest</p><pre>[]</pre></details></li><li class="workflow-step status-pending" data-status="pending"><span class="symbol" aria-hidden="true">○</span><strong>4. 维护者检查</strong><span class="state-text">尚未开始</span><p>贡献侧要求完成后才进入维护者检查。</p><details><summary>内部阶段与依据</summary><p>Verify, Repair</p><pre>[]</pre></details></li><li class="workflow-step status-pending" data-status="pending"><span class="symbol" aria-hidden="true">○</span><strong>5. 人类维护者最终决定</strong><span class="state-text">尚未开始</span><p>前序治理要求完成后才进入最终决定。</p><details><summary>内部阶段与依据</summary><p>Decide, Record</p><pre>[]</pre></details></li></ol>
@@ -170,6 +172,8 @@ code { overflow-wrap: anywhere; }
   &quot;raw_status&quot;: &quot;unsatisfied&quot;,
   &quot;material_status&quot;: &quot;missing&quot;,
   &quot;workflow_status&quot;: &quot;awaiting_contributor&quot;,
+  &quot;blocking_requirement&quot;: true,
+  &quot;currently_blocks_progression&quot;: true,
   &quot;traceability&quot;: [
     {
       &quot;kind&quot;: &quot;compiled_obligation&quot;,
@@ -197,6 +201,8 @@ code { overflow-wrap: anywhere; }
   &quot;raw_status&quot;: &quot;unsatisfied&quot;,
   &quot;material_status&quot;: &quot;missing&quot;,
   &quot;workflow_status&quot;: &quot;awaiting_contributor&quot;,
+  &quot;blocking_requirement&quot;: true,
+  &quot;currently_blocks_progression&quot;: true,
   &quot;traceability&quot;: [
     {
       &quot;kind&quot;: &quot;compiled_obligation&quot;,
@@ -228,6 +234,8 @@ code { overflow-wrap: anywhere; }
   &quot;raw_status&quot;: &quot;unsatisfied&quot;,
   &quot;material_status&quot;: &quot;missing&quot;,
   &quot;workflow_status&quot;: &quot;awaiting_contributor&quot;,
+  &quot;blocking_requirement&quot;: true,
+  &quot;currently_blocks_progression&quot;: true,
   &quot;traceability&quot;: [
     {
       &quot;kind&quot;: &quot;compiled_obligation&quot;,
@@ -255,6 +263,8 @@ code { overflow-wrap: anywhere; }
   &quot;raw_status&quot;: &quot;unsatisfied&quot;,
   &quot;material_status&quot;: &quot;missing&quot;,
   &quot;workflow_status&quot;: &quot;awaiting_contributor&quot;,
+  &quot;blocking_requirement&quot;: true,
+  &quot;currently_blocks_progression&quot;: true,
   &quot;traceability&quot;: [
     {
       &quot;kind&quot;: &quot;compiled_obligation&quot;,
@@ -286,6 +296,8 @@ code { overflow-wrap: anywhere; }
   &quot;raw_status&quot;: &quot;unsatisfied&quot;,
   &quot;material_status&quot;: &quot;missing&quot;,
   &quot;workflow_status&quot;: &quot;awaiting_attestation&quot;,
+  &quot;blocking_requirement&quot;: true,
+  &quot;currently_blocks_progression&quot;: false,
   &quot;traceability&quot;: [
     {
       &quot;kind&quot;: &quot;compiled_obligation&quot;,
@@ -314,6 +326,8 @@ code { overflow-wrap: anywhere; }
   &quot;raw_status&quot;: &quot;unsatisfied&quot;,
   &quot;material_status&quot;: &quot;missing&quot;,
   &quot;workflow_status&quot;: &quot;blocks_progression&quot;,
+  &quot;blocking_requirement&quot;: true,
+  &quot;currently_blocks_progression&quot;: false,
   &quot;traceability&quot;: [
     {
       &quot;kind&quot;: &quot;compiled_obligation&quot;,
@@ -346,6 +360,8 @@ code { overflow-wrap: anywhere; }
   &quot;raw_status&quot;: &quot;unsatisfied&quot;,
   &quot;material_status&quot;: &quot;missing&quot;,
   &quot;workflow_status&quot;: &quot;awaiting_contributor&quot;,
+  &quot;blocking_requirement&quot;: true,
+  &quot;currently_blocks_progression&quot;: true,
   &quot;traceability&quot;: [
     {
       &quot;kind&quot;: &quot;compiled_obligation&quot;,
@@ -378,6 +394,8 @@ code { overflow-wrap: anywhere; }
   &quot;raw_status&quot;: &quot;unsatisfied&quot;,
   &quot;material_status&quot;: &quot;missing&quot;,
   &quot;workflow_status&quot;: &quot;awaiting_contributor&quot;,
+  &quot;blocking_requirement&quot;: true,
+  &quot;currently_blocks_progression&quot;: true,
   &quot;traceability&quot;: [
     {
       &quot;kind&quot;: &quot;compiled_obligation&quot;,
@@ -410,6 +428,8 @@ code { overflow-wrap: anywhere; }
   &quot;raw_status&quot;: &quot;unsatisfied&quot;,
   &quot;material_status&quot;: &quot;missing&quot;,
   &quot;workflow_status&quot;: &quot;awaiting_contributor&quot;,
+  &quot;blocking_requirement&quot;: true,
+  &quot;currently_blocks_progression&quot;: true,
   &quot;traceability&quot;: [
     {
       &quot;kind&quot;: &quot;compiled_obligation&quot;,
@@ -442,6 +462,8 @@ code { overflow-wrap: anywhere; }
   &quot;raw_status&quot;: &quot;unsatisfied&quot;,
   &quot;material_status&quot;: &quot;missing&quot;,
   &quot;workflow_status&quot;: &quot;awaiting_contributor&quot;,
+  &quot;blocking_requirement&quot;: true,
+  &quot;currently_blocks_progression&quot;: true,
   &quot;traceability&quot;: [
     {
       &quot;kind&quot;: &quot;compiled_obligation&quot;,
@@ -475,7 +497,37 @@ code { overflow-wrap: anywhere; }
     &quot;relationship&quot;: &quot;agent_scope_requirement&quot;
   }
 ]</pre></details></section>
-<section class="preview" id="action-preview"><h2>操作前预览</h2><p>你准备执行：<strong>请求补充或更新材料</strong></p><p>操作 request_repair 不能从当前状态 evidence_incomplete 执行。</p><ul><li>不会改变案例。</li></ul><p><strong>保留的未受影响材料：</strong>无</p><p><strong>将失效的材料：</strong>无</p><p><strong>将失效的负责人确认：</strong>无</p><p><strong>责任方变化：</strong>贡献者、贡献侧智能体 → 贡献者、贡献侧智能体</p><p><strong>流程位置变化：</strong>prepare_materials → prepare_materials</p><p><strong>预计新增记录：</strong>无</p><p><strong>后续仍需负责人确认：</strong>是；<strong>后续仍需维护者检查：</strong>是；<strong>最终接受是否已经发生：</strong>否</p><p><strong>此预览本身不会修改案例：</strong>是</p></section>
+<section class="preview" id="action-preview"><h2>操作前预览</h2><p>你准备执行：<strong>请求补充或更新材料</strong></p><p>操作 request_repair 不能从当前状态 evidence_incomplete 执行。</p><p><strong>将处理：</strong>登录、认证与权限影响</p><ul><li>不会改变案例。</li></ul><p><strong>保留的未受影响材料：</strong>无</p><p><strong>将失效：</strong>无</p><p><strong>责任方变化：</strong>贡献者、贡献侧智能体 → 贡献者、贡献侧智能体</p><p><strong>流程位置变化：</strong>贡献者准备材料 → 贡献者准备材料</p><p><strong>执行后：</strong></p><ul><li>本次操作不会改变案例状态。</li><li>当前责任方仍是贡献者、贡献侧智能体。</li><li>这不等于代码已经被项目接受。</li></ul><p><strong>后续仍需负责人确认：</strong>是；<strong>后续仍需维护者检查：</strong>是；<strong>最终接受是否已经发生：</strong>否</p><p><strong>此预览本身不会修改案例：</strong>是</p><details><summary>技术操作、内部 ID 与原始状态</summary><pre>{
+  &quot;operation&quot;: &quot;request_repair&quot;,
+  &quot;source_state&quot;: &quot;evidence_incomplete&quot;,
+  &quot;target_state&quot;: &quot;evidence_incomplete&quot;,
+  &quot;effects&quot;: [],
+  &quot;affected_obligation_ids&quot;: [
+    &quot;O-AUTH-IMPACT&quot;
+  ],
+  &quot;retained_evidence_ids&quot;: [],
+  &quot;invalidated_attestation_ids&quot;: [],
+  &quot;invalidated_evidence_ids&quot;: [],
+  &quot;processed_objects&quot;: [
+    &quot;O-AUTH-IMPACT&quot;
+  ],
+  &quot;workflow_step_before&quot;: &quot;prepare_materials&quot;,
+  &quot;workflow_step_after&quot;: &quot;prepare_materials&quot;,
+  &quot;creates_records&quot;: [],
+  &quot;preview_fingerprint&quot;: &quot;8025aa30042039553fd8e7e5a3788b197815ce8169271433cd4212fc7a2c3e0d&quot;,
+  &quot;traceability&quot;: [
+    {
+      &quot;kind&quot;: &quot;permission_rule&quot;,
+      &quot;object_id&quot;: &quot;maintainer:request_repair&quot;,
+      &quot;relationship&quot;: &quot;authority&quot;
+    },
+    {
+      &quot;kind&quot;: &quot;governance_case&quot;,
+      &quot;object_id&quot;: &quot;multi-risk-missing&quot;,
+      &quot;relationship&quot;: &quot;source_state&quot;
+    }
+  ]
+}</pre></details></section>
 <section>
 <h2>当前相关操作</h2>
 <p>这里列出合法选择及影响，不替维护者作决定。后端仍会重新检查角色、状态和对象范围。</p>
@@ -1299,10 +1351,11 @@ code { overflow-wrap: anywhere; }
   &quot;verification_records&quot;: [],
   &quot;findings&quot;: [],
   &quot;repair_requests&quot;: [],
+  &quot;attempted_operations&quot;: [],
   &quot;contribution_fingerprint&quot;: &quot;c3323431536bbbb95ba1b08b6e69fd082ab89accf9a348306c042228fe49e2ef&quot;,
   &quot;policy_fingerprint&quot;: &quot;e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564&quot;,
   &quot;policy_snapshot&quot;: {
-    &quot;id&quot;: &quot;policy-3655904bf4104eb98127ad2040c37e69&quot;,
+    &quot;id&quot;: &quot;policy-57dc31e37e16513f8a3aaaaed32a842c&quot;,
     &quot;schema_version&quot;: &quot;agm.policy_snapshot/v0.2-dev&quot;,
     &quot;manifest_version&quot;: &quot;agm.manifest/v0.2-dev&quot;,
     &quot;base_commit&quot;: &quot;demo-base&quot;,
@@ -1327,7 +1380,7 @@ code { overflow-wrap: anywhere; }
   },
   &quot;transition_history&quot;: [
     {
-      &quot;id&quot;: &quot;transition-1e1b7732b4504f9b9fbb5ae031231bd3&quot;,
+      &quot;id&quot;: &quot;transition-dfc4829d0fb45db0ba836df6b6d5bc59&quot;,
       &quot;case_id&quot;: &quot;multi-risk-missing&quot;,
       &quot;actor&quot;: &quot;agm-engine&quot;,
       &quot;role&quot;: &quot;system&quot;,
@@ -1336,12 +1389,12 @@ code { overflow-wrap: anywhere; }
       &quot;action&quot;: &quot;resolve_policy&quot;,
       &quot;reason&quot;: &quot;Resolved canonical policy against the contribution.&quot;,
       &quot;related_object_ids&quot;: [
-        &quot;policy-3655904bf4104eb98127ad2040c37e69&quot;
+        &quot;policy-57dc31e37e16513f8a3aaaaed32a842c&quot;
       ],
       &quot;timestamp&quot;: &quot;2026-07-26T00:00:00Z&quot;
     },
     {
-      &quot;id&quot;: &quot;transition-66f971deae5249088e90ec465df9388a&quot;,
+      &quot;id&quot;: &quot;transition-eee21e3a4c8a5ba3a8cf1d64899835dd&quot;,
       &quot;case_id&quot;: &quot;multi-risk-missing&quot;,
       &quot;actor&quot;: &quot;agm-engine&quot;,
       &quot;role&quot;: &quot;system&quot;,
@@ -1364,7 +1417,7 @@ code { overflow-wrap: anywhere; }
       &quot;timestamp&quot;: &quot;2026-07-26T00:00:00Z&quot;
     },
     {
-      &quot;id&quot;: &quot;transition-51bda88fa6ac42dc9228448aa671f935&quot;,
+      &quot;id&quot;: &quot;transition-ad1fadf8d5be505fa531b3eef015603e&quot;,
       &quot;case_id&quot;: &quot;multi-risk-missing&quot;,
       &quot;actor&quot;: &quot;agm-engine&quot;,
       &quot;role&quot;: &quot;system&quot;,

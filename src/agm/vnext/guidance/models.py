@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import warnings
 from dataclasses import asdict, dataclass, field
 from typing import Any
 
@@ -28,11 +29,21 @@ class TraceReference(GuidanceRecord):
 
 
 @dataclass(frozen=True)
+class GuidanceReasonPresentation(GuidanceRecord):
+    reason_code: str | None
+    display_plain: str
+    source_english: str | None
+    source_code: str | None
+    trace_refs: list[TraceReference] = field(default_factory=list)
+
+
+@dataclass(frozen=True)
 class GuidanceExplanation(GuidanceRecord):
     title: str
     technical_term: str
     plain_language: str
     source_references: list[TraceReference] = field(default_factory=list)
+    reason_presentation: GuidanceReasonPresentation | None = None
 
 
 @dataclass(frozen=True)
@@ -84,7 +95,7 @@ class RequirementComparison(GuidanceRecord):
     result: str
     result_label: str
     raw_status: str
-    blocking: bool
+    blocking_requirement: bool
     source_rule_ids: list[str]
     interaction_ids: list[str]
     evidence_ids: list[str]
@@ -101,8 +112,32 @@ class RequirementComparison(GuidanceRecord):
     material_status_label: str = "缺少"
     workflow_status: str = "awaiting_contributor"
     workflow_status_label: str = "等待贡献者处理"
-    blocks_progression: bool = False
+    currently_blocks_progression: bool = False
     affected_scope: list[str] = field(default_factory=list)
+
+    @property
+    def blocking(self) -> bool:
+        """Deprecated alias for the policy-level requirement property."""
+
+        warnings.warn(
+            "RequirementComparison.blocking is deprecated; use "
+            "blocking_requirement",
+            DeprecationWarning,
+            stacklevel=2,
+        )
+        return self.blocking_requirement
+
+    @property
+    def blocks_progression(self) -> bool:
+        """Deprecated alias for the current workflow consequence."""
+
+        warnings.warn(
+            "RequirementComparison.blocks_progression is deprecated; use "
+            "currently_blocks_progression",
+            DeprecationWarning,
+            stacklevel=2,
+        )
+        return self.currently_blocks_progression
 
 
 @dataclass(frozen=True)
@@ -110,6 +145,7 @@ class DiagnosticFindingView(GuidanceRecord):
     finding_id: str
     title: str
     plain_language: str
+    reason_presentation: GuidanceReasonPresentation
     severity: str
     blocking: bool
     status: str
@@ -125,6 +161,14 @@ class ActionEffect(GuidanceRecord):
     after: str
     explanation: str
     source_object_ids: list[str] = field(default_factory=list)
+
+
+@dataclass(frozen=True)
+class ActionPreviewDisplayEffect(GuidanceRecord):
+    display_label: str
+    before_label: str
+    after_label: str
+    display_description: str
 
 
 @dataclass(frozen=True)
@@ -193,6 +237,7 @@ class MaterialityDeclarationView(GuidanceRecord):
     classification_label: str
     declared_by: str
     reason: str
+    reason_presentation: GuidanceReasonPresentation
     affected_obligation_ids: list[str]
     affected_labels: list[str]
     unaffected_obligation_ids: list[str]
@@ -205,34 +250,124 @@ class MaterialityDeclarationView(GuidanceRecord):
 
 
 @dataclass(frozen=True)
+class RejectedOperationView(GuidanceRecord):
+    attempt_id: str
+    operation: str
+    actor: str
+    actor_role: str
+    attempted_at: str
+    result: str
+    display_title: str
+    display_message: str
+    reason_plain: str
+    reason_raw: str
+    state_changed: bool
+    current_state: str
+    current_state_label: str
+    required_roles: list[str]
+    trace_refs: list[TraceReference] = field(default_factory=list)
+
+
+@dataclass(frozen=True)
 class ActionPreview(GuidanceRecord):
-    action: str
     title: str
     actor: ActorContext
     authorized: bool
     authorization_reason: str
-    source_state: str
-    target_state: str
-    effects: list[ActionEffect]
-    affected_obligation_ids: list[str]
-    retained_evidence_ids: list[str]
-    invalidated_attestation_ids: list[str]
+    display_effects: list[ActionPreviewDisplayEffect]
+    affected_items: list[str]
+    retained_items: list[str]
+    invalidated_items: list[str]
     next_authorized_actor_roles: list[str]
     requires_confirmation: bool
     mutates_case: bool
-    preview_fingerprint: str
-    traceability: list[TraceReference] = field(default_factory=list)
-    processed_objects: list[str] = field(default_factory=list)
-    invalidated_evidence_ids: list[str] = field(default_factory=list)
+    technical_details: dict[str, Any]
     responsibility_before: ResponsibilityView | None = None
     responsibility_after: ResponsibilityView | None = None
-    workflow_step_before: str = ""
-    workflow_step_after: str = ""
-    creates_records: list[str] = field(default_factory=list)
+    workflow_position_before: str = ""
+    workflow_position_after: str = ""
+    next_steps: list[str] = field(default_factory=list)
     requires_human_attestation_after: bool = False
     requires_maintainer_verification_after: bool = False
     final_acceptance_recorded: bool = False
     final_acceptance_still_required: bool = True
+
+    @property
+    def action(self) -> str:
+        return str(self.technical_details.get("operation", ""))
+
+    @property
+    def source_state(self) -> str:
+        return str(self.technical_details.get("source_state", ""))
+
+    @property
+    def target_state(self) -> str:
+        return str(self.technical_details.get("target_state", ""))
+
+    @property
+    def effects(self) -> list[ActionEffect]:
+        return [
+            ActionEffect(**item)
+            for item in self.technical_details.get("effects", [])
+        ]
+
+    @property
+    def affected_obligation_ids(self) -> list[str]:
+        return list(
+            self.technical_details.get("affected_obligation_ids", [])
+        )
+
+    @property
+    def retained_evidence_ids(self) -> list[str]:
+        return list(
+            self.technical_details.get("retained_evidence_ids", [])
+        )
+
+    @property
+    def invalidated_attestation_ids(self) -> list[str]:
+        return list(
+            self.technical_details.get(
+                "invalidated_attestation_ids",
+                [],
+            )
+        )
+
+    @property
+    def preview_fingerprint(self) -> str:
+        return str(self.technical_details.get("preview_fingerprint", ""))
+
+    @property
+    def traceability(self) -> list[TraceReference]:
+        return [
+            TraceReference(**item)
+            for item in self.technical_details.get("traceability", [])
+        ]
+
+    @property
+    def processed_objects(self) -> list[str]:
+        return list(self.technical_details.get("processed_objects", []))
+
+    @property
+    def invalidated_evidence_ids(self) -> list[str]:
+        return list(
+            self.technical_details.get("invalidated_evidence_ids", [])
+        )
+
+    @property
+    def workflow_step_before(self) -> str:
+        return str(
+            self.technical_details.get("workflow_step_before", "")
+        )
+
+    @property
+    def workflow_step_after(self) -> str:
+        return str(
+            self.technical_details.get("workflow_step_after", "")
+        )
+
+    @property
+    def creates_records(self) -> list[str]:
+        return list(self.technical_details.get("creates_records", []))
 
 
 @dataclass(frozen=True)
@@ -257,3 +392,4 @@ class ReviewerGuidanceView(GuidanceRecord):
     unavailable_action_summary: str = ""
     utility_actions: list[GuidanceUtilityAction] = field(default_factory=list)
     materiality_declaration: MaterialityDeclarationView | None = None
+    rejected_operation_notice: RejectedOperationView | None = None

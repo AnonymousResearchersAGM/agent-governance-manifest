@@ -36,6 +36,7 @@ input, select, textarea { box-sizing: border-box; width: 100%; padding: .6rem; m
 button { padding: .65rem .9rem; margin-top: .8rem; cursor: pointer; }
 button.danger { background: #8c2818; color: white; border: 0; border-radius: 5px; margin-right: .6rem; }
 .preview { border: 3px solid #9b6a00; }
+.rejected-notice { border: 3px solid #9b3d23; }
 .authority { border-left: 7px solid #9b6a00; }
 details { margin-top: .45rem; }
 summary { cursor: pointer; font-weight: 700; }
@@ -65,17 +66,18 @@ code { overflow-wrap: anywhere; }
 <p><strong>为什么现在轮到这一方：</strong>人类最终决定和关闭记录已经生成，当前没有待交接操作。</p>
 <details><summary>技术状态</summary><p>State: <code>accepted</code> · Readiness: <code>closed:accepted</code> · Autonomy: <code>human_direct</code></p></details>
 </header>
+
 <section>
 <h2>治理流程导航器</h2>
 <ol class="workflow"><li class="workflow-step status-completed" data-status="completed"><span class="symbol" aria-hidden="true">✓</span><strong>1. 系统识别要求</strong><span class="state-text">已完成</span><p>适用规则和本次要求已由 AGM 引擎生成。</p><details><summary>内部阶段与依据</summary><p>Resolve, Compile</p><pre>[
   {
     &quot;kind&quot;: &quot;state_transition&quot;,
-    &quot;object_id&quot;: &quot;transition-770979f456264f10b06671a70f37917e&quot;,
+    &quot;object_id&quot;: &quot;transition-2f28d3319ff9522792e471454f352d67&quot;,
     &quot;relationship&quot;: &quot;primary:resolve_policy&quot;
   },
   {
     &quot;kind&quot;: &quot;state_transition&quot;,
-    &quot;object_id&quot;: &quot;transition-2fa26aada3a649cb929bbf6d289c7b3c&quot;,
+    &quot;object_id&quot;: &quot;transition-7161cae53aba5f12ab94b144f737f20e&quot;,
     &quot;relationship&quot;: &quot;primary:compile_obligations&quot;
   },
   {
@@ -96,54 +98,54 @@ code { overflow-wrap: anywhere; }
 ]</pre></details></li><li class="workflow-step status-completed" data-status="completed"><span class="symbol" aria-hidden="true">✓</span><strong>2. 贡献者准备材料</strong><span class="state-text">已完成</span><p>本次所需材料已提交到后续流程。</p><details><summary>内部阶段与依据</summary><p>Bind, Repair</p><pre>[
   {
     &quot;kind&quot;: &quot;state_transition&quot;,
-    &quot;object_id&quot;: &quot;transition-664133fde6704c6e9d17bbdaf23d11c7&quot;,
+    &quot;object_id&quot;: &quot;transition-66c206cc530755f99b7f7f5300c615ee&quot;,
     &quot;relationship&quot;: &quot;primary:mark_evidence_state&quot;
   },
   {
     &quot;kind&quot;: &quot;evidence&quot;,
-    &quot;object_id&quot;: &quot;evidence-c701f892009b4bd3af410126d26dc906&quot;,
+    &quot;object_id&quot;: &quot;evidence-41ca16ed791f5f6e8a57ddec6ac09610&quot;,
     &quot;relationship&quot;: &quot;binding_or_retention&quot;
   },
   {
     &quot;kind&quot;: &quot;evidence&quot;,
-    &quot;object_id&quot;: &quot;evidence-2e006840991340b0a0e8000551050a08&quot;,
+    &quot;object_id&quot;: &quot;evidence-661f729aab135d11a9828ba5ea54ea26&quot;,
     &quot;relationship&quot;: &quot;binding_or_retention&quot;
   }
 ]</pre></details></li><li class="workflow-step status-skipped" data-status="skipped"><span class="symbol" aria-hidden="true">—</span><strong>3. 负责人确认</strong><span class="state-text">本次不要求</span><p>当前义务集合不要求负责人确认。</p><details><summary>内部阶段与依据</summary><p>Attest</p><pre>[]</pre></details></li><li class="workflow-step status-completed" data-status="completed"><span class="symbol" aria-hidden="true">✓</span><strong>4. 维护者检查</strong><span class="state-text">已完成</span><p>维护者核验阶段已完成；这不等于接受贡献。</p><details><summary>内部阶段与依据</summary><p>Verify, Repair</p><pre>[
   {
     &quot;kind&quot;: &quot;state_transition&quot;,
-    &quot;object_id&quot;: &quot;transition-8287b4c003774148a51aace269665704&quot;,
+    &quot;object_id&quot;: &quot;transition-d9b41a0725a359e5831cbf8b249403f4&quot;,
     &quot;relationship&quot;: &quot;primary:submit_for_verification&quot;
   },
   {
     &quot;kind&quot;: &quot;state_transition&quot;,
-    &quot;object_id&quot;: &quot;transition-603ee3961f63421480424bafeb2f32b2&quot;,
+    &quot;object_id&quot;: &quot;transition-68be84dfe5ce5b40aa18a11a6b588ed2&quot;,
     &quot;relationship&quot;: &quot;primary:verify_evidence&quot;
   },
   {
     &quot;kind&quot;: &quot;maintainer_verification&quot;,
-    &quot;object_id&quot;: &quot;verification-e46fb7ce77b14baea2d7ce2a24e33238&quot;,
+    &quot;object_id&quot;: &quot;verification-ae0eb67a5165516eb4198b4c824e96a2&quot;,
     &quot;relationship&quot;: &quot;verified&quot;
   }
 ]</pre></details></li><li class="workflow-step status-completed" data-status="completed"><span class="symbol" aria-hidden="true">✓</span><strong>5. 人类维护者最终决定</strong><span class="state-text">已完成</span><p>已记录人类维护者最终决定和关闭信息。</p><details><summary>内部阶段与依据</summary><p>Decide, Record</p><pre>[
   {
     &quot;kind&quot;: &quot;state_transition&quot;,
-    &quot;object_id&quot;: &quot;transition-833d4aee3f724954813bb730c3533d62&quot;,
+    &quot;object_id&quot;: &quot;transition-ba3e2834196459f189cf12bd8df834dd&quot;,
     &quot;relationship&quot;: &quot;primary:mark_ready&quot;
   },
   {
     &quot;kind&quot;: &quot;state_transition&quot;,
-    &quot;object_id&quot;: &quot;transition-f5f3fe6b205f4e67907e1ddfb7230d2d&quot;,
+    &quot;object_id&quot;: &quot;transition-1e62c0ace9c05e429fa016aebd71c10a&quot;,
     &quot;relationship&quot;: &quot;primary:decide_accept&quot;
   },
   {
     &quot;kind&quot;: &quot;final_decision&quot;,
-    &quot;object_id&quot;: &quot;decision-1964e79b65b547b6a648f6e5ad49ef6f&quot;,
+    &quot;object_id&quot;: &quot;decision-46db7a481b1c5e92818b386121fc0b71&quot;,
     &quot;relationship&quot;: &quot;accept&quot;
   },
   {
     &quot;kind&quot;: &quot;closure_receipt&quot;,
-    &quot;object_id&quot;: &quot;closure-5c842d8e02784af697001aa957f984a2&quot;,
+    &quot;object_id&quot;: &quot;closure-47ec43584583509ca5783fff53e24de9&quot;,
     &quot;relationship&quot;: &quot;closure&quot;
   }
 ]</pre></details></li></ol>
@@ -160,7 +162,7 @@ code { overflow-wrap: anywhere; }
   ],
   &quot;interaction_rules&quot;: [],
   &quot;evidence_ids&quot;: [
-    &quot;evidence-c701f892009b4bd3af410126d26dc906&quot;
+    &quot;evidence-41ca16ed791f5f6e8a57ddec6ac09610&quot;
   ],
   &quot;binding_fingerprints&quot;: [
     &quot;91d4654f97e096f13211d6f1e50de376057d725b7eccdf4980c366131a4e54a2&quot;
@@ -171,6 +173,8 @@ code { overflow-wrap: anywhere; }
   &quot;raw_status&quot;: &quot;verified&quot;,
   &quot;material_status&quot;: &quot;verified&quot;,
   &quot;workflow_status&quot;: &quot;completed&quot;,
+  &quot;blocking_requirement&quot;: true,
+  &quot;currently_blocks_progression&quot;: false,
   &quot;traceability&quot;: [
     {
       &quot;kind&quot;: &quot;compiled_obligation&quot;,
@@ -184,7 +188,7 @@ code { overflow-wrap: anywhere; }
     },
     {
       &quot;kind&quot;: &quot;evidence&quot;,
-      &quot;object_id&quot;: &quot;evidence-c701f892009b4bd3af410126d26dc906&quot;,
+      &quot;object_id&quot;: &quot;evidence-41ca16ed791f5f6e8a57ddec6ac09610&quot;,
       &quot;relationship&quot;: &quot;observed&quot;
     }
   ]
@@ -195,7 +199,7 @@ code { overflow-wrap: anywhere; }
   ],
   &quot;interaction_rules&quot;: [],
   &quot;evidence_ids&quot;: [
-    &quot;evidence-2e006840991340b0a0e8000551050a08&quot;
+    &quot;evidence-661f729aab135d11a9828ba5ea54ea26&quot;
   ],
   &quot;binding_fingerprints&quot;: [
     &quot;91d4654f97e096f13211d6f1e50de376057d725b7eccdf4980c366131a4e54a2&quot;
@@ -206,6 +210,8 @@ code { overflow-wrap: anywhere; }
   &quot;raw_status&quot;: &quot;verified&quot;,
   &quot;material_status&quot;: &quot;verified&quot;,
   &quot;workflow_status&quot;: &quot;completed&quot;,
+  &quot;blocking_requirement&quot;: true,
+  &quot;currently_blocks_progression&quot;: false,
   &quot;traceability&quot;: [
     {
       &quot;kind&quot;: &quot;compiled_obligation&quot;,
@@ -219,7 +225,7 @@ code { overflow-wrap: anywhere; }
     },
     {
       &quot;kind&quot;: &quot;evidence&quot;,
-      &quot;object_id&quot;: &quot;evidence-2e006840991340b0a0e8000551050a08&quot;,
+      &quot;object_id&quot;: &quot;evidence-661f729aab135d11a9828ba5ea54ea26&quot;,
       &quot;relationship&quot;: &quot;observed&quot;
     }
   ]
@@ -240,7 +246,55 @@ code { overflow-wrap: anywhere; }
     &quot;relationship&quot;: &quot;delegation_definition&quot;
   }
 ]</pre></details></section>
-<section class="preview" id="action-preview"><h2>操作前预览</h2><p>你准备执行：<strong>提交人类最终接受决定</strong></p><p>当前角色和案例状态允许生成此操作计划。</p><ul><li><strong>案例状态</strong>: 等待人类维护者最终决定 → 人类维护者已接受并关闭<br>案例 accepted 并生成 closure receipt；该动作不是自动合并。</li></ul><p><strong>保留的未受影响材料：</strong>evidence-c701f892009b4bd3af410126d26dc906, evidence-2e006840991340b0a0e8000551050a08</p><p><strong>将失效的材料：</strong>无</p><p><strong>将失效的负责人确认：</strong>无</p><p><strong>责任方变化：</strong>人类维护者 → 流程已结束</p><p><strong>流程位置变化：</strong>human_final_decision → human_final_decision</p><p><strong>预计新增记录：</strong>state_transition、final_decision、closure_receipt</p><p><strong>后续仍需负责人确认：</strong>否；<strong>后续仍需维护者检查：</strong>否；<strong>最终接受是否已经发生：</strong>是</p><p><strong>此预览本身不会修改案例：</strong>是</p></section>
+<section class="preview" id="action-preview"><h2>操作前预览</h2><p>你准备执行：<strong>提交人类最终接受决定</strong></p><p>当前角色和案例状态允许生成此操作计划。</p><p><strong>将处理：</strong>无</p><ul><li><strong>案例流程</strong>: 等待人类维护者最终决定 → 人类维护者已接受并关闭<br>案例 accepted 并生成 closure receipt；该动作不是自动合并。</li></ul><p><strong>保留的未受影响材料：</strong>变更文件清单、修改说明</p><p><strong>将失效：</strong>无</p><p><strong>责任方变化：</strong>人类维护者 → 流程已结束</p><p><strong>流程位置变化：</strong>人类维护者最终决定 → 人类维护者最终决定</p><p><strong>执行后：</strong></p><ul><li>当前责任方将转交给流程已结束。</li><li>案例将进入“人类维护者最终决定”。</li></ul><p><strong>后续仍需负责人确认：</strong>否；<strong>后续仍需维护者检查：</strong>否；<strong>最终接受是否已经发生：</strong>是</p><p><strong>此预览本身不会修改案例：</strong>是</p><details><summary>技术操作、内部 ID 与原始状态</summary><pre>{
+  &quot;operation&quot;: &quot;decide_accept&quot;,
+  &quot;source_state&quot;: &quot;ready_for_human_decision&quot;,
+  &quot;target_state&quot;: &quot;accepted&quot;,
+  &quot;effects&quot;: [
+    {
+      &quot;target&quot;: &quot;案例状态&quot;,
+      &quot;before&quot;: &quot;ready_for_human_decision&quot;,
+      &quot;after&quot;: &quot;accepted&quot;,
+      &quot;explanation&quot;: &quot;案例 accepted 并生成 closure receipt；该动作不是自动合并。&quot;,
+      &quot;source_object_ids&quot;: [
+        &quot;transition-ba3e2834196459f189cf12bd8df834dd&quot;
+      ]
+    }
+  ],
+  &quot;affected_obligation_ids&quot;: [],
+  &quot;retained_evidence_ids&quot;: [
+    &quot;evidence-41ca16ed791f5f6e8a57ddec6ac09610&quot;,
+    &quot;evidence-661f729aab135d11a9828ba5ea54ea26&quot;
+  ],
+  &quot;invalidated_attestation_ids&quot;: [],
+  &quot;invalidated_evidence_ids&quot;: [],
+  &quot;processed_objects&quot;: [],
+  &quot;workflow_step_before&quot;: &quot;human_final_decision&quot;,
+  &quot;workflow_step_after&quot;: &quot;human_final_decision&quot;,
+  &quot;creates_records&quot;: [
+    &quot;state_transition&quot;,
+    &quot;final_decision&quot;,
+    &quot;closure_receipt&quot;
+  ],
+  &quot;preview_fingerprint&quot;: &quot;2a014cb9eef33a65ece8483c33ba0139875ec110f763de906f27c3f589f5d5c9&quot;,
+  &quot;traceability&quot;: [
+    {
+      &quot;kind&quot;: &quot;permission_rule&quot;,
+      &quot;object_id&quot;: &quot;maintainer:decide_accept&quot;,
+      &quot;relationship&quot;: &quot;authority&quot;
+    },
+    {
+      &quot;kind&quot;: &quot;governance_case&quot;,
+      &quot;object_id&quot;: &quot;human-final-closure&quot;,
+      &quot;relationship&quot;: &quot;source_state&quot;
+    },
+    {
+      &quot;kind&quot;: &quot;state_machine_rule&quot;,
+      &quot;object_id&quot;: &quot;ready_for_human_decision:decide_accept:accepted&quot;,
+      &quot;relationship&quot;: &quot;transition_plan&quot;
+    }
+  ]
+}</pre></details></section>
 <section>
 <h2>当前相关操作</h2>
 <p>这里列出合法选择及影响，不替维护者作决定。后端仍会重新检查角色、状态和对象范围。</p>
@@ -750,7 +804,7 @@ code { overflow-wrap: anywhere; }
   ],
   &quot;evidence_records&quot;: [
     {
-      &quot;id&quot;: &quot;evidence-c701f892009b4bd3af410126d26dc906&quot;,
+      &quot;id&quot;: &quot;evidence-41ca16ed791f5f6e8a57ddec6ac09610&quot;,
       &quot;obligation_ids&quot;: [
         &quot;O-CHANGED-FILES&quot;
       ],
@@ -780,7 +834,7 @@ code { overflow-wrap: anywhere; }
       &quot;invalid_reasons&quot;: []
     },
     {
-      &quot;id&quot;: &quot;evidence-2e006840991340b0a0e8000551050a08&quot;,
+      &quot;id&quot;: &quot;evidence-661f729aab135d11a9828ba5ea54ea26&quot;,
       &quot;obligation_ids&quot;: [
         &quot;O-SUMMARY&quot;
       ],
@@ -811,7 +865,7 @@ code { overflow-wrap: anywhere; }
   &quot;attestation_records&quot;: [],
   &quot;verification_records&quot;: [
     {
-      &quot;id&quot;: &quot;verification-e46fb7ce77b14baea2d7ce2a24e33238&quot;,
+      &quot;id&quot;: &quot;verification-ae0eb67a5165516eb4198b4c824e96a2&quot;,
       &quot;actor&quot;: &quot;verifier-1&quot;,
       &quot;role&quot;: &quot;maintainer_verifier&quot;,
       &quot;timestamp&quot;: &quot;2026-07-26T00:20:00Z&quot;,
@@ -820,8 +874,8 @@ code { overflow-wrap: anywhere; }
         &quot;O-SUMMARY&quot;
       ],
       &quot;evidence_ids&quot;: [
-        &quot;evidence-2e006840991340b0a0e8000551050a08&quot;,
-        &quot;evidence-c701f892009b4bd3af410126d26dc906&quot;
+        &quot;evidence-41ca16ed791f5f6e8a57ddec6ac09610&quot;,
+        &quot;evidence-661f729aab135d11a9828ba5ea54ea26&quot;
       ],
       &quot;outcome&quot;: &quot;verified&quot;,
       &quot;reason&quot;: &quot;Evidence independently checked.&quot;,
@@ -831,10 +885,11 @@ code { overflow-wrap: anywhere; }
   ],
   &quot;findings&quot;: [],
   &quot;repair_requests&quot;: [],
+  &quot;attempted_operations&quot;: [],
   &quot;contribution_fingerprint&quot;: &quot;91d4654f97e096f13211d6f1e50de376057d725b7eccdf4980c366131a4e54a2&quot;,
   &quot;policy_fingerprint&quot;: &quot;e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564&quot;,
   &quot;policy_snapshot&quot;: {
-    &quot;id&quot;: &quot;policy-c1d5986e6ced4d5c87fef963a94402e1&quot;,
+    &quot;id&quot;: &quot;policy-cab5ec65413651bfa0c4ef4b4abdf3b2&quot;,
     &quot;schema_version&quot;: &quot;agm.policy_snapshot/v0.2-dev&quot;,
     &quot;manifest_version&quot;: &quot;agm.manifest/v0.2-dev&quot;,
     &quot;base_commit&quot;: &quot;demo-base&quot;,
@@ -859,7 +914,7 @@ code { overflow-wrap: anywhere; }
   },
   &quot;transition_history&quot;: [
     {
-      &quot;id&quot;: &quot;transition-770979f456264f10b06671a70f37917e&quot;,
+      &quot;id&quot;: &quot;transition-2f28d3319ff9522792e471454f352d67&quot;,
       &quot;case_id&quot;: &quot;human-final-closure&quot;,
       &quot;actor&quot;: &quot;agm-engine&quot;,
       &quot;role&quot;: &quot;system&quot;,
@@ -868,12 +923,12 @@ code { overflow-wrap: anywhere; }
       &quot;action&quot;: &quot;resolve_policy&quot;,
       &quot;reason&quot;: &quot;Resolved canonical policy against the contribution.&quot;,
       &quot;related_object_ids&quot;: [
-        &quot;policy-c1d5986e6ced4d5c87fef963a94402e1&quot;
+        &quot;policy-cab5ec65413651bfa0c4ef4b4abdf3b2&quot;
       ],
       &quot;timestamp&quot;: &quot;2026-07-26T00:00:00Z&quot;
     },
     {
-      &quot;id&quot;: &quot;transition-2fa26aada3a649cb929bbf6d289c7b3c&quot;,
+      &quot;id&quot;: &quot;transition-7161cae53aba5f12ab94b144f737f20e&quot;,
       &quot;case_id&quot;: &quot;human-final-closure&quot;,
       &quot;actor&quot;: &quot;agm-engine&quot;,
       &quot;role&quot;: &quot;system&quot;,
@@ -888,7 +943,7 @@ code { overflow-wrap: anywhere; }
       &quot;timestamp&quot;: &quot;2026-07-26T00:00:00Z&quot;
     },
     {
-      &quot;id&quot;: &quot;transition-664133fde6704c6e9d17bbdaf23d11c7&quot;,
+      &quot;id&quot;: &quot;transition-66c206cc530755f99b7f7f5300c615ee&quot;,
       &quot;case_id&quot;: &quot;human-final-closure&quot;,
       &quot;actor&quot;: &quot;agm-engine&quot;,
       &quot;role&quot;: &quot;system&quot;,
@@ -903,7 +958,7 @@ code { overflow-wrap: anywhere; }
       &quot;timestamp&quot;: &quot;2026-07-26T00:00:00Z&quot;
     },
     {
-      &quot;id&quot;: &quot;transition-8287b4c003774148a51aace269665704&quot;,
+      &quot;id&quot;: &quot;transition-d9b41a0725a359e5831cbf8b249403f4&quot;,
       &quot;case_id&quot;: &quot;human-final-closure&quot;,
       &quot;actor&quot;: &quot;contributor-agent&quot;,
       &quot;role&quot;: &quot;contributor_agent&quot;,
@@ -912,13 +967,13 @@ code { overflow-wrap: anywhere; }
       &quot;action&quot;: &quot;submit_for_verification&quot;,
       &quot;reason&quot;: &quot;Contributor submitted prepared evidence for maintainer verification.&quot;,
       &quot;related_object_ids&quot;: [
-        &quot;evidence-c701f892009b4bd3af410126d26dc906&quot;,
-        &quot;evidence-2e006840991340b0a0e8000551050a08&quot;
+        &quot;evidence-41ca16ed791f5f6e8a57ddec6ac09610&quot;,
+        &quot;evidence-661f729aab135d11a9828ba5ea54ea26&quot;
       ],
-      &quot;timestamp&quot;: &quot;2026-07-26T13:27:36Z&quot;
+      &quot;timestamp&quot;: &quot;2026-07-26T00:00:00Z&quot;
     },
     {
-      &quot;id&quot;: &quot;transition-603ee3961f63421480424bafeb2f32b2&quot;,
+      &quot;id&quot;: &quot;transition-68be84dfe5ce5b40aa18a11a6b588ed2&quot;,
       &quot;case_id&quot;: &quot;human-final-closure&quot;,
       &quot;actor&quot;: &quot;verifier-1&quot;,
       &quot;role&quot;: &quot;maintainer_verifier&quot;,
@@ -927,12 +982,12 @@ code { overflow-wrap: anywhere; }
       &quot;action&quot;: &quot;verify_evidence&quot;,
       &quot;reason&quot;: &quot;Evidence independently checked.&quot;,
       &quot;related_object_ids&quot;: [
-        &quot;verification-e46fb7ce77b14baea2d7ce2a24e33238&quot;
+        &quot;verification-ae0eb67a5165516eb4198b4c824e96a2&quot;
       ],
       &quot;timestamp&quot;: &quot;2026-07-26T00:20:00Z&quot;
     },
     {
-      &quot;id&quot;: &quot;transition-833d4aee3f724954813bb730c3533d62&quot;,
+      &quot;id&quot;: &quot;transition-ba3e2834196459f189cf12bd8df834dd&quot;,
       &quot;case_id&quot;: &quot;human-final-closure&quot;,
       &quot;actor&quot;: &quot;agm-engine&quot;,
       &quot;role&quot;: &quot;system&quot;,
@@ -941,12 +996,12 @@ code { overflow-wrap: anywhere; }
       &quot;action&quot;: &quot;mark_ready&quot;,
       &quot;reason&quot;: &quot;All blocking obligations are satisfied or verified; the case is ready for an authorized human decision, not accepted.&quot;,
       &quot;related_object_ids&quot;: [
-        &quot;verification-e46fb7ce77b14baea2d7ce2a24e33238&quot;
+        &quot;verification-ae0eb67a5165516eb4198b4c824e96a2&quot;
       ],
       &quot;timestamp&quot;: &quot;2026-07-26T00:20:00Z&quot;
     },
     {
-      &quot;id&quot;: &quot;transition-f5f3fe6b205f4e67907e1ddfb7230d2d&quot;,
+      &quot;id&quot;: &quot;transition-1e62c0ace9c05e429fa016aebd71c10a&quot;,
       &quot;case_id&quot;: &quot;human-final-closure&quot;,
       &quot;actor&quot;: &quot;human-maintainer&quot;,
       &quot;role&quot;: &quot;maintainer&quot;,
@@ -955,13 +1010,13 @@ code { overflow-wrap: anywhere; }
       &quot;action&quot;: &quot;decide_accept&quot;,
       &quot;reason&quot;: &quot;Human maintainer accepted after independent review.&quot;,
       &quot;related_object_ids&quot;: [
-        &quot;decision-1964e79b65b547b6a648f6e5ad49ef6f&quot;
+        &quot;decision-46db7a481b1c5e92818b386121fc0b71&quot;
       ],
       &quot;timestamp&quot;: &quot;2026-07-26T00:30:00Z&quot;
     }
   ],
   &quot;final_decision&quot;: {
-    &quot;id&quot;: &quot;decision-1964e79b65b547b6a648f6e5ad49ef6f&quot;,
+    &quot;id&quot;: &quot;decision-46db7a481b1c5e92818b386121fc0b71&quot;,
     &quot;actor&quot;: &quot;human-maintainer&quot;,
     &quot;role&quot;: &quot;maintainer&quot;,
     &quot;timestamp&quot;: &quot;2026-07-26T00:30:00Z&quot;,
@@ -971,13 +1026,13 @@ code { overflow-wrap: anywhere; }
     &quot;unresolved_exception_ids&quot;: []
   },
   &quot;closure_receipt&quot;: {
-    &quot;id&quot;: &quot;closure-5c842d8e02784af697001aa957f984a2&quot;,
+    &quot;id&quot;: &quot;closure-47ec43584583509ca5783fff53e24de9&quot;,
     &quot;case_id&quot;: &quot;human-final-closure&quot;,
-    &quot;created_at&quot;: &quot;2026-07-26T13:27:36Z&quot;,
+    &quot;created_at&quot;: &quot;2026-07-26T00:00:00Z&quot;,
     &quot;policy_fingerprint&quot;: &quot;e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564&quot;,
     &quot;contribution_fingerprint&quot;: &quot;91d4654f97e096f13211d6f1e50de376057d725b7eccdf4980c366131a4e54a2&quot;,
     &quot;final_state&quot;: &quot;accepted&quot;,
-    &quot;final_decision_id&quot;: &quot;decision-1964e79b65b547b6a648f6e5ad49ef6f&quot;,
+    &quot;final_decision_id&quot;: &quot;decision-46db7a481b1c5e92818b386121fc0b71&quot;,
     &quot;matched_rule_ids&quot;: [
       &quot;documentation-low&quot;
     ],
@@ -986,16 +1041,16 @@ code { overflow-wrap: anywhere; }
       &quot;O-SUMMARY&quot;: &quot;verified&quot;
     },
     &quot;evidence_ids&quot;: [
-      &quot;evidence-2e006840991340b0a0e8000551050a08&quot;,
-      &quot;evidence-c701f892009b4bd3af410126d26dc906&quot;
+      &quot;evidence-41ca16ed791f5f6e8a57ddec6ac09610&quot;,
+      &quot;evidence-661f729aab135d11a9828ba5ea54ea26&quot;
     ],
     &quot;attestation_ids&quot;: [],
     &quot;verification_ids&quot;: [
-      &quot;verification-e46fb7ce77b14baea2d7ce2a24e33238&quot;
+      &quot;verification-ae0eb67a5165516eb4198b4c824e96a2&quot;
     ],
     &quot;repair_request_ids&quot;: [],
     &quot;unresolved_exception_ids&quot;: [],
-    &quot;transition_log_hash&quot;: &quot;313515bd0f03fa25f23fbb026916f4234e610c64af4f9df4b627dc0074b499d3&quot;
+    &quot;transition_log_hash&quot;: &quot;07676e66309a24a6f43a711a4b08b67bdb2c870365440b46b21248eaf369d04b&quot;
   },
   &quot;policy_migration_diagnostic&quot;: {
     &quot;case_id&quot;: &quot;human-final-closure&quot;,

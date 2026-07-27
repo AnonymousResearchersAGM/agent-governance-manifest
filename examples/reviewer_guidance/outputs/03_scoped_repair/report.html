@@ -36,6 +36,7 @@ input, select, textarea { box-sizing: border-box; width: 100%; padding: .6rem; m
 button { padding: .65rem .9rem; margin-top: .8rem; cursor: pointer; }
 button.danger { background: #8c2818; color: white; border: 0; border-radius: 5px; margin-right: .6rem; }
 .preview { border: 3px solid #9b6a00; }
+.rejected-notice { border: 3px solid #9b3d23; }
 .authority { border-left: 7px solid #9b6a00; }
 details { margin-top: .45rem; }
 summary { cursor: pointer; font-weight: 700; }
@@ -65,17 +66,18 @@ code { overflow-wrap: anywhere; }
 <p><strong>为什么现在轮到这一方：</strong>受影响材料已补充或仍然有效；当前只需重新检查指定修复范围。</p>
 <details><summary>技术状态</summary><p>State: <code>resubmitted</code> · Readiness: <code>repair_required</code> · Autonomy: <code>supervised_agent</code></p></details>
 </header>
+
 <section>
 <h2>治理流程导航器</h2>
 <ol class="workflow"><li class="workflow-step status-completed" data-status="completed"><span class="symbol" aria-hidden="true">✓</span><strong>1. 系统识别要求</strong><span class="state-text">已完成</span><p>适用规则和本次要求已由 AGM 引擎生成。</p><details><summary>内部阶段与依据</summary><p>Resolve, Compile</p><pre>[
   {
     &quot;kind&quot;: &quot;state_transition&quot;,
-    &quot;object_id&quot;: &quot;transition-df8cbc8f795c40169d2dabf865ef01b8&quot;,
+    &quot;object_id&quot;: &quot;transition-cb586d60710a5ea88000e4b20ad4b0fc&quot;,
     &quot;relationship&quot;: &quot;primary:resolve_policy&quot;
   },
   {
     &quot;kind&quot;: &quot;state_transition&quot;,
-    &quot;object_id&quot;: &quot;transition-3bad8885dbb447e4a3f758d692918122&quot;,
+    &quot;object_id&quot;: &quot;transition-a9c4464a89f4597a83b2ec787faf4b9f&quot;,
     &quot;relationship&quot;: &quot;primary:compile_obligations&quot;
   },
   {
@@ -101,64 +103,64 @@ code { overflow-wrap: anywhere; }
 ]</pre></details></li><li class="workflow-step status-completed" data-status="completed"><span class="symbol" aria-hidden="true">✓</span><strong>2. 贡献者准备材料</strong><span class="state-text">已完成</span><p>指定范围已补交并具备可检查材料，未受影响材料继续保留。</p><details><summary>内部阶段与依据</summary><p>Bind, Repair</p><pre>[
   {
     &quot;kind&quot;: &quot;state_transition&quot;,
-    &quot;object_id&quot;: &quot;transition-92734d164caa4345807392f7c0026517&quot;,
+    &quot;object_id&quot;: &quot;transition-ecaa52c8137a5e78b1a666f080861a2c&quot;,
     &quot;relationship&quot;: &quot;primary:mark_evidence_state&quot;
   },
   {
     &quot;kind&quot;: &quot;state_transition&quot;,
-    &quot;object_id&quot;: &quot;transition-edb55a1ee0c543c490e4363341dfcd4e&quot;,
+    &quot;object_id&quot;: &quot;transition-96fdfbcc786957ca913e285c9e517b18&quot;,
     &quot;relationship&quot;: &quot;primary:resubmit&quot;
   },
   {
     &quot;kind&quot;: &quot;evidence&quot;,
-    &quot;object_id&quot;: &quot;evidence-3c0c167445a143248e0fa0f71bb423b6&quot;,
+    &quot;object_id&quot;: &quot;evidence-78d4d1c1ff665bb4808d6623ad98935f&quot;,
     &quot;relationship&quot;: &quot;binding_or_retention&quot;
   },
   {
     &quot;kind&quot;: &quot;evidence&quot;,
-    &quot;object_id&quot;: &quot;evidence-52d1959b65174b11a46526b31074ae80&quot;,
+    &quot;object_id&quot;: &quot;evidence-7525c42fd5d650df850b5f6ebf095485&quot;,
     &quot;relationship&quot;: &quot;binding_or_retention&quot;
   },
   {
     &quot;kind&quot;: &quot;evidence&quot;,
-    &quot;object_id&quot;: &quot;evidence-4544e6c323e945d7b96b3d602e6856d5&quot;,
+    &quot;object_id&quot;: &quot;evidence-2cb3732e2b49561598dc8daee791f8d9&quot;,
     &quot;relationship&quot;: &quot;binding_or_retention&quot;
   },
   {
     &quot;kind&quot;: &quot;repair_request&quot;,
-    &quot;object_id&quot;: &quot;repair-fcae5dc548bb4440848e80210d229a8e&quot;,
+    &quot;object_id&quot;: &quot;repair-cb5bf46ed270569b89e88c9153331193&quot;,
     &quot;relationship&quot;: &quot;repair_scope&quot;
   }
 ]</pre></details></li><li class="workflow-step status-skipped" data-status="skipped"><span class="symbol" aria-hidden="true">—</span><strong>3. 负责人确认</strong><span class="state-text">本次不要求</span><p>当前义务集合不要求负责人确认。</p><details><summary>内部阶段与依据</summary><p>Attest</p><pre>[]</pre></details></li><li class="workflow-step status-current" data-status="current"><span class="symbol" aria-hidden="true">●</span><strong>4. 维护者检查</strong><span class="state-text">当前阶段</span><p>当前只重新检查指定修复范围；未受影响的检查结果保留。</p><details><summary>内部阶段与依据</summary><p>Verify, Repair</p><pre>[
   {
     &quot;kind&quot;: &quot;state_transition&quot;,
-    &quot;object_id&quot;: &quot;transition-3b0eae34c8b44a1bb35fcf073cf81fab&quot;,
+    &quot;object_id&quot;: &quot;transition-f6f404c026065d37b2d9aac0badf72b4&quot;,
     &quot;relationship&quot;: &quot;primary:submit_for_verification&quot;
   },
   {
     &quot;kind&quot;: &quot;state_transition&quot;,
-    &quot;object_id&quot;: &quot;transition-f19842708d3b47d8961be953f6b1c356&quot;,
+    &quot;object_id&quot;: &quot;transition-54b77b6cbf5c56eeb0affb40899358c3&quot;,
     &quot;relationship&quot;: &quot;primary:verify_evidence&quot;
   },
   {
     &quot;kind&quot;: &quot;state_transition&quot;,
-    &quot;object_id&quot;: &quot;transition-634a529f8c364e39a34145a6ea0dda6c&quot;,
+    &quot;object_id&quot;: &quot;transition-a4cf31c3da0a5f02ae23162314d82686&quot;,
     &quot;relationship&quot;: &quot;primary:request_repair&quot;
   },
   {
     &quot;kind&quot;: &quot;maintainer_verification&quot;,
-    &quot;object_id&quot;: &quot;verification-0984956c115c4a1b8d1332b28a2e2387&quot;,
+    &quot;object_id&quot;: &quot;verification-87a29324d7bf5adba4143d896939d000&quot;,
     &quot;relationship&quot;: &quot;verified&quot;
   },
   {
     &quot;kind&quot;: &quot;finding&quot;,
-    &quot;object_id&quot;: &quot;finding-3c07f0079a2a40e9879548d26cf01ca2&quot;,
+    &quot;object_id&quot;: &quot;finding-998704f5c08b576f882422ff5d00c5cd&quot;,
     &quot;relationship&quot;: &quot;open&quot;
   }
 ]</pre></details></li><li class="workflow-step status-pending" data-status="pending"><span class="symbol" aria-hidden="true">○</span><strong>5. 人类维护者最终决定</strong><span class="state-text">尚未开始</span><p>前序治理要求完成后才进入最终决定。</p><details><summary>内部阶段与依据</summary><p>Decide, Record</p><pre>[
   {
     &quot;kind&quot;: &quot;state_transition&quot;,
-    &quot;object_id&quot;: &quot;transition-40a765972f2f4680914c3d11ebf3c035&quot;,
+    &quot;object_id&quot;: &quot;transition-8c4bc0d142ab58e48da5119eee7d1490&quot;,
     &quot;relationship&quot;: &quot;primary:mark_ready&quot;
   }
 ]</pre></details></li></ol>
@@ -175,19 +177,21 @@ code { overflow-wrap: anywhere; }
   ],
   &quot;interaction_rules&quot;: [],
   &quot;evidence_ids&quot;: [
-    &quot;evidence-3c0c167445a143248e0fa0f71bb423b6&quot;
+    &quot;evidence-78d4d1c1ff665bb4808d6623ad98935f&quot;
   ],
   &quot;binding_fingerprints&quot;: [
     &quot;9fe19abd52f6e8e2b7fbb8b2f8ed283cb530ad8698ef8cf7c4411fc6fd3fb1d8&quot;
   ],
   &quot;finding_ids&quot;: [
-    &quot;finding-3c07f0079a2a40e9879548d26cf01ca2&quot;
+    &quot;finding-998704f5c08b576f882422ff5d00c5cd&quot;
   ],
   &quot;reference_english&quot;: &quot;Record the declared action, permissions, supervision, and delegation scope.&quot;,
   &quot;observed_raw&quot;: &quot;valid material present; open repair awaits revalidation&quot;,
   &quot;raw_status&quot;: &quot;satisfied&quot;,
   &quot;material_status&quot;: &quot;provided&quot;,
   &quot;workflow_status&quot;: &quot;awaiting_revalidation&quot;,
+  &quot;blocking_requirement&quot;: true,
+  &quot;currently_blocks_progression&quot;: true,
   &quot;traceability&quot;: [
     {
       &quot;kind&quot;: &quot;compiled_obligation&quot;,
@@ -201,12 +205,12 @@ code { overflow-wrap: anywhere; }
     },
     {
       &quot;kind&quot;: &quot;evidence&quot;,
-      &quot;object_id&quot;: &quot;evidence-3c0c167445a143248e0fa0f71bb423b6&quot;,
+      &quot;object_id&quot;: &quot;evidence-78d4d1c1ff665bb4808d6623ad98935f&quot;,
       &quot;relationship&quot;: &quot;observed&quot;
     },
     {
       &quot;kind&quot;: &quot;finding&quot;,
-      &quot;object_id&quot;: &quot;finding-3c07f0079a2a40e9879548d26cf01ca2&quot;,
+      &quot;object_id&quot;: &quot;finding-998704f5c08b576f882422ff5d00c5cd&quot;,
       &quot;relationship&quot;: &quot;diagnostic&quot;
     }
   ]
@@ -217,7 +221,7 @@ code { overflow-wrap: anywhere; }
   ],
   &quot;interaction_rules&quot;: [],
   &quot;evidence_ids&quot;: [
-    &quot;evidence-52d1959b65174b11a46526b31074ae80&quot;
+    &quot;evidence-7525c42fd5d650df850b5f6ebf095485&quot;
   ],
   &quot;binding_fingerprints&quot;: [
     &quot;9fe19abd52f6e8e2b7fbb8b2f8ed283cb530ad8698ef8cf7c4411fc6fd3fb1d8&quot;
@@ -228,6 +232,8 @@ code { overflow-wrap: anywhere; }
   &quot;raw_status&quot;: &quot;satisfied&quot;,
   &quot;material_status&quot;: &quot;provided&quot;,
   &quot;workflow_status&quot;: &quot;completed&quot;,
+  &quot;blocking_requirement&quot;: true,
+  &quot;currently_blocks_progression&quot;: false,
   &quot;traceability&quot;: [
     {
       &quot;kind&quot;: &quot;compiled_obligation&quot;,
@@ -241,7 +247,7 @@ code { overflow-wrap: anywhere; }
     },
     {
       &quot;kind&quot;: &quot;evidence&quot;,
-      &quot;object_id&quot;: &quot;evidence-52d1959b65174b11a46526b31074ae80&quot;,
+      &quot;object_id&quot;: &quot;evidence-7525c42fd5d650df850b5f6ebf095485&quot;,
       &quot;relationship&quot;: &quot;observed&quot;
     }
   ]
@@ -252,7 +258,7 @@ code { overflow-wrap: anywhere; }
   ],
   &quot;interaction_rules&quot;: [],
   &quot;evidence_ids&quot;: [
-    &quot;evidence-4544e6c323e945d7b96b3d602e6856d5&quot;
+    &quot;evidence-2cb3732e2b49561598dc8daee791f8d9&quot;
   ],
   &quot;binding_fingerprints&quot;: [
     &quot;9fe19abd52f6e8e2b7fbb8b2f8ed283cb530ad8698ef8cf7c4411fc6fd3fb1d8&quot;
@@ -263,6 +269,8 @@ code { overflow-wrap: anywhere; }
   &quot;raw_status&quot;: &quot;satisfied&quot;,
   &quot;material_status&quot;: &quot;provided&quot;,
   &quot;workflow_status&quot;: &quot;completed&quot;,
+  &quot;blocking_requirement&quot;: true,
+  &quot;currently_blocks_progression&quot;: false,
   &quot;traceability&quot;: [
     {
       &quot;kind&quot;: &quot;compiled_obligation&quot;,
@@ -276,18 +284,36 @@ code { overflow-wrap: anywhere; }
     },
     {
       &quot;kind&quot;: &quot;evidence&quot;,
-      &quot;object_id&quot;: &quot;evidence-4544e6c323e945d7b96b3d602e6856d5&quot;,
+      &quot;object_id&quot;: &quot;evidence-2cb3732e2b49561598dc8daee791f8d9&quot;,
       &quot;relationship&quot;: &quot;observed&quot;
     }
   ]
 }</pre></details></td></tr></tbody>
 </table>
 </section>
-<section><h2>变化影响声明</h2><p><strong>本次变化被声明为：</strong>未检测到贡献指纹变化</p><p><strong>声明者：</strong>contributor-agent</p><p><strong>声明理由：</strong>Wording clarification does not change contribution behavior.</p><p><strong>尚需维护者核验：</strong>是</p><p><strong>受影响：</strong>智能体行动与委派说明</p><p><strong>未受影响：</strong>变更文件清单、修改说明</p><details><summary>材料保留、失效和原始依据</summary><pre>{
+<section><h2>变化影响声明</h2><p><strong>本次变化被声明为：</strong>未检测到贡献指纹变化</p><p><strong>声明者：</strong>contributor-agent</p><p><strong>声明理由：</strong>本次只澄清文字表述，不改变贡献行为。</p><p><strong>尚需维护者核验：</strong>是</p><p><strong>受影响：</strong>智能体行动与委派说明</p><p><strong>未受影响：</strong>变更文件清单、修改说明</p><details><summary>材料保留、失效和原始依据</summary><pre>{
   &quot;classification&quot;: &quot;no_material_change&quot;,
   &quot;classification_label&quot;: &quot;未检测到贡献指纹变化&quot;,
   &quot;declared_by&quot;: &quot;contributor-agent&quot;,
-  &quot;reason&quot;: &quot;Wording clarification does not change contribution behavior.&quot;,
+  &quot;reason&quot;: &quot;本次只澄清文字表述，不改变贡献行为。&quot;,
+  &quot;reason_presentation&quot;: {
+    &quot;reason_code&quot;: &quot;wording_only_clarification&quot;,
+    &quot;display_plain&quot;: &quot;本次只澄清文字表述，不改变贡献行为。&quot;,
+    &quot;source_english&quot;: &quot;Wording clarification does not change contribution behavior.&quot;,
+    &quot;source_code&quot;: &quot;wording_only_clarification&quot;,
+    &quot;trace_refs&quot;: [
+      {
+        &quot;kind&quot;: &quot;repair_request&quot;,
+        &quot;object_id&quot;: &quot;repair-cb5bf46ed270569b89e88c9153331193&quot;,
+        &quot;relationship&quot;: &quot;source&quot;
+      },
+      {
+        &quot;kind&quot;: &quot;resubmission_attempt&quot;,
+        &quot;object_id&quot;: &quot;attempt-5edb54f0dd405c4bbe986bdc73db8b5a&quot;,
+        &quot;relationship&quot;: &quot;materiality_declaration&quot;
+      }
+    ]
+  },
   &quot;affected_obligation_ids&quot;: [
     &quot;O-AGENT-SCOPE&quot;
   ],
@@ -303,8 +329,8 @@ code { overflow-wrap: anywhere; }
     &quot;修改说明&quot;
   ],
   &quot;retained_evidence_ids&quot;: [
-    &quot;evidence-4544e6c323e945d7b96b3d602e6856d5&quot;,
-    &quot;evidence-52d1959b65174b11a46526b31074ae80&quot;
+    &quot;evidence-2cb3732e2b49561598dc8daee791f8d9&quot;,
+    &quot;evidence-7525c42fd5d650df850b5f6ebf095485&quot;
   ],
   &quot;stale_evidence_ids&quot;: [],
   &quot;invalidated_attestation_ids&quot;: [],
@@ -312,20 +338,38 @@ code { overflow-wrap: anywhere; }
   &quot;traceability&quot;: [
     {
       &quot;kind&quot;: &quot;repair_request&quot;,
-      &quot;object_id&quot;: &quot;repair-fcae5dc548bb4440848e80210d229a8e&quot;,
+      &quot;object_id&quot;: &quot;repair-cb5bf46ed270569b89e88c9153331193&quot;,
       &quot;relationship&quot;: &quot;source&quot;
     },
     {
       &quot;kind&quot;: &quot;resubmission_attempt&quot;,
-      &quot;object_id&quot;: &quot;attempt-34381e3c671d4850b2639f0be008e3c3&quot;,
+      &quot;object_id&quot;: &quot;attempt-5edb54f0dd405c4bbe986bdc73db8b5a&quot;,
       &quot;relationship&quot;: &quot;materiality_declaration&quot;
     }
   ]
 }</pre></details></section>
-<section><h2>问题与说明</h2><ul><li><strong>阻断问题</strong>: Clarify agent action and delegation scope only.<details><summary>finding 与 repair 原始依据</summary><pre>{
-  &quot;finding_id&quot;: &quot;finding-3c07f0079a2a40e9879548d26cf01ca2&quot;,
+<section><h2>问题与说明</h2><ul><li><strong>阻断问题</strong>: 只需澄清智能体行动、权限和继续委派的范围。<details><summary>finding 与 repair 原始依据</summary><pre>{
+  &quot;finding_id&quot;: &quot;finding-998704f5c08b576f882422ff5d00c5cd&quot;,
   &quot;title&quot;: &quot;阻断问题&quot;,
-  &quot;plain_language&quot;: &quot;Clarify agent action and delegation scope only.&quot;,
+  &quot;plain_language&quot;: &quot;只需澄清智能体行动、权限和继续委派的范围。&quot;,
+  &quot;reason_presentation&quot;: {
+    &quot;reason_code&quot;: &quot;agent_delegation_clarification&quot;,
+    &quot;display_plain&quot;: &quot;只需澄清智能体行动、权限和继续委派的范围。&quot;,
+    &quot;source_english&quot;: &quot;Clarify agent action and delegation scope only.&quot;,
+    &quot;source_code&quot;: &quot;agent_delegation_clarification&quot;,
+    &quot;trace_refs&quot;: [
+      {
+        &quot;kind&quot;: &quot;finding&quot;,
+        &quot;object_id&quot;: &quot;finding-998704f5c08b576f882422ff5d00c5cd&quot;,
+        &quot;relationship&quot;: &quot;diagnostic&quot;
+      },
+      {
+        &quot;kind&quot;: &quot;repair_request&quot;,
+        &quot;object_id&quot;: &quot;repair-cb5bf46ed270569b89e88c9153331193&quot;,
+        &quot;relationship&quot;: &quot;repair&quot;
+      }
+    ]
+  },
   &quot;severity&quot;: &quot;high&quot;,
   &quot;blocking&quot;: true,
   &quot;status&quot;: &quot;open&quot;,
@@ -333,17 +377,17 @@ code { overflow-wrap: anywhere; }
     &quot;O-AGENT-SCOPE&quot;
   ],
   &quot;repair_request_ids&quot;: [
-    &quot;repair-fcae5dc548bb4440848e80210d229a8e&quot;
+    &quot;repair-cb5bf46ed270569b89e88c9153331193&quot;
   ],
   &quot;traceability&quot;: [
     {
       &quot;kind&quot;: &quot;finding&quot;,
-      &quot;object_id&quot;: &quot;finding-3c07f0079a2a40e9879548d26cf01ca2&quot;,
+      &quot;object_id&quot;: &quot;finding-998704f5c08b576f882422ff5d00c5cd&quot;,
       &quot;relationship&quot;: &quot;diagnostic&quot;
     },
     {
       &quot;kind&quot;: &quot;repair_request&quot;,
-      &quot;object_id&quot;: &quot;repair-fcae5dc548bb4440848e80210d229a8e&quot;,
+      &quot;object_id&quot;: &quot;repair-cb5bf46ed270569b89e88c9153331193&quot;,
       &quot;relationship&quot;: &quot;repair&quot;
     }
   ]
@@ -353,20 +397,20 @@ code { overflow-wrap: anywhere; }
     &quot;object_id&quot;: &quot;match-documentation-low&quot;,
     &quot;relationship&quot;: &quot;path_intensity&quot;
   }
-]</pre></details><details class="explanation"><summary>本次只重新检查受影响部分 <small>scoped repair and revalidation</small></summary><p>需要重新检查：O-AGENT-SCOPE。 保留的材料：evidence-4544e6c323e945d7b96b3d602e6856d5, evidence-52d1959b65174b11a46526b31074ae80。</p><pre>[
+]</pre></details><details class="explanation"><summary>本次只重新检查受影响部分 <small>scoped repair and revalidation</small></summary><p>需要重新检查：O-AGENT-SCOPE。 保留的材料：evidence-2cb3732e2b49561598dc8daee791f8d9, evidence-7525c42fd5d650df850b5f6ebf095485。</p><pre>[
   {
     &quot;kind&quot;: &quot;repair_request&quot;,
-    &quot;object_id&quot;: &quot;repair-fcae5dc548bb4440848e80210d229a8e&quot;,
+    &quot;object_id&quot;: &quot;repair-cb5bf46ed270569b89e88c9153331193&quot;,
     &quot;relationship&quot;: &quot;scope&quot;
   },
   {
     &quot;kind&quot;: &quot;evidence&quot;,
-    &quot;object_id&quot;: &quot;evidence-4544e6c323e945d7b96b3d602e6856d5&quot;,
+    &quot;object_id&quot;: &quot;evidence-2cb3732e2b49561598dc8daee791f8d9&quot;,
     &quot;relationship&quot;: &quot;retained&quot;
   },
   {
     &quot;kind&quot;: &quot;evidence&quot;,
-    &quot;object_id&quot;: &quot;evidence-52d1959b65174b11a46526b31074ae80&quot;,
+    &quot;object_id&quot;: &quot;evidence-7525c42fd5d650df850b5f6ebf095485&quot;,
     &quot;relationship&quot;: &quot;retained&quot;
   }
 ]</pre></details><details class="explanation"><summary>是否把具有独立行动能力的工作交给了另一个智能体？ <small>agent action and delegation scope</small></summary><p>通常算作继续委派：子智能体修改文件、执行命令、自主生成被直接采用的代码或配置、拥有独立工具权限或行动范围，或其产出直接进入当前贡献。通常不算：普通函数或工具调用、文件读取、搜索、没有独立行动权的模型调用，或只提供建议且没有修改/提交产出的辅助模型。</p><pre>[
@@ -381,7 +425,85 @@ code { overflow-wrap: anywhere; }
     &quot;relationship&quot;: &quot;agent_scope_requirement&quot;
   }
 ]</pre></details></section>
-<section class="preview" id="action-preview"><h2>操作前预览</h2><p>你准备执行：<strong>检查待核验项</strong></p><p>当前角色和案例状态允许生成此操作计划。</p><ul><li><strong>案例状态</strong>: 已补交，等待确认材料是否齐备 → 等待人类维护者最终决定<br>受影响项会记录维护者检查；全部阻断项完成后进入人类最终决定。</li><li><strong>O-AGENT-SCOPE</strong>: 材料已满足 → 已检查<br>受影响项会记录维护者检查；全部阻断项完成后进入人类最终决定。</li><li><strong>指定修复请求</strong>: resubmitted → 已解决<br>所关联的问题在本次重新检查后关闭。</li></ul><p><strong>保留的未受影响材料：</strong>evidence-52d1959b65174b11a46526b31074ae80, evidence-4544e6c323e945d7b96b3d602e6856d5</p><p><strong>将失效的材料：</strong>无</p><p><strong>将失效的负责人确认：</strong>无</p><p><strong>责任方变化：</strong>维护者核验人、项目规则负责人、人类维护者 → 人类维护者</p><p><strong>流程位置变化：</strong>maintainer_check → human_final_decision</p><p><strong>预计新增记录：</strong>state_transition、maintainer_verification</p><p><strong>后续仍需负责人确认：</strong>否；<strong>后续仍需维护者检查：</strong>否；<strong>最终接受是否已经发生：</strong>否</p><p><strong>此预览本身不会修改案例：</strong>是</p></section>
+<section class="preview" id="action-preview"><h2>操作前预览</h2><p>你准备执行：<strong>只重新检查“智能体行动与委派说明”</strong></p><p>当前角色和案例状态允许生成此操作计划。</p><p><strong>将处理：</strong>智能体行动与委派说明</p><ul><li><strong>案例流程</strong>: 已补充，等待重新检查 → 等待人类维护者最终决定<br>受影响项会记录维护者检查；全部阻断项完成后进入人类最终决定。</li><li><strong>智能体行动与委派说明</strong>: 材料已满足 → 已检查<br>受影响项会记录维护者检查；全部阻断项完成后进入人类最终决定。</li><li><strong>本次问题</strong>: 待处理 → 已关闭<br>本次重新检查通过后，关联问题将关闭。</li><li><strong>本次修复请求</strong>: 已补充，等待重新检查 → 已关闭<br>所关联的问题在本次重新检查后关闭。</li></ul><p><strong>保留的未受影响材料：</strong>变更文件清单、修改说明</p><p><strong>将失效：</strong>无</p><p><strong>责任方变化：</strong>维护者核验人、项目规则负责人、人类维护者 → 人类维护者</p><p><strong>流程位置变化：</strong>维护者检查 → 人类维护者最终决定</p><p><strong>执行后：</strong></p><ul><li>本次指定材料将被标记为已检查。</li><li>关联的问题和修复请求将被关闭。</li><li>当前责任方将转交给人类维护者。</li><li>案例将进入“人类维护者最终决定”。</li><li>这不等于代码已经被项目接受。</li></ul><p><strong>后续仍需负责人确认：</strong>否；<strong>后续仍需维护者检查：</strong>否；<strong>最终接受是否已经发生：</strong>否</p><p><strong>此预览本身不会修改案例：</strong>是</p><details><summary>技术操作、内部 ID 与原始状态</summary><pre>{
+  &quot;operation&quot;: &quot;verify_evidence&quot;,
+  &quot;source_state&quot;: &quot;resubmitted&quot;,
+  &quot;target_state&quot;: &quot;ready_for_human_decision&quot;,
+  &quot;effects&quot;: [
+    {
+      &quot;target&quot;: &quot;案例状态&quot;,
+      &quot;before&quot;: &quot;resubmitted&quot;,
+      &quot;after&quot;: &quot;ready_for_human_decision&quot;,
+      &quot;explanation&quot;: &quot;受影响项会记录维护者检查；全部阻断项完成后进入人类最终决定。&quot;,
+      &quot;source_object_ids&quot;: [
+        &quot;transition-96fdfbcc786957ca913e285c9e517b18&quot;
+      ]
+    },
+    {
+      &quot;target&quot;: &quot;O-AGENT-SCOPE&quot;,
+      &quot;before&quot;: &quot;satisfied&quot;,
+      &quot;after&quot;: &quot;verified&quot;,
+      &quot;explanation&quot;: &quot;受影响项会记录维护者检查；全部阻断项完成后进入人类最终决定。&quot;,
+      &quot;source_object_ids&quot;: [
+        &quot;obl-o-agent-scope&quot;
+      ]
+    },
+    {
+      &quot;target&quot;: &quot;finding-998704f5c08b576f882422ff5d00c5cd&quot;,
+      &quot;before&quot;: &quot;open&quot;,
+      &quot;after&quot;: &quot;resolved&quot;,
+      &quot;explanation&quot;: &quot;本次重新检查通过后，关联问题将关闭。&quot;,
+      &quot;source_object_ids&quot;: [
+        &quot;finding-998704f5c08b576f882422ff5d00c5cd&quot;
+      ]
+    },
+    {
+      &quot;target&quot;: &quot;指定修复请求&quot;,
+      &quot;before&quot;: &quot;resubmitted&quot;,
+      &quot;after&quot;: &quot;resolved&quot;,
+      &quot;explanation&quot;: &quot;所关联的问题在本次重新检查后关闭。&quot;,
+      &quot;source_object_ids&quot;: [
+        &quot;repair-cb5bf46ed270569b89e88c9153331193&quot;
+      ]
+    }
+  ],
+  &quot;affected_obligation_ids&quot;: [
+    &quot;O-AGENT-SCOPE&quot;
+  ],
+  &quot;retained_evidence_ids&quot;: [
+    &quot;evidence-7525c42fd5d650df850b5f6ebf095485&quot;,
+    &quot;evidence-2cb3732e2b49561598dc8daee791f8d9&quot;
+  ],
+  &quot;invalidated_attestation_ids&quot;: [],
+  &quot;invalidated_evidence_ids&quot;: [],
+  &quot;processed_objects&quot;: [
+    &quot;O-AGENT-SCOPE&quot;
+  ],
+  &quot;workflow_step_before&quot;: &quot;maintainer_check&quot;,
+  &quot;workflow_step_after&quot;: &quot;human_final_decision&quot;,
+  &quot;creates_records&quot;: [
+    &quot;state_transition&quot;,
+    &quot;maintainer_verification&quot;
+  ],
+  &quot;preview_fingerprint&quot;: &quot;21e0ab3d480ac8233ddd8f56a5b6e6bb91778e68a6ec1bffcdad8271602eab0d&quot;,
+  &quot;traceability&quot;: [
+    {
+      &quot;kind&quot;: &quot;permission_rule&quot;,
+      &quot;object_id&quot;: &quot;maintainer_verifier:verify_evidence&quot;,
+      &quot;relationship&quot;: &quot;authority&quot;
+    },
+    {
+      &quot;kind&quot;: &quot;governance_case&quot;,
+      &quot;object_id&quot;: &quot;scoped-repair&quot;,
+      &quot;relationship&quot;: &quot;source_state&quot;
+    },
+    {
+      &quot;kind&quot;: &quot;state_machine_rule&quot;,
+      &quot;object_id&quot;: &quot;resubmitted:verify_evidence:verification_complete&quot;,
+      &quot;relationship&quot;: &quot;transition_plan&quot;
+    }
+  ]
+}</pre></details></section>
 <section>
 <h2>当前相关操作</h2>
 <p>这里列出合法选择及影响，不替维护者作决定。后端仍会重新检查角色、状态和对象范围。</p>
@@ -937,7 +1059,7 @@ code { overflow-wrap: anywhere; }
   ],
   &quot;evidence_records&quot;: [
     {
-      &quot;id&quot;: &quot;evidence-3c0c167445a143248e0fa0f71bb423b6&quot;,
+      &quot;id&quot;: &quot;evidence-78d4d1c1ff665bb4808d6623ad98935f&quot;,
       &quot;obligation_ids&quot;: [
         &quot;O-AGENT-SCOPE&quot;
       ],
@@ -965,7 +1087,7 @@ code { overflow-wrap: anywhere; }
       &quot;invalid_reasons&quot;: []
     },
     {
-      &quot;id&quot;: &quot;evidence-52d1959b65174b11a46526b31074ae80&quot;,
+      &quot;id&quot;: &quot;evidence-7525c42fd5d650df850b5f6ebf095485&quot;,
       &quot;obligation_ids&quot;: [
         &quot;O-CHANGED-FILES&quot;
       ],
@@ -995,7 +1117,7 @@ code { overflow-wrap: anywhere; }
       &quot;invalid_reasons&quot;: []
     },
     {
-      &quot;id&quot;: &quot;evidence-4544e6c323e945d7b96b3d602e6856d5&quot;,
+      &quot;id&quot;: &quot;evidence-2cb3732e2b49561598dc8daee791f8d9&quot;,
       &quot;obligation_ids&quot;: [
         &quot;O-SUMMARY&quot;
       ],
@@ -1026,19 +1148,19 @@ code { overflow-wrap: anywhere; }
   &quot;attestation_records&quot;: [],
   &quot;verification_records&quot;: [
     {
-      &quot;id&quot;: &quot;verification-0984956c115c4a1b8d1332b28a2e2387&quot;,
+      &quot;id&quot;: &quot;verification-87a29324d7bf5adba4143d896939d000&quot;,
       &quot;actor&quot;: &quot;verifier-1&quot;,
       &quot;role&quot;: &quot;maintainer_verifier&quot;,
-      &quot;timestamp&quot;: &quot;2026-07-26T13:27:34Z&quot;,
+      &quot;timestamp&quot;: &quot;2026-07-26T00:00:00Z&quot;,
       &quot;obligation_ids&quot;: [
         &quot;O-AGENT-SCOPE&quot;,
         &quot;O-CHANGED-FILES&quot;,
         &quot;O-SUMMARY&quot;
       ],
       &quot;evidence_ids&quot;: [
-        &quot;evidence-3c0c167445a143248e0fa0f71bb423b6&quot;,
-        &quot;evidence-4544e6c323e945d7b96b3d602e6856d5&quot;,
-        &quot;evidence-52d1959b65174b11a46526b31074ae80&quot;
+        &quot;evidence-2cb3732e2b49561598dc8daee791f8d9&quot;,
+        &quot;evidence-7525c42fd5d650df850b5f6ebf095485&quot;,
+        &quot;evidence-78d4d1c1ff665bb4808d6623ad98935f&quot;
       ],
       &quot;outcome&quot;: &quot;verified&quot;,
       &quot;reason&quot;: &quot;Initial evidence checked.&quot;,
@@ -1048,8 +1170,8 @@ code { overflow-wrap: anywhere; }
   ],
   &quot;findings&quot;: [
     {
-      &quot;id&quot;: &quot;finding-3c07f0079a2a40e9879548d26cf01ca2&quot;,
-      &quot;code&quot;: &quot;repair_required&quot;,
+      &quot;id&quot;: &quot;finding-998704f5c08b576f882422ff5d00c5cd&quot;,
+      &quot;code&quot;: &quot;agent_delegation_clarification&quot;,
       &quot;severity&quot;: &quot;high&quot;,
       &quot;message&quot;: &quot;Clarify agent action and delegation scope only.&quot;,
       &quot;blocking&quot;: true,
@@ -1058,16 +1180,16 @@ code { overflow-wrap: anywhere; }
         &quot;O-AGENT-SCOPE&quot;
       ],
       &quot;status&quot;: &quot;open&quot;,
-      &quot;created_at&quot;: &quot;2026-07-26T13:27:34Z&quot;,
+      &quot;created_at&quot;: &quot;2026-07-26T00:00:00Z&quot;,
       &quot;resolved_at&quot;: null,
       &quot;resolution&quot;: null
     }
   ],
   &quot;repair_requests&quot;: [
     {
-      &quot;id&quot;: &quot;repair-fcae5dc548bb4440848e80210d229a8e&quot;,
+      &quot;id&quot;: &quot;repair-cb5bf46ed270569b89e88c9153331193&quot;,
       &quot;finding_ids&quot;: [
-        &quot;finding-3c07f0079a2a40e9879548d26cf01ca2&quot;
+        &quot;finding-998704f5c08b576f882422ff5d00c5cd&quot;
       ],
       &quot;responsible_role&quot;: &quot;contributor&quot;,
       &quot;affected_obligation_ids&quot;: [
@@ -1078,13 +1200,13 @@ code { overflow-wrap: anywhere; }
         &quot;O-AGENT-SCOPE&quot;
       ],
       &quot;requested_by&quot;: &quot;verifier-1&quot;,
-      &quot;requested_at&quot;: &quot;2026-07-26T13:27:34Z&quot;,
+      &quot;requested_at&quot;: &quot;2026-07-26T00:00:00Z&quot;,
       &quot;status&quot;: &quot;resubmitted&quot;,
       &quot;attempts&quot;: [
         {
-          &quot;id&quot;: &quot;attempt-34381e3c671d4850b2639f0be008e3c3&quot;,
+          &quot;id&quot;: &quot;attempt-5edb54f0dd405c4bbe986bdc73db8b5a&quot;,
           &quot;actor&quot;: &quot;contributor-agent&quot;,
-          &quot;timestamp&quot;: &quot;2026-07-26T13:27:34Z&quot;,
+          &quot;timestamp&quot;: &quot;2026-07-26T00:00:00Z&quot;,
           &quot;summary&quot;: &quot;Clarified delegation wording without changing the contribution.&quot;,
           &quot;affected_obligation_ids&quot;: [
             &quot;O-AGENT-SCOPE&quot;
@@ -1097,8 +1219,8 @@ code { overflow-wrap: anywhere; }
             &quot;new_contribution_fingerprint&quot;: &quot;9fe19abd52f6e8e2b7fbb8b2f8ed283cb530ad8698ef8cf7c4411fc6fd3fb1d8&quot;,
             &quot;stale_evidence_ids&quot;: [],
             &quot;retained_evidence_ids&quot;: [
-              &quot;evidence-4544e6c323e945d7b96b3d602e6856d5&quot;,
-              &quot;evidence-52d1959b65174b11a46526b31074ae80&quot;
+              &quot;evidence-2cb3732e2b49561598dc8daee791f8d9&quot;,
+              &quot;evidence-7525c42fd5d650df850b5f6ebf095485&quot;
             ],
             &quot;invalidated_attestation_ids&quot;: [],
             &quot;required_revalidation_scope&quot;: [
@@ -1111,8 +1233,8 @@ code { overflow-wrap: anywhere; }
           &quot;new_contribution_fingerprint&quot;: &quot;9fe19abd52f6e8e2b7fbb8b2f8ed283cb530ad8698ef8cf7c4411fc6fd3fb1d8&quot;,
           &quot;stale_evidence_ids&quot;: [],
           &quot;retained_evidence_ids&quot;: [
-            &quot;evidence-4544e6c323e945d7b96b3d602e6856d5&quot;,
-            &quot;evidence-52d1959b65174b11a46526b31074ae80&quot;
+            &quot;evidence-2cb3732e2b49561598dc8daee791f8d9&quot;,
+            &quot;evidence-7525c42fd5d650df850b5f6ebf095485&quot;
           ],
           &quot;invalidated_attestation_ids&quot;: [],
           &quot;required_revalidation_scope&quot;: [
@@ -1122,10 +1244,11 @@ code { overflow-wrap: anywhere; }
       ]
     }
   ],
+  &quot;attempted_operations&quot;: [],
   &quot;contribution_fingerprint&quot;: &quot;9fe19abd52f6e8e2b7fbb8b2f8ed283cb530ad8698ef8cf7c4411fc6fd3fb1d8&quot;,
   &quot;policy_fingerprint&quot;: &quot;e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564&quot;,
   &quot;policy_snapshot&quot;: {
-    &quot;id&quot;: &quot;policy-4a8d0da19e674e2590b507558f5b6d07&quot;,
+    &quot;id&quot;: &quot;policy-8d451cd3a45156e198a91be729a23da3&quot;,
     &quot;schema_version&quot;: &quot;agm.policy_snapshot/v0.2-dev&quot;,
     &quot;manifest_version&quot;: &quot;agm.manifest/v0.2-dev&quot;,
     &quot;base_commit&quot;: &quot;demo-base&quot;,
@@ -1150,7 +1273,7 @@ code { overflow-wrap: anywhere; }
   },
   &quot;transition_history&quot;: [
     {
-      &quot;id&quot;: &quot;transition-df8cbc8f795c40169d2dabf865ef01b8&quot;,
+      &quot;id&quot;: &quot;transition-cb586d60710a5ea88000e4b20ad4b0fc&quot;,
       &quot;case_id&quot;: &quot;scoped-repair&quot;,
       &quot;actor&quot;: &quot;agm-engine&quot;,
       &quot;role&quot;: &quot;system&quot;,
@@ -1159,12 +1282,12 @@ code { overflow-wrap: anywhere; }
       &quot;action&quot;: &quot;resolve_policy&quot;,
       &quot;reason&quot;: &quot;Resolved canonical policy against the contribution.&quot;,
       &quot;related_object_ids&quot;: [
-        &quot;policy-4a8d0da19e674e2590b507558f5b6d07&quot;
+        &quot;policy-8d451cd3a45156e198a91be729a23da3&quot;
       ],
       &quot;timestamp&quot;: &quot;2026-07-26T00:00:00Z&quot;
     },
     {
-      &quot;id&quot;: &quot;transition-3bad8885dbb447e4a3f758d692918122&quot;,
+      &quot;id&quot;: &quot;transition-a9c4464a89f4597a83b2ec787faf4b9f&quot;,
       &quot;case_id&quot;: &quot;scoped-repair&quot;,
       &quot;actor&quot;: &quot;agm-engine&quot;,
       &quot;role&quot;: &quot;system&quot;,
@@ -1180,7 +1303,7 @@ code { overflow-wrap: anywhere; }
       &quot;timestamp&quot;: &quot;2026-07-26T00:00:00Z&quot;
     },
     {
-      &quot;id&quot;: &quot;transition-92734d164caa4345807392f7c0026517&quot;,
+      &quot;id&quot;: &quot;transition-ecaa52c8137a5e78b1a666f080861a2c&quot;,
       &quot;case_id&quot;: &quot;scoped-repair&quot;,
       &quot;actor&quot;: &quot;agm-engine&quot;,
       &quot;role&quot;: &quot;system&quot;,
@@ -1196,7 +1319,7 @@ code { overflow-wrap: anywhere; }
       &quot;timestamp&quot;: &quot;2026-07-26T00:00:00Z&quot;
     },
     {
-      &quot;id&quot;: &quot;transition-3b0eae34c8b44a1bb35fcf073cf81fab&quot;,
+      &quot;id&quot;: &quot;transition-f6f404c026065d37b2d9aac0badf72b4&quot;,
       &quot;case_id&quot;: &quot;scoped-repair&quot;,
       &quot;actor&quot;: &quot;contributor-agent&quot;,
       &quot;role&quot;: &quot;contributor_agent&quot;,
@@ -1205,14 +1328,14 @@ code { overflow-wrap: anywhere; }
       &quot;action&quot;: &quot;submit_for_verification&quot;,
       &quot;reason&quot;: &quot;Contributor submitted prepared evidence for maintainer verification.&quot;,
       &quot;related_object_ids&quot;: [
-        &quot;evidence-3c0c167445a143248e0fa0f71bb423b6&quot;,
-        &quot;evidence-52d1959b65174b11a46526b31074ae80&quot;,
-        &quot;evidence-4544e6c323e945d7b96b3d602e6856d5&quot;
+        &quot;evidence-78d4d1c1ff665bb4808d6623ad98935f&quot;,
+        &quot;evidence-7525c42fd5d650df850b5f6ebf095485&quot;,
+        &quot;evidence-2cb3732e2b49561598dc8daee791f8d9&quot;
       ],
-      &quot;timestamp&quot;: &quot;2026-07-26T13:27:34Z&quot;
+      &quot;timestamp&quot;: &quot;2026-07-26T00:00:00Z&quot;
     },
     {
-      &quot;id&quot;: &quot;transition-f19842708d3b47d8961be953f6b1c356&quot;,
+      &quot;id&quot;: &quot;transition-54b77b6cbf5c56eeb0affb40899358c3&quot;,
       &quot;case_id&quot;: &quot;scoped-repair&quot;,
       &quot;actor&quot;: &quot;verifier-1&quot;,
       &quot;role&quot;: &quot;maintainer_verifier&quot;,
@@ -1221,12 +1344,12 @@ code { overflow-wrap: anywhere; }
       &quot;action&quot;: &quot;verify_evidence&quot;,
       &quot;reason&quot;: &quot;Initial evidence checked.&quot;,
       &quot;related_object_ids&quot;: [
-        &quot;verification-0984956c115c4a1b8d1332b28a2e2387&quot;
+        &quot;verification-87a29324d7bf5adba4143d896939d000&quot;
       ],
-      &quot;timestamp&quot;: &quot;2026-07-26T13:27:34Z&quot;
+      &quot;timestamp&quot;: &quot;2026-07-26T00:00:00Z&quot;
     },
     {
-      &quot;id&quot;: &quot;transition-40a765972f2f4680914c3d11ebf3c035&quot;,
+      &quot;id&quot;: &quot;transition-8c4bc0d142ab58e48da5119eee7d1490&quot;,
       &quot;case_id&quot;: &quot;scoped-repair&quot;,
       &quot;actor&quot;: &quot;agm-engine&quot;,
       &quot;role&quot;: &quot;system&quot;,
@@ -1235,12 +1358,12 @@ code { overflow-wrap: anywhere; }
       &quot;action&quot;: &quot;mark_ready&quot;,
       &quot;reason&quot;: &quot;All blocking obligations are satisfied or verified; the case is ready for an authorized human decision, not accepted.&quot;,
       &quot;related_object_ids&quot;: [
-        &quot;verification-0984956c115c4a1b8d1332b28a2e2387&quot;
+        &quot;verification-87a29324d7bf5adba4143d896939d000&quot;
       ],
-      &quot;timestamp&quot;: &quot;2026-07-26T13:27:34Z&quot;
+      &quot;timestamp&quot;: &quot;2026-07-26T00:00:00Z&quot;
     },
     {
-      &quot;id&quot;: &quot;transition-634a529f8c364e39a34145a6ea0dda6c&quot;,
+      &quot;id&quot;: &quot;transition-a4cf31c3da0a5f02ae23162314d82686&quot;,
       &quot;case_id&quot;: &quot;scoped-repair&quot;,
       &quot;actor&quot;: &quot;verifier-1&quot;,
       &quot;role&quot;: &quot;maintainer_verifier&quot;,
@@ -1249,13 +1372,13 @@ code { overflow-wrap: anywhere; }
       &quot;action&quot;: &quot;request_repair&quot;,
       &quot;reason&quot;: &quot;Clarify agent action and delegation scope only.&quot;,
       &quot;related_object_ids&quot;: [
-        &quot;finding-3c07f0079a2a40e9879548d26cf01ca2&quot;,
-        &quot;repair-fcae5dc548bb4440848e80210d229a8e&quot;
+        &quot;finding-998704f5c08b576f882422ff5d00c5cd&quot;,
+        &quot;repair-cb5bf46ed270569b89e88c9153331193&quot;
       ],
-      &quot;timestamp&quot;: &quot;2026-07-26T13:27:34Z&quot;
+      &quot;timestamp&quot;: &quot;2026-07-26T00:00:00Z&quot;
     },
     {
-      &quot;id&quot;: &quot;transition-edb55a1ee0c543c490e4363341dfcd4e&quot;,
+      &quot;id&quot;: &quot;transition-96fdfbcc786957ca913e285c9e517b18&quot;,
       &quot;case_id&quot;: &quot;scoped-repair&quot;,
       &quot;actor&quot;: &quot;contributor-agent&quot;,
       &quot;role&quot;: &quot;contributor_agent&quot;,
@@ -1264,9 +1387,9 @@ code { overflow-wrap: anywhere; }
       &quot;action&quot;: &quot;resubmit&quot;,
       &quot;reason&quot;: &quot;Clarified delegation wording without changing the contribution.&quot;,
       &quot;related_object_ids&quot;: [
-        &quot;attempt-34381e3c671d4850b2639f0be008e3c3&quot;
+        &quot;attempt-5edb54f0dd405c4bbe986bdc73db8b5a&quot;
       ],
-      &quot;timestamp&quot;: &quot;2026-07-26T13:27:34Z&quot;
+      &quot;timestamp&quot;: &quot;2026-07-26T00:00:00Z&quot;
     }
   ],
   &quot;final_decision&quot;: null,

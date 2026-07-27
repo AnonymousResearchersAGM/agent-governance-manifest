@@ -52,12 +52,12 @@
         "traceability": [
           {
             "kind": "state_transition",
-            "object_id": "transition-2cdb15d865e74f2e8c4b334a47492138",
+            "object_id": "transition-29f9d2b91ddb544bb4360480113f0ac8",
             "relationship": "primary:resolve_policy"
           },
           {
             "kind": "state_transition",
-            "object_id": "transition-9a4125a31a0d4ce1a4b027ff79f3c79a",
+            "object_id": "transition-1371daf054285d73b8979c4bed6e8195",
             "relationship": "primary:compile_obligations"
           },
           {
@@ -92,7 +92,7 @@
         "traceability": [
           {
             "kind": "state_transition",
-            "object_id": "transition-a3387af59dfd4db28c555a80ea33bc6d",
+            "object_id": "transition-fb1c3eb898d154ed98f2004b45dc4d73",
             "relationship": "primary:mark_evidence_state"
           }
         ]
@@ -148,7 +148,7 @@
         "result": "missing",
         "result_label": "缺少",
         "raw_status": "unsatisfied",
-        "blocking": true,
+        "blocking_requirement": true,
         "source_rule_ids": [
           "documentation-low"
         ],
@@ -178,7 +178,7 @@
         "material_status_label": "缺少",
         "workflow_status": "awaiting_contributor",
         "workflow_status_label": "等待贡献者处理",
-        "blocks_progression": true,
+        "currently_blocks_progression": true,
         "affected_scope": [
           "docs/guide.md"
         ]
@@ -191,7 +191,7 @@
         "result": "missing",
         "result_label": "缺少",
         "raw_status": "unsatisfied",
-        "blocking": true,
+        "blocking_requirement": true,
         "source_rule_ids": [
           "documentation-low"
         ],
@@ -221,7 +221,7 @@
         "material_status_label": "缺少",
         "workflow_status": "awaiting_contributor",
         "workflow_status_label": "等待贡献者处理",
-        "blocks_progression": true,
+        "currently_blocks_progression": true,
         "affected_scope": [
           "docs/guide.md"
         ]
@@ -281,7 +281,7 @@
         "primary_reason": "后端允许此操作，但它不直接处理当前主要阻断项。",
         "selector_options": [
           {
-            "selector_token": "sel-6680e6adf3e686831bd2ca774b4df75bbe86415f53912bda45df669a1b256a41",
+            "selector_token": "sel-8313c82a572cf4628c2715a2c652d849bab284c9b26847039331dd992e27ec7f",
             "action": "record_policy_conflict",
             "label": "变更文件清单",
             "status_label": "缺少；等待贡献者处理",
@@ -317,7 +317,7 @@
             ]
           },
           {
-            "selector_token": "sel-7764f91afea8aa0c567164196779b04661e5d8cd924f272d69c632f20bec0a90",
+            "selector_token": "sel-fea7c9afdc31c6e74dbf2fe30dfd0783c5ddfb965e750410cd5f2b5c266d00ea",
             "action": "record_policy_conflict",
             "label": "修改说明",
             "status_label": "缺少；等待贡献者处理",
@@ -731,12 +731,25 @@
             "object_id": "match-documentation-low",
             "relationship": "path_intensity"
           }
-        ]
+        ],
+        "reason_presentation": {
+          "reason_code": "lightweight_path",
+          "display_plain": "本次未触发完整治理流程，只需完成轻量审核要求。",
+          "source_english": "Structured AGM preparation was explicitly declared or requested; no claim about contributor identity is inferred.",
+          "source_code": "lightweight_path",
+          "trace_refs": [
+            {
+              "kind": "matched_rule",
+              "object_id": "match-documentation-low",
+              "relationship": "path_intensity"
+            }
+          ]
+        }
       },
       {
         "title": "项目规则在案例打开后发生了变化",
         "technical_term": "policy migration warning",
-        "plain_language": "Policy changed, but the case may remain on its recorded snapshot; migration must be an explicit maintainer decision. 迁移不会由诊断层静默执行，需要按权限另行决定。",
+        "plain_language": "案例记录的项目规则版本与当前版本不同；系统不会静默迁移。 迁移需要按角色权限另行决定。",
         "source_references": [
           {
             "kind": "policy_snapshot",
@@ -748,7 +761,25 @@
             "object_id": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
             "relationship": "current"
           }
-        ]
+        ],
+        "reason_presentation": {
+          "reason_code": "policy_migration_warning",
+          "display_plain": "案例记录的项目规则版本与当前版本不同；系统不会静默迁移。",
+          "source_english": "Policy changed, but the case may remain on its recorded snapshot; migration must be an explicit maintainer decision.",
+          "source_code": "policy_migration_warning",
+          "trace_refs": [
+            {
+              "kind": "policy_snapshot",
+              "object_id": "recorded-policy-fingerprint-before-change",
+              "relationship": "recorded"
+            },
+            {
+              "kind": "policy_snapshot",
+              "object_id": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
+              "relationship": "current"
+            }
+          ]
+        }
       }
     ],
     "delegation_help": {
@@ -761,7 +792,8 @@
           "object_id": "human_direct",
           "relationship": "delegation_definition"
         }
-      ]
+      ],
+      "reason_presentation": null
     },
     "repair_loop": [
       "维护者发现问题",
@@ -859,10 +891,11 @@
       "verification_records": [],
       "findings": [],
       "repair_requests": [],
+      "attempted_operations": [],
       "contribution_fingerprint": "e9d96f8f36a92549155112fc471507591a241d77f81bbcdd2eb695d170e7fdc4",
       "policy_fingerprint": "recorded-policy-fingerprint-before-change",
       "policy_snapshot": {
-        "id": "policy-d19a9b2e1a7747eb8d428a9f41012a51",
+        "id": "policy-ac99c1208e8a54a9b2d852a5334f8ed4",
         "schema_version": "agm.policy_snapshot/v0.2-dev",
         "manifest_version": "agm.manifest/v0.2-dev",
         "base_commit": "demo-base",
@@ -887,7 +920,7 @@
       },
       "transition_history": [
         {
-          "id": "transition-2cdb15d865e74f2e8c4b334a47492138",
+          "id": "transition-29f9d2b91ddb544bb4360480113f0ac8",
           "case_id": "policy-migration",
           "actor": "agm-engine",
           "role": "system",
@@ -896,12 +929,12 @@
           "action": "resolve_policy",
           "reason": "Resolved canonical policy against the contribution.",
           "related_object_ids": [
-            "policy-d19a9b2e1a7747eb8d428a9f41012a51"
+            "policy-ac99c1208e8a54a9b2d852a5334f8ed4"
           ],
           "timestamp": "2026-07-26T00:00:00Z"
         },
         {
-          "id": "transition-9a4125a31a0d4ce1a4b027ff79f3c79a",
+          "id": "transition-1371daf054285d73b8979c4bed6e8195",
           "case_id": "policy-migration",
           "actor": "agm-engine",
           "role": "system",
@@ -916,7 +949,7 @@
           "timestamp": "2026-07-26T00:00:00Z"
         },
         {
-          "id": "transition-a3387af59dfd4db28c555a80ea33bc6d",
+          "id": "transition-fb1c3eb898d154ed98f2004b45dc4d73",
           "case_id": "policy-migration",
           "actor": "agm-engine",
           "role": "system",
@@ -1037,7 +1070,7 @@
         "primary_reason": "后端允许此操作，但它不直接处理当前主要阻断项。",
         "selector_options": [
           {
-            "selector_token": "sel-6680e6adf3e686831bd2ca774b4df75bbe86415f53912bda45df669a1b256a41",
+            "selector_token": "sel-8313c82a572cf4628c2715a2c652d849bab284c9b26847039331dd992e27ec7f",
             "action": "record_policy_conflict",
             "label": "变更文件清单",
             "status_label": "缺少；等待贡献者处理",
@@ -1073,7 +1106,7 @@
             ]
           },
           {
-            "selector_token": "sel-7764f91afea8aa0c567164196779b04661e5d8cd924f272d69c632f20bec0a90",
+            "selector_token": "sel-fea7c9afdc31c6e74dbf2fe30dfd0783c5ddfb965e750410cd5f2b5c266d00ea",
             "action": "record_policy_conflict",
             "label": "修改说明",
             "status_label": "缺少；等待贡献者处理",
@@ -1229,7 +1262,8 @@
         "state_changing": false
       }
     ],
-    "materiality_declaration": null
+    "materiality_declaration": null,
+    "rejected_operation_notice": null
   },
   "expected_workflow_steps": [
     {
@@ -1267,7 +1301,7 @@
       "result": "missing",
       "result_label": "缺少",
       "raw_status": "unsatisfied",
-      "blocking": true,
+      "blocking_requirement": true,
       "source_rule_ids": [
         "documentation-low"
       ],
@@ -1297,7 +1331,7 @@
       "material_status_label": "缺少",
       "workflow_status": "awaiting_contributor",
       "workflow_status_label": "等待贡献者处理",
-      "blocks_progression": true,
+      "currently_blocks_progression": true,
       "affected_scope": [
         "docs/guide.md"
       ]
@@ -1310,7 +1344,7 @@
       "result": "missing",
       "result_label": "缺少",
       "raw_status": "unsatisfied",
-      "blocking": true,
+      "blocking_requirement": true,
       "source_rule_ids": [
         "documentation-low"
       ],
@@ -1340,7 +1374,7 @@
       "material_status_label": "缺少",
       "workflow_status": "awaiting_contributor",
       "workflow_status_label": "等待贡献者处理",
-      "blocks_progression": true,
+      "currently_blocks_progression": true,
       "affected_scope": [
         "docs/guide.md"
       ]
@@ -1368,7 +1402,7 @@
   "context_selector_data": {
     "record_policy_conflict": [
       {
-        "selector_token": "sel-6680e6adf3e686831bd2ca774b4df75bbe86415f53912bda45df669a1b256a41",
+        "selector_token": "sel-8313c82a572cf4628c2715a2c652d849bab284c9b26847039331dd992e27ec7f",
         "action": "record_policy_conflict",
         "label": "变更文件清单",
         "status_label": "缺少；等待贡献者处理",
@@ -1404,7 +1438,7 @@
         ]
       },
       {
-        "selector_token": "sel-7764f91afea8aa0c567164196779b04661e5d8cd924f272d69c632f20bec0a90",
+        "selector_token": "sel-fea7c9afdc31c6e74dbf2fe30dfd0783c5ddfb965e750410cd5f2b5c266d00ea",
         "action": "record_policy_conflict",
         "label": "修改说明",
         "status_label": "缺少；等待贡献者处理",
@@ -1445,12 +1479,12 @@
     "identify_requirements": [
       {
         "kind": "state_transition",
-        "object_id": "transition-2cdb15d865e74f2e8c4b334a47492138",
+        "object_id": "transition-29f9d2b91ddb544bb4360480113f0ac8",
         "relationship": "primary:resolve_policy"
       },
       {
         "kind": "state_transition",
-        "object_id": "transition-9a4125a31a0d4ce1a4b027ff79f3c79a",
+        "object_id": "transition-1371daf054285d73b8979c4bed6e8195",
         "relationship": "primary:compile_obligations"
       },
       {
@@ -1472,7 +1506,7 @@
     "prepare_materials": [
       {
         "kind": "state_transition",
-        "object_id": "transition-a3387af59dfd4db28c555a80ea33bc6d",
+        "object_id": "transition-fb1c3eb898d154ed98f2004b45dc4d73",
         "relationship": "primary:mark_evidence_state"
       }
     ],
@@ -1533,7 +1567,7 @@
       "primary_reason": "后端允许此操作，但它不直接处理当前主要阻断项。",
       "selector_options": [
         {
-          "selector_token": "sel-6680e6adf3e686831bd2ca774b4df75bbe86415f53912bda45df669a1b256a41",
+          "selector_token": "sel-8313c82a572cf4628c2715a2c652d849bab284c9b26847039331dd992e27ec7f",
           "action": "record_policy_conflict",
           "label": "变更文件清单",
           "status_label": "缺少；等待贡献者处理",
@@ -1569,7 +1603,7 @@
           ]
         },
         {
-          "selector_token": "sel-7764f91afea8aa0c567164196779b04661e5d8cd924f272d69c632f20bec0a90",
+          "selector_token": "sel-fea7c9afdc31c6e74dbf2fe30dfd0783c5ddfb965e750410cd5f2b5c266d00ea",
           "action": "record_policy_conflict",
           "label": "修改说明",
           "status_label": "缺少；等待贡献者处理",
@@ -1973,7 +2007,6 @@
     }
   ],
   "action_preview": {
-    "action": "record_policy_conflict",
     "title": "记录项目规则冲突",
     "actor": {
       "actor": "policy-reviewer",
@@ -1982,61 +2015,90 @@
     },
     "authorized": true,
     "authorization_reason": "当前角色和案例状态允许生成此操作计划。",
-    "source_state": "evidence_incomplete",
-    "target_state": "repair_requested",
-    "effects": [
+    "display_effects": [
       {
-        "target": "案例状态",
-        "before": "evidence_incomplete",
-        "after": "repair_requested",
-        "explanation": "案例转入 repair，由 policy steward 或维护者处理。",
-        "source_object_ids": [
-          "transition-a3387af59dfd4db28c555a80ea33bc6d"
-        ]
+        "display_label": "案例流程",
+        "before_label": "等待贡献者补齐材料",
+        "after_label": "发现问题，等待指定范围修改",
+        "display_description": "案例转入 repair，由 policy steward 或维护者处理。"
       },
       {
-        "target": "O-SUMMARY",
-        "before": "unsatisfied",
-        "after": "policy_conflict",
-        "explanation": "案例转入 repair，由 policy steward 或维护者处理。",
-        "source_object_ids": [
-          "obl-o-summary"
-        ]
+        "display_label": "修改说明",
+        "before_label": "尚未满足",
+        "after_label": "项目规则冲突",
+        "display_description": "案例转入 repair，由 policy steward 或维护者处理。"
       }
     ],
-    "affected_obligation_ids": [
-      "O-SUMMARY"
+    "affected_items": [
+      "修改说明"
     ],
-    "retained_evidence_ids": [],
-    "invalidated_attestation_ids": [],
+    "retained_items": [],
+    "invalidated_items": [],
     "next_authorized_actor_roles": [
       "policy_steward",
       "maintainer"
     ],
     "requires_confirmation": true,
     "mutates_case": false,
-    "preview_fingerprint": "00e0d82c9c29a56cdf8e4d7e5dcb078ddf8b0561119be2c73f2e5d11576a2fea",
-    "traceability": [
-      {
-        "kind": "permission_rule",
-        "object_id": "policy_steward:record_policy_conflict",
-        "relationship": "authority"
-      },
-      {
-        "kind": "governance_case",
-        "object_id": "policy-migration",
-        "relationship": "source_state"
-      },
-      {
-        "kind": "state_machine_rule",
-        "object_id": "evidence_incomplete:record_policy_conflict:repair_requested",
-        "relationship": "transition_plan"
-      }
-    ],
-    "processed_objects": [
-      "O-SUMMARY"
-    ],
-    "invalidated_evidence_ids": [],
+    "technical_details": {
+      "operation": "record_policy_conflict",
+      "source_state": "evidence_incomplete",
+      "target_state": "repair_requested",
+      "effects": [
+        {
+          "target": "案例状态",
+          "before": "evidence_incomplete",
+          "after": "repair_requested",
+          "explanation": "案例转入 repair，由 policy steward 或维护者处理。",
+          "source_object_ids": [
+            "transition-fb1c3eb898d154ed98f2004b45dc4d73"
+          ]
+        },
+        {
+          "target": "O-SUMMARY",
+          "before": "unsatisfied",
+          "after": "policy_conflict",
+          "explanation": "案例转入 repair，由 policy steward 或维护者处理。",
+          "source_object_ids": [
+            "obl-o-summary"
+          ]
+        }
+      ],
+      "affected_obligation_ids": [
+        "O-SUMMARY"
+      ],
+      "retained_evidence_ids": [],
+      "invalidated_attestation_ids": [],
+      "invalidated_evidence_ids": [],
+      "processed_objects": [
+        "O-SUMMARY"
+      ],
+      "workflow_step_before": "prepare_materials",
+      "workflow_step_after": "prepare_materials",
+      "creates_records": [
+        "state_transition",
+        "finding",
+        "repair_request"
+      ],
+      "preview_fingerprint": "00e0d82c9c29a56cdf8e4d7e5dcb078ddf8b0561119be2c73f2e5d11576a2fea",
+      "traceability": [
+        {
+          "kind": "permission_rule",
+          "object_id": "policy_steward:record_policy_conflict",
+          "relationship": "authority"
+        },
+        {
+          "kind": "governance_case",
+          "object_id": "policy-migration",
+          "relationship": "source_state"
+        },
+        {
+          "kind": "state_machine_rule",
+          "object_id": "evidence_incomplete:record_policy_conflict:repair_requested",
+          "relationship": "transition_plan"
+        }
+      ]
+    },
     "responsibility_before": {
       "primary_roles": [
         "contributor",
@@ -2069,12 +2131,12 @@
         "maintainer_verifier"
       ]
     },
-    "workflow_step_before": "prepare_materials",
-    "workflow_step_after": "prepare_materials",
-    "creates_records": [
-      "state_transition",
-      "finding",
-      "repair_request"
+    "workflow_position_before": "贡献者准备材料",
+    "workflow_position_after": "贡献者准备材料",
+    "next_steps": [
+      "当前责任方将转交给项目规则负责人、人类维护者。",
+      "案例将进入“贡献者准备材料”。",
+      "这不等于代码已经被项目接受。"
     ],
     "requires_human_attestation_after": false,
     "requires_maintainer_verification_after": true,

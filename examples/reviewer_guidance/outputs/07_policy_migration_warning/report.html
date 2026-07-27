@@ -36,6 +36,7 @@ input, select, textarea { box-sizing: border-box; width: 100%; padding: .6rem; m
 button { padding: .65rem .9rem; margin-top: .8rem; cursor: pointer; }
 button.danger { background: #8c2818; color: white; border: 0; border-radius: 5px; margin-right: .6rem; }
 .preview { border: 3px solid #9b6a00; }
+.rejected-notice { border: 3px solid #9b3d23; }
 .authority { border-left: 7px solid #9b6a00; }
 details { margin-top: .45rem; }
 summary { cursor: pointer; font-weight: 700; }
@@ -65,17 +66,18 @@ code { overflow-wrap: anywhere; }
 <p><strong>为什么现在轮到这一方：</strong>受影响材料尚未准备或更新完成，当前还不能进入维护者检查。</p>
 <details><summary>技术状态</summary><p>State: <code>evidence_incomplete</code> · Readiness: <code>not_ready</code> · Autonomy: <code>human_direct</code></p></details>
 </header>
+
 <section>
 <h2>治理流程导航器</h2>
 <ol class="workflow"><li class="workflow-step status-completed" data-status="completed"><span class="symbol" aria-hidden="true">✓</span><strong>1. 系统识别要求</strong><span class="state-text">已完成</span><p>适用规则和本次要求已由 AGM 引擎生成。</p><details><summary>内部阶段与依据</summary><p>Resolve, Compile</p><pre>[
   {
     &quot;kind&quot;: &quot;state_transition&quot;,
-    &quot;object_id&quot;: &quot;transition-2cdb15d865e74f2e8c4b334a47492138&quot;,
+    &quot;object_id&quot;: &quot;transition-29f9d2b91ddb544bb4360480113f0ac8&quot;,
     &quot;relationship&quot;: &quot;primary:resolve_policy&quot;
   },
   {
     &quot;kind&quot;: &quot;state_transition&quot;,
-    &quot;object_id&quot;: &quot;transition-9a4125a31a0d4ce1a4b027ff79f3c79a&quot;,
+    &quot;object_id&quot;: &quot;transition-1371daf054285d73b8979c4bed6e8195&quot;,
     &quot;relationship&quot;: &quot;primary:compile_obligations&quot;
   },
   {
@@ -96,7 +98,7 @@ code { overflow-wrap: anywhere; }
 ]</pre></details></li><li class="workflow-step status-current" data-status="current"><span class="symbol" aria-hidden="true">●</span><strong>2. 贡献者准备材料</strong><span class="state-text">当前阶段</span><p>贡献者正在准备或补齐本次所需材料。</p><details><summary>内部阶段与依据</summary><p>Bind, Repair</p><pre>[
   {
     &quot;kind&quot;: &quot;state_transition&quot;,
-    &quot;object_id&quot;: &quot;transition-a3387af59dfd4db28c555a80ea33bc6d&quot;,
+    &quot;object_id&quot;: &quot;transition-fb1c3eb898d154ed98f2004b45dc4d73&quot;,
     &quot;relationship&quot;: &quot;primary:mark_evidence_state&quot;
   }
 ]</pre></details></li><li class="workflow-step status-skipped" data-status="skipped"><span class="symbol" aria-hidden="true">—</span><strong>3. 负责人确认</strong><span class="state-text">本次不要求</span><p>当前义务集合不要求负责人确认。</p><details><summary>内部阶段与依据</summary><p>Attest</p><pre>[]</pre></details></li><li class="workflow-step status-pending" data-status="pending"><span class="symbol" aria-hidden="true">○</span><strong>4. 维护者检查</strong><span class="state-text">尚未开始</span><p>贡献侧要求完成后才进入维护者检查。</p><details><summary>内部阶段与依据</summary><p>Verify, Repair</p><pre>[]</pre></details></li><li class="workflow-step status-pending" data-status="pending"><span class="symbol" aria-hidden="true">○</span><strong>5. 人类维护者最终决定</strong><span class="state-text">尚未开始</span><p>前序治理要求完成后才进入最终决定。</p><details><summary>内部阶段与依据</summary><p>Decide, Record</p><pre>[]</pre></details></li></ol>
@@ -120,6 +122,8 @@ code { overflow-wrap: anywhere; }
   &quot;raw_status&quot;: &quot;unsatisfied&quot;,
   &quot;material_status&quot;: &quot;missing&quot;,
   &quot;workflow_status&quot;: &quot;awaiting_contributor&quot;,
+  &quot;blocking_requirement&quot;: true,
+  &quot;currently_blocks_progression&quot;: true,
   &quot;traceability&quot;: [
     {
       &quot;kind&quot;: &quot;compiled_obligation&quot;,
@@ -146,6 +150,8 @@ code { overflow-wrap: anywhere; }
   &quot;raw_status&quot;: &quot;unsatisfied&quot;,
   &quot;material_status&quot;: &quot;missing&quot;,
   &quot;workflow_status&quot;: &quot;awaiting_contributor&quot;,
+  &quot;blocking_requirement&quot;: true,
+  &quot;currently_blocks_progression&quot;: true,
   &quot;traceability&quot;: [
     {
       &quot;kind&quot;: &quot;compiled_obligation&quot;,
@@ -168,7 +174,7 @@ code { overflow-wrap: anywhere; }
     &quot;object_id&quot;: &quot;match-documentation-low&quot;,
     &quot;relationship&quot;: &quot;path_intensity&quot;
   }
-]</pre></details><details class="explanation"><summary>项目规则在案例打开后发生了变化 <small>policy migration warning</small></summary><p>Policy changed, but the case may remain on its recorded snapshot; migration must be an explicit maintainer decision. 迁移不会由诊断层静默执行，需要按权限另行决定。</p><pre>[
+]</pre></details><details class="explanation"><summary>项目规则在案例打开后发生了变化 <small>policy migration warning</small></summary><p>案例记录的项目规则版本与当前版本不同；系统不会静默迁移。 迁移需要按角色权限另行决定。</p><pre>[
   {
     &quot;kind&quot;: &quot;policy_snapshot&quot;,
     &quot;object_id&quot;: &quot;recorded-policy-fingerprint-before-change&quot;,
@@ -186,7 +192,65 @@ code { overflow-wrap: anywhere; }
     &quot;relationship&quot;: &quot;delegation_definition&quot;
   }
 ]</pre></details></section>
-<section class="preview" id="action-preview"><h2>操作前预览</h2><p>你准备执行：<strong>记录项目规则冲突</strong></p><p>当前角色和案例状态允许生成此操作计划。</p><ul><li><strong>案例状态</strong>: 等待贡献者补齐材料 → 发现问题，等待指定范围修改<br>案例转入 repair，由 policy steward 或维护者处理。</li><li><strong>O-SUMMARY</strong>: 尚未满足 → 项目规则冲突<br>案例转入 repair，由 policy steward 或维护者处理。</li></ul><p><strong>保留的未受影响材料：</strong>无</p><p><strong>将失效的材料：</strong>无</p><p><strong>将失效的负责人确认：</strong>无</p><p><strong>责任方变化：</strong>贡献者、贡献侧智能体 → 项目规则负责人、人类维护者</p><p><strong>流程位置变化：</strong>prepare_materials → prepare_materials</p><p><strong>预计新增记录：</strong>state_transition、finding、repair_request</p><p><strong>后续仍需负责人确认：</strong>否；<strong>后续仍需维护者检查：</strong>是；<strong>最终接受是否已经发生：</strong>否</p><p><strong>此预览本身不会修改案例：</strong>是</p></section>
+<section class="preview" id="action-preview"><h2>操作前预览</h2><p>你准备执行：<strong>记录项目规则冲突</strong></p><p>当前角色和案例状态允许生成此操作计划。</p><p><strong>将处理：</strong>修改说明</p><ul><li><strong>案例流程</strong>: 等待贡献者补齐材料 → 发现问题，等待指定范围修改<br>案例转入 repair，由 policy steward 或维护者处理。</li><li><strong>修改说明</strong>: 尚未满足 → 项目规则冲突<br>案例转入 repair，由 policy steward 或维护者处理。</li></ul><p><strong>保留的未受影响材料：</strong>无</p><p><strong>将失效：</strong>无</p><p><strong>责任方变化：</strong>贡献者、贡献侧智能体 → 项目规则负责人、人类维护者</p><p><strong>流程位置变化：</strong>贡献者准备材料 → 贡献者准备材料</p><p><strong>执行后：</strong></p><ul><li>当前责任方将转交给项目规则负责人、人类维护者。</li><li>案例将进入“贡献者准备材料”。</li><li>这不等于代码已经被项目接受。</li></ul><p><strong>后续仍需负责人确认：</strong>否；<strong>后续仍需维护者检查：</strong>是；<strong>最终接受是否已经发生：</strong>否</p><p><strong>此预览本身不会修改案例：</strong>是</p><details><summary>技术操作、内部 ID 与原始状态</summary><pre>{
+  &quot;operation&quot;: &quot;record_policy_conflict&quot;,
+  &quot;source_state&quot;: &quot;evidence_incomplete&quot;,
+  &quot;target_state&quot;: &quot;repair_requested&quot;,
+  &quot;effects&quot;: [
+    {
+      &quot;target&quot;: &quot;案例状态&quot;,
+      &quot;before&quot;: &quot;evidence_incomplete&quot;,
+      &quot;after&quot;: &quot;repair_requested&quot;,
+      &quot;explanation&quot;: &quot;案例转入 repair，由 policy steward 或维护者处理。&quot;,
+      &quot;source_object_ids&quot;: [
+        &quot;transition-fb1c3eb898d154ed98f2004b45dc4d73&quot;
+      ]
+    },
+    {
+      &quot;target&quot;: &quot;O-SUMMARY&quot;,
+      &quot;before&quot;: &quot;unsatisfied&quot;,
+      &quot;after&quot;: &quot;policy_conflict&quot;,
+      &quot;explanation&quot;: &quot;案例转入 repair，由 policy steward 或维护者处理。&quot;,
+      &quot;source_object_ids&quot;: [
+        &quot;obl-o-summary&quot;
+      ]
+    }
+  ],
+  &quot;affected_obligation_ids&quot;: [
+    &quot;O-SUMMARY&quot;
+  ],
+  &quot;retained_evidence_ids&quot;: [],
+  &quot;invalidated_attestation_ids&quot;: [],
+  &quot;invalidated_evidence_ids&quot;: [],
+  &quot;processed_objects&quot;: [
+    &quot;O-SUMMARY&quot;
+  ],
+  &quot;workflow_step_before&quot;: &quot;prepare_materials&quot;,
+  &quot;workflow_step_after&quot;: &quot;prepare_materials&quot;,
+  &quot;creates_records&quot;: [
+    &quot;state_transition&quot;,
+    &quot;finding&quot;,
+    &quot;repair_request&quot;
+  ],
+  &quot;preview_fingerprint&quot;: &quot;00e0d82c9c29a56cdf8e4d7e5dcb078ddf8b0561119be2c73f2e5d11576a2fea&quot;,
+  &quot;traceability&quot;: [
+    {
+      &quot;kind&quot;: &quot;permission_rule&quot;,
+      &quot;object_id&quot;: &quot;policy_steward:record_policy_conflict&quot;,
+      &quot;relationship&quot;: &quot;authority&quot;
+    },
+    {
+      &quot;kind&quot;: &quot;governance_case&quot;,
+      &quot;object_id&quot;: &quot;policy-migration&quot;,
+      &quot;relationship&quot;: &quot;source_state&quot;
+    },
+    {
+      &quot;kind&quot;: &quot;state_machine_rule&quot;,
+      &quot;object_id&quot;: &quot;evidence_incomplete:record_policy_conflict:repair_requested&quot;,
+      &quot;relationship&quot;: &quot;transition_plan&quot;
+    }
+  ]
+}</pre></details></section>
 <section>
 <h2>当前相关操作</h2>
 <p>这里列出合法选择及影响，不替维护者作决定。后端仍会重新检查角色、状态和对象范围。</p>
@@ -723,10 +787,11 @@ code { overflow-wrap: anywhere; }
   &quot;verification_records&quot;: [],
   &quot;findings&quot;: [],
   &quot;repair_requests&quot;: [],
+  &quot;attempted_operations&quot;: [],
   &quot;contribution_fingerprint&quot;: &quot;e9d96f8f36a92549155112fc471507591a241d77f81bbcdd2eb695d170e7fdc4&quot;,
   &quot;policy_fingerprint&quot;: &quot;recorded-policy-fingerprint-before-change&quot;,
   &quot;policy_snapshot&quot;: {
-    &quot;id&quot;: &quot;policy-d19a9b2e1a7747eb8d428a9f41012a51&quot;,
+    &quot;id&quot;: &quot;policy-ac99c1208e8a54a9b2d852a5334f8ed4&quot;,
     &quot;schema_version&quot;: &quot;agm.policy_snapshot/v0.2-dev&quot;,
     &quot;manifest_version&quot;: &quot;agm.manifest/v0.2-dev&quot;,
     &quot;base_commit&quot;: &quot;demo-base&quot;,
@@ -751,7 +816,7 @@ code { overflow-wrap: anywhere; }
   },
   &quot;transition_history&quot;: [
     {
-      &quot;id&quot;: &quot;transition-2cdb15d865e74f2e8c4b334a47492138&quot;,
+      &quot;id&quot;: &quot;transition-29f9d2b91ddb544bb4360480113f0ac8&quot;,
       &quot;case_id&quot;: &quot;policy-migration&quot;,
       &quot;actor&quot;: &quot;agm-engine&quot;,
       &quot;role&quot;: &quot;system&quot;,
@@ -760,12 +825,12 @@ code { overflow-wrap: anywhere; }
       &quot;action&quot;: &quot;resolve_policy&quot;,
       &quot;reason&quot;: &quot;Resolved canonical policy against the contribution.&quot;,
       &quot;related_object_ids&quot;: [
-        &quot;policy-d19a9b2e1a7747eb8d428a9f41012a51&quot;
+        &quot;policy-ac99c1208e8a54a9b2d852a5334f8ed4&quot;
       ],
       &quot;timestamp&quot;: &quot;2026-07-26T00:00:00Z&quot;
     },
     {
-      &quot;id&quot;: &quot;transition-9a4125a31a0d4ce1a4b027ff79f3c79a&quot;,
+      &quot;id&quot;: &quot;transition-1371daf054285d73b8979c4bed6e8195&quot;,
       &quot;case_id&quot;: &quot;policy-migration&quot;,
       &quot;actor&quot;: &quot;agm-engine&quot;,
       &quot;role&quot;: &quot;system&quot;,
@@ -780,7 +845,7 @@ code { overflow-wrap: anywhere; }
       &quot;timestamp&quot;: &quot;2026-07-26T00:00:00Z&quot;
     },
     {
-      &quot;id&quot;: &quot;transition-a3387af59dfd4db28c555a80ea33bc6d&quot;,
+      &quot;id&quot;: &quot;transition-fb1c3eb898d154ed98f2004b45dc4d73&quot;,
       &quot;case_id&quot;: &quot;policy-migration&quot;,
       &quot;actor&quot;: &quot;agm-engine&quot;,
       &quot;role&quot;: &quot;system&quot;,

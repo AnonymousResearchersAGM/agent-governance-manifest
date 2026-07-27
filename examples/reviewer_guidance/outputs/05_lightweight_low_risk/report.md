@@ -64,17 +64,38 @@
 
 ## 操作预览
 
+你准备执行：**检查指定范围：变更文件清单、修改说明**
+
+当前角色和案例状态允许生成此操作计划。
+
+### 将处理
+
+- 变更文件清单
+- 修改说明
+
+### 将保留
+
+- 无
+
+### 预计变化
+
+- 案例流程：等待维护者检查 → 等待人类维护者最终决定。受影响项会记录维护者检查；全部阻断项完成后进入人类最终决定。
+- 变更文件清单：材料已满足 → 已检查。受影响项会记录维护者检查；全部阻断项完成后进入人类最终决定。
+- 修改说明：材料已满足 → 已检查。受影响项会记录维护者检查；全部阻断项完成后进入人类最终决定。
+
+### 执行后
+
+- 本次指定材料将被标记为已检查。
+- 当前责任方将转交给人类维护者。
+- 案例将进入“人类维护者最终决定”。
+- 这不等于代码已经被项目接受。
+
+<details>
+<summary>技术操作、内部 ID 与原始状态</summary>
+
 ```json
 {
-  "action": "verify_evidence",
-  "title": "检查待核验项",
-  "actor": {
-    "actor": "verifier-1",
-    "role": "maintainer_verifier",
-    "human": true
-  },
-  "authorized": true,
-  "authorization_reason": "当前角色和案例状态允许生成此操作计划。",
+  "operation": "verify_evidence",
   "source_state": "awaiting_maintainer_verification",
   "target_state": "ready_for_human_decision",
   "effects": [
@@ -84,7 +105,7 @@
       "after": "ready_for_human_decision",
       "explanation": "受影响项会记录维护者检查；全部阻断项完成后进入人类最终决定。",
       "source_object_ids": [
-        "transition-ece0b73c39a4428190d87b96b52f4f33"
+        "transition-885e4c23f61651ee91ae9bb49a2e7bfd"
       ]
     },
     {
@@ -112,12 +133,18 @@
   ],
   "retained_evidence_ids": [],
   "invalidated_attestation_ids": [],
-  "next_authorized_actor_roles": [
-    "maintainer"
+  "invalidated_evidence_ids": [],
+  "processed_objects": [
+    "O-CHANGED-FILES",
+    "O-SUMMARY"
   ],
-  "requires_confirmation": true,
-  "mutates_case": false,
-  "preview_fingerprint": "6e8b14e49741b7bdfaa04538e9146350ac3d1d2353f2aab2d87909212c26a9a4",
+  "workflow_step_before": "maintainer_check",
+  "workflow_step_after": "human_final_decision",
+  "creates_records": [
+    "state_transition",
+    "maintainer_verification"
+  ],
+  "preview_fingerprint": "c8278e40da38678700dce8658ee5a40548e8b65f87098254c5560c9033621798",
   "traceability": [
     {
       "kind": "permission_rule",
@@ -134,43 +161,8 @@
       "object_id": "awaiting_maintainer_verification:verify_evidence:verification_complete",
       "relationship": "transition_plan"
     }
-  ],
-  "processed_objects": [
-    "O-CHANGED-FILES",
-    "O-SUMMARY"
-  ],
-  "invalidated_evidence_ids": [],
-  "responsibility_before": {
-    "primary_roles": [
-      "maintainer_verifier",
-      "policy_steward",
-      "maintainer"
-    ],
-    "display_label": "维护者核验人、项目规则负责人、人类维护者",
-    "reason": "贡献侧要求已经满足，当前轮到有权限的维护者检查；检查完成仍不等于接受。",
-    "blocking_items": [],
-    "next_handoff_roles": [
-      "maintainer"
-    ]
-  },
-  "responsibility_after": {
-    "primary_roles": [
-      "maintainer"
-    ],
-    "display_label": "人类维护者",
-    "reason": "治理检查已经达到可决策状态，但最终接受、拒绝或要求修改仍须由人类维护者明确记录。",
-    "blocking_items": [],
-    "next_handoff_roles": []
-  },
-  "workflow_step_before": "maintainer_check",
-  "workflow_step_after": "human_final_decision",
-  "creates_records": [
-    "state_transition",
-    "maintainer_verification"
-  ],
-  "requires_human_attestation_after": false,
-  "requires_maintainer_verification_after": false,
-  "final_acceptance_recorded": false,
-  "final_acceptance_still_required": true
+  ]
 }
 ```
+
+</details>

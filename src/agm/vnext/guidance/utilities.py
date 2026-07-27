@@ -41,7 +41,9 @@ def build_guidance_utilities(
     responsibility: ResponsibilityView,
 ) -> list[GuidanceUtilityAction]:
     """Build immutable exports without changing the case or transition log."""
-    blocking = [item for item in comparisons if item.blocks_progression]
+    blocking = [
+        item for item in comparisons if item.currently_blocks_progression
+    ]
     contributor_items = [
         item
         for item in comparisons

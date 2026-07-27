@@ -54,12 +54,12 @@
         "traceability": [
           {
             "kind": "state_transition",
-            "object_id": "transition-5e6fc44e7b674ff9a4b7c9a7e0e12856",
+            "object_id": "transition-043630b8f9a552db9b395148e8403140",
             "relationship": "primary:resolve_policy"
           },
           {
             "kind": "state_transition",
-            "object_id": "transition-70481b0197694df19ab026e01a4b6e7f",
+            "object_id": "transition-72924e41eadb5a0ea8d66634345ac05f",
             "relationship": "primary:compile_obligations"
           },
           {
@@ -94,17 +94,17 @@
         "traceability": [
           {
             "kind": "state_transition",
-            "object_id": "transition-f976d5bac610471abf4c543a11b76701",
+            "object_id": "transition-f1857b02dd0a5014803e0344afd7a7fc",
             "relationship": "primary:mark_evidence_state"
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
+            "object_id": "evidence-25ba94a5df425a8785f9aae745aaade8",
             "relationship": "binding_or_retention"
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-ebcddb02af6f4454a16de8186659a880",
+            "object_id": "evidence-1c539cd83057591199b1b750d7e93f70",
             "relationship": "binding_or_retention"
           }
         ]
@@ -137,7 +137,7 @@
         "traceability": [
           {
             "kind": "state_transition",
-            "object_id": "transition-ece0b73c39a4428190d87b96b52f4f33",
+            "object_id": "transition-885e4c23f61651ee91ae9bb49a2e7bfd",
             "relationship": "primary:submit_for_verification"
           }
         ]
@@ -166,13 +166,13 @@
         "result": "meets_requirement",
         "result_label": "符合要求",
         "raw_status": "satisfied",
-        "blocking": true,
+        "blocking_requirement": true,
         "source_rule_ids": [
           "documentation-low"
         ],
         "interaction_ids": [],
         "evidence_ids": [
-          "evidence-52161624f3d54c59a2b8490de8b9eaf5"
+          "evidence-25ba94a5df425a8785f9aae745aaade8"
         ],
         "binding_fingerprints": [
           "73fd2b8969b9783204be0cdaf8c41541ce85a134187c87443f7872143ab64d9b"
@@ -193,7 +193,7 @@
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
+            "object_id": "evidence-25ba94a5df425a8785f9aae745aaade8",
             "relationship": "observed"
           }
         ],
@@ -205,7 +205,7 @@
         "material_status_label": "已提供",
         "workflow_status": "completed",
         "workflow_status_label": "已完成",
-        "blocks_progression": false,
+        "currently_blocks_progression": false,
         "affected_scope": [
           "docs/guide.md"
         ]
@@ -218,13 +218,13 @@
         "result": "meets_requirement",
         "result_label": "符合要求",
         "raw_status": "satisfied",
-        "blocking": true,
+        "blocking_requirement": true,
         "source_rule_ids": [
           "documentation-low"
         ],
         "interaction_ids": [],
         "evidence_ids": [
-          "evidence-ebcddb02af6f4454a16de8186659a880"
+          "evidence-1c539cd83057591199b1b750d7e93f70"
         ],
         "binding_fingerprints": [
           "73fd2b8969b9783204be0cdaf8c41541ce85a134187c87443f7872143ab64d9b"
@@ -245,7 +245,7 @@
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-ebcddb02af6f4454a16de8186659a880",
+            "object_id": "evidence-1c539cd83057591199b1b750d7e93f70",
             "relationship": "observed"
           }
         ],
@@ -257,7 +257,7 @@
         "material_status_label": "已提供",
         "workflow_status": "completed",
         "workflow_status_label": "已完成",
-        "blocks_progression": false,
+        "currently_blocks_progression": false,
         "affected_scope": [
           "docs/guide.md"
         ]
@@ -317,7 +317,7 @@
         "primary_reason": "该操作直接对应当前流程阶段或开放问题。",
         "selector_options": [
           {
-            "selector_token": "sel-f0c9098999bbe3aff6f7255e4d28c0accbecc09b373fedcb941c93e8d0d6bc98",
+            "selector_token": "sel-479cf473272084cb84cc78a1d1de4dfc00bd525c8e9e984da029be73fc5f8507",
             "action": "verify_evidence",
             "label": "变更文件清单",
             "status_label": "已提供；已完成",
@@ -337,7 +337,7 @@
             "technical_details": {
               "obligation_id": "O-CHANGED-FILES",
               "evidence_ids": [
-                "evidence-52161624f3d54c59a2b8490de8b9eaf5"
+                "evidence-25ba94a5df425a8785f9aae745aaade8"
               ],
               "finding_ids": []
             },
@@ -354,13 +354,13 @@
               },
               {
                 "kind": "evidence",
-                "object_id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
+                "object_id": "evidence-25ba94a5df425a8785f9aae745aaade8",
                 "relationship": "observed"
               }
             ]
           },
           {
-            "selector_token": "sel-0a45c25626cb4641284f84d5fbfe9c4245e4f58c3537d21fad1e31ca62eee6e3",
+            "selector_token": "sel-2e294175907424a77ca974d26b67a1b33bb9e2d17965b4f12ec3bb1ac8709815",
             "action": "verify_evidence",
             "label": "修改说明",
             "status_label": "已提供；已完成",
@@ -380,7 +380,7 @@
             "technical_details": {
               "obligation_id": "O-SUMMARY",
               "evidence_ids": [
-                "evidence-ebcddb02af6f4454a16de8186659a880"
+                "evidence-1c539cd83057591199b1b750d7e93f70"
               ],
               "finding_ids": []
             },
@@ -397,7 +397,7 @@
               },
               {
                 "kind": "evidence",
-                "object_id": "evidence-ebcddb02af6f4454a16de8186659a880",
+                "object_id": "evidence-1c539cd83057591199b1b750d7e93f70",
                 "relationship": "observed"
               }
             ]
@@ -433,7 +433,7 @@
         "primary_reason": "该操作直接对应当前流程阶段或开放问题。",
         "selector_options": [
           {
-            "selector_token": "sel-e7ab4fe76329f1a5f3c3cbee607f915b8ff79a9f4d19e966959f82492b9db2ae",
+            "selector_token": "sel-6b75342b6bb7f7347ceb44b203e055a736c374e6b4f669042b861c3303379e3d",
             "action": "request_repair",
             "label": "变更文件清单",
             "status_label": "已提供；已完成",
@@ -453,7 +453,7 @@
             "technical_details": {
               "obligation_id": "O-CHANGED-FILES",
               "evidence_ids": [
-                "evidence-52161624f3d54c59a2b8490de8b9eaf5"
+                "evidence-25ba94a5df425a8785f9aae745aaade8"
               ],
               "finding_ids": []
             },
@@ -470,13 +470,13 @@
               },
               {
                 "kind": "evidence",
-                "object_id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
+                "object_id": "evidence-25ba94a5df425a8785f9aae745aaade8",
                 "relationship": "observed"
               }
             ]
           },
           {
-            "selector_token": "sel-2240cf7c001523a20a690cfe8b50d94b5153f2121a9672cdafbbc47b0b66232b",
+            "selector_token": "sel-a37be9876944c38bd109f3a2b178b6eceddd2bab75e07b10cc2a6a347a1fc4cf",
             "action": "request_repair",
             "label": "修改说明",
             "status_label": "已提供；已完成",
@@ -496,7 +496,7 @@
             "technical_details": {
               "obligation_id": "O-SUMMARY",
               "evidence_ids": [
-                "evidence-ebcddb02af6f4454a16de8186659a880"
+                "evidence-1c539cd83057591199b1b750d7e93f70"
               ],
               "finding_ids": []
             },
@@ -513,7 +513,7 @@
               },
               {
                 "kind": "evidence",
-                "object_id": "evidence-ebcddb02af6f4454a16de8186659a880",
+                "object_id": "evidence-1c539cd83057591199b1b750d7e93f70",
                 "relationship": "observed"
               }
             ]
@@ -549,7 +549,7 @@
         "primary_reason": "该操作直接对应当前流程阶段或开放问题。",
         "selector_options": [
           {
-            "selector_token": "sel-d9fc93d1730b531b7beb190b2387e4fa3d096a0158dbfbe51eafd64476ff627a",
+            "selector_token": "sel-7f837845a75380fc81de5ec100d50b81f6cd4c211947a33b5cb04dc6febc19ac",
             "action": "reject_evidence",
             "label": "变更文件清单",
             "status_label": "当前材料有效，可记录拒绝依据",
@@ -561,25 +561,25 @@
             ],
             "object_type": "evidence",
             "object_ids": [
-              "evidence-52161624f3d54c59a2b8490de8b9eaf5"
+              "evidence-25ba94a5df425a8785f9aae745aaade8"
             ],
             "blocking": true,
             "material_status": "valid",
             "workflow_status": "",
             "technical_details": {
-              "evidence_id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
+              "evidence_id": "evidence-25ba94a5df425a8785f9aae745aaade8",
               "evidence_type": "changed_files"
             },
             "traceability": [
               {
                 "kind": "evidence",
-                "object_id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
+                "object_id": "evidence-25ba94a5df425a8785f9aae745aaade8",
                 "relationship": "action_target"
               }
             ]
           },
           {
-            "selector_token": "sel-74dc4da9103a67f7ea5c810ca8342229adfb5ff12c4f34e9230adba698fdce2d",
+            "selector_token": "sel-0b5f19275bcd970c5abcde87dd43112054f3a5890b70aee98db5e330bbc92bf4",
             "action": "reject_evidence",
             "label": "修改说明",
             "status_label": "当前材料有效，可记录拒绝依据",
@@ -591,19 +591,19 @@
             ],
             "object_type": "evidence",
             "object_ids": [
-              "evidence-ebcddb02af6f4454a16de8186659a880"
+              "evidence-1c539cd83057591199b1b750d7e93f70"
             ],
             "blocking": true,
             "material_status": "valid",
             "workflow_status": "",
             "technical_details": {
-              "evidence_id": "evidence-ebcddb02af6f4454a16de8186659a880",
+              "evidence_id": "evidence-1c539cd83057591199b1b750d7e93f70",
               "evidence_type": "contribution_summary"
             },
             "traceability": [
               {
                 "kind": "evidence",
-                "object_id": "evidence-ebcddb02af6f4454a16de8186659a880",
+                "object_id": "evidence-1c539cd83057591199b1b750d7e93f70",
                 "relationship": "action_target"
               }
             ]
@@ -639,7 +639,7 @@
         "primary_reason": "该操作直接对应当前流程阶段或开放问题。",
         "selector_options": [
           {
-            "selector_token": "sel-c51f480a04b3c6695e98756405837375d3cd425d47ca28d35af195cba9736ee3",
+            "selector_token": "sel-5feaa82bb3561f775ce5b943199787408874ad227fb0ad7afe94b09cadea43e6",
             "action": "ask_clarification",
             "label": "变更文件清单",
             "status_label": "已提供；已完成",
@@ -659,7 +659,7 @@
             "technical_details": {
               "obligation_id": "O-CHANGED-FILES",
               "evidence_ids": [
-                "evidence-52161624f3d54c59a2b8490de8b9eaf5"
+                "evidence-25ba94a5df425a8785f9aae745aaade8"
               ],
               "finding_ids": []
             },
@@ -676,13 +676,13 @@
               },
               {
                 "kind": "evidence",
-                "object_id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
+                "object_id": "evidence-25ba94a5df425a8785f9aae745aaade8",
                 "relationship": "observed"
               }
             ]
           },
           {
-            "selector_token": "sel-9e85ed1d4a0f9d5da3fc2c3e36dc76af9fc813a429da9dc35c00bc8913b9b5df",
+            "selector_token": "sel-d5e4e752c9f1ba644f38e688e93249b40ed288623b59b44cfda2839788b9535a",
             "action": "ask_clarification",
             "label": "修改说明",
             "status_label": "已提供；已完成",
@@ -702,7 +702,7 @@
             "technical_details": {
               "obligation_id": "O-SUMMARY",
               "evidence_ids": [
-                "evidence-ebcddb02af6f4454a16de8186659a880"
+                "evidence-1c539cd83057591199b1b750d7e93f70"
               ],
               "finding_ids": []
             },
@@ -719,7 +719,7 @@
               },
               {
                 "kind": "evidence",
-                "object_id": "evidence-ebcddb02af6f4454a16de8186659a880",
+                "object_id": "evidence-1c539cd83057591199b1b750d7e93f70",
                 "relationship": "observed"
               }
             ]
@@ -755,7 +755,7 @@
         "primary_reason": "后端允许此操作，但它不直接处理当前主要阻断项。",
         "selector_options": [
           {
-            "selector_token": "sel-f6585d4bbddd56e5b8c49e189b5b12a434e2324739efa84873720ff7ea525409",
+            "selector_token": "sel-39f2c832f4c7f9e77cbb71470198a1e3ccdf533f68c0053e0d0fc998cf8f2280",
             "action": "record_policy_conflict",
             "label": "变更文件清单",
             "status_label": "已提供；已完成",
@@ -775,7 +775,7 @@
             "technical_details": {
               "obligation_id": "O-CHANGED-FILES",
               "evidence_ids": [
-                "evidence-52161624f3d54c59a2b8490de8b9eaf5"
+                "evidence-25ba94a5df425a8785f9aae745aaade8"
               ],
               "finding_ids": []
             },
@@ -792,13 +792,13 @@
               },
               {
                 "kind": "evidence",
-                "object_id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
+                "object_id": "evidence-25ba94a5df425a8785f9aae745aaade8",
                 "relationship": "observed"
               }
             ]
           },
           {
-            "selector_token": "sel-f2ddba222a592a976e0153341d3ed97553355d91894ef86e9b71ec62805b4943",
+            "selector_token": "sel-c8441a7d8ede909229ca6c57f3151b2bc272f97067c98d487b8e15a3feacff44",
             "action": "record_policy_conflict",
             "label": "修改说明",
             "status_label": "已提供；已完成",
@@ -818,7 +818,7 @@
             "technical_details": {
               "obligation_id": "O-SUMMARY",
               "evidence_ids": [
-                "evidence-ebcddb02af6f4454a16de8186659a880"
+                "evidence-1c539cd83057591199b1b750d7e93f70"
               ],
               "finding_ids": []
             },
@@ -835,7 +835,7 @@
               },
               {
                 "kind": "evidence",
-                "object_id": "evidence-ebcddb02af6f4454a16de8186659a880",
+                "object_id": "evidence-1c539cd83057591199b1b750d7e93f70",
                 "relationship": "observed"
               }
             ]
@@ -1103,7 +1103,20 @@
             "object_id": "match-documentation-low",
             "relationship": "path_intensity"
           }
-        ]
+        ],
+        "reason_presentation": {
+          "reason_code": "lightweight_path",
+          "display_plain": "本次未触发完整治理流程，只需完成轻量审核要求。",
+          "source_english": "Structured AGM preparation was explicitly declared or requested; no claim about contributor identity is inferred.",
+          "source_code": "lightweight_path",
+          "trace_refs": [
+            {
+              "kind": "matched_rule",
+              "object_id": "match-documentation-low",
+              "relationship": "path_intensity"
+            }
+          ]
+        }
       }
     ],
     "delegation_help": {
@@ -1116,7 +1129,8 @@
           "object_id": "human_direct",
           "relationship": "delegation_definition"
         }
-      ]
+      ],
+      "reason_presentation": null
     },
     "repair_loop": [
       "维护者发现问题",
@@ -1211,7 +1225,7 @@
       ],
       "evidence_records": [
         {
-          "id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
+          "id": "evidence-25ba94a5df425a8785f9aae745aaade8",
           "obligation_ids": [
             "O-CHANGED-FILES"
           ],
@@ -1241,7 +1255,7 @@
           "invalid_reasons": []
         },
         {
-          "id": "evidence-ebcddb02af6f4454a16de8186659a880",
+          "id": "evidence-1c539cd83057591199b1b750d7e93f70",
           "obligation_ids": [
             "O-SUMMARY"
           ],
@@ -1273,10 +1287,11 @@
       "verification_records": [],
       "findings": [],
       "repair_requests": [],
+      "attempted_operations": [],
       "contribution_fingerprint": "73fd2b8969b9783204be0cdaf8c41541ce85a134187c87443f7872143ab64d9b",
       "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
       "policy_snapshot": {
-        "id": "policy-b8dd4d4e523a48af938643102f4b34b5",
+        "id": "policy-96a6f90aa6bf538a87bef886cd0b04e6",
         "schema_version": "agm.policy_snapshot/v0.2-dev",
         "manifest_version": "agm.manifest/v0.2-dev",
         "base_commit": "demo-base",
@@ -1301,7 +1316,7 @@
       },
       "transition_history": [
         {
-          "id": "transition-5e6fc44e7b674ff9a4b7c9a7e0e12856",
+          "id": "transition-043630b8f9a552db9b395148e8403140",
           "case_id": "lightweight-low",
           "actor": "agm-engine",
           "role": "system",
@@ -1310,12 +1325,12 @@
           "action": "resolve_policy",
           "reason": "Resolved canonical policy against the contribution.",
           "related_object_ids": [
-            "policy-b8dd4d4e523a48af938643102f4b34b5"
+            "policy-96a6f90aa6bf538a87bef886cd0b04e6"
           ],
           "timestamp": "2026-07-26T00:00:00Z"
         },
         {
-          "id": "transition-70481b0197694df19ab026e01a4b6e7f",
+          "id": "transition-72924e41eadb5a0ea8d66634345ac05f",
           "case_id": "lightweight-low",
           "actor": "agm-engine",
           "role": "system",
@@ -1330,7 +1345,7 @@
           "timestamp": "2026-07-26T00:00:00Z"
         },
         {
-          "id": "transition-f976d5bac610471abf4c543a11b76701",
+          "id": "transition-f1857b02dd0a5014803e0344afd7a7fc",
           "case_id": "lightweight-low",
           "actor": "agm-engine",
           "role": "system",
@@ -1345,7 +1360,7 @@
           "timestamp": "2026-07-26T00:00:00Z"
         },
         {
-          "id": "transition-ece0b73c39a4428190d87b96b52f4f33",
+          "id": "transition-885e4c23f61651ee91ae9bb49a2e7bfd",
           "case_id": "lightweight-low",
           "actor": "contributor-agent",
           "role": "contributor_agent",
@@ -1354,10 +1369,10 @@
           "action": "submit_for_verification",
           "reason": "Contributor submitted prepared evidence for maintainer verification.",
           "related_object_ids": [
-            "evidence-52161624f3d54c59a2b8490de8b9eaf5",
-            "evidence-ebcddb02af6f4454a16de8186659a880"
+            "evidence-25ba94a5df425a8785f9aae745aaade8",
+            "evidence-1c539cd83057591199b1b750d7e93f70"
           ],
-          "timestamp": "2026-07-26T13:27:35Z"
+          "timestamp": "2026-07-26T00:00:00Z"
         }
       ],
       "final_decision": null,
@@ -1440,7 +1455,7 @@
         "primary_reason": "该操作直接对应当前流程阶段或开放问题。",
         "selector_options": [
           {
-            "selector_token": "sel-f0c9098999bbe3aff6f7255e4d28c0accbecc09b373fedcb941c93e8d0d6bc98",
+            "selector_token": "sel-479cf473272084cb84cc78a1d1de4dfc00bd525c8e9e984da029be73fc5f8507",
             "action": "verify_evidence",
             "label": "变更文件清单",
             "status_label": "已提供；已完成",
@@ -1460,7 +1475,7 @@
             "technical_details": {
               "obligation_id": "O-CHANGED-FILES",
               "evidence_ids": [
-                "evidence-52161624f3d54c59a2b8490de8b9eaf5"
+                "evidence-25ba94a5df425a8785f9aae745aaade8"
               ],
               "finding_ids": []
             },
@@ -1477,13 +1492,13 @@
               },
               {
                 "kind": "evidence",
-                "object_id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
+                "object_id": "evidence-25ba94a5df425a8785f9aae745aaade8",
                 "relationship": "observed"
               }
             ]
           },
           {
-            "selector_token": "sel-0a45c25626cb4641284f84d5fbfe9c4245e4f58c3537d21fad1e31ca62eee6e3",
+            "selector_token": "sel-2e294175907424a77ca974d26b67a1b33bb9e2d17965b4f12ec3bb1ac8709815",
             "action": "verify_evidence",
             "label": "修改说明",
             "status_label": "已提供；已完成",
@@ -1503,7 +1518,7 @@
             "technical_details": {
               "obligation_id": "O-SUMMARY",
               "evidence_ids": [
-                "evidence-ebcddb02af6f4454a16de8186659a880"
+                "evidence-1c539cd83057591199b1b750d7e93f70"
               ],
               "finding_ids": []
             },
@@ -1520,7 +1535,7 @@
               },
               {
                 "kind": "evidence",
-                "object_id": "evidence-ebcddb02af6f4454a16de8186659a880",
+                "object_id": "evidence-1c539cd83057591199b1b750d7e93f70",
                 "relationship": "observed"
               }
             ]
@@ -1556,7 +1571,7 @@
         "primary_reason": "该操作直接对应当前流程阶段或开放问题。",
         "selector_options": [
           {
-            "selector_token": "sel-e7ab4fe76329f1a5f3c3cbee607f915b8ff79a9f4d19e966959f82492b9db2ae",
+            "selector_token": "sel-6b75342b6bb7f7347ceb44b203e055a736c374e6b4f669042b861c3303379e3d",
             "action": "request_repair",
             "label": "变更文件清单",
             "status_label": "已提供；已完成",
@@ -1576,7 +1591,7 @@
             "technical_details": {
               "obligation_id": "O-CHANGED-FILES",
               "evidence_ids": [
-                "evidence-52161624f3d54c59a2b8490de8b9eaf5"
+                "evidence-25ba94a5df425a8785f9aae745aaade8"
               ],
               "finding_ids": []
             },
@@ -1593,13 +1608,13 @@
               },
               {
                 "kind": "evidence",
-                "object_id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
+                "object_id": "evidence-25ba94a5df425a8785f9aae745aaade8",
                 "relationship": "observed"
               }
             ]
           },
           {
-            "selector_token": "sel-2240cf7c001523a20a690cfe8b50d94b5153f2121a9672cdafbbc47b0b66232b",
+            "selector_token": "sel-a37be9876944c38bd109f3a2b178b6eceddd2bab75e07b10cc2a6a347a1fc4cf",
             "action": "request_repair",
             "label": "修改说明",
             "status_label": "已提供；已完成",
@@ -1619,7 +1634,7 @@
             "technical_details": {
               "obligation_id": "O-SUMMARY",
               "evidence_ids": [
-                "evidence-ebcddb02af6f4454a16de8186659a880"
+                "evidence-1c539cd83057591199b1b750d7e93f70"
               ],
               "finding_ids": []
             },
@@ -1636,7 +1651,7 @@
               },
               {
                 "kind": "evidence",
-                "object_id": "evidence-ebcddb02af6f4454a16de8186659a880",
+                "object_id": "evidence-1c539cd83057591199b1b750d7e93f70",
                 "relationship": "observed"
               }
             ]
@@ -1672,7 +1687,7 @@
         "primary_reason": "该操作直接对应当前流程阶段或开放问题。",
         "selector_options": [
           {
-            "selector_token": "sel-d9fc93d1730b531b7beb190b2387e4fa3d096a0158dbfbe51eafd64476ff627a",
+            "selector_token": "sel-7f837845a75380fc81de5ec100d50b81f6cd4c211947a33b5cb04dc6febc19ac",
             "action": "reject_evidence",
             "label": "变更文件清单",
             "status_label": "当前材料有效，可记录拒绝依据",
@@ -1684,25 +1699,25 @@
             ],
             "object_type": "evidence",
             "object_ids": [
-              "evidence-52161624f3d54c59a2b8490de8b9eaf5"
+              "evidence-25ba94a5df425a8785f9aae745aaade8"
             ],
             "blocking": true,
             "material_status": "valid",
             "workflow_status": "",
             "technical_details": {
-              "evidence_id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
+              "evidence_id": "evidence-25ba94a5df425a8785f9aae745aaade8",
               "evidence_type": "changed_files"
             },
             "traceability": [
               {
                 "kind": "evidence",
-                "object_id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
+                "object_id": "evidence-25ba94a5df425a8785f9aae745aaade8",
                 "relationship": "action_target"
               }
             ]
           },
           {
-            "selector_token": "sel-74dc4da9103a67f7ea5c810ca8342229adfb5ff12c4f34e9230adba698fdce2d",
+            "selector_token": "sel-0b5f19275bcd970c5abcde87dd43112054f3a5890b70aee98db5e330bbc92bf4",
             "action": "reject_evidence",
             "label": "修改说明",
             "status_label": "当前材料有效，可记录拒绝依据",
@@ -1714,19 +1729,19 @@
             ],
             "object_type": "evidence",
             "object_ids": [
-              "evidence-ebcddb02af6f4454a16de8186659a880"
+              "evidence-1c539cd83057591199b1b750d7e93f70"
             ],
             "blocking": true,
             "material_status": "valid",
             "workflow_status": "",
             "technical_details": {
-              "evidence_id": "evidence-ebcddb02af6f4454a16de8186659a880",
+              "evidence_id": "evidence-1c539cd83057591199b1b750d7e93f70",
               "evidence_type": "contribution_summary"
             },
             "traceability": [
               {
                 "kind": "evidence",
-                "object_id": "evidence-ebcddb02af6f4454a16de8186659a880",
+                "object_id": "evidence-1c539cd83057591199b1b750d7e93f70",
                 "relationship": "action_target"
               }
             ]
@@ -1762,7 +1777,7 @@
         "primary_reason": "该操作直接对应当前流程阶段或开放问题。",
         "selector_options": [
           {
-            "selector_token": "sel-c51f480a04b3c6695e98756405837375d3cd425d47ca28d35af195cba9736ee3",
+            "selector_token": "sel-5feaa82bb3561f775ce5b943199787408874ad227fb0ad7afe94b09cadea43e6",
             "action": "ask_clarification",
             "label": "变更文件清单",
             "status_label": "已提供；已完成",
@@ -1782,7 +1797,7 @@
             "technical_details": {
               "obligation_id": "O-CHANGED-FILES",
               "evidence_ids": [
-                "evidence-52161624f3d54c59a2b8490de8b9eaf5"
+                "evidence-25ba94a5df425a8785f9aae745aaade8"
               ],
               "finding_ids": []
             },
@@ -1799,13 +1814,13 @@
               },
               {
                 "kind": "evidence",
-                "object_id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
+                "object_id": "evidence-25ba94a5df425a8785f9aae745aaade8",
                 "relationship": "observed"
               }
             ]
           },
           {
-            "selector_token": "sel-9e85ed1d4a0f9d5da3fc2c3e36dc76af9fc813a429da9dc35c00bc8913b9b5df",
+            "selector_token": "sel-d5e4e752c9f1ba644f38e688e93249b40ed288623b59b44cfda2839788b9535a",
             "action": "ask_clarification",
             "label": "修改说明",
             "status_label": "已提供；已完成",
@@ -1825,7 +1840,7 @@
             "technical_details": {
               "obligation_id": "O-SUMMARY",
               "evidence_ids": [
-                "evidence-ebcddb02af6f4454a16de8186659a880"
+                "evidence-1c539cd83057591199b1b750d7e93f70"
               ],
               "finding_ids": []
             },
@@ -1842,7 +1857,7 @@
               },
               {
                 "kind": "evidence",
-                "object_id": "evidence-ebcddb02af6f4454a16de8186659a880",
+                "object_id": "evidence-1c539cd83057591199b1b750d7e93f70",
                 "relationship": "observed"
               }
             ]
@@ -1901,7 +1916,7 @@
         "primary_reason": "后端允许此操作，但它不直接处理当前主要阻断项。",
         "selector_options": [
           {
-            "selector_token": "sel-f6585d4bbddd56e5b8c49e189b5b12a434e2324739efa84873720ff7ea525409",
+            "selector_token": "sel-39f2c832f4c7f9e77cbb71470198a1e3ccdf533f68c0053e0d0fc998cf8f2280",
             "action": "record_policy_conflict",
             "label": "变更文件清单",
             "status_label": "已提供；已完成",
@@ -1921,7 +1936,7 @@
             "technical_details": {
               "obligation_id": "O-CHANGED-FILES",
               "evidence_ids": [
-                "evidence-52161624f3d54c59a2b8490de8b9eaf5"
+                "evidence-25ba94a5df425a8785f9aae745aaade8"
               ],
               "finding_ids": []
             },
@@ -1938,13 +1953,13 @@
               },
               {
                 "kind": "evidence",
-                "object_id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
+                "object_id": "evidence-25ba94a5df425a8785f9aae745aaade8",
                 "relationship": "observed"
               }
             ]
           },
           {
-            "selector_token": "sel-f2ddba222a592a976e0153341d3ed97553355d91894ef86e9b71ec62805b4943",
+            "selector_token": "sel-c8441a7d8ede909229ca6c57f3151b2bc272f97067c98d487b8e15a3feacff44",
             "action": "record_policy_conflict",
             "label": "修改说明",
             "status_label": "已提供；已完成",
@@ -1964,7 +1979,7 @@
             "technical_details": {
               "obligation_id": "O-SUMMARY",
               "evidence_ids": [
-                "evidence-ebcddb02af6f4454a16de8186659a880"
+                "evidence-1c539cd83057591199b1b750d7e93f70"
               ],
               "finding_ids": []
             },
@@ -1981,7 +1996,7 @@
               },
               {
                 "kind": "evidence",
-                "object_id": "evidence-ebcddb02af6f4454a16de8186659a880",
+                "object_id": "evidence-1c539cd83057591199b1b750d7e93f70",
                 "relationship": "observed"
               }
             ]
@@ -2028,7 +2043,7 @@
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
+            "object_id": "evidence-25ba94a5df425a8785f9aae745aaade8",
             "relationship": "observed"
           },
           {
@@ -2038,7 +2053,7 @@
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-ebcddb02af6f4454a16de8186659a880",
+            "object_id": "evidence-1c539cd83057591199b1b750d7e93f70",
             "relationship": "observed"
           }
         ],
@@ -2078,7 +2093,7 @@
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
+            "object_id": "evidence-25ba94a5df425a8785f9aae745aaade8",
             "relationship": "observed"
           },
           {
@@ -2088,14 +2103,15 @@
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-ebcddb02af6f4454a16de8186659a880",
+            "object_id": "evidence-1c539cd83057591199b1b750d7e93f70",
             "relationship": "observed"
           }
         ],
         "state_changing": false
       }
     ],
-    "materiality_declaration": null
+    "materiality_declaration": null,
+    "rejected_operation_notice": null
   },
   "expected_workflow_steps": [
     {
@@ -2133,13 +2149,13 @@
       "result": "meets_requirement",
       "result_label": "符合要求",
       "raw_status": "satisfied",
-      "blocking": true,
+      "blocking_requirement": true,
       "source_rule_ids": [
         "documentation-low"
       ],
       "interaction_ids": [],
       "evidence_ids": [
-        "evidence-52161624f3d54c59a2b8490de8b9eaf5"
+        "evidence-25ba94a5df425a8785f9aae745aaade8"
       ],
       "binding_fingerprints": [
         "73fd2b8969b9783204be0cdaf8c41541ce85a134187c87443f7872143ab64d9b"
@@ -2160,7 +2176,7 @@
         },
         {
           "kind": "evidence",
-          "object_id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
+          "object_id": "evidence-25ba94a5df425a8785f9aae745aaade8",
           "relationship": "observed"
         }
       ],
@@ -2172,7 +2188,7 @@
       "material_status_label": "已提供",
       "workflow_status": "completed",
       "workflow_status_label": "已完成",
-      "blocks_progression": false,
+      "currently_blocks_progression": false,
       "affected_scope": [
         "docs/guide.md"
       ]
@@ -2185,13 +2201,13 @@
       "result": "meets_requirement",
       "result_label": "符合要求",
       "raw_status": "satisfied",
-      "blocking": true,
+      "blocking_requirement": true,
       "source_rule_ids": [
         "documentation-low"
       ],
       "interaction_ids": [],
       "evidence_ids": [
-        "evidence-ebcddb02af6f4454a16de8186659a880"
+        "evidence-1c539cd83057591199b1b750d7e93f70"
       ],
       "binding_fingerprints": [
         "73fd2b8969b9783204be0cdaf8c41541ce85a134187c87443f7872143ab64d9b"
@@ -2212,7 +2228,7 @@
         },
         {
           "kind": "evidence",
-          "object_id": "evidence-ebcddb02af6f4454a16de8186659a880",
+          "object_id": "evidence-1c539cd83057591199b1b750d7e93f70",
           "relationship": "observed"
         }
       ],
@@ -2224,7 +2240,7 @@
       "material_status_label": "已提供",
       "workflow_status": "completed",
       "workflow_status_label": "已完成",
-      "blocks_progression": false,
+      "currently_blocks_progression": false,
       "affected_scope": [
         "docs/guide.md"
       ]
@@ -2275,7 +2291,7 @@
       "primary_reason": "该操作直接对应当前流程阶段或开放问题。",
       "selector_options": [
         {
-          "selector_token": "sel-f0c9098999bbe3aff6f7255e4d28c0accbecc09b373fedcb941c93e8d0d6bc98",
+          "selector_token": "sel-479cf473272084cb84cc78a1d1de4dfc00bd525c8e9e984da029be73fc5f8507",
           "action": "verify_evidence",
           "label": "变更文件清单",
           "status_label": "已提供；已完成",
@@ -2295,7 +2311,7 @@
           "technical_details": {
             "obligation_id": "O-CHANGED-FILES",
             "evidence_ids": [
-              "evidence-52161624f3d54c59a2b8490de8b9eaf5"
+              "evidence-25ba94a5df425a8785f9aae745aaade8"
             ],
             "finding_ids": []
           },
@@ -2312,13 +2328,13 @@
             },
             {
               "kind": "evidence",
-              "object_id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
+              "object_id": "evidence-25ba94a5df425a8785f9aae745aaade8",
               "relationship": "observed"
             }
           ]
         },
         {
-          "selector_token": "sel-0a45c25626cb4641284f84d5fbfe9c4245e4f58c3537d21fad1e31ca62eee6e3",
+          "selector_token": "sel-2e294175907424a77ca974d26b67a1b33bb9e2d17965b4f12ec3bb1ac8709815",
           "action": "verify_evidence",
           "label": "修改说明",
           "status_label": "已提供；已完成",
@@ -2338,7 +2354,7 @@
           "technical_details": {
             "obligation_id": "O-SUMMARY",
             "evidence_ids": [
-              "evidence-ebcddb02af6f4454a16de8186659a880"
+              "evidence-1c539cd83057591199b1b750d7e93f70"
             ],
             "finding_ids": []
           },
@@ -2355,7 +2371,7 @@
             },
             {
               "kind": "evidence",
-              "object_id": "evidence-ebcddb02af6f4454a16de8186659a880",
+              "object_id": "evidence-1c539cd83057591199b1b750d7e93f70",
               "relationship": "observed"
             }
           ]
@@ -2391,7 +2407,7 @@
       "primary_reason": "该操作直接对应当前流程阶段或开放问题。",
       "selector_options": [
         {
-          "selector_token": "sel-e7ab4fe76329f1a5f3c3cbee607f915b8ff79a9f4d19e966959f82492b9db2ae",
+          "selector_token": "sel-6b75342b6bb7f7347ceb44b203e055a736c374e6b4f669042b861c3303379e3d",
           "action": "request_repair",
           "label": "变更文件清单",
           "status_label": "已提供；已完成",
@@ -2411,7 +2427,7 @@
           "technical_details": {
             "obligation_id": "O-CHANGED-FILES",
             "evidence_ids": [
-              "evidence-52161624f3d54c59a2b8490de8b9eaf5"
+              "evidence-25ba94a5df425a8785f9aae745aaade8"
             ],
             "finding_ids": []
           },
@@ -2428,13 +2444,13 @@
             },
             {
               "kind": "evidence",
-              "object_id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
+              "object_id": "evidence-25ba94a5df425a8785f9aae745aaade8",
               "relationship": "observed"
             }
           ]
         },
         {
-          "selector_token": "sel-2240cf7c001523a20a690cfe8b50d94b5153f2121a9672cdafbbc47b0b66232b",
+          "selector_token": "sel-a37be9876944c38bd109f3a2b178b6eceddd2bab75e07b10cc2a6a347a1fc4cf",
           "action": "request_repair",
           "label": "修改说明",
           "status_label": "已提供；已完成",
@@ -2454,7 +2470,7 @@
           "technical_details": {
             "obligation_id": "O-SUMMARY",
             "evidence_ids": [
-              "evidence-ebcddb02af6f4454a16de8186659a880"
+              "evidence-1c539cd83057591199b1b750d7e93f70"
             ],
             "finding_ids": []
           },
@@ -2471,7 +2487,7 @@
             },
             {
               "kind": "evidence",
-              "object_id": "evidence-ebcddb02af6f4454a16de8186659a880",
+              "object_id": "evidence-1c539cd83057591199b1b750d7e93f70",
               "relationship": "observed"
             }
           ]
@@ -2507,7 +2523,7 @@
       "primary_reason": "该操作直接对应当前流程阶段或开放问题。",
       "selector_options": [
         {
-          "selector_token": "sel-d9fc93d1730b531b7beb190b2387e4fa3d096a0158dbfbe51eafd64476ff627a",
+          "selector_token": "sel-7f837845a75380fc81de5ec100d50b81f6cd4c211947a33b5cb04dc6febc19ac",
           "action": "reject_evidence",
           "label": "变更文件清单",
           "status_label": "当前材料有效，可记录拒绝依据",
@@ -2519,25 +2535,25 @@
           ],
           "object_type": "evidence",
           "object_ids": [
-            "evidence-52161624f3d54c59a2b8490de8b9eaf5"
+            "evidence-25ba94a5df425a8785f9aae745aaade8"
           ],
           "blocking": true,
           "material_status": "valid",
           "workflow_status": "",
           "technical_details": {
-            "evidence_id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
+            "evidence_id": "evidence-25ba94a5df425a8785f9aae745aaade8",
             "evidence_type": "changed_files"
           },
           "traceability": [
             {
               "kind": "evidence",
-              "object_id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
+              "object_id": "evidence-25ba94a5df425a8785f9aae745aaade8",
               "relationship": "action_target"
             }
           ]
         },
         {
-          "selector_token": "sel-74dc4da9103a67f7ea5c810ca8342229adfb5ff12c4f34e9230adba698fdce2d",
+          "selector_token": "sel-0b5f19275bcd970c5abcde87dd43112054f3a5890b70aee98db5e330bbc92bf4",
           "action": "reject_evidence",
           "label": "修改说明",
           "status_label": "当前材料有效，可记录拒绝依据",
@@ -2549,19 +2565,19 @@
           ],
           "object_type": "evidence",
           "object_ids": [
-            "evidence-ebcddb02af6f4454a16de8186659a880"
+            "evidence-1c539cd83057591199b1b750d7e93f70"
           ],
           "blocking": true,
           "material_status": "valid",
           "workflow_status": "",
           "technical_details": {
-            "evidence_id": "evidence-ebcddb02af6f4454a16de8186659a880",
+            "evidence_id": "evidence-1c539cd83057591199b1b750d7e93f70",
             "evidence_type": "contribution_summary"
           },
           "traceability": [
             {
               "kind": "evidence",
-              "object_id": "evidence-ebcddb02af6f4454a16de8186659a880",
+              "object_id": "evidence-1c539cd83057591199b1b750d7e93f70",
               "relationship": "action_target"
             }
           ]
@@ -2597,7 +2613,7 @@
       "primary_reason": "该操作直接对应当前流程阶段或开放问题。",
       "selector_options": [
         {
-          "selector_token": "sel-c51f480a04b3c6695e98756405837375d3cd425d47ca28d35af195cba9736ee3",
+          "selector_token": "sel-5feaa82bb3561f775ce5b943199787408874ad227fb0ad7afe94b09cadea43e6",
           "action": "ask_clarification",
           "label": "变更文件清单",
           "status_label": "已提供；已完成",
@@ -2617,7 +2633,7 @@
           "technical_details": {
             "obligation_id": "O-CHANGED-FILES",
             "evidence_ids": [
-              "evidence-52161624f3d54c59a2b8490de8b9eaf5"
+              "evidence-25ba94a5df425a8785f9aae745aaade8"
             ],
             "finding_ids": []
           },
@@ -2634,13 +2650,13 @@
             },
             {
               "kind": "evidence",
-              "object_id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
+              "object_id": "evidence-25ba94a5df425a8785f9aae745aaade8",
               "relationship": "observed"
             }
           ]
         },
         {
-          "selector_token": "sel-9e85ed1d4a0f9d5da3fc2c3e36dc76af9fc813a429da9dc35c00bc8913b9b5df",
+          "selector_token": "sel-d5e4e752c9f1ba644f38e688e93249b40ed288623b59b44cfda2839788b9535a",
           "action": "ask_clarification",
           "label": "修改说明",
           "status_label": "已提供；已完成",
@@ -2660,7 +2676,7 @@
           "technical_details": {
             "obligation_id": "O-SUMMARY",
             "evidence_ids": [
-              "evidence-ebcddb02af6f4454a16de8186659a880"
+              "evidence-1c539cd83057591199b1b750d7e93f70"
             ],
             "finding_ids": []
           },
@@ -2677,7 +2693,7 @@
             },
             {
               "kind": "evidence",
-              "object_id": "evidence-ebcddb02af6f4454a16de8186659a880",
+              "object_id": "evidence-1c539cd83057591199b1b750d7e93f70",
               "relationship": "observed"
             }
           ]
@@ -2689,7 +2705,7 @@
   "context_selector_data": {
     "verify_evidence": [
       {
-        "selector_token": "sel-f0c9098999bbe3aff6f7255e4d28c0accbecc09b373fedcb941c93e8d0d6bc98",
+        "selector_token": "sel-479cf473272084cb84cc78a1d1de4dfc00bd525c8e9e984da029be73fc5f8507",
         "action": "verify_evidence",
         "label": "变更文件清单",
         "status_label": "已提供；已完成",
@@ -2709,7 +2725,7 @@
         "technical_details": {
           "obligation_id": "O-CHANGED-FILES",
           "evidence_ids": [
-            "evidence-52161624f3d54c59a2b8490de8b9eaf5"
+            "evidence-25ba94a5df425a8785f9aae745aaade8"
           ],
           "finding_ids": []
         },
@@ -2726,13 +2742,13 @@
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
+            "object_id": "evidence-25ba94a5df425a8785f9aae745aaade8",
             "relationship": "observed"
           }
         ]
       },
       {
-        "selector_token": "sel-0a45c25626cb4641284f84d5fbfe9c4245e4f58c3537d21fad1e31ca62eee6e3",
+        "selector_token": "sel-2e294175907424a77ca974d26b67a1b33bb9e2d17965b4f12ec3bb1ac8709815",
         "action": "verify_evidence",
         "label": "修改说明",
         "status_label": "已提供；已完成",
@@ -2752,7 +2768,7 @@
         "technical_details": {
           "obligation_id": "O-SUMMARY",
           "evidence_ids": [
-            "evidence-ebcddb02af6f4454a16de8186659a880"
+            "evidence-1c539cd83057591199b1b750d7e93f70"
           ],
           "finding_ids": []
         },
@@ -2769,7 +2785,7 @@
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-ebcddb02af6f4454a16de8186659a880",
+            "object_id": "evidence-1c539cd83057591199b1b750d7e93f70",
             "relationship": "observed"
           }
         ]
@@ -2777,7 +2793,7 @@
     ],
     "request_repair": [
       {
-        "selector_token": "sel-e7ab4fe76329f1a5f3c3cbee607f915b8ff79a9f4d19e966959f82492b9db2ae",
+        "selector_token": "sel-6b75342b6bb7f7347ceb44b203e055a736c374e6b4f669042b861c3303379e3d",
         "action": "request_repair",
         "label": "变更文件清单",
         "status_label": "已提供；已完成",
@@ -2797,7 +2813,7 @@
         "technical_details": {
           "obligation_id": "O-CHANGED-FILES",
           "evidence_ids": [
-            "evidence-52161624f3d54c59a2b8490de8b9eaf5"
+            "evidence-25ba94a5df425a8785f9aae745aaade8"
           ],
           "finding_ids": []
         },
@@ -2814,13 +2830,13 @@
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
+            "object_id": "evidence-25ba94a5df425a8785f9aae745aaade8",
             "relationship": "observed"
           }
         ]
       },
       {
-        "selector_token": "sel-2240cf7c001523a20a690cfe8b50d94b5153f2121a9672cdafbbc47b0b66232b",
+        "selector_token": "sel-a37be9876944c38bd109f3a2b178b6eceddd2bab75e07b10cc2a6a347a1fc4cf",
         "action": "request_repair",
         "label": "修改说明",
         "status_label": "已提供；已完成",
@@ -2840,7 +2856,7 @@
         "technical_details": {
           "obligation_id": "O-SUMMARY",
           "evidence_ids": [
-            "evidence-ebcddb02af6f4454a16de8186659a880"
+            "evidence-1c539cd83057591199b1b750d7e93f70"
           ],
           "finding_ids": []
         },
@@ -2857,7 +2873,7 @@
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-ebcddb02af6f4454a16de8186659a880",
+            "object_id": "evidence-1c539cd83057591199b1b750d7e93f70",
             "relationship": "observed"
           }
         ]
@@ -2865,7 +2881,7 @@
     ],
     "reject_evidence": [
       {
-        "selector_token": "sel-d9fc93d1730b531b7beb190b2387e4fa3d096a0158dbfbe51eafd64476ff627a",
+        "selector_token": "sel-7f837845a75380fc81de5ec100d50b81f6cd4c211947a33b5cb04dc6febc19ac",
         "action": "reject_evidence",
         "label": "变更文件清单",
         "status_label": "当前材料有效，可记录拒绝依据",
@@ -2877,25 +2893,25 @@
         ],
         "object_type": "evidence",
         "object_ids": [
-          "evidence-52161624f3d54c59a2b8490de8b9eaf5"
+          "evidence-25ba94a5df425a8785f9aae745aaade8"
         ],
         "blocking": true,
         "material_status": "valid",
         "workflow_status": "",
         "technical_details": {
-          "evidence_id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
+          "evidence_id": "evidence-25ba94a5df425a8785f9aae745aaade8",
           "evidence_type": "changed_files"
         },
         "traceability": [
           {
             "kind": "evidence",
-            "object_id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
+            "object_id": "evidence-25ba94a5df425a8785f9aae745aaade8",
             "relationship": "action_target"
           }
         ]
       },
       {
-        "selector_token": "sel-74dc4da9103a67f7ea5c810ca8342229adfb5ff12c4f34e9230adba698fdce2d",
+        "selector_token": "sel-0b5f19275bcd970c5abcde87dd43112054f3a5890b70aee98db5e330bbc92bf4",
         "action": "reject_evidence",
         "label": "修改说明",
         "status_label": "当前材料有效，可记录拒绝依据",
@@ -2907,19 +2923,19 @@
         ],
         "object_type": "evidence",
         "object_ids": [
-          "evidence-ebcddb02af6f4454a16de8186659a880"
+          "evidence-1c539cd83057591199b1b750d7e93f70"
         ],
         "blocking": true,
         "material_status": "valid",
         "workflow_status": "",
         "technical_details": {
-          "evidence_id": "evidence-ebcddb02af6f4454a16de8186659a880",
+          "evidence_id": "evidence-1c539cd83057591199b1b750d7e93f70",
           "evidence_type": "contribution_summary"
         },
         "traceability": [
           {
             "kind": "evidence",
-            "object_id": "evidence-ebcddb02af6f4454a16de8186659a880",
+            "object_id": "evidence-1c539cd83057591199b1b750d7e93f70",
             "relationship": "action_target"
           }
         ]
@@ -2927,7 +2943,7 @@
     ],
     "ask_clarification": [
       {
-        "selector_token": "sel-c51f480a04b3c6695e98756405837375d3cd425d47ca28d35af195cba9736ee3",
+        "selector_token": "sel-5feaa82bb3561f775ce5b943199787408874ad227fb0ad7afe94b09cadea43e6",
         "action": "ask_clarification",
         "label": "变更文件清单",
         "status_label": "已提供；已完成",
@@ -2947,7 +2963,7 @@
         "technical_details": {
           "obligation_id": "O-CHANGED-FILES",
           "evidence_ids": [
-            "evidence-52161624f3d54c59a2b8490de8b9eaf5"
+            "evidence-25ba94a5df425a8785f9aae745aaade8"
           ],
           "finding_ids": []
         },
@@ -2964,13 +2980,13 @@
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
+            "object_id": "evidence-25ba94a5df425a8785f9aae745aaade8",
             "relationship": "observed"
           }
         ]
       },
       {
-        "selector_token": "sel-9e85ed1d4a0f9d5da3fc2c3e36dc76af9fc813a429da9dc35c00bc8913b9b5df",
+        "selector_token": "sel-d5e4e752c9f1ba644f38e688e93249b40ed288623b59b44cfda2839788b9535a",
         "action": "ask_clarification",
         "label": "修改说明",
         "status_label": "已提供；已完成",
@@ -2990,7 +3006,7 @@
         "technical_details": {
           "obligation_id": "O-SUMMARY",
           "evidence_ids": [
-            "evidence-ebcddb02af6f4454a16de8186659a880"
+            "evidence-1c539cd83057591199b1b750d7e93f70"
           ],
           "finding_ids": []
         },
@@ -3007,7 +3023,7 @@
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-ebcddb02af6f4454a16de8186659a880",
+            "object_id": "evidence-1c539cd83057591199b1b750d7e93f70",
             "relationship": "observed"
           }
         ]
@@ -3015,7 +3031,7 @@
     ],
     "record_policy_conflict": [
       {
-        "selector_token": "sel-f6585d4bbddd56e5b8c49e189b5b12a434e2324739efa84873720ff7ea525409",
+        "selector_token": "sel-39f2c832f4c7f9e77cbb71470198a1e3ccdf533f68c0053e0d0fc998cf8f2280",
         "action": "record_policy_conflict",
         "label": "变更文件清单",
         "status_label": "已提供；已完成",
@@ -3035,7 +3051,7 @@
         "technical_details": {
           "obligation_id": "O-CHANGED-FILES",
           "evidence_ids": [
-            "evidence-52161624f3d54c59a2b8490de8b9eaf5"
+            "evidence-25ba94a5df425a8785f9aae745aaade8"
           ],
           "finding_ids": []
         },
@@ -3052,13 +3068,13 @@
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
+            "object_id": "evidence-25ba94a5df425a8785f9aae745aaade8",
             "relationship": "observed"
           }
         ]
       },
       {
-        "selector_token": "sel-f2ddba222a592a976e0153341d3ed97553355d91894ef86e9b71ec62805b4943",
+        "selector_token": "sel-c8441a7d8ede909229ca6c57f3151b2bc272f97067c98d487b8e15a3feacff44",
         "action": "record_policy_conflict",
         "label": "修改说明",
         "status_label": "已提供；已完成",
@@ -3078,7 +3094,7 @@
         "technical_details": {
           "obligation_id": "O-SUMMARY",
           "evidence_ids": [
-            "evidence-ebcddb02af6f4454a16de8186659a880"
+            "evidence-1c539cd83057591199b1b750d7e93f70"
           ],
           "finding_ids": []
         },
@@ -3095,7 +3111,7 @@
           },
           {
             "kind": "evidence",
-            "object_id": "evidence-ebcddb02af6f4454a16de8186659a880",
+            "object_id": "evidence-1c539cd83057591199b1b750d7e93f70",
             "relationship": "observed"
           }
         ]
@@ -3106,12 +3122,12 @@
     "identify_requirements": [
       {
         "kind": "state_transition",
-        "object_id": "transition-5e6fc44e7b674ff9a4b7c9a7e0e12856",
+        "object_id": "transition-043630b8f9a552db9b395148e8403140",
         "relationship": "primary:resolve_policy"
       },
       {
         "kind": "state_transition",
-        "object_id": "transition-70481b0197694df19ab026e01a4b6e7f",
+        "object_id": "transition-72924e41eadb5a0ea8d66634345ac05f",
         "relationship": "primary:compile_obligations"
       },
       {
@@ -3133,17 +3149,17 @@
     "prepare_materials": [
       {
         "kind": "state_transition",
-        "object_id": "transition-f976d5bac610471abf4c543a11b76701",
+        "object_id": "transition-f1857b02dd0a5014803e0344afd7a7fc",
         "relationship": "primary:mark_evidence_state"
       },
       {
         "kind": "evidence",
-        "object_id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
+        "object_id": "evidence-25ba94a5df425a8785f9aae745aaade8",
         "relationship": "binding_or_retention"
       },
       {
         "kind": "evidence",
-        "object_id": "evidence-ebcddb02af6f4454a16de8186659a880",
+        "object_id": "evidence-1c539cd83057591199b1b750d7e93f70",
         "relationship": "binding_or_retention"
       }
     ],
@@ -3151,7 +3167,7 @@
     "maintainer_check": [
       {
         "kind": "state_transition",
-        "object_id": "transition-ece0b73c39a4428190d87b96b52f4f33",
+        "object_id": "transition-885e4c23f61651ee91ae9bb49a2e7bfd",
         "relationship": "primary:submit_for_verification"
       }
     ],
@@ -3210,7 +3226,7 @@
       "primary_reason": "该操作直接对应当前流程阶段或开放问题。",
       "selector_options": [
         {
-          "selector_token": "sel-f0c9098999bbe3aff6f7255e4d28c0accbecc09b373fedcb941c93e8d0d6bc98",
+          "selector_token": "sel-479cf473272084cb84cc78a1d1de4dfc00bd525c8e9e984da029be73fc5f8507",
           "action": "verify_evidence",
           "label": "变更文件清单",
           "status_label": "已提供；已完成",
@@ -3230,7 +3246,7 @@
           "technical_details": {
             "obligation_id": "O-CHANGED-FILES",
             "evidence_ids": [
-              "evidence-52161624f3d54c59a2b8490de8b9eaf5"
+              "evidence-25ba94a5df425a8785f9aae745aaade8"
             ],
             "finding_ids": []
           },
@@ -3247,13 +3263,13 @@
             },
             {
               "kind": "evidence",
-              "object_id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
+              "object_id": "evidence-25ba94a5df425a8785f9aae745aaade8",
               "relationship": "observed"
             }
           ]
         },
         {
-          "selector_token": "sel-0a45c25626cb4641284f84d5fbfe9c4245e4f58c3537d21fad1e31ca62eee6e3",
+          "selector_token": "sel-2e294175907424a77ca974d26b67a1b33bb9e2d17965b4f12ec3bb1ac8709815",
           "action": "verify_evidence",
           "label": "修改说明",
           "status_label": "已提供；已完成",
@@ -3273,7 +3289,7 @@
           "technical_details": {
             "obligation_id": "O-SUMMARY",
             "evidence_ids": [
-              "evidence-ebcddb02af6f4454a16de8186659a880"
+              "evidence-1c539cd83057591199b1b750d7e93f70"
             ],
             "finding_ids": []
           },
@@ -3290,7 +3306,7 @@
             },
             {
               "kind": "evidence",
-              "object_id": "evidence-ebcddb02af6f4454a16de8186659a880",
+              "object_id": "evidence-1c539cd83057591199b1b750d7e93f70",
               "relationship": "observed"
             }
           ]
@@ -3326,7 +3342,7 @@
       "primary_reason": "该操作直接对应当前流程阶段或开放问题。",
       "selector_options": [
         {
-          "selector_token": "sel-e7ab4fe76329f1a5f3c3cbee607f915b8ff79a9f4d19e966959f82492b9db2ae",
+          "selector_token": "sel-6b75342b6bb7f7347ceb44b203e055a736c374e6b4f669042b861c3303379e3d",
           "action": "request_repair",
           "label": "变更文件清单",
           "status_label": "已提供；已完成",
@@ -3346,7 +3362,7 @@
           "technical_details": {
             "obligation_id": "O-CHANGED-FILES",
             "evidence_ids": [
-              "evidence-52161624f3d54c59a2b8490de8b9eaf5"
+              "evidence-25ba94a5df425a8785f9aae745aaade8"
             ],
             "finding_ids": []
           },
@@ -3363,13 +3379,13 @@
             },
             {
               "kind": "evidence",
-              "object_id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
+              "object_id": "evidence-25ba94a5df425a8785f9aae745aaade8",
               "relationship": "observed"
             }
           ]
         },
         {
-          "selector_token": "sel-2240cf7c001523a20a690cfe8b50d94b5153f2121a9672cdafbbc47b0b66232b",
+          "selector_token": "sel-a37be9876944c38bd109f3a2b178b6eceddd2bab75e07b10cc2a6a347a1fc4cf",
           "action": "request_repair",
           "label": "修改说明",
           "status_label": "已提供；已完成",
@@ -3389,7 +3405,7 @@
           "technical_details": {
             "obligation_id": "O-SUMMARY",
             "evidence_ids": [
-              "evidence-ebcddb02af6f4454a16de8186659a880"
+              "evidence-1c539cd83057591199b1b750d7e93f70"
             ],
             "finding_ids": []
           },
@@ -3406,7 +3422,7 @@
             },
             {
               "kind": "evidence",
-              "object_id": "evidence-ebcddb02af6f4454a16de8186659a880",
+              "object_id": "evidence-1c539cd83057591199b1b750d7e93f70",
               "relationship": "observed"
             }
           ]
@@ -3442,7 +3458,7 @@
       "primary_reason": "该操作直接对应当前流程阶段或开放问题。",
       "selector_options": [
         {
-          "selector_token": "sel-d9fc93d1730b531b7beb190b2387e4fa3d096a0158dbfbe51eafd64476ff627a",
+          "selector_token": "sel-7f837845a75380fc81de5ec100d50b81f6cd4c211947a33b5cb04dc6febc19ac",
           "action": "reject_evidence",
           "label": "变更文件清单",
           "status_label": "当前材料有效，可记录拒绝依据",
@@ -3454,25 +3470,25 @@
           ],
           "object_type": "evidence",
           "object_ids": [
-            "evidence-52161624f3d54c59a2b8490de8b9eaf5"
+            "evidence-25ba94a5df425a8785f9aae745aaade8"
           ],
           "blocking": true,
           "material_status": "valid",
           "workflow_status": "",
           "technical_details": {
-            "evidence_id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
+            "evidence_id": "evidence-25ba94a5df425a8785f9aae745aaade8",
             "evidence_type": "changed_files"
           },
           "traceability": [
             {
               "kind": "evidence",
-              "object_id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
+              "object_id": "evidence-25ba94a5df425a8785f9aae745aaade8",
               "relationship": "action_target"
             }
           ]
         },
         {
-          "selector_token": "sel-74dc4da9103a67f7ea5c810ca8342229adfb5ff12c4f34e9230adba698fdce2d",
+          "selector_token": "sel-0b5f19275bcd970c5abcde87dd43112054f3a5890b70aee98db5e330bbc92bf4",
           "action": "reject_evidence",
           "label": "修改说明",
           "status_label": "当前材料有效，可记录拒绝依据",
@@ -3484,19 +3500,19 @@
           ],
           "object_type": "evidence",
           "object_ids": [
-            "evidence-ebcddb02af6f4454a16de8186659a880"
+            "evidence-1c539cd83057591199b1b750d7e93f70"
           ],
           "blocking": true,
           "material_status": "valid",
           "workflow_status": "",
           "technical_details": {
-            "evidence_id": "evidence-ebcddb02af6f4454a16de8186659a880",
+            "evidence_id": "evidence-1c539cd83057591199b1b750d7e93f70",
             "evidence_type": "contribution_summary"
           },
           "traceability": [
             {
               "kind": "evidence",
-              "object_id": "evidence-ebcddb02af6f4454a16de8186659a880",
+              "object_id": "evidence-1c539cd83057591199b1b750d7e93f70",
               "relationship": "action_target"
             }
           ]
@@ -3532,7 +3548,7 @@
       "primary_reason": "该操作直接对应当前流程阶段或开放问题。",
       "selector_options": [
         {
-          "selector_token": "sel-c51f480a04b3c6695e98756405837375d3cd425d47ca28d35af195cba9736ee3",
+          "selector_token": "sel-5feaa82bb3561f775ce5b943199787408874ad227fb0ad7afe94b09cadea43e6",
           "action": "ask_clarification",
           "label": "变更文件清单",
           "status_label": "已提供；已完成",
@@ -3552,7 +3568,7 @@
           "technical_details": {
             "obligation_id": "O-CHANGED-FILES",
             "evidence_ids": [
-              "evidence-52161624f3d54c59a2b8490de8b9eaf5"
+              "evidence-25ba94a5df425a8785f9aae745aaade8"
             ],
             "finding_ids": []
           },
@@ -3569,13 +3585,13 @@
             },
             {
               "kind": "evidence",
-              "object_id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
+              "object_id": "evidence-25ba94a5df425a8785f9aae745aaade8",
               "relationship": "observed"
             }
           ]
         },
         {
-          "selector_token": "sel-9e85ed1d4a0f9d5da3fc2c3e36dc76af9fc813a429da9dc35c00bc8913b9b5df",
+          "selector_token": "sel-d5e4e752c9f1ba644f38e688e93249b40ed288623b59b44cfda2839788b9535a",
           "action": "ask_clarification",
           "label": "修改说明",
           "status_label": "已提供；已完成",
@@ -3595,7 +3611,7 @@
           "technical_details": {
             "obligation_id": "O-SUMMARY",
             "evidence_ids": [
-              "evidence-ebcddb02af6f4454a16de8186659a880"
+              "evidence-1c539cd83057591199b1b750d7e93f70"
             ],
             "finding_ids": []
           },
@@ -3612,7 +3628,7 @@
             },
             {
               "kind": "evidence",
-              "object_id": "evidence-ebcddb02af6f4454a16de8186659a880",
+              "object_id": "evidence-1c539cd83057591199b1b750d7e93f70",
               "relationship": "observed"
             }
           ]
@@ -3648,7 +3664,7 @@
       "primary_reason": "后端允许此操作，但它不直接处理当前主要阻断项。",
       "selector_options": [
         {
-          "selector_token": "sel-f6585d4bbddd56e5b8c49e189b5b12a434e2324739efa84873720ff7ea525409",
+          "selector_token": "sel-39f2c832f4c7f9e77cbb71470198a1e3ccdf533f68c0053e0d0fc998cf8f2280",
           "action": "record_policy_conflict",
           "label": "变更文件清单",
           "status_label": "已提供；已完成",
@@ -3668,7 +3684,7 @@
           "technical_details": {
             "obligation_id": "O-CHANGED-FILES",
             "evidence_ids": [
-              "evidence-52161624f3d54c59a2b8490de8b9eaf5"
+              "evidence-25ba94a5df425a8785f9aae745aaade8"
             ],
             "finding_ids": []
           },
@@ -3685,13 +3701,13 @@
             },
             {
               "kind": "evidence",
-              "object_id": "evidence-52161624f3d54c59a2b8490de8b9eaf5",
+              "object_id": "evidence-25ba94a5df425a8785f9aae745aaade8",
               "relationship": "observed"
             }
           ]
         },
         {
-          "selector_token": "sel-f2ddba222a592a976e0153341d3ed97553355d91894ef86e9b71ec62805b4943",
+          "selector_token": "sel-c8441a7d8ede909229ca6c57f3151b2bc272f97067c98d487b8e15a3feacff44",
           "action": "record_policy_conflict",
           "label": "修改说明",
           "status_label": "已提供；已完成",
@@ -3711,7 +3727,7 @@
           "technical_details": {
             "obligation_id": "O-SUMMARY",
             "evidence_ids": [
-              "evidence-ebcddb02af6f4454a16de8186659a880"
+              "evidence-1c539cd83057591199b1b750d7e93f70"
             ],
             "finding_ids": []
           },
@@ -3728,7 +3744,7 @@
             },
             {
               "kind": "evidence",
-              "object_id": "evidence-ebcddb02af6f4454a16de8186659a880",
+              "object_id": "evidence-1c539cd83057591199b1b750d7e93f70",
               "relationship": "observed"
             }
           ]
@@ -3986,8 +4002,7 @@
     }
   ],
   "action_preview": {
-    "action": "verify_evidence",
-    "title": "检查待核验项",
+    "title": "检查指定范围：变更文件清单、修改说明",
     "actor": {
       "actor": "verifier-1",
       "role": "maintainer_verifier",
@@ -3995,71 +4010,106 @@
     },
     "authorized": true,
     "authorization_reason": "当前角色和案例状态允许生成此操作计划。",
-    "source_state": "awaiting_maintainer_verification",
-    "target_state": "ready_for_human_decision",
-    "effects": [
+    "display_effects": [
       {
-        "target": "案例状态",
-        "before": "awaiting_maintainer_verification",
-        "after": "ready_for_human_decision",
-        "explanation": "受影响项会记录维护者检查；全部阻断项完成后进入人类最终决定。",
-        "source_object_ids": [
-          "transition-ece0b73c39a4428190d87b96b52f4f33"
-        ]
+        "display_label": "案例流程",
+        "before_label": "等待维护者检查",
+        "after_label": "等待人类维护者最终决定",
+        "display_description": "受影响项会记录维护者检查；全部阻断项完成后进入人类最终决定。"
       },
       {
-        "target": "O-CHANGED-FILES",
-        "before": "satisfied",
-        "after": "verified",
-        "explanation": "受影响项会记录维护者检查；全部阻断项完成后进入人类最终决定。",
-        "source_object_ids": [
-          "obl-o-changed-files"
-        ]
+        "display_label": "变更文件清单",
+        "before_label": "材料已满足",
+        "after_label": "已检查",
+        "display_description": "受影响项会记录维护者检查；全部阻断项完成后进入人类最终决定。"
       },
       {
-        "target": "O-SUMMARY",
-        "before": "satisfied",
-        "after": "verified",
-        "explanation": "受影响项会记录维护者检查；全部阻断项完成后进入人类最终决定。",
-        "source_object_ids": [
-          "obl-o-summary"
-        ]
+        "display_label": "修改说明",
+        "before_label": "材料已满足",
+        "after_label": "已检查",
+        "display_description": "受影响项会记录维护者检查；全部阻断项完成后进入人类最终决定。"
       }
     ],
-    "affected_obligation_ids": [
-      "O-CHANGED-FILES",
-      "O-SUMMARY"
+    "affected_items": [
+      "变更文件清单",
+      "修改说明"
     ],
-    "retained_evidence_ids": [],
-    "invalidated_attestation_ids": [],
+    "retained_items": [],
+    "invalidated_items": [],
     "next_authorized_actor_roles": [
       "maintainer"
     ],
     "requires_confirmation": true,
     "mutates_case": false,
-    "preview_fingerprint": "6e8b14e49741b7bdfaa04538e9146350ac3d1d2353f2aab2d87909212c26a9a4",
-    "traceability": [
-      {
-        "kind": "permission_rule",
-        "object_id": "maintainer_verifier:verify_evidence",
-        "relationship": "authority"
-      },
-      {
-        "kind": "governance_case",
-        "object_id": "lightweight-low",
-        "relationship": "source_state"
-      },
-      {
-        "kind": "state_machine_rule",
-        "object_id": "awaiting_maintainer_verification:verify_evidence:verification_complete",
-        "relationship": "transition_plan"
-      }
-    ],
-    "processed_objects": [
-      "O-CHANGED-FILES",
-      "O-SUMMARY"
-    ],
-    "invalidated_evidence_ids": [],
+    "technical_details": {
+      "operation": "verify_evidence",
+      "source_state": "awaiting_maintainer_verification",
+      "target_state": "ready_for_human_decision",
+      "effects": [
+        {
+          "target": "案例状态",
+          "before": "awaiting_maintainer_verification",
+          "after": "ready_for_human_decision",
+          "explanation": "受影响项会记录维护者检查；全部阻断项完成后进入人类最终决定。",
+          "source_object_ids": [
+            "transition-885e4c23f61651ee91ae9bb49a2e7bfd"
+          ]
+        },
+        {
+          "target": "O-CHANGED-FILES",
+          "before": "satisfied",
+          "after": "verified",
+          "explanation": "受影响项会记录维护者检查；全部阻断项完成后进入人类最终决定。",
+          "source_object_ids": [
+            "obl-o-changed-files"
+          ]
+        },
+        {
+          "target": "O-SUMMARY",
+          "before": "satisfied",
+          "after": "verified",
+          "explanation": "受影响项会记录维护者检查；全部阻断项完成后进入人类最终决定。",
+          "source_object_ids": [
+            "obl-o-summary"
+          ]
+        }
+      ],
+      "affected_obligation_ids": [
+        "O-CHANGED-FILES",
+        "O-SUMMARY"
+      ],
+      "retained_evidence_ids": [],
+      "invalidated_attestation_ids": [],
+      "invalidated_evidence_ids": [],
+      "processed_objects": [
+        "O-CHANGED-FILES",
+        "O-SUMMARY"
+      ],
+      "workflow_step_before": "maintainer_check",
+      "workflow_step_after": "human_final_decision",
+      "creates_records": [
+        "state_transition",
+        "maintainer_verification"
+      ],
+      "preview_fingerprint": "c8278e40da38678700dce8658ee5a40548e8b65f87098254c5560c9033621798",
+      "traceability": [
+        {
+          "kind": "permission_rule",
+          "object_id": "maintainer_verifier:verify_evidence",
+          "relationship": "authority"
+        },
+        {
+          "kind": "governance_case",
+          "object_id": "lightweight-low",
+          "relationship": "source_state"
+        },
+        {
+          "kind": "state_machine_rule",
+          "object_id": "awaiting_maintainer_verification:verify_evidence:verification_complete",
+          "relationship": "transition_plan"
+        }
+      ]
+    },
     "responsibility_before": {
       "primary_roles": [
         "maintainer_verifier",
@@ -4082,11 +4132,13 @@
       "blocking_items": [],
       "next_handoff_roles": []
     },
-    "workflow_step_before": "maintainer_check",
-    "workflow_step_after": "human_final_decision",
-    "creates_records": [
-      "state_transition",
-      "maintainer_verification"
+    "workflow_position_before": "维护者检查",
+    "workflow_position_after": "人类维护者最终决定",
+    "next_steps": [
+      "本次指定材料将被标记为已检查。",
+      "当前责任方将转交给人类维护者。",
+      "案例将进入“人类维护者最终决定”。",
+      "这不等于代码已经被项目接受。"
     ],
     "requires_human_attestation_after": false,
     "requires_maintainer_verification_after": false,

@@ -15,8 +15,15 @@ preferred maintainer answer:
 Regenerate the JSON, Markdown, and HTML outputs from a clean clone:
 
 ```bash
-python scripts/generate_reviewer_guidance_demos.py
+PYTHONPATH=src python scripts/generate_reviewer_guidance_demos.py
+git status --short
 ```
+
+Deterministic research-fixture mode is the default, so a frozen clean checkout
+remains clean and per-file SHA-256 hashes remain identical after regeneration.
+Use `--runtime-random` only to exercise ordinary random IDs and runtime selector
+signing during development; the fixed demo context is never a production
+session context.
 
 Every scenario directory contains `guidance.json`, `report.md`, and
 `report.html`. JSON contains the complete guidance view, workflow and

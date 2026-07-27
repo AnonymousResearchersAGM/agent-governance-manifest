@@ -139,6 +139,12 @@ obligation ID. It is not written into `.agm`, and raw canonical English remains
 in every comparison row and technical detail. Unknown future obligations use a
 safe non-empty fallback.
 
+Reviewer-facing finding, repair, materiality and scope reasons follow the same
+boundary through `GuidanceReasonPresentation`. Structured codes select concise
+Chinese presentation; complete source English and typed trace references remain
+available. Unknown reason codes use a neutral fallback rather than sentence
+matching or scenario-specific presentation.
+
 `RequirementComparison` models two orthogonal axes:
 
 - material: missing, invalid, stale, provided, retained, verified, overridden,
@@ -148,6 +154,12 @@ safe non-empty fallback.
 
 This prevents valid repaired material from being labelled invalid merely
 because a finding remains open until scoped revalidation.
+
+The boolean names follow the same separation:
+`blocking_requirement` is the compiled policy property, while
+`currently_blocks_progression` is the current workflow consequence. Deprecated
+Python aliases preserve early source consumers; default serialization emits
+only the clear names.
 
 `ResponsibilityView` is derived from unresolved material, findings, repairs,
 attestations, policy conflicts, revalidation scope and readiness. Case state is
@@ -183,8 +195,37 @@ responsibility and workflow, expected record types, remaining attestation and
 verification, and the fact that final acceptance remains outstanding unless a
 human accept action is actually being previewed.
 
+The preview model separates Chinese `display_effects` and named
+affected/retained items from `technical_details`. Canonical IDs, raw states,
+operation names, internal workflow nodes, created record types and trace
+references remain complete but default-collapsed. Preview execution and
+fingerprinting continue to use the technical values; the split is
+presentation-only and the projection remains side-effect free.
+
 Materiality remains an actor declaration, not an objective semantic proof.
 The view identifies classification, declarer, reason, affected/unaffected
 requirements, stale/retained records and the continuing need for maintainer
 inspection. Lightweight and ordinary paths reduce governance intensity only;
 they never transfer final authority to an agent.
+
+## Final presentation and reproducibility design
+
+Denied state-changing calls to verification, final decision, and override are
+recorded as append-only `AttemptedOperation` audit facts. A rejected audit event
+records before/after state and required roles but is neither
+`GovernanceFinding` nor `StateTransition`. `RejectedOperationView` surfaces the
+latest denial without changing responsibility, readiness, or case state;
+successful actions do not enter the rejected collection.
+
+The eight public research demonstrations install a scenario-scoped
+`DemoExecutionContext`. Its clock is fixed, its UUID5 identifier factory uses
+`scenario namespace + record type + ordinal`, and its selector secret is
+derived from a demo-only key plus scenario namespace. This makes source domain
+records, HMAC selector tokens, timestamps, transition-log hashes, preview
+fingerprints, and rendered files deterministic without HTML rewriting.
+
+The default `RuntimeExecutionContext` continues to use UUID4 identifiers, the
+real UTC clock, and process-random selector secret material. The deterministic
+context is installed only around demo generation and is restored afterward.
+Consequently a fixed demo key cannot leak into ordinary sessions and
+`--runtime-random` exercises the normal path for semantic comparison.

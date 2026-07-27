@@ -2,9 +2,12 @@
 
 from __future__ import annotations
 
+import hashlib
+import hmac
 from typing import Any
 
-from ..models import GovernanceCase, VNextError, fingerprint
+from ..models import GovernanceCase, VNextError, canonical_json
+from ..runtime import selector_token_secret
 from .diagnostics import build_requirement_comparisons
 from .models import ContextSelectorOption, RequirementComparison, TraceReference
 
@@ -29,7 +32,7 @@ def _token(
     object_ids: list[str],
     obligation_ids: list[str],
 ) -> str:
-    return "sel-" + fingerprint(
+    material = canonical_json(
         {
             "case_id": case.id,
             "contribution_fingerprint": case.contribution_fingerprint,
@@ -38,7 +41,12 @@ def _token(
             "object_ids": sorted(object_ids),
             "obligation_ids": sorted(obligation_ids),
         }
-    )
+    ).encode("utf-8")
+    return "sel-" + hmac.new(
+        selector_token_secret(),
+        material,
+        hashlib.sha256,
+    ).hexdigest()
 
 
 def _option(
@@ -100,7 +108,7 @@ def _comparison_options(
                 obligation_ids=[row.obligation_id],
                 object_type="obligation",
                 object_ids=[row.obligation_id],
-                blocking=row.blocking,
+                blocking=row.blocking_requirement,
                 material_status=row.material_status,
                 workflow_status=row.workflow_status,
                 technical_details={
@@ -172,7 +180,7 @@ def build_context_selector_options(
                     object_type="evidence",
                     object_ids=[evidence.id],
                     blocking=any(
-                        by_obligation[item].blocking
+                        by_obligation[item].blocking_requirement
                         for item in obligation_ids
                         if item in by_obligation
                     ),
@@ -219,7 +227,7 @@ def build_context_selector_options(
                     obligation_ids=["O-HUMAN-ATTEST"],
                     object_type="human_attestation",
                     object_ids=[attestation.id],
-                    blocking=bool(row and row.blocking),
+                    blocking=bool(row and row.blocking_requirement),
                     material_status="provided",
                     technical_details={
                         "attestation_id": attestation.id,
@@ -324,7 +332,7 @@ def build_context_selector_options(
             case,
             action,
             rows,
-            predicate=lambda row: row.blocking
+            predicate=lambda row: row.blocking_requirement
             and row.raw_status
             not in {"satisfied", "verified", "overridden"},
         )

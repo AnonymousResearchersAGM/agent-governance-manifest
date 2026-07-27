@@ -65,17 +65,40 @@
 
 ## 操作预览
 
+你准备执行：**只重新检查“智能体行动与委派说明”**
+
+当前角色和案例状态允许生成此操作计划。
+
+### 将处理
+
+- 智能体行动与委派说明
+
+### 将保留
+
+- 变更文件清单
+- 修改说明
+
+### 预计变化
+
+- 案例流程：已补充，等待重新检查 → 等待人类维护者最终决定。受影响项会记录维护者检查；全部阻断项完成后进入人类最终决定。
+- 智能体行动与委派说明：材料已满足 → 已检查。受影响项会记录维护者检查；全部阻断项完成后进入人类最终决定。
+- 本次问题：待处理 → 已关闭。本次重新检查通过后，关联问题将关闭。
+- 本次修复请求：已补充，等待重新检查 → 已关闭。所关联的问题在本次重新检查后关闭。
+
+### 执行后
+
+- 本次指定材料将被标记为已检查。
+- 关联的问题和修复请求将被关闭。
+- 当前责任方将转交给人类维护者。
+- 案例将进入“人类维护者最终决定”。
+- 这不等于代码已经被项目接受。
+
+<details>
+<summary>技术操作、内部 ID 与原始状态</summary>
+
 ```json
 {
-  "action": "verify_evidence",
-  "title": "检查待核验项",
-  "actor": {
-    "actor": "verifier-1",
-    "role": "maintainer_verifier",
-    "human": true
-  },
-  "authorized": true,
-  "authorization_reason": "当前角色和案例状态允许生成此操作计划。",
+  "operation": "verify_evidence",
   "source_state": "resubmitted",
   "target_state": "ready_for_human_decision",
   "effects": [
@@ -85,7 +108,7 @@
       "after": "ready_for_human_decision",
       "explanation": "受影响项会记录维护者检查；全部阻断项完成后进入人类最终决定。",
       "source_object_ids": [
-        "transition-edb55a1ee0c543c490e4363341dfcd4e"
+        "transition-96fdfbcc786957ca913e285c9e517b18"
       ]
     },
     {
@@ -98,12 +121,21 @@
       ]
     },
     {
+      "target": "finding-998704f5c08b576f882422ff5d00c5cd",
+      "before": "open",
+      "after": "resolved",
+      "explanation": "本次重新检查通过后，关联问题将关闭。",
+      "source_object_ids": [
+        "finding-998704f5c08b576f882422ff5d00c5cd"
+      ]
+    },
+    {
       "target": "指定修复请求",
       "before": "resubmitted",
       "after": "resolved",
       "explanation": "所关联的问题在本次重新检查后关闭。",
       "source_object_ids": [
-        "repair-fcae5dc548bb4440848e80210d229a8e"
+        "repair-cb5bf46ed270569b89e88c9153331193"
       ]
     }
   ],
@@ -111,16 +143,21 @@
     "O-AGENT-SCOPE"
   ],
   "retained_evidence_ids": [
-    "evidence-52d1959b65174b11a46526b31074ae80",
-    "evidence-4544e6c323e945d7b96b3d602e6856d5"
+    "evidence-7525c42fd5d650df850b5f6ebf095485",
+    "evidence-2cb3732e2b49561598dc8daee791f8d9"
   ],
   "invalidated_attestation_ids": [],
-  "next_authorized_actor_roles": [
-    "maintainer"
+  "invalidated_evidence_ids": [],
+  "processed_objects": [
+    "O-AGENT-SCOPE"
   ],
-  "requires_confirmation": true,
-  "mutates_case": false,
-  "preview_fingerprint": "1b84357f01fa0924d5792f4b431cbe3cefef7ba2bfabfb30b462c3d348148da2",
+  "workflow_step_before": "maintainer_check",
+  "workflow_step_after": "human_final_decision",
+  "creates_records": [
+    "state_transition",
+    "maintainer_verification"
+  ],
+  "preview_fingerprint": "21e0ab3d480ac8233ddd8f56a5b6e6bb91778e68a6ec1bffcdad8271602eab0d",
   "traceability": [
     {
       "kind": "permission_rule",
@@ -137,44 +174,8 @@
       "object_id": "resubmitted:verify_evidence:verification_complete",
       "relationship": "transition_plan"
     }
-  ],
-  "processed_objects": [
-    "O-AGENT-SCOPE"
-  ],
-  "invalidated_evidence_ids": [],
-  "responsibility_before": {
-    "primary_roles": [
-      "maintainer_verifier",
-      "policy_steward",
-      "maintainer"
-    ],
-    "display_label": "维护者核验人、项目规则负责人、人类维护者",
-    "reason": "受影响材料已补充或仍然有效；当前只需重新检查指定修复范围。",
-    "blocking_items": [
-      "智能体行动与委派说明"
-    ],
-    "next_handoff_roles": [
-      "maintainer"
-    ]
-  },
-  "responsibility_after": {
-    "primary_roles": [
-      "maintainer"
-    ],
-    "display_label": "人类维护者",
-    "reason": "治理检查已经达到可决策状态，但最终接受、拒绝或要求修改仍须由人类维护者明确记录。",
-    "blocking_items": [],
-    "next_handoff_roles": []
-  },
-  "workflow_step_before": "maintainer_check",
-  "workflow_step_after": "human_final_decision",
-  "creates_records": [
-    "state_transition",
-    "maintainer_verification"
-  ],
-  "requires_human_attestation_after": false,
-  "requires_maintainer_verification_after": false,
-  "final_acceptance_recorded": false,
-  "final_acceptance_still_required": true
+  ]
 }
 ```
+
+</details>

@@ -12,13 +12,17 @@ from ..state_machine import allowed_actions
 from .models import (
     ActionEffect,
     ActionPreview,
+    ActionPreviewDisplayEffect,
     ActorContext,
     AvailableAction,
     ResponsibilityView,
     TraceReference,
     UnavailableAction,
 )
-from .diagnostics import build_requirement_comparisons
+from .diagnostics import (
+    CURRENT_STATE_LABELS,
+    build_requirement_comparisons,
+)
 from .responsibility import derive_current_responsibility
 from .selectors import build_context_selector_options
 from .workflow import build_workflow_steps
@@ -694,6 +698,42 @@ def _current_workflow_step(
     return current.step_id
 
 
+def _workflow_step_title(
+    case: GovernanceCase,
+    transitions: list[StateTransition],
+) -> str:
+    steps = build_workflow_steps(case, transitions)
+    current = next(
+        (
+            item
+            for item in steps
+            if item.status in {"current", "problem", "return"}
+        ),
+        steps[-1],
+    )
+    return current.title
+
+
+def _status_label(value: str) -> str:
+    return {
+        "unsatisfied": "尚未满足",
+        "satisfied": "材料已满足",
+        "verified": "已检查",
+        "overridden": "已由有权维护者覆盖",
+        "needs_update": "需要更新",
+        "policy_conflict": "项目规则冲突",
+        "revalidation_required": "等待重新检查",
+        "valid": "有效",
+        "rejected": "已拒绝",
+        "confirmed": "已确认",
+        "invalidated": "已失效",
+        "resolved": "已关闭",
+        "open": "待处理",
+        "resubmitted": "已补充，等待重新检查",
+        "unchanged": "不变",
+    }.get(value, CURRENT_STATE_LABELS.get(value, value))
+
+
 def _project_action(
     case: GovernanceCase,
     action: str,
@@ -902,6 +942,7 @@ def preview_reviewer_action(
                 )
             )
         if action == "verify_evidence":
+            resolved_finding_ids: set[str] = set()
             for repair in case.repair_requests:
                 affected_findings = [
                     finding
@@ -918,6 +959,23 @@ def preview_reviewer_action(
                         if finding.status == "open"
                     )
                 ):
+                    for finding in affected_findings:
+                        if (
+                            finding.status == "open"
+                            and finding.id not in resolved_finding_ids
+                        ):
+                            effects.append(
+                                ActionEffect(
+                                    target=finding.id,
+                                    before=finding.status,
+                                    after="resolved",
+                                    explanation=(
+                                        "本次重新检查通过后，关联问题将关闭。"
+                                    ),
+                                    source_object_ids=[finding.id],
+                                )
+                            )
+                            resolved_finding_ids.add(finding.id)
                     effects.append(
                         ActionEffect(
                             target="指定修复请求",
@@ -979,6 +1037,8 @@ def preview_reviewer_action(
     )
     before_step = _current_workflow_step(case, transitions)
     after_step = _current_workflow_step(projected, transitions)
+    before_step_title = _workflow_step_title(case, transitions)
+    after_step_title = _workflow_step_title(projected, transitions)
     attestation_required = any(
         item.type == "human_attestation"
         and item.blocking
@@ -1043,32 +1103,118 @@ def preview_reviewer_action(
                 "transition_plan",
             )
         )
-    return ActionPreview(
-        action=action,
-        title=definition.title,
-        actor=normalized,
-        authorized=authorized,
-        authorization_reason=(
-            "当前角色和案例状态允许生成此操作计划。"
-            if authorized
-            else reason or "操作不可用。"
-        ),
-        source_state=case.state,
-        target_state=target_state,
-        effects=effects,
-        affected_obligation_ids=scope,
-        retained_evidence_ids=retained_evidence,
-        invalidated_attestation_ids=invalidated_attestations,
-        next_authorized_actor_roles=(
-            responsibility_before.primary_roles
-            if not authorized
-            else responsibility_after.primary_roles
-        ),
-        requires_confirmation=authorized and definition.mutates_state,
-        mutates_case=False,
-        preview_fingerprint=fingerprint(preview_material),
-        traceability=traceability,
-        processed_objects=[
+    comparisons = {
+        item.obligation_id: item
+        for item in build_requirement_comparisons(case)
+    }
+    display_effects: list[ActionPreviewDisplayEffect] = []
+    for effect in effects:
+        if effect.target == "案例状态":
+            label = "案例流程"
+        elif effect.target in comparisons:
+            label = comparisons[effect.target].display_name
+        elif effect.target == "指定修复请求":
+            label = "本次修复请求"
+        elif any(
+            item.id == effect.target for item in case.evidence
+        ):
+            evidence = next(
+                item for item in case.evidence if item.id == effect.target
+            )
+            labels = [
+                comparisons[item].display_name
+                for item in evidence.obligation_ids
+                if item in comparisons
+            ]
+            label = "、".join(labels) or "指定材料"
+        elif any(
+            item.id == effect.target for item in case.attestations
+        ):
+            label = "负责人确认"
+        elif any(
+            item.id == effect.target for item in case.findings
+        ):
+            label = "本次问题"
+        else:
+            label = "案例数据"
+        display_effects.append(
+            ActionPreviewDisplayEffect(
+                display_label=label,
+                before_label=_status_label(effect.before),
+                after_label=_status_label(effect.after),
+                display_description=effect.explanation,
+            )
+        )
+
+    affected_items = [
+        comparisons[item].display_name
+        for item in scope
+        if item in comparisons
+    ]
+    retained_items = list(
+        dict.fromkeys(
+            comparisons[obligation_id].display_name
+            for evidence in case.evidence
+            if evidence.id in retained_evidence
+            for obligation_id in evidence.obligation_ids
+            if obligation_id in comparisons
+        )
+    )
+    invalidated_items = list(
+        dict.fromkeys(
+            [
+                comparisons[obligation_id].display_name
+                for evidence in case.evidence
+                if evidence.id in invalidated_evidence
+                for obligation_id in evidence.obligation_ids
+                if obligation_id in comparisons
+            ]
+            + (
+                ["负责人确认"]
+                if invalidated_attestations
+                else []
+            )
+        )
+    )
+    next_steps: list[str] = []
+    if not authorized:
+        next_steps.extend(
+            [
+                "本次操作不会改变案例状态。",
+                (
+                    "当前责任方仍是"
+                    f"{responsibility_before.display_label}。"
+                ),
+            ]
+        )
+    else:
+        if action == "verify_evidence":
+            next_steps.append("本次指定材料将被标记为已检查。")
+            if any(
+                item.target == "指定修复请求"
+                and item.after == "resolved"
+                for item in effects
+            ):
+                next_steps.append("关联的问题和修复请求将被关闭。")
+        if responsibility_after != responsibility_before:
+            next_steps.append(
+                "当前责任方将转交给"
+                f"{responsibility_after.display_label}。"
+            )
+        next_steps.append(f"案例将进入“{after_step_title}”。")
+    if not final_acceptance_recorded:
+        next_steps.append("这不等于代码已经被项目接受。")
+
+    technical_details = {
+        "operation": action,
+        "source_state": case.state,
+        "target_state": target_state,
+        "effects": [item.to_dict() for item in effects],
+        "affected_obligation_ids": scope,
+        "retained_evidence_ids": retained_evidence,
+        "invalidated_attestation_ids": invalidated_attestations,
+        "invalidated_evidence_ids": invalidated_evidence,
+        "processed_objects": [
             *scope,
             *(
                 [str(parameters.get("object_id"))]
@@ -1076,12 +1222,45 @@ def preview_reviewer_action(
                 else []
             ),
         ],
-        invalidated_evidence_ids=invalidated_evidence,
+        "workflow_step_before": before_step,
+        "workflow_step_after": after_step,
+        "creates_records": creates_records,
+        "preview_fingerprint": fingerprint(preview_material),
+        "traceability": [item.to_dict() for item in traceability],
+    }
+    preview_title = definition.title
+    if action == "verify_evidence" and affected_items:
+        preview_title = (
+            f"只重新检查“{affected_items[0]}”"
+            if len(affected_items) == 1
+            else "检查指定范围：" + "、".join(affected_items)
+        )
+    return ActionPreview(
+        title=preview_title,
+        actor=normalized,
+        authorized=authorized,
+        authorization_reason=(
+            "当前角色和案例状态允许生成此操作计划。"
+            if authorized
+            else reason or "操作不可用。"
+        ),
+        display_effects=display_effects,
+        affected_items=affected_items,
+        retained_items=retained_items,
+        invalidated_items=invalidated_items,
+        next_authorized_actor_roles=(
+            responsibility_before.primary_roles
+            if not authorized
+            else responsibility_after.primary_roles
+        ),
+        requires_confirmation=authorized and definition.mutates_state,
+        mutates_case=False,
+        technical_details=technical_details,
         responsibility_before=responsibility_before,
         responsibility_after=responsibility_after,
-        workflow_step_before=before_step,
-        workflow_step_after=after_step,
-        creates_records=creates_records,
+        workflow_position_before=before_step_title,
+        workflow_position_after=after_step_title,
+        next_steps=next_steps,
         requires_human_attestation_after=attestation_required,
         requires_maintainer_verification_after=verification_required,
         final_acceptance_recorded=final_acceptance_recorded,
