@@ -6,7 +6,7 @@
 - 风险: 低
 - 阻断问题: 0
 - 需要关注: 0
-- 当前责任方: 维护者核验人、项目规则负责人、人类维护者
+- 当前责任方: 维护者侧检查人员、项目规则负责人、人类维护者
 - 责任方依据: 贡献侧要求已经满足，当前轮到有权限的维护者检查；检查完成仍不等于接受。
 
 ## 五步流程
@@ -26,15 +26,15 @@
 
 ## 当前相关操作
 
-- **检查待核验项** (`verify_evidence`): 受影响项会记录维护者检查；全部阻断项完成后进入人类最终决定。
-- **请求补充或更新材料** (`request_repair`): 仅指定范围需要修复和重新检查，未受影响材料保留。
-- **拒绝无效材料** (`reject_evidence`): 该材料标记为 rejected，并建立 scoped repair。
-- **请求说明** (`ask_clarification`): 案例返回贡献侧回答，所选范围需要重新检查。
+- **检查提交材料**：受影响项会记录维护者检查；全部阻断项完成后进入人类最终决定。
+- **要求补充或修改**：仅指定范围需要修复和重新检查，未受影响材料保留。
+- **拒绝当前材料**：该材料将标记为已拒绝，并建立指定范围的补充或修改请求。
+- **请求补充说明**：案例返回贡献侧回答，所选范围需要重新检查。
 
 ## 其他可用操作（折叠区内容）
 
 - **查看变化范围**: 只读操作，不改变案例状态。
-- **记录项目规则冲突**: 案例转入 repair，由 policy steward 或维护者处理。
+- **记录项目规则冲突**: 案例转入补充处理，由项目规则负责人或维护者处理。
 
 ## 只读交接工具
 
@@ -47,15 +47,15 @@
 ## 暂不可用操作摘要
 
 - 还有 9 项操作因当前阶段、权限或对象范围暂不可用
-  - 要求负责人重新确认: 当前没有仍然有效的负责人确认可供失效处理。
-  - 解决项目规则冲突: 当前角色没有 resolve_policy_conflict 权限。 可执行角色：maintainer, policy_steward。
-  - 补交指定范围: 当前角色没有 resubmit 权限。 可执行角色：contributor, contributor_agent。
-  - 负责人确认当前范围: 当前角色没有 confirm_attestation 权限。 可执行角色：accountable_human。
-  - 执行有权覆盖: 当前角色没有 authorized_override 权限。 可执行角色：maintainer。
-  - 提交人类最终接受决定: 当前角色没有 decide_accept 权限。 可执行角色：maintainer。
-  - 提交人类最终拒绝决定: 当前角色没有 decide_reject 权限。 可执行角色：maintainer。
-  - 提交人类修改决定: 当前角色没有 decide_request_changes 权限。 可执行角色：maintainer。
-  - 关闭案例: 当前角色没有 decide_close 权限。 可执行角色：maintainer。
+  - 将旧负责人确认标记为失效: 当前没有仍然有效的负责人确认可供失效处理。
+  - 处理项目规则冲突: 当前角色没有“处理项目规则冲突”的权限。可以执行这一步的角色：人类维护者或项目规则负责人。
+  - 重新提交修改后的材料: 当前角色没有“重新提交修改后的材料”的权限。可以执行这一步的角色：人类贡献者或贡献侧智能体。
+  - 确认负责人声明: 当前角色没有“确认负责人声明”的权限。可以执行这一步的角色：负责人。
+  - 由有权维护者执行覆盖处理: 当前角色没有“由有权维护者执行覆盖处理”的权限。可以执行这一步的角色：人类维护者。
+  - 最终接受: 当前角色没有“最终接受”的权限。可以执行这一步的角色：人类维护者。
+  - 最终拒绝: 当前角色没有“最终拒绝”的权限。可以执行这一步的角色：人类维护者。
+  - 要求继续修改: 当前角色没有“要求继续修改”的权限。可以执行这一步的角色：人类维护者。
+  - 关闭本次审核记录: 当前角色没有“关闭本次审核记录”的权限。可以执行这一步的角色：人类维护者。
 
 ## Authority boundary
 
@@ -67,6 +67,8 @@
 你准备执行：**检查指定范围：变更文件清单、修改说明**
 
 当前角色和案例状态允许生成此操作计划。
+
+当前可以继续处理的角色：人类维护者。
 
 ### 将处理
 
@@ -96,6 +98,12 @@
 ```json
 {
   "operation": "verify_evidence",
+  "current_role": "maintainer_verifier",
+  "required_roles": [
+    "maintainer",
+    "maintainer_verifier",
+    "policy_steward"
+  ],
   "source_state": "awaiting_maintainer_verification",
   "target_state": "ready_for_human_decision",
   "effects": [
@@ -131,6 +139,7 @@
     "O-CHANGED-FILES",
     "O-SUMMARY"
   ],
+  "requested_obligation_ids": [],
   "retained_evidence_ids": [],
   "invalidated_attestation_ids": [],
   "invalidated_evidence_ids": [],
@@ -144,7 +153,7 @@
     "state_transition",
     "maintainer_verification"
   ],
-  "preview_fingerprint": "c8278e40da38678700dce8658ee5a40548e8b65f87098254c5560c9033621798",
+  "preview_fingerprint": "ed389aacfe6e475e585560790bdd598d3be9dfd9444e65730f84673a26fa0ebf",
   "traceability": [
     {
       "kind": "permission_rule",

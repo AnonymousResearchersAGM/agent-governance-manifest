@@ -1,0 +1,33 @@
+{
+  "commit_basis": "b96a81cbc4da6d662286a7c549b867cb3490ade0",
+  "file_count": 25,
+  "files": {
+    "01_multi_risk_missing/guidance.json": "1401fefcb3cc148fe0a5fe08c1aadb244071ea0c67e8d755872dc1ccf20dd1bf",
+    "01_multi_risk_missing/report.html": "4b72093c93af2318f513d44736235ed6b8c5ee631c8329ed6ed1b80f96699fb7",
+    "01_multi_risk_missing/report.md": "b9cfb6224bda89b4708f7f55ff718490da27bb80c42b89e967a426bf865b9769",
+    "02_material_partial_invalidation/guidance.json": "212c49a54d32a7cc1e91e40bb76354b183049a1b96aabd0e12f702dd331d2441",
+    "02_material_partial_invalidation/report.html": "8bd5eebe1a60c1c7de7bc12038eea3d3c1869bd197b15f2e89d0a958fc20ed06",
+    "02_material_partial_invalidation/report.md": "a68d6cdfdcf0ca3d77ede6927756a4726eb736b980996dc4a79b7caa375b981f",
+    "03_scoped_repair/guidance.json": "8d89466ef6d1b0981d6becbdc9aeca4f8cf1fabd3d172fa8f8267294c6c27a2c",
+    "03_scoped_repair/report.html": "2b2d99a096695a8943341a7ba7a5a8015ca1889ad0758d4e34480321fcb8e66c",
+    "03_scoped_repair/report.md": "5f3e31658d89dd1d60b475301d10a471210bb738a93c72948850091fa8a6669a",
+    "04_unauthorized_agent_verification/guidance.json": "69cf07896121490a08c112672df4c24f1acab445ccdd5ec1efc7796cfda4cdfc",
+    "04_unauthorized_agent_verification/report.html": "9cfa64fa400027f0119f59f642a2d4eb6d056e7d8736c869aedf5527e7a7cb1c",
+    "04_unauthorized_agent_verification/report.md": "bd30de98a06789d6e4150ac108e8e6074c706f8fa65a5fc995a9a215733782a3",
+    "05_lightweight_low_risk/guidance.json": "eea522a8473b7ceec958d499c6fabdd605d2702cb414427208a4d4f387785a55",
+    "05_lightweight_low_risk/report.html": "00c44aa969036dabb6b2957be710a490e5680ee0a76ff6abb79822fe33240c2e",
+    "05_lightweight_low_risk/report.md": "6e989962fa7e19663b21ce0c7544fa45c7e5272bf02d3e57a5ff73ac474a4e5d",
+    "06_governance_self_modification/guidance.json": "48e0ad8e4a51809324e12085d2b4a56718f5f50bdc15ccd5e8f1d591af32a52a",
+    "06_governance_self_modification/report.html": "fabcb7a12d8d4b4cbf15f5eb63e1abb548bd684dd68c1d399700756a0499f489",
+    "06_governance_self_modification/report.md": "1f07443126a5954d5d2d613546504e33e8d99a73908ee270f994ea6416f620e6",
+    "07_policy_migration_warning/guidance.json": "9bda46d816bf13da5c4dfb893c449be3650f93d4e6eacca3128977f664b5142c",
+    "07_policy_migration_warning/report.html": "7db6c2fdb1ae81d031b7dcb02bd88c4066b80a24f1c7a8c9464100cea8bdb14b",
+    "07_policy_migration_warning/report.md": "f271f9849ac25b3b1a1e69502ded84d822c89f4ddb335a199f9e16a801f4b587",
+    "08_human_final_decision_closure/guidance.json": "e91c4564b6106edaaed4f432ae7bbe97c0f15a9a2dbb5be9526f27c2161b75ec",
+    "08_human_final_decision_closure/report.html": "520df2d2e1faf840dee9e0dd8a7aaeb1003206efde9730f210fa69ef19732387",
+    "08_human_final_decision_closure/report.md": "1797bd0a7d90b94bb0d9a6675b49314b0132e6cfba9c431daf06f64b521411f9",
+    "manifest.json": "9f4f102640f6da1e3460a4f143b1a262d4a4908e28ca4dcfe6730f9bd646a5d5"
+  },
+  "generator_version": "reviewer-guidance-demo-v2-cross-platform",
+  "schema_version": "agm.reviewer_guidance_expected_sha256/v1"
+}

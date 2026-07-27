@@ -16,11 +16,16 @@ Regenerate the JSON, Markdown, and HTML outputs from a clean clone:
 
 ```bash
 PYTHONPATH=src python scripts/generate_reviewer_guidance_demos.py
+python scripts/check_reviewer_guidance_demo_hashes.py
 git status --short
 ```
 
 Deterministic research-fixture mode is the default, so a frozen clean checkout
 remains clean and per-file SHA-256 hashes remain identical after regeneration.
+Fixture input bytes use UTF-8/LF, serialized relative paths use `/`, and both
+Windows and Linux compare the 25 outputs with the same
+`examples/reviewer_guidance/expected_sha256.json` freeze. The checker does not
+change that freeze unless a researcher explicitly supplies `--update`.
 Use `--runtime-random` only to exercise ordinary random IDs and runtime selector
 signing during development; the fixed demo context is never a production
 session context.

@@ -553,7 +553,11 @@ def test_unauthorized_contributor_agent_action_is_visible_and_rejected(
         )
 
     assert "verify_evidence" in unavailable
-    assert "没有 verify_evidence 权限" in unavailable["verify_evidence"].reason
+    assert (
+        unavailable["verify_evidence"].reason
+        == "当前角色没有“检查提交材料”的权限。"
+        "可以执行这一步的角色：人类维护者、维护者侧检查人员或项目规则负责人。"
+    )
     assert "maintainer" in unavailable["verify_evidence"].next_actor_roles
     assert service.storage.load_case("unauthorized").state == before
 

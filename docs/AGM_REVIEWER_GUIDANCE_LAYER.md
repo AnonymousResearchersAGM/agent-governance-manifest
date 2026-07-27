@@ -490,6 +490,46 @@ source-generation reproducibility; no generated page is post-processed to
 replace IDs, and the fixed demo selector secret is never used for real
 sessions.
 
+Cross-platform reproducibility additionally fixes the input bytes and path
+spelling. `write_demo_text()` converts CRLF and CR to LF, writes UTF-8 bytes
+directly, and enforces the declared final-newline policy. The copied `.agm`
+and skill files inside each temporary scenario are normalized in the same
+fixture-only path; tracked canonical policy files are not edited. Serialized
+repository-relative paths use `/`, file lists are explicitly ordered, and no
+temporary absolute root or platform permission bit participates in a demo
+contribution fingerprint. Narrow `.gitattributes` rules keep only the public
+demo outputs and expected hash manifest on LF in every checkout, including
+Windows repositories with `core.autocrlf=true`.
+
+The shared Windows/Linux freeze lives at
+`examples/reviewer_guidance/expected_sha256.json`. Verify all 25 outputs with:
+
+```bash
+PYTHONPATH=src python scripts/generate_reviewer_guidance_demos.py
+python scripts/check_reviewer_guidance_demo_hashes.py
+git diff --exit-code
+```
+
+The checker reports missing, unexpected, and mismatched files. It never
+updates the freeze during ordinary validation. A researcher may deliberately
+replace it only after reviewing the generated changes:
+
+```bash
+python scripts/check_reviewer_guidance_demo_hashes.py --update
+```
+
+The CI matrix runs the same generator, checker, complete test suite, and Git
+diff check on `windows-latest` and `ubuntu-latest`.
+
+Participant-facing canonical terms use one backend presentation registry.
+Actions, roles, obligations, workflow nodes, record types, and states are
+represented as a Chinese `display_plain` label paired with the unchanged
+canonical value. Preview and rejected-operation main layers use the display
+label; raw values such as `verify_evidence`, `contributor_agent`,
+`O-SUMMARY`, `maintainer_check`, and `maintainer_verification` remain in
+default-collapsed technical detail. Unknown values receive a neutral display
+fallback while preserving the original canonical value for traceability.
+
 Outputs are written to `examples/reviewer_guidance/outputs/`. Eight scenarios
 cover multi-risk missing material, partial invalidation, scoped repair,
 unauthorized verification, lightweight review, governance self-modification,

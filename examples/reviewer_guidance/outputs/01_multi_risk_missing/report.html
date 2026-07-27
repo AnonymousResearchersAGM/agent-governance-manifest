@@ -58,7 +58,7 @@ code { overflow-wrap: anywhere; }
 <div class="metric"><strong>当前阶段</strong><br>等待贡献侧补齐或更新材料</div>
 <div class="metric"><strong>阻断问题</strong><br>8 项</div>
 <div class="metric"><strong>需要关注</strong><br>0 项</div>
-<div class="metric"><strong>当前责任方</strong><br>贡献者、贡献侧智能体</div>
+<div class="metric"><strong>当前责任方</strong><br>人类贡献者、贡献侧智能体</div>
 <div class="metric"><strong>智能体参与方式</strong><br>智能体执行、有人监督</div>
 </div>
 <p><strong>变更文件：</strong>demo_app/auth.py, demo_app/config.py</p>
@@ -186,7 +186,7 @@ code { overflow-wrap: anywhere; }
       &quot;relationship&quot;: &quot;source&quot;
     }
   ]
-}</pre></details></td></tr><tr><td><strong>可核验测试制品</strong></td><td>提供可以实际检查的测试输出或文件。</td><td>尚未提供。</td><td><span class="result material-missing">缺少</span></td><td><span class="result workflow-awaiting_contributor">等待贡献者处理</span><br><strong>案例暂时不能继续</strong><details><summary>查看原始依据</summary><pre>{
+}</pre></details></td></tr><tr><td><strong>可检查的测试输出或文件</strong></td><td>提供可以实际检查的测试输出或文件。</td><td>尚未提供。</td><td><span class="result material-missing">缺少</span></td><td><span class="result workflow-awaiting_contributor">等待贡献者处理</span><br><strong>案例暂时不能继续</strong><details><summary>查看原始依据</summary><pre>{
   &quot;obligation_id&quot;: &quot;O-ARTIFACT&quot;,
   &quot;source_rules&quot;: [
     &quot;authentication-critical&quot;,
@@ -220,7 +220,7 @@ code { overflow-wrap: anywhere; }
       &quot;relationship&quot;: &quot;source&quot;
     }
   ]
-}</pre></details></td></tr><tr><td><strong>登录、认证与权限影响</strong></td><td>说明本次修改是否改变登录、认证或权限行为。</td><td>尚未提供。</td><td><span class="result material-missing">缺少</span></td><td><span class="result workflow-awaiting_contributor">等待贡献者处理</span><br><strong>案例暂时不能继续</strong><details><summary>查看原始依据</summary><pre>{
+}</pre></details></td></tr><tr><td><strong>登录、认证与权限影响说明</strong></td><td>说明本次修改是否改变登录、认证或权限行为。</td><td>尚未提供。</td><td><span class="result material-missing">缺少</span></td><td><span class="result workflow-awaiting_contributor">等待贡献者处理</span><br><strong>案例暂时不能继续</strong><details><summary>查看原始依据</summary><pre>{
   &quot;obligation_id&quot;: &quot;O-AUTH-IMPACT&quot;,
   &quot;source_rules&quot;: [
     &quot;authentication-critical&quot;
@@ -379,7 +379,7 @@ code { overflow-wrap: anywhere; }
       &quot;relationship&quot;: &quot;source&quot;
     }
   ]
-}</pre></details></td></tr><tr><td><strong>修改理由</strong></td><td>说明为什么需要这次修改。</td><td>尚未提供。</td><td><span class="result material-missing">缺少</span></td><td><span class="result workflow-awaiting_contributor">等待贡献者处理</span><br><strong>案例暂时不能继续</strong><details><summary>查看原始依据</summary><pre>{
+}</pre></details></td></tr><tr><td><strong>修改原因</strong></td><td>说明为什么需要这次修改。</td><td>尚未提供。</td><td><span class="result material-missing">缺少</span></td><td><span class="result workflow-awaiting_contributor">等待贡献者处理</span><br><strong>案例暂时不能继续</strong><details><summary>查看原始依据</summary><pre>{
   &quot;obligation_id&quot;: &quot;O-RATIONALE&quot;,
   &quot;source_rules&quot;: [
     &quot;authentication-critical&quot;,
@@ -497,12 +497,21 @@ code { overflow-wrap: anywhere; }
     &quot;relationship&quot;: &quot;agent_scope_requirement&quot;
   }
 ]</pre></details></section>
-<section class="preview" id="action-preview"><h2>操作前预览</h2><p>你准备执行：<strong>请求补充或更新材料</strong></p><p>操作 request_repair 不能从当前状态 evidence_incomplete 执行。</p><p><strong>将处理：</strong>登录、认证与权限影响</p><ul><li>不会改变案例。</li></ul><p><strong>保留的未受影响材料：</strong>无</p><p><strong>将失效：</strong>无</p><p><strong>责任方变化：</strong>贡献者、贡献侧智能体 → 贡献者、贡献侧智能体</p><p><strong>流程位置变化：</strong>贡献者准备材料 → 贡献者准备材料</p><p><strong>执行后：</strong></p><ul><li>本次操作不会改变案例状态。</li><li>当前责任方仍是贡献者、贡献侧智能体。</li><li>这不等于代码已经被项目接受。</li></ul><p><strong>后续仍需负责人确认：</strong>是；<strong>后续仍需维护者检查：</strong>是；<strong>最终接受是否已经发生：</strong>否</p><p><strong>此预览本身不会修改案例：</strong>是</p><details><summary>技术操作、内部 ID 与原始状态</summary><pre>{
+<section class="preview" id="action-preview"><h2>操作前预览</h2><p>你准备执行：<strong>要求补充或修改</strong></p><p>当前处于“等待贡献者补齐材料”，还不能执行“要求补充或修改”。</p><p><strong>当前可以继续处理的角色：</strong>人类贡献者或贡献侧智能体</p><p><strong>将处理：</strong>登录、认证与权限影响说明</p><ul><li>不会改变案例。</li></ul><p><strong>保留的未受影响材料：</strong>无</p><p><strong>将失效：</strong>无</p><p><strong>责任方变化：</strong>人类贡献者、贡献侧智能体 → 人类贡献者、贡献侧智能体</p><p><strong>流程位置变化：</strong>贡献者准备材料 → 贡献者准备材料</p><p><strong>执行后：</strong></p><ul><li>本次操作不会改变案例状态。</li><li>当前责任方仍是人类贡献者、贡献侧智能体。</li><li>这不等于代码已经被项目接受。</li></ul><p><strong>后续仍需负责人确认：</strong>是；<strong>后续仍需维护者检查：</strong>是；<strong>最终接受是否已经发生：</strong>否</p><p><strong>此预览本身不会修改案例：</strong>是</p><details><summary>技术操作、内部 ID 与原始状态</summary><pre>{
   &quot;operation&quot;: &quot;request_repair&quot;,
+  &quot;current_role&quot;: &quot;maintainer&quot;,
+  &quot;required_roles&quot;: [
+    &quot;maintainer&quot;,
+    &quot;maintainer_verifier&quot;,
+    &quot;policy_steward&quot;
+  ],
   &quot;source_state&quot;: &quot;evidence_incomplete&quot;,
   &quot;target_state&quot;: &quot;evidence_incomplete&quot;,
   &quot;effects&quot;: [],
   &quot;affected_obligation_ids&quot;: [
+    &quot;O-AUTH-IMPACT&quot;
+  ],
+  &quot;requested_obligation_ids&quot;: [
     &quot;O-AUTH-IMPACT&quot;
   ],
   &quot;retained_evidence_ids&quot;: [],
@@ -514,7 +523,7 @@ code { overflow-wrap: anywhere; }
   &quot;workflow_step_before&quot;: &quot;prepare_materials&quot;,
   &quot;workflow_step_after&quot;: &quot;prepare_materials&quot;,
   &quot;creates_records&quot;: [],
-  &quot;preview_fingerprint&quot;: &quot;8025aa30042039553fd8e7e5a3788b197815ce8169271433cd4212fc7a2c3e0d&quot;,
+  &quot;preview_fingerprint&quot;: &quot;af5d8e3988c291d0dbb0cfefa1504e2641cb5633c5c422a3ea7d44946def928b&quot;,
   &quot;traceability&quot;: [
     {
       &quot;kind&quot;: &quot;permission_rule&quot;,
@@ -535,7 +544,7 @@ code { overflow-wrap: anywhere; }
 </section>
 <section>
 <details><summary>其他可用操作（2 项）</summary>
-<div class="actions"><article class="action-card available"><h3>查看变化范围</h3><p>查看 changed files、风险规则、影响范围和绑定 fingerprint。</p><p><strong>为什么现在相关：</strong>后端允许此操作，但它不直接处理当前主要阻断项。</p><p><strong>执行后：</strong>只读操作，不改变案例状态。</p><details><summary>技术操作标识与依据</summary><pre>{
+<div class="actions"><article class="action-card available"><h3>查看变化范围</h3><p>查看变更文件、风险规则、影响范围和绑定指纹。</p><p><strong>为什么现在相关：</strong>后端允许此操作，但它不直接处理当前主要阻断项。</p><p><strong>执行后：</strong>只读操作，不改变案例状态。</p><details><summary>技术操作标识与依据</summary><pre>{
   &quot;action&quot;: &quot;view_change_scope&quot;,
   &quot;traceability&quot;: [
     {
@@ -544,7 +553,7 @@ code { overflow-wrap: anywhere; }
       &quot;relationship&quot;: &quot;authority&quot;
     }
   ]
-}</pre></details></article><article class="action-card available"><h3>记录项目规则冲突</h3><p>记录无法由普通材料修复的策略冲突。</p><p><strong>为什么现在相关：</strong>后端允许此操作，但它不直接处理当前主要阻断项。</p><p><strong>执行后：</strong>案例转入 repair，由 policy steward 或维护者处理。</p><details><summary>技术操作标识与依据</summary><pre>{
+}</pre></details></article><article class="action-card available"><h3>记录项目规则冲突</h3><p>记录无法由普通材料修复的策略冲突。</p><p><strong>为什么现在相关：</strong>后端允许此操作，但它不直接处理当前主要阻断项。</p><p><strong>执行后：</strong>案例转入补充处理，由项目规则负责人或维护者处理。</p><details><summary>技术操作标识与依据</summary><pre>{
   &quot;action&quot;: &quot;record_policy_conflict&quot;,
   &quot;traceability&quot;: [
     {
@@ -565,47 +574,47 @@ code { overflow-wrap: anywhere; }
 <h2>交接与导出工具</h2>
 <p>这些工具只读取当前 guidance，不修改案例，也不增加 transition。</p>
 <div class="actions"><article class="action-card utility"><h3>复制缺失项清单</h3><p>生成可直接交给贡献侧的缺失、过时或无效材料清单。</p><a class="button-link" href="/utility?action_id=copy_missing_requirements">打开只读输出</a><details><summary>在页面中预览</summary><pre>- 智能体行动与委派说明：缺少；等待贡献者处理；范围：当前贡献范围
-- 可核验测试制品：缺少；等待贡献者处理；范围：demo_app/auth.py、demo_app/config.py
-- 登录、认证与权限影响：缺少；等待贡献者处理；范围：demo_app/auth.py
+- 可检查的测试输出或文件：缺少；等待贡献者处理；范围：demo_app/auth.py、demo_app/config.py
+- 登录、认证与权限影响说明：缺少；等待贡献者处理；范围：demo_app/auth.py
 - 变更文件清单：缺少；等待贡献者处理；范围：demo_app/auth.py、demo_app/config.py
 - 负责人确认：缺少；等待负责人确认；范围：demo_app/auth.py
 - 已知限制：缺少；等待贡献者处理；范围：demo_app/auth.py、demo_app/config.py
-- 修改理由：缺少；等待贡献者处理；范围：demo_app/auth.py、demo_app/config.py
+- 修改原因：缺少；等待贡献者处理；范围：demo_app/auth.py、demo_app/config.py
 - 修改说明：缺少；等待贡献者处理；范围：demo_app/auth.py、demo_app/config.py
 - 测试命令与结果：缺少；等待贡献者处理；范围：demo_app/auth.py、demo_app/config.py</pre></details></article><article class="action-card utility"><h3>导出贡献者待办清单</h3><p>导出包含责任方、待处理项和范围的 Markdown 清单。</p><a class="button-link" href="/utility?action_id=export_contributor_checklist">打开只读输出</a><details><summary>在页面中预览</summary><pre># 贡献者待办清单
 
 案例：multi-risk-missing
-当前责任方：贡献者、贡献侧智能体
+当前责任方：人类贡献者、贡献侧智能体
 原因：受影响材料尚未准备或更新完成，当前还不能进入维护者检查。
 
 ## 待处理项
 
 - 智能体行动与委派说明：缺少；等待贡献者处理；范围：当前贡献范围
-- 可核验测试制品：缺少；等待贡献者处理；范围：demo_app/auth.py、demo_app/config.py
-- 登录、认证与权限影响：缺少；等待贡献者处理；范围：demo_app/auth.py
+- 可检查的测试输出或文件：缺少；等待贡献者处理；范围：demo_app/auth.py、demo_app/config.py
+- 登录、认证与权限影响说明：缺少；等待贡献者处理；范围：demo_app/auth.py
 - 变更文件清单：缺少；等待贡献者处理；范围：demo_app/auth.py、demo_app/config.py
 - 负责人确认：缺少；等待负责人确认；范围：demo_app/auth.py
 - 已知限制：缺少；等待贡献者处理；范围：demo_app/auth.py、demo_app/config.py
-- 修改理由：缺少；等待贡献者处理；范围：demo_app/auth.py、demo_app/config.py
+- 修改原因：缺少；等待贡献者处理；范围：demo_app/auth.py、demo_app/config.py
 - 修改说明：缺少；等待贡献者处理；范围：demo_app/auth.py、demo_app/config.py
 - 测试命令与结果：缺少；等待贡献者处理；范围：demo_app/auth.py、demo_app/config.py
 
 完成后请按当前 repair/提交范围交回；最终决定仍由人类维护者作出。</pre></details></article><article class="action-card utility"><h3>下载维护者摘要</h3><p>导出当前风险、责任方和阻断项摘要，不作接受判断。</p><a class="button-link" href="/utility?action_id=export_reviewer_summary">打开只读输出</a><details><summary>在页面中预览</summary><pre># 维护者审核摘要
 
 案例：multi-risk-missing
-当前状态：evidence_incomplete
+当前状态：等待贡献者补齐材料
 风险：critical
-当前责任方：贡献者、贡献侧智能体
+当前责任方：人类贡献者、贡献侧智能体
 责任方依据：受影响材料尚未准备或更新完成，当前还不能进入维护者检查。
 
 ## 阻断或待检查项
 
 - 智能体行动与委派说明：缺少；等待贡献者处理；范围：当前贡献范围
-- 可核验测试制品：缺少；等待贡献者处理；范围：demo_app/auth.py、demo_app/config.py
-- 登录、认证与权限影响：缺少；等待贡献者处理；范围：demo_app/auth.py
+- 可检查的测试输出或文件：缺少；等待贡献者处理；范围：demo_app/auth.py、demo_app/config.py
+- 登录、认证与权限影响说明：缺少；等待贡献者处理；范围：demo_app/auth.py
 - 变更文件清单：缺少；等待贡献者处理；范围：demo_app/auth.py、demo_app/config.py
 - 已知限制：缺少；等待贡献者处理；范围：demo_app/auth.py、demo_app/config.py
-- 修改理由：缺少；等待贡献者处理；范围：demo_app/auth.py、demo_app/config.py
+- 修改原因：缺少；等待贡献者处理；范围：demo_app/auth.py、demo_app/config.py
 - 修改说明：缺少；等待贡献者处理；范围：demo_app/auth.py、demo_app/config.py
 - 测试命令与结果：缺少；等待贡献者处理；范围：demo_app/auth.py、demo_app/config.py
 
@@ -668,19 +677,19 @@ code { overflow-wrap: anywhere; }
       &quot;demo_app/config.py&quot;
     ]
   }
-}</pre></details></article><article class="action-card utility"><h3>复制当前责任方说明</h3><p>生成不改变案例状态的 handoff note。</p><a class="button-link" href="/utility?action_id=copy_handoff_note">打开只读输出</a><details><summary>在页面中预览</summary><pre>案例 multi-risk-missing 当前交给：贡献者、贡献侧智能体。
+}</pre></details></article><article class="action-card utility"><h3>复制当前责任方说明</h3><p>生成不改变案例状态的 handoff note。</p><a class="button-link" href="/utility?action_id=copy_handoff_note">打开只读输出</a><details><summary>在页面中预览</summary><pre>案例 multi-risk-missing 当前交给：人类贡献者、贡献侧智能体。
 受影响材料尚未准备或更新完成，当前还不能进入维护者检查。
-涉及：智能体行动与委派说明、可核验测试制品、登录、认证与权限影响、变更文件清单、已知限制、修改理由、修改说明、测试命令与结果。
-完成后交给角色：accountable_human、maintainer_verifier、maintainer。</pre></details></article></div>
+涉及：智能体行动与委派说明、可检查的测试输出或文件、登录、认证与权限影响说明、变更文件清单、已知限制、修改原因、修改说明、测试命令与结果。
+完成后交给角色：负责人、维护者侧检查人员或人类维护者。</pre></details></article></div>
 </section>
 <section>
 <details><summary>还有 13 项操作因当前阶段、权限或对象范围暂不可用</summary>
 <p>展开后可查看不可用原因、所需角色、所需状态及以后是否可能开放。后端权限检查始终保留。</p>
-<div class="actions"><article class="action-card unavailable" aria-disabled="true"><h3>检查待核验项 <span>当前不可用</span></h3><p>记录维护者对指定义务及其绑定材料的检查结果。</p><p><strong>原因：</strong>操作 verify_evidence 不能从当前状态 evidence_incomplete 执行。</p><p><strong>所需角色：</strong>人类维护者、维护者核验人、项目规则负责人</p><p><strong>所需技术状态：</strong>awaiting_maintainer_verification、resubmitted</p><p><strong>以后是否可能可用：</strong>到达所需状态且对象范围满足后可能可用。</p><details><summary>技术操作标识与依据</summary><pre>{
+<div class="actions"><article class="action-card unavailable" aria-disabled="true"><h3>检查提交材料 <span>当前不可用</span></h3><p>记录维护者对指定项目要求及其绑定材料的检查结果。</p><p><strong>原因：</strong>当前处于“等待贡献者补齐材料”，还不能执行“检查提交材料”。</p><p><strong>所需角色：</strong>人类维护者、维护者侧检查人员、项目规则负责人</p><p><strong>所需流程位置：</strong>等待维护者检查或已补交，等待确认材料是否齐备</p><p><strong>以后是否可能可用：</strong>到达所需状态且对象范围满足后可能可用。</p><details><summary>技术操作标识与依据</summary><pre>{
   &quot;action&quot;: &quot;verify_evidence&quot;,
-  &quot;title&quot;: &quot;检查待核验项&quot;,
-  &quot;description&quot;: &quot;记录维护者对指定义务及其绑定材料的检查结果。&quot;,
-  &quot;reason&quot;: &quot;操作 verify_evidence 不能从当前状态 evidence_incomplete 执行。&quot;,
+  &quot;title&quot;: &quot;检查提交材料&quot;,
+  &quot;description&quot;: &quot;记录维护者对指定项目要求及其绑定材料的检查结果。&quot;,
+  &quot;reason&quot;: &quot;当前处于“等待贡献者补齐材料”，还不能执行“检查提交材料”。&quot;,
   &quot;next_actor_roles&quot;: [
     &quot;contributor&quot;,
     &quot;contributor_agent&quot;
@@ -693,7 +702,7 @@ code { overflow-wrap: anywhere; }
       &quot;relationship&quot;: &quot;authority&quot;
     }
   ],
-  &quot;category&quot;: &quot;stage&quot;,
+  &quot;category&quot;: &quot;authority&quot;,
   &quot;required_role&quot;: [
     &quot;maintainer&quot;,
     &quot;maintainer_verifier&quot;,
@@ -704,11 +713,11 @@ code { overflow-wrap: anywhere; }
     &quot;resubmitted&quot;
   ],
   &quot;future_availability&quot;: &quot;到达所需状态且对象范围满足后可能可用。&quot;
-}</pre></details></article><article class="action-card unavailable" aria-disabled="true"><h3>请求补充或更新材料 <span>当前不可用</span></h3><p>指出问题和受影响义务，返回贡献侧修复。</p><p><strong>原因：</strong>操作 request_repair 不能从当前状态 evidence_incomplete 执行。</p><p><strong>所需角色：</strong>人类维护者、维护者核验人、项目规则负责人</p><p><strong>所需技术状态：</strong>awaiting_maintainer_verification、ready_for_human_decision、verification_complete</p><p><strong>以后是否可能可用：</strong>到达所需状态且对象范围满足后可能可用。</p><details><summary>技术操作标识与依据</summary><pre>{
+}</pre></details></article><article class="action-card unavailable" aria-disabled="true"><h3>要求补充或修改 <span>当前不可用</span></h3><p>指出问题和受影响义务，返回贡献侧修复。</p><p><strong>原因：</strong>当前处于“等待贡献者补齐材料”，还不能执行“要求补充或修改”。</p><p><strong>所需角色：</strong>人类维护者、维护者侧检查人员、项目规则负责人</p><p><strong>所需流程位置：</strong>等待维护者检查、等待人类维护者最终决定或维护者检查完成，正在确认可决策状态</p><p><strong>以后是否可能可用：</strong>到达所需状态且对象范围满足后可能可用。</p><details><summary>技术操作标识与依据</summary><pre>{
   &quot;action&quot;: &quot;request_repair&quot;,
-  &quot;title&quot;: &quot;请求补充或更新材料&quot;,
+  &quot;title&quot;: &quot;要求补充或修改&quot;,
   &quot;description&quot;: &quot;指出问题和受影响义务，返回贡献侧修复。&quot;,
-  &quot;reason&quot;: &quot;操作 request_repair 不能从当前状态 evidence_incomplete 执行。&quot;,
+  &quot;reason&quot;: &quot;当前处于“等待贡献者补齐材料”，还不能执行“要求补充或修改”。&quot;,
   &quot;next_actor_roles&quot;: [
     &quot;contributor&quot;,
     &quot;contributor_agent&quot;
@@ -721,7 +730,7 @@ code { overflow-wrap: anywhere; }
       &quot;relationship&quot;: &quot;authority&quot;
     }
   ],
-  &quot;category&quot;: &quot;stage&quot;,
+  &quot;category&quot;: &quot;authority&quot;,
   &quot;required_role&quot;: [
     &quot;maintainer&quot;,
     &quot;maintainer_verifier&quot;,
@@ -733,11 +742,11 @@ code { overflow-wrap: anywhere; }
     &quot;verification_complete&quot;
   ],
   &quot;future_availability&quot;: &quot;到达所需状态且对象范围满足后可能可用。&quot;
-}</pre></details></article><article class="action-card unavailable" aria-disabled="true"><h3>拒绝无效材料 <span>当前不可用</span></h3><p>拒绝一条不能支持当前修改的具体材料。</p><p><strong>原因：</strong>操作 reject_evidence 不能从当前状态 evidence_incomplete 执行。</p><p><strong>所需角色：</strong>人类维护者、维护者核验人</p><p><strong>所需技术状态：</strong>awaiting_maintainer_verification、verification_complete</p><p><strong>以后是否可能可用：</strong>到达所需状态且对象范围满足后可能可用。</p><details><summary>技术操作标识与依据</summary><pre>{
+}</pre></details></article><article class="action-card unavailable" aria-disabled="true"><h3>拒绝当前材料 <span>当前不可用</span></h3><p>拒绝一条不能支持当前修改的具体材料。</p><p><strong>原因：</strong>当前处于“等待贡献者补齐材料”，还不能执行“拒绝当前材料”。</p><p><strong>所需角色：</strong>人类维护者、维护者侧检查人员</p><p><strong>所需流程位置：</strong>等待维护者检查或维护者检查完成，正在确认可决策状态</p><p><strong>以后是否可能可用：</strong>到达所需状态且对象范围满足后可能可用。</p><details><summary>技术操作标识与依据</summary><pre>{
   &quot;action&quot;: &quot;reject_evidence&quot;,
-  &quot;title&quot;: &quot;拒绝无效材料&quot;,
+  &quot;title&quot;: &quot;拒绝当前材料&quot;,
   &quot;description&quot;: &quot;拒绝一条不能支持当前修改的具体材料。&quot;,
-  &quot;reason&quot;: &quot;操作 reject_evidence 不能从当前状态 evidence_incomplete 执行。&quot;,
+  &quot;reason&quot;: &quot;当前处于“等待贡献者补齐材料”，还不能执行“拒绝当前材料”。&quot;,
   &quot;next_actor_roles&quot;: [
     &quot;contributor&quot;,
     &quot;contributor_agent&quot;
@@ -750,7 +759,7 @@ code { overflow-wrap: anywhere; }
       &quot;relationship&quot;: &quot;authority&quot;
     }
   ],
-  &quot;category&quot;: &quot;stage&quot;,
+  &quot;category&quot;: &quot;authority&quot;,
   &quot;required_role&quot;: [
     &quot;maintainer&quot;,
     &quot;maintainer_verifier&quot;
@@ -760,11 +769,11 @@ code { overflow-wrap: anywhere; }
     &quot;verification_complete&quot;
   ],
   &quot;future_availability&quot;: &quot;到达所需状态且对象范围满足后可能可用。&quot;
-}</pre></details></article><article class="action-card unavailable" aria-disabled="true"><h3>请求说明 <span>当前不可用</span></h3><p>针对指定要求提出可审计的澄清问题。</p><p><strong>原因：</strong>操作 ask_clarification 不能从当前状态 evidence_incomplete 执行。</p><p><strong>所需角色：</strong>人类维护者、维护者核验人</p><p><strong>所需技术状态：</strong>awaiting_maintainer_verification、ready_for_human_decision、verification_complete</p><p><strong>以后是否可能可用：</strong>到达所需状态且对象范围满足后可能可用。</p><details><summary>技术操作标识与依据</summary><pre>{
+}</pre></details></article><article class="action-card unavailable" aria-disabled="true"><h3>请求补充说明 <span>当前不可用</span></h3><p>针对指定要求提出可审计的澄清问题。</p><p><strong>原因：</strong>当前处于“等待贡献者补齐材料”，还不能执行“请求补充说明”。</p><p><strong>所需角色：</strong>人类维护者、维护者侧检查人员</p><p><strong>所需流程位置：</strong>等待维护者检查、等待人类维护者最终决定或维护者检查完成，正在确认可决策状态</p><p><strong>以后是否可能可用：</strong>到达所需状态且对象范围满足后可能可用。</p><details><summary>技术操作标识与依据</summary><pre>{
   &quot;action&quot;: &quot;ask_clarification&quot;,
-  &quot;title&quot;: &quot;请求说明&quot;,
+  &quot;title&quot;: &quot;请求补充说明&quot;,
   &quot;description&quot;: &quot;针对指定要求提出可审计的澄清问题。&quot;,
-  &quot;reason&quot;: &quot;操作 ask_clarification 不能从当前状态 evidence_incomplete 执行。&quot;,
+  &quot;reason&quot;: &quot;当前处于“等待贡献者补齐材料”，还不能执行“请求补充说明”。&quot;,
   &quot;next_actor_roles&quot;: [
     &quot;contributor&quot;,
     &quot;contributor_agent&quot;
@@ -777,7 +786,7 @@ code { overflow-wrap: anywhere; }
       &quot;relationship&quot;: &quot;authority&quot;
     }
   ],
-  &quot;category&quot;: &quot;stage&quot;,
+  &quot;category&quot;: &quot;authority&quot;,
   &quot;required_role&quot;: [
     &quot;maintainer&quot;,
     &quot;maintainer_verifier&quot;
@@ -788,11 +797,11 @@ code { overflow-wrap: anywhere; }
     &quot;verification_complete&quot;
   ],
   &quot;future_availability&quot;: &quot;到达所需状态且对象范围满足后可能可用。&quot;
-}</pre></details></article><article class="action-card unavailable" aria-disabled="true"><h3>要求负责人重新确认 <span>当前不可用</span></h3><p>使一条过时或不正确的负责人确认失效。</p><p><strong>原因：</strong>操作 invalidate_attestation 不能从当前状态 evidence_incomplete 执行。</p><p><strong>所需角色：</strong>人类维护者、维护者核验人</p><p><strong>所需技术状态：</strong>awaiting_maintainer_verification、ready_for_human_decision、verification_complete</p><p><strong>以后是否可能可用：</strong>到达所需状态且对象范围满足后可能可用。</p><details><summary>技术操作标识与依据</summary><pre>{
+}</pre></details></article><article class="action-card unavailable" aria-disabled="true"><h3>将旧负责人确认标记为失效 <span>当前不可用</span></h3><p>使一条过时或不正确的负责人确认失效。</p><p><strong>原因：</strong>当前处于“等待贡献者补齐材料”，还不能执行“将旧负责人确认标记为失效”。</p><p><strong>所需角色：</strong>人类维护者、维护者侧检查人员</p><p><strong>所需流程位置：</strong>等待维护者检查、等待人类维护者最终决定或维护者检查完成，正在确认可决策状态</p><p><strong>以后是否可能可用：</strong>到达所需状态且对象范围满足后可能可用。</p><details><summary>技术操作标识与依据</summary><pre>{
   &quot;action&quot;: &quot;invalidate_attestation&quot;,
-  &quot;title&quot;: &quot;要求负责人重新确认&quot;,
+  &quot;title&quot;: &quot;将旧负责人确认标记为失效&quot;,
   &quot;description&quot;: &quot;使一条过时或不正确的负责人确认失效。&quot;,
-  &quot;reason&quot;: &quot;操作 invalidate_attestation 不能从当前状态 evidence_incomplete 执行。&quot;,
+  &quot;reason&quot;: &quot;当前处于“等待贡献者补齐材料”，还不能执行“将旧负责人确认标记为失效”。&quot;,
   &quot;next_actor_roles&quot;: [
     &quot;contributor&quot;,
     &quot;contributor_agent&quot;
@@ -805,7 +814,7 @@ code { overflow-wrap: anywhere; }
       &quot;relationship&quot;: &quot;authority&quot;
     }
   ],
-  &quot;category&quot;: &quot;stage&quot;,
+  &quot;category&quot;: &quot;authority&quot;,
   &quot;required_role&quot;: [
     &quot;maintainer&quot;,
     &quot;maintainer_verifier&quot;
@@ -816,11 +825,11 @@ code { overflow-wrap: anywhere; }
     &quot;verification_complete&quot;
   ],
   &quot;future_availability&quot;: &quot;到达所需状态且对象范围满足后可能可用。&quot;
-}</pre></details></article><article class="action-card unavailable" aria-disabled="true"><h3>解决项目规则冲突 <span>当前不可用</span></h3><p>由有权限的角色记录策略冲突的解决依据。</p><p><strong>原因：</strong>操作 resolve_policy_conflict 不能从当前状态 evidence_incomplete 执行。</p><p><strong>所需角色：</strong>人类维护者、项目规则负责人</p><p><strong>所需技术状态：</strong>repair_requested</p><p><strong>以后是否可能可用：</strong>到达所需状态且对象范围满足后可能可用。</p><details><summary>技术操作标识与依据</summary><pre>{
+}</pre></details></article><article class="action-card unavailable" aria-disabled="true"><h3>处理项目规则冲突 <span>当前不可用</span></h3><p>由有权限的角色记录策略冲突的解决依据。</p><p><strong>原因：</strong>当前处于“等待贡献者补齐材料”，还不能执行“处理项目规则冲突”。</p><p><strong>所需角色：</strong>人类维护者、项目规则负责人</p><p><strong>所需流程位置：</strong>发现问题，等待指定范围修改</p><p><strong>以后是否可能可用：</strong>到达所需状态且对象范围满足后可能可用。</p><details><summary>技术操作标识与依据</summary><pre>{
   &quot;action&quot;: &quot;resolve_policy_conflict&quot;,
-  &quot;title&quot;: &quot;解决项目规则冲突&quot;,
+  &quot;title&quot;: &quot;处理项目规则冲突&quot;,
   &quot;description&quot;: &quot;由有权限的角色记录策略冲突的解决依据。&quot;,
-  &quot;reason&quot;: &quot;操作 resolve_policy_conflict 不能从当前状态 evidence_incomplete 执行。&quot;,
+  &quot;reason&quot;: &quot;当前处于“等待贡献者补齐材料”，还不能执行“处理项目规则冲突”。&quot;,
   &quot;next_actor_roles&quot;: [
     &quot;contributor&quot;,
     &quot;contributor_agent&quot;
@@ -833,7 +842,7 @@ code { overflow-wrap: anywhere; }
       &quot;relationship&quot;: &quot;authority&quot;
     }
   ],
-  &quot;category&quot;: &quot;stage&quot;,
+  &quot;category&quot;: &quot;scope&quot;,
   &quot;required_role&quot;: [
     &quot;maintainer&quot;,
     &quot;policy_steward&quot;
@@ -842,11 +851,11 @@ code { overflow-wrap: anywhere; }
     &quot;repair_requested&quot;
   ],
   &quot;future_availability&quot;: &quot;到达所需状态且对象范围满足后可能可用。&quot;
-}</pre></details></article><article class="action-card unavailable" aria-disabled="true"><h3>补交指定范围 <span>当前不可用</span></h3><p>贡献侧提交 repair 影响范围和新增材料。</p><p><strong>原因：</strong>当前角色没有 resubmit 权限。 可执行角色：contributor, contributor_agent。</p><p><strong>所需角色：</strong>贡献者、贡献侧智能体</p><p><strong>所需技术状态：</strong>repair_requested</p><p><strong>以后是否可能可用：</strong>切换流程阶段不会改变角色权限；需要由列出的有权角色执行。</p><details><summary>技术操作标识与依据</summary><pre>{
+}</pre></details></article><article class="action-card unavailable" aria-disabled="true"><h3>重新提交修改后的材料 <span>当前不可用</span></h3><p>贡献侧提交补充或修改影响范围和新增材料。</p><p><strong>原因：</strong>当前角色没有“重新提交修改后的材料”的权限。可以执行这一步的角色：人类贡献者或贡献侧智能体。</p><p><strong>所需角色：</strong>人类贡献者、贡献侧智能体</p><p><strong>所需流程位置：</strong>发现问题，等待指定范围修改</p><p><strong>以后是否可能可用：</strong>切换流程阶段不会改变角色权限；需要由列出的有权角色执行。</p><details><summary>技术操作标识与依据</summary><pre>{
   &quot;action&quot;: &quot;resubmit&quot;,
-  &quot;title&quot;: &quot;补交指定范围&quot;,
-  &quot;description&quot;: &quot;贡献侧提交 repair 影响范围和新增材料。&quot;,
-  &quot;reason&quot;: &quot;当前角色没有 resubmit 权限。 可执行角色：contributor, contributor_agent。&quot;,
+  &quot;title&quot;: &quot;重新提交修改后的材料&quot;,
+  &quot;description&quot;: &quot;贡献侧提交补充或修改影响范围和新增材料。&quot;,
+  &quot;reason&quot;: &quot;当前角色没有“重新提交修改后的材料”的权限。可以执行这一步的角色：人类贡献者或贡献侧智能体。&quot;,
   &quot;next_actor_roles&quot;: [
     &quot;contributor&quot;,
     &quot;contributor_agent&quot;
@@ -868,11 +877,11 @@ code { overflow-wrap: anywhere; }
     &quot;repair_requested&quot;
   ],
   &quot;future_availability&quot;: &quot;切换流程阶段不会改变角色权限；需要由列出的有权角色执行。&quot;
-}</pre></details></article><article class="action-card unavailable" aria-disabled="true"><h3>负责人确认当前范围 <span>当前不可用</span></h3><p>由 accountable human 对明确范围作出事实确认。</p><p><strong>原因：</strong>当前角色没有 confirm_attestation 权限。 可执行角色：accountable_human。</p><p><strong>所需角色：</strong>负责人</p><p><strong>所需技术状态：</strong>awaiting_human_attestation、evidence_incomplete</p><p><strong>以后是否可能可用：</strong>切换流程阶段不会改变角色权限；需要由列出的有权角色执行。</p><details><summary>技术操作标识与依据</summary><pre>{
+}</pre></details></article><article class="action-card unavailable" aria-disabled="true"><h3>确认负责人声明 <span>当前不可用</span></h3><p>由负责人对明确范围作出事实确认。</p><p><strong>原因：</strong>当前角色没有“确认负责人声明”的权限。可以执行这一步的角色：负责人。</p><p><strong>所需角色：</strong>负责人</p><p><strong>所需流程位置：</strong>等待负责人确认或等待贡献者补齐材料</p><p><strong>以后是否可能可用：</strong>切换流程阶段不会改变角色权限；需要由列出的有权角色执行。</p><details><summary>技术操作标识与依据</summary><pre>{
   &quot;action&quot;: &quot;confirm_attestation&quot;,
-  &quot;title&quot;: &quot;负责人确认当前范围&quot;,
-  &quot;description&quot;: &quot;由 accountable human 对明确范围作出事实确认。&quot;,
-  &quot;reason&quot;: &quot;当前角色没有 confirm_attestation 权限。 可执行角色：accountable_human。&quot;,
+  &quot;title&quot;: &quot;确认负责人声明&quot;,
+  &quot;description&quot;: &quot;由负责人对明确范围作出事实确认。&quot;,
+  &quot;reason&quot;: &quot;当前角色没有“确认负责人声明”的权限。可以执行这一步的角色：负责人。&quot;,
   &quot;next_actor_roles&quot;: [
     &quot;accountable_human&quot;
   ],
@@ -898,11 +907,11 @@ code { overflow-wrap: anywhere; }
     &quot;evidence_incomplete&quot;
   ],
   &quot;future_availability&quot;: &quot;切换流程阶段不会改变角色权限；需要由列出的有权角色执行。&quot;
-}</pre></details></article><article class="action-card unavailable" aria-disabled="true"><h3>执行有权覆盖 <span>当前不可用</span></h3><p>记录具备权限的维护者对明确义务或 finding 的例外处理。</p><p><strong>原因：</strong>操作 authorized_override 不能从当前状态 evidence_incomplete 执行。</p><p><strong>所需角色：</strong>人类维护者</p><p><strong>所需技术状态：</strong>ready_for_human_decision、repair_requested、verification_complete</p><p><strong>以后是否可能可用：</strong>到达所需状态且对象范围满足后可能可用。</p><details><summary>技术操作标识与依据</summary><pre>{
+}</pre></details></article><article class="action-card unavailable" aria-disabled="true"><h3>由有权维护者执行覆盖处理 <span>当前不可用</span></h3><p>记录具备权限的维护者对明确项目要求或问题的例外处理。</p><p><strong>原因：</strong>当前处于“等待贡献者补齐材料”，还不能执行“由有权维护者执行覆盖处理”。</p><p><strong>所需角色：</strong>人类维护者</p><p><strong>所需流程位置：</strong>等待人类维护者最终决定、发现问题，等待指定范围修改或维护者检查完成，正在确认可决策状态</p><p><strong>以后是否可能可用：</strong>到达所需状态且对象范围满足后可能可用。</p><details><summary>技术操作标识与依据</summary><pre>{
   &quot;action&quot;: &quot;authorized_override&quot;,
-  &quot;title&quot;: &quot;执行有权覆盖&quot;,
-  &quot;description&quot;: &quot;记录具备权限的维护者对明确义务或 finding 的例外处理。&quot;,
-  &quot;reason&quot;: &quot;操作 authorized_override 不能从当前状态 evidence_incomplete 执行。&quot;,
+  &quot;title&quot;: &quot;由有权维护者执行覆盖处理&quot;,
+  &quot;description&quot;: &quot;记录具备权限的维护者对明确项目要求或问题的例外处理。&quot;,
+  &quot;reason&quot;: &quot;当前处于“等待贡献者补齐材料”，还不能执行“由有权维护者执行覆盖处理”。&quot;,
   &quot;next_actor_roles&quot;: [
     &quot;contributor&quot;,
     &quot;contributor_agent&quot;
@@ -915,7 +924,7 @@ code { overflow-wrap: anywhere; }
       &quot;relationship&quot;: &quot;authority&quot;
     }
   ],
-  &quot;category&quot;: &quot;stage&quot;,
+  &quot;category&quot;: &quot;authority&quot;,
   &quot;required_role&quot;: [
     &quot;maintainer&quot;
   ],
@@ -925,11 +934,11 @@ code { overflow-wrap: anywhere; }
     &quot;verification_complete&quot;
   ],
   &quot;future_availability&quot;: &quot;到达所需状态且对象范围满足后可能可用。&quot;
-}</pre></details></article><article class="action-card unavailable" aria-disabled="true"><h3>提交人类最终接受决定 <span>当前不可用</span></h3><p>由人类维护者记录接受决定。</p><p><strong>原因：</strong>操作 decide_accept 不能从当前状态 evidence_incomplete 执行。</p><p><strong>所需角色：</strong>人类维护者</p><p><strong>所需技术状态：</strong>overridden、ready_for_human_decision</p><p><strong>以后是否可能可用：</strong>前序阻断要求完成并进入人类最终决定阶段后可用。</p><details><summary>技术操作标识与依据</summary><pre>{
+}</pre></details></article><article class="action-card unavailable" aria-disabled="true"><h3>最终接受 <span>当前不可用</span></h3><p>由人类维护者记录接受决定。</p><p><strong>原因：</strong>当前处于“等待贡献者补齐材料”，还不能执行“最终接受”。</p><p><strong>所需角色：</strong>人类维护者</p><p><strong>所需流程位置：</strong>有权覆盖已记录，等待人类维护者最终决定或等待人类维护者最终决定</p><p><strong>以后是否可能可用：</strong>前序阻断要求完成并进入人类最终决定阶段后可用。</p><details><summary>技术操作标识与依据</summary><pre>{
   &quot;action&quot;: &quot;decide_accept&quot;,
-  &quot;title&quot;: &quot;提交人类最终接受决定&quot;,
+  &quot;title&quot;: &quot;最终接受&quot;,
   &quot;description&quot;: &quot;由人类维护者记录接受决定。&quot;,
-  &quot;reason&quot;: &quot;操作 decide_accept 不能从当前状态 evidence_incomplete 执行。&quot;,
+  &quot;reason&quot;: &quot;当前处于“等待贡献者补齐材料”，还不能执行“最终接受”。&quot;,
   &quot;next_actor_roles&quot;: [
     &quot;contributor&quot;,
     &quot;contributor_agent&quot;
@@ -942,7 +951,7 @@ code { overflow-wrap: anywhere; }
       &quot;relationship&quot;: &quot;authority&quot;
     }
   ],
-  &quot;category&quot;: &quot;stage&quot;,
+  &quot;category&quot;: &quot;authority&quot;,
   &quot;required_role&quot;: [
     &quot;maintainer&quot;
   ],
@@ -951,11 +960,11 @@ code { overflow-wrap: anywhere; }
     &quot;ready_for_human_decision&quot;
   ],
   &quot;future_availability&quot;: &quot;前序阻断要求完成并进入人类最终决定阶段后可用。&quot;
-}</pre></details></article><article class="action-card unavailable" aria-disabled="true"><h3>提交人类最终拒绝决定 <span>当前不可用</span></h3><p>由人类维护者记录拒绝决定。</p><p><strong>原因：</strong>操作 decide_reject 不能从当前状态 evidence_incomplete 执行。</p><p><strong>所需角色：</strong>人类维护者</p><p><strong>所需技术状态：</strong>overridden、ready_for_human_decision、repair_requested</p><p><strong>以后是否可能可用：</strong>前序阻断要求完成并进入人类最终决定阶段后可用。</p><details><summary>技术操作标识与依据</summary><pre>{
+}</pre></details></article><article class="action-card unavailable" aria-disabled="true"><h3>最终拒绝 <span>当前不可用</span></h3><p>由人类维护者记录拒绝决定。</p><p><strong>原因：</strong>当前处于“等待贡献者补齐材料”，还不能执行“最终拒绝”。</p><p><strong>所需角色：</strong>人类维护者</p><p><strong>所需流程位置：</strong>有权覆盖已记录，等待人类维护者最终决定、等待人类维护者最终决定或发现问题，等待指定范围修改</p><p><strong>以后是否可能可用：</strong>前序阻断要求完成并进入人类最终决定阶段后可用。</p><details><summary>技术操作标识与依据</summary><pre>{
   &quot;action&quot;: &quot;decide_reject&quot;,
-  &quot;title&quot;: &quot;提交人类最终拒绝决定&quot;,
+  &quot;title&quot;: &quot;最终拒绝&quot;,
   &quot;description&quot;: &quot;由人类维护者记录拒绝决定。&quot;,
-  &quot;reason&quot;: &quot;操作 decide_reject 不能从当前状态 evidence_incomplete 执行。&quot;,
+  &quot;reason&quot;: &quot;当前处于“等待贡献者补齐材料”，还不能执行“最终拒绝”。&quot;,
   &quot;next_actor_roles&quot;: [
     &quot;contributor&quot;,
     &quot;contributor_agent&quot;
@@ -968,7 +977,7 @@ code { overflow-wrap: anywhere; }
       &quot;relationship&quot;: &quot;authority&quot;
     }
   ],
-  &quot;category&quot;: &quot;stage&quot;,
+  &quot;category&quot;: &quot;authority&quot;,
   &quot;required_role&quot;: [
     &quot;maintainer&quot;
   ],
@@ -978,11 +987,11 @@ code { overflow-wrap: anywhere; }
     &quot;repair_requested&quot;
   ],
   &quot;future_availability&quot;: &quot;前序阻断要求完成并进入人类最终决定阶段后可用。&quot;
-}</pre></details></article><article class="action-card unavailable" aria-disabled="true"><h3>提交人类修改决定 <span>当前不可用</span></h3><p>由人类维护者要求贡献侧继续修改。</p><p><strong>原因：</strong>操作 decide_request_changes 不能从当前状态 evidence_incomplete 执行。</p><p><strong>所需角色：</strong>人类维护者</p><p><strong>所需技术状态：</strong>overridden、ready_for_human_decision</p><p><strong>以后是否可能可用：</strong>前序阻断要求完成并进入人类最终决定阶段后可用。</p><details><summary>技术操作标识与依据</summary><pre>{
+}</pre></details></article><article class="action-card unavailable" aria-disabled="true"><h3>要求继续修改 <span>当前不可用</span></h3><p>由人类维护者要求贡献侧继续修改。</p><p><strong>原因：</strong>当前处于“等待贡献者补齐材料”，还不能执行“要求继续修改”。</p><p><strong>所需角色：</strong>人类维护者</p><p><strong>所需流程位置：</strong>有权覆盖已记录，等待人类维护者最终决定或等待人类维护者最终决定</p><p><strong>以后是否可能可用：</strong>前序阻断要求完成并进入人类最终决定阶段后可用。</p><details><summary>技术操作标识与依据</summary><pre>{
   &quot;action&quot;: &quot;decide_request_changes&quot;,
-  &quot;title&quot;: &quot;提交人类修改决定&quot;,
+  &quot;title&quot;: &quot;要求继续修改&quot;,
   &quot;description&quot;: &quot;由人类维护者要求贡献侧继续修改。&quot;,
-  &quot;reason&quot;: &quot;操作 decide_request_changes 不能从当前状态 evidence_incomplete 执行。&quot;,
+  &quot;reason&quot;: &quot;当前处于“等待贡献者补齐材料”，还不能执行“要求继续修改”。&quot;,
   &quot;next_actor_roles&quot;: [
     &quot;contributor&quot;,
     &quot;contributor_agent&quot;
@@ -995,7 +1004,7 @@ code { overflow-wrap: anywhere; }
       &quot;relationship&quot;: &quot;authority&quot;
     }
   ],
-  &quot;category&quot;: &quot;stage&quot;,
+  &quot;category&quot;: &quot;authority&quot;,
   &quot;required_role&quot;: [
     &quot;maintainer&quot;
   ],
@@ -1004,11 +1013,11 @@ code { overflow-wrap: anywhere; }
     &quot;ready_for_human_decision&quot;
   ],
   &quot;future_availability&quot;: &quot;前序阻断要求完成并进入人类最终决定阶段后可用。&quot;
-}</pre></details></article><article class="action-card unavailable" aria-disabled="true"><h3>关闭案例 <span>当前不可用</span></h3><p>由人类维护者关闭案例而不表示接受或合并。</p><p><strong>原因：</strong>操作 decide_close 不能从当前状态 evidence_incomplete 执行。</p><p><strong>所需角色：</strong>人类维护者</p><p><strong>所需技术状态：</strong>overridden、ready_for_human_decision、repair_requested</p><p><strong>以后是否可能可用：</strong>前序阻断要求完成并进入人类最终决定阶段后可用。</p><details><summary>技术操作标识与依据</summary><pre>{
+}</pre></details></article><article class="action-card unavailable" aria-disabled="true"><h3>关闭本次审核记录 <span>当前不可用</span></h3><p>由人类维护者关闭案例而不表示接受或合并。</p><p><strong>原因：</strong>当前处于“等待贡献者补齐材料”，还不能执行“关闭本次审核记录”。</p><p><strong>所需角色：</strong>人类维护者</p><p><strong>所需流程位置：</strong>有权覆盖已记录，等待人类维护者最终决定、等待人类维护者最终决定或发现问题，等待指定范围修改</p><p><strong>以后是否可能可用：</strong>前序阻断要求完成并进入人类最终决定阶段后可用。</p><details><summary>技术操作标识与依据</summary><pre>{
   &quot;action&quot;: &quot;decide_close&quot;,
-  &quot;title&quot;: &quot;关闭案例&quot;,
+  &quot;title&quot;: &quot;关闭本次审核记录&quot;,
   &quot;description&quot;: &quot;由人类维护者关闭案例而不表示接受或合并。&quot;,
-  &quot;reason&quot;: &quot;操作 decide_close 不能从当前状态 evidence_incomplete 执行。&quot;,
+  &quot;reason&quot;: &quot;当前处于“等待贡献者补齐材料”，还不能执行“关闭本次审核记录”。&quot;,
   &quot;next_actor_roles&quot;: [
     &quot;contributor&quot;,
     &quot;contributor_agent&quot;
@@ -1021,7 +1030,7 @@ code { overflow-wrap: anywhere; }
       &quot;relationship&quot;: &quot;authority&quot;
     }
   ],
-  &quot;category&quot;: &quot;stage&quot;,
+  &quot;category&quot;: &quot;authority&quot;,
   &quot;required_role&quot;: [
     &quot;maintainer&quot;
   ],
@@ -1352,7 +1361,7 @@ code { overflow-wrap: anywhere; }
   &quot;findings&quot;: [],
   &quot;repair_requests&quot;: [],
   &quot;attempted_operations&quot;: [],
-  &quot;contribution_fingerprint&quot;: &quot;c3323431536bbbb95ba1b08b6e69fd082ab89accf9a348306c042228fe49e2ef&quot;,
+  &quot;contribution_fingerprint&quot;: &quot;e9bf2e6f68419187ca25503e78de5f29d0032fe013d4a59252b069d25e8bb261&quot;,
   &quot;policy_fingerprint&quot;: &quot;e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564&quot;,
   &quot;policy_snapshot&quot;: {
     &quot;id&quot;: &quot;policy-57dc31e37e16513f8a3aaaaed32a842c&quot;,

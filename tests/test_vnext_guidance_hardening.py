@@ -186,7 +186,9 @@ def test_unknown_obligation_uses_nonempty_fallback_and_keeps_english():
     name, plain = obligation_presentation(obligation)
 
     assert name and plain
-    assert "O-FUTURE" in name
+    assert name == "某项项目要求"
+    assert "O-FUTURE" not in name
+    assert obligation.obligation_id == "O-FUTURE"
     assert obligation.description == "Future canonical English requirement."
 
 

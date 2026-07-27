@@ -6,7 +6,7 @@
 - 风险: 低
 - 阻断问题: 1
 - 需要关注: 0
-- 当前责任方: 贡献者、贡献侧智能体
+- 当前责任方: 人类贡献者、贡献侧智能体
 - 责任方依据: 受影响材料尚未准备或更新完成，当前还不能进入维护者检查。
 
 ## 五步流程
@@ -44,20 +44,20 @@
 ## 暂不可用操作摘要
 
 - 还有 14 项操作因当前阶段、权限或对象范围暂不可用
-  - 检查待核验项: 这些项目的材料或负责人确认尚未满足，当前不能核验：O-SUMMARY
-  - 请求补充或更新材料: 操作 request_repair 不能从当前状态 resubmitted 执行。
-  - 拒绝无效材料: 操作 reject_evidence 不能从当前状态 resubmitted 执行。
-  - 请求说明: 操作 ask_clarification 不能从当前状态 resubmitted 执行。
-  - 要求负责人重新确认: 操作 invalidate_attestation 不能从当前状态 resubmitted 执行。
-  - 记录项目规则冲突: 操作 record_policy_conflict 不能从当前状态 resubmitted 执行。
-  - 解决项目规则冲突: 当前角色没有 resolve_policy_conflict 权限。 可执行角色：maintainer, policy_steward。
-  - 补交指定范围: 当前角色没有 resubmit 权限。 可执行角色：contributor, contributor_agent。
-  - 负责人确认当前范围: 当前角色没有 confirm_attestation 权限。 可执行角色：accountable_human。
-  - 执行有权覆盖: 当前角色没有 authorized_override 权限。 可执行角色：maintainer。
-  - 提交人类最终接受决定: 当前角色没有 decide_accept 权限。 可执行角色：maintainer。
-  - 提交人类最终拒绝决定: 当前角色没有 decide_reject 权限。 可执行角色：maintainer。
-  - 提交人类修改决定: 当前角色没有 decide_request_changes 权限。 可执行角色：maintainer。
-  - 关闭案例: 当前角色没有 decide_close 权限。 可执行角色：maintainer。
+  - 检查提交材料: 当前还不能进行维护者检查。原因：“修改说明”仍需要更新。当前可以继续处理的角色：人类贡献者或贡献侧智能体。
+  - 要求补充或修改: 当前处于“已补交，等待确认材料是否齐备”，还不能执行“要求补充或修改”。
+  - 拒绝当前材料: 当前处于“已补交，等待确认材料是否齐备”，还不能执行“拒绝当前材料”。
+  - 请求补充说明: 当前处于“已补交，等待确认材料是否齐备”，还不能执行“请求补充说明”。
+  - 将旧负责人确认标记为失效: 当前处于“已补交，等待确认材料是否齐备”，还不能执行“将旧负责人确认标记为失效”。
+  - 记录项目规则冲突: 当前处于“已补交，等待确认材料是否齐备”，还不能执行“记录项目规则冲突”。
+  - 处理项目规则冲突: 当前角色没有“处理项目规则冲突”的权限。可以执行这一步的角色：人类维护者或项目规则负责人。
+  - 重新提交修改后的材料: 当前角色没有“重新提交修改后的材料”的权限。可以执行这一步的角色：人类贡献者或贡献侧智能体。
+  - 确认负责人声明: 当前角色没有“确认负责人声明”的权限。可以执行这一步的角色：负责人。
+  - 由有权维护者执行覆盖处理: 当前角色没有“由有权维护者执行覆盖处理”的权限。可以执行这一步的角色：人类维护者。
+  - 最终接受: 当前角色没有“最终接受”的权限。可以执行这一步的角色：人类维护者。
+  - 最终拒绝: 当前角色没有“最终拒绝”的权限。可以执行这一步的角色：人类维护者。
+  - 要求继续修改: 当前角色没有“要求继续修改”的权限。可以执行这一步的角色：人类维护者。
+  - 关闭本次审核记录: 当前角色没有“关闭本次审核记录”的权限。可以执行这一步的角色：人类维护者。
 
 ## Authority boundary
 
@@ -68,7 +68,9 @@
 
 你准备执行：**只重新检查“修改说明”**
 
-这些项目的材料或负责人确认尚未满足，当前不能核验：O-SUMMARY
+当前还不能进行维护者检查。原因：“修改说明”仍需要更新。当前可以继续处理的角色：人类贡献者或贡献侧智能体。
+
+当前可以继续处理的角色：人类贡献者或贡献侧智能体。
 
 ### 将处理
 
@@ -86,7 +88,7 @@
 ### 执行后
 
 - 本次操作不会改变案例状态。
-- 当前责任方仍是贡献者、贡献侧智能体。
+- 当前责任方仍是人类贡献者、贡献侧智能体。
 - 这不等于代码已经被项目接受。
 
 <details>
@@ -95,10 +97,19 @@
 ```json
 {
   "operation": "verify_evidence",
+  "current_role": "maintainer_verifier",
+  "required_roles": [
+    "maintainer",
+    "maintainer_verifier",
+    "policy_steward"
+  ],
   "source_state": "resubmitted",
   "target_state": "resubmitted",
   "effects": [],
   "affected_obligation_ids": [
+    "O-SUMMARY"
+  ],
+  "requested_obligation_ids": [
     "O-SUMMARY"
   ],
   "retained_evidence_ids": [
@@ -113,7 +124,7 @@
   "workflow_step_before": "prepare_materials",
   "workflow_step_after": "prepare_materials",
   "creates_records": [],
-  "preview_fingerprint": "3cdfa61de86dd86f13fa397dcda26c012bef974bd44fcb7e037f763463bee5f3",
+  "preview_fingerprint": "3e574fcf2a348d9742b94f09cc97875d1cd9cac775f014bd9772dd5133ebc11d",
   "traceability": [
     {
       "kind": "permission_rule",

@@ -30,6 +30,15 @@ from .selectors import (
     resolve_selector_tokens,
 )
 from .utilities import build_guidance_utilities, utility_output
+from .term_presentations import (
+    PresentedTerm,
+    present_action,
+    present_obligation,
+    present_record_type,
+    present_role,
+    present_state,
+    present_workflow_node,
+)
 from .presenters import (
     build_no_package_guidance,
     build_reviewer_guidance,
@@ -50,6 +59,7 @@ __all__ = [
     "GuidanceExplanation",
     "GuidanceReasonPresentation",
     "MaterialityDeclarationView",
+    "PresentedTerm",
     "RejectedOperationView",
     "RequirementComparison",
     "ResponsibilityView",
@@ -64,6 +74,12 @@ __all__ = [
     "build_reviewer_guidance",
     "derive_current_responsibility",
     "preview_reviewer_action",
+    "present_action",
+    "present_obligation",
+    "present_record_type",
+    "present_role",
+    "present_state",
+    "present_workflow_node",
     "resolve_selector_tokens",
     "render_guidance_html",
     "render_guidance_markdown",

@@ -6,7 +6,7 @@
 - 风险: 低
 - 阻断问题: 1
 - 需要关注: 0
-- 当前责任方: 维护者核验人、项目规则负责人、人类维护者
+- 当前责任方: 维护者侧检查人员、项目规则负责人、人类维护者
 - 责任方依据: 受影响材料已补充或仍然有效；当前只需重新检查指定修复范围。
 
 ## 五步流程
@@ -27,7 +27,7 @@
 
 ## 当前相关操作
 
-- **检查待核验项** (`verify_evidence`): 受影响项会记录维护者检查；全部阻断项完成后进入人类最终决定。
+- **检查提交材料**：受影响项会记录维护者检查；全部阻断项完成后进入人类最终决定。
 
 ## 其他可用操作（折叠区内容）
 
@@ -44,19 +44,19 @@
 ## 暂不可用操作摘要
 
 - 还有 13 项操作因当前阶段、权限或对象范围暂不可用
-  - 请求补充或更新材料: 操作 request_repair 不能从当前状态 resubmitted 执行。
-  - 拒绝无效材料: 操作 reject_evidence 不能从当前状态 resubmitted 执行。
-  - 请求说明: 操作 ask_clarification 不能从当前状态 resubmitted 执行。
-  - 要求负责人重新确认: 操作 invalidate_attestation 不能从当前状态 resubmitted 执行。
-  - 记录项目规则冲突: 操作 record_policy_conflict 不能从当前状态 resubmitted 执行。
-  - 解决项目规则冲突: 当前角色没有 resolve_policy_conflict 权限。 可执行角色：maintainer, policy_steward。
-  - 补交指定范围: 当前角色没有 resubmit 权限。 可执行角色：contributor, contributor_agent。
-  - 负责人确认当前范围: 当前角色没有 confirm_attestation 权限。 可执行角色：accountable_human。
-  - 执行有权覆盖: 当前角色没有 authorized_override 权限。 可执行角色：maintainer。
-  - 提交人类最终接受决定: 当前角色没有 decide_accept 权限。 可执行角色：maintainer。
-  - 提交人类最终拒绝决定: 当前角色没有 decide_reject 权限。 可执行角色：maintainer。
-  - 提交人类修改决定: 当前角色没有 decide_request_changes 权限。 可执行角色：maintainer。
-  - 关闭案例: 当前角色没有 decide_close 权限。 可执行角色：maintainer。
+  - 要求补充或修改: 当前处于“已补交，等待确认材料是否齐备”，还不能执行“要求补充或修改”。
+  - 拒绝当前材料: 当前处于“已补交，等待确认材料是否齐备”，还不能执行“拒绝当前材料”。
+  - 请求补充说明: 当前处于“已补交，等待确认材料是否齐备”，还不能执行“请求补充说明”。
+  - 将旧负责人确认标记为失效: 当前处于“已补交，等待确认材料是否齐备”，还不能执行“将旧负责人确认标记为失效”。
+  - 记录项目规则冲突: 当前处于“已补交，等待确认材料是否齐备”，还不能执行“记录项目规则冲突”。
+  - 处理项目规则冲突: 当前角色没有“处理项目规则冲突”的权限。可以执行这一步的角色：人类维护者或项目规则负责人。
+  - 重新提交修改后的材料: 当前角色没有“重新提交修改后的材料”的权限。可以执行这一步的角色：人类贡献者或贡献侧智能体。
+  - 确认负责人声明: 当前角色没有“确认负责人声明”的权限。可以执行这一步的角色：负责人。
+  - 由有权维护者执行覆盖处理: 当前角色没有“由有权维护者执行覆盖处理”的权限。可以执行这一步的角色：人类维护者。
+  - 最终接受: 当前角色没有“最终接受”的权限。可以执行这一步的角色：人类维护者。
+  - 最终拒绝: 当前角色没有“最终拒绝”的权限。可以执行这一步的角色：人类维护者。
+  - 要求继续修改: 当前角色没有“要求继续修改”的权限。可以执行这一步的角色：人类维护者。
+  - 关闭本次审核记录: 当前角色没有“关闭本次审核记录”的权限。可以执行这一步的角色：人类维护者。
 
 ## Authority boundary
 
@@ -68,6 +68,8 @@
 你准备执行：**只重新检查“智能体行动与委派说明”**
 
 当前角色和案例状态允许生成此操作计划。
+
+当前可以继续处理的角色：人类维护者。
 
 ### 将处理
 
@@ -99,6 +101,12 @@
 ```json
 {
   "operation": "verify_evidence",
+  "current_role": "maintainer_verifier",
+  "required_roles": [
+    "maintainer",
+    "maintainer_verifier",
+    "policy_steward"
+  ],
   "source_state": "resubmitted",
   "target_state": "ready_for_human_decision",
   "effects": [
@@ -142,6 +150,9 @@
   "affected_obligation_ids": [
     "O-AGENT-SCOPE"
   ],
+  "requested_obligation_ids": [
+    "O-AGENT-SCOPE"
+  ],
   "retained_evidence_ids": [
     "evidence-7525c42fd5d650df850b5f6ebf095485",
     "evidence-2cb3732e2b49561598dc8daee791f8d9"
@@ -157,7 +168,7 @@
     "state_transition",
     "maintainer_verification"
   ],
-  "preview_fingerprint": "21e0ab3d480ac8233ddd8f56a5b6e6bb91778e68a6ec1bffcdad8271602eab0d",
+  "preview_fingerprint": "7cf68059960a1c57513cbc21d3bda1e89c20fe164318c2d66f4b48fa198dfcdf",
   "traceability": [
     {
       "kind": "permission_rule",

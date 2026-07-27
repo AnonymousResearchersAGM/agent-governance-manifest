@@ -58,7 +58,7 @@ code { overflow-wrap: anywhere; }
 <div class="metric"><strong>当前阶段</strong><br>等待维护者重新检查指定范围</div>
 <div class="metric"><strong>阻断问题</strong><br>1 项</div>
 <div class="metric"><strong>需要关注</strong><br>0 项</div>
-<div class="metric"><strong>当前责任方</strong><br>维护者核验人、项目规则负责人、人类维护者</div>
+<div class="metric"><strong>当前责任方</strong><br>维护者侧检查人员、项目规则负责人、人类维护者</div>
 <div class="metric"><strong>智能体参与方式</strong><br>智能体执行、有人监督</div>
 </div>
 <p><strong>变更文件：</strong>docs/guide.md</p>
@@ -180,7 +180,7 @@ code { overflow-wrap: anywhere; }
     &quot;evidence-78d4d1c1ff665bb4808d6623ad98935f&quot;
   ],
   &quot;binding_fingerprints&quot;: [
-    &quot;9fe19abd52f6e8e2b7fbb8b2f8ed283cb530ad8698ef8cf7c4411fc6fd3fb1d8&quot;
+    &quot;712fcd4dc43abd39cf07328603c2a14d9da29e20b1369a6d2b1b1b8eba6080a0&quot;
   ],
   &quot;finding_ids&quot;: [
     &quot;finding-998704f5c08b576f882422ff5d00c5cd&quot;
@@ -224,7 +224,7 @@ code { overflow-wrap: anywhere; }
     &quot;evidence-7525c42fd5d650df850b5f6ebf095485&quot;
   ],
   &quot;binding_fingerprints&quot;: [
-    &quot;9fe19abd52f6e8e2b7fbb8b2f8ed283cb530ad8698ef8cf7c4411fc6fd3fb1d8&quot;
+    &quot;712fcd4dc43abd39cf07328603c2a14d9da29e20b1369a6d2b1b1b8eba6080a0&quot;
   ],
   &quot;finding_ids&quot;: [],
   &quot;reference_english&quot;: &quot;Identify the files and scopes covered by the contribution.&quot;,
@@ -261,7 +261,7 @@ code { overflow-wrap: anywhere; }
     &quot;evidence-2cb3732e2b49561598dc8daee791f8d9&quot;
   ],
   &quot;binding_fingerprints&quot;: [
-    &quot;9fe19abd52f6e8e2b7fbb8b2f8ed283cb530ad8698ef8cf7c4411fc6fd3fb1d8&quot;
+    &quot;712fcd4dc43abd39cf07328603c2a14d9da29e20b1369a6d2b1b1b8eba6080a0&quot;
   ],
   &quot;finding_ids&quot;: [],
   &quot;reference_english&quot;: &quot;Provide a concise factual contribution summary.&quot;,
@@ -425,8 +425,14 @@ code { overflow-wrap: anywhere; }
     &quot;relationship&quot;: &quot;agent_scope_requirement&quot;
   }
 ]</pre></details></section>
-<section class="preview" id="action-preview"><h2>操作前预览</h2><p>你准备执行：<strong>只重新检查“智能体行动与委派说明”</strong></p><p>当前角色和案例状态允许生成此操作计划。</p><p><strong>将处理：</strong>智能体行动与委派说明</p><ul><li><strong>案例流程</strong>: 已补充，等待重新检查 → 等待人类维护者最终决定<br>受影响项会记录维护者检查；全部阻断项完成后进入人类最终决定。</li><li><strong>智能体行动与委派说明</strong>: 材料已满足 → 已检查<br>受影响项会记录维护者检查；全部阻断项完成后进入人类最终决定。</li><li><strong>本次问题</strong>: 待处理 → 已关闭<br>本次重新检查通过后，关联问题将关闭。</li><li><strong>本次修复请求</strong>: 已补充，等待重新检查 → 已关闭<br>所关联的问题在本次重新检查后关闭。</li></ul><p><strong>保留的未受影响材料：</strong>变更文件清单、修改说明</p><p><strong>将失效：</strong>无</p><p><strong>责任方变化：</strong>维护者核验人、项目规则负责人、人类维护者 → 人类维护者</p><p><strong>流程位置变化：</strong>维护者检查 → 人类维护者最终决定</p><p><strong>执行后：</strong></p><ul><li>本次指定材料将被标记为已检查。</li><li>关联的问题和修复请求将被关闭。</li><li>当前责任方将转交给人类维护者。</li><li>案例将进入“人类维护者最终决定”。</li><li>这不等于代码已经被项目接受。</li></ul><p><strong>后续仍需负责人确认：</strong>否；<strong>后续仍需维护者检查：</strong>否；<strong>最终接受是否已经发生：</strong>否</p><p><strong>此预览本身不会修改案例：</strong>是</p><details><summary>技术操作、内部 ID 与原始状态</summary><pre>{
+<section class="preview" id="action-preview"><h2>操作前预览</h2><p>你准备执行：<strong>只重新检查“智能体行动与委派说明”</strong></p><p>当前角色和案例状态允许生成此操作计划。</p><p><strong>当前可以继续处理的角色：</strong>人类维护者</p><p><strong>将处理：</strong>智能体行动与委派说明</p><ul><li><strong>案例流程</strong>: 已补充，等待重新检查 → 等待人类维护者最终决定<br>受影响项会记录维护者检查；全部阻断项完成后进入人类最终决定。</li><li><strong>智能体行动与委派说明</strong>: 材料已满足 → 已检查<br>受影响项会记录维护者检查；全部阻断项完成后进入人类最终决定。</li><li><strong>本次问题</strong>: 待处理 → 已关闭<br>本次重新检查通过后，关联问题将关闭。</li><li><strong>本次修复请求</strong>: 已补充，等待重新检查 → 已关闭<br>所关联的问题在本次重新检查后关闭。</li></ul><p><strong>保留的未受影响材料：</strong>变更文件清单、修改说明</p><p><strong>将失效：</strong>无</p><p><strong>责任方变化：</strong>维护者侧检查人员、项目规则负责人、人类维护者 → 人类维护者</p><p><strong>流程位置变化：</strong>维护者检查 → 人类维护者最终决定</p><p><strong>执行后：</strong></p><ul><li>本次指定材料将被标记为已检查。</li><li>关联的问题和修复请求将被关闭。</li><li>当前责任方将转交给人类维护者。</li><li>案例将进入“人类维护者最终决定”。</li><li>这不等于代码已经被项目接受。</li></ul><p><strong>后续仍需负责人确认：</strong>否；<strong>后续仍需维护者检查：</strong>否；<strong>最终接受是否已经发生：</strong>否</p><p><strong>此预览本身不会修改案例：</strong>是</p><details><summary>技术操作、内部 ID 与原始状态</summary><pre>{
   &quot;operation&quot;: &quot;verify_evidence&quot;,
+  &quot;current_role&quot;: &quot;maintainer_verifier&quot;,
+  &quot;required_roles&quot;: [
+    &quot;maintainer&quot;,
+    &quot;maintainer_verifier&quot;,
+    &quot;policy_steward&quot;
+  ],
   &quot;source_state&quot;: &quot;resubmitted&quot;,
   &quot;target_state&quot;: &quot;ready_for_human_decision&quot;,
   &quot;effects&quot;: [
@@ -470,6 +476,9 @@ code { overflow-wrap: anywhere; }
   &quot;affected_obligation_ids&quot;: [
     &quot;O-AGENT-SCOPE&quot;
   ],
+  &quot;requested_obligation_ids&quot;: [
+    &quot;O-AGENT-SCOPE&quot;
+  ],
   &quot;retained_evidence_ids&quot;: [
     &quot;evidence-7525c42fd5d650df850b5f6ebf095485&quot;,
     &quot;evidence-2cb3732e2b49561598dc8daee791f8d9&quot;
@@ -485,7 +494,7 @@ code { overflow-wrap: anywhere; }
     &quot;state_transition&quot;,
     &quot;maintainer_verification&quot;
   ],
-  &quot;preview_fingerprint&quot;: &quot;21e0ab3d480ac8233ddd8f56a5b6e6bb91778e68a6ec1bffcdad8271602eab0d&quot;,
+  &quot;preview_fingerprint&quot;: &quot;7cf68059960a1c57513cbc21d3bda1e89c20fe164318c2d66f4b48fa198dfcdf&quot;,
   &quot;traceability&quot;: [
     {
       &quot;kind&quot;: &quot;permission_rule&quot;,
@@ -507,7 +516,7 @@ code { overflow-wrap: anywhere; }
 <section>
 <h2>当前相关操作</h2>
 <p>这里列出合法选择及影响，不替维护者作决定。后端仍会重新检查角色、状态和对象范围。</p>
-<div class="actions"><article class="action-card available"><h3>检查待核验项</h3><p>记录维护者对指定义务及其绑定材料的检查结果。</p><p><strong>为什么现在相关：</strong>该操作直接对应当前流程阶段或开放问题。</p><p><strong>执行后：</strong>受影响项会记录维护者检查；全部阻断项完成后进入人类最终决定。</p><details><summary>技术操作标识与依据</summary><pre>{
+<div class="actions"><article class="action-card available"><h3>检查提交材料</h3><p>记录维护者对指定项目要求及其绑定材料的检查结果。</p><p><strong>为什么现在相关：</strong>该操作直接对应当前流程阶段或开放问题。</p><p><strong>执行后：</strong>受影响项会记录维护者检查；全部阻断项完成后进入人类最终决定。</p><details><summary>技术操作标识与依据</summary><pre>{
   &quot;action&quot;: &quot;verify_evidence&quot;,
   &quot;traceability&quot;: [
     {
@@ -525,7 +534,7 @@ code { overflow-wrap: anywhere; }
 </section>
 <section>
 <details><summary>其他可用操作（1 项）</summary>
-<div class="actions"><article class="action-card available"><h3>查看变化范围</h3><p>查看 changed files、风险规则、影响范围和绑定 fingerprint。</p><p><strong>为什么现在相关：</strong>后端允许此操作，但它不直接处理当前主要阻断项。</p><p><strong>执行后：</strong>只读操作，不改变案例状态。</p><details><summary>技术操作标识与依据</summary><pre>{
+<div class="actions"><article class="action-card available"><h3>查看变化范围</h3><p>查看变更文件、风险规则、影响范围和绑定指纹。</p><p><strong>为什么现在相关：</strong>后端允许此操作，但它不直接处理当前主要阻断项。</p><p><strong>执行后：</strong>只读操作，不改变案例状态。</p><details><summary>技术操作标识与依据</summary><pre>{
   &quot;action&quot;: &quot;view_change_scope&quot;,
   &quot;traceability&quot;: [
     {
@@ -543,7 +552,7 @@ code { overflow-wrap: anywhere; }
 <div class="actions"><article class="action-card utility"><h3>复制缺失项清单</h3><p>生成可直接交给贡献侧的缺失、过时或无效材料清单。</p><a class="button-link" href="/utility?action_id=copy_missing_requirements">打开只读输出</a><details><summary>在页面中预览</summary><pre>当前没有需要贡献侧补充或更新的材料。</pre></details></article><article class="action-card utility"><h3>导出贡献者待办清单</h3><p>导出包含责任方、待处理项和范围的 Markdown 清单。</p><a class="button-link" href="/utility?action_id=export_contributor_checklist">打开只读输出</a><details><summary>在页面中预览</summary><pre># 贡献者待办清单
 
 案例：scoped-repair
-当前责任方：维护者核验人、项目规则负责人、人类维护者
+当前责任方：维护者侧检查人员、项目规则负责人、人类维护者
 原因：受影响材料已补充或仍然有效；当前只需重新检查指定修复范围。
 
 ## 待处理项
@@ -553,9 +562,9 @@ code { overflow-wrap: anywhere; }
 完成后请按当前 repair/提交范围交回；最终决定仍由人类维护者作出。</pre></details></article><article class="action-card utility"><h3>下载维护者摘要</h3><p>导出当前风险、责任方和阻断项摘要，不作接受判断。</p><a class="button-link" href="/utility?action_id=export_reviewer_summary">打开只读输出</a><details><summary>在页面中预览</summary><pre># 维护者审核摘要
 
 案例：scoped-repair
-当前状态：resubmitted
+当前状态：已补交，等待确认材料是否齐备
 风险：low
-当前责任方：维护者核验人、项目规则负责人、人类维护者
+当前责任方：维护者侧检查人员、项目规则负责人、人类维护者
 责任方依据：受影响材料已补充或仍然有效；当前只需重新检查指定修复范围。
 
 ## 阻断或待检查项
@@ -585,19 +594,19 @@ code { overflow-wrap: anywhere; }
       &quot;docs/guide.md&quot;
     ]
   }
-}</pre></details></article><article class="action-card utility"><h3>复制当前责任方说明</h3><p>生成不改变案例状态的 handoff note。</p><a class="button-link" href="/utility?action_id=copy_handoff_note">打开只读输出</a><details><summary>在页面中预览</summary><pre>案例 scoped-repair 当前交给：维护者核验人、项目规则负责人、人类维护者。
+}</pre></details></article><article class="action-card utility"><h3>复制当前责任方说明</h3><p>生成不改变案例状态的 handoff note。</p><a class="button-link" href="/utility?action_id=copy_handoff_note">打开只读输出</a><details><summary>在页面中预览</summary><pre>案例 scoped-repair 当前交给：维护者侧检查人员、项目规则负责人、人类维护者。
 受影响材料已补充或仍然有效；当前只需重新检查指定修复范围。
 涉及：智能体行动与委派说明。
-完成后交给角色：maintainer。</pre></details></article></div>
+完成后交给角色：人类维护者。</pre></details></article></div>
 </section>
 <section>
 <details><summary>还有 13 项操作因当前阶段、权限或对象范围暂不可用</summary>
 <p>展开后可查看不可用原因、所需角色、所需状态及以后是否可能开放。后端权限检查始终保留。</p>
-<div class="actions"><article class="action-card unavailable" aria-disabled="true"><h3>请求补充或更新材料 <span>当前不可用</span></h3><p>指出问题和受影响义务，返回贡献侧修复。</p><p><strong>原因：</strong>操作 request_repair 不能从当前状态 resubmitted 执行。</p><p><strong>所需角色：</strong>人类维护者、维护者核验人、项目规则负责人</p><p><strong>所需技术状态：</strong>awaiting_maintainer_verification、ready_for_human_decision、verification_complete</p><p><strong>以后是否可能可用：</strong>到达所需状态且对象范围满足后可能可用。</p><details><summary>技术操作标识与依据</summary><pre>{
+<div class="actions"><article class="action-card unavailable" aria-disabled="true"><h3>要求补充或修改 <span>当前不可用</span></h3><p>指出问题和受影响义务，返回贡献侧修复。</p><p><strong>原因：</strong>当前处于“已补交，等待确认材料是否齐备”，还不能执行“要求补充或修改”。</p><p><strong>所需角色：</strong>人类维护者、维护者侧检查人员、项目规则负责人</p><p><strong>所需流程位置：</strong>等待维护者检查、等待人类维护者最终决定或维护者检查完成，正在确认可决策状态</p><p><strong>以后是否可能可用：</strong>到达所需状态且对象范围满足后可能可用。</p><details><summary>技术操作标识与依据</summary><pre>{
   &quot;action&quot;: &quot;request_repair&quot;,
-  &quot;title&quot;: &quot;请求补充或更新材料&quot;,
+  &quot;title&quot;: &quot;要求补充或修改&quot;,
   &quot;description&quot;: &quot;指出问题和受影响义务，返回贡献侧修复。&quot;,
-  &quot;reason&quot;: &quot;操作 request_repair 不能从当前状态 resubmitted 执行。&quot;,
+  &quot;reason&quot;: &quot;当前处于“已补交，等待确认材料是否齐备”，还不能执行“要求补充或修改”。&quot;,
   &quot;next_actor_roles&quot;: [
     &quot;maintainer_verifier&quot;,
     &quot;policy_steward&quot;,
@@ -611,7 +620,7 @@ code { overflow-wrap: anywhere; }
       &quot;relationship&quot;: &quot;authority&quot;
     }
   ],
-  &quot;category&quot;: &quot;stage&quot;,
+  &quot;category&quot;: &quot;authority&quot;,
   &quot;required_role&quot;: [
     &quot;maintainer&quot;,
     &quot;maintainer_verifier&quot;,
@@ -623,11 +632,11 @@ code { overflow-wrap: anywhere; }
     &quot;verification_complete&quot;
   ],
   &quot;future_availability&quot;: &quot;到达所需状态且对象范围满足后可能可用。&quot;
-}</pre></details></article><article class="action-card unavailable" aria-disabled="true"><h3>拒绝无效材料 <span>当前不可用</span></h3><p>拒绝一条不能支持当前修改的具体材料。</p><p><strong>原因：</strong>操作 reject_evidence 不能从当前状态 resubmitted 执行。</p><p><strong>所需角色：</strong>人类维护者、维护者核验人</p><p><strong>所需技术状态：</strong>awaiting_maintainer_verification、verification_complete</p><p><strong>以后是否可能可用：</strong>到达所需状态且对象范围满足后可能可用。</p><details><summary>技术操作标识与依据</summary><pre>{
+}</pre></details></article><article class="action-card unavailable" aria-disabled="true"><h3>拒绝当前材料 <span>当前不可用</span></h3><p>拒绝一条不能支持当前修改的具体材料。</p><p><strong>原因：</strong>当前处于“已补交，等待确认材料是否齐备”，还不能执行“拒绝当前材料”。</p><p><strong>所需角色：</strong>人类维护者、维护者侧检查人员</p><p><strong>所需流程位置：</strong>等待维护者检查或维护者检查完成，正在确认可决策状态</p><p><strong>以后是否可能可用：</strong>到达所需状态且对象范围满足后可能可用。</p><details><summary>技术操作标识与依据</summary><pre>{
   &quot;action&quot;: &quot;reject_evidence&quot;,
-  &quot;title&quot;: &quot;拒绝无效材料&quot;,
+  &quot;title&quot;: &quot;拒绝当前材料&quot;,
   &quot;description&quot;: &quot;拒绝一条不能支持当前修改的具体材料。&quot;,
-  &quot;reason&quot;: &quot;操作 reject_evidence 不能从当前状态 resubmitted 执行。&quot;,
+  &quot;reason&quot;: &quot;当前处于“已补交，等待确认材料是否齐备”，还不能执行“拒绝当前材料”。&quot;,
   &quot;next_actor_roles&quot;: [
     &quot;maintainer_verifier&quot;,
     &quot;policy_steward&quot;,
@@ -641,7 +650,7 @@ code { overflow-wrap: anywhere; }
       &quot;relationship&quot;: &quot;authority&quot;
     }
   ],
-  &quot;category&quot;: &quot;stage&quot;,
+  &quot;category&quot;: &quot;authority&quot;,
   &quot;required_role&quot;: [
     &quot;maintainer&quot;,
     &quot;maintainer_verifier&quot;
@@ -651,11 +660,11 @@ code { overflow-wrap: anywhere; }
     &quot;verification_complete&quot;
   ],
   &quot;future_availability&quot;: &quot;到达所需状态且对象范围满足后可能可用。&quot;
-}</pre></details></article><article class="action-card unavailable" aria-disabled="true"><h3>请求说明 <span>当前不可用</span></h3><p>针对指定要求提出可审计的澄清问题。</p><p><strong>原因：</strong>操作 ask_clarification 不能从当前状态 resubmitted 执行。</p><p><strong>所需角色：</strong>人类维护者、维护者核验人</p><p><strong>所需技术状态：</strong>awaiting_maintainer_verification、ready_for_human_decision、verification_complete</p><p><strong>以后是否可能可用：</strong>到达所需状态且对象范围满足后可能可用。</p><details><summary>技术操作标识与依据</summary><pre>{
+}</pre></details></article><article class="action-card unavailable" aria-disabled="true"><h3>请求补充说明 <span>当前不可用</span></h3><p>针对指定要求提出可审计的澄清问题。</p><p><strong>原因：</strong>当前处于“已补交，等待确认材料是否齐备”，还不能执行“请求补充说明”。</p><p><strong>所需角色：</strong>人类维护者、维护者侧检查人员</p><p><strong>所需流程位置：</strong>等待维护者检查、等待人类维护者最终决定或维护者检查完成，正在确认可决策状态</p><p><strong>以后是否可能可用：</strong>到达所需状态且对象范围满足后可能可用。</p><details><summary>技术操作标识与依据</summary><pre>{
   &quot;action&quot;: &quot;ask_clarification&quot;,
-  &quot;title&quot;: &quot;请求说明&quot;,
+  &quot;title&quot;: &quot;请求补充说明&quot;,
   &quot;description&quot;: &quot;针对指定要求提出可审计的澄清问题。&quot;,
-  &quot;reason&quot;: &quot;操作 ask_clarification 不能从当前状态 resubmitted 执行。&quot;,
+  &quot;reason&quot;: &quot;当前处于“已补交，等待确认材料是否齐备”，还不能执行“请求补充说明”。&quot;,
   &quot;next_actor_roles&quot;: [
     &quot;maintainer_verifier&quot;,
     &quot;policy_steward&quot;,
@@ -669,7 +678,7 @@ code { overflow-wrap: anywhere; }
       &quot;relationship&quot;: &quot;authority&quot;
     }
   ],
-  &quot;category&quot;: &quot;stage&quot;,
+  &quot;category&quot;: &quot;authority&quot;,
   &quot;required_role&quot;: [
     &quot;maintainer&quot;,
     &quot;maintainer_verifier&quot;
@@ -680,11 +689,11 @@ code { overflow-wrap: anywhere; }
     &quot;verification_complete&quot;
   ],
   &quot;future_availability&quot;: &quot;到达所需状态且对象范围满足后可能可用。&quot;
-}</pre></details></article><article class="action-card unavailable" aria-disabled="true"><h3>要求负责人重新确认 <span>当前不可用</span></h3><p>使一条过时或不正确的负责人确认失效。</p><p><strong>原因：</strong>操作 invalidate_attestation 不能从当前状态 resubmitted 执行。</p><p><strong>所需角色：</strong>人类维护者、维护者核验人</p><p><strong>所需技术状态：</strong>awaiting_maintainer_verification、ready_for_human_decision、verification_complete</p><p><strong>以后是否可能可用：</strong>到达所需状态且对象范围满足后可能可用。</p><details><summary>技术操作标识与依据</summary><pre>{
+}</pre></details></article><article class="action-card unavailable" aria-disabled="true"><h3>将旧负责人确认标记为失效 <span>当前不可用</span></h3><p>使一条过时或不正确的负责人确认失效。</p><p><strong>原因：</strong>当前处于“已补交，等待确认材料是否齐备”，还不能执行“将旧负责人确认标记为失效”。</p><p><strong>所需角色：</strong>人类维护者、维护者侧检查人员</p><p><strong>所需流程位置：</strong>等待维护者检查、等待人类维护者最终决定或维护者检查完成，正在确认可决策状态</p><p><strong>以后是否可能可用：</strong>到达所需状态且对象范围满足后可能可用。</p><details><summary>技术操作标识与依据</summary><pre>{
   &quot;action&quot;: &quot;invalidate_attestation&quot;,
-  &quot;title&quot;: &quot;要求负责人重新确认&quot;,
+  &quot;title&quot;: &quot;将旧负责人确认标记为失效&quot;,
   &quot;description&quot;: &quot;使一条过时或不正确的负责人确认失效。&quot;,
-  &quot;reason&quot;: &quot;操作 invalidate_attestation 不能从当前状态 resubmitted 执行。&quot;,
+  &quot;reason&quot;: &quot;当前处于“已补交，等待确认材料是否齐备”，还不能执行“将旧负责人确认标记为失效”。&quot;,
   &quot;next_actor_roles&quot;: [
     &quot;maintainer_verifier&quot;,
     &quot;policy_steward&quot;,
@@ -698,7 +707,7 @@ code { overflow-wrap: anywhere; }
       &quot;relationship&quot;: &quot;authority&quot;
     }
   ],
-  &quot;category&quot;: &quot;stage&quot;,
+  &quot;category&quot;: &quot;authority&quot;,
   &quot;required_role&quot;: [
     &quot;maintainer&quot;,
     &quot;maintainer_verifier&quot;
@@ -709,11 +718,11 @@ code { overflow-wrap: anywhere; }
     &quot;verification_complete&quot;
   ],
   &quot;future_availability&quot;: &quot;到达所需状态且对象范围满足后可能可用。&quot;
-}</pre></details></article><article class="action-card unavailable" aria-disabled="true"><h3>记录项目规则冲突 <span>当前不可用</span></h3><p>记录无法由普通材料修复的策略冲突。</p><p><strong>原因：</strong>操作 record_policy_conflict 不能从当前状态 resubmitted 执行。</p><p><strong>所需角色：</strong>人类维护者、维护者核验人、项目规则负责人</p><p><strong>所需技术状态：</strong>awaiting_human_attestation、awaiting_maintainer_verification、evidence_incomplete、ready_for_human_decision、verification_complete</p><p><strong>以后是否可能可用：</strong>到达所需状态且对象范围满足后可能可用。</p><details><summary>技术操作标识与依据</summary><pre>{
+}</pre></details></article><article class="action-card unavailable" aria-disabled="true"><h3>记录项目规则冲突 <span>当前不可用</span></h3><p>记录无法由普通材料修复的策略冲突。</p><p><strong>原因：</strong>当前处于“已补交，等待确认材料是否齐备”，还不能执行“记录项目规则冲突”。</p><p><strong>所需角色：</strong>人类维护者、维护者侧检查人员、项目规则负责人</p><p><strong>所需流程位置：</strong>等待负责人确认、等待维护者检查、等待贡献者补齐材料、等待人类维护者最终决定或维护者检查完成，正在确认可决策状态</p><p><strong>以后是否可能可用：</strong>到达所需状态且对象范围满足后可能可用。</p><details><summary>技术操作标识与依据</summary><pre>{
   &quot;action&quot;: &quot;record_policy_conflict&quot;,
   &quot;title&quot;: &quot;记录项目规则冲突&quot;,
   &quot;description&quot;: &quot;记录无法由普通材料修复的策略冲突。&quot;,
-  &quot;reason&quot;: &quot;操作 record_policy_conflict 不能从当前状态 resubmitted 执行。&quot;,
+  &quot;reason&quot;: &quot;当前处于“已补交，等待确认材料是否齐备”，还不能执行“记录项目规则冲突”。&quot;,
   &quot;next_actor_roles&quot;: [
     &quot;maintainer_verifier&quot;,
     &quot;policy_steward&quot;,
@@ -727,7 +736,7 @@ code { overflow-wrap: anywhere; }
       &quot;relationship&quot;: &quot;authority&quot;
     }
   ],
-  &quot;category&quot;: &quot;stage&quot;,
+  &quot;category&quot;: &quot;scope&quot;,
   &quot;required_role&quot;: [
     &quot;maintainer&quot;,
     &quot;maintainer_verifier&quot;,
@@ -741,11 +750,11 @@ code { overflow-wrap: anywhere; }
     &quot;verification_complete&quot;
   ],
   &quot;future_availability&quot;: &quot;到达所需状态且对象范围满足后可能可用。&quot;
-}</pre></details></article><article class="action-card unavailable" aria-disabled="true"><h3>解决项目规则冲突 <span>当前不可用</span></h3><p>由有权限的角色记录策略冲突的解决依据。</p><p><strong>原因：</strong>当前角色没有 resolve_policy_conflict 权限。 可执行角色：maintainer, policy_steward。</p><p><strong>所需角色：</strong>人类维护者、项目规则负责人</p><p><strong>所需技术状态：</strong>repair_requested</p><p><strong>以后是否可能可用：</strong>切换流程阶段不会改变角色权限；需要由列出的有权角色执行。</p><details><summary>技术操作标识与依据</summary><pre>{
+}</pre></details></article><article class="action-card unavailable" aria-disabled="true"><h3>处理项目规则冲突 <span>当前不可用</span></h3><p>由有权限的角色记录策略冲突的解决依据。</p><p><strong>原因：</strong>当前角色没有“处理项目规则冲突”的权限。可以执行这一步的角色：人类维护者或项目规则负责人。</p><p><strong>所需角色：</strong>人类维护者、项目规则负责人</p><p><strong>所需流程位置：</strong>发现问题，等待指定范围修改</p><p><strong>以后是否可能可用：</strong>切换流程阶段不会改变角色权限；需要由列出的有权角色执行。</p><details><summary>技术操作标识与依据</summary><pre>{
   &quot;action&quot;: &quot;resolve_policy_conflict&quot;,
-  &quot;title&quot;: &quot;解决项目规则冲突&quot;,
+  &quot;title&quot;: &quot;处理项目规则冲突&quot;,
   &quot;description&quot;: &quot;由有权限的角色记录策略冲突的解决依据。&quot;,
-  &quot;reason&quot;: &quot;当前角色没有 resolve_policy_conflict 权限。 可执行角色：maintainer, policy_steward。&quot;,
+  &quot;reason&quot;: &quot;当前角色没有“处理项目规则冲突”的权限。可以执行这一步的角色：人类维护者或项目规则负责人。&quot;,
   &quot;next_actor_roles&quot;: [
     &quot;maintainer&quot;,
     &quot;policy_steward&quot;
@@ -767,11 +776,11 @@ code { overflow-wrap: anywhere; }
     &quot;repair_requested&quot;
   ],
   &quot;future_availability&quot;: &quot;切换流程阶段不会改变角色权限；需要由列出的有权角色执行。&quot;
-}</pre></details></article><article class="action-card unavailable" aria-disabled="true"><h3>补交指定范围 <span>当前不可用</span></h3><p>贡献侧提交 repair 影响范围和新增材料。</p><p><strong>原因：</strong>当前角色没有 resubmit 权限。 可执行角色：contributor, contributor_agent。</p><p><strong>所需角色：</strong>贡献者、贡献侧智能体</p><p><strong>所需技术状态：</strong>repair_requested</p><p><strong>以后是否可能可用：</strong>切换流程阶段不会改变角色权限；需要由列出的有权角色执行。</p><details><summary>技术操作标识与依据</summary><pre>{
+}</pre></details></article><article class="action-card unavailable" aria-disabled="true"><h3>重新提交修改后的材料 <span>当前不可用</span></h3><p>贡献侧提交补充或修改影响范围和新增材料。</p><p><strong>原因：</strong>当前角色没有“重新提交修改后的材料”的权限。可以执行这一步的角色：人类贡献者或贡献侧智能体。</p><p><strong>所需角色：</strong>人类贡献者、贡献侧智能体</p><p><strong>所需流程位置：</strong>发现问题，等待指定范围修改</p><p><strong>以后是否可能可用：</strong>切换流程阶段不会改变角色权限；需要由列出的有权角色执行。</p><details><summary>技术操作标识与依据</summary><pre>{
   &quot;action&quot;: &quot;resubmit&quot;,
-  &quot;title&quot;: &quot;补交指定范围&quot;,
-  &quot;description&quot;: &quot;贡献侧提交 repair 影响范围和新增材料。&quot;,
-  &quot;reason&quot;: &quot;当前角色没有 resubmit 权限。 可执行角色：contributor, contributor_agent。&quot;,
+  &quot;title&quot;: &quot;重新提交修改后的材料&quot;,
+  &quot;description&quot;: &quot;贡献侧提交补充或修改影响范围和新增材料。&quot;,
+  &quot;reason&quot;: &quot;当前角色没有“重新提交修改后的材料”的权限。可以执行这一步的角色：人类贡献者或贡献侧智能体。&quot;,
   &quot;next_actor_roles&quot;: [
     &quot;contributor&quot;,
     &quot;contributor_agent&quot;
@@ -793,11 +802,11 @@ code { overflow-wrap: anywhere; }
     &quot;repair_requested&quot;
   ],
   &quot;future_availability&quot;: &quot;切换流程阶段不会改变角色权限；需要由列出的有权角色执行。&quot;
-}</pre></details></article><article class="action-card unavailable" aria-disabled="true"><h3>负责人确认当前范围 <span>当前不可用</span></h3><p>由 accountable human 对明确范围作出事实确认。</p><p><strong>原因：</strong>当前角色没有 confirm_attestation 权限。 可执行角色：accountable_human。</p><p><strong>所需角色：</strong>负责人</p><p><strong>所需技术状态：</strong>awaiting_human_attestation、evidence_incomplete</p><p><strong>以后是否可能可用：</strong>切换流程阶段不会改变角色权限；需要由列出的有权角色执行。</p><details><summary>技术操作标识与依据</summary><pre>{
+}</pre></details></article><article class="action-card unavailable" aria-disabled="true"><h3>确认负责人声明 <span>当前不可用</span></h3><p>由负责人对明确范围作出事实确认。</p><p><strong>原因：</strong>当前角色没有“确认负责人声明”的权限。可以执行这一步的角色：负责人。</p><p><strong>所需角色：</strong>负责人</p><p><strong>所需流程位置：</strong>等待负责人确认或等待贡献者补齐材料</p><p><strong>以后是否可能可用：</strong>切换流程阶段不会改变角色权限；需要由列出的有权角色执行。</p><details><summary>技术操作标识与依据</summary><pre>{
   &quot;action&quot;: &quot;confirm_attestation&quot;,
-  &quot;title&quot;: &quot;负责人确认当前范围&quot;,
-  &quot;description&quot;: &quot;由 accountable human 对明确范围作出事实确认。&quot;,
-  &quot;reason&quot;: &quot;当前角色没有 confirm_attestation 权限。 可执行角色：accountable_human。&quot;,
+  &quot;title&quot;: &quot;确认负责人声明&quot;,
+  &quot;description&quot;: &quot;由负责人对明确范围作出事实确认。&quot;,
+  &quot;reason&quot;: &quot;当前角色没有“确认负责人声明”的权限。可以执行这一步的角色：负责人。&quot;,
   &quot;next_actor_roles&quot;: [
     &quot;accountable_human&quot;
   ],
@@ -818,11 +827,11 @@ code { overflow-wrap: anywhere; }
     &quot;evidence_incomplete&quot;
   ],
   &quot;future_availability&quot;: &quot;切换流程阶段不会改变角色权限；需要由列出的有权角色执行。&quot;
-}</pre></details></article><article class="action-card unavailable" aria-disabled="true"><h3>执行有权覆盖 <span>当前不可用</span></h3><p>记录具备权限的维护者对明确义务或 finding 的例外处理。</p><p><strong>原因：</strong>当前角色没有 authorized_override 权限。 可执行角色：maintainer。</p><p><strong>所需角色：</strong>人类维护者</p><p><strong>所需技术状态：</strong>ready_for_human_decision、repair_requested、verification_complete</p><p><strong>以后是否可能可用：</strong>切换流程阶段不会改变角色权限；需要由列出的有权角色执行。</p><details><summary>技术操作标识与依据</summary><pre>{
+}</pre></details></article><article class="action-card unavailable" aria-disabled="true"><h3>由有权维护者执行覆盖处理 <span>当前不可用</span></h3><p>记录具备权限的维护者对明确项目要求或问题的例外处理。</p><p><strong>原因：</strong>当前角色没有“由有权维护者执行覆盖处理”的权限。可以执行这一步的角色：人类维护者。</p><p><strong>所需角色：</strong>人类维护者</p><p><strong>所需流程位置：</strong>等待人类维护者最终决定、发现问题，等待指定范围修改或维护者检查完成，正在确认可决策状态</p><p><strong>以后是否可能可用：</strong>切换流程阶段不会改变角色权限；需要由列出的有权角色执行。</p><details><summary>技术操作标识与依据</summary><pre>{
   &quot;action&quot;: &quot;authorized_override&quot;,
-  &quot;title&quot;: &quot;执行有权覆盖&quot;,
-  &quot;description&quot;: &quot;记录具备权限的维护者对明确义务或 finding 的例外处理。&quot;,
-  &quot;reason&quot;: &quot;当前角色没有 authorized_override 权限。 可执行角色：maintainer。&quot;,
+  &quot;title&quot;: &quot;由有权维护者执行覆盖处理&quot;,
+  &quot;description&quot;: &quot;记录具备权限的维护者对明确项目要求或问题的例外处理。&quot;,
+  &quot;reason&quot;: &quot;当前角色没有“由有权维护者执行覆盖处理”的权限。可以执行这一步的角色：人类维护者。&quot;,
   &quot;next_actor_roles&quot;: [
     &quot;maintainer&quot;
   ],
@@ -844,11 +853,11 @@ code { overflow-wrap: anywhere; }
     &quot;verification_complete&quot;
   ],
   &quot;future_availability&quot;: &quot;切换流程阶段不会改变角色权限；需要由列出的有权角色执行。&quot;
-}</pre></details></article><article class="action-card unavailable" aria-disabled="true"><h3>提交人类最终接受决定 <span>当前不可用</span></h3><p>由人类维护者记录接受决定。</p><p><strong>原因：</strong>当前角色没有 decide_accept 权限。 可执行角色：maintainer。</p><p><strong>所需角色：</strong>人类维护者</p><p><strong>所需技术状态：</strong>overridden、ready_for_human_decision</p><p><strong>以后是否可能可用：</strong>切换流程阶段不会改变角色权限；需要由列出的有权角色执行。</p><details><summary>技术操作标识与依据</summary><pre>{
+}</pre></details></article><article class="action-card unavailable" aria-disabled="true"><h3>最终接受 <span>当前不可用</span></h3><p>由人类维护者记录接受决定。</p><p><strong>原因：</strong>当前角色没有“最终接受”的权限。可以执行这一步的角色：人类维护者。</p><p><strong>所需角色：</strong>人类维护者</p><p><strong>所需流程位置：</strong>有权覆盖已记录，等待人类维护者最终决定或等待人类维护者最终决定</p><p><strong>以后是否可能可用：</strong>切换流程阶段不会改变角色权限；需要由列出的有权角色执行。</p><details><summary>技术操作标识与依据</summary><pre>{
   &quot;action&quot;: &quot;decide_accept&quot;,
-  &quot;title&quot;: &quot;提交人类最终接受决定&quot;,
+  &quot;title&quot;: &quot;最终接受&quot;,
   &quot;description&quot;: &quot;由人类维护者记录接受决定。&quot;,
-  &quot;reason&quot;: &quot;当前角色没有 decide_accept 权限。 可执行角色：maintainer。&quot;,
+  &quot;reason&quot;: &quot;当前角色没有“最终接受”的权限。可以执行这一步的角色：人类维护者。&quot;,
   &quot;next_actor_roles&quot;: [
     &quot;maintainer&quot;
   ],
@@ -869,11 +878,11 @@ code { overflow-wrap: anywhere; }
     &quot;ready_for_human_decision&quot;
   ],
   &quot;future_availability&quot;: &quot;切换流程阶段不会改变角色权限；需要由列出的有权角色执行。&quot;
-}</pre></details></article><article class="action-card unavailable" aria-disabled="true"><h3>提交人类最终拒绝决定 <span>当前不可用</span></h3><p>由人类维护者记录拒绝决定。</p><p><strong>原因：</strong>当前角色没有 decide_reject 权限。 可执行角色：maintainer。</p><p><strong>所需角色：</strong>人类维护者</p><p><strong>所需技术状态：</strong>overridden、ready_for_human_decision、repair_requested</p><p><strong>以后是否可能可用：</strong>切换流程阶段不会改变角色权限；需要由列出的有权角色执行。</p><details><summary>技术操作标识与依据</summary><pre>{
+}</pre></details></article><article class="action-card unavailable" aria-disabled="true"><h3>最终拒绝 <span>当前不可用</span></h3><p>由人类维护者记录拒绝决定。</p><p><strong>原因：</strong>当前角色没有“最终拒绝”的权限。可以执行这一步的角色：人类维护者。</p><p><strong>所需角色：</strong>人类维护者</p><p><strong>所需流程位置：</strong>有权覆盖已记录，等待人类维护者最终决定、等待人类维护者最终决定或发现问题，等待指定范围修改</p><p><strong>以后是否可能可用：</strong>切换流程阶段不会改变角色权限；需要由列出的有权角色执行。</p><details><summary>技术操作标识与依据</summary><pre>{
   &quot;action&quot;: &quot;decide_reject&quot;,
-  &quot;title&quot;: &quot;提交人类最终拒绝决定&quot;,
+  &quot;title&quot;: &quot;最终拒绝&quot;,
   &quot;description&quot;: &quot;由人类维护者记录拒绝决定。&quot;,
-  &quot;reason&quot;: &quot;当前角色没有 decide_reject 权限。 可执行角色：maintainer。&quot;,
+  &quot;reason&quot;: &quot;当前角色没有“最终拒绝”的权限。可以执行这一步的角色：人类维护者。&quot;,
   &quot;next_actor_roles&quot;: [
     &quot;maintainer&quot;
   ],
@@ -895,11 +904,11 @@ code { overflow-wrap: anywhere; }
     &quot;repair_requested&quot;
   ],
   &quot;future_availability&quot;: &quot;切换流程阶段不会改变角色权限；需要由列出的有权角色执行。&quot;
-}</pre></details></article><article class="action-card unavailable" aria-disabled="true"><h3>提交人类修改决定 <span>当前不可用</span></h3><p>由人类维护者要求贡献侧继续修改。</p><p><strong>原因：</strong>当前角色没有 decide_request_changes 权限。 可执行角色：maintainer。</p><p><strong>所需角色：</strong>人类维护者</p><p><strong>所需技术状态：</strong>overridden、ready_for_human_decision</p><p><strong>以后是否可能可用：</strong>切换流程阶段不会改变角色权限；需要由列出的有权角色执行。</p><details><summary>技术操作标识与依据</summary><pre>{
+}</pre></details></article><article class="action-card unavailable" aria-disabled="true"><h3>要求继续修改 <span>当前不可用</span></h3><p>由人类维护者要求贡献侧继续修改。</p><p><strong>原因：</strong>当前角色没有“要求继续修改”的权限。可以执行这一步的角色：人类维护者。</p><p><strong>所需角色：</strong>人类维护者</p><p><strong>所需流程位置：</strong>有权覆盖已记录，等待人类维护者最终决定或等待人类维护者最终决定</p><p><strong>以后是否可能可用：</strong>切换流程阶段不会改变角色权限；需要由列出的有权角色执行。</p><details><summary>技术操作标识与依据</summary><pre>{
   &quot;action&quot;: &quot;decide_request_changes&quot;,
-  &quot;title&quot;: &quot;提交人类修改决定&quot;,
+  &quot;title&quot;: &quot;要求继续修改&quot;,
   &quot;description&quot;: &quot;由人类维护者要求贡献侧继续修改。&quot;,
-  &quot;reason&quot;: &quot;当前角色没有 decide_request_changes 权限。 可执行角色：maintainer。&quot;,
+  &quot;reason&quot;: &quot;当前角色没有“要求继续修改”的权限。可以执行这一步的角色：人类维护者。&quot;,
   &quot;next_actor_roles&quot;: [
     &quot;maintainer&quot;
   ],
@@ -920,11 +929,11 @@ code { overflow-wrap: anywhere; }
     &quot;ready_for_human_decision&quot;
   ],
   &quot;future_availability&quot;: &quot;切换流程阶段不会改变角色权限；需要由列出的有权角色执行。&quot;
-}</pre></details></article><article class="action-card unavailable" aria-disabled="true"><h3>关闭案例 <span>当前不可用</span></h3><p>由人类维护者关闭案例而不表示接受或合并。</p><p><strong>原因：</strong>当前角色没有 decide_close 权限。 可执行角色：maintainer。</p><p><strong>所需角色：</strong>人类维护者</p><p><strong>所需技术状态：</strong>overridden、ready_for_human_decision、repair_requested</p><p><strong>以后是否可能可用：</strong>切换流程阶段不会改变角色权限；需要由列出的有权角色执行。</p><details><summary>技术操作标识与依据</summary><pre>{
+}</pre></details></article><article class="action-card unavailable" aria-disabled="true"><h3>关闭本次审核记录 <span>当前不可用</span></h3><p>由人类维护者关闭案例而不表示接受或合并。</p><p><strong>原因：</strong>当前角色没有“关闭本次审核记录”的权限。可以执行这一步的角色：人类维护者。</p><p><strong>所需角色：</strong>人类维护者</p><p><strong>所需流程位置：</strong>有权覆盖已记录，等待人类维护者最终决定、等待人类维护者最终决定或发现问题，等待指定范围修改</p><p><strong>以后是否可能可用：</strong>切换流程阶段不会改变角色权限；需要由列出的有权角色执行。</p><details><summary>技术操作标识与依据</summary><pre>{
   &quot;action&quot;: &quot;decide_close&quot;,
-  &quot;title&quot;: &quot;关闭案例&quot;,
+  &quot;title&quot;: &quot;关闭本次审核记录&quot;,
   &quot;description&quot;: &quot;由人类维护者关闭案例而不表示接受或合并。&quot;,
-  &quot;reason&quot;: &quot;当前角色没有 decide_close 权限。 可执行角色：maintainer。&quot;,
+  &quot;reason&quot;: &quot;当前角色没有“关闭本次审核记录”的权限。可以执行这一步的角色：人类维护者。&quot;,
   &quot;next_actor_roles&quot;: [
     &quot;maintainer&quot;
   ],
@@ -1066,7 +1075,7 @@ code { overflow-wrap: anywhere; }
       &quot;affected_scope&quot;: [
         &quot;docs/guide.md&quot;
       ],
-      &quot;contribution_fingerprint&quot;: &quot;9fe19abd52f6e8e2b7fbb8b2f8ed283cb530ad8698ef8cf7c4411fc6fd3fb1d8&quot;,
+      &quot;contribution_fingerprint&quot;: &quot;712fcd4dc43abd39cf07328603c2a14d9da29e20b1369a6d2b1b1b8eba6080a0&quot;,
       &quot;policy_fingerprint&quot;: &quot;e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564&quot;,
       &quot;evidence_type&quot;: &quot;agent_action_scope&quot;,
       &quot;value&quot;: &quot;Task-bounded workspace access under active supervision; no undeclared delegation.&quot;,
@@ -1094,7 +1103,7 @@ code { overflow-wrap: anywhere; }
       &quot;affected_scope&quot;: [
         &quot;docs/guide.md&quot;
       ],
-      &quot;contribution_fingerprint&quot;: &quot;9fe19abd52f6e8e2b7fbb8b2f8ed283cb530ad8698ef8cf7c4411fc6fd3fb1d8&quot;,
+      &quot;contribution_fingerprint&quot;: &quot;712fcd4dc43abd39cf07328603c2a14d9da29e20b1369a6d2b1b1b8eba6080a0&quot;,
       &quot;policy_fingerprint&quot;: &quot;e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564&quot;,
       &quot;evidence_type&quot;: &quot;changed_files&quot;,
       &quot;value&quot;: [
@@ -1124,7 +1133,7 @@ code { overflow-wrap: anywhere; }
       &quot;affected_scope&quot;: [
         &quot;docs/guide.md&quot;
       ],
-      &quot;contribution_fingerprint&quot;: &quot;9fe19abd52f6e8e2b7fbb8b2f8ed283cb530ad8698ef8cf7c4411fc6fd3fb1d8&quot;,
+      &quot;contribution_fingerprint&quot;: &quot;712fcd4dc43abd39cf07328603c2a14d9da29e20b1369a6d2b1b1b8eba6080a0&quot;,
       &quot;policy_fingerprint&quot;: &quot;e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564&quot;,
       &quot;evidence_type&quot;: &quot;contribution_summary&quot;,
       &quot;value&quot;: &quot;Implemented the scenario contribution.&quot;,
@@ -1165,7 +1174,7 @@ code { overflow-wrap: anywhere; }
       &quot;outcome&quot;: &quot;verified&quot;,
       &quot;reason&quot;: &quot;Initial evidence checked.&quot;,
       &quot;policy_fingerprint&quot;: &quot;e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564&quot;,
-      &quot;contribution_fingerprint&quot;: &quot;9fe19abd52f6e8e2b7fbb8b2f8ed283cb530ad8698ef8cf7c4411fc6fd3fb1d8&quot;
+      &quot;contribution_fingerprint&quot;: &quot;712fcd4dc43abd39cf07328603c2a14d9da29e20b1369a6d2b1b1b8eba6080a0&quot;
     }
   ],
   &quot;findings&quot;: [
@@ -1215,8 +1224,8 @@ code { overflow-wrap: anywhere; }
           &quot;change_assessment&quot;: {
             &quot;change_classification&quot;: &quot;no_material_change&quot;,
             &quot;change_reason&quot;: &quot;Wording clarification does not change contribution behavior.&quot;,
-            &quot;previous_contribution_fingerprint&quot;: &quot;9fe19abd52f6e8e2b7fbb8b2f8ed283cb530ad8698ef8cf7c4411fc6fd3fb1d8&quot;,
-            &quot;new_contribution_fingerprint&quot;: &quot;9fe19abd52f6e8e2b7fbb8b2f8ed283cb530ad8698ef8cf7c4411fc6fd3fb1d8&quot;,
+            &quot;previous_contribution_fingerprint&quot;: &quot;712fcd4dc43abd39cf07328603c2a14d9da29e20b1369a6d2b1b1b8eba6080a0&quot;,
+            &quot;new_contribution_fingerprint&quot;: &quot;712fcd4dc43abd39cf07328603c2a14d9da29e20b1369a6d2b1b1b8eba6080a0&quot;,
             &quot;stale_evidence_ids&quot;: [],
             &quot;retained_evidence_ids&quot;: [
               &quot;evidence-2cb3732e2b49561598dc8daee791f8d9&quot;,
@@ -1229,8 +1238,8 @@ code { overflow-wrap: anywhere; }
           },
           &quot;change_classification&quot;: &quot;no_material_change&quot;,
           &quot;change_reason&quot;: &quot;Wording clarification does not change contribution behavior.&quot;,
-          &quot;previous_contribution_fingerprint&quot;: &quot;9fe19abd52f6e8e2b7fbb8b2f8ed283cb530ad8698ef8cf7c4411fc6fd3fb1d8&quot;,
-          &quot;new_contribution_fingerprint&quot;: &quot;9fe19abd52f6e8e2b7fbb8b2f8ed283cb530ad8698ef8cf7c4411fc6fd3fb1d8&quot;,
+          &quot;previous_contribution_fingerprint&quot;: &quot;712fcd4dc43abd39cf07328603c2a14d9da29e20b1369a6d2b1b1b8eba6080a0&quot;,
+          &quot;new_contribution_fingerprint&quot;: &quot;712fcd4dc43abd39cf07328603c2a14d9da29e20b1369a6d2b1b1b8eba6080a0&quot;,
           &quot;stale_evidence_ids&quot;: [],
           &quot;retained_evidence_ids&quot;: [
             &quot;evidence-2cb3732e2b49561598dc8daee791f8d9&quot;,
@@ -1245,7 +1254,7 @@ code { overflow-wrap: anywhere; }
     }
   ],
   &quot;attempted_operations&quot;: [],
-  &quot;contribution_fingerprint&quot;: &quot;9fe19abd52f6e8e2b7fbb8b2f8ed283cb530ad8698ef8cf7c4411fc6fd3fb1d8&quot;,
+  &quot;contribution_fingerprint&quot;: &quot;712fcd4dc43abd39cf07328603c2a14d9da29e20b1369a6d2b1b1b8eba6080a0&quot;,
   &quot;policy_fingerprint&quot;: &quot;e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564&quot;,
   &quot;policy_snapshot&quot;: {
     &quot;id&quot;: &quot;policy-8d451cd3a45156e198a91be729a23da3&quot;,

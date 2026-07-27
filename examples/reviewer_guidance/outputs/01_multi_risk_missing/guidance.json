@@ -4,7 +4,7 @@
   "notes": "Union includes authentication, configuration, autonomy, and interaction obligations.",
   "guidance_view": {
     "schema_version": "agm.reviewer_guidance/v0.2-dev",
-    "generated_from_case_fingerprint": "c3323431536bbbb95ba1b08b6e69fd082ab89accf9a348306c042228fe49e2ef",
+    "generated_from_case_fingerprint": "e9bf2e6f68419187ca25503e78de5f29d0032fe013d4a59252b069d25e8bb261",
     "actor": {
       "actor": "human-maintainer",
       "role": "maintainer",
@@ -28,7 +28,7 @@
       "blocking_issue_count": 8,
       "warning_count": 0,
       "current_responsible_parties": [
-        "贡献者",
+        "人类贡献者",
         "贡献侧智能体"
       ],
       "next_authorized_actor_roles": [
@@ -235,7 +235,7 @@
       },
       {
         "obligation_id": "O-ARTIFACT",
-        "check_item": "可核验测试制品",
+        "check_item": "可检查的测试输出或文件",
         "project_requirement": "提供可以实际检查的测试输出或文件。",
         "current_situation": "尚未提供。",
         "result": "missing",
@@ -269,7 +269,7 @@
             "relationship": "source"
           }
         ],
-        "display_name": "可核验测试制品",
+        "display_name": "可检查的测试输出或文件",
         "reference_plain": "提供可以实际检查的测试输出或文件。",
         "observed_plain": "尚未提供。",
         "observed_raw": "no bound evidence record",
@@ -285,7 +285,7 @@
       },
       {
         "obligation_id": "O-AUTH-IMPACT",
-        "check_item": "登录、认证与权限影响",
+        "check_item": "登录、认证与权限影响说明",
         "project_requirement": "说明本次修改是否改变登录、认证或权限行为。",
         "current_situation": "尚未提供。",
         "result": "missing",
@@ -313,7 +313,7 @@
             "relationship": "source"
           }
         ],
-        "display_name": "登录、认证与权限影响",
+        "display_name": "登录、认证与权限影响说明",
         "reference_plain": "说明本次修改是否改变登录、认证或权限行为。",
         "observed_plain": "尚未提供。",
         "observed_raw": "no bound evidence record",
@@ -522,7 +522,7 @@
       },
       {
         "obligation_id": "O-RATIONALE",
-        "check_item": "修改理由",
+        "check_item": "修改原因",
         "project_requirement": "说明为什么需要这次修改。",
         "current_situation": "尚未提供。",
         "result": "missing",
@@ -556,7 +556,7 @@
             "relationship": "source"
           }
         ],
-        "display_name": "修改理由",
+        "display_name": "修改原因",
         "reference_plain": "说明为什么需要这次修改。",
         "observed_plain": "尚未提供。",
         "observed_raw": "no bound evidence record",
@@ -676,7 +676,7 @@
       {
         "action": "view_change_scope",
         "title": "查看变化范围",
-        "description": "查看 changed files、风险规则、影响范围和绑定 fingerprint。",
+        "description": "查看变更文件、风险规则、影响范围和绑定指纹。",
         "consequence": "只读操作，不改变案例状态。",
         "mutates_state": false,
         "actor_role": "maintainer",
@@ -698,7 +698,7 @@
         "action": "record_policy_conflict",
         "title": "记录项目规则冲突",
         "description": "记录无法由普通材料修复的策略冲突。",
-        "consequence": "案例转入 repair，由 policy steward 或维护者处理。",
+        "consequence": "案例转入补充处理，由项目规则负责人或维护者处理。",
         "mutates_state": true,
         "actor_role": "maintainer",
         "default_obligation_ids": [
@@ -725,7 +725,7 @@
         "primary_reason": "后端允许此操作，但它不直接处理当前主要阻断项。",
         "selector_options": [
           {
-            "selector_token": "sel-a22be89969559667685020bfa7f7a3afa78142e3abe1be1718764cca99252f2c",
+            "selector_token": "sel-bb86ba666def569ff498e92937f60c7db5da6116adf06ac5915b89796df1e8ca",
             "action": "record_policy_conflict",
             "label": "智能体行动与委派说明",
             "status_label": "缺少；等待贡献者处理",
@@ -759,9 +759,9 @@
             ]
           },
           {
-            "selector_token": "sel-e0518fa73e15a9b083be59fbefe5cbb4a40c4b2a246c0f88de657c368f13326b",
+            "selector_token": "sel-b8084f7c7634eda3f663e53b94e9ed25aae47e6c815a8d72d74cf63c9dfd433d",
             "action": "record_policy_conflict",
-            "label": "可核验测试制品",
+            "label": "可检查的测试输出或文件",
             "status_label": "缺少；等待贡献者处理",
             "affected_scope": [
               "demo_app/auth.py",
@@ -801,9 +801,9 @@
             ]
           },
           {
-            "selector_token": "sel-c8c113c93dfacba781dd68f7d09f2fcd4e679cbc28493e2a1af30ab8a754aa7c",
+            "selector_token": "sel-b7a6abe67e7ad7eaaad0da8f4f7d6d6dc378e109e4f2063d095df1a206692077",
             "action": "record_policy_conflict",
-            "label": "登录、认证与权限影响",
+            "label": "登录、认证与权限影响说明",
             "status_label": "缺少；等待贡献者处理",
             "affected_scope": [
               "demo_app/auth.py"
@@ -837,7 +837,7 @@
             ]
           },
           {
-            "selector_token": "sel-6250df2fffee81728c78604d5bd4266e76b3b0d7acd5ff4138853a62fc6556e5",
+            "selector_token": "sel-1c14e9c88cca48f58f92f2399e247b61dc0bd0bd913fec75905ba3491d9991c8",
             "action": "record_policy_conflict",
             "label": "变更文件清单",
             "status_label": "缺少；等待贡献者处理",
@@ -879,7 +879,7 @@
             ]
           },
           {
-            "selector_token": "sel-820807f526932863f2faf6e3212984db01ee70f5ead41b72ef8d9d4f2cc425b4",
+            "selector_token": "sel-ab0d7fa8d1119a771390738ca91e21b92774d5d02841e8581611da9fd08619f2",
             "action": "record_policy_conflict",
             "label": "负责人确认",
             "status_label": "缺少；等待负责人确认",
@@ -915,7 +915,7 @@
             ]
           },
           {
-            "selector_token": "sel-e42af89c75f2211ebb099cf55564fc3e8717895f50397f9c5a0247d372f360ec",
+            "selector_token": "sel-a2979a7e64d7708ba7a522dfb661dca4fd3877eb49d4a7a2d714ec168867293a",
             "action": "record_policy_conflict",
             "label": "独立维护者检查",
             "status_label": "缺少；阻止继续",
@@ -957,7 +957,7 @@
             ]
           },
           {
-            "selector_token": "sel-36a7bcb4cfd2b0d4901e39bee3d86ad75879a1ebf4626d2b637e2e0113077827",
+            "selector_token": "sel-fd7b47a482b5920b37e36a5351e0b72db23c6e7b2a6dc2e0e519e8d453edd338",
             "action": "record_policy_conflict",
             "label": "已知限制",
             "status_label": "缺少；等待贡献者处理",
@@ -999,9 +999,9 @@
             ]
           },
           {
-            "selector_token": "sel-332875878277502a69727ddf6ee7a3f4efbc0e0f9c8329ccd5a00cbbd4607147",
+            "selector_token": "sel-e363d09ee77de8f56a557e5ae05c501458ee3ff1d4fae31acfe48a26afa9fe89",
             "action": "record_policy_conflict",
-            "label": "修改理由",
+            "label": "修改原因",
             "status_label": "缺少；等待贡献者处理",
             "affected_scope": [
               "demo_app/auth.py",
@@ -1041,7 +1041,7 @@
             ]
           },
           {
-            "selector_token": "sel-1adb485bbe8800eee5e987babe2701211441602ca1f0288a5d9b7a83e523502e",
+            "selector_token": "sel-7820cea494bbf466e796317dfb8642f662d341c7d6a4014fc45ae280d2869eca",
             "action": "record_policy_conflict",
             "label": "修改说明",
             "status_label": "缺少；等待贡献者处理",
@@ -1083,7 +1083,7 @@
             ]
           },
           {
-            "selector_token": "sel-9c205484e4ec76a75cc182eb4e0f711bc0890fbae23184e126d3504513e24478",
+            "selector_token": "sel-311b48efa7403ee411303819452e2f836210b33bc249dd8ec22ba32c7d34204d",
             "action": "record_policy_conflict",
             "label": "测试命令与结果",
             "status_label": "缺少；等待贡献者处理",
@@ -1130,9 +1130,9 @@
     "unavailable_actions": [
       {
         "action": "verify_evidence",
-        "title": "检查待核验项",
-        "description": "记录维护者对指定义务及其绑定材料的检查结果。",
-        "reason": "操作 verify_evidence 不能从当前状态 evidence_incomplete 执行。",
+        "title": "检查提交材料",
+        "description": "记录维护者对指定项目要求及其绑定材料的检查结果。",
+        "reason": "当前处于“等待贡献者补齐材料”，还不能执行“检查提交材料”。",
         "next_actor_roles": [
           "contributor",
           "contributor_agent"
@@ -1145,7 +1145,7 @@
             "relationship": "authority"
           }
         ],
-        "category": "stage",
+        "category": "authority",
         "required_role": [
           "maintainer",
           "maintainer_verifier",
@@ -1159,9 +1159,9 @@
       },
       {
         "action": "request_repair",
-        "title": "请求补充或更新材料",
+        "title": "要求补充或修改",
         "description": "指出问题和受影响义务，返回贡献侧修复。",
-        "reason": "操作 request_repair 不能从当前状态 evidence_incomplete 执行。",
+        "reason": "当前处于“等待贡献者补齐材料”，还不能执行“要求补充或修改”。",
         "next_actor_roles": [
           "contributor",
           "contributor_agent"
@@ -1174,7 +1174,7 @@
             "relationship": "authority"
           }
         ],
-        "category": "stage",
+        "category": "authority",
         "required_role": [
           "maintainer",
           "maintainer_verifier",
@@ -1189,9 +1189,9 @@
       },
       {
         "action": "reject_evidence",
-        "title": "拒绝无效材料",
+        "title": "拒绝当前材料",
         "description": "拒绝一条不能支持当前修改的具体材料。",
-        "reason": "操作 reject_evidence 不能从当前状态 evidence_incomplete 执行。",
+        "reason": "当前处于“等待贡献者补齐材料”，还不能执行“拒绝当前材料”。",
         "next_actor_roles": [
           "contributor",
           "contributor_agent"
@@ -1204,7 +1204,7 @@
             "relationship": "authority"
           }
         ],
-        "category": "stage",
+        "category": "authority",
         "required_role": [
           "maintainer",
           "maintainer_verifier"
@@ -1217,9 +1217,9 @@
       },
       {
         "action": "ask_clarification",
-        "title": "请求说明",
+        "title": "请求补充说明",
         "description": "针对指定要求提出可审计的澄清问题。",
-        "reason": "操作 ask_clarification 不能从当前状态 evidence_incomplete 执行。",
+        "reason": "当前处于“等待贡献者补齐材料”，还不能执行“请求补充说明”。",
         "next_actor_roles": [
           "contributor",
           "contributor_agent"
@@ -1232,7 +1232,7 @@
             "relationship": "authority"
           }
         ],
-        "category": "stage",
+        "category": "authority",
         "required_role": [
           "maintainer",
           "maintainer_verifier"
@@ -1246,9 +1246,9 @@
       },
       {
         "action": "invalidate_attestation",
-        "title": "要求负责人重新确认",
+        "title": "将旧负责人确认标记为失效",
         "description": "使一条过时或不正确的负责人确认失效。",
-        "reason": "操作 invalidate_attestation 不能从当前状态 evidence_incomplete 执行。",
+        "reason": "当前处于“等待贡献者补齐材料”，还不能执行“将旧负责人确认标记为失效”。",
         "next_actor_roles": [
           "contributor",
           "contributor_agent"
@@ -1261,7 +1261,7 @@
             "relationship": "authority"
           }
         ],
-        "category": "stage",
+        "category": "authority",
         "required_role": [
           "maintainer",
           "maintainer_verifier"
@@ -1275,9 +1275,9 @@
       },
       {
         "action": "resolve_policy_conflict",
-        "title": "解决项目规则冲突",
+        "title": "处理项目规则冲突",
         "description": "由有权限的角色记录策略冲突的解决依据。",
-        "reason": "操作 resolve_policy_conflict 不能从当前状态 evidence_incomplete 执行。",
+        "reason": "当前处于“等待贡献者补齐材料”，还不能执行“处理项目规则冲突”。",
         "next_actor_roles": [
           "contributor",
           "contributor_agent"
@@ -1290,7 +1290,7 @@
             "relationship": "authority"
           }
         ],
-        "category": "stage",
+        "category": "scope",
         "required_role": [
           "maintainer",
           "policy_steward"
@@ -1302,9 +1302,9 @@
       },
       {
         "action": "resubmit",
-        "title": "补交指定范围",
-        "description": "贡献侧提交 repair 影响范围和新增材料。",
-        "reason": "当前角色没有 resubmit 权限。 可执行角色：contributor, contributor_agent。",
+        "title": "重新提交修改后的材料",
+        "description": "贡献侧提交补充或修改影响范围和新增材料。",
+        "reason": "当前角色没有“重新提交修改后的材料”的权限。可以执行这一步的角色：人类贡献者或贡献侧智能体。",
         "next_actor_roles": [
           "contributor",
           "contributor_agent"
@@ -1329,9 +1329,9 @@
       },
       {
         "action": "confirm_attestation",
-        "title": "负责人确认当前范围",
-        "description": "由 accountable human 对明确范围作出事实确认。",
-        "reason": "当前角色没有 confirm_attestation 权限。 可执行角色：accountable_human。",
+        "title": "确认负责人声明",
+        "description": "由负责人对明确范围作出事实确认。",
+        "reason": "当前角色没有“确认负责人声明”的权限。可以执行这一步的角色：负责人。",
         "next_actor_roles": [
           "accountable_human"
         ],
@@ -1360,9 +1360,9 @@
       },
       {
         "action": "authorized_override",
-        "title": "执行有权覆盖",
-        "description": "记录具备权限的维护者对明确义务或 finding 的例外处理。",
-        "reason": "操作 authorized_override 不能从当前状态 evidence_incomplete 执行。",
+        "title": "由有权维护者执行覆盖处理",
+        "description": "记录具备权限的维护者对明确项目要求或问题的例外处理。",
+        "reason": "当前处于“等待贡献者补齐材料”，还不能执行“由有权维护者执行覆盖处理”。",
         "next_actor_roles": [
           "contributor",
           "contributor_agent"
@@ -1375,7 +1375,7 @@
             "relationship": "authority"
           }
         ],
-        "category": "stage",
+        "category": "authority",
         "required_role": [
           "maintainer"
         ],
@@ -1388,9 +1388,9 @@
       },
       {
         "action": "decide_accept",
-        "title": "提交人类最终接受决定",
+        "title": "最终接受",
         "description": "由人类维护者记录接受决定。",
-        "reason": "操作 decide_accept 不能从当前状态 evidence_incomplete 执行。",
+        "reason": "当前处于“等待贡献者补齐材料”，还不能执行“最终接受”。",
         "next_actor_roles": [
           "contributor",
           "contributor_agent"
@@ -1403,7 +1403,7 @@
             "relationship": "authority"
           }
         ],
-        "category": "stage",
+        "category": "authority",
         "required_role": [
           "maintainer"
         ],
@@ -1415,9 +1415,9 @@
       },
       {
         "action": "decide_reject",
-        "title": "提交人类最终拒绝决定",
+        "title": "最终拒绝",
         "description": "由人类维护者记录拒绝决定。",
-        "reason": "操作 decide_reject 不能从当前状态 evidence_incomplete 执行。",
+        "reason": "当前处于“等待贡献者补齐材料”，还不能执行“最终拒绝”。",
         "next_actor_roles": [
           "contributor",
           "contributor_agent"
@@ -1430,7 +1430,7 @@
             "relationship": "authority"
           }
         ],
-        "category": "stage",
+        "category": "authority",
         "required_role": [
           "maintainer"
         ],
@@ -1443,9 +1443,9 @@
       },
       {
         "action": "decide_request_changes",
-        "title": "提交人类修改决定",
+        "title": "要求继续修改",
         "description": "由人类维护者要求贡献侧继续修改。",
-        "reason": "操作 decide_request_changes 不能从当前状态 evidence_incomplete 执行。",
+        "reason": "当前处于“等待贡献者补齐材料”，还不能执行“要求继续修改”。",
         "next_actor_roles": [
           "contributor",
           "contributor_agent"
@@ -1458,7 +1458,7 @@
             "relationship": "authority"
           }
         ],
-        "category": "stage",
+        "category": "authority",
         "required_role": [
           "maintainer"
         ],
@@ -1470,9 +1470,9 @@
       },
       {
         "action": "decide_close",
-        "title": "关闭案例",
+        "title": "关闭本次审核记录",
         "description": "由人类维护者关闭案例而不表示接受或合并。",
-        "reason": "操作 decide_close 不能从当前状态 evidence_incomplete 执行。",
+        "reason": "当前处于“等待贡献者补齐材料”，还不能执行“关闭本次审核记录”。",
         "next_actor_roles": [
           "contributor",
           "contributor_agent"
@@ -1485,7 +1485,7 @@
             "relationship": "authority"
           }
         ],
-        "category": "stage",
+        "category": "authority",
         "required_role": [
           "maintainer"
         ],
@@ -1838,7 +1838,7 @@
       "findings": [],
       "repair_requests": [],
       "attempted_operations": [],
-      "contribution_fingerprint": "c3323431536bbbb95ba1b08b6e69fd082ab89accf9a348306c042228fe49e2ef",
+      "contribution_fingerprint": "e9bf2e6f68419187ca25503e78de5f29d0032fe013d4a59252b069d25e8bb261",
       "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
       "policy_snapshot": {
         "id": "policy-57dc31e37e16513f8a3aaaaed32a842c",
@@ -1985,15 +1985,15 @@
         "contributor",
         "contributor_agent"
       ],
-      "display_label": "贡献者、贡献侧智能体",
+      "display_label": "人类贡献者、贡献侧智能体",
       "reason": "受影响材料尚未准备或更新完成，当前还不能进入维护者检查。",
       "blocking_items": [
         "智能体行动与委派说明",
-        "可核验测试制品",
-        "登录、认证与权限影响",
+        "可检查的测试输出或文件",
+        "登录、认证与权限影响说明",
         "变更文件清单",
         "已知限制",
-        "修改理由",
+        "修改原因",
         "修改说明",
         "测试命令与结果"
       ],
@@ -2008,7 +2008,7 @@
       {
         "action": "view_change_scope",
         "title": "查看变化范围",
-        "description": "查看 changed files、风险规则、影响范围和绑定 fingerprint。",
+        "description": "查看变更文件、风险规则、影响范围和绑定指纹。",
         "consequence": "只读操作，不改变案例状态。",
         "mutates_state": false,
         "actor_role": "maintainer",
@@ -2030,7 +2030,7 @@
         "action": "record_policy_conflict",
         "title": "记录项目规则冲突",
         "description": "记录无法由普通材料修复的策略冲突。",
-        "consequence": "案例转入 repair，由 policy steward 或维护者处理。",
+        "consequence": "案例转入补充处理，由项目规则负责人或维护者处理。",
         "mutates_state": true,
         "actor_role": "maintainer",
         "default_obligation_ids": [
@@ -2057,7 +2057,7 @@
         "primary_reason": "后端允许此操作，但它不直接处理当前主要阻断项。",
         "selector_options": [
           {
-            "selector_token": "sel-a22be89969559667685020bfa7f7a3afa78142e3abe1be1718764cca99252f2c",
+            "selector_token": "sel-bb86ba666def569ff498e92937f60c7db5da6116adf06ac5915b89796df1e8ca",
             "action": "record_policy_conflict",
             "label": "智能体行动与委派说明",
             "status_label": "缺少；等待贡献者处理",
@@ -2091,9 +2091,9 @@
             ]
           },
           {
-            "selector_token": "sel-e0518fa73e15a9b083be59fbefe5cbb4a40c4b2a246c0f88de657c368f13326b",
+            "selector_token": "sel-b8084f7c7634eda3f663e53b94e9ed25aae47e6c815a8d72d74cf63c9dfd433d",
             "action": "record_policy_conflict",
-            "label": "可核验测试制品",
+            "label": "可检查的测试输出或文件",
             "status_label": "缺少；等待贡献者处理",
             "affected_scope": [
               "demo_app/auth.py",
@@ -2133,9 +2133,9 @@
             ]
           },
           {
-            "selector_token": "sel-c8c113c93dfacba781dd68f7d09f2fcd4e679cbc28493e2a1af30ab8a754aa7c",
+            "selector_token": "sel-b7a6abe67e7ad7eaaad0da8f4f7d6d6dc378e109e4f2063d095df1a206692077",
             "action": "record_policy_conflict",
-            "label": "登录、认证与权限影响",
+            "label": "登录、认证与权限影响说明",
             "status_label": "缺少；等待贡献者处理",
             "affected_scope": [
               "demo_app/auth.py"
@@ -2169,7 +2169,7 @@
             ]
           },
           {
-            "selector_token": "sel-6250df2fffee81728c78604d5bd4266e76b3b0d7acd5ff4138853a62fc6556e5",
+            "selector_token": "sel-1c14e9c88cca48f58f92f2399e247b61dc0bd0bd913fec75905ba3491d9991c8",
             "action": "record_policy_conflict",
             "label": "变更文件清单",
             "status_label": "缺少；等待贡献者处理",
@@ -2211,7 +2211,7 @@
             ]
           },
           {
-            "selector_token": "sel-820807f526932863f2faf6e3212984db01ee70f5ead41b72ef8d9d4f2cc425b4",
+            "selector_token": "sel-ab0d7fa8d1119a771390738ca91e21b92774d5d02841e8581611da9fd08619f2",
             "action": "record_policy_conflict",
             "label": "负责人确认",
             "status_label": "缺少；等待负责人确认",
@@ -2247,7 +2247,7 @@
             ]
           },
           {
-            "selector_token": "sel-e42af89c75f2211ebb099cf55564fc3e8717895f50397f9c5a0247d372f360ec",
+            "selector_token": "sel-a2979a7e64d7708ba7a522dfb661dca4fd3877eb49d4a7a2d714ec168867293a",
             "action": "record_policy_conflict",
             "label": "独立维护者检查",
             "status_label": "缺少；阻止继续",
@@ -2289,7 +2289,7 @@
             ]
           },
           {
-            "selector_token": "sel-36a7bcb4cfd2b0d4901e39bee3d86ad75879a1ebf4626d2b637e2e0113077827",
+            "selector_token": "sel-fd7b47a482b5920b37e36a5351e0b72db23c6e7b2a6dc2e0e519e8d453edd338",
             "action": "record_policy_conflict",
             "label": "已知限制",
             "status_label": "缺少；等待贡献者处理",
@@ -2331,9 +2331,9 @@
             ]
           },
           {
-            "selector_token": "sel-332875878277502a69727ddf6ee7a3f4efbc0e0f9c8329ccd5a00cbbd4607147",
+            "selector_token": "sel-e363d09ee77de8f56a557e5ae05c501458ee3ff1d4fae31acfe48a26afa9fe89",
             "action": "record_policy_conflict",
-            "label": "修改理由",
+            "label": "修改原因",
             "status_label": "缺少；等待贡献者处理",
             "affected_scope": [
               "demo_app/auth.py",
@@ -2373,7 +2373,7 @@
             ]
           },
           {
-            "selector_token": "sel-1adb485bbe8800eee5e987babe2701211441602ca1f0288a5d9b7a83e523502e",
+            "selector_token": "sel-7820cea494bbf466e796317dfb8642f662d341c7d6a4014fc45ae280d2869eca",
             "action": "record_policy_conflict",
             "label": "修改说明",
             "status_label": "缺少；等待贡献者处理",
@@ -2415,7 +2415,7 @@
             ]
           },
           {
-            "selector_token": "sel-9c205484e4ec76a75cc182eb4e0f711bc0890fbae23184e126d3504513e24478",
+            "selector_token": "sel-311b48efa7403ee411303819452e2f836210b33bc249dd8ec22ba32c7d34204d",
             "action": "record_policy_conflict",
             "label": "测试命令与结果",
             "status_label": "缺少；等待贡献者处理",
@@ -2466,7 +2466,7 @@
         "label": "复制缺失项清单",
         "description": "生成可直接交给贡献侧的缺失、过时或无效材料清单。",
         "output_type": "text/plain",
-        "output": "- 智能体行动与委派说明：缺少；等待贡献者处理；范围：当前贡献范围\n- 可核验测试制品：缺少；等待贡献者处理；范围：demo_app/auth.py、demo_app/config.py\n- 登录、认证与权限影响：缺少；等待贡献者处理；范围：demo_app/auth.py\n- 变更文件清单：缺少；等待贡献者处理；范围：demo_app/auth.py、demo_app/config.py\n- 负责人确认：缺少；等待负责人确认；范围：demo_app/auth.py\n- 已知限制：缺少；等待贡献者处理；范围：demo_app/auth.py、demo_app/config.py\n- 修改理由：缺少；等待贡献者处理；范围：demo_app/auth.py、demo_app/config.py\n- 修改说明：缺少；等待贡献者处理；范围：demo_app/auth.py、demo_app/config.py\n- 测试命令与结果：缺少；等待贡献者处理；范围：demo_app/auth.py、demo_app/config.py",
+        "output": "- 智能体行动与委派说明：缺少；等待贡献者处理；范围：当前贡献范围\n- 可检查的测试输出或文件：缺少；等待贡献者处理；范围：demo_app/auth.py、demo_app/config.py\n- 登录、认证与权限影响说明：缺少；等待贡献者处理；范围：demo_app/auth.py\n- 变更文件清单：缺少；等待贡献者处理；范围：demo_app/auth.py、demo_app/config.py\n- 负责人确认：缺少；等待负责人确认；范围：demo_app/auth.py\n- 已知限制：缺少；等待贡献者处理；范围：demo_app/auth.py、demo_app/config.py\n- 修改原因：缺少；等待贡献者处理；范围：demo_app/auth.py、demo_app/config.py\n- 修改说明：缺少；等待贡献者处理；范围：demo_app/auth.py、demo_app/config.py\n- 测试命令与结果：缺少；等待贡献者处理；范围：demo_app/auth.py、demo_app/config.py",
         "trace_refs": [
           {
             "kind": "compiled_obligation",
@@ -2536,7 +2536,7 @@
         "label": "导出贡献者待办清单",
         "description": "导出包含责任方、待处理项和范围的 Markdown 清单。",
         "output_type": "text/markdown",
-        "output": "# 贡献者待办清单\n\n案例：multi-risk-missing\n当前责任方：贡献者、贡献侧智能体\n原因：受影响材料尚未准备或更新完成，当前还不能进入维护者检查。\n\n## 待处理项\n\n- 智能体行动与委派说明：缺少；等待贡献者处理；范围：当前贡献范围\n- 可核验测试制品：缺少；等待贡献者处理；范围：demo_app/auth.py、demo_app/config.py\n- 登录、认证与权限影响：缺少；等待贡献者处理；范围：demo_app/auth.py\n- 变更文件清单：缺少；等待贡献者处理；范围：demo_app/auth.py、demo_app/config.py\n- 负责人确认：缺少；等待负责人确认；范围：demo_app/auth.py\n- 已知限制：缺少；等待贡献者处理；范围：demo_app/auth.py、demo_app/config.py\n- 修改理由：缺少；等待贡献者处理；范围：demo_app/auth.py、demo_app/config.py\n- 修改说明：缺少；等待贡献者处理；范围：demo_app/auth.py、demo_app/config.py\n- 测试命令与结果：缺少；等待贡献者处理；范围：demo_app/auth.py、demo_app/config.py\n\n完成后请按当前 repair/提交范围交回；最终决定仍由人类维护者作出。",
+        "output": "# 贡献者待办清单\n\n案例：multi-risk-missing\n当前责任方：人类贡献者、贡献侧智能体\n原因：受影响材料尚未准备或更新完成，当前还不能进入维护者检查。\n\n## 待处理项\n\n- 智能体行动与委派说明：缺少；等待贡献者处理；范围：当前贡献范围\n- 可检查的测试输出或文件：缺少；等待贡献者处理；范围：demo_app/auth.py、demo_app/config.py\n- 登录、认证与权限影响说明：缺少；等待贡献者处理；范围：demo_app/auth.py\n- 变更文件清单：缺少；等待贡献者处理；范围：demo_app/auth.py、demo_app/config.py\n- 负责人确认：缺少；等待负责人确认；范围：demo_app/auth.py\n- 已知限制：缺少；等待贡献者处理；范围：demo_app/auth.py、demo_app/config.py\n- 修改原因：缺少；等待贡献者处理；范围：demo_app/auth.py、demo_app/config.py\n- 修改说明：缺少；等待贡献者处理；范围：demo_app/auth.py、demo_app/config.py\n- 测试命令与结果：缺少；等待贡献者处理；范围：demo_app/auth.py、demo_app/config.py\n\n完成后请按当前 repair/提交范围交回；最终决定仍由人类维护者作出。",
         "trace_refs": [
           {
             "kind": "compiled_obligation",
@@ -2606,7 +2606,7 @@
         "label": "下载维护者摘要",
         "description": "导出当前风险、责任方和阻断项摘要，不作接受判断。",
         "output_type": "text/markdown",
-        "output": "# 维护者审核摘要\n\n案例：multi-risk-missing\n当前状态：evidence_incomplete\n风险：critical\n当前责任方：贡献者、贡献侧智能体\n责任方依据：受影响材料尚未准备或更新完成，当前还不能进入维护者检查。\n\n## 阻断或待检查项\n\n- 智能体行动与委派说明：缺少；等待贡献者处理；范围：当前贡献范围\n- 可核验测试制品：缺少；等待贡献者处理；范围：demo_app/auth.py、demo_app/config.py\n- 登录、认证与权限影响：缺少；等待贡献者处理；范围：demo_app/auth.py\n- 变更文件清单：缺少；等待贡献者处理；范围：demo_app/auth.py、demo_app/config.py\n- 已知限制：缺少；等待贡献者处理；范围：demo_app/auth.py、demo_app/config.py\n- 修改理由：缺少；等待贡献者处理；范围：demo_app/auth.py、demo_app/config.py\n- 修改说明：缺少；等待贡献者处理；范围：demo_app/auth.py、demo_app/config.py\n- 测试命令与结果：缺少；等待贡献者处理；范围：demo_app/auth.py、demo_app/config.py\n\n本摘要是治理状态说明，不是接受决定。",
+        "output": "# 维护者审核摘要\n\n案例：multi-risk-missing\n当前状态：等待贡献者补齐材料\n风险：critical\n当前责任方：人类贡献者、贡献侧智能体\n责任方依据：受影响材料尚未准备或更新完成，当前还不能进入维护者检查。\n\n## 阻断或待检查项\n\n- 智能体行动与委派说明：缺少；等待贡献者处理；范围：当前贡献范围\n- 可检查的测试输出或文件：缺少；等待贡献者处理；范围：demo_app/auth.py、demo_app/config.py\n- 登录、认证与权限影响说明：缺少；等待贡献者处理；范围：demo_app/auth.py\n- 变更文件清单：缺少；等待贡献者处理；范围：demo_app/auth.py、demo_app/config.py\n- 已知限制：缺少；等待贡献者处理；范围：demo_app/auth.py、demo_app/config.py\n- 修改原因：缺少；等待贡献者处理；范围：demo_app/auth.py、demo_app/config.py\n- 修改说明：缺少；等待贡献者处理；范围：demo_app/auth.py、demo_app/config.py\n- 测试命令与结果：缺少；等待贡献者处理；范围：demo_app/auth.py、demo_app/config.py\n\n本摘要是治理状态说明，不是接受决定。",
         "trace_refs": [
           {
             "kind": "compiled_obligation",
@@ -2711,7 +2711,7 @@
         "label": "复制当前责任方说明",
         "description": "生成不改变案例状态的 handoff note。",
         "output_type": "text/plain",
-        "output": "案例 multi-risk-missing 当前交给：贡献者、贡献侧智能体。\n受影响材料尚未准备或更新完成，当前还不能进入维护者检查。\n涉及：智能体行动与委派说明、可核验测试制品、登录、认证与权限影响、变更文件清单、已知限制、修改理由、修改说明、测试命令与结果。\n完成后交给角色：accountable_human、maintainer_verifier、maintainer。",
+        "output": "案例 multi-risk-missing 当前交给：人类贡献者、贡献侧智能体。\n受影响材料尚未准备或更新完成，当前还不能进入维护者检查。\n涉及：智能体行动与委派说明、可检查的测试输出或文件、登录、认证与权限影响说明、变更文件清单、已知限制、修改原因、修改说明、测试命令与结果。\n完成后交给角色：负责人、维护者侧检查人员或人类维护者。",
         "trace_refs": [
           {
             "kind": "compiled_obligation",
@@ -2846,7 +2846,7 @@
     },
     {
       "obligation_id": "O-ARTIFACT",
-      "check_item": "可核验测试制品",
+      "check_item": "可检查的测试输出或文件",
       "project_requirement": "提供可以实际检查的测试输出或文件。",
       "current_situation": "尚未提供。",
       "result": "missing",
@@ -2880,7 +2880,7 @@
           "relationship": "source"
         }
       ],
-      "display_name": "可核验测试制品",
+      "display_name": "可检查的测试输出或文件",
       "reference_plain": "提供可以实际检查的测试输出或文件。",
       "observed_plain": "尚未提供。",
       "observed_raw": "no bound evidence record",
@@ -2896,7 +2896,7 @@
     },
     {
       "obligation_id": "O-AUTH-IMPACT",
-      "check_item": "登录、认证与权限影响",
+      "check_item": "登录、认证与权限影响说明",
       "project_requirement": "说明本次修改是否改变登录、认证或权限行为。",
       "current_situation": "尚未提供。",
       "result": "missing",
@@ -2924,7 +2924,7 @@
           "relationship": "source"
         }
       ],
-      "display_name": "登录、认证与权限影响",
+      "display_name": "登录、认证与权限影响说明",
       "reference_plain": "说明本次修改是否改变登录、认证或权限行为。",
       "observed_plain": "尚未提供。",
       "observed_raw": "no bound evidence record",
@@ -3133,7 +3133,7 @@
     },
     {
       "obligation_id": "O-RATIONALE",
-      "check_item": "修改理由",
+      "check_item": "修改原因",
       "project_requirement": "说明为什么需要这次修改。",
       "current_situation": "尚未提供。",
       "result": "missing",
@@ -3167,7 +3167,7 @@
           "relationship": "source"
         }
       ],
-      "display_name": "修改理由",
+      "display_name": "修改原因",
       "reference_plain": "说明为什么需要这次修改。",
       "observed_plain": "尚未提供。",
       "observed_raw": "no bound evidence record",
@@ -3287,15 +3287,15 @@
       "contributor",
       "contributor_agent"
     ],
-    "display_label": "贡献者、贡献侧智能体",
+    "display_label": "人类贡献者、贡献侧智能体",
     "reason": "受影响材料尚未准备或更新完成，当前还不能进入维护者检查。",
     "blocking_items": [
       "智能体行动与委派说明",
-      "可核验测试制品",
-      "登录、认证与权限影响",
+      "可检查的测试输出或文件",
+      "登录、认证与权限影响说明",
       "变更文件清单",
       "已知限制",
-      "修改理由",
+      "修改原因",
       "修改说明",
       "测试命令与结果"
     ],
@@ -3310,7 +3310,7 @@
   "context_selector_data": {
     "record_policy_conflict": [
       {
-        "selector_token": "sel-a22be89969559667685020bfa7f7a3afa78142e3abe1be1718764cca99252f2c",
+        "selector_token": "sel-bb86ba666def569ff498e92937f60c7db5da6116adf06ac5915b89796df1e8ca",
         "action": "record_policy_conflict",
         "label": "智能体行动与委派说明",
         "status_label": "缺少；等待贡献者处理",
@@ -3344,9 +3344,9 @@
         ]
       },
       {
-        "selector_token": "sel-e0518fa73e15a9b083be59fbefe5cbb4a40c4b2a246c0f88de657c368f13326b",
+        "selector_token": "sel-b8084f7c7634eda3f663e53b94e9ed25aae47e6c815a8d72d74cf63c9dfd433d",
         "action": "record_policy_conflict",
-        "label": "可核验测试制品",
+        "label": "可检查的测试输出或文件",
         "status_label": "缺少；等待贡献者处理",
         "affected_scope": [
           "demo_app/auth.py",
@@ -3386,9 +3386,9 @@
         ]
       },
       {
-        "selector_token": "sel-c8c113c93dfacba781dd68f7d09f2fcd4e679cbc28493e2a1af30ab8a754aa7c",
+        "selector_token": "sel-b7a6abe67e7ad7eaaad0da8f4f7d6d6dc378e109e4f2063d095df1a206692077",
         "action": "record_policy_conflict",
-        "label": "登录、认证与权限影响",
+        "label": "登录、认证与权限影响说明",
         "status_label": "缺少；等待贡献者处理",
         "affected_scope": [
           "demo_app/auth.py"
@@ -3422,7 +3422,7 @@
         ]
       },
       {
-        "selector_token": "sel-6250df2fffee81728c78604d5bd4266e76b3b0d7acd5ff4138853a62fc6556e5",
+        "selector_token": "sel-1c14e9c88cca48f58f92f2399e247b61dc0bd0bd913fec75905ba3491d9991c8",
         "action": "record_policy_conflict",
         "label": "变更文件清单",
         "status_label": "缺少；等待贡献者处理",
@@ -3464,7 +3464,7 @@
         ]
       },
       {
-        "selector_token": "sel-820807f526932863f2faf6e3212984db01ee70f5ead41b72ef8d9d4f2cc425b4",
+        "selector_token": "sel-ab0d7fa8d1119a771390738ca91e21b92774d5d02841e8581611da9fd08619f2",
         "action": "record_policy_conflict",
         "label": "负责人确认",
         "status_label": "缺少；等待负责人确认",
@@ -3500,7 +3500,7 @@
         ]
       },
       {
-        "selector_token": "sel-e42af89c75f2211ebb099cf55564fc3e8717895f50397f9c5a0247d372f360ec",
+        "selector_token": "sel-a2979a7e64d7708ba7a522dfb661dca4fd3877eb49d4a7a2d714ec168867293a",
         "action": "record_policy_conflict",
         "label": "独立维护者检查",
         "status_label": "缺少；阻止继续",
@@ -3542,7 +3542,7 @@
         ]
       },
       {
-        "selector_token": "sel-36a7bcb4cfd2b0d4901e39bee3d86ad75879a1ebf4626d2b637e2e0113077827",
+        "selector_token": "sel-fd7b47a482b5920b37e36a5351e0b72db23c6e7b2a6dc2e0e519e8d453edd338",
         "action": "record_policy_conflict",
         "label": "已知限制",
         "status_label": "缺少；等待贡献者处理",
@@ -3584,9 +3584,9 @@
         ]
       },
       {
-        "selector_token": "sel-332875878277502a69727ddf6ee7a3f4efbc0e0f9c8329ccd5a00cbbd4607147",
+        "selector_token": "sel-e363d09ee77de8f56a557e5ae05c501458ee3ff1d4fae31acfe48a26afa9fe89",
         "action": "record_policy_conflict",
-        "label": "修改理由",
+        "label": "修改原因",
         "status_label": "缺少；等待贡献者处理",
         "affected_scope": [
           "demo_app/auth.py",
@@ -3626,7 +3626,7 @@
         ]
       },
       {
-        "selector_token": "sel-1adb485bbe8800eee5e987babe2701211441602ca1f0288a5d9b7a83e523502e",
+        "selector_token": "sel-7820cea494bbf466e796317dfb8642f662d341c7d6a4014fc45ae280d2869eca",
         "action": "record_policy_conflict",
         "label": "修改说明",
         "status_label": "缺少；等待贡献者处理",
@@ -3668,7 +3668,7 @@
         ]
       },
       {
-        "selector_token": "sel-9c205484e4ec76a75cc182eb4e0f711bc0890fbae23184e126d3504513e24478",
+        "selector_token": "sel-311b48efa7403ee411303819452e2f836210b33bc249dd8ec22ba32c7d34204d",
         "action": "record_policy_conflict",
         "label": "测试命令与结果",
         "status_label": "缺少；等待贡献者处理",
@@ -3804,7 +3804,7 @@
     {
       "action": "view_change_scope",
       "title": "查看变化范围",
-      "description": "查看 changed files、风险规则、影响范围和绑定 fingerprint。",
+      "description": "查看变更文件、风险规则、影响范围和绑定指纹。",
       "consequence": "只读操作，不改变案例状态。",
       "mutates_state": false,
       "actor_role": "maintainer",
@@ -3826,7 +3826,7 @@
       "action": "record_policy_conflict",
       "title": "记录项目规则冲突",
       "description": "记录无法由普通材料修复的策略冲突。",
-      "consequence": "案例转入 repair，由 policy steward 或维护者处理。",
+      "consequence": "案例转入补充处理，由项目规则负责人或维护者处理。",
       "mutates_state": true,
       "actor_role": "maintainer",
       "default_obligation_ids": [
@@ -3853,7 +3853,7 @@
       "primary_reason": "后端允许此操作，但它不直接处理当前主要阻断项。",
       "selector_options": [
         {
-          "selector_token": "sel-a22be89969559667685020bfa7f7a3afa78142e3abe1be1718764cca99252f2c",
+          "selector_token": "sel-bb86ba666def569ff498e92937f60c7db5da6116adf06ac5915b89796df1e8ca",
           "action": "record_policy_conflict",
           "label": "智能体行动与委派说明",
           "status_label": "缺少；等待贡献者处理",
@@ -3887,9 +3887,9 @@
           ]
         },
         {
-          "selector_token": "sel-e0518fa73e15a9b083be59fbefe5cbb4a40c4b2a246c0f88de657c368f13326b",
+          "selector_token": "sel-b8084f7c7634eda3f663e53b94e9ed25aae47e6c815a8d72d74cf63c9dfd433d",
           "action": "record_policy_conflict",
-          "label": "可核验测试制品",
+          "label": "可检查的测试输出或文件",
           "status_label": "缺少；等待贡献者处理",
           "affected_scope": [
             "demo_app/auth.py",
@@ -3929,9 +3929,9 @@
           ]
         },
         {
-          "selector_token": "sel-c8c113c93dfacba781dd68f7d09f2fcd4e679cbc28493e2a1af30ab8a754aa7c",
+          "selector_token": "sel-b7a6abe67e7ad7eaaad0da8f4f7d6d6dc378e109e4f2063d095df1a206692077",
           "action": "record_policy_conflict",
-          "label": "登录、认证与权限影响",
+          "label": "登录、认证与权限影响说明",
           "status_label": "缺少；等待贡献者处理",
           "affected_scope": [
             "demo_app/auth.py"
@@ -3965,7 +3965,7 @@
           ]
         },
         {
-          "selector_token": "sel-6250df2fffee81728c78604d5bd4266e76b3b0d7acd5ff4138853a62fc6556e5",
+          "selector_token": "sel-1c14e9c88cca48f58f92f2399e247b61dc0bd0bd913fec75905ba3491d9991c8",
           "action": "record_policy_conflict",
           "label": "变更文件清单",
           "status_label": "缺少；等待贡献者处理",
@@ -4007,7 +4007,7 @@
           ]
         },
         {
-          "selector_token": "sel-820807f526932863f2faf6e3212984db01ee70f5ead41b72ef8d9d4f2cc425b4",
+          "selector_token": "sel-ab0d7fa8d1119a771390738ca91e21b92774d5d02841e8581611da9fd08619f2",
           "action": "record_policy_conflict",
           "label": "负责人确认",
           "status_label": "缺少；等待负责人确认",
@@ -4043,7 +4043,7 @@
           ]
         },
         {
-          "selector_token": "sel-e42af89c75f2211ebb099cf55564fc3e8717895f50397f9c5a0247d372f360ec",
+          "selector_token": "sel-a2979a7e64d7708ba7a522dfb661dca4fd3877eb49d4a7a2d714ec168867293a",
           "action": "record_policy_conflict",
           "label": "独立维护者检查",
           "status_label": "缺少；阻止继续",
@@ -4085,7 +4085,7 @@
           ]
         },
         {
-          "selector_token": "sel-36a7bcb4cfd2b0d4901e39bee3d86ad75879a1ebf4626d2b637e2e0113077827",
+          "selector_token": "sel-fd7b47a482b5920b37e36a5351e0b72db23c6e7b2a6dc2e0e519e8d453edd338",
           "action": "record_policy_conflict",
           "label": "已知限制",
           "status_label": "缺少；等待贡献者处理",
@@ -4127,9 +4127,9 @@
           ]
         },
         {
-          "selector_token": "sel-332875878277502a69727ddf6ee7a3f4efbc0e0f9c8329ccd5a00cbbd4607147",
+          "selector_token": "sel-e363d09ee77de8f56a557e5ae05c501458ee3ff1d4fae31acfe48a26afa9fe89",
           "action": "record_policy_conflict",
-          "label": "修改理由",
+          "label": "修改原因",
           "status_label": "缺少；等待贡献者处理",
           "affected_scope": [
             "demo_app/auth.py",
@@ -4169,7 +4169,7 @@
           ]
         },
         {
-          "selector_token": "sel-1adb485bbe8800eee5e987babe2701211441602ca1f0288a5d9b7a83e523502e",
+          "selector_token": "sel-7820cea494bbf466e796317dfb8642f662d341c7d6a4014fc45ae280d2869eca",
           "action": "record_policy_conflict",
           "label": "修改说明",
           "status_label": "缺少；等待贡献者处理",
@@ -4211,7 +4211,7 @@
           ]
         },
         {
-          "selector_token": "sel-9c205484e4ec76a75cc182eb4e0f711bc0890fbae23184e126d3504513e24478",
+          "selector_token": "sel-311b48efa7403ee411303819452e2f836210b33bc249dd8ec22ba32c7d34204d",
           "action": "record_policy_conflict",
           "label": "测试命令与结果",
           "status_label": "缺少；等待贡献者处理",
@@ -4258,9 +4258,9 @@
   "unavailable_actions": [
     {
       "action": "verify_evidence",
-      "title": "检查待核验项",
-      "description": "记录维护者对指定义务及其绑定材料的检查结果。",
-      "reason": "操作 verify_evidence 不能从当前状态 evidence_incomplete 执行。",
+      "title": "检查提交材料",
+      "description": "记录维护者对指定项目要求及其绑定材料的检查结果。",
+      "reason": "当前处于“等待贡献者补齐材料”，还不能执行“检查提交材料”。",
       "next_actor_roles": [
         "contributor",
         "contributor_agent"
@@ -4273,7 +4273,7 @@
           "relationship": "authority"
         }
       ],
-      "category": "stage",
+      "category": "authority",
       "required_role": [
         "maintainer",
         "maintainer_verifier",
@@ -4287,9 +4287,9 @@
     },
     {
       "action": "request_repair",
-      "title": "请求补充或更新材料",
+      "title": "要求补充或修改",
       "description": "指出问题和受影响义务，返回贡献侧修复。",
-      "reason": "操作 request_repair 不能从当前状态 evidence_incomplete 执行。",
+      "reason": "当前处于“等待贡献者补齐材料”，还不能执行“要求补充或修改”。",
       "next_actor_roles": [
         "contributor",
         "contributor_agent"
@@ -4302,7 +4302,7 @@
           "relationship": "authority"
         }
       ],
-      "category": "stage",
+      "category": "authority",
       "required_role": [
         "maintainer",
         "maintainer_verifier",
@@ -4317,9 +4317,9 @@
     },
     {
       "action": "reject_evidence",
-      "title": "拒绝无效材料",
+      "title": "拒绝当前材料",
       "description": "拒绝一条不能支持当前修改的具体材料。",
-      "reason": "操作 reject_evidence 不能从当前状态 evidence_incomplete 执行。",
+      "reason": "当前处于“等待贡献者补齐材料”，还不能执行“拒绝当前材料”。",
       "next_actor_roles": [
         "contributor",
         "contributor_agent"
@@ -4332,7 +4332,7 @@
           "relationship": "authority"
         }
       ],
-      "category": "stage",
+      "category": "authority",
       "required_role": [
         "maintainer",
         "maintainer_verifier"
@@ -4345,9 +4345,9 @@
     },
     {
       "action": "ask_clarification",
-      "title": "请求说明",
+      "title": "请求补充说明",
       "description": "针对指定要求提出可审计的澄清问题。",
-      "reason": "操作 ask_clarification 不能从当前状态 evidence_incomplete 执行。",
+      "reason": "当前处于“等待贡献者补齐材料”，还不能执行“请求补充说明”。",
       "next_actor_roles": [
         "contributor",
         "contributor_agent"
@@ -4360,7 +4360,7 @@
           "relationship": "authority"
         }
       ],
-      "category": "stage",
+      "category": "authority",
       "required_role": [
         "maintainer",
         "maintainer_verifier"
@@ -4374,9 +4374,9 @@
     },
     {
       "action": "invalidate_attestation",
-      "title": "要求负责人重新确认",
+      "title": "将旧负责人确认标记为失效",
       "description": "使一条过时或不正确的负责人确认失效。",
-      "reason": "操作 invalidate_attestation 不能从当前状态 evidence_incomplete 执行。",
+      "reason": "当前处于“等待贡献者补齐材料”，还不能执行“将旧负责人确认标记为失效”。",
       "next_actor_roles": [
         "contributor",
         "contributor_agent"
@@ -4389,7 +4389,7 @@
           "relationship": "authority"
         }
       ],
-      "category": "stage",
+      "category": "authority",
       "required_role": [
         "maintainer",
         "maintainer_verifier"
@@ -4403,9 +4403,9 @@
     },
     {
       "action": "resolve_policy_conflict",
-      "title": "解决项目规则冲突",
+      "title": "处理项目规则冲突",
       "description": "由有权限的角色记录策略冲突的解决依据。",
-      "reason": "操作 resolve_policy_conflict 不能从当前状态 evidence_incomplete 执行。",
+      "reason": "当前处于“等待贡献者补齐材料”，还不能执行“处理项目规则冲突”。",
       "next_actor_roles": [
         "contributor",
         "contributor_agent"
@@ -4418,7 +4418,7 @@
           "relationship": "authority"
         }
       ],
-      "category": "stage",
+      "category": "scope",
       "required_role": [
         "maintainer",
         "policy_steward"
@@ -4430,9 +4430,9 @@
     },
     {
       "action": "resubmit",
-      "title": "补交指定范围",
-      "description": "贡献侧提交 repair 影响范围和新增材料。",
-      "reason": "当前角色没有 resubmit 权限。 可执行角色：contributor, contributor_agent。",
+      "title": "重新提交修改后的材料",
+      "description": "贡献侧提交补充或修改影响范围和新增材料。",
+      "reason": "当前角色没有“重新提交修改后的材料”的权限。可以执行这一步的角色：人类贡献者或贡献侧智能体。",
       "next_actor_roles": [
         "contributor",
         "contributor_agent"
@@ -4457,9 +4457,9 @@
     },
     {
       "action": "confirm_attestation",
-      "title": "负责人确认当前范围",
-      "description": "由 accountable human 对明确范围作出事实确认。",
-      "reason": "当前角色没有 confirm_attestation 权限。 可执行角色：accountable_human。",
+      "title": "确认负责人声明",
+      "description": "由负责人对明确范围作出事实确认。",
+      "reason": "当前角色没有“确认负责人声明”的权限。可以执行这一步的角色：负责人。",
       "next_actor_roles": [
         "accountable_human"
       ],
@@ -4488,9 +4488,9 @@
     },
     {
       "action": "authorized_override",
-      "title": "执行有权覆盖",
-      "description": "记录具备权限的维护者对明确义务或 finding 的例外处理。",
-      "reason": "操作 authorized_override 不能从当前状态 evidence_incomplete 执行。",
+      "title": "由有权维护者执行覆盖处理",
+      "description": "记录具备权限的维护者对明确项目要求或问题的例外处理。",
+      "reason": "当前处于“等待贡献者补齐材料”，还不能执行“由有权维护者执行覆盖处理”。",
       "next_actor_roles": [
         "contributor",
         "contributor_agent"
@@ -4503,7 +4503,7 @@
           "relationship": "authority"
         }
       ],
-      "category": "stage",
+      "category": "authority",
       "required_role": [
         "maintainer"
       ],
@@ -4516,9 +4516,9 @@
     },
     {
       "action": "decide_accept",
-      "title": "提交人类最终接受决定",
+      "title": "最终接受",
       "description": "由人类维护者记录接受决定。",
-      "reason": "操作 decide_accept 不能从当前状态 evidence_incomplete 执行。",
+      "reason": "当前处于“等待贡献者补齐材料”，还不能执行“最终接受”。",
       "next_actor_roles": [
         "contributor",
         "contributor_agent"
@@ -4531,7 +4531,7 @@
           "relationship": "authority"
         }
       ],
-      "category": "stage",
+      "category": "authority",
       "required_role": [
         "maintainer"
       ],
@@ -4543,9 +4543,9 @@
     },
     {
       "action": "decide_reject",
-      "title": "提交人类最终拒绝决定",
+      "title": "最终拒绝",
       "description": "由人类维护者记录拒绝决定。",
-      "reason": "操作 decide_reject 不能从当前状态 evidence_incomplete 执行。",
+      "reason": "当前处于“等待贡献者补齐材料”，还不能执行“最终拒绝”。",
       "next_actor_roles": [
         "contributor",
         "contributor_agent"
@@ -4558,7 +4558,7 @@
           "relationship": "authority"
         }
       ],
-      "category": "stage",
+      "category": "authority",
       "required_role": [
         "maintainer"
       ],
@@ -4571,9 +4571,9 @@
     },
     {
       "action": "decide_request_changes",
-      "title": "提交人类修改决定",
+      "title": "要求继续修改",
       "description": "由人类维护者要求贡献侧继续修改。",
-      "reason": "操作 decide_request_changes 不能从当前状态 evidence_incomplete 执行。",
+      "reason": "当前处于“等待贡献者补齐材料”，还不能执行“要求继续修改”。",
       "next_actor_roles": [
         "contributor",
         "contributor_agent"
@@ -4586,7 +4586,7 @@
           "relationship": "authority"
         }
       ],
-      "category": "stage",
+      "category": "authority",
       "required_role": [
         "maintainer"
       ],
@@ -4598,9 +4598,9 @@
     },
     {
       "action": "decide_close",
-      "title": "关闭案例",
+      "title": "关闭本次审核记录",
       "description": "由人类维护者关闭案例而不表示接受或合并。",
-      "reason": "操作 decide_close 不能从当前状态 evidence_incomplete 执行。",
+      "reason": "当前处于“等待贡献者补齐材料”，还不能执行“关闭本次审核记录”。",
       "next_actor_roles": [
         "contributor",
         "contributor_agent"
@@ -4613,7 +4613,7 @@
           "relationship": "authority"
         }
       ],
-      "category": "stage",
+      "category": "authority",
       "required_role": [
         "maintainer"
       ],
@@ -4626,17 +4626,17 @@
     }
   ],
   "action_preview": {
-    "title": "请求补充或更新材料",
+    "title": "要求补充或修改",
     "actor": {
       "actor": "human-maintainer",
       "role": "maintainer",
       "human": true
     },
     "authorized": false,
-    "authorization_reason": "操作 request_repair 不能从当前状态 evidence_incomplete 执行。",
+    "authorization_reason": "当前处于“等待贡献者补齐材料”，还不能执行“要求补充或修改”。",
     "display_effects": [],
     "affected_items": [
-      "登录、认证与权限影响"
+      "登录、认证与权限影响说明"
     ],
     "retained_items": [],
     "invalidated_items": [],
@@ -4648,10 +4648,19 @@
     "mutates_case": false,
     "technical_details": {
       "operation": "request_repair",
+      "current_role": "maintainer",
+      "required_roles": [
+        "maintainer",
+        "maintainer_verifier",
+        "policy_steward"
+      ],
       "source_state": "evidence_incomplete",
       "target_state": "evidence_incomplete",
       "effects": [],
       "affected_obligation_ids": [
+        "O-AUTH-IMPACT"
+      ],
+      "requested_obligation_ids": [
         "O-AUTH-IMPACT"
       ],
       "retained_evidence_ids": [],
@@ -4663,7 +4672,7 @@
       "workflow_step_before": "prepare_materials",
       "workflow_step_after": "prepare_materials",
       "creates_records": [],
-      "preview_fingerprint": "8025aa30042039553fd8e7e5a3788b197815ce8169271433cd4212fc7a2c3e0d",
+      "preview_fingerprint": "af5d8e3988c291d0dbb0cfefa1504e2641cb5633c5c422a3ea7d44946def928b",
       "traceability": [
         {
           "kind": "permission_rule",
@@ -4682,15 +4691,15 @@
         "contributor",
         "contributor_agent"
       ],
-      "display_label": "贡献者、贡献侧智能体",
+      "display_label": "人类贡献者、贡献侧智能体",
       "reason": "受影响材料尚未准备或更新完成，当前还不能进入维护者检查。",
       "blocking_items": [
         "智能体行动与委派说明",
-        "可核验测试制品",
-        "登录、认证与权限影响",
+        "可检查的测试输出或文件",
+        "登录、认证与权限影响说明",
         "变更文件清单",
         "已知限制",
-        "修改理由",
+        "修改原因",
         "修改说明",
         "测试命令与结果"
       ],
@@ -4705,15 +4714,15 @@
         "contributor",
         "contributor_agent"
       ],
-      "display_label": "贡献者、贡献侧智能体",
+      "display_label": "人类贡献者、贡献侧智能体",
       "reason": "受影响材料尚未准备或更新完成，当前还不能进入维护者检查。",
       "blocking_items": [
         "智能体行动与委派说明",
-        "可核验测试制品",
-        "登录、认证与权限影响",
+        "可检查的测试输出或文件",
+        "登录、认证与权限影响说明",
         "变更文件清单",
         "已知限制",
-        "修改理由",
+        "修改原因",
         "修改说明",
         "测试命令与结果"
       ],
@@ -4727,7 +4736,7 @@
     "workflow_position_after": "贡献者准备材料",
     "next_steps": [
       "本次操作不会改变案例状态。",
-      "当前责任方仍是贡献者、贡献侧智能体。",
+      "当前责任方仍是人类贡献者、贡献侧智能体。",
       "这不等于代码已经被项目接受。"
     ],
     "requires_human_attestation_after": true,

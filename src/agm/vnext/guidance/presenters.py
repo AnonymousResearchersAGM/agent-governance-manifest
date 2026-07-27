@@ -33,11 +33,14 @@ from .models import (
     UnavailableAction,
     WorkflowStepView,
 )
-from .responsibility import (
-    ROLE_LABELS,
-    derive_current_responsibility,
-)
+from .responsibility import derive_current_responsibility
 from .reason_presentations import present_reason
+from .term_presentations import (
+    format_presented_terms,
+    present_action,
+    present_role,
+    present_state,
+)
 from .utilities import build_guidance_utilities
 from .workflow import STEP_DEFINITIONS, STEP_STYLES, build_workflow_steps
 
@@ -71,17 +74,6 @@ AUTONOMY_LABELS = {
     "delegated_agent": "存在继续委派的智能体工作",
     "autonomous_agent": "智能体具有较高独立行动范围",
 }
-
-OPERATION_LABELS = {
-    "verify_evidence": "维护者检查",
-    "decide_accept": "接受决定",
-    "decide_reject": "拒绝决定",
-    "decide_request_changes": "要求修改的最终决定",
-    "decide_close": "关闭决定",
-    "final_decision": "最终决定",
-    "authorized_override": "有权覆盖",
-}
-
 
 def _matched_interactions(
     case: GovernanceCase, policy: VNextConfig
@@ -181,7 +173,7 @@ def _summary(
         blocking_issue_count=blocking_count,
         warning_count=warning_count,
         current_responsible_parties=[
-            ROLE_LABELS.get(item, item)
+            present_role(item).display_plain
             for item in responsibility.primary_roles
         ],
         next_authorized_actor_roles=responsibility.primary_roles,
@@ -297,17 +289,26 @@ def _rejected_operation_notice(
     )
     if attempt is None:
         return None
-    actor_label = ROLE_LABELS.get(attempt.actor_role, attempt.actor_role)
-    operation_label = OPERATION_LABELS.get(
-        attempt.operation,
-        "受治理控制的操作",
-    )
+    actor_label = present_role(attempt.actor_role).display_plain
+    operation_label = present_action(attempt.operation).display_plain
     permission_denied = attempt.actor_role not in attempt.required_roles
-    reason_plain = (
-        "系统已拒绝该操作，因为该角色没有执行此操作所需的权限。"
-        if permission_denied
-        else "系统已拒绝该操作，因为操作范围或当前流程位置不符合要求。"
-    )
+    maintainer_side_roles = {
+        "maintainer",
+        "maintainer_verifier",
+        "policy_steward",
+    }
+    if permission_denied and set(attempt.required_roles) <= maintainer_side_roles:
+        reason_plain = (
+            "系统拒绝了该操作，因为这一操作必须由维护者侧角色执行。"
+        )
+    elif permission_denied:
+        reason_plain = (
+            "系统拒绝了该操作，因为当前角色不在可以执行这一步的角色范围内。"
+        )
+    else:
+        reason_plain = (
+            "系统拒绝了该操作，因为操作范围或当前流程位置不符合要求。"
+        )
     return RejectedOperationView(
         attempt_id=attempt.id,
         operation=attempt.operation,
@@ -316,7 +317,7 @@ def _rejected_operation_notice(
         attempted_at=attempt.attempted_at,
         result=attempt.result,
         display_title="最近一次操作未生效",
-        display_message=f"{actor_label}尝试执行{operation_label}。",
+        display_message=f"{actor_label}尝试执行“{operation_label}”。",
         reason_plain=reason_plain,
         reason_raw=attempt.reason_raw,
         state_changed=attempt.state_changed,
@@ -919,9 +920,9 @@ def render_guidance_markdown(view: ReviewerGuidanceView) -> str:
                 else "- 案例状态发生变化，请核对审计记录",
                 f"- 当前仍处于：{notice.current_state_label}",
                 "- 下一步需要："
-                + "、".join(
-                    ROLE_LABELS.get(role, role)
-                    for role in notice.required_roles
+                + format_presented_terms(
+                    notice.required_roles,
+                    present_role,
                 ),
             ]
         )
@@ -955,7 +956,7 @@ def render_guidance_markdown(view: ReviewerGuidanceView) -> str:
         lines.append("- 当前角色没有直接改变状态的相关操作；可使用下方只读交接工具。")
     for item in view.current_relevant_actions:
         lines.append(
-            f"- **{item.title}** (`{item.action}`): {item.consequence}"
+            f"- **{item.title}**：{item.consequence}"
         )
     lines.extend(["", "## 其他可用操作（折叠区内容）", ""])
     for item in view.other_available_actions:
@@ -990,6 +991,17 @@ def render_action_preview_markdown(preview: ActionPreview) -> str:
         f"你准备执行：**{preview.title}**",
         "",
         preview.authorization_reason,
+        "",
+        (
+            "当前可以继续处理的角色："
+            + format_presented_terms(
+                preview.next_authorized_actor_roles,
+                present_role,
+            )
+            + "。"
+            if preview.next_authorized_actor_roles
+            else "当前没有待交接角色。"
+        ),
         "",
         "### 将处理",
         "",
@@ -1090,6 +1102,10 @@ def _action_preview_html(
     next_steps = "".join(
         f"<li>{html.escape(item)}</li>" for item in preview.next_steps
     )
+    next_roles = format_presented_terms(
+        preview.next_authorized_actor_roles,
+        present_role,
+    ) or "当前没有待交接角色"
     confirmation = ""
     if (
         preview.authorized
@@ -1136,6 +1152,8 @@ def _action_preview_html(
         "<h2>操作前预览</h2>"
         f"<p>你准备执行：<strong>{html.escape(preview.title)}</strong></p>"
         f"<p>{html.escape(preview.authorization_reason)}</p>"
+        "<p><strong>当前可以继续处理的角色：</strong>"
+        f"{html.escape(next_roles)}</p>"
         f"<p><strong>将处理：</strong>{html.escape(affected)}</p>"
         f"<ul>{effects or '<li>不会改变案例。</li>'}</ul>"
         f"<p><strong>保留的未受影响材料：</strong>{html.escape(retained)}</p>"
@@ -1311,15 +1329,29 @@ def render_guidance_html(
         _action_card(view, item, action_token)
         for item in view.other_available_actions
     )
+    unavailable_role_labels = {
+        item.action: "、".join(
+            present_role(role).display_plain
+            for role in item.required_role
+        )
+        for item in view.unavailable_actions
+    }
+    unavailable_state_labels = {
+        item.action: format_presented_terms(
+            item.required_state,
+            present_state,
+        )
+        for item in view.unavailable_actions
+    }
     unavailable = "".join(
         '<article class="action-card unavailable" aria-disabled="true">'
         f"<h3>{html.escape(item.title)} <span>当前不可用</span></h3>"
         f"<p>{html.escape(item.description)}</p>"
         f"<p><strong>原因：</strong>{html.escape(item.reason)}</p>"
         f"<p><strong>所需角色：</strong>"
-        f"{html.escape('、'.join(ROLE_LABELS.get(role, role) for role in item.required_role) or '无')}</p>"
-        f"<p><strong>所需技术状态：</strong>"
-        f"{html.escape('、'.join(item.required_state) or '无')}</p>"
+        f"{html.escape(unavailable_role_labels[item.action] or '无')}</p>"
+        f"<p><strong>所需流程位置：</strong>"
+        f"{html.escape(unavailable_state_labels[item.action] or '无')}</p>"
         f"<p><strong>以后是否可能可用：</strong>"
         f"{html.escape(item.future_availability)}</p>"
         "<details><summary>技术操作标识与依据</summary>"
@@ -1359,9 +1391,9 @@ def render_guidance_html(
     rejected_notice = ""
     if view.rejected_operation_notice:
         notice = view.rejected_operation_notice
-        required = "、".join(
-            ROLE_LABELS.get(role, role)
-            for role in notice.required_roles
+        required = format_presented_terms(
+            notice.required_roles,
+            present_role,
         ) or "具备相应权限的角色"
         rejected_notice = (
             '<section class="rejected-notice">'

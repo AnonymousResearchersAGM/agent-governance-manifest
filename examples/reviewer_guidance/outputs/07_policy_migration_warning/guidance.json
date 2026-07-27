@@ -4,7 +4,7 @@
   "notes": "Migration check is read-only and exposes recorded versus current policy.",
   "guidance_view": {
     "schema_version": "agm.reviewer_guidance/v0.2-dev",
-    "generated_from_case_fingerprint": "e9d96f8f36a92549155112fc471507591a241d77f81bbcdd2eb695d170e7fdc4",
+    "generated_from_case_fingerprint": "195f75a5dadcbaf549b58dd87064f35418fbe8741065bc50cb4978840620fc1d",
     "actor": {
       "actor": "policy-reviewer",
       "role": "policy_steward",
@@ -26,7 +26,7 @@
       "blocking_issue_count": 2,
       "warning_count": 1,
       "current_responsible_parties": [
-        "贡献者",
+        "人类贡献者",
         "贡献侧智能体"
       ],
       "next_authorized_actor_roles": [
@@ -232,7 +232,7 @@
       {
         "action": "view_change_scope",
         "title": "查看变化范围",
-        "description": "查看 changed files、风险规则、影响范围和绑定 fingerprint。",
+        "description": "查看变更文件、风险规则、影响范围和绑定指纹。",
         "consequence": "只读操作，不改变案例状态。",
         "mutates_state": false,
         "actor_role": "policy_steward",
@@ -254,7 +254,7 @@
         "action": "record_policy_conflict",
         "title": "记录项目规则冲突",
         "description": "记录无法由普通材料修复的策略冲突。",
-        "consequence": "案例转入 repair，由 policy steward 或维护者处理。",
+        "consequence": "案例转入补充处理，由项目规则负责人或维护者处理。",
         "mutates_state": true,
         "actor_role": "policy_steward",
         "default_obligation_ids": [
@@ -281,7 +281,7 @@
         "primary_reason": "后端允许此操作，但它不直接处理当前主要阻断项。",
         "selector_options": [
           {
-            "selector_token": "sel-8313c82a572cf4628c2715a2c652d849bab284c9b26847039331dd992e27ec7f",
+            "selector_token": "sel-7eddef05cd365d18327192170ca76e1a51ae20644f54208be8cb75ba6a65de13",
             "action": "record_policy_conflict",
             "label": "变更文件清单",
             "status_label": "缺少；等待贡献者处理",
@@ -317,7 +317,7 @@
             ]
           },
           {
-            "selector_token": "sel-fea7c9afdc31c6e74dbf2fe30dfd0783c5ddfb965e750410cd5f2b5c266d00ea",
+            "selector_token": "sel-96d3f502f18d3551c40d33f67cb830bf610a949f241192c2f474bfc5ba2de92d",
             "action": "record_policy_conflict",
             "label": "修改说明",
             "status_label": "缺少；等待贡献者处理",
@@ -358,9 +358,9 @@
     "unavailable_actions": [
       {
         "action": "verify_evidence",
-        "title": "检查待核验项",
-        "description": "记录维护者对指定义务及其绑定材料的检查结果。",
-        "reason": "操作 verify_evidence 不能从当前状态 evidence_incomplete 执行。",
+        "title": "检查提交材料",
+        "description": "记录维护者对指定项目要求及其绑定材料的检查结果。",
+        "reason": "当前处于“等待贡献者补齐材料”，还不能执行“检查提交材料”。",
         "next_actor_roles": [
           "contributor",
           "contributor_agent"
@@ -373,7 +373,7 @@
             "relationship": "authority"
           }
         ],
-        "category": "stage",
+        "category": "authority",
         "required_role": [
           "maintainer",
           "maintainer_verifier",
@@ -387,9 +387,9 @@
       },
       {
         "action": "request_repair",
-        "title": "请求补充或更新材料",
+        "title": "要求补充或修改",
         "description": "指出问题和受影响义务，返回贡献侧修复。",
-        "reason": "操作 request_repair 不能从当前状态 evidence_incomplete 执行。",
+        "reason": "当前处于“等待贡献者补齐材料”，还不能执行“要求补充或修改”。",
         "next_actor_roles": [
           "contributor",
           "contributor_agent"
@@ -402,7 +402,7 @@
             "relationship": "authority"
           }
         ],
-        "category": "stage",
+        "category": "authority",
         "required_role": [
           "maintainer",
           "maintainer_verifier",
@@ -417,9 +417,9 @@
       },
       {
         "action": "reject_evidence",
-        "title": "拒绝无效材料",
+        "title": "拒绝当前材料",
         "description": "拒绝一条不能支持当前修改的具体材料。",
-        "reason": "当前角色没有 reject_evidence 权限。 可执行角色：maintainer, maintainer_verifier。",
+        "reason": "当前角色没有“拒绝当前材料”的权限。可以执行这一步的角色：人类维护者或维护者侧检查人员。",
         "next_actor_roles": [
           "maintainer",
           "maintainer_verifier"
@@ -445,9 +445,9 @@
       },
       {
         "action": "ask_clarification",
-        "title": "请求说明",
+        "title": "请求补充说明",
         "description": "针对指定要求提出可审计的澄清问题。",
-        "reason": "当前角色没有 ask_clarification 权限。 可执行角色：maintainer, maintainer_verifier。",
+        "reason": "当前角色没有“请求补充说明”的权限。可以执行这一步的角色：人类维护者或维护者侧检查人员。",
         "next_actor_roles": [
           "maintainer",
           "maintainer_verifier"
@@ -474,9 +474,9 @@
       },
       {
         "action": "invalidate_attestation",
-        "title": "要求负责人重新确认",
+        "title": "将旧负责人确认标记为失效",
         "description": "使一条过时或不正确的负责人确认失效。",
-        "reason": "当前角色没有 invalidate_attestation 权限。 可执行角色：maintainer, maintainer_verifier。",
+        "reason": "当前角色没有“将旧负责人确认标记为失效”的权限。可以执行这一步的角色：人类维护者或维护者侧检查人员。",
         "next_actor_roles": [
           "maintainer",
           "maintainer_verifier"
@@ -503,9 +503,9 @@
       },
       {
         "action": "resolve_policy_conflict",
-        "title": "解决项目规则冲突",
+        "title": "处理项目规则冲突",
         "description": "由有权限的角色记录策略冲突的解决依据。",
-        "reason": "操作 resolve_policy_conflict 不能从当前状态 evidence_incomplete 执行。",
+        "reason": "当前处于“等待贡献者补齐材料”，还不能执行“处理项目规则冲突”。",
         "next_actor_roles": [
           "contributor",
           "contributor_agent"
@@ -518,7 +518,7 @@
             "relationship": "authority"
           }
         ],
-        "category": "stage",
+        "category": "scope",
         "required_role": [
           "maintainer",
           "policy_steward"
@@ -530,9 +530,9 @@
       },
       {
         "action": "resubmit",
-        "title": "补交指定范围",
-        "description": "贡献侧提交 repair 影响范围和新增材料。",
-        "reason": "当前角色没有 resubmit 权限。 可执行角色：contributor, contributor_agent。",
+        "title": "重新提交修改后的材料",
+        "description": "贡献侧提交补充或修改影响范围和新增材料。",
+        "reason": "当前角色没有“重新提交修改后的材料”的权限。可以执行这一步的角色：人类贡献者或贡献侧智能体。",
         "next_actor_roles": [
           "contributor",
           "contributor_agent"
@@ -557,9 +557,9 @@
       },
       {
         "action": "confirm_attestation",
-        "title": "负责人确认当前范围",
-        "description": "由 accountable human 对明确范围作出事实确认。",
-        "reason": "当前角色没有 confirm_attestation 权限。 可执行角色：accountable_human。",
+        "title": "确认负责人声明",
+        "description": "由负责人对明确范围作出事实确认。",
+        "reason": "当前角色没有“确认负责人声明”的权限。可以执行这一步的角色：负责人。",
         "next_actor_roles": [
           "accountable_human"
         ],
@@ -588,9 +588,9 @@
       },
       {
         "action": "authorized_override",
-        "title": "执行有权覆盖",
-        "description": "记录具备权限的维护者对明确义务或 finding 的例外处理。",
-        "reason": "当前角色没有 authorized_override 权限。 可执行角色：maintainer。",
+        "title": "由有权维护者执行覆盖处理",
+        "description": "记录具备权限的维护者对明确项目要求或问题的例外处理。",
+        "reason": "当前角色没有“由有权维护者执行覆盖处理”的权限。可以执行这一步的角色：人类维护者。",
         "next_actor_roles": [
           "maintainer"
         ],
@@ -615,9 +615,9 @@
       },
       {
         "action": "decide_accept",
-        "title": "提交人类最终接受决定",
+        "title": "最终接受",
         "description": "由人类维护者记录接受决定。",
-        "reason": "当前角色没有 decide_accept 权限。 可执行角色：maintainer。",
+        "reason": "当前角色没有“最终接受”的权限。可以执行这一步的角色：人类维护者。",
         "next_actor_roles": [
           "maintainer"
         ],
@@ -641,9 +641,9 @@
       },
       {
         "action": "decide_reject",
-        "title": "提交人类最终拒绝决定",
+        "title": "最终拒绝",
         "description": "由人类维护者记录拒绝决定。",
-        "reason": "当前角色没有 decide_reject 权限。 可执行角色：maintainer。",
+        "reason": "当前角色没有“最终拒绝”的权限。可以执行这一步的角色：人类维护者。",
         "next_actor_roles": [
           "maintainer"
         ],
@@ -668,9 +668,9 @@
       },
       {
         "action": "decide_request_changes",
-        "title": "提交人类修改决定",
+        "title": "要求继续修改",
         "description": "由人类维护者要求贡献侧继续修改。",
-        "reason": "当前角色没有 decide_request_changes 权限。 可执行角色：maintainer。",
+        "reason": "当前角色没有“要求继续修改”的权限。可以执行这一步的角色：人类维护者。",
         "next_actor_roles": [
           "maintainer"
         ],
@@ -694,9 +694,9 @@
       },
       {
         "action": "decide_close",
-        "title": "关闭案例",
+        "title": "关闭本次审核记录",
         "description": "由人类维护者关闭案例而不表示接受或合并。",
-        "reason": "当前角色没有 decide_close 权限。 可执行角色：maintainer。",
+        "reason": "当前角色没有“关闭本次审核记录”的权限。可以执行这一步的角色：人类维护者。",
         "next_actor_roles": [
           "maintainer"
         ],
@@ -892,7 +892,7 @@
       "findings": [],
       "repair_requests": [],
       "attempted_operations": [],
-      "contribution_fingerprint": "e9d96f8f36a92549155112fc471507591a241d77f81bbcdd2eb695d170e7fdc4",
+      "contribution_fingerprint": "195f75a5dadcbaf549b58dd87064f35418fbe8741065bc50cb4978840620fc1d",
       "policy_fingerprint": "recorded-policy-fingerprint-before-change",
       "policy_snapshot": {
         "id": "policy-ac99c1208e8a54a9b2d852a5334f8ed4",
@@ -1004,7 +1004,7 @@
         "contributor",
         "contributor_agent"
       ],
-      "display_label": "贡献者、贡献侧智能体",
+      "display_label": "人类贡献者、贡献侧智能体",
       "reason": "受影响材料尚未准备或更新完成，当前还不能进入维护者检查。",
       "blocking_items": [
         "变更文件清单",
@@ -1021,7 +1021,7 @@
       {
         "action": "view_change_scope",
         "title": "查看变化范围",
-        "description": "查看 changed files、风险规则、影响范围和绑定 fingerprint。",
+        "description": "查看变更文件、风险规则、影响范围和绑定指纹。",
         "consequence": "只读操作，不改变案例状态。",
         "mutates_state": false,
         "actor_role": "policy_steward",
@@ -1043,7 +1043,7 @@
         "action": "record_policy_conflict",
         "title": "记录项目规则冲突",
         "description": "记录无法由普通材料修复的策略冲突。",
-        "consequence": "案例转入 repair，由 policy steward 或维护者处理。",
+        "consequence": "案例转入补充处理，由项目规则负责人或维护者处理。",
         "mutates_state": true,
         "actor_role": "policy_steward",
         "default_obligation_ids": [
@@ -1070,7 +1070,7 @@
         "primary_reason": "后端允许此操作，但它不直接处理当前主要阻断项。",
         "selector_options": [
           {
-            "selector_token": "sel-8313c82a572cf4628c2715a2c652d849bab284c9b26847039331dd992e27ec7f",
+            "selector_token": "sel-7eddef05cd365d18327192170ca76e1a51ae20644f54208be8cb75ba6a65de13",
             "action": "record_policy_conflict",
             "label": "变更文件清单",
             "status_label": "缺少；等待贡献者处理",
@@ -1106,7 +1106,7 @@
             ]
           },
           {
-            "selector_token": "sel-fea7c9afdc31c6e74dbf2fe30dfd0783c5ddfb965e750410cd5f2b5c266d00ea",
+            "selector_token": "sel-96d3f502f18d3551c40d33f67cb830bf610a949f241192c2f474bfc5ba2de92d",
             "action": "record_policy_conflict",
             "label": "修改说明",
             "status_label": "缺少；等待贡献者处理",
@@ -1176,7 +1176,7 @@
         "label": "导出贡献者待办清单",
         "description": "导出包含责任方、待处理项和范围的 Markdown 清单。",
         "output_type": "text/markdown",
-        "output": "# 贡献者待办清单\n\n案例：policy-migration\n当前责任方：贡献者、贡献侧智能体\n原因：受影响材料尚未准备或更新完成，当前还不能进入维护者检查。\n\n## 待处理项\n\n- 变更文件清单：缺少；等待贡献者处理；范围：docs/guide.md\n- 修改说明：缺少；等待贡献者处理；范围：docs/guide.md\n\n完成后请按当前 repair/提交范围交回；最终决定仍由人类维护者作出。",
+        "output": "# 贡献者待办清单\n\n案例：policy-migration\n当前责任方：人类贡献者、贡献侧智能体\n原因：受影响材料尚未准备或更新完成，当前还不能进入维护者检查。\n\n## 待处理项\n\n- 变更文件清单：缺少；等待贡献者处理；范围：docs/guide.md\n- 修改说明：缺少；等待贡献者处理；范围：docs/guide.md\n\n完成后请按当前 repair/提交范围交回；最终决定仍由人类维护者作出。",
         "trace_refs": [
           {
             "kind": "compiled_obligation",
@@ -1201,7 +1201,7 @@
         "label": "下载维护者摘要",
         "description": "导出当前风险、责任方和阻断项摘要，不作接受判断。",
         "output_type": "text/markdown",
-        "output": "# 维护者审核摘要\n\n案例：policy-migration\n当前状态：evidence_incomplete\n风险：low\n当前责任方：贡献者、贡献侧智能体\n责任方依据：受影响材料尚未准备或更新完成，当前还不能进入维护者检查。\n\n## 阻断或待检查项\n\n- 变更文件清单：缺少；等待贡献者处理；范围：docs/guide.md\n- 修改说明：缺少；等待贡献者处理；范围：docs/guide.md\n\n本摘要是治理状态说明，不是接受决定。",
+        "output": "# 维护者审核摘要\n\n案例：policy-migration\n当前状态：等待贡献者补齐材料\n风险：low\n当前责任方：人类贡献者、贡献侧智能体\n责任方依据：受影响材料尚未准备或更新完成，当前还不能进入维护者检查。\n\n## 阻断或待检查项\n\n- 变更文件清单：缺少；等待贡献者处理；范围：docs/guide.md\n- 修改说明：缺少；等待贡献者处理；范围：docs/guide.md\n\n本摘要是治理状态说明，不是接受决定。",
         "trace_refs": [
           {
             "kind": "compiled_obligation",
@@ -1241,7 +1241,7 @@
         "label": "复制当前责任方说明",
         "description": "生成不改变案例状态的 handoff note。",
         "output_type": "text/plain",
-        "output": "案例 policy-migration 当前交给：贡献者、贡献侧智能体。\n受影响材料尚未准备或更新完成，当前还不能进入维护者检查。\n涉及：变更文件清单、修改说明。\n完成后交给角色：accountable_human、maintainer_verifier、maintainer。",
+        "output": "案例 policy-migration 当前交给：人类贡献者、贡献侧智能体。\n受影响材料尚未准备或更新完成，当前还不能进入维护者检查。\n涉及：变更文件清单、修改说明。\n完成后交给角色：负责人、维护者侧检查人员或人类维护者。",
         "trace_refs": [
           {
             "kind": "compiled_obligation",
@@ -1385,7 +1385,7 @@
       "contributor",
       "contributor_agent"
     ],
-    "display_label": "贡献者、贡献侧智能体",
+    "display_label": "人类贡献者、贡献侧智能体",
     "reason": "受影响材料尚未准备或更新完成，当前还不能进入维护者检查。",
     "blocking_items": [
       "变更文件清单",
@@ -1402,7 +1402,7 @@
   "context_selector_data": {
     "record_policy_conflict": [
       {
-        "selector_token": "sel-8313c82a572cf4628c2715a2c652d849bab284c9b26847039331dd992e27ec7f",
+        "selector_token": "sel-7eddef05cd365d18327192170ca76e1a51ae20644f54208be8cb75ba6a65de13",
         "action": "record_policy_conflict",
         "label": "变更文件清单",
         "status_label": "缺少；等待贡献者处理",
@@ -1438,7 +1438,7 @@
         ]
       },
       {
-        "selector_token": "sel-fea7c9afdc31c6e74dbf2fe30dfd0783c5ddfb965e750410cd5f2b5c266d00ea",
+        "selector_token": "sel-96d3f502f18d3551c40d33f67cb830bf610a949f241192c2f474bfc5ba2de92d",
         "action": "record_policy_conflict",
         "label": "修改说明",
         "status_label": "缺少；等待贡献者处理",
@@ -1518,7 +1518,7 @@
     {
       "action": "view_change_scope",
       "title": "查看变化范围",
-      "description": "查看 changed files、风险规则、影响范围和绑定 fingerprint。",
+      "description": "查看变更文件、风险规则、影响范围和绑定指纹。",
       "consequence": "只读操作，不改变案例状态。",
       "mutates_state": false,
       "actor_role": "policy_steward",
@@ -1540,7 +1540,7 @@
       "action": "record_policy_conflict",
       "title": "记录项目规则冲突",
       "description": "记录无法由普通材料修复的策略冲突。",
-      "consequence": "案例转入 repair，由 policy steward 或维护者处理。",
+      "consequence": "案例转入补充处理，由项目规则负责人或维护者处理。",
       "mutates_state": true,
       "actor_role": "policy_steward",
       "default_obligation_ids": [
@@ -1567,7 +1567,7 @@
       "primary_reason": "后端允许此操作，但它不直接处理当前主要阻断项。",
       "selector_options": [
         {
-          "selector_token": "sel-8313c82a572cf4628c2715a2c652d849bab284c9b26847039331dd992e27ec7f",
+          "selector_token": "sel-7eddef05cd365d18327192170ca76e1a51ae20644f54208be8cb75ba6a65de13",
           "action": "record_policy_conflict",
           "label": "变更文件清单",
           "status_label": "缺少；等待贡献者处理",
@@ -1603,7 +1603,7 @@
           ]
         },
         {
-          "selector_token": "sel-fea7c9afdc31c6e74dbf2fe30dfd0783c5ddfb965e750410cd5f2b5c266d00ea",
+          "selector_token": "sel-96d3f502f18d3551c40d33f67cb830bf610a949f241192c2f474bfc5ba2de92d",
           "action": "record_policy_conflict",
           "label": "修改说明",
           "status_label": "缺少；等待贡献者处理",
@@ -1644,9 +1644,9 @@
   "unavailable_actions": [
     {
       "action": "verify_evidence",
-      "title": "检查待核验项",
-      "description": "记录维护者对指定义务及其绑定材料的检查结果。",
-      "reason": "操作 verify_evidence 不能从当前状态 evidence_incomplete 执行。",
+      "title": "检查提交材料",
+      "description": "记录维护者对指定项目要求及其绑定材料的检查结果。",
+      "reason": "当前处于“等待贡献者补齐材料”，还不能执行“检查提交材料”。",
       "next_actor_roles": [
         "contributor",
         "contributor_agent"
@@ -1659,7 +1659,7 @@
           "relationship": "authority"
         }
       ],
-      "category": "stage",
+      "category": "authority",
       "required_role": [
         "maintainer",
         "maintainer_verifier",
@@ -1673,9 +1673,9 @@
     },
     {
       "action": "request_repair",
-      "title": "请求补充或更新材料",
+      "title": "要求补充或修改",
       "description": "指出问题和受影响义务，返回贡献侧修复。",
-      "reason": "操作 request_repair 不能从当前状态 evidence_incomplete 执行。",
+      "reason": "当前处于“等待贡献者补齐材料”，还不能执行“要求补充或修改”。",
       "next_actor_roles": [
         "contributor",
         "contributor_agent"
@@ -1688,7 +1688,7 @@
           "relationship": "authority"
         }
       ],
-      "category": "stage",
+      "category": "authority",
       "required_role": [
         "maintainer",
         "maintainer_verifier",
@@ -1703,9 +1703,9 @@
     },
     {
       "action": "reject_evidence",
-      "title": "拒绝无效材料",
+      "title": "拒绝当前材料",
       "description": "拒绝一条不能支持当前修改的具体材料。",
-      "reason": "当前角色没有 reject_evidence 权限。 可执行角色：maintainer, maintainer_verifier。",
+      "reason": "当前角色没有“拒绝当前材料”的权限。可以执行这一步的角色：人类维护者或维护者侧检查人员。",
       "next_actor_roles": [
         "maintainer",
         "maintainer_verifier"
@@ -1731,9 +1731,9 @@
     },
     {
       "action": "ask_clarification",
-      "title": "请求说明",
+      "title": "请求补充说明",
       "description": "针对指定要求提出可审计的澄清问题。",
-      "reason": "当前角色没有 ask_clarification 权限。 可执行角色：maintainer, maintainer_verifier。",
+      "reason": "当前角色没有“请求补充说明”的权限。可以执行这一步的角色：人类维护者或维护者侧检查人员。",
       "next_actor_roles": [
         "maintainer",
         "maintainer_verifier"
@@ -1760,9 +1760,9 @@
     },
     {
       "action": "invalidate_attestation",
-      "title": "要求负责人重新确认",
+      "title": "将旧负责人确认标记为失效",
       "description": "使一条过时或不正确的负责人确认失效。",
-      "reason": "当前角色没有 invalidate_attestation 权限。 可执行角色：maintainer, maintainer_verifier。",
+      "reason": "当前角色没有“将旧负责人确认标记为失效”的权限。可以执行这一步的角色：人类维护者或维护者侧检查人员。",
       "next_actor_roles": [
         "maintainer",
         "maintainer_verifier"
@@ -1789,9 +1789,9 @@
     },
     {
       "action": "resolve_policy_conflict",
-      "title": "解决项目规则冲突",
+      "title": "处理项目规则冲突",
       "description": "由有权限的角色记录策略冲突的解决依据。",
-      "reason": "操作 resolve_policy_conflict 不能从当前状态 evidence_incomplete 执行。",
+      "reason": "当前处于“等待贡献者补齐材料”，还不能执行“处理项目规则冲突”。",
       "next_actor_roles": [
         "contributor",
         "contributor_agent"
@@ -1804,7 +1804,7 @@
           "relationship": "authority"
         }
       ],
-      "category": "stage",
+      "category": "scope",
       "required_role": [
         "maintainer",
         "policy_steward"
@@ -1816,9 +1816,9 @@
     },
     {
       "action": "resubmit",
-      "title": "补交指定范围",
-      "description": "贡献侧提交 repair 影响范围和新增材料。",
-      "reason": "当前角色没有 resubmit 权限。 可执行角色：contributor, contributor_agent。",
+      "title": "重新提交修改后的材料",
+      "description": "贡献侧提交补充或修改影响范围和新增材料。",
+      "reason": "当前角色没有“重新提交修改后的材料”的权限。可以执行这一步的角色：人类贡献者或贡献侧智能体。",
       "next_actor_roles": [
         "contributor",
         "contributor_agent"
@@ -1843,9 +1843,9 @@
     },
     {
       "action": "confirm_attestation",
-      "title": "负责人确认当前范围",
-      "description": "由 accountable human 对明确范围作出事实确认。",
-      "reason": "当前角色没有 confirm_attestation 权限。 可执行角色：accountable_human。",
+      "title": "确认负责人声明",
+      "description": "由负责人对明确范围作出事实确认。",
+      "reason": "当前角色没有“确认负责人声明”的权限。可以执行这一步的角色：负责人。",
       "next_actor_roles": [
         "accountable_human"
       ],
@@ -1874,9 +1874,9 @@
     },
     {
       "action": "authorized_override",
-      "title": "执行有权覆盖",
-      "description": "记录具备权限的维护者对明确义务或 finding 的例外处理。",
-      "reason": "当前角色没有 authorized_override 权限。 可执行角色：maintainer。",
+      "title": "由有权维护者执行覆盖处理",
+      "description": "记录具备权限的维护者对明确项目要求或问题的例外处理。",
+      "reason": "当前角色没有“由有权维护者执行覆盖处理”的权限。可以执行这一步的角色：人类维护者。",
       "next_actor_roles": [
         "maintainer"
       ],
@@ -1901,9 +1901,9 @@
     },
     {
       "action": "decide_accept",
-      "title": "提交人类最终接受决定",
+      "title": "最终接受",
       "description": "由人类维护者记录接受决定。",
-      "reason": "当前角色没有 decide_accept 权限。 可执行角色：maintainer。",
+      "reason": "当前角色没有“最终接受”的权限。可以执行这一步的角色：人类维护者。",
       "next_actor_roles": [
         "maintainer"
       ],
@@ -1927,9 +1927,9 @@
     },
     {
       "action": "decide_reject",
-      "title": "提交人类最终拒绝决定",
+      "title": "最终拒绝",
       "description": "由人类维护者记录拒绝决定。",
-      "reason": "当前角色没有 decide_reject 权限。 可执行角色：maintainer。",
+      "reason": "当前角色没有“最终拒绝”的权限。可以执行这一步的角色：人类维护者。",
       "next_actor_roles": [
         "maintainer"
       ],
@@ -1954,9 +1954,9 @@
     },
     {
       "action": "decide_request_changes",
-      "title": "提交人类修改决定",
+      "title": "要求继续修改",
       "description": "由人类维护者要求贡献侧继续修改。",
-      "reason": "当前角色没有 decide_request_changes 权限。 可执行角色：maintainer。",
+      "reason": "当前角色没有“要求继续修改”的权限。可以执行这一步的角色：人类维护者。",
       "next_actor_roles": [
         "maintainer"
       ],
@@ -1980,9 +1980,9 @@
     },
     {
       "action": "decide_close",
-      "title": "关闭案例",
+      "title": "关闭本次审核记录",
       "description": "由人类维护者关闭案例而不表示接受或合并。",
-      "reason": "当前角色没有 decide_close 权限。 可执行角色：maintainer。",
+      "reason": "当前角色没有“关闭本次审核记录”的权限。可以执行这一步的角色：人类维护者。",
       "next_actor_roles": [
         "maintainer"
       ],
@@ -2020,13 +2020,13 @@
         "display_label": "案例流程",
         "before_label": "等待贡献者补齐材料",
         "after_label": "发现问题，等待指定范围修改",
-        "display_description": "案例转入 repair，由 policy steward 或维护者处理。"
+        "display_description": "案例转入补充处理，由项目规则负责人或维护者处理。"
       },
       {
         "display_label": "修改说明",
         "before_label": "尚未满足",
         "after_label": "项目规则冲突",
-        "display_description": "案例转入 repair，由 policy steward 或维护者处理。"
+        "display_description": "案例转入补充处理，由项目规则负责人或维护者处理。"
       }
     ],
     "affected_items": [
@@ -2042,6 +2042,12 @@
     "mutates_case": false,
     "technical_details": {
       "operation": "record_policy_conflict",
+      "current_role": "policy_steward",
+      "required_roles": [
+        "maintainer",
+        "maintainer_verifier",
+        "policy_steward"
+      ],
       "source_state": "evidence_incomplete",
       "target_state": "repair_requested",
       "effects": [
@@ -2049,7 +2055,7 @@
           "target": "案例状态",
           "before": "evidence_incomplete",
           "after": "repair_requested",
-          "explanation": "案例转入 repair，由 policy steward 或维护者处理。",
+          "explanation": "案例转入补充处理，由项目规则负责人或维护者处理。",
           "source_object_ids": [
             "transition-fb1c3eb898d154ed98f2004b45dc4d73"
           ]
@@ -2058,13 +2064,16 @@
           "target": "O-SUMMARY",
           "before": "unsatisfied",
           "after": "policy_conflict",
-          "explanation": "案例转入 repair，由 policy steward 或维护者处理。",
+          "explanation": "案例转入补充处理，由项目规则负责人或维护者处理。",
           "source_object_ids": [
             "obl-o-summary"
           ]
         }
       ],
       "affected_obligation_ids": [
+        "O-SUMMARY"
+      ],
+      "requested_obligation_ids": [
         "O-SUMMARY"
       ],
       "retained_evidence_ids": [],
@@ -2080,7 +2089,7 @@
         "finding",
         "repair_request"
       ],
-      "preview_fingerprint": "00e0d82c9c29a56cdf8e4d7e5dcb078ddf8b0561119be2c73f2e5d11576a2fea",
+      "preview_fingerprint": "4b7b3cd670bc4eb743a1e23b13e6b4b903bfe465fd411df39f0f48285b38267c",
       "traceability": [
         {
           "kind": "permission_rule",
@@ -2104,7 +2113,7 @@
         "contributor",
         "contributor_agent"
       ],
-      "display_label": "贡献者、贡献侧智能体",
+      "display_label": "人类贡献者、贡献侧智能体",
       "reason": "受影响材料尚未准备或更新完成，当前还不能进入维护者检查。",
       "blocking_items": [
         "变更文件清单",

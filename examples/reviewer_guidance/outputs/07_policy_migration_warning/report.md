@@ -6,7 +6,7 @@
 - 风险: 低
 - 阻断问题: 2
 - 需要关注: 1
-- 当前责任方: 贡献者、贡献侧智能体
+- 当前责任方: 人类贡献者、贡献侧智能体
 - 责任方依据: 受影响材料尚未准备或更新完成，当前还不能进入维护者检查。
 
 ## 五步流程
@@ -31,7 +31,7 @@
 ## 其他可用操作（折叠区内容）
 
 - **查看变化范围**: 只读操作，不改变案例状态。
-- **记录项目规则冲突**: 案例转入 repair，由 policy steward 或维护者处理。
+- **记录项目规则冲突**: 案例转入补充处理，由项目规则负责人或维护者处理。
 
 ## 只读交接工具
 
@@ -44,19 +44,19 @@
 ## 暂不可用操作摘要
 
 - 还有 13 项操作因当前阶段、权限或对象范围暂不可用
-  - 检查待核验项: 操作 verify_evidence 不能从当前状态 evidence_incomplete 执行。
-  - 请求补充或更新材料: 操作 request_repair 不能从当前状态 evidence_incomplete 执行。
-  - 拒绝无效材料: 当前角色没有 reject_evidence 权限。 可执行角色：maintainer, maintainer_verifier。
-  - 请求说明: 当前角色没有 ask_clarification 权限。 可执行角色：maintainer, maintainer_verifier。
-  - 要求负责人重新确认: 当前角色没有 invalidate_attestation 权限。 可执行角色：maintainer, maintainer_verifier。
-  - 解决项目规则冲突: 操作 resolve_policy_conflict 不能从当前状态 evidence_incomplete 执行。
-  - 补交指定范围: 当前角色没有 resubmit 权限。 可执行角色：contributor, contributor_agent。
-  - 负责人确认当前范围: 当前角色没有 confirm_attestation 权限。 可执行角色：accountable_human。
-  - 执行有权覆盖: 当前角色没有 authorized_override 权限。 可执行角色：maintainer。
-  - 提交人类最终接受决定: 当前角色没有 decide_accept 权限。 可执行角色：maintainer。
-  - 提交人类最终拒绝决定: 当前角色没有 decide_reject 权限。 可执行角色：maintainer。
-  - 提交人类修改决定: 当前角色没有 decide_request_changes 权限。 可执行角色：maintainer。
-  - 关闭案例: 当前角色没有 decide_close 权限。 可执行角色：maintainer。
+  - 检查提交材料: 当前处于“等待贡献者补齐材料”，还不能执行“检查提交材料”。
+  - 要求补充或修改: 当前处于“等待贡献者补齐材料”，还不能执行“要求补充或修改”。
+  - 拒绝当前材料: 当前角色没有“拒绝当前材料”的权限。可以执行这一步的角色：人类维护者或维护者侧检查人员。
+  - 请求补充说明: 当前角色没有“请求补充说明”的权限。可以执行这一步的角色：人类维护者或维护者侧检查人员。
+  - 将旧负责人确认标记为失效: 当前角色没有“将旧负责人确认标记为失效”的权限。可以执行这一步的角色：人类维护者或维护者侧检查人员。
+  - 处理项目规则冲突: 当前处于“等待贡献者补齐材料”，还不能执行“处理项目规则冲突”。
+  - 重新提交修改后的材料: 当前角色没有“重新提交修改后的材料”的权限。可以执行这一步的角色：人类贡献者或贡献侧智能体。
+  - 确认负责人声明: 当前角色没有“确认负责人声明”的权限。可以执行这一步的角色：负责人。
+  - 由有权维护者执行覆盖处理: 当前角色没有“由有权维护者执行覆盖处理”的权限。可以执行这一步的角色：人类维护者。
+  - 最终接受: 当前角色没有“最终接受”的权限。可以执行这一步的角色：人类维护者。
+  - 最终拒绝: 当前角色没有“最终拒绝”的权限。可以执行这一步的角色：人类维护者。
+  - 要求继续修改: 当前角色没有“要求继续修改”的权限。可以执行这一步的角色：人类维护者。
+  - 关闭本次审核记录: 当前角色没有“关闭本次审核记录”的权限。可以执行这一步的角色：人类维护者。
 
 ## Authority boundary
 
@@ -69,6 +69,8 @@
 
 当前角色和案例状态允许生成此操作计划。
 
+当前可以继续处理的角色：项目规则负责人或人类维护者。
+
 ### 将处理
 
 - 修改说明
@@ -79,8 +81,8 @@
 
 ### 预计变化
 
-- 案例流程：等待贡献者补齐材料 → 发现问题，等待指定范围修改。案例转入 repair，由 policy steward 或维护者处理。
-- 修改说明：尚未满足 → 项目规则冲突。案例转入 repair，由 policy steward 或维护者处理。
+- 案例流程：等待贡献者补齐材料 → 发现问题，等待指定范围修改。案例转入补充处理，由项目规则负责人或维护者处理。
+- 修改说明：尚未满足 → 项目规则冲突。案例转入补充处理，由项目规则负责人或维护者处理。
 
 ### 执行后
 
@@ -94,6 +96,12 @@
 ```json
 {
   "operation": "record_policy_conflict",
+  "current_role": "policy_steward",
+  "required_roles": [
+    "maintainer",
+    "maintainer_verifier",
+    "policy_steward"
+  ],
   "source_state": "evidence_incomplete",
   "target_state": "repair_requested",
   "effects": [
@@ -101,7 +109,7 @@
       "target": "案例状态",
       "before": "evidence_incomplete",
       "after": "repair_requested",
-      "explanation": "案例转入 repair，由 policy steward 或维护者处理。",
+      "explanation": "案例转入补充处理，由项目规则负责人或维护者处理。",
       "source_object_ids": [
         "transition-fb1c3eb898d154ed98f2004b45dc4d73"
       ]
@@ -110,13 +118,16 @@
       "target": "O-SUMMARY",
       "before": "unsatisfied",
       "after": "policy_conflict",
-      "explanation": "案例转入 repair，由 policy steward 或维护者处理。",
+      "explanation": "案例转入补充处理，由项目规则负责人或维护者处理。",
       "source_object_ids": [
         "obl-o-summary"
       ]
     }
   ],
   "affected_obligation_ids": [
+    "O-SUMMARY"
+  ],
+  "requested_obligation_ids": [
     "O-SUMMARY"
   ],
   "retained_evidence_ids": [],
@@ -132,7 +143,7 @@
     "finding",
     "repair_request"
   ],
-  "preview_fingerprint": "00e0d82c9c29a56cdf8e4d7e5dcb078ddf8b0561119be2c73f2e5d11576a2fea",
+  "preview_fingerprint": "4b7b3cd670bc4eb743a1e23b13e6b4b903bfe465fd411df39f0f48285b38267c",
   "traceability": [
     {
       "kind": "permission_rule",

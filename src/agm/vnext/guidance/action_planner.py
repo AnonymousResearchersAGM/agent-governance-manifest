@@ -25,6 +25,13 @@ from .diagnostics import (
 )
 from .responsibility import derive_current_responsibility
 from .selectors import build_context_selector_options
+from .term_presentations import (
+    format_presented_terms,
+    present_action,
+    present_obligation,
+    present_role,
+    present_state,
+)
 from .workflow import build_workflow_steps
 
 
@@ -41,107 +48,107 @@ class _ActionDefinition:
 ACTION_DEFINITIONS = (
     _ActionDefinition(
         "view_change_scope",
-        "查看变化范围",
-        "查看 changed files、风险规则、影响范围和绑定 fingerprint。",
+        present_action("view_change_scope").display_plain,
+        "查看变更文件、风险规则、影响范围和绑定指纹。",
         "只读操作，不改变案例状态。",
         mutates_state=False,
     ),
     _ActionDefinition(
         "verify_evidence",
-        "检查待核验项",
-        "记录维护者对指定义务及其绑定材料的检查结果。",
+        present_action("verify_evidence").display_plain,
+        "记录维护者对指定项目要求及其绑定材料的检查结果。",
         "受影响项会记录维护者检查；全部阻断项完成后进入人类最终决定。",
         required_parameters=("reason",),
     ),
     _ActionDefinition(
         "request_repair",
-        "请求补充或更新材料",
+        present_action("request_repair").display_plain,
         "指出问题和受影响义务，返回贡献侧修复。",
         "仅指定范围需要修复和重新检查，未受影响材料保留。",
         required_parameters=("obligation_ids", "reason"),
     ),
     _ActionDefinition(
         "reject_evidence",
-        "拒绝无效材料",
+        present_action("reject_evidence").display_plain,
         "拒绝一条不能支持当前修改的具体材料。",
-        "该材料标记为 rejected，并建立 scoped repair。",
+        "该材料将标记为已拒绝，并建立指定范围的补充或修改请求。",
         required_parameters=("object_id", "reason"),
     ),
     _ActionDefinition(
         "ask_clarification",
-        "请求说明",
+        present_action("ask_clarification").display_plain,
         "针对指定要求提出可审计的澄清问题。",
         "案例返回贡献侧回答，所选范围需要重新检查。",
         required_parameters=("obligation_ids", "reason"),
     ),
     _ActionDefinition(
         "invalidate_attestation",
-        "要求负责人重新确认",
+        present_action("invalidate_attestation").display_plain,
         "使一条过时或不正确的负责人确认失效。",
         "负责人需要在修复后重新确认明确范围。",
         required_parameters=("object_id", "reason"),
     ),
     _ActionDefinition(
         "record_policy_conflict",
-        "记录项目规则冲突",
+        present_action("record_policy_conflict").display_plain,
         "记录无法由普通材料修复的策略冲突。",
-        "案例转入 repair，由 policy steward 或维护者处理。",
+        "案例转入补充处理，由项目规则负责人或维护者处理。",
         required_parameters=("obligation_ids", "reason"),
     ),
     _ActionDefinition(
         "resolve_policy_conflict",
-        "解决项目规则冲突",
+        present_action("resolve_policy_conflict").display_plain,
         "由有权限的角色记录策略冲突的解决依据。",
-        "案例进入 resubmitted，继续检查受影响范围。",
+        "案例进入重新提交后的检查阶段，继续检查受影响范围。",
         required_parameters=("object_id", "reason"),
     ),
     _ActionDefinition(
         "resubmit",
-        "补交指定范围",
-        "贡献侧提交 repair 影响范围和新增材料。",
+        present_action("resubmit").display_plain,
+        "贡献侧提交补充或修改影响范围和新增材料。",
         "案例进入重新检查；未受影响的有效材料保留。",
         required_parameters=("obligation_ids", "reason"),
     ),
     _ActionDefinition(
         "confirm_attestation",
-        "负责人确认当前范围",
-        "由 accountable human 对明确范围作出事实确认。",
+        present_action("confirm_attestation").display_plain,
+        "由负责人对明确范围作出事实确认。",
         "确认记录绑定当前贡献、策略和材料集合；不等于接受贡献。",
         required_parameters=("reason",),
     ),
     _ActionDefinition(
         "authorized_override",
-        "执行有权覆盖",
-        "记录具备权限的维护者对明确义务或 finding 的例外处理。",
-        "案例进入 overridden，但仍须人类维护者另行作最终决定。",
+        present_action("authorized_override").display_plain,
+        "记录具备权限的维护者对明确项目要求或问题的例外处理。",
+        "案例记录有权覆盖，但仍须人类维护者另行作最终决定。",
         required_parameters=("obligation_ids", "reason"),
     ),
     _ActionDefinition(
         "decide_accept",
-        "提交人类最终接受决定",
+        present_action("decide_accept").display_plain,
         "由人类维护者记录接受决定。",
-        "案例 accepted 并生成 closure receipt；该动作不是自动合并。",
+        "案例记录接受状态并生成审核关闭记录；该动作不是自动合并。",
         required_parameters=("reason",),
     ),
     _ActionDefinition(
         "decide_reject",
-        "提交人类最终拒绝决定",
+        present_action("decide_reject").display_plain,
         "由人类维护者记录拒绝决定。",
-        "案例 rejected 并生成 closure receipt。",
+        "案例记录拒绝状态并生成审核关闭记录。",
         required_parameters=("reason",),
     ),
     _ActionDefinition(
         "decide_request_changes",
-        "提交人类修改决定",
+        present_action("decide_request_changes").display_plain,
         "由人类维护者要求贡献侧继续修改。",
-        "建立 repair request 并返回贡献侧。",
+        "建立补充或修改请求并返回贡献侧。",
         required_parameters=("reason",),
     ),
     _ActionDefinition(
         "decide_close",
-        "关闭案例",
+        present_action("decide_close").display_plain,
         "由人类维护者关闭案例而不表示接受或合并。",
-        "案例 closed 并生成 closure receipt。",
+        "案例记录关闭状态并生成审核关闭记录。",
         required_parameters=("reason",),
     ),
 )
@@ -250,27 +257,61 @@ def _domain_unavailability(
     if action == "verify_evidence":
         requested = set(scope)
         unresolved = [
-            item.obligation_id
+            item
             for item in case.obligations
             if item.obligation_id in requested
             and item.type in {"evidence", "human_attestation"}
             and item.status not in {"satisfied", "verified", "overridden"}
         ]
         if unresolved:
+            comparison_by_id = {
+                item.obligation_id: item
+                for item in build_requirement_comparisons(case)
+            }
+            labels = [
+                present_obligation(item.obligation_id).display_plain
+                for item in unresolved
+            ]
+            if len(labels) == 1:
+                material_reason = f"“{labels[0]}”"
+            else:
+                material_reason = "“" + "、".join(labels) + "”"
+            material_statuses = {
+                comparison_by_id[item.obligation_id].material_status
+                for item in unresolved
+                if item.obligation_id in comparison_by_id
+            }
+            if "stale" in material_statuses:
+                material_reason += "仍需要更新"
+            elif "invalid" in material_statuses:
+                material_reason += "当前无效"
+            else:
+                material_reason += "尚未提供"
+            participant_roles = (
+                ["accountable_human"]
+                if all(item.type == "human_attestation" for item in unresolved)
+                else ["contributor", "contributor_agent"]
+            )
             return (
-                "这些项目的材料或负责人确认尚未满足，当前不能核验："
-                + ", ".join(unresolved)
+                "当前还不能进行维护者检查。"
+                f"原因：{material_reason}。"
+                "当前可以继续处理的角色："
+                + format_presented_terms(
+                    participant_roles,
+                    present_role,
+                )
+                + "。"
             )
         independent = "O-INDEPENDENT-REVIEW" in requested
         if independent and actor.role != "maintainer":
-            return "独立检查要求必须由 maintainer 角色执行。"
+            return "独立维护者检查必须由人类维护者执行。"
         source_actors = {item.source_actor for item in case.evidence} | {
             item.actor for item in case.attestations
         }
         if independent and actor.actor in source_actors:
             return "独立检查要求执行者与材料或确认记录的提供者分离。"
     if action == "reject_evidence" and not case.evidence:
-        return "当前没有可引用的 evidence record。"
+        return "当前没有可引用的材料记录。"
     if action == "invalidate_attestation" and not any(
         item.status == "confirmed" for item in case.attestations
     ):
@@ -279,11 +320,11 @@ def _domain_unavailability(
         item.code == "policy_conflict" and item.status == "open"
         for item in case.findings
     ):
-        return "当前没有待解决的 policy_conflict finding。"
+        return "当前没有待解决的项目规则冲突记录。"
     if action == "resubmit" and not any(
         item.status == "open" for item in case.repair_requests
     ):
-        return "当前没有开放的 repair request。"
+        return "当前没有待处理的补充或修改请求。"
     if action == "authorized_override":
         open_findings = [
             item for item in case.findings if item.status == "open"
@@ -304,12 +345,16 @@ def _domain_unavailability(
             for item in case.obligations
         )
         if not candidates:
-            return "当前没有明确的 obligation 或 finding 可供覆盖。"
+            return "当前没有明确的项目要求或问题记录可供覆盖。"
         outside = sorted(set(scope) - eligible_obligations)
         if outside:
             return (
                 "所选要求不属于当前可覆盖的开放异常范围："
-                + ", ".join(outside)
+                + "、".join(
+                    present_obligation(item).display_plain
+                    for item in outside
+                )
+                + "。"
             )
     if action == "confirm_attestation":
         unresolved_evidence = [
@@ -335,7 +380,7 @@ def _authority_reason(
         return None
     action = definition.action
     if actor.role not in config.roles:
-        return f"未知角色 {actor.role}，后端不会授权该操作。"
+        return "当前角色未被项目规则识别，后端不会授权该操作。"
     if action not in config.permissions.get(actor.role, set()):
         authorized_roles = sorted(
             role
@@ -343,18 +388,27 @@ def _authority_reason(
             if action in actions
         )
         suffix = (
-            f" 可执行角色：{', '.join(authorized_roles)}。"
+            "可以执行这一步的角色："
+            + format_presented_terms(authorized_roles, present_role)
+            + "。"
             if authorized_roles
             else ""
         )
-        return f"当前角色没有 {action} 权限。{suffix}".strip()
+        action_label = present_action(action).display_plain
+        return f"当前角色没有“{action_label}”的权限。{suffix}".strip()
     transition = _transition_definition(config, case, action)
     if transition is None:
-        return f"操作 {action} 不能从当前状态 {case.state} 执行。"
+        return (
+            f"当前处于“{present_state(case.state).display_plain}”，"
+            f"还不能执行“{present_action(action).display_plain}”。"
+        )
     if actor.role not in transition["roles"]:
         return (
-            f"当前角色不能从 {case.state} 执行 {action}；"
-            f"允许角色：{', '.join(transition['roles'])}。"
+            f"当前角色不能在“{present_state(case.state).display_plain}”"
+            f"执行“{present_action(action).display_plain}”；"
+            "可以执行这一步的角色："
+            + format_presented_terms(transition["roles"], present_role)
+            + "。"
         )
     return _domain_unavailability(case, definition, actor, scope)
 
@@ -576,11 +630,7 @@ def _scope_error(
     known = {item.obligation_id for item in case.obligations}
     unknown = sorted(supplied - known)
     if unknown:
-        return (
-            "操作范围包含当前案例不存在的要求："
-            + ", ".join(unknown)
-            + "。"
-        )
+        return "操作范围包含当前案例不存在的项目要求；具体标识见技术详情。"
     if action == "resubmit" and supplied:
         open_scope = {
             obligation_id
@@ -590,11 +640,7 @@ def _scope_error(
         }
         outside = sorted(supplied - open_scope)
         if outside:
-            return (
-                "补交范围不属于当前开放 repair request："
-                + ", ".join(outside)
-                + "。"
-            )
+            return "补交范围不属于当前待处理的补充或修改请求。"
     return None
 
 
@@ -869,7 +915,7 @@ def preview_reviewer_action(
         (item for item in ACTION_DEFINITIONS if item.action == action),
         _ActionDefinition(
             action,
-            action,
+            present_action(action).display_plain,
             "未知操作。",
             "不会执行。",
         ),
@@ -1205,12 +1251,24 @@ def preview_reviewer_action(
     if not final_acceptance_recorded:
         next_steps.append("这不等于代码已经被项目接受。")
 
+    requested_obligation_ids = parameters.get("obligation_ids", []) or []
+    if isinstance(requested_obligation_ids, str):
+        requested_obligation_ids = [requested_obligation_ids]
     technical_details = {
         "operation": action,
+        "current_role": normalized.role,
+        "required_roles": sorted(
+            role
+            for role, actions in policy.permissions.items()
+            if action in actions
+        ),
         "source_state": case.state,
         "target_state": target_state,
         "effects": [item.to_dict() for item in effects],
         "affected_obligation_ids": scope,
+        "requested_obligation_ids": list(
+            dict.fromkeys(requested_obligation_ids)
+        ),
         "retained_evidence_ids": retained_evidence,
         "invalidated_attestation_ids": invalidated_attestations,
         "invalidated_evidence_ids": invalidated_evidence,
