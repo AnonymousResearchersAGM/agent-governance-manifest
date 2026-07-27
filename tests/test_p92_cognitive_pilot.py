@@ -362,7 +362,10 @@ def test_baseline_hash_mismatch_is_rejected(tmp_path):
         path
         for path in (package / "baseline").rglob("case.yml")
     )
-    target.write_text(target.read_text(encoding="utf-8") + "# changed\n")
+    target.write_text(
+        target.read_text(encoding="utf-8") + "# changed\n",
+        encoding="utf-8",
+    )
     with pytest.raises(RuntimeError, match="baseline hash mismatch"):
         verify_baseline_manifest(package)
 

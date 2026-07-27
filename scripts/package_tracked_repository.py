@@ -38,10 +38,16 @@ def _git(*arguments: str) -> str:
 
 
 def tracked_files(ref: str) -> tuple[str, ...]:
+    completed = subprocess.run(
+        ["git", "ls-tree", "-rz", "--name-only", ref],
+        cwd=REPOSITORY_ROOT,
+        check=True,
+        capture_output=True,
+    )
     return tuple(
-        line
-        for line in _git("ls-tree", "-r", "--name-only", ref).splitlines()
-        if line
+        name.decode("utf-8")
+        for name in completed.stdout.split(b"\x00")
+        if name
     )
 
 
