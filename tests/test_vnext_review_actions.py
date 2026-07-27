@@ -20,6 +20,7 @@ sys.path.insert(0, str(ROOT / "src"))
 sys.path.insert(0, str(ROOT / "scripts"))
 
 from agm.vnext.briefing.actions import (  # noqa: E402
+    DraftAssessment,
     PreviewTokenRegistry,
     ReviewDraftStore,
     compile_contextual_actions,
@@ -30,6 +31,7 @@ from agm.vnext.briefing.actions import (  # noqa: E402
     preview_review_submission,
     render_final_decision_html,
     render_interactive_review_html,
+    render_review_preview_html,
 )
 from agm.vnext.briefing.actions.server import (  # noqa: E402
     _handler_class,
@@ -956,7 +958,143 @@ def test_review_and_final_decision_are_separate(tmp_path):
             csrf_token="csrf",
         )
         assert "最终人类决定" in final_html
-        assert "接受贡献" in final_html
+        assert "接受本次贡献" in final_html
+
+
+def test_draft_banner_matches_real_interaction_state(tmp_path):
+    with demo_service(
+        tmp_path, "03_scoped_repair"
+    ) as (service, case_id):
+        view = action_view(service, case_id)
+        empty = render_interactive_review_html(view)
+        assert "尚未选择处理结果" in empty
+        assert "你的选择尚未提交" not in empty
+
+        store = ReviewDraftStore(service.storage)
+        draft = store.save(
+            action_view=view,
+            selections=all_sufficient(view),
+        )
+        selected = render_interactive_review_html(view, draft=draft)
+        assert "你的选择尚未提交" in selected
+
+        preview = preview_review_submission(
+            service=service,
+            actor_context=HUMAN,
+            review_draft=draft,
+            token_registry=PreviewTokenRegistry(
+                token_factory=lambda: "banner-preview"
+            ),
+        )
+        previewed = render_review_preview_html(
+            preview,
+            csrf_token="csrf",
+        )
+        assert "预览完成，尚未正式提交" in previewed
+
+        stale = render_interactive_review_html(
+            view,
+            draft=draft,
+            assessment=DraftAssessment(
+                stale=True,
+                complete=False,
+                reasons=("贡献版本已经变化。",),
+                missing_judgment_ids=(),
+                changed_judgment_ids=(),
+            ),
+        )
+        assert "贡献或规则已经变化，之前的选择已失效" in stale
+
+        submitted = render_interactive_review_html(
+            view,
+            draft=draft,
+            draft_status="submitted",
+        )
+        assert '<section class="draft-banner' not in submitted
+        participant = submitted.split("<details>", 1)[0]
+        assert "尚未选择处理结果" not in participant
+        assert "你的选择尚未提交" not in participant
+        assert "预览完成，尚未正式提交" not in participant
+
+
+def test_no_task_or_no_authority_pages_have_no_draft_banner(tmp_path):
+    for scenario in (
+        "01_multi_risk_missing",
+        "04_unauthorized_agent_verification",
+        "05_lightweight_low_risk",
+        "07_policy_migration_warning",
+        "08_human_final_decision_closure",
+    ):
+        with demo_service(tmp_path, scenario) as (service, case_id):
+            rendered = render_interactive_review_html(
+                action_view(service, case_id)
+            ).split("<details>", 1)[0]
+            assert "尚未选择处理结果" not in rendered
+            assert "你的选择尚未提交" not in rendered
+
+    with demo_service(
+        tmp_path, "03_scoped_repair"
+    ) as (service, case_id):
+        unauthorized = action_view(
+            service,
+            case_id,
+            ActorContext("reviewer-agent", "maintainer", False),
+        )
+        rendered = render_interactive_review_html(
+            unauthorized
+        ).split("<details>", 1)[0]
+        assert "尚未选择处理结果" not in rendered
+        assert "你的选择尚未提交" not in rendered
+
+
+def test_final_decision_participant_surface_uses_plain_language(tmp_path):
+    with demo_service(
+        tmp_path, "03_scoped_repair"
+    ) as (service, case_id):
+        make_ready(service, case_id)
+        case = service.storage.load_case(case_id)
+        brief = service.review_brief(
+            case_id,
+            actor=HUMAN.actor,
+            role=HUMAN.role,
+        )
+        view = compile_final_decision_view(
+            review_brief=brief,
+            governance_case=case,
+            actor_context=HUMAN,
+            policy_config=service.config,
+        )
+        rendered = render_final_decision_html(view)
+        participant = rendered.split("<details>", 1)[0]
+        required = (
+            "最终人类决定",
+            "治理材料和维护者检查已经完成",
+            "接受本次贡献",
+            "拒绝本次贡献",
+            "要求修改后重新决定",
+        )
+        for text in required:
+            assert text in participant
+        forbidden = (
+            "actor",
+            "canonical maintainer",
+            "authority-controlled",
+            "finding",
+            "verification operation",
+            "final-decision operation",
+            "closure operation",
+            "transition",
+            "obligation",
+            "compiler",
+            "CSRF",
+            "preview token",
+            "live_actions_enabled",
+        )
+        lowered = participant.lower()
+        for text in forbidden:
+            assert text.lower() not in lowered
+        assert "<details>" in rendered
+        assert "<details open" not in rendered
 
 
 def test_final_decision_has_independent_preview_and_authority(tmp_path):

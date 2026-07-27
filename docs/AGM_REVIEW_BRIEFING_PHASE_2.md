@@ -120,10 +120,16 @@ performs only the legal scoped repair and records every submitted selection
 in the append-only interaction submission audit; it does not invent a
 verification.
 
-The canonical state machine currently has no repair-request transition from
-`resubmitted`. In that state, supplement and material-risk options are shown
-unavailable with the stage limitation. Phase 2 does not add a transition,
-temporarily rewrite state, or verify material the human judged insufficient.
+The canonical state machine has no repair-request transition from
+`resubmitted`. Phase 2.0.1 treats that state as contribution-side preparation:
+the maintainer action view is empty and explains that the resubmission is
+being validated and submitted for review. Once the repaired material is
+complete and version-bound, the contribution-side workflow calls existing
+`prepare_case()` as `contributor_agent`. Its existing
+`submit_for_verification` operation moves the case to
+`awaiting_maintainer_verification`. At that point sufficient, supplement, and
+material-risk outcomes are all compiled against legal existing operations.
+No transition or precondition is added or changed.
 
 ## Final-decision separation
 
@@ -132,8 +138,11 @@ the canonical state is `ready_for_human_decision` or `overridden`, an
 authorized maintainer sees only **进入最终决定**.
 
 The separate **最终人类决定** page recompiles contribution, risk,
-requirements, verification, unresolved findings, final authority, and the
-acceptance boundary. It exposes only existing `decide_accept`,
+completed checks, unresolved blockers, final authority, and the acceptance
+boundary. Its participant-facing layer uses project language such as
+**接受本次贡献** and **要求修改后重新决定**; actor, operation, transition,
+obligation, fingerprint, and token details remain in the folded technical
+section. It exposes only existing `decide_accept`,
 `decide_reject`, `decide_request_changes`, and `decide_close` operations that
 are currently legal. Every decision requires its own reason, preview, token,
 and authority recheck. Review completion never auto-navigates into or executes
@@ -176,6 +185,14 @@ current time.
 read-only Review Briefing, and interactive Review Briefing outputs, compare
 all frozen hashes, run the two briefing test files independently, run the
 complete suite, and require a clean Git diff.
+
+Interactive outputs and their expected-hash manifest are explicitly LF in
+`.gitattributes`. `scripts/package_tracked_repository.py` uses `git archive`
+so a ZIP contains exact tracked blobs and excludes `.git`, `.agm-work`,
+virtual environments, caches, runtime tokens, screenshots, and untracked
+files. `scripts/verify_tracked_repository_package.py` extracts the ZIP into a
+fresh directory, runs all three hash checks before generation, regenerates all
+demo families, reruns the checks, and compares every tracked byte.
 
 ## Governance boundary
 

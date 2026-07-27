@@ -26,29 +26,25 @@ jobs:
       - name: Install test dependencies
         run: python -m pip install -r requirements.txt
 
+      - name: Check committed frozen artifacts before regeneration
+        run: |
+          python scripts/check_reviewer_guidance_demo_hashes.py
+          python scripts/check_review_briefing_demo_hashes.py
+          python scripts/check_review_interactive_demo_hashes.py
+
       - name: Generate deterministic research demos
         env:
           PYTHONPATH: src
-        run: python scripts/generate_reviewer_guidance_demos.py
+        run: |
+          python scripts/generate_reviewer_guidance_demos.py
+          python scripts/generate_review_briefing_demos.py
+          python scripts/generate_review_interactive_demos.py
 
-      - name: Check frozen cross-platform SHA-256 values
-        run: python scripts/check_reviewer_guidance_demo_hashes.py
-
-      - name: Generate deterministic Review Briefing demos
-        env:
-          PYTHONPATH: src
-        run: python scripts/generate_review_briefing_demos.py
-
-      - name: Check frozen Review Briefing SHA-256 values
-        run: python scripts/check_review_briefing_demo_hashes.py
-
-      - name: Generate deterministic interactive Review Briefing demos
-        env:
-          PYTHONPATH: src
-        run: python scripts/generate_review_interactive_demos.py
-
-      - name: Check frozen interactive Review Briefing SHA-256 values
-        run: python scripts/check_review_interactive_demo_hashes.py
+      - name: Check regenerated frozen SHA-256 values
+        run: |
+          python scripts/check_reviewer_guidance_demo_hashes.py
+          python scripts/check_review_briefing_demo_hashes.py
+          python scripts/check_review_interactive_demo_hashes.py
 
       - name: Verify Review Briefing test-file isolation
         run: python -m pytest -q tests/test_vnext_review_briefing.py
@@ -57,7 +53,17 @@ jobs:
         run: python -m pytest -q tests/test_vnext_review_briefing_phase_1_1.py
 
       - name: Run complete test suite
-        run: python -m pytest
+        run: python -m pytest -q
 
       - name: Confirm regeneration leaves tracked files unchanged
         run: git diff --exit-code
+
+      - name: Package exact tracked Git blobs
+        run: >-
+          python scripts/package_tracked_repository.py
+          --output .ci-tracked-repository.zip
+
+      - name: Verify fresh tracked ZIP before and after regeneration
+        run: >-
+          python scripts/verify_tracked_repository_package.py
+          .ci-tracked-repository.zip

@@ -355,9 +355,13 @@ accepts only that token and maps the plan to existing domain operations:
 - no review action calls `decide_*`.
 
 If the state machine has no semantically correct operation, the option is
-disabled. In particular, `resubmitted` supports verification but no
-repair-request transition. Phase 2 does not add one or route through a false
-verification.
+disabled. In particular, raw `resubmitted` supports contribution-side
+preparation but no maintainer repair request. It therefore exposes no
+maintainer judgment actions. After complete, bound material passes existing
+`prepare_case()`, the contribution-side `submit_for_verification` operation
+enters `awaiting_maintainer_verification`, where all three contextual outcomes
+have legal existing mappings. Phase 2.0.1 adds no transition and does not
+route through false verification.
 
 The final decision is a different compiler and page. It appears only in
 `ready_for_human_decision` or `overridden`, rechecks final authority, exposes
@@ -369,3 +373,14 @@ a session CSRF token, loopback host/origin, fixed case/actor context, safe
 content type and size, current fingerprints/provenance, and an unused,
 unexpired preview token. Submitted interaction records and rejected attempts
 are append-only runtime audit facts; they are not canonical `.agm` policy.
+
+Participant-facing draft banners are conditional: no-task and no-authority
+views show no unfinished-work warning; actionable items distinguish
+unselected, selected, previewed, stale, and submitted states. The separate
+final-decision main layer uses ordinary project language. Internal actor,
+operation, transition, obligation, fingerprint, and token data remains in a
+default-folded technical section.
+
+Frozen interactive outputs use LF on every platform. Repository delivery ZIPs
+are built from Git blob content rather than the Windows working tree and are
+verified in a clean extraction before any generator runs.

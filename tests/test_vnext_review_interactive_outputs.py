@@ -218,7 +218,9 @@ def test_pre_final_fixture_uses_distinct_final_decision_page(
     assert model["final_decision"]["available"] is True
     assert "最终人类决定" in rendered
     assert "维护者逐项检查" not in participant_text(rendered)
-    assert "静态演示" in participant_text(rendered)
+    assert "治理材料和维护者检查已经完成" in (
+        participant_text(rendered)
+    )
 
 
 def test_participant_surface_has_no_raw_governance_ids_or_fixture_actor(
@@ -254,8 +256,59 @@ def test_no_generic_action_menu_and_draft_state_is_explicit(
     scoped = participant_text(
         interactive_outputs[2]["03_scoped_repair"]
     )
-    assert "你的选择尚未提交" in scoped
+    assert "尚未选择处理结果" in scoped
     assert "检查不等于最终接受" in scoped
+
+
+def test_no_task_scenarios_do_not_show_draft_banner(
+    interactive_outputs,
+):
+    for scenario in (
+        "01_multi_risk_missing",
+        "02_material_partial_invalidation",
+        "04_unauthorized_agent_verification",
+        "05_lightweight_low_risk",
+        "07_policy_migration_warning",
+        "08_human_final_decision_closure",
+    ):
+        visible = participant_text(interactive_outputs[2][scenario])
+        assert "尚未选择处理结果" not in visible
+        assert "你的选择尚未提交" not in visible
+
+
+def test_final_decision_static_surface_has_no_internal_terms(
+    interactive_outputs,
+):
+    visible = participant_text(
+        interactive_outputs[2]["09_pre_final_decision"]
+    )
+    required = (
+        "最终人类决定",
+        "治理材料和维护者检查已经完成",
+        "接受本次贡献",
+        "拒绝本次贡献",
+        "要求修改后重新决定",
+    )
+    forbidden = (
+        "actor",
+        "canonical maintainer",
+        "authority-controlled",
+        "finding",
+        "verification operation",
+        "final-decision operation",
+        "closure operation",
+        "transition",
+        "obligation",
+        "compiler",
+        "CSRF",
+        "preview token",
+        "live_actions_enabled",
+    )
+    for text in required:
+        assert text in visible
+    lowered = visible.lower()
+    for text in forbidden:
+        assert text.lower() not in lowered
 
 
 def test_technical_details_are_folded_and_mobile_css_is_present(

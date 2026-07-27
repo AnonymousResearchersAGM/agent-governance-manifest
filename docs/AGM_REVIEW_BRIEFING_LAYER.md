@@ -341,6 +341,13 @@ and Ubuntu. Fixture prose is natural participant language; generator names,
 actor IDs, internal states, and other research identifiers remain only in
 technical details.
 
+Phase 2.0.1 additionally freezes interactive JSON, HTML, manifests, and the
+interactive hash manifest as LF through `.gitattributes`. The tracked
+repository ZIP is created from Git blobs with
+`scripts/package_tracked_repository.py`, never from platform-converted
+working-tree bytes. A fresh extraction must pass all three raw-byte hash
+checks before regeneration and remain content-identical after regeneration.
+
 ## 13. Remaining limitations
 
 - Path classification does not parse code semantics.
@@ -349,8 +356,12 @@ technical details.
 - Identity and truthfulness require external systems.
 - Normal code review remains outside automatic AGM checks.
 - The canonical state machine has no `request_repair` transition from
-  `resubmitted`. Phase 2 disables supplement/material-risk outcomes at that
-  stage instead of inventing a transition or falsely verifying material.
+  `resubmitted`. A raw resubmission therefore remains contribution-side and
+  exposes no maintainer actions. After complete bound material is validated,
+  the contribution-side workflow calls existing `prepare_case()`, whose
+  existing `submit_for_verification` transition enters
+  `awaiting_maintainer_verification`. Only then are all legal review outcomes
+  compiled.
 - In a mixed sufficient/repair batch, the adapter executes only scoped repair.
   Sufficient selections remain in append-only interaction audit; it does not
   fabricate a maintainer verification transition.

@@ -863,6 +863,16 @@ evidence shall remain valid according to existing scoped-repair semantics.
 Where no semantically correct existing transition exists, the option shall be
 unavailable; the presentation shall not simulate success.
 
+A raw `resubmitted` case shall remain contribution-side and shall not compile
+maintainer judgment actions. When its repaired evidence is complete,
+structurally valid, and current-version-bound, the contribution-side workflow
+shall call existing `prepare_case()` with a role authorized for
+`submit_for_verification`. Only the resulting
+`awaiting_maintainer_verification` state may enable sufficient, supplement,
+and material-risk options. The transition history shall remain append-only and
+shall record actor, role, source, target, fingerprints, policy snapshot, time,
+and provenance through existing records.
+
 ### 23.4 Review/final-decision separation
 
 The review page shall contain only item decisions, draft controls, review
@@ -875,6 +885,13 @@ verification, unresolved findings, final authority, and acceptance boundary.
 Each supported final operation shall require its own reason, preview,
 authority check, and one-time token. Verification shall not equal acceptance;
 acceptance shall not be presented as merge.
+
+The participant-visible final-decision layer shall use ordinary project
+language and shall not display actor IDs, role IDs, canonical-role jargon,
+findings, verification/final/closure operation names, transitions,
+obligations, evidence IDs, policy fingerprints, compiler names, CSRF values,
+preview/session tokens, or static-mode flags. Those details may appear only in
+a default-folded technical section.
 
 ### 23.5 Local service security and audit
 
@@ -896,6 +913,14 @@ Static Phase 2 outputs shall set `live_actions_enabled=false` and contain no
 runtime CSRF token, preview token, random session ID, or current time.
 Windows and Ubuntu CI shall regenerate and hash-check all eight preserved
 scenarios plus one deterministic pre-final-decision fixture.
+
+Interactive outputs, their manifest, and their expected SHA-256 manifest shall
+be stored as raw UTF-8/LF bytes. Hash checks shall compare original bytes and
+shall not normalize line endings. A tracked repository ZIP shall be generated
+from Git blobs, contain exactly the tracked-file set, and exclude repository
+metadata, `.agm-work`, environments, caches, screenshots, untracked files,
+and runtime secrets. A fresh extraction shall pass all three hash families
+before regeneration and remain byte-identical after regeneration.
 
 The local CLI can enforce canonical role, permission, stage, actor binding,
 and separation from recorded source actors. Without an external identity
