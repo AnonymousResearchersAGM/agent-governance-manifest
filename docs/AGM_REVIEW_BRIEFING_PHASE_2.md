@@ -2,6 +2,8 @@
 
 Status: implementation evidence prepared; `pending_human_review`
 
+Phase 2.1 adds a compiled PR diagnostic projection and sidecar-only evidence packages. It does not alter lifecycle operations, authority, final decision semantics, or canonical policy.
+
 ## Purpose
 
 Phase 2 turns the read-only Human-Work Compiler into a contextual,

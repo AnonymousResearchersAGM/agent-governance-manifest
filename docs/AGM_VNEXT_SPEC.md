@@ -927,3 +927,5 @@ and separation from recorded source actors. Without an external identity
 provider it cannot prove that the local actor assertion belongs to the real
 human. This limitation shall be documented and shall not weaken domain
 authorization.
+
+Phase 2.1 PR diagnostics are a read-only projection of compiled state. They cannot modify code, execute `git merge`, approve or merge a hosted pull request, or claim hosted status without adapter evidence. Sidecar evidence packages remain outside tracked source.
