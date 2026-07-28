@@ -49,14 +49,14 @@ OPTION_DEFINITIONS = (
 FINAL_DEFINITIONS = (
     (
         "accept",
-        "接受本次贡献",
-        "项目正式接受本次贡献。",
+        "记录 AGM 建议：可以接受",
+        "记录 AGM 的建议接受结论；不会批准或合并平台 PR。",
         "decide_accept",
     ),
     (
         "reject",
-        "拒绝本次贡献",
-        "项目不接受本次贡献，并记录拒绝原因。",
+        "记录 AGM 建议：不接受",
+        "记录 AGM 的不接受建议；不会改变平台 PR 状态。",
         "decide_reject",
     ),
     (

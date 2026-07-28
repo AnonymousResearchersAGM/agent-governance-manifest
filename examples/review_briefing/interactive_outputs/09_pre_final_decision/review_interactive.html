@@ -46,8 +46,8 @@ header,section,details{padding:18px}.context{grid-template-columns:1fr}
 pre{font-size:.78rem}}
 </style></head>
 <body><main><header class="final">
-<h1>最终人类决定</h1>
-<p>请根据本次贡献、风险和已完成检查作出项目决定</p></header><section class="status"><h2>现在需要你作出最终决定</h2><p>治理材料和维护者检查已经完成。</p><p>现在需要由具有最终决定权限的人类维护者决定，本次贡献是否可以被项目接受。</p><p class="boundary">完成本页决定前，项目尚未接受本次贡献；接受后仍需按项目流程完成代码合并。</p></section><section><h2>已完成</h2><ul><li>✓ 项目要求的材料已经齐备。</li><li>✓ 负责人已经确认当前版本，维护者已经完成必要检查。</li><li>✓ 当前没有尚未解决的阻断问题。</li></ul></section><section><h2>本次贡献</h2><p>贡献者补充了智能体行动与委派说明；本次补充未修改代码、测试结果或安全影响说明。</p><p>风险等级：低。主要风险：docs/guide.md 触发了“文档与说明”风险范围。</p></section><div class="options"><label class="option"><input type="radio" name="decision_id" value="accept" disabled><strong>接受本次贡献</strong><p>项目正式接受本次贡献。</p></label><label class="option"><input type="radio" name="decision_id" value="reject" disabled><strong>拒绝本次贡献</strong><p>项目不接受本次贡献，并记录拒绝原因。</p></label><label class="option"><input type="radio" name="decision_id" value="request_changes" disabled><strong>要求修改后重新决定</strong><p>本次不作最终接受决定，贡献者需要根据意见修改后重新提交。</p></label><label class="option"><input type="radio" name="decision_id" value="close" disabled><strong>关闭本次审查</strong><p>结束本次治理案例并归档当前决定。</p></label></div><section class="unavailable">静态演示页面仅用于视觉复核，不能在此提交最终选择。</section><details><summary>治理过程与技术详情</summary><pre>{
+<h1>记录 AGM 最终审查建议</h1>
+<p>不会批准或合并代码托管平台 PR</p></header><section class="boundary"><strong>当前为 AGM 本地审查工作台。</strong> 这里的操作只记录 AGM 审查结果；不会修改代码，不会执行 git merge，也不会批准或合并 GitHub/GitLab 上的 PR。</section><section class="status"><h2>记录 AGM 最终审查建议</h2><p>治理材料和维护者检查已经完成。</p><p>现在需要由具有最终决定权限的人类维护者决定，本次贡献是否可以被项目接受。</p><p class="boundary">完成本页决定前，项目尚未接受本次贡献；接受后仍需按项目流程完成代码合并。</p></section><section><h2>AGM 审查结论</h2><p>该结论只记录 AGM 审查建议。</p><h2>代码托管平台 PR 状态</h2><p>未连接，未批准，未合并</p></section><section><h2>已完成</h2><ul><li>✓ 项目要求的材料已经齐备。</li><li>✓ 负责人已经确认当前版本，维护者已经完成必要检查。</li><li>✓ 当前没有尚未解决的阻断问题。</li></ul></section><section><h2>本次贡献</h2><p>贡献者补充了智能体行动与委派说明；本次补充未修改代码、测试结果或安全影响说明。</p><p>风险等级：低。主要风险：docs/guide.md 触发了“文档与说明”风险范围。</p></section><div class="options"><label class="option"><input type="radio" name="decision_id" value="accept" disabled><strong>记录 AGM 建议：可以接受</strong><p>记录 AGM 的建议接受结论；不会批准或合并平台 PR。</p></label><label class="option"><input type="radio" name="decision_id" value="reject" disabled><strong>记录 AGM 建议：不接受</strong><p>记录 AGM 的不接受建议；不会改变平台 PR 状态。</p></label><label class="option"><input type="radio" name="decision_id" value="request_changes" disabled><strong>要求修改后重新决定</strong><p>本次不作最终接受决定，贡献者需要根据意见修改后重新提交。</p></label><label class="option"><input type="radio" name="decision_id" value="close" disabled><strong>关闭本次审查</strong><p>结束本次治理案例并归档当前决定。</p></label></div><section class="unavailable">静态演示页面仅用于视觉复核，不能在此提交最终选择。</section><details><summary>治理过程与技术详情</summary><pre>{
   &quot;case_id&quot;: &quot;scoped-repair&quot;,
   &quot;actor_id&quot;: &quot;human-maintainer&quot;,
   &quot;role&quot;: &quot;maintainer&quot;,
@@ -62,8 +62,8 @@ pre{font-size:.78rem}}
   &quot;options&quot;: [
     {
       &quot;decision_id&quot;: &quot;accept&quot;,
-      &quot;display_label&quot;: &quot;接受本次贡献&quot;,
-      &quot;plain_consequence&quot;: &quot;项目正式接受本次贡献。&quot;,
+      &quot;display_label&quot;: &quot;记录 AGM 建议：可以接受&quot;,
+      &quot;plain_consequence&quot;: &quot;记录 AGM 的建议接受结论；不会批准或合并平台 PR。&quot;,
       &quot;requires_reason&quot;: true,
       &quot;authorized&quot;: true,
       &quot;unavailable_reason&quot;: null,
@@ -71,8 +71,8 @@ pre{font-size:.78rem}}
     },
     {
       &quot;decision_id&quot;: &quot;reject&quot;,
-      &quot;display_label&quot;: &quot;拒绝本次贡献&quot;,
-      &quot;plain_consequence&quot;: &quot;项目不接受本次贡献，并记录拒绝原因。&quot;,
+      &quot;display_label&quot;: &quot;记录 AGM 建议：不接受&quot;,
+      &quot;plain_consequence&quot;: &quot;记录 AGM 的不接受建议；不会改变平台 PR 状态。&quot;,
       &quot;requires_reason&quot;: true,
       &quot;authorized&quot;: true,
       &quot;unavailable_reason&quot;: null,

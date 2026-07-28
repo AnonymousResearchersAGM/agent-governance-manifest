@@ -252,6 +252,7 @@ def render_interactive_review_html(
         else ""
     )
     body = (
+        '<section class="boundary"><strong>当前为 AGM 本地审查工作台。</strong> 这里的操作只记录 AGM 审查结果；不会修改代码，不会执行 git merge，也不会批准或合并 GitHub/GitLab 上的 PR。</section>'
         f'<section class="status"><h2>{html.escape(str(next_step.get("display_title", "当前状态")))}</h2>'
         f'<p>{html.escape(str(next_step.get("plain_explanation", "")))}</p>'
         f'<p><strong>当前责任方：</strong>{html.escape(str(next_step.get("responsible_party", "")))}</p>'
@@ -367,11 +368,12 @@ def render_final_decision_html(
         json.dumps(view.to_dict(), ensure_ascii=False, indent=2)
     )
     body = (
-        '<section class="status"><h2>现在需要你作出最终决定</h2>'
+        '<section class="boundary"><strong>当前为 AGM 本地审查工作台。</strong> 这里的操作只记录 AGM 审查结果；不会修改代码，不会执行 git merge，也不会批准或合并 GitHub/GitLab 上的 PR。</section>'
+        '<section class="status"><h2>记录 AGM 最终审查建议</h2>'
         '<p>治理材料和维护者检查已经完成。</p>'
         f"<p>{html.escape(view.final_authority_summary)}</p>"
         f'<p class="boundary">{html.escape(view.acceptance_boundary)}</p>'
-        '</section><section><h2>已完成</h2>'
+        '</section><section><h2>AGM 审查结论</h2><p>该结论只记录 AGM 审查建议。</p><h2>代码托管平台 PR 状态</h2><p>未连接，未批准，未合并</p></section><section><h2>已完成</h2>'
         f"<ul>{completed_html}</ul></section>"
         '<section><h2>本次贡献</h2>'
         f"<p>{html.escape(view.contribution_summary)}</p>"
@@ -381,8 +383,8 @@ def render_final_decision_html(
     )
     return _page(
         title="AGM Final Human Decision",
-        header_title="最终人类决定",
-        header_subtitle="请根据本次贡献、风险和已完成检查作出项目决定",
+        header_title="记录 AGM 最终审查建议",
+        header_subtitle="不会批准或合并代码托管平台 PR",
         body=body,
         final=True,
     )

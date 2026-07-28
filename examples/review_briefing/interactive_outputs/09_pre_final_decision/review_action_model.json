@@ -50,8 +50,8 @@
     "options": [
       {
         "decision_id": "accept",
-        "display_label": "接受本次贡献",
-        "plain_consequence": "项目正式接受本次贡献。",
+        "display_label": "记录 AGM 建议：可以接受",
+        "plain_consequence": "记录 AGM 的建议接受结论；不会批准或合并平台 PR。",
         "requires_reason": true,
         "authorized": true,
         "unavailable_reason": null,
@@ -59,8 +59,8 @@
       },
       {
         "decision_id": "reject",
-        "display_label": "拒绝本次贡献",
-        "plain_consequence": "项目不接受本次贡献，并记录拒绝原因。",
+        "display_label": "记录 AGM 建议：不接受",
+        "plain_consequence": "记录 AGM 的不接受建议；不会改变平台 PR 状态。",
         "requires_reason": true,
         "authorized": true,
         "unavailable_reason": null,
