@@ -7,6 +7,10 @@ already-resolved governance case into the current conclusion, owner, blocking
 work, irreducibly human judgment, and supporting explanation that an ordinary
 maintainer can use without first learning the AGM lifecycle.
 
+## Phase 2.1 PR-native diagnostic projection
+
+`src/agm/vnext/pr_diagnostic/` is an additional read-only projection of the same compiled case. It does not perform independent matching or create cues. It presents a concrete PR, diffs when supplied, tests, materials, and clear local-operation boundaries; see `AGM_PR_NATIVE_DIAGNOSTIC_PHASE_2_1.md`.
+
 The Phase 1.1 `brief` command remains read-only. Phase 2 adds a separate
 interactive `review` command. It compiles each existing
 `HumanJudgmentItem` into item-bound business outcomes, actor/case/version-bound

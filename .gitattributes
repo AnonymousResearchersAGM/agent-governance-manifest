@@ -5,3 +5,5 @@ examples/review_briefing/outputs/** text eol=lf
 examples/review_briefing/expected_sha256.json text eol=lf
 examples/review_briefing/interactive_outputs/** text eol=lf
 examples/review_briefing/interactive_expected_sha256.json text eol=lf
+examples/pr_native_diagnostic/outputs/** text eol=lf
+examples/pr_native_diagnostic/outputs/expected_sha256.json text eol=lf

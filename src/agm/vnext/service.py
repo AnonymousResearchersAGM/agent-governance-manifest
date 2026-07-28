@@ -1307,6 +1307,24 @@ class GovernanceService:
             actor_context=ActorContext(actor=actor, role=role),
         )
 
+    def pr_diagnosis(
+        self,
+        case_id: str,
+        *,
+        contribution: Any = None,
+    ):
+        """Return a read-only PR-native projection of already compiled state.
+
+        This method deliberately has no host-platform adapter and cannot alter
+        source files, a Git ref, or a pull request.
+        """
+        from .pr_diagnostic import compile_pr_diagnostic
+
+        return compile_pr_diagnostic(
+            governance_case=self.storage.load_case(case_id),
+            contribution=contribution,
+        )
+
     def preview_reviewer_action(
         self,
         case_id: str,

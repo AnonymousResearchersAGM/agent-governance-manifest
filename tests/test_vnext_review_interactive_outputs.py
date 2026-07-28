@@ -216,7 +216,7 @@ def test_pre_final_fixture_uses_distinct_final_decision_page(
         "final_decision_entry_available"
     ] is True
     assert model["final_decision"]["available"] is True
-    assert "最终人类决定" in rendered
+    assert "记录 AGM 最终审查建议" in rendered
     assert "维护者逐项检查" not in participant_text(rendered)
     assert "治理材料和维护者检查已经完成" in (
         participant_text(rendered)
@@ -283,10 +283,10 @@ def test_final_decision_static_surface_has_no_internal_terms(
         interactive_outputs[2]["09_pre_final_decision"]
     )
     required = (
-        "最终人类决定",
+            "记录 AGM 最终审查建议",
         "治理材料和维护者检查已经完成",
-        "接受本次贡献",
-        "拒绝本次贡献",
+            "记录 AGM 最终审查建议",
+            "记录 AGM 建议：不接受",
         "要求修改后重新决定",
     )
     forbidden = (

@@ -957,8 +957,8 @@ def test_review_and_final_decision_are_separate(tmp_path):
             final,
             csrf_token="csrf",
         )
-        assert "最终人类决定" in final_html
-        assert "接受本次贡献" in final_html
+        assert "记录 AGM 最终审查建议" in final_html
+        assert "记录 AGM 建议：可以接受" in final_html
 
 
 def test_draft_banner_matches_real_interaction_state(tmp_path):
@@ -1067,10 +1067,10 @@ def test_final_decision_participant_surface_uses_plain_language(tmp_path):
         rendered = render_final_decision_html(view)
         participant = rendered.split("<details>", 1)[0]
         required = (
-            "最终人类决定",
+            "记录 AGM 最终审查建议",
             "治理材料和维护者检查已经完成",
-            "接受本次贡献",
-            "拒绝本次贡献",
+            "记录 AGM 最终审查建议",
+            "记录 AGM 建议：不接受",
             "要求修改后重新决定",
         )
         for text in required:

@@ -15,6 +15,8 @@ and authority boundaries, binds evidence and human accountability to the
 actual change, and supports authorized verification, repair, final human
 decision, and auditable closure.
 
+Phase 2.1 adds `pr_diagnostic` as a second, PR-native projection of the same compiled case. The projection has no independent rule matching. Its evidence packages are runtime-only, digest-immutable sidecars.
+
 The four v0.1 observable domains—risk, evidence, accountability, and review
 gate—remain useful diagnostics. They are not the complete AGM ontology.
 
