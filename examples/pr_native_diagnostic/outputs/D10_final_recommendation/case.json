@@ -106,7 +106,7 @@
   ],
   "evidence": [
     {
-      "id": "sidecar-b5a032cbe47da6ca407e5978",
+      "id": "sidecar-3b4c3c4fa6c7b5c078391fad",
       "obligation_ids": [
         "O-SUMMARY"
       ],
@@ -116,7 +116,22 @@
       "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
       "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
       "evidence_type": "contribution_summary",
-      "value": "这是一份绑定当前版本的具体贡献材料。",
+      "value": {
+        "affected_components": [
+          "README.md"
+        ],
+        "artifact_type": "change_summary",
+        "behavioral_change": "文档安装示例更明确。",
+        "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
+        "head_commit_sha": "cccccccccccccccccccccccccccccccccccccccc",
+        "obligation_refs": [
+          "O-SUMMARY"
+        ],
+        "observed_at": "2026-07-26T00:00:00Z",
+        "schema_version": "agm.evidence_artifact/v1",
+        "source_tool": "deterministic-scenario",
+        "summary": "更新 README 的安装命令，并保留现有链接说明。"
+      },
       "command": null,
       "environment": null,
       "artifact_path": null,
@@ -124,7 +139,7 @@
       "observed_at": "2026-07-26T00:00:00Z",
       "expires_at": null,
       "source_actor": "sidecar-bridge",
-      "source_tool": null,
+      "source_tool": "deterministic-scenario",
       "retained_for_contribution_fingerprint": null,
       "retention_reason": null,
       "rejected_at": null,
@@ -134,7 +149,7 @@
       "invalid_reasons": []
     },
     {
-      "id": "sidecar-438e1d8c09dabd91669d7c38",
+      "id": "sidecar-25c139b8edfc8605384671ba",
       "obligation_ids": [
         "O-CHANGED-FILES"
       ],
@@ -144,7 +159,20 @@
       "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
       "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
       "evidence_type": "changed_files",
-      "value": "这是一份绑定当前版本的具体贡献材料。",
+      "value": {
+        "artifact_type": "changed_files",
+        "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
+        "files": [
+          "README.md"
+        ],
+        "head_commit_sha": "cccccccccccccccccccccccccccccccccccccccc",
+        "obligation_refs": [
+          "O-CHANGED-FILES"
+        ],
+        "observed_at": "2026-07-26T00:00:00Z",
+        "schema_version": "agm.evidence_artifact/v1",
+        "source_tool": "deterministic-scenario"
+      },
       "command": null,
       "environment": null,
       "artifact_path": null,
@@ -152,7 +180,7 @@
       "observed_at": "2026-07-26T00:00:00Z",
       "expires_at": null,
       "source_actor": "sidecar-bridge",
-      "source_tool": null,
+      "source_tool": "deterministic-scenario",
       "retained_for_contribution_fingerprint": null,
       "retention_reason": null,
       "rejected_at": null,
@@ -177,8 +205,8 @@
         "O-SUMMARY"
       ],
       "evidence_ids": [
-        "sidecar-438e1d8c09dabd91669d7c38",
-        "sidecar-b5a032cbe47da6ca407e5978"
+        "sidecar-25c139b8edfc8605384671ba",
+        "sidecar-3b4c3c4fa6c7b5c078391fad"
       ],
       "outcome": "verified",
       "reason": "已检查当前材料。",
@@ -212,8 +240,8 @@
       "O-SUMMARY": "verified"
     },
     "evidence_ids": [
-      "sidecar-438e1d8c09dabd91669d7c38",
-      "sidecar-b5a032cbe47da6ca407e5978"
+      "sidecar-25c139b8edfc8605384671ba",
+      "sidecar-3b4c3c4fa6c7b5c078391fad"
     ],
     "attestation_ids": [],
     "verification_ids": [
@@ -221,7 +249,7 @@
     ],
     "repair_request_ids": [],
     "unresolved_exception_ids": [],
-    "transition_log_hash": "f724d3417c64f6c2e3aa2ea12d16f695c5fa0b3f1d9891119b3ca7825719c51d"
+    "transition_log_hash": "7b3274ef8224ed1d743796ae46d32dfbf4b50b74c06d349f3ef4771052ffb13c"
   },
   "schema_version": "agm.governance_case/v0.2-dev"
 }

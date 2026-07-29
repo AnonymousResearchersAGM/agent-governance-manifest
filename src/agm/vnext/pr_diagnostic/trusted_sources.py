@@ -82,7 +82,9 @@ class TrustedDiagnosticEvidenceResolver:
         return TrustedDiagnosticEvidenceSet(current, historical, tuple(artifacts),
             next(iter(by_type.get("agent_activity", ())), None),
             next(iter(by_type.get("contribution_declaration", ())), None),
-            tuple(by_type.get("test_result", ())), tuple(by_type.get("diff", ())),
+            tuple(by_type.get("test_result", ())), tuple(
+                [*by_type.get("unified_diff", ()), *by_type.get("diff", ())]
+            ),
             confirmations, receipt,
             {"connected": False, "approval_state": "not_performed", "merge_state": "not_performed", "close_state": "not_performed", "verified": True})
 

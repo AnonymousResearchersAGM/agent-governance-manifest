@@ -238,7 +238,7 @@
   ],
   "evidence": [
     {
-      "id": "sidecar-90b1a59c8ee262f13a55ac07",
+      "id": "sidecar-e0f83dc8bde46cc3e0d4b87e",
       "obligation_ids": [
         "O-SUMMARY"
       ],
@@ -248,7 +248,22 @@
       "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
       "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
       "evidence_type": "contribution_summary",
-      "value": "这是一份绑定当前版本的具体贡献材料。",
+      "value": {
+        "affected_components": [
+          "demo_app/auth.py"
+        ],
+        "artifact_type": "change_summary",
+        "behavioral_change": "已撤销令牌现在会被明确拒绝。",
+        "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
+        "head_commit_sha": "cccccccccccccccccccccccccccccccccccccccc",
+        "obligation_refs": [
+          "O-SUMMARY"
+        ],
+        "observed_at": "2026-07-26T00:00:00Z",
+        "schema_version": "agm.evidence_artifact/v1",
+        "source_tool": "deterministic-scenario",
+        "summary": "在访问检查中拒绝已撤销令牌，再判断令牌是否仍然有效。"
+      },
       "command": null,
       "environment": null,
       "artifact_path": null,
@@ -256,7 +271,7 @@
       "observed_at": "2026-07-26T00:00:00Z",
       "expires_at": null,
       "source_actor": "sidecar-bridge",
-      "source_tool": null,
+      "source_tool": "deterministic-scenario",
       "retained_for_contribution_fingerprint": null,
       "retention_reason": null,
       "rejected_at": null,
@@ -266,7 +281,7 @@
       "invalid_reasons": []
     },
     {
-      "id": "sidecar-ea5f8001689a8905b14c9d9f",
+      "id": "sidecar-61361d28ae63cdf536d2b976",
       "obligation_ids": [
         "O-CHANGED-FILES"
       ],
@@ -276,7 +291,20 @@
       "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
       "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
       "evidence_type": "changed_files",
-      "value": "这是一份绑定当前版本的具体贡献材料。",
+      "value": {
+        "artifact_type": "changed_files",
+        "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
+        "files": [
+          "demo_app/auth.py"
+        ],
+        "head_commit_sha": "cccccccccccccccccccccccccccccccccccccccc",
+        "obligation_refs": [
+          "O-CHANGED-FILES"
+        ],
+        "observed_at": "2026-07-26T00:00:00Z",
+        "schema_version": "agm.evidence_artifact/v1",
+        "source_tool": "deterministic-scenario"
+      },
       "command": null,
       "environment": null,
       "artifact_path": null,
@@ -284,7 +312,7 @@
       "observed_at": "2026-07-26T00:00:00Z",
       "expires_at": null,
       "source_actor": "sidecar-bridge",
-      "source_tool": null,
+      "source_tool": "deterministic-scenario",
       "retained_for_contribution_fingerprint": null,
       "retention_reason": null,
       "rejected_at": null,
@@ -294,7 +322,7 @@
       "invalid_reasons": []
     },
     {
-      "id": "sidecar-030f1db23df324aa85a1da3a",
+      "id": "sidecar-3c84a7b8cf5b3ae51d4a3f37",
       "obligation_ids": [
         "O-RATIONALE"
       ],
@@ -304,7 +332,19 @@
       "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
       "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
       "evidence_type": "rationale",
-      "value": "这是一份绑定当前版本的具体贡献材料。",
+      "value": {
+        "artifact_type": "rationale",
+        "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
+        "head_commit_sha": "cccccccccccccccccccccccccccccccccccccccc",
+        "intended_outcome": "撤销后的访问稳定失败。",
+        "obligation_refs": [
+          "O-RATIONALE"
+        ],
+        "observed_at": "2026-07-26T00:00:00Z",
+        "reason": "避免已撤销令牌继续访问。",
+        "schema_version": "agm.evidence_artifact/v1",
+        "source_tool": "deterministic-scenario"
+      },
       "command": null,
       "environment": null,
       "artifact_path": null,
@@ -312,7 +352,7 @@
       "observed_at": "2026-07-26T00:00:00Z",
       "expires_at": null,
       "source_actor": "sidecar-bridge",
-      "source_tool": null,
+      "source_tool": "deterministic-scenario",
       "retained_for_contribution_fingerprint": null,
       "retention_reason": null,
       "rejected_at": null,
@@ -322,7 +362,7 @@
       "invalid_reasons": []
     },
     {
-      "id": "sidecar-cc0a9eb6327d839b49a26cad",
+      "id": "sidecar-628354d1da3033937d0b9864",
       "obligation_ids": [
         "O-LIMITATIONS"
       ],
@@ -332,7 +372,20 @@
       "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
       "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
       "evidence_type": "known_limitations",
-      "value": "这是一份绑定当前版本的具体贡献材料。",
+      "value": {
+        "artifact_type": "known_limitations",
+        "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
+        "declared_by": "demo contributor",
+        "head_commit_sha": "cccccccccccccccccccccccccccccccccccccccc",
+        "limitations": [],
+        "no_known_limitations": true,
+        "obligation_refs": [
+          "O-LIMITATIONS"
+        ],
+        "observed_at": "2026-07-26T00:00:00Z",
+        "schema_version": "agm.evidence_artifact/v1",
+        "source_tool": "deterministic-scenario"
+      },
       "command": null,
       "environment": null,
       "artifact_path": null,
@@ -340,7 +393,7 @@
       "observed_at": "2026-07-26T00:00:00Z",
       "expires_at": null,
       "source_actor": "sidecar-bridge",
-      "source_tool": null,
+      "source_tool": "deterministic-scenario",
       "retained_for_contribution_fingerprint": null,
       "retention_reason": null,
       "rejected_at": null,
@@ -350,7 +403,7 @@
       "invalid_reasons": []
     },
     {
-      "id": "sidecar-045ffa5418373c78a33b6cf9",
+      "id": "sidecar-daa17c511f682103ca0aa8b7",
       "obligation_ids": [
         "O-AUTH-IMPACT"
       ],
@@ -360,7 +413,27 @@
       "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
       "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
       "evidence_type": "security_auth_impact",
-      "value": "撤销令牌、会话刷新和权限变更后拒绝旧会话；未改变注册或密码重置。",
+      "value": {
+        "artifact_type": "impact_statement",
+        "compatibility_impact": {
+          "reason": "未改变令牌格式或调用接口。",
+          "status": "not_applicable"
+        },
+        "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
+        "data_impact": {
+          "reason": "不读取或迁移持久化数据。",
+          "status": "not_applicable"
+        },
+        "head_commit_sha": "cccccccccccccccccccccccccccccccccccccccc",
+        "obligation_refs": [
+          "O-AUTH-IMPACT"
+        ],
+        "observed_at": "2026-07-26T00:00:00Z",
+        "operational_impact": "部署后现有已撤销会话会立即失去访问能力。",
+        "schema_version": "agm.evidence_artifact/v1",
+        "security_impact": "已撤销令牌在访问检查中被拒绝。",
+        "source_tool": "deterministic-scenario"
+      },
       "command": null,
       "environment": null,
       "artifact_path": null,
@@ -368,7 +441,7 @@
       "observed_at": "2026-07-26T00:00:00Z",
       "expires_at": null,
       "source_actor": "sidecar-bridge",
-      "source_tool": null,
+      "source_tool": "deterministic-scenario",
       "retained_for_contribution_fingerprint": null,
       "retention_reason": null,
       "rejected_at": null,

@@ -125,7 +125,7 @@
   ],
   "evidence": [
     {
-      "id": "sidecar-776dde024e0504cb96669944",
+      "id": "sidecar-a60ad4ac27effee7b5218da5",
       "obligation_ids": [
         "O-SUMMARY"
       ],
@@ -135,7 +135,22 @@
       "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
       "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
       "evidence_type": "contribution_summary",
-      "value": "这是一份绑定当前版本的具体贡献材料。",
+      "value": {
+        "affected_components": [
+          "README.md"
+        ],
+        "artifact_type": "change_summary",
+        "behavioral_change": "文档安装示例更明确。",
+        "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
+        "head_commit_sha": "cccccccccccccccccccccccccccccccccccccccc",
+        "obligation_refs": [
+          "O-SUMMARY"
+        ],
+        "observed_at": "2026-07-26T00:00:00Z",
+        "schema_version": "agm.evidence_artifact/v1",
+        "source_tool": "deterministic-scenario",
+        "summary": "更新 README 的安装命令，并保留现有链接说明。"
+      },
       "command": null,
       "environment": null,
       "artifact_path": null,
@@ -143,7 +158,7 @@
       "observed_at": "2026-07-26T00:00:00Z",
       "expires_at": null,
       "source_actor": "sidecar-bridge",
-      "source_tool": null,
+      "source_tool": "deterministic-scenario",
       "retained_for_contribution_fingerprint": null,
       "retention_reason": null,
       "rejected_at": null,
@@ -153,7 +168,7 @@
       "invalid_reasons": []
     },
     {
-      "id": "sidecar-97ef8437c8a74b50c8e0cd9f",
+      "id": "sidecar-94fbcd05fb59e4459b0698b1",
       "obligation_ids": [
         "O-CHANGED-FILES"
       ],
@@ -163,7 +178,20 @@
       "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
       "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
       "evidence_type": "changed_files",
-      "value": "这是一份绑定当前版本的具体贡献材料。",
+      "value": {
+        "artifact_type": "changed_files",
+        "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
+        "files": [
+          "README.md"
+        ],
+        "head_commit_sha": "cccccccccccccccccccccccccccccccccccccccc",
+        "obligation_refs": [
+          "O-CHANGED-FILES"
+        ],
+        "observed_at": "2026-07-26T00:00:00Z",
+        "schema_version": "agm.evidence_artifact/v1",
+        "source_tool": "deterministic-scenario"
+      },
       "command": null,
       "environment": null,
       "artifact_path": null,
@@ -171,7 +199,7 @@
       "observed_at": "2026-07-26T00:00:00Z",
       "expires_at": null,
       "source_actor": "sidecar-bridge",
-      "source_tool": null,
+      "source_tool": "deterministic-scenario",
       "retained_for_contribution_fingerprint": null,
       "retention_reason": null,
       "rejected_at": null,
@@ -181,7 +209,7 @@
       "invalid_reasons": []
     },
     {
-      "id": "sidecar-9429b682a74ce5e63ef1d18f",
+      "id": "sidecar-631473affc8732eeb13d4be3",
       "obligation_ids": [
         "O-AGENT-SCOPE"
       ],
@@ -191,7 +219,12 @@
       "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
       "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
       "evidence_type": "agent_action_scope",
-      "value": "{\"agent_type\": \"编码助手\", \"task_summary\": \"修正 README 安装命令和失效链接\", \"files_modified\": [\"README.md\"], \"commands_executed\": [], \"tests_executed\": [], \"other_agents_or_tools_used\": false, \"tools_used\": [], \"activity_scope\": [\"README.md\"], \"network_access\": false}",
+      "value": {
+        "activity_scope": [
+          "README.md"
+        ],
+        "typed_source_validated": true
+      },
       "command": null,
       "environment": null,
       "artifact_path": null,
@@ -199,7 +232,7 @@
       "observed_at": "2026-07-26T00:00:00Z",
       "expires_at": null,
       "source_actor": "sidecar-bridge",
-      "source_tool": "deterministic-scenario",
+      "source_tool": "deterministic-agent-recorder",
       "retained_for_contribution_fingerprint": null,
       "retention_reason": null,
       "rejected_at": null,

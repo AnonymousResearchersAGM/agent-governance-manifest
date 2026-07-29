@@ -51,6 +51,7 @@ def verify_fresh_extract(
 ) -> dict[str, object]:
     archive_path = archive_path.resolve()
     members = verify_archive(archive_path, ref=ref)
+    scenario_consistency_valid = False
     with tempfile.TemporaryDirectory(
         prefix="agm-tracked-zip-verification-"
     ) as raw:
@@ -66,6 +67,17 @@ def verify_fresh_extract(
             _run(extracted, script)
         _run(extracted, "scripts/validate_pr_diagnostic_links.py")
         _run(extracted, "scripts/validate_pr_diagnostic_participant_terms.py")
+        consistency = (
+            extracted
+            / "scripts"
+            / "validate_pr_diagnostic_scenario_consistency.py"
+        )
+        if consistency.is_file():
+            _run(
+                extracted,
+                "scripts/validate_pr_diagnostic_scenario_consistency.py",
+            )
+            scenario_consistency_valid = True
         after = _snapshot(extracted, members)
         changed = sorted(
             name for name in members if before[name] != after[name]
@@ -89,6 +101,7 @@ def verify_fresh_extract(
         "hash_checks_after_generation": len(CHECKS),
         "fresh_demo_links_valid": True,
         "participant_term_scan_valid": True,
+        "scenario_consistency_valid": scenario_consistency_valid,
         "regeneration_content_stable": True,
     }
 

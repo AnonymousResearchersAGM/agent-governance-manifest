@@ -15,11 +15,16 @@ from generate_pr_diagnostic_demos import SCENARIOS,build_scenario
 
 def _case(tmp_path,path="demo_app/auth.py",profile="supervised_agent"):
  root=make_project(tmp_path,"p213");service=GovernanceService(root);case,_=service.open_case([path],requested_mode="declared_agent_mediated",actor="contributor",actor_role="contributor",case_id="p213",base_commit="a"*40,autonomy_profile=profile,timestamp=FIXED_TIME);return root,service,case
-def _package(root,case,artifacts):return SidecarEvidenceStore(root).write_package(case_id=case.id,contribution_fingerprint=case.contribution_fingerprint,policy_fingerprint=case.policy_snapshot.policy_fingerprint,producer="fixture",created_at=FIXED_TIME,artifacts=artifacts)
+HEAD="c"*40
+def _package(root,case,artifacts):return SidecarEvidenceStore(root).write_package(case_id=case.id,contribution_fingerprint=case.contribution_fingerprint,policy_fingerprint=case.policy_snapshot.policy_fingerprint,producer="fixture",created_at=FIXED_TIME,base_commit_sha=case.base_commit,head_commit_sha=HEAD,artifacts=artifacts)
+def _typed(case,artifact_type,refs,**fields):return json.dumps({"schema_version":"agm.evidence_artifact/v1","artifact_type":artifact_type,"observed_at":FIXED_TIME,"head_commit_sha":HEAD,"contribution_fingerprint":case.contribution_fingerprint,"obligation_refs":refs,**fields},sort_keys=True)
+def _summary(case):
+ refs=["O-SUMMARY"]
+ return {"type":"change_summary","content":_typed(case,"change_summary",refs,summary="更新认证检查以拒绝已撤销的访问令牌。",affected_components=["demo_app/auth.py"],behavioral_change="已撤销令牌不再通过访问检查。"),"source_tool":"fixture","observed_at":FIXED_TIME,"affected_scope":["demo_app/auth.py"],"obligation_refs":refs}
 def _diff():return "diff --git a/demo_app/auth.py b/demo_app/auth.py\n--- a/demo_app/auth.py\n+++ b/demo_app/auth.py\n@@ -84,1 +84,2 @@\n+    return False\n"
 
 def test_bridge_registers_test_as_canonical_evidence(tmp_path):
- root,service,case=_case(tmp_path);p=_package(root,case,[{"type":"test_result","content":"python -m pytest tests/test_auth.py -q\n18 passed, 0 failed","source_tool":"pytest","command":"python -m pytest tests/test_auth.py -q","environment":"fixture","result_summary":"18 passed, 0 failed","affected_scope":["demo_app/auth.py"],"observed_at":FIXED_TIME,"obligation_refs":["O-TEST-COMMAND","O-ARTIFACT"]}]);receipt=SidecarEvidenceBridge(service).register_package(case.id,package_digest=p.package_digest)
+ root,service,case=_case(tmp_path);refs=["O-TEST-COMMAND","O-ARTIFACT"];command="python -m pytest tests/test_auth.py -q";result="18 passed, 0 failed";p=_package(root,case,[{"type":"test_result","content":_typed(case,"test_result",refs,command=command,environment="fixture",result_summary=result,exit_code=0,tests_passed=18,tests_failed=0,affected_scope=["demo_app/auth.py"],source_tool="pytest"),"source_tool":"pytest","command":command,"environment":"fixture","result_summary":result,"exit_code":0,"tests_passed":18,"tests_failed":0,"affected_scope":["demo_app/auth.py"],"observed_at":FIXED_TIME,"obligation_refs":refs}]);receipt=SidecarEvidenceBridge(service).register_package(case.id,package_digest=p.package_digest)
  assert len(receipt.evidence_ids)==2 and all(item.validity_state=="valid" for item in service.storage.load_case(case.id).evidence)
 
 @pytest.mark.parametrize("artifact,needle",[
@@ -82,14 +87,14 @@ def test_artifact_route_rejects_pathlike_segments(value):
  assert not _safe_segment(value)
 
 def test_bridge_is_idempotent_and_does_not_prepare_case(tmp_path):
- root,service,case=_case(tmp_path);p=_package(root,case,[{"type":"supporting_statement","content":"summary","affected_scope":["demo_app/auth.py"],"source_tool":"fixture","observed_at":FIXED_TIME,"obligation_refs":["O-SUMMARY"]}])
+ root,service,case=_case(tmp_path);p=_package(root,case,[_summary(case)])
  first=SidecarEvidenceBridge(service).register_package(case.id,package_digest=p.package_digest)
  second=SidecarEvidenceBridge(service).register_package(case.id,package_digest=p.package_digest)
  loaded=service.storage.load_case(case.id)
  assert first.evidence_ids==second.evidence_ids and len(loaded.evidence)==1 and loaded.state=="evidence_incomplete"
 
 def test_bridge_batch_failure_is_atomic(tmp_path):
- root,service,case=_case(tmp_path);p=_package(root,case,[{"type":"supporting_statement","content":"summary","affected_scope":["demo_app/auth.py"],"source_tool":"fixture","observed_at":FIXED_TIME,"obligation_refs":["O-SUMMARY"]},{"type":"diff","content":_diff(),"obligation_refs":["O-TEST-COMMAND"]}])
+ root,service,case=_case(tmp_path);p=_package(root,case,[_summary(case),{"type":"diff","content":_diff(),"obligation_refs":["O-TEST-COMMAND"]}])
  with pytest.raises(VNextError):SidecarEvidenceBridge(service).register_package(case.id,package_digest=p.package_digest)
  assert not service.storage.load_case(case.id).evidence
 

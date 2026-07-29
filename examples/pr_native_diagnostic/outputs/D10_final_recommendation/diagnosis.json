@@ -4,7 +4,7 @@
   "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
   "diagnostic_status": "AGM 最终审查建议已记录",
   "change_summary": {
-    "summary": "D10_final_recommendation",
+    "summary": "更新 README 的安装命令，并保留现有链接说明。",
     "files": [
       "README.md"
     ],
@@ -38,14 +38,14 @@
         "O-CHANGED-FILES"
       ],
       "evidence_refs": [
-        "05665f40918daa727b32791b:@@ -5,2 +5,2 @@"
+        "78d539c54eea2f076c5605dc:@@ -5,2 +5,2 @@"
       ],
       "responsibility": "maintainer",
       "recommended_route": "inspect_risk",
       "blocking": false,
       "source_state_refs": [
         "match-documentation-low",
-        "05665f40918daa727b32791b:@@ -5,2 +5,2 @@"
+        "78d539c54eea2f076c5605dc:@@ -5,2 +5,2 @@"
       ]
     }
   ],
@@ -57,7 +57,7 @@
       "state": "current",
       "blocking": true,
       "evidence_ids": [
-        "sidecar-438e1d8c09dabd91669d7c38"
+        "sidecar-25c139b8edfc8605384671ba"
       ]
     },
     {
@@ -67,7 +67,7 @@
       "state": "current",
       "blocking": true,
       "evidence_ids": [
-        "sidecar-b5a032cbe47da6ca407e5978"
+        "sidecar-3b4c3c4fa6c7b5c078391fad"
       ]
     }
   ],
@@ -78,7 +78,7 @@
       "evidence_type": "changed_files",
       "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
       "source": "sidecar-bridge",
-      "evidence_id": "sidecar-438e1d8c09dabd91669d7c38"
+      "evidence_id": "sidecar-25c139b8edfc8605384671ba"
     },
     {
       "title": "修改说明",
@@ -86,7 +86,7 @@
       "evidence_type": "contribution_summary",
       "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
       "source": "sidecar-bridge",
-      "evidence_id": "sidecar-b5a032cbe47da6ca407e5978"
+      "evidence_id": "sidecar-3b4c3c4fa6c7b5c078391fad"
     }
   ],
   "evidence_gaps": [],
@@ -134,7 +134,7 @@
   },
   "inspection_objects": [
     {
-      "object_id": "05665f40918daa727b32791b",
+      "object_id": "78d539c54eea2f076c5605dc",
       "title": "相关代码差异",
       "object_type": "DiffInspectionObject",
       "plain_language_summary": "绑定当前贡献的代码差异。",
@@ -143,13 +143,13 @@
       "head_commit_sha": "cccccccccccccccccccccccccccccccccccccccc",
       "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
       "content_digest": "c1b72fef3ca826433758a2722f1e2d6a93d8f4d3da6ecb57ca6a89dfbc9fd64f",
-      "evidence_package_digest": "a318b5c28d459f196f8e8189d686bafceb90de331a5f3a8f6811b81e1b4fcaca",
+      "evidence_package_digest": "cac873baaacc94ed945f56a31ddc7a59638477d7b45b20ba041f1d6f57fd5524",
       "availability": "available",
       "freshness": "current",
-      "artifact_route": "/artifacts/case-D10_final_recommendation/a318b5c28d459f196f8e8189d686bafceb90de331a5f3a8f6811b81e1b4fcaca/05665f40918daa727b32791b",
+      "artifact_route": "/artifacts/case-D10_final_recommendation/cac873baaacc94ed945f56a31ddc7a59638477d7b45b20ba041f1d6f57fd5524/78d539c54eea2f076c5605dc",
       "inline_content": "diff --git a/README.md b/README.md\n--- a/README.md\n+++ b/README.md\n@@ -5,2 +5,2 @@\n-pip install agm-demo\n+python -m pip install agm-demo\n link remains valid\n",
       "technical_metadata": {
-        "artifact_type": "diff",
+        "artifact_type": "unified_diff",
         "media_type": "text/plain",
         "obligation_refs": [],
         "canonical_evidence_ids": [],
@@ -157,36 +157,61 @@
       }
     },
     {
-      "object_id": "e7fa8972a373b135c8084ec8",
-      "title": "贡献材料说明",
+      "object_id": "d295417b2f4592584a589433",
+      "title": "修改说明",
       "object_type": "ContributionSummaryInspectionObject",
-      "plain_language_summary": "对应当前版本的贡献材料说明。",
+      "plain_language_summary": "对应当前版本的修改说明。",
       "source": "已验证并绑定当前版本的材料",
       "base_commit_sha": "dddddddddddddddddddddddddddddddddddddddd",
       "head_commit_sha": "cccccccccccccccccccccccccccccccccccccccc",
       "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
-      "content_digest": "de02a1bcc07b9d243c02e969da3d0891aec341a7d8afc383e1ccb44a892d17e5",
-      "evidence_package_digest": "a318b5c28d459f196f8e8189d686bafceb90de331a5f3a8f6811b81e1b4fcaca",
+      "content_digest": "652473ffb77a207da02ddfe25e96181bedfdc32a5c1ac02d8b2989e7e688ec60",
+      "evidence_package_digest": "cac873baaacc94ed945f56a31ddc7a59638477d7b45b20ba041f1d6f57fd5524",
       "availability": "available",
       "freshness": "current",
-      "artifact_route": "/artifacts/case-D10_final_recommendation/a318b5c28d459f196f8e8189d686bafceb90de331a5f3a8f6811b81e1b4fcaca/e7fa8972a373b135c8084ec8",
-      "inline_content": "这是一份绑定当前版本的具体贡献材料。",
+      "artifact_route": "/artifacts/case-D10_final_recommendation/cac873baaacc94ed945f56a31ddc7a59638477d7b45b20ba041f1d6f57fd5524/d295417b2f4592584a589433",
+      "inline_content": "{\"affected_components\": [\"README.md\"], \"artifact_type\": \"change_summary\", \"behavioral_change\": \"文档安装示例更明确。\", \"contribution_fingerprint\": \"2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5\", \"head_commit_sha\": \"cccccccccccccccccccccccccccccccccccccccc\", \"obligation_refs\": [\"O-SUMMARY\"], \"observed_at\": \"2026-07-26T00:00:00Z\", \"schema_version\": \"agm.evidence_artifact/v1\", \"source_tool\": \"deterministic-scenario\", \"summary\": \"更新 README 的安装命令，并保留现有链接说明。\"}",
       "technical_metadata": {
-        "artifact_type": "supporting_statement",
+        "artifact_type": "change_summary",
         "media_type": "text/plain",
         "obligation_refs": [
-          "O-SUMMARY",
-          "O-CHANGED-FILES"
+          "O-SUMMARY"
         ],
         "canonical_evidence_ids": [
-          "sidecar-b5a032cbe47da6ca407e5978",
-          "sidecar-438e1d8c09dabd91669d7c38"
+          "sidecar-3b4c3c4fa6c7b5c078391fad"
         ],
         "producer_assurance": "producer_declared"
       }
     },
     {
-      "object_id": "0e6715d054dfeacd76e8eedd293cb3b541119e29e0fe0d9d3d4e28af9c4c04d1",
+      "object_id": "f82d40c1996bb8780731c621",
+      "title": "变更文件清单",
+      "object_type": "ChangedFilesInspectionObject",
+      "plain_language_summary": "对应当前版本的变更文件清单。",
+      "source": "已验证并绑定当前版本的材料",
+      "base_commit_sha": "dddddddddddddddddddddddddddddddddddddddd",
+      "head_commit_sha": "cccccccccccccccccccccccccccccccccccccccc",
+      "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
+      "content_digest": "eb183bdbbada7faea948617d47d5c8f95723e12b1596af774391befc57a21642",
+      "evidence_package_digest": "cac873baaacc94ed945f56a31ddc7a59638477d7b45b20ba041f1d6f57fd5524",
+      "availability": "available",
+      "freshness": "current",
+      "artifact_route": "/artifacts/case-D10_final_recommendation/cac873baaacc94ed945f56a31ddc7a59638477d7b45b20ba041f1d6f57fd5524/f82d40c1996bb8780731c621",
+      "inline_content": "{\"artifact_type\": \"changed_files\", \"contribution_fingerprint\": \"2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5\", \"files\": [\"README.md\"], \"head_commit_sha\": \"cccccccccccccccccccccccccccccccccccccccc\", \"obligation_refs\": [\"O-CHANGED-FILES\"], \"observed_at\": \"2026-07-26T00:00:00Z\", \"schema_version\": \"agm.evidence_artifact/v1\", \"source_tool\": \"deterministic-scenario\"}",
+      "technical_metadata": {
+        "artifact_type": "changed_files",
+        "media_type": "text/plain",
+        "obligation_refs": [
+          "O-CHANGED-FILES"
+        ],
+        "canonical_evidence_ids": [
+          "sidecar-25c139b8edfc8605384671ba"
+        ],
+        "producer_assurance": "producer_declared"
+      }
+    },
+    {
+      "object_id": "7bbbb55099951cbf699e427c292525a2451832974155fe22abefceabb18831bd",
       "title": "最终审查建议回执",
       "object_type": "FinalReceiptInspectionObject",
       "plain_language_summary": "已验证的 AGM 最终审查建议回执。",
@@ -194,14 +219,14 @@
       "base_commit_sha": "dddddddddddddddddddddddddddddddddddddddd",
       "head_commit_sha": null,
       "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
-      "content_digest": "44169466dc4edc0e42e1f5f30e8af3871e7b2cb2abd63b4cb5002d52f046367c",
+      "content_digest": "1ed24c733d13ce7d889a455312e74603c50c8dcc4b039ed3a49d214a95f85db6",
       "evidence_package_digest": null,
       "availability": "available",
       "freshness": "current",
       "artifact_route": null,
-      "inline_content": "{\n  \"agent_involvement\": \"未检测到可验证记录\",\n  \"agm_final_recommendation\": \"建议接受\",\n  \"case_id\": \"case-D10_final_recommendation\",\n  \"contribution_fingerprint\": \"2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5\",\n  \"contributor_self_review_status\": \"不适用\",\n  \"created_at\": \"2026-07-26T00:00:00Z\",\n  \"evidence_package_digest\": \"a318b5c28d459f196f8e8189d686bafceb90de331a5f3a8f6811b81e1b4fcaca\",\n  \"final_decision_id\": \"decision-fab7c07da1755a98bee65a7e82011b5f\",\n  \"host_platform_status\": {\n    \"approval_state\": \"not_performed\",\n    \"close_state\": \"not_performed\",\n    \"connected\": false,\n    \"merge_state\": \"not_performed\",\n    \"verified\": true\n  },\n  \"maintainer_review_status\": \"已完成必要检查\",\n  \"policy_fingerprint\": \"e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564\",\n  \"risk_summary\": \"低风险文档修改\"\n}",
+      "inline_content": "{\n  \"agent_involvement\": \"未检测到可验证记录\",\n  \"agm_final_recommendation\": \"建议接受\",\n  \"case_id\": \"case-D10_final_recommendation\",\n  \"contribution_fingerprint\": \"2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5\",\n  \"contributor_self_review_status\": \"不适用\",\n  \"created_at\": \"2026-07-26T00:00:00Z\",\n  \"evidence_package_digest\": \"cac873baaacc94ed945f56a31ddc7a59638477d7b45b20ba041f1d6f57fd5524\",\n  \"final_decision_id\": \"decision-fab7c07da1755a98bee65a7e82011b5f\",\n  \"host_platform_status\": {\n    \"approval_state\": \"not_performed\",\n    \"close_state\": \"not_performed\",\n    \"connected\": false,\n    \"merge_state\": \"not_performed\",\n    \"verified\": true\n  },\n  \"maintainer_review_status\": \"已完成必要检查\",\n  \"policy_fingerprint\": \"e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564\",\n  \"risk_summary\": \"低风险文档修改\"\n}",
       "technical_metadata": {
-        "receipt_digest": "0e6715d054dfeacd76e8eedd293cb3b541119e29e0fe0d9d3d4e28af9c4c04d1"
+        "receipt_digest": "7bbbb55099951cbf699e427c292525a2451832974155fe22abefceabb18831bd"
       }
     }
   ],
@@ -229,7 +254,7 @@
       "reason": "人类最终决定和关闭记录已经生成，当前没有待交接操作。"
     },
     "sidecar": {
-      "current_package": "a318b5c28d459f196f8e8189d686bafceb90de331a5f3a8f6811b81e1b4fcaca",
+      "current_package": "cac873baaacc94ed945f56a31ddc7a59638477d7b45b20ba041f1d6f57fd5524",
       "historical_packages": []
     },
     "host_platform": {

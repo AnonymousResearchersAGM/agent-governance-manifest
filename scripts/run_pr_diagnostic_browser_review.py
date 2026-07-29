@@ -24,6 +24,29 @@ MOBILE_SCENARIOS = {
     "D9_contributor_waiting",
 }
 
+INLINE_ASSERTION_DETAILS = (
+    "D8 denied operation",
+    "D10 final receipt",
+    "D10 host-platform boundary",
+)
+
+
+def _empty_report() -> dict[str, object]:
+    return {
+        "desktop_pages": 0,
+        "mobile_pages": 0,
+        "artifact_link_clicks": 0,
+        "inline_object_assertions": 0,
+        "inline_assertion_details": [],
+        "http_200": 0,
+        "http_404": 0,
+        "console_errors": [],
+        "uncaught_exceptions": [],
+        "overflow_failures": [],
+        "read_audit_records": 0,
+        "invalid_audit_lines": 0,
+    }
+
 
 def _has_horizontal_overflow(scroll_width: int, inner_width: int) -> bool:
     return scroll_width > inner_width
@@ -48,7 +71,7 @@ def main() -> int:
     parser.add_argument(
         "--output",
         type=Path,
-        default=ROOT / ".agm-work" / "visual_review" / "phase2_1_3_final",
+        default=ROOT / ".agm-work" / "visual_review" / "phase2_1_3_semantic_hardening",
     )
     args = parser.parse_args()
     try:
@@ -57,18 +80,7 @@ def main() -> int:
         raise SystemExit("Install the optional Playwright package to run Chromium review.") from exc
 
     args.output.mkdir(parents=True, exist_ok=True)
-    report = {
-        "pages": 0,
-        "mobile_pages": 0,
-        "artifact_clicks": 0,
-        "http_200": 0,
-        "http_404": 0,
-        "console_errors": [],
-        "uncaught_exceptions": [],
-        "horizontal_overflow": [],
-        "read_audit_records": 0,
-        "invalid_audit_lines": 0,
-    }
+    report = _empty_report()
     executable = os.environ.get("AGM_CHROMIUM_EXECUTABLE")
     with sync_playwright() as playwright:
         launch = {"headless": True}
@@ -122,15 +134,44 @@ def main() -> int:
                     response = page.goto(url, wait_until="networkidle")
                     if response is None or response.status != 200:
                         raise RuntimeError(f"page failed: {slug}")
-                    report["pages"] += 1
+                    report["desktop_pages"] += 1
                     report["http_200"] += 1
+                    visible_text = page.locator("main").inner_text()
+                    if slug == "D8_system_handled":
+                        if (
+                            "系统已阻止一次未经授权的操作" not in visible_text
+                            or "尝试完成材料验证" not in visible_text
+                            or "verify_evidence" in visible_text.split("技术详情", 1)[0]
+                        ):
+                            raise RuntimeError("D8 denied-operation wording is invalid")
+                        report["inline_object_assertions"] += 1
+                        report["inline_assertion_details"].append(
+                            "D8 denied operation"
+                        )
+                    if slug == "D10_final_recommendation":
+                        if "最终审查建议回执" not in visible_text:
+                            raise RuntimeError("D10 final receipt is not visible")
+                        report["inline_object_assertions"] += 1
+                        report["inline_assertion_details"].append(
+                            "D10 final receipt"
+                        )
+                        if (
+                            "未连接代码托管平台" not in visible_text
+                            or "未通过本页批准 PR" not in visible_text
+                            or "未通过本页合并 PR" not in visible_text
+                        ):
+                            raise RuntimeError("D10 platform boundary is not visible")
+                        report["inline_object_assertions"] += 1
+                        report["inline_assertion_details"].append(
+                            "D10 host-platform boundary"
+                        )
                     dimensions = page.evaluate(
                         "() => ({scroll: document.documentElement.scrollWidth, inner: window.innerWidth})"
                     )
                     if _has_horizontal_overflow(
                         dimensions["scroll"], dimensions["inner"]
                     ):
-                        report["horizontal_overflow"].append(
+                        report["overflow_failures"].append(
                             {"scenario": slug, "viewport": "desktop"}
                         )
                     page.screenshot(
@@ -152,7 +193,7 @@ def main() -> int:
                             raise RuntimeError(f"artifact failed: {href}")
                         if not page.locator("pre").is_visible():
                             raise RuntimeError(f"artifact was not rendered inertly: {href}")
-                        report["artifact_clicks"] += 1
+                        report["artifact_link_clicks"] += 1
                         report["http_200"] += 1
                         page.go_back(wait_until="domcontentloaded")
                     context.close()
@@ -167,13 +208,14 @@ def main() -> int:
                         mobile_response = mobile_page.goto(url, wait_until="networkidle")
                         if mobile_response is None or mobile_response.status != 200:
                             raise RuntimeError(f"mobile page failed: {slug}")
+                        report["http_200"] += 1
                         dimensions = mobile_page.evaluate(
                             "() => ({scroll: document.documentElement.scrollWidth, inner: window.innerWidth})"
                         )
                         if _has_horizontal_overflow(
                             dimensions["scroll"], dimensions["inner"]
                         ):
-                            report["horizontal_overflow"].append(
+                            report["overflow_failures"].append(
                                 {"scenario": slug, "viewport": "390x844"}
                             )
                         mobile_page.screenshot(
@@ -219,7 +261,7 @@ def main() -> int:
         report["http_404"]
         or report["console_errors"]
         or report["uncaught_exceptions"]
-        or report["horizontal_overflow"]
+        or report["overflow_failures"]
         or report["invalid_audit_lines"]
     ) else 1
 

@@ -4,7 +4,7 @@
   "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
   "diagnostic_status": "可以按常规流程审查",
   "change_summary": {
-    "summary": "D8_system_handled",
+    "summary": "更新 README 的安装命令，并保留现有链接说明。",
     "files": [
       "README.md"
     ],
@@ -38,14 +38,14 @@
         "O-CHANGED-FILES"
       ],
       "evidence_refs": [
-        "fe7847a0d24fa5d23c222f57:@@ -5,2 +5,2 @@"
+        "ffa8b1c961f10d6a61e177ad:@@ -5,2 +5,2 @@"
       ],
       "responsibility": "maintainer",
       "recommended_route": "inspect_risk",
       "blocking": false,
       "source_state_refs": [
         "match-documentation-low",
-        "fe7847a0d24fa5d23c222f57:@@ -5,2 +5,2 @@"
+        "ffa8b1c961f10d6a61e177ad:@@ -5,2 +5,2 @@"
       ]
     }
   ],
@@ -57,7 +57,7 @@
       "state": "current",
       "blocking": true,
       "evidence_ids": [
-        "sidecar-340e6fc5152c2321bcd56ab5"
+        "sidecar-da774c42e81c1e067ce5bf25"
       ]
     },
     {
@@ -67,7 +67,7 @@
       "state": "current",
       "blocking": true,
       "evidence_ids": [
-        "sidecar-931fff35939f0eb0e0024b40"
+        "sidecar-14c785c4bf08b1fc14b03dc2"
       ]
     }
   ],
@@ -78,7 +78,7 @@
       "evidence_type": "changed_files",
       "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
       "source": "sidecar-bridge",
-      "evidence_id": "sidecar-340e6fc5152c2321bcd56ab5"
+      "evidence_id": "sidecar-da774c42e81c1e067ce5bf25"
     },
     {
       "title": "修改说明",
@@ -86,7 +86,7 @@
       "evidence_type": "contribution_summary",
       "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
       "source": "sidecar-bridge",
-      "evidence_id": "sidecar-931fff35939f0eb0e0024b40"
+      "evidence_id": "sidecar-14c785c4bf08b1fc14b03dc2"
     }
   ],
   "evidence_gaps": [
@@ -95,7 +95,7 @@
       "category": "denied_operation",
       "severity": "low",
       "headline": "系统已阻止一次未经授权的操作",
-      "plain_language_explanation": "操作：verify_evidence；该操作未生效。",
+      "plain_language_explanation": "操作：尝试完成材料验证；该操作未生效。",
       "affected_files": [],
       "affected_line_ranges": [],
       "expected_state": "无需单独处理",
@@ -152,11 +152,11 @@
   "recommended_route": {
     "route": "normal_pr_review",
     "owner": "维护者",
-    "message": "检查文字准确性、命令示例和链接即可，可以返回常规审查。"
+    "message": "请检查文字、示例、链接和说明是否一致，可以返回常规审查。"
   },
   "inspection_objects": [
     {
-      "object_id": "fe7847a0d24fa5d23c222f57",
+      "object_id": "ffa8b1c961f10d6a61e177ad",
       "title": "相关代码差异",
       "object_type": "DiffInspectionObject",
       "plain_language_summary": "绑定当前贡献的代码差异。",
@@ -165,13 +165,13 @@
       "head_commit_sha": "cccccccccccccccccccccccccccccccccccccccc",
       "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
       "content_digest": "c1b72fef3ca826433758a2722f1e2d6a93d8f4d3da6ecb57ca6a89dfbc9fd64f",
-      "evidence_package_digest": "da0bde2a7f8ad9a0532662716bcff4aaea0052a009c6ee793bd7088d207da31b",
+      "evidence_package_digest": "6c769fcee39f5025ca04e24c1d81fcdf5ba34286fbc94ca0742f57efaea0392b",
       "availability": "available",
       "freshness": "current",
-      "artifact_route": "/artifacts/case-D8_system_handled/da0bde2a7f8ad9a0532662716bcff4aaea0052a009c6ee793bd7088d207da31b/fe7847a0d24fa5d23c222f57",
+      "artifact_route": "/artifacts/case-D8_system_handled/6c769fcee39f5025ca04e24c1d81fcdf5ba34286fbc94ca0742f57efaea0392b/ffa8b1c961f10d6a61e177ad",
       "inline_content": "diff --git a/README.md b/README.md\n--- a/README.md\n+++ b/README.md\n@@ -5,2 +5,2 @@\n-pip install agm-demo\n+python -m pip install agm-demo\n link remains valid\n",
       "technical_metadata": {
-        "artifact_type": "diff",
+        "artifact_type": "unified_diff",
         "media_type": "text/plain",
         "obligation_refs": [],
         "canonical_evidence_ids": [],
@@ -179,30 +179,55 @@
       }
     },
     {
-      "object_id": "6b3f3b2a3eb54e7493340ec8",
-      "title": "贡献材料说明",
+      "object_id": "8d72355ac008ef815e63a4d6",
+      "title": "修改说明",
       "object_type": "ContributionSummaryInspectionObject",
-      "plain_language_summary": "对应当前版本的贡献材料说明。",
+      "plain_language_summary": "对应当前版本的修改说明。",
       "source": "已验证并绑定当前版本的材料",
       "base_commit_sha": "dddddddddddddddddddddddddddddddddddddddd",
       "head_commit_sha": "cccccccccccccccccccccccccccccccccccccccc",
       "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
-      "content_digest": "de02a1bcc07b9d243c02e969da3d0891aec341a7d8afc383e1ccb44a892d17e5",
-      "evidence_package_digest": "da0bde2a7f8ad9a0532662716bcff4aaea0052a009c6ee793bd7088d207da31b",
+      "content_digest": "652473ffb77a207da02ddfe25e96181bedfdc32a5c1ac02d8b2989e7e688ec60",
+      "evidence_package_digest": "6c769fcee39f5025ca04e24c1d81fcdf5ba34286fbc94ca0742f57efaea0392b",
       "availability": "available",
       "freshness": "current",
-      "artifact_route": "/artifacts/case-D8_system_handled/da0bde2a7f8ad9a0532662716bcff4aaea0052a009c6ee793bd7088d207da31b/6b3f3b2a3eb54e7493340ec8",
-      "inline_content": "这是一份绑定当前版本的具体贡献材料。",
+      "artifact_route": "/artifacts/case-D8_system_handled/6c769fcee39f5025ca04e24c1d81fcdf5ba34286fbc94ca0742f57efaea0392b/8d72355ac008ef815e63a4d6",
+      "inline_content": "{\"affected_components\": [\"README.md\"], \"artifact_type\": \"change_summary\", \"behavioral_change\": \"文档安装示例更明确。\", \"contribution_fingerprint\": \"2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5\", \"head_commit_sha\": \"cccccccccccccccccccccccccccccccccccccccc\", \"obligation_refs\": [\"O-SUMMARY\"], \"observed_at\": \"2026-07-26T00:00:00Z\", \"schema_version\": \"agm.evidence_artifact/v1\", \"source_tool\": \"deterministic-scenario\", \"summary\": \"更新 README 的安装命令，并保留现有链接说明。\"}",
       "technical_metadata": {
-        "artifact_type": "supporting_statement",
+        "artifact_type": "change_summary",
         "media_type": "text/plain",
         "obligation_refs": [
-          "O-SUMMARY",
+          "O-SUMMARY"
+        ],
+        "canonical_evidence_ids": [
+          "sidecar-14c785c4bf08b1fc14b03dc2"
+        ],
+        "producer_assurance": "producer_declared"
+      }
+    },
+    {
+      "object_id": "38b3026b4faee65b49a8e399",
+      "title": "变更文件清单",
+      "object_type": "ChangedFilesInspectionObject",
+      "plain_language_summary": "对应当前版本的变更文件清单。",
+      "source": "已验证并绑定当前版本的材料",
+      "base_commit_sha": "dddddddddddddddddddddddddddddddddddddddd",
+      "head_commit_sha": "cccccccccccccccccccccccccccccccccccccccc",
+      "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
+      "content_digest": "eb183bdbbada7faea948617d47d5c8f95723e12b1596af774391befc57a21642",
+      "evidence_package_digest": "6c769fcee39f5025ca04e24c1d81fcdf5ba34286fbc94ca0742f57efaea0392b",
+      "availability": "available",
+      "freshness": "current",
+      "artifact_route": "/artifacts/case-D8_system_handled/6c769fcee39f5025ca04e24c1d81fcdf5ba34286fbc94ca0742f57efaea0392b/38b3026b4faee65b49a8e399",
+      "inline_content": "{\"artifact_type\": \"changed_files\", \"contribution_fingerprint\": \"2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5\", \"files\": [\"README.md\"], \"head_commit_sha\": \"cccccccccccccccccccccccccccccccccccccccc\", \"obligation_refs\": [\"O-CHANGED-FILES\"], \"observed_at\": \"2026-07-26T00:00:00Z\", \"schema_version\": \"agm.evidence_artifact/v1\", \"source_tool\": \"deterministic-scenario\"}",
+      "technical_metadata": {
+        "artifact_type": "changed_files",
+        "media_type": "text/plain",
+        "obligation_refs": [
           "O-CHANGED-FILES"
         ],
         "canonical_evidence_ids": [
-          "sidecar-931fff35939f0eb0e0024b40",
-          "sidecar-340e6fc5152c2321bcd56ab5"
+          "sidecar-da774c42e81c1e067ce5bf25"
         ],
         "producer_assurance": "producer_declared"
       }
@@ -243,7 +268,7 @@
       "reason": "贡献侧要求已经满足，当前轮到有权限的维护者检查；检查完成仍不等于接受。"
     },
     "sidecar": {
-      "current_package": "da0bde2a7f8ad9a0532662716bcff4aaea0052a009c6ee793bd7088d207da31b",
+      "current_package": "6c769fcee39f5025ca04e24c1d81fcdf5ba34286fbc94ca0742f57efaea0392b",
       "historical_packages": []
     },
     "host_platform": {

@@ -212,7 +212,7 @@ class SidecarEvidenceStore:
                 with self._audit_lock, path.open("a", encoding="utf8") as handle:
                     handle.write(line); handle.flush(); os.fsync(handle.fileno())
                 return
-            except PermissionError:
+            except OSError:
                 if attempt == 2: raise
                 time.sleep(0.02 * (attempt + 1))
 
@@ -249,6 +249,73 @@ class SidecarEvidenceStore:
         with self._audit_lock, audit.open("a", encoding="utf8") as handle:
             handle.write(canonical_json({"event":payload["registration_status"],"receipt_digest":digest,"case_id":payload["case_id"],"package_digest":payload["package_digest"]})+"\n"); handle.flush(); os.fsync(handle.fileno())
         return path
+
+    def bridge_receipt_path(self, payload: dict[str, Any]) -> Path:
+        return self.root / "bridge_receipts" / f"{fingerprint(payload)}.json"
+
+    def finalize_bridge_receipt(self, payload: dict[str, Any]) -> tuple[Path, str]:
+        payload = dict(payload); digest = fingerprint(payload)
+        path = self.bridge_receipt_path(payload)
+        encoded = canonical_json(payload) + "\n"
+        if path.exists() and path.read_text(encoding="utf8") != encoded:
+            raise VNextError("Bridge receipt digest collision")
+        if not path.exists():
+            atomic_write_text(path, encoded)
+        return path, digest
+
+    def registration_path(self, package_digest: str) -> Path:
+        if not package_digest or "/" in package_digest or "\\" in package_digest or ".." in package_digest:
+            raise VNextError("Invalid registration package digest")
+        return self.root / "registration_index" / f"{package_digest}.json"
+
+    def read_registration(self, package_digest: str) -> dict[str, Any] | None:
+        path = self.registration_path(package_digest)
+        if not path.exists():
+            return None
+        value = json.loads(path.read_text(encoding="utf8"))
+        if value.get("package_digest") != package_digest:
+            raise VNextError("Registration index package binding is invalid")
+        return value
+
+    def finalize_registration(self, payload: dict[str, Any]) -> Path:
+        path = self.registration_path(payload["package_digest"])
+        encoded = canonical_json(payload) + "\n"
+        if path.exists() and path.read_text(encoding="utf8") != encoded:
+            raise VNextError("Registration index collision")
+        if not path.exists():
+            atomic_write_text(path, encoded)
+        return path
+
+    def append_audit_event(self, name: str, payload: dict[str, Any]) -> None:
+        if name not in {"bridge_audit", "conflict_audit"}:
+            raise VNextError("Unknown sidecar audit")
+        path = self.root / f"{name}.jsonl"; path.parent.mkdir(parents=True, exist_ok=True)
+        line = canonical_json(payload) + "\n"
+        for attempt in range(3):
+            try:
+                with self._audit_lock, path.open("a", encoding="utf8") as handle:
+                    handle.write(line); handle.flush(); os.fsync(handle.fileno())
+                return
+            except OSError:
+                if attempt == 2: raise
+                time.sleep(.02 * (attempt + 1))
+
+    def audit_lengths(self) -> dict[str, int]:
+        with self._audit_lock:
+            return {
+                name: (self.root / f"{name}.jsonl").stat().st_size
+                if (self.root / f"{name}.jsonl").exists() else 0
+                for name in ("bridge_audit", "conflict_audit")
+            }
+
+    def restore_audit_lengths(self, lengths: dict[str, int]) -> None:
+        with self._audit_lock:
+            for name, length in lengths.items():
+                path = self.root / f"{name}.jsonl"
+                if not path.exists():
+                    continue
+                with path.open("r+b") as handle:
+                    handle.truncate(length); handle.flush(); os.fsync(handle.fileno())
 
     def append_conflict_audit(self, event: str, *, case_id: str, package_digest: str) -> None:
         path=self.root/"conflict_audit.jsonl"; path.parent.mkdir(parents=True,exist_ok=True)

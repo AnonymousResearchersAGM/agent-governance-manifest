@@ -1,28 +1,222 @@
-"""Detect conflicts only from verified, bound sidecar material."""
+"""Trusted conflicts derived only from fully validated typed artifacts."""
 from __future__ import annotations
-import json
-from ..models import VNextError, fingerprint
+
+from dataclasses import dataclass
+from typing import Any
+
+from ..models import GovernanceCase, VNextError, fingerprint
 from ..service import GovernanceService
+from .artifact_schemas import TypedArtifactValidator, ValidatedArtifact
 from .sidecar import SidecarEvidenceStore
 
+
+@dataclass(frozen=True)
+class ValidatedConflictDerivation:
+    case_id: str
+    policy_fingerprint: str
+    contribution_fingerprint: str
+    package_digest: str
+    declaration_artifact_id: str
+    declaration_artifact_digest: str
+    agent_activity_artifact_id: str
+    agent_activity_artifact_digest: str
+    canonical_evidence_ids: tuple[str, ...]
+    typed_relation: tuple[tuple[str, bool], ...]
+    validation_result: str = "validated"
+
+
+def _evidence_id(package: str, artifact: str, obligation: str) -> str:
+    return "sidecar-" + fingerprint(
+        {"package": package, "artifact": artifact, "obligation": obligation}
+    )[:24]
+
+
+def validate_conflict_derivation(
+    case: GovernanceCase,
+    store: SidecarEvidenceStore,
+    derivation: ValidatedConflictDerivation,
+) -> None:
+    """Revalidate every source and the typed relation at the canonical boundary."""
+    if not isinstance(derivation, ValidatedConflictDerivation):
+        raise VNextError("Trusted conflict requires a validated derivation object")
+    if (
+        derivation.case_id,
+        derivation.policy_fingerprint,
+        derivation.contribution_fingerprint,
+    ) != (
+        case.id,
+        case.policy_snapshot.policy_fingerprint,
+        case.contribution_fingerprint,
+    ):
+        raise VNextError("Conflict derivation does not bind to the current case")
+    package = store.get_package_by_digest(derivation.package_digest)
+    validated = TypedArtifactValidator().validate_package(
+        case, package, store.read_artifact
+    )
+    by_id = {item.artifact_id: item for item in validated}
+    declaration = by_id.get(derivation.declaration_artifact_id)
+    activity = by_id.get(derivation.agent_activity_artifact_id)
+    if (
+        declaration is None
+        or declaration.artifact_type != "contribution_declaration"
+        or activity is None
+        or activity.artifact_type != "agent_activity"
+    ):
+        raise VNextError("Conflict derivation source artifacts are unavailable")
+    if (
+        declaration.metadata["content_digest"]
+        != derivation.declaration_artifact_digest
+        or activity.metadata["content_digest"]
+        != derivation.agent_activity_artifact_digest
+    ):
+        raise VNextError("Conflict derivation source digest does not match")
+    expected_relation = (
+        ("declared_other_agents_or_tools_used", False),
+        ("observed_other_agents_or_tools_used", True),
+    )
+    if (
+        declaration.typed_value is None
+        or activity.typed_value is None
+        or declaration.typed_value["other_agents_or_tools_used"] is not False
+        or activity.typed_value["other_agents_or_tools_used"] is not True
+        or derivation.typed_relation != expected_relation
+    ):
+        raise VNextError("Typed artifacts do not form a trusted conflict")
+    expected_ids = (
+        _evidence_id(
+            package["package_digest"], declaration.artifact_id, "O-AGENT-SCOPE"
+        ),
+        _evidence_id(
+            package["package_digest"], activity.artifact_id, "O-AGENT-SCOPE"
+        ),
+    )
+    if derivation.canonical_evidence_ids != expected_ids:
+        raise VNextError("Conflict derivation canonical evidence mapping is invalid")
+    evidence = {item.id: item for item in case.evidence}
+    if not set(expected_ids) <= set(evidence):
+        raise VNextError("Conflict canonical evidence mapping is unavailable")
+    for evidence_id, artifact in zip(expected_ids, (declaration, activity)):
+        item = evidence[evidence_id]
+        if (
+            item.contribution_fingerprint != case.contribution_fingerprint
+            or item.policy_fingerprint != case.policy_snapshot.policy_fingerprint
+            or item.value
+            != {
+                "activity_scope": sorted(
+                    artifact.metadata.get("affected_scope", ())
+                ),
+                "typed_source_validated": True,
+            }
+        ):
+            raise VNextError("Conflict canonical evidence source mapping is invalid")
+
+
 class TrustedSidecarConflictDetector:
-    def __init__(self, service: GovernanceService): self.service=service; self.store=SidecarEvidenceStore(service.root)
-    def detect(self, case_id: str, package_digest: str):
-        self.store.append_conflict_audit("detection_started",case_id=case_id,package_digest=package_digest)
+    def __init__(
+        self,
+        service: GovernanceService,
+        store: SidecarEvidenceStore | None = None,
+    ):
+        self.service = service
+        self.store = store or SidecarEvidenceStore(service.root)
+
+    def derive(
+        self,
+        case: GovernanceCase,
+        package_digest: str,
+        artifacts: tuple[ValidatedArtifact, ...],
+    ) -> ValidatedConflictDerivation | None:
+        package = self.store.get_package_by_digest(package_digest)
+        if (
+            package.get("case_id"),
+            package.get("contribution_fingerprint"),
+            package.get("policy_fingerprint"),
+        ) != (
+            case.id,
+            case.contribution_fingerprint,
+            case.policy_snapshot.policy_fingerprint,
+        ):
+            raise VNextError("Conflict package binding does not match current case")
+        declaration = next(
+            (
+                item
+                for item in artifacts
+                if item.artifact_type == "contribution_declaration"
+            ),
+            None,
+        )
+        activity = next(
+            (item for item in artifacts if item.artifact_type == "agent_activity"),
+            None,
+        )
+        if declaration is None or activity is None:
+            return None
+        if declaration.typed_value is None or activity.typed_value is None:
+            raise VNextError("Conflict sources were not typed and validated")
+        if not (
+            declaration.typed_value["other_agents_or_tools_used"] is False
+            and activity.typed_value["other_agents_or_tools_used"] is True
+        ):
+            return None
+        return ValidatedConflictDerivation(
+            case_id=case.id,
+            policy_fingerprint=case.policy_snapshot.policy_fingerprint,
+            contribution_fingerprint=case.contribution_fingerprint,
+            package_digest=package_digest,
+            declaration_artifact_id=declaration.artifact_id,
+            declaration_artifact_digest=declaration.metadata["content_digest"],
+            agent_activity_artifact_id=activity.artifact_id,
+            agent_activity_artifact_digest=activity.metadata["content_digest"],
+            canonical_evidence_ids=(
+                _evidence_id(
+                    package_digest,
+                    declaration.artifact_id,
+                    "O-AGENT-SCOPE",
+                ),
+                _evidence_id(
+                    package_digest, activity.artifact_id, "O-AGENT-SCOPE"
+                ),
+            ),
+            typed_relation=(
+                ("declared_other_agents_or_tools_used", False),
+                ("observed_other_agents_or_tools_used", True),
+            ),
+        )
+
+    def detect(self, case_id: str, package_digest: str) -> Any:
+        """Idempotently re-run detection for an already registered package."""
+        self.store.append_conflict_audit(
+            "detection_started", case_id=case_id, package_digest=package_digest
+        )
         try:
-            case=self.service.storage.load_case(case_id); package=self.store.get_package_by_digest(package_digest)
-            if (package.get("case_id"),package.get("contribution_fingerprint"),package.get("policy_fingerprint")) != (case.id,case.contribution_fingerprint,case.policy_snapshot.policy_fingerprint): raise VNextError("Conflict package binding does not match current case")
-            items={item["artifact_type"]:item for item in package["artifacts"]}; declaration=items.get("contribution_declaration"); activity=items.get("agent_activity")
-            if not declaration or not activity:self.store.append_conflict_audit("no_conflict",case_id=case_id,package_digest=package_digest);return None
-            if declaration["artifact_type"]!="contribution_declaration" or activity["artifact_type"]!="agent_activity":raise VNextError("Conflict artifact types are invalid")
-            for artifact in (declaration,activity):
-                if artifact.get("contribution_fingerprint")!=case.contribution_fingerprint or artifact.get("head_commit_sha")!=package.get("head_commit_sha"):raise VNextError("Conflict artifact binding does not match package")
-            _,declared=self.store.read_artifact(package_digest,declaration["artifact_id"]); _,active=self.store.read_artifact(package_digest,activity["artifact_id"])
-            d=json.loads(declared);a=json.loads(active); conflict=d.get("other_agents_or_tools_used") is False and a.get("other_agents_or_tools_used") is True
-            expected=["sidecar-"+fingerprint({"package":package_digest,"artifact":x["artifact_id"],"obligation":o})[:24] for x,o in ((declaration,"O-SUMMARY"),(activity,"O-AGENT-SCOPE"))]
-            if not set(expected)<= {item.id for item in case.evidence}:raise VNextError("Conflict canonical evidence mapping is unavailable")
-            if not conflict:self.store.append_conflict_audit("no_conflict",case_id=case_id,package_digest=package_digest);return None
-            before=len(case.findings); result=self.service.record_sidecar_conflict(case.id,actor="sidecar-conflict-detector",role="maintainer",message="贡献者声明与编码助手活动记录不一致。",source_evidence_ids=expected,source_artifact_ids=[declaration["artifact_id"],activity["artifact_id"]],affected_obligation_ids=["O-AGENT-SCOPE"],package_digest=package_digest)
-            self.store.append_conflict_audit("conflict_already_recorded" if len(self.service.storage.load_case(case.id).findings)==before else "conflict_detected",case_id=case_id,package_digest=package_digest);return result
-        except (VNextError,json.JSONDecodeError):
-            self.store.append_conflict_audit("source_validation_rejected",case_id=case_id,package_digest=package_digest);raise
+            case = self.service.storage.load_case(case_id)
+            package = self.store.get_package_by_digest(package_digest)
+            artifacts = TypedArtifactValidator().validate_package(
+                case, package, self.store.read_artifact
+            )
+            derivation = self.derive(case, package_digest, artifacts)
+            if derivation is None:
+                self.store.append_conflict_audit(
+                    "no_conflict", case_id=case_id, package_digest=package_digest
+                )
+                return None
+            before = len(case.findings)
+            result = self.service._record_validated_sidecar_conflict(
+                case, derivation
+            )
+            self.service.storage.save_case(case)
+            self.store.append_conflict_audit(
+                "conflict_already_recorded"
+                if len(case.findings) == before
+                else "conflict_detected",
+                case_id=case_id,
+                package_digest=package_digest,
+            )
+            return result
+        except VNextError:
+            self.store.append_conflict_audit(
+                "source_validation_rejected",
+                case_id=case_id,
+                package_digest=package_digest,
+            )
+            raise

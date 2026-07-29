@@ -20,6 +20,20 @@ STATE_WORDS={"missing":"未提供","invalid":"材料验证未通过","stale":"�
 DISPLAY_TITLE={"O-AGENT-SCOPE":"编码助手活动记录","O-HUMAN-ATTEST":"贡献者人工检查","O-TEST-COMMAND":"测试记录","O-ARTIFACT":"可复查的测试输出","O-AUTH-IMPACT":"认证与权限影响说明","O-SUMMARY":"修改说明","O-CHANGED-FILES":"变更文件清单","O-RATIONALE":"修改原因","O-LIMITATIONS":"已知限制"}
 ROUTE_TEXT={"contributor_action_required":("贡献者","请补充或更新下列材料后，再提交维护者检查。"),"waiting_for_contributor_submission":("贡献者","当前无需你操作；下一步由贡献者提交维护者检查。"),"maintainer_focused_review":("维护者","材料已齐备，但涉及风险区域；请重点检查指定差异和关键测试。"),"maintainer_action_required":("维护者","发现需要先处理的材料矛盾；请决定是否要求贡献者补充或修正。"),"waiting_for_accountable_human":("有权限的负责人","等待确认已经检查当前版本和范围。"),"final_recommendation_recorded":("无需额外处理","AGM 最终审查建议已经记录；本页没有批准或合并平台 PR。"),"normal_pr_review":("维护者","检查文字准确性、命令示例和链接即可，可以返回常规审查。"),"blocked_pending_repair":("贡献者","维护者已要求修正；下一步由贡献者处理。")}
 
+def _route_text(route:str,case:GovernanceCase)->tuple[str,str]:
+    owner,message=ROUTE_TEXT[route]
+    if route=="contributor_action_required" and case.state=="repair_requested" and any(item.code=="trusted_sidecar_conflict" for item in case.findings):
+        return "贡献者","维护者已经要求贡献者修正工具使用说明。下一步由贡献者处理。"
+    if route!="normal_pr_review":return owner,message
+    zones={item.zone for item in case.matched_rules}
+    if "documentation" in zones:
+        return owner,"请检查文字、示例、链接和说明是否一致，可以返回常规审查。"
+    if "authentication" in zones:
+        return owner,"请检查权限与认证边界、安全失败模式以及相关测试，可以返回常规审查。"
+    if zones & {"configuration","test_strategy"}:
+        return owner,"请检查兼容性、环境差异、构建结果和部署影响，可以返回常规审查。"
+    return owner,"请检查实现逻辑、边界条件、错误处理、相关测试和兼容性影响，可以返回常规审查。"
+
 def _json(content:str)->dict[str,Any]:
     try:
         value=json.loads(content); return value if isinstance(value,dict) else {}
@@ -72,10 +86,12 @@ def compile_pr_diagnostic(*,governance_case:GovernanceCase,contribution:Any=None
         if state!="current":gaps.append(DiagnosticFinding(f"gap:{obligation.id}","evidence_gap",obligation.severity,STATE_WORDS[state],plain,tuple(obligation.affected_scope),(),"对应当前版本",STATE_WORDS[state],"请贡献者补充或更新。",tuple(obligation.source_rule_ids),(obligation.obligation_id,),tuple(item.id for item in selected),"contributor","contributor_action_required",obligation.blocking,(obligation.id,*[item.id for item in selected])))
     for finding in case.findings:
         if finding.status == "open" and finding.code == "trusted_sidecar_conflict":
-            gaps.append(DiagnosticFinding(finding.id,"trusted_sidecar_conflict",finding.severity,"材料不一致","贡献者说明与编码助手活动记录不一致。",(),(),"需要维护者决定是否要求补充","发现材料矛盾","由维护者决定是否要求贡献者补充或修正。",(),tuple(finding.affected_obligation_ids),tuple(finding.related_object_ids),"maintainer","maintainer_action_required",True,tuple(finding.related_object_ids)))
+            repair_requested=case.state=="repair_requested"
+            gaps.append(DiagnosticFinding(finding.id,"trusted_sidecar_conflict",finding.severity,"材料不一致","贡献者说明与编码助手活动记录不一致。",(),(),"贡献者修正工具使用说明" if repair_requested else "需要维护者决定是否要求补充","维护者已经要求修正" if repair_requested else "发现材料矛盾","维护者已经要求贡献者修正工具使用说明。下一步由贡献者处理。" if repair_requested else "由维护者决定是否要求贡献者补充或修正。",(),tuple(finding.affected_obligation_ids),tuple(finding.related_object_ids),"contributor" if repair_requested else "maintainer","contributor_action_required" if repair_requested else "maintainer_action_required",True,tuple(finding.related_object_ids)))
     for attempt in case.attempted_operations:
         if attempt.result == "denied":
-            gaps.append(DiagnosticFinding(attempt.id,"denied_operation","low","系统已阻止一次未经授权的操作",f"操作：{attempt.operation}；该操作未生效。",(),(),"无需单独处理","系统已阻止该操作","仍按当前 PR 的正常路线审查。",(),(),(),"maintainer","normal_pr_review",False,(attempt.id,)))
+            operation_label={"verify_evidence":"尝试完成材料验证"}.get(attempt.operation,"尝试执行受限操作")
+            gaps.append(DiagnosticFinding(attempt.id,"denied_operation","low","系统已阻止一次未经授权的操作",f"操作：{operation_label}；该操作未生效。",(),(),"无需单独处理","系统已阻止该操作","仍按当前 PR 的正常路线审查。",(),(),(),"maintainer","normal_pr_review",False,(attempt.id,)))
     locations=[]
     if trusted:
         for diff in trusted.diffs:
@@ -88,7 +104,7 @@ def compile_pr_diagnostic(*,governance_case:GovernanceCase,contribution:Any=None
         refs=tuple(f"{item.artifact_id}:{location.hunk}" for item,location in matched)
         risks.append(DiagnosticFinding(f"risk:{rule.id}","risk_area",rule.risk_level,f"{ {'low':'低风险','medium':'中等风险','high':'较高风险','critical':'严重风险'}.get(rule.risk_level,'风险区域')}：{', '.join(rule.affected_paths)}",RISK_TEXT.get(rule.zone,"该位置被项目规则识别为需要额外检查的区域。"),tuple(location.path for _,location in matched) or tuple(rule.affected_paths),lines,"按项目要求检查","已识别该风险区域","",(rule.rule_id,),tuple(rule.obligation_ids),refs,"maintainer","inspect_risk",False,(rule.id,*refs)))
     if trusted:
-        kinds={"diff":("DiffInspectionObject","绑定当前贡献的代码差异。"),"supporting_statement":("ContributionSummaryInspectionObject","对应当前版本的贡献材料说明。"),"test_result":("TestInspectionObject","可复查的测试命令和结果。"),"agent_activity":("AgentActivityInspectionObject","对应当前版本的编码助手活动记录。"),"contribution_declaration":("ContributionDeclarationInspectionObject","贡献者对工具使用的声明。"),"impact_statement":("ImpactStatementInspectionObject","对应当前版本的影响说明。")}
+        kinds={"diff":("DiffInspectionObject","绑定当前贡献的代码差异。"),"unified_diff":("DiffInspectionObject","绑定当前贡献的代码差异。"),"change_summary":("ContributionSummaryInspectionObject","对应当前版本的修改说明。"),"changed_files":("ChangedFilesInspectionObject","对应当前版本的变更文件清单。"),"rationale":("RationaleInspectionObject","对应当前版本的修改原因。"),"known_limitations":("KnownLimitationsInspectionObject","对应当前版本的已知限制声明。"),"supporting_statement":("SupportingMaterialInspectionObject","补充材料，不单独满足项目要求。"),"test_result":("TestInspectionObject","可复查的测试命令和结果。"),"agent_activity":("AgentActivityInspectionObject","对应当前版本的编码助手活动记录。"),"contribution_declaration":("ContributionDeclarationInspectionObject","贡献者对工具使用的声明。"),"impact_statement":("ImpactStatementInspectionObject","对应当前版本的影响说明。")}
         for item in trusted.artifacts:
             if item.artifact_type in kinds: objects.append(_trusted_object(case,item,*kinds[item.artifact_type],_artifact_evidence_ids(case,item)))
         for package in trusted.historical_packages:
@@ -105,7 +121,7 @@ def compile_pr_diagnostic(*,governance_case:GovernanceCase,contribution:Any=None
     attestation_required=any(item.type=="human_attestation" for item in case.obligations); confirmed=any(item.status=="confirmed" and item.contribution_fingerprint==case.contribution_fingerprint for item in case.attestations); human_state="required_current" if confirmed else ("required_missing" if attestation_required else "not_required")
     human={"contributor_self_review":{"required_current":"已完成","required_missing":"项目要求贡献者检查当前版本，但尚未确认。","not_required":"本类修改不要求额外的贡献者人工确认。"}[human_state],"contributor_state":human_state,"maintainer_review":"已完成必要检查" if case.maintainer_verifications else "尚未完成必要检查","final_recommendation":"已记录" if case.final_decision else "尚未记录"}
     comparisons=build_requirement_comparisons(case)
-    responsibility=derive_current_responsibility(case,comparisons,case.findings,case.repair_requests,case.attestations); route,legal=_route(case,policy_config,responsibility,gaps,actor_role); owner,message=ROUTE_TEXT[route]
+    responsibility=derive_current_responsibility(case,comparisons,case.findings,case.repair_requests,case.attestations); route,legal=_route(case,policy_config,responsibility,gaps,actor_role); owner,message=_route_text(route,case)
     status={"normal_pr_review":"可以按常规流程审查","maintainer_focused_review":"需要重点检查","maintainer_action_required":"发现需要先处理的材料矛盾","contributor_action_required":"需要贡献者先处理","waiting_for_contributor_submission":"等待贡献者提交维护者检查","blocked_pending_repair":"等待贡献者修正","waiting_for_accountable_human":"等待人类确认","final_recommendation_recorded":"AGM 最终审查建议已记录"}[route]
     host=HostPlatformStatus(False,None,None,None,"not_performed","not_performed","not_performed","local absence of host-platform adapter",True)
     final={"status":"建议接受" if case.final_decision and case.final_decision.decision=="accept" else "尚未记录","decision":case.final_decision.decision if case.final_decision else None}
