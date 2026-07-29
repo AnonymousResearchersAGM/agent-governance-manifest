@@ -1,24 +1,39 @@
-<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PR 审查诊断</title><style>body{margin:0;background:#f3f6f8;font:16px/1.55 system-ui;color:#18212f;overflow-wrap:anywhere}main{max-width:1040px;margin:auto;padding:16px}section,article,details{background:white;border:1px solid #dbe2ea;border-radius:12px;padding:16px;margin:14px 0}header{background:#153452;color:white;padding:20px;border-radius:12px}.status,.gap{border-left:6px solid #a64b17}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}pre{white-space:pre-wrap;overflow:auto}@media(max-width:720px){main{padding:8px}.grid{grid-template-columns:1fr}}</style><main><header><h1>PR 审查诊断</h1><p>当前为 AGM 本地审查工作台：操作只记录 AGM 审查结果，不会修改代码、批准或合并平台 PR。</p></header><section class=status><h2>需要贡献者先处理</h2><p>请贡献者完成测试、检查当前 diff，并确认实际操作后重新提交。</p><p><strong>下一步：</strong>contributor</p></section><section><h2>这次 PR 改了什么</h2><p>贡献者补交前等待</p><p>demo_app/auth.py</p></section><section><h2>风险位置与原因</h2><article><h3>CRITICAL：demo_app/auth.py</h3><p><strong>demo_app/auth.py </strong></p><p>该位置决定认证或权限边界；错误修改可能让已撤销的权限继续有效。</p></article></section><section><h2>项目要求与当前情况</h2><div class=grid><article><h3>本类修改通常需要</h3><ul><li>Record the declared action, permissions, supervision, and delegation scope.</li><li>Provide a locally checkable artifact or test output.</li><li>Describe security, authentication, and authorization impact.</li><li>Identify the files and scopes covered by the contribution.</li><li>Obtain explicit accountable-human attestation bound to the case.</li><li>State known limitations or explicitly state none.</li><li>Explain why the change is needed without disclosing private reasoning.</li><li>Provide a concise factual contribution summary.</li><li>Provide a concrete test command, environment, and outcome.</li></ul></article><article><h3>当前实际情况</h3><ul><li>missing：Record the declared action, permissions, supervision, and delegation scope.</li><li>missing：Provide a locally checkable artifact or test output.</li><li>missing：Describe security, authentication, and authorization impact.</li><li>missing：Identify the files and scopes covered by the contribution.</li><li>missing：Obtain explicit accountable-human attestation bound to the case.</li><li>missing：State known limitations or explicitly state none.</li><li>missing：Explain why the change is needed without disclosing private reasoning.</li><li>missing：Provide a concise factual contribution summary.</li><li>missing：Provide a concrete test command, environment, and outcome.</li></ul></article></div></section><section><h2>缺失和异常</h2><article class=gap><h3>缺少项目要求的材料</h3><p>Record the declared action, permissions, supervision, and delegation scope.</p><p><strong>缺少什么：</strong>请贡献者补充或更新后重新提交。</p></article><article class=gap><h3>缺少项目要求的材料</h3><p>Provide a locally checkable artifact or test output.</p><p><strong>缺少什么：</strong>请贡献者补充或更新后重新提交。</p></article><article class=gap><h3>缺少项目要求的材料</h3><p>Describe security, authentication, and authorization impact.</p><p><strong>缺少什么：</strong>请贡献者补充或更新后重新提交。</p></article><article class=gap><h3>缺少项目要求的材料</h3><p>Identify the files and scopes covered by the contribution.</p><p><strong>缺少什么：</strong>请贡献者补充或更新后重新提交。</p></article><article class=gap><h3>缺少项目要求的材料</h3><p>Obtain explicit accountable-human attestation bound to the case.</p><p><strong>缺少什么：</strong>请贡献者补充或更新后重新提交。</p></article><article class=gap><h3>缺少项目要求的材料</h3><p>State known limitations or explicitly state none.</p><p><strong>缺少什么：</strong>请贡献者补充或更新后重新提交。</p></article><article class=gap><h3>缺少项目要求的材料</h3><p>Explain why the change is needed without disclosing private reasoning.</p><p><strong>缺少什么：</strong>请贡献者补充或更新后重新提交。</p></article><article class=gap><h3>缺少项目要求的材料</h3><p>Provide a concise factual contribution summary.</p><p><strong>缺少什么：</strong>请贡献者补充或更新后重新提交。</p></article><article class=gap><h3>缺少项目要求的材料</h3><p>Provide a concrete test command, environment, and outcome.</p><p><strong>缺少什么：</strong>请贡献者补充或更新后重新提交。</p></article></section><section><h2>具体检查对象</h2><article><h3>查看相关修改：demo_app/auth.py</h3><p>当前未提供可查看的代码差异。</p><p>该材料当前不可查看。</p></article></section><section><h2>页面操作边界</h2><article><h3>确认这项检查没有问题</h3><p><strong>会：</strong>记录该检查已完成。；保留其他有效材料。</p><p><strong>不会：</strong>不会修改代码。；不会批准或合并 PR。；不会作出最终接受决定。</p></article><article><h3>请求贡献者补充</h3><p><strong>会：</strong>记录需要补充的范围。</p><p><strong>不会：</strong>不会修改代码。；不会执行 git merge。；不会改变 GitHub/GitLab PR 状态。</p></article></section><details><summary>技术与治理详情</summary><pre>{
-  &quot;derived_from&quot;: {
-    &quot;matched_rules&quot;: [
-      &quot;match-authentication-critical&quot;
-    ],
-    &quot;compiled_obligations&quot;: [
-      &quot;obl-o-agent-scope&quot;,
-      &quot;obl-o-artifact&quot;,
-      &quot;obl-o-auth-impact&quot;,
-      &quot;obl-o-changed-files&quot;,
-      &quot;obl-o-human-attest&quot;,
-      &quot;obl-o-limitations&quot;,
-      &quot;obl-o-rationale&quot;,
-      &quot;obl-o-summary&quot;,
-      &quot;obl-o-test-command&quot;
-    ],
-    &quot;evidence_set_fingerprint&quot;: &quot;4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945&quot;,
-    &quot;case_state&quot;: &quot;evidence_incomplete&quot;
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PR 审查诊断</title><style>body{margin:0;background:#f3f6f8;font:16px/1.55 system-ui;color:#18212f;overflow-wrap:anywhere}main{max-width:1040px;margin:auto;padding:16px}header{background:#153452;color:#fff;padding:20px;border-radius:12px}section,article,details{background:#fff;border:1px solid #dbe2ea;border-radius:12px;padding:16px;margin:14px 0;min-width:0}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.gap{border-left:6px solid #a64b17}pre{white-space:pre-wrap;overflow:auto}@media(max-width:720px){main{padding:8px}.grid{grid-template-columns:1fr}}</style><main><header><h1>PR 审查诊断</h1><p>这是本地审查工作台：不会修改代码，不会执行 git merge，也不会批准或合并代码托管平台 PR。</p></header><section class=gap><h2>等待贡献者提交维护者检查</h2><p>当前无需你操作；下一步由贡献者提交维护者检查。</p><p><strong>下一步：</strong>贡献者</p></section><section><h2>这次 PR 改了什么</h2><p>D9_contributor_waiting</p><p>README.md</p></section><section><h2>风险位置与原因</h2><article><h3>低风险：README.md</h3><p>README.md 5–8</p><p>该位置是项目说明；需要检查文字准确性和链接。</p></article></section><section><h2>项目要求与当前情况</h2><ul><li>编码助手操作摘要：对应当前版本</li><li>变更文件清单：对应当前版本</li><li>修改说明：对应当前版本</li></ul></section><section><h2>缺失和异常</h2><p>当前无需额外处理。</p></section><section><h2>编码助手参与情况</h2><ul><li>检测到可验证的编码 Agent 活动。</li><li>工具类型：编码 Agent</li><li>修改文件：1 个</li><li>运行命令：1 条</li><li>测试：pytest</li><li>使用其他助手或自动化工具：未记录或否</li><li>网络访问：未记录或否</li><li>记录版本：对应当前版本</li></ul></section><section><h2>人工检查状态</h2><ul><li>贡献者是否已经检查当前版本：尚未确认</li><li>维护者是否完成必要检查：尚未完成必要检查</li><li>是否已由有权限的人类维护者记录最终建议：尚未记录</li></ul></section><section><h2>AGM 最终审查建议</h2><p>尚未记录</p><h2>代码托管平台</h2><p>未连接代码托管平台；未通过本页批准 PR；未通过本页合并 PR。</p></section><section><h2>具体检查对象</h2><article><h3>编码助手操作摘要</h3><p>可复查的项目材料。</p><p>对应当前版本</p><details><summary>展开材料</summary><pre>O-AGENT-SCOPE 的当前版本材料</pre></details></article><article><h3>变更文件清单</h3><p>可复查的项目材料。</p><p>对应当前版本</p><details><summary>展开材料</summary><pre>O-CHANGED-FILES 的当前版本材料</pre></details></article><article><h3>修改说明</h3><p>可复查的项目材料。</p><p>对应当前版本</p><details><summary>展开材料</summary><pre>O-SUMMARY 的当前版本材料</pre></details></article><article><h3>相关修改：README.md</h3><p>当前未提供可查看的代码差异。</p><p>对应当前版本</p><p>该材料当前不可查看。</p></article><article><h3>编码助手行动摘要</h3><p>检测到可验证的编码 Agent 活动。</p><p>对应当前版本</p><details><summary>展开材料</summary><pre>修改当前贡献并运行测试。</pre></details></article></section><details><summary>技术详情</summary><pre>{
+  &quot;case_state&quot;: &quot;evidence_incomplete&quot;,
+  &quot;responsible_side&quot;: [
+    &quot;contributor&quot;,
+    &quot;contributor_agent&quot;
+  ],
+  &quot;gate_state&quot;: &quot;evidence_incomplete&quot;,
+  &quot;legal_operations&quot;: [],
+  &quot;risk_rule_refs&quot;: [
+    &quot;documentation-low&quot;
+  ],
+  &quot;compiled_obligation_refs&quot;: [
+    &quot;O-AGENT-SCOPE&quot;,
+    &quot;O-CHANGED-FILES&quot;,
+    &quot;O-SUMMARY&quot;
+  ],
+  &quot;evidence_state_summary&quot;: {
+    &quot;O-AGENT-SCOPE&quot;: &quot;current&quot;,
+    &quot;O-CHANGED-FILES&quot;: &quot;current&quot;,
+    &quot;O-SUMMARY&quot;: &quot;current&quot;
+  },
+  &quot;human_confirmation_state&quot;: &quot;尚未确认&quot;,
+  &quot;agent_trace_state&quot;: &quot;verifiable&quot;,
+  &quot;route_derivation&quot;: {
+    &quot;route&quot;: &quot;waiting_for_contributor_submission&quot;,
+    &quot;reason&quot;: &quot;当前仍有贡献侧要求未完成；完成后再交给负责人或维护者。&quot;
   },
   &quot;host_platform&quot;: {
-    &quot;status&quot;: &quot;未连接，未批准，未合并&quot;,
-    &quot;adapter&quot;: null
+    &quot;connected&quot;: false,
+    &quot;provider&quot;: null,
+    &quot;repository&quot;: null,
+    &quot;pull_request_id&quot;: null,
+    &quot;approval_state&quot;: &quot;not_performed&quot;,
+    &quot;merge_state&quot;: &quot;not_performed&quot;,
+    &quot;close_state&quot;: &quot;not_performed&quot;,
+    &quot;evidence_source&quot;: &quot;local absence of host-platform adapter&quot;,
+    &quot;verified&quot;: true
   }
 }</pre></details></main></html>

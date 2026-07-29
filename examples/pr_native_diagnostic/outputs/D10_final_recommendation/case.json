@@ -1,0 +1,227 @@
+{
+  "id": "case-D10_final_recommendation",
+  "mode": "maintainer_requested",
+  "mode_reason": "Structured AGM preparation was explicitly declared or requested; no claim about contributor identity is inferred.",
+  "state": "accepted",
+  "created_at": "2026-07-26T00:00:00Z",
+  "updated_at": "2026-07-26T00:00:00Z",
+  "base_commit": "dddddddddddddddddddddddddddddddddddddddd",
+  "changed_files": [
+    "README.md"
+  ],
+  "change_tags": [],
+  "semantic_targets": [],
+  "autonomy_profile": "human_direct",
+  "assurance_profile": "standard",
+  "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
+  "policy_snapshot": {
+    "id": "policy-c570c7a0b8665fe8af271482c3a6f11f",
+    "schema_version": "agm.policy_snapshot/v0.2-dev",
+    "manifest_version": "agm.manifest/v0.2-dev",
+    "base_commit": "dddddddddddddddddddddddddddddddddddddddd",
+    "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
+    "resolved_at": "2026-07-26T00:00:00Z",
+    "source_paths": [
+      ".agm/manifest.yml",
+      ".agm/agents/entrypoints.yml",
+      ".agm/profiles/assurance_profiles.yml",
+      ".agm/profiles/autonomy_profiles.yml",
+      ".agm/interfaces/contributor_panel.yml",
+      ".agm/policies/evidence_profiles.yml",
+      ".agm/interfaces/governance_report.yml",
+      ".agm/policies/interaction_rules.yml",
+      ".agm/interfaces/maintainer_panel.yml",
+      ".agm/interfaces/messages.yml",
+      ".agm/roles/permissions.yml",
+      ".agm/policies/risk_rules.yml",
+      ".agm/roles/roles.yml",
+      ".agm/workflows/state_machine.yml"
+    ]
+  },
+  "overall_risk_level": "low",
+  "matched_rules": [
+    {
+      "id": "match-documentation-low",
+      "rule_id": "documentation-low",
+      "zone": "documentation",
+      "risk_level": "low",
+      "affected_paths": [
+        "README.md"
+      ],
+      "selector_reasons": [
+        "path selectors matched: README.md"
+      ],
+      "obligation_ids": [
+        "O-SUMMARY",
+        "O-CHANGED-FILES"
+      ],
+      "case_required": false,
+      "source": "risk_rule",
+      "obligation_overrides": {}
+    }
+  ],
+  "obligations": [
+    {
+      "id": "obl-o-changed-files",
+      "obligation_id": "O-CHANGED-FILES",
+      "source_rule_ids": [
+        "documentation-low"
+      ],
+      "type": "evidence",
+      "severity": "low",
+      "blocking": true,
+      "verifier_roles": [
+        "maintainer",
+        "maintainer_verifier"
+      ],
+      "evidence_type": "changed_files",
+      "description": "Identify the files and scopes covered by the contribution.",
+      "affected_scope": [
+        "README.md"
+      ],
+      "status": "verified",
+      "interaction_ids": []
+    },
+    {
+      "id": "obl-o-summary",
+      "obligation_id": "O-SUMMARY",
+      "source_rule_ids": [
+        "documentation-low"
+      ],
+      "type": "evidence",
+      "severity": "low",
+      "blocking": true,
+      "verifier_roles": [
+        "maintainer",
+        "maintainer_verifier"
+      ],
+      "evidence_type": "contribution_summary",
+      "description": "Provide a concise factual contribution summary.",
+      "affected_scope": [
+        "README.md"
+      ],
+      "status": "verified",
+      "interaction_ids": []
+    }
+  ],
+  "evidence": [
+    {
+      "id": "evidence-35f8d66168305ece87a19e6d142d05b9",
+      "obligation_ids": [
+        "O-CHANGED-FILES"
+      ],
+      "affected_scope": [
+        "README.md"
+      ],
+      "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
+      "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
+      "evidence_type": "changed_files",
+      "value": "O-CHANGED-FILES 的当前版本材料",
+      "command": null,
+      "environment": null,
+      "artifact_path": null,
+      "artifact_hash": null,
+      "observed_at": "2026-07-26T00:00:00Z",
+      "expires_at": null,
+      "source_actor": "contributor",
+      "source_tool": null,
+      "retained_for_contribution_fingerprint": null,
+      "retention_reason": null,
+      "rejected_at": null,
+      "rejected_by": null,
+      "rejection_reason": null,
+      "validity_state": "verified",
+      "invalid_reasons": []
+    },
+    {
+      "id": "evidence-e5379a1c07895a4ebc6e0e3a2efd77d2",
+      "obligation_ids": [
+        "O-SUMMARY"
+      ],
+      "affected_scope": [
+        "README.md"
+      ],
+      "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
+      "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
+      "evidence_type": "contribution_summary",
+      "value": "O-SUMMARY 的当前版本材料",
+      "command": null,
+      "environment": null,
+      "artifact_path": null,
+      "artifact_hash": null,
+      "observed_at": "2026-07-26T00:00:00Z",
+      "expires_at": null,
+      "source_actor": "contributor",
+      "source_tool": null,
+      "retained_for_contribution_fingerprint": null,
+      "retention_reason": null,
+      "rejected_at": null,
+      "rejected_by": null,
+      "rejection_reason": null,
+      "validity_state": "verified",
+      "invalid_reasons": []
+    }
+  ],
+  "attestations": [],
+  "findings": [],
+  "repair_requests": [],
+  "attempted_operations": [],
+  "maintainer_verifications": [
+    {
+      "id": "verification-e541bc58c76f5c6a80bae1ac92f20069",
+      "actor": "maintainer-reviewer",
+      "role": "maintainer",
+      "timestamp": "2026-07-26T00:00:00Z",
+      "obligation_ids": [
+        "O-CHANGED-FILES",
+        "O-SUMMARY"
+      ],
+      "evidence_ids": [
+        "evidence-35f8d66168305ece87a19e6d142d05b9",
+        "evidence-e5379a1c07895a4ebc6e0e3a2efd77d2"
+      ],
+      "outcome": "verified",
+      "reason": "已检查当前材料。",
+      "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
+      "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5"
+    }
+  ],
+  "final_decision": {
+    "id": "decision-fab7c07da1755a98bee65a7e82011b5f",
+    "actor": "final-maintainer",
+    "role": "maintainer",
+    "timestamp": "2026-07-26T00:00:00Z",
+    "decision": "accept",
+    "reason": "AGM 审查建议可以接受。",
+    "override": false,
+    "unresolved_exception_ids": []
+  },
+  "closure_receipt": {
+    "id": "closure-0799c291617154cebf15f9b3edc5a2cb",
+    "case_id": "case-D10_final_recommendation",
+    "created_at": "2026-07-26T00:00:00Z",
+    "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
+    "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
+    "final_state": "accepted",
+    "final_decision_id": "decision-fab7c07da1755a98bee65a7e82011b5f",
+    "matched_rule_ids": [
+      "documentation-low"
+    ],
+    "obligation_statuses": {
+      "O-CHANGED-FILES": "verified",
+      "O-SUMMARY": "verified"
+    },
+    "evidence_ids": [
+      "evidence-35f8d66168305ece87a19e6d142d05b9",
+      "evidence-e5379a1c07895a4ebc6e0e3a2efd77d2"
+    ],
+    "attestation_ids": [],
+    "verification_ids": [
+      "verification-e541bc58c76f5c6a80bae1ac92f20069"
+    ],
+    "repair_request_ids": [],
+    "unresolved_exception_ids": [],
+    "transition_log_hash": "06dcf2d27018ea3d1b6836e62be987ed68da5753262a90020ea018275f1e52b2"
+  },
+  "schema_version": "agm.governance_case/v0.2-dev"
+}

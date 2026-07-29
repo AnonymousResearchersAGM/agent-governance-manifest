@@ -1,0 +1,508 @@
+{
+  "id": "case-D7_stale_test",
+  "mode": "declared_agent_mediated",
+  "mode_reason": "Structured AGM preparation was explicitly declared or requested; no claim about contributor identity is inferred.",
+  "state": "resubmitted",
+  "created_at": "2026-07-26T00:00:00Z",
+  "updated_at": "2026-07-26T00:00:00Z",
+  "base_commit": "dddddddddddddddddddddddddddddddddddddddd",
+  "changed_files": [
+    "tests/test_auth.py"
+  ],
+  "change_tags": [],
+  "semantic_targets": [],
+  "autonomy_profile": "supervised_agent",
+  "assurance_profile": "standard",
+  "contribution_fingerprint": "88a38b827edd056b99aa94745ed1248f1f6f63fb6725689d33fe6b5aa2a33f07",
+  "policy_snapshot": {
+    "id": "policy-40d457fcadfc5baa8853f9b4300df93a",
+    "schema_version": "agm.policy_snapshot/v0.2-dev",
+    "manifest_version": "agm.manifest/v0.2-dev",
+    "base_commit": "dddddddddddddddddddddddddddddddddddddddd",
+    "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
+    "resolved_at": "2026-07-26T00:00:00Z",
+    "source_paths": [
+      ".agm/manifest.yml",
+      ".agm/agents/entrypoints.yml",
+      ".agm/profiles/assurance_profiles.yml",
+      ".agm/profiles/autonomy_profiles.yml",
+      ".agm/interfaces/contributor_panel.yml",
+      ".agm/policies/evidence_profiles.yml",
+      ".agm/interfaces/governance_report.yml",
+      ".agm/policies/interaction_rules.yml",
+      ".agm/interfaces/maintainer_panel.yml",
+      ".agm/interfaces/messages.yml",
+      ".agm/roles/permissions.yml",
+      ".agm/policies/risk_rules.yml",
+      ".agm/roles/roles.yml",
+      ".agm/workflows/state_machine.yml"
+    ]
+  },
+  "overall_risk_level": "high",
+  "matched_rules": [
+    {
+      "id": "match-test-strategy-high",
+      "rule_id": "test-strategy-high",
+      "zone": "test_strategy",
+      "risk_level": "high",
+      "affected_paths": [
+        "tests/test_auth.py"
+      ],
+      "selector_reasons": [
+        "path selectors matched: tests/test_auth.py"
+      ],
+      "obligation_ids": [
+        "O-SUMMARY",
+        "O-CHANGED-FILES",
+        "O-RATIONALE",
+        "O-TEST-COMMAND",
+        "O-ARTIFACT",
+        "O-LIMITATIONS"
+      ],
+      "case_required": false,
+      "source": "risk_rule",
+      "obligation_overrides": {}
+    }
+  ],
+  "obligations": [
+    {
+      "id": "obl-o-agent-scope",
+      "obligation_id": "O-AGENT-SCOPE",
+      "source_rule_ids": [
+        "autonomy:supervised_agent"
+      ],
+      "type": "evidence",
+      "severity": "medium",
+      "blocking": true,
+      "verifier_roles": [
+        "maintainer",
+        "maintainer_verifier"
+      ],
+      "evidence_type": "agent_action_scope",
+      "description": "Record the declared action, permissions, supervision, and delegation scope.",
+      "affected_scope": [],
+      "status": "satisfied",
+      "interaction_ids": []
+    },
+    {
+      "id": "obl-o-artifact",
+      "obligation_id": "O-ARTIFACT",
+      "source_rule_ids": [
+        "test-strategy-high"
+      ],
+      "type": "evidence",
+      "severity": "high",
+      "blocking": true,
+      "verifier_roles": [
+        "maintainer",
+        "maintainer_verifier"
+      ],
+      "evidence_type": "artifact",
+      "description": "Provide a locally checkable artifact or test output.",
+      "affected_scope": [
+        "tests/test_auth.py"
+      ],
+      "status": "satisfied",
+      "interaction_ids": []
+    },
+    {
+      "id": "obl-o-changed-files",
+      "obligation_id": "O-CHANGED-FILES",
+      "source_rule_ids": [
+        "test-strategy-high"
+      ],
+      "type": "evidence",
+      "severity": "low",
+      "blocking": true,
+      "verifier_roles": [
+        "maintainer",
+        "maintainer_verifier"
+      ],
+      "evidence_type": "changed_files",
+      "description": "Identify the files and scopes covered by the contribution.",
+      "affected_scope": [
+        "tests/test_auth.py"
+      ],
+      "status": "satisfied",
+      "interaction_ids": []
+    },
+    {
+      "id": "obl-o-limitations",
+      "obligation_id": "O-LIMITATIONS",
+      "source_rule_ids": [
+        "test-strategy-high"
+      ],
+      "type": "evidence",
+      "severity": "high",
+      "blocking": true,
+      "verifier_roles": [
+        "maintainer",
+        "maintainer_verifier"
+      ],
+      "evidence_type": "known_limitations",
+      "description": "State known limitations or explicitly state none.",
+      "affected_scope": [
+        "tests/test_auth.py"
+      ],
+      "status": "satisfied",
+      "interaction_ids": []
+    },
+    {
+      "id": "obl-o-rationale",
+      "obligation_id": "O-RATIONALE",
+      "source_rule_ids": [
+        "test-strategy-high"
+      ],
+      "type": "evidence",
+      "severity": "medium",
+      "blocking": true,
+      "verifier_roles": [
+        "maintainer",
+        "maintainer_verifier"
+      ],
+      "evidence_type": "rationale",
+      "description": "Explain why the change is needed without disclosing private reasoning.",
+      "affected_scope": [
+        "tests/test_auth.py"
+      ],
+      "status": "satisfied",
+      "interaction_ids": []
+    },
+    {
+      "id": "obl-o-summary",
+      "obligation_id": "O-SUMMARY",
+      "source_rule_ids": [
+        "test-strategy-high"
+      ],
+      "type": "evidence",
+      "severity": "low",
+      "blocking": true,
+      "verifier_roles": [
+        "maintainer",
+        "maintainer_verifier"
+      ],
+      "evidence_type": "contribution_summary",
+      "description": "Provide a concise factual contribution summary.",
+      "affected_scope": [
+        "tests/test_auth.py"
+      ],
+      "status": "satisfied",
+      "interaction_ids": []
+    },
+    {
+      "id": "obl-o-test-command",
+      "obligation_id": "O-TEST-COMMAND",
+      "source_rule_ids": [
+        "test-strategy-high"
+      ],
+      "type": "evidence",
+      "severity": "high",
+      "blocking": true,
+      "verifier_roles": [
+        "maintainer",
+        "maintainer_verifier"
+      ],
+      "evidence_type": "test_command",
+      "description": "Provide a concrete test command, environment, and outcome.",
+      "affected_scope": [
+        "tests/test_auth.py"
+      ],
+      "status": "unsatisfied",
+      "interaction_ids": []
+    }
+  ],
+  "evidence": [
+    {
+      "id": "evidence-4e783629142e5c41b12a71c78b8bb605",
+      "obligation_ids": [
+        "O-AGENT-SCOPE"
+      ],
+      "affected_scope": [
+        "tests/test_auth.py"
+      ],
+      "contribution_fingerprint": "c456c0c5af5e0e16a165529345f2d1fc44fe78443954136c40caf5e994467508",
+      "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
+      "evidence_type": "agent_action_scope",
+      "value": "O-AGENT-SCOPE 的当前版本材料",
+      "command": null,
+      "environment": null,
+      "artifact_path": null,
+      "artifact_hash": null,
+      "observed_at": "2026-07-26T00:00:00Z",
+      "expires_at": null,
+      "source_actor": "contributor",
+      "source_tool": null,
+      "retained_for_contribution_fingerprint": "88a38b827edd056b99aa94745ed1248f1f6f63fb6725689d33fe6b5aa2a33f07",
+      "retention_reason": "The evidence scope is unaffected by the recorded material change.",
+      "rejected_at": null,
+      "rejected_by": null,
+      "rejection_reason": null,
+      "validity_state": "valid",
+      "invalid_reasons": []
+    },
+    {
+      "id": "evidence-35e7e3baa5885c9fbd74b5a1ca5980a5",
+      "obligation_ids": [
+        "O-ARTIFACT"
+      ],
+      "affected_scope": [
+        "tests/test_auth.py"
+      ],
+      "contribution_fingerprint": "c456c0c5af5e0e16a165529345f2d1fc44fe78443954136c40caf5e994467508",
+      "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
+      "evidence_type": "artifact",
+      "value": "O-ARTIFACT 的当前版本材料",
+      "command": null,
+      "environment": null,
+      "artifact_path": null,
+      "artifact_hash": null,
+      "observed_at": "2026-07-26T00:00:00Z",
+      "expires_at": null,
+      "source_actor": "contributor",
+      "source_tool": null,
+      "retained_for_contribution_fingerprint": "88a38b827edd056b99aa94745ed1248f1f6f63fb6725689d33fe6b5aa2a33f07",
+      "retention_reason": "The evidence scope is unaffected by the recorded material change.",
+      "rejected_at": null,
+      "rejected_by": null,
+      "rejection_reason": null,
+      "validity_state": "valid",
+      "invalid_reasons": []
+    },
+    {
+      "id": "evidence-22d94576afa85f5589ed167736f7ed54",
+      "obligation_ids": [
+        "O-CHANGED-FILES"
+      ],
+      "affected_scope": [
+        "tests/test_auth.py"
+      ],
+      "contribution_fingerprint": "c456c0c5af5e0e16a165529345f2d1fc44fe78443954136c40caf5e994467508",
+      "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
+      "evidence_type": "changed_files",
+      "value": "O-CHANGED-FILES 的当前版本材料",
+      "command": null,
+      "environment": null,
+      "artifact_path": null,
+      "artifact_hash": null,
+      "observed_at": "2026-07-26T00:00:00Z",
+      "expires_at": null,
+      "source_actor": "contributor",
+      "source_tool": null,
+      "retained_for_contribution_fingerprint": "88a38b827edd056b99aa94745ed1248f1f6f63fb6725689d33fe6b5aa2a33f07",
+      "retention_reason": "The evidence scope is unaffected by the recorded material change.",
+      "rejected_at": null,
+      "rejected_by": null,
+      "rejection_reason": null,
+      "validity_state": "valid",
+      "invalid_reasons": []
+    },
+    {
+      "id": "evidence-23eb444a35f75861bc51649ccb3e32d7",
+      "obligation_ids": [
+        "O-LIMITATIONS"
+      ],
+      "affected_scope": [
+        "tests/test_auth.py"
+      ],
+      "contribution_fingerprint": "c456c0c5af5e0e16a165529345f2d1fc44fe78443954136c40caf5e994467508",
+      "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
+      "evidence_type": "known_limitations",
+      "value": "O-LIMITATIONS 的当前版本材料",
+      "command": null,
+      "environment": null,
+      "artifact_path": null,
+      "artifact_hash": null,
+      "observed_at": "2026-07-26T00:00:00Z",
+      "expires_at": null,
+      "source_actor": "contributor",
+      "source_tool": null,
+      "retained_for_contribution_fingerprint": "88a38b827edd056b99aa94745ed1248f1f6f63fb6725689d33fe6b5aa2a33f07",
+      "retention_reason": "The evidence scope is unaffected by the recorded material change.",
+      "rejected_at": null,
+      "rejected_by": null,
+      "rejection_reason": null,
+      "validity_state": "valid",
+      "invalid_reasons": []
+    },
+    {
+      "id": "evidence-f8d5ebf5649552e7b94dd31614672764",
+      "obligation_ids": [
+        "O-RATIONALE"
+      ],
+      "affected_scope": [
+        "tests/test_auth.py"
+      ],
+      "contribution_fingerprint": "c456c0c5af5e0e16a165529345f2d1fc44fe78443954136c40caf5e994467508",
+      "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
+      "evidence_type": "rationale",
+      "value": "O-RATIONALE 的当前版本材料",
+      "command": null,
+      "environment": null,
+      "artifact_path": null,
+      "artifact_hash": null,
+      "observed_at": "2026-07-26T00:00:00Z",
+      "expires_at": null,
+      "source_actor": "contributor",
+      "source_tool": null,
+      "retained_for_contribution_fingerprint": "88a38b827edd056b99aa94745ed1248f1f6f63fb6725689d33fe6b5aa2a33f07",
+      "retention_reason": "The evidence scope is unaffected by the recorded material change.",
+      "rejected_at": null,
+      "rejected_by": null,
+      "rejection_reason": null,
+      "validity_state": "valid",
+      "invalid_reasons": []
+    },
+    {
+      "id": "evidence-885094ad1e4e51b4a2dd599aa7e18c98",
+      "obligation_ids": [
+        "O-SUMMARY"
+      ],
+      "affected_scope": [
+        "tests/test_auth.py"
+      ],
+      "contribution_fingerprint": "c456c0c5af5e0e16a165529345f2d1fc44fe78443954136c40caf5e994467508",
+      "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
+      "evidence_type": "contribution_summary",
+      "value": "O-SUMMARY 的当前版本材料",
+      "command": null,
+      "environment": null,
+      "artifact_path": null,
+      "artifact_hash": null,
+      "observed_at": "2026-07-26T00:00:00Z",
+      "expires_at": null,
+      "source_actor": "contributor",
+      "source_tool": null,
+      "retained_for_contribution_fingerprint": "88a38b827edd056b99aa94745ed1248f1f6f63fb6725689d33fe6b5aa2a33f07",
+      "retention_reason": "The evidence scope is unaffected by the recorded material change.",
+      "rejected_at": null,
+      "rejected_by": null,
+      "rejection_reason": null,
+      "validity_state": "valid",
+      "invalid_reasons": []
+    },
+    {
+      "id": "evidence-ed39ff65b35551b1882eeb3b503ba6e1",
+      "obligation_ids": [
+        "O-TEST-COMMAND"
+      ],
+      "affected_scope": [
+        "tests/test_auth.py"
+      ],
+      "contribution_fingerprint": "c456c0c5af5e0e16a165529345f2d1fc44fe78443954136c40caf5e994467508",
+      "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
+      "evidence_type": "test_command",
+      "value": "O-TEST-COMMAND 的当前版本材料",
+      "command": "python -m pytest -q",
+      "environment": "Python 3.11 / local deterministic fixture",
+      "artifact_path": null,
+      "artifact_hash": null,
+      "observed_at": "2026-07-26T00:00:00Z",
+      "expires_at": null,
+      "source_actor": "contributor",
+      "source_tool": "pytest",
+      "retained_for_contribution_fingerprint": null,
+      "retention_reason": null,
+      "rejected_at": null,
+      "rejected_by": null,
+      "rejection_reason": null,
+      "validity_state": "stale",
+      "invalid_reasons": [
+        "evidence is bound to a stale contribution fingerprint"
+      ]
+    }
+  ],
+  "attestations": [],
+  "findings": [
+    {
+      "id": "finding-e01953c5cdb859529c8ce3195a0c32de",
+      "code": "repair_required",
+      "severity": "high",
+      "message": "请更新指定测试记录。",
+      "blocking": true,
+      "related_object_ids": [],
+      "affected_obligation_ids": [
+        "O-TEST-COMMAND"
+      ],
+      "status": "open",
+      "created_at": "2026-07-26T00:00:00Z",
+      "resolved_at": null,
+      "resolution": null
+    }
+  ],
+  "repair_requests": [
+    {
+      "id": "repair-d44b977b0cc755c39d426de5f71e8f17",
+      "finding_ids": [
+        "finding-e01953c5cdb859529c8ce3195a0c32de"
+      ],
+      "responsible_role": "contributor",
+      "affected_obligation_ids": [
+        "O-TEST-COMMAND"
+      ],
+      "requested_correction": "请更新指定测试记录。",
+      "revalidation_required": [
+        "O-TEST-COMMAND"
+      ],
+      "requested_by": "maintainer-reviewer",
+      "requested_at": "2026-07-26T00:00:00Z",
+      "status": "resubmitted",
+      "attempts": [
+        {
+          "id": "attempt-e92db83de94b534cbe809fdfbad5ead7",
+          "actor": "contributor",
+          "timestamp": "2026-07-26T00:00:00Z",
+          "summary": "提交新版本代码差异。",
+          "affected_obligation_ids": [
+            "O-TEST-COMMAND"
+          ],
+          "evidence_ids": [],
+          "change_assessment": {
+            "change_classification": "partial_material_change",
+            "change_reason": "Recorded by the resubmitting actor.",
+            "previous_contribution_fingerprint": "c456c0c5af5e0e16a165529345f2d1fc44fe78443954136c40caf5e994467508",
+            "new_contribution_fingerprint": "88a38b827edd056b99aa94745ed1248f1f6f63fb6725689d33fe6b5aa2a33f07",
+            "stale_evidence_ids": [
+              "evidence-ed39ff65b35551b1882eeb3b503ba6e1"
+            ],
+            "retained_evidence_ids": [
+              "evidence-22d94576afa85f5589ed167736f7ed54",
+              "evidence-23eb444a35f75861bc51649ccb3e32d7",
+              "evidence-35e7e3baa5885c9fbd74b5a1ca5980a5",
+              "evidence-4e783629142e5c41b12a71c78b8bb605",
+              "evidence-885094ad1e4e51b4a2dd599aa7e18c98",
+              "evidence-f8d5ebf5649552e7b94dd31614672764"
+            ],
+            "invalidated_attestation_ids": [],
+            "required_revalidation_scope": [
+              "O-TEST-COMMAND"
+            ]
+          },
+          "change_classification": "partial_material_change",
+          "change_reason": "Recorded by the resubmitting actor.",
+          "previous_contribution_fingerprint": "c456c0c5af5e0e16a165529345f2d1fc44fe78443954136c40caf5e994467508",
+          "new_contribution_fingerprint": "88a38b827edd056b99aa94745ed1248f1f6f63fb6725689d33fe6b5aa2a33f07",
+          "stale_evidence_ids": [
+            "evidence-ed39ff65b35551b1882eeb3b503ba6e1"
+          ],
+          "retained_evidence_ids": [
+            "evidence-22d94576afa85f5589ed167736f7ed54",
+            "evidence-23eb444a35f75861bc51649ccb3e32d7",
+            "evidence-35e7e3baa5885c9fbd74b5a1ca5980a5",
+            "evidence-4e783629142e5c41b12a71c78b8bb605",
+            "evidence-885094ad1e4e51b4a2dd599aa7e18c98",
+            "evidence-f8d5ebf5649552e7b94dd31614672764"
+          ],
+          "invalidated_attestation_ids": [],
+          "required_revalidation_scope": [
+            "O-TEST-COMMAND"
+          ]
+        }
+      ]
+    }
+  ],
+  "attempted_operations": [],
+  "maintainer_verifications": [],
+  "final_decision": null,
+  "closure_receipt": null,
+  "schema_version": "agm.governance_case/v0.2-dev"
+}

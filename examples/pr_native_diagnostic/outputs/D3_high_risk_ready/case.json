@@ -1,0 +1,512 @@
+{
+  "id": "case-D3_high_risk_ready",
+  "mode": "policy_required",
+  "mode_reason": "Project policy requires a Governance Case for at least one matched change rule; this requirement is based on the change, not inferred authorship.",
+  "state": "awaiting_maintainer_verification",
+  "created_at": "2026-07-26T00:00:00Z",
+  "updated_at": "2026-07-26T00:00:00Z",
+  "base_commit": "dddddddddddddddddddddddddddddddddddddddd",
+  "changed_files": [
+    "demo_app/auth.py"
+  ],
+  "change_tags": [],
+  "semantic_targets": [],
+  "autonomy_profile": "supervised_agent",
+  "assurance_profile": "standard",
+  "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
+  "policy_snapshot": {
+    "id": "policy-d93b2efbd7205916a8f8db705dc81f5d",
+    "schema_version": "agm.policy_snapshot/v0.2-dev",
+    "manifest_version": "agm.manifest/v0.2-dev",
+    "base_commit": "dddddddddddddddddddddddddddddddddddddddd",
+    "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
+    "resolved_at": "2026-07-26T00:00:00Z",
+    "source_paths": [
+      ".agm/manifest.yml",
+      ".agm/agents/entrypoints.yml",
+      ".agm/profiles/assurance_profiles.yml",
+      ".agm/profiles/autonomy_profiles.yml",
+      ".agm/interfaces/contributor_panel.yml",
+      ".agm/policies/evidence_profiles.yml",
+      ".agm/interfaces/governance_report.yml",
+      ".agm/policies/interaction_rules.yml",
+      ".agm/interfaces/maintainer_panel.yml",
+      ".agm/interfaces/messages.yml",
+      ".agm/roles/permissions.yml",
+      ".agm/policies/risk_rules.yml",
+      ".agm/roles/roles.yml",
+      ".agm/workflows/state_machine.yml"
+    ]
+  },
+  "overall_risk_level": "critical",
+  "matched_rules": [
+    {
+      "id": "match-authentication-critical",
+      "rule_id": "authentication-critical",
+      "zone": "authentication",
+      "risk_level": "critical",
+      "affected_paths": [
+        "demo_app/auth.py"
+      ],
+      "selector_reasons": [
+        "path selectors matched: demo_app/auth.py"
+      ],
+      "obligation_ids": [
+        "O-SUMMARY",
+        "O-CHANGED-FILES",
+        "O-RATIONALE",
+        "O-AUTH-IMPACT",
+        "O-TEST-COMMAND",
+        "O-ARTIFACT",
+        "O-LIMITATIONS",
+        "O-HUMAN-ATTEST"
+      ],
+      "case_required": true,
+      "source": "risk_rule",
+      "obligation_overrides": {}
+    }
+  ],
+  "obligations": [
+    {
+      "id": "obl-o-agent-scope",
+      "obligation_id": "O-AGENT-SCOPE",
+      "source_rule_ids": [
+        "autonomy:supervised_agent"
+      ],
+      "type": "evidence",
+      "severity": "medium",
+      "blocking": true,
+      "verifier_roles": [
+        "maintainer",
+        "maintainer_verifier"
+      ],
+      "evidence_type": "agent_action_scope",
+      "description": "Record the declared action, permissions, supervision, and delegation scope.",
+      "affected_scope": [],
+      "status": "satisfied",
+      "interaction_ids": []
+    },
+    {
+      "id": "obl-o-artifact",
+      "obligation_id": "O-ARTIFACT",
+      "source_rule_ids": [
+        "authentication-critical"
+      ],
+      "type": "evidence",
+      "severity": "high",
+      "blocking": true,
+      "verifier_roles": [
+        "maintainer",
+        "maintainer_verifier"
+      ],
+      "evidence_type": "artifact",
+      "description": "Provide a locally checkable artifact or test output.",
+      "affected_scope": [
+        "demo_app/auth.py"
+      ],
+      "status": "satisfied",
+      "interaction_ids": []
+    },
+    {
+      "id": "obl-o-auth-impact",
+      "obligation_id": "O-AUTH-IMPACT",
+      "source_rule_ids": [
+        "authentication-critical"
+      ],
+      "type": "evidence",
+      "severity": "critical",
+      "blocking": true,
+      "verifier_roles": [
+        "maintainer",
+        "maintainer_verifier"
+      ],
+      "evidence_type": "security_auth_impact",
+      "description": "Describe security, authentication, and authorization impact.",
+      "affected_scope": [
+        "demo_app/auth.py"
+      ],
+      "status": "satisfied",
+      "interaction_ids": []
+    },
+    {
+      "id": "obl-o-changed-files",
+      "obligation_id": "O-CHANGED-FILES",
+      "source_rule_ids": [
+        "authentication-critical"
+      ],
+      "type": "evidence",
+      "severity": "low",
+      "blocking": true,
+      "verifier_roles": [
+        "maintainer",
+        "maintainer_verifier"
+      ],
+      "evidence_type": "changed_files",
+      "description": "Identify the files and scopes covered by the contribution.",
+      "affected_scope": [
+        "demo_app/auth.py"
+      ],
+      "status": "satisfied",
+      "interaction_ids": []
+    },
+    {
+      "id": "obl-o-human-attest",
+      "obligation_id": "O-HUMAN-ATTEST",
+      "source_rule_ids": [
+        "authentication-critical"
+      ],
+      "type": "human_attestation",
+      "severity": "critical",
+      "blocking": true,
+      "verifier_roles": [
+        "accountable_human",
+        "maintainer"
+      ],
+      "evidence_type": "human_attestation",
+      "description": "Obtain explicit accountable-human attestation bound to the case.",
+      "affected_scope": [
+        "demo_app/auth.py"
+      ],
+      "status": "satisfied",
+      "interaction_ids": []
+    },
+    {
+      "id": "obl-o-limitations",
+      "obligation_id": "O-LIMITATIONS",
+      "source_rule_ids": [
+        "authentication-critical"
+      ],
+      "type": "evidence",
+      "severity": "high",
+      "blocking": true,
+      "verifier_roles": [
+        "maintainer",
+        "maintainer_verifier"
+      ],
+      "evidence_type": "known_limitations",
+      "description": "State known limitations or explicitly state none.",
+      "affected_scope": [
+        "demo_app/auth.py"
+      ],
+      "status": "satisfied",
+      "interaction_ids": []
+    },
+    {
+      "id": "obl-o-rationale",
+      "obligation_id": "O-RATIONALE",
+      "source_rule_ids": [
+        "authentication-critical"
+      ],
+      "type": "evidence",
+      "severity": "medium",
+      "blocking": true,
+      "verifier_roles": [
+        "maintainer",
+        "maintainer_verifier"
+      ],
+      "evidence_type": "rationale",
+      "description": "Explain why the change is needed without disclosing private reasoning.",
+      "affected_scope": [
+        "demo_app/auth.py"
+      ],
+      "status": "satisfied",
+      "interaction_ids": []
+    },
+    {
+      "id": "obl-o-summary",
+      "obligation_id": "O-SUMMARY",
+      "source_rule_ids": [
+        "authentication-critical"
+      ],
+      "type": "evidence",
+      "severity": "low",
+      "blocking": true,
+      "verifier_roles": [
+        "maintainer",
+        "maintainer_verifier"
+      ],
+      "evidence_type": "contribution_summary",
+      "description": "Provide a concise factual contribution summary.",
+      "affected_scope": [
+        "demo_app/auth.py"
+      ],
+      "status": "satisfied",
+      "interaction_ids": []
+    },
+    {
+      "id": "obl-o-test-command",
+      "obligation_id": "O-TEST-COMMAND",
+      "source_rule_ids": [
+        "authentication-critical"
+      ],
+      "type": "evidence",
+      "severity": "high",
+      "blocking": true,
+      "verifier_roles": [
+        "maintainer",
+        "maintainer_verifier"
+      ],
+      "evidence_type": "test_command",
+      "description": "Provide a concrete test command, environment, and outcome.",
+      "affected_scope": [
+        "demo_app/auth.py"
+      ],
+      "status": "satisfied",
+      "interaction_ids": []
+    }
+  ],
+  "evidence": [
+    {
+      "id": "evidence-303307ef40b85830bac374e6673b2832",
+      "obligation_ids": [
+        "O-AGENT-SCOPE"
+      ],
+      "affected_scope": [
+        "demo_app/auth.py"
+      ],
+      "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
+      "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
+      "evidence_type": "agent_action_scope",
+      "value": "O-AGENT-SCOPE 的当前版本材料",
+      "command": null,
+      "environment": null,
+      "artifact_path": null,
+      "artifact_hash": null,
+      "observed_at": "2026-07-26T00:00:00Z",
+      "expires_at": null,
+      "source_actor": "contributor",
+      "source_tool": null,
+      "retained_for_contribution_fingerprint": null,
+      "retention_reason": null,
+      "rejected_at": null,
+      "rejected_by": null,
+      "rejection_reason": null,
+      "validity_state": "valid",
+      "invalid_reasons": []
+    },
+    {
+      "id": "evidence-c9cb8efb318b571aa48d6b5b3abc83ee",
+      "obligation_ids": [
+        "O-ARTIFACT"
+      ],
+      "affected_scope": [
+        "demo_app/auth.py"
+      ],
+      "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
+      "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
+      "evidence_type": "artifact",
+      "value": "O-ARTIFACT 的当前版本材料",
+      "command": null,
+      "environment": null,
+      "artifact_path": null,
+      "artifact_hash": null,
+      "observed_at": "2026-07-26T00:00:00Z",
+      "expires_at": null,
+      "source_actor": "contributor",
+      "source_tool": null,
+      "retained_for_contribution_fingerprint": null,
+      "retention_reason": null,
+      "rejected_at": null,
+      "rejected_by": null,
+      "rejection_reason": null,
+      "validity_state": "valid",
+      "invalid_reasons": []
+    },
+    {
+      "id": "evidence-74dce3330f48595a9ab21a2c7537c247",
+      "obligation_ids": [
+        "O-AUTH-IMPACT"
+      ],
+      "affected_scope": [
+        "demo_app/auth.py"
+      ],
+      "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
+      "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
+      "evidence_type": "security_auth_impact",
+      "value": "O-AUTH-IMPACT 的当前版本材料",
+      "command": null,
+      "environment": null,
+      "artifact_path": null,
+      "artifact_hash": null,
+      "observed_at": "2026-07-26T00:00:00Z",
+      "expires_at": null,
+      "source_actor": "contributor",
+      "source_tool": null,
+      "retained_for_contribution_fingerprint": null,
+      "retention_reason": null,
+      "rejected_at": null,
+      "rejected_by": null,
+      "rejection_reason": null,
+      "validity_state": "valid",
+      "invalid_reasons": []
+    },
+    {
+      "id": "evidence-ae80d8d778325930baf059b7a23f44d3",
+      "obligation_ids": [
+        "O-CHANGED-FILES"
+      ],
+      "affected_scope": [
+        "demo_app/auth.py"
+      ],
+      "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
+      "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
+      "evidence_type": "changed_files",
+      "value": "O-CHANGED-FILES 的当前版本材料",
+      "command": null,
+      "environment": null,
+      "artifact_path": null,
+      "artifact_hash": null,
+      "observed_at": "2026-07-26T00:00:00Z",
+      "expires_at": null,
+      "source_actor": "contributor",
+      "source_tool": null,
+      "retained_for_contribution_fingerprint": null,
+      "retention_reason": null,
+      "rejected_at": null,
+      "rejected_by": null,
+      "rejection_reason": null,
+      "validity_state": "valid",
+      "invalid_reasons": []
+    },
+    {
+      "id": "evidence-7612a8d03815527ab4e316f5eea320ad",
+      "obligation_ids": [
+        "O-LIMITATIONS"
+      ],
+      "affected_scope": [
+        "demo_app/auth.py"
+      ],
+      "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
+      "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
+      "evidence_type": "known_limitations",
+      "value": "O-LIMITATIONS 的当前版本材料",
+      "command": null,
+      "environment": null,
+      "artifact_path": null,
+      "artifact_hash": null,
+      "observed_at": "2026-07-26T00:00:00Z",
+      "expires_at": null,
+      "source_actor": "contributor",
+      "source_tool": null,
+      "retained_for_contribution_fingerprint": null,
+      "retention_reason": null,
+      "rejected_at": null,
+      "rejected_by": null,
+      "rejection_reason": null,
+      "validity_state": "valid",
+      "invalid_reasons": []
+    },
+    {
+      "id": "evidence-68c7e64bf7eb55f783e0cc393f2bea62",
+      "obligation_ids": [
+        "O-RATIONALE"
+      ],
+      "affected_scope": [
+        "demo_app/auth.py"
+      ],
+      "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
+      "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
+      "evidence_type": "rationale",
+      "value": "O-RATIONALE 的当前版本材料",
+      "command": null,
+      "environment": null,
+      "artifact_path": null,
+      "artifact_hash": null,
+      "observed_at": "2026-07-26T00:00:00Z",
+      "expires_at": null,
+      "source_actor": "contributor",
+      "source_tool": null,
+      "retained_for_contribution_fingerprint": null,
+      "retention_reason": null,
+      "rejected_at": null,
+      "rejected_by": null,
+      "rejection_reason": null,
+      "validity_state": "valid",
+      "invalid_reasons": []
+    },
+    {
+      "id": "evidence-84efeca885875600afd7062dea8e6184",
+      "obligation_ids": [
+        "O-SUMMARY"
+      ],
+      "affected_scope": [
+        "demo_app/auth.py"
+      ],
+      "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
+      "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
+      "evidence_type": "contribution_summary",
+      "value": "O-SUMMARY 的当前版本材料",
+      "command": null,
+      "environment": null,
+      "artifact_path": null,
+      "artifact_hash": null,
+      "observed_at": "2026-07-26T00:00:00Z",
+      "expires_at": null,
+      "source_actor": "contributor",
+      "source_tool": null,
+      "retained_for_contribution_fingerprint": null,
+      "retention_reason": null,
+      "rejected_at": null,
+      "rejected_by": null,
+      "rejection_reason": null,
+      "validity_state": "valid",
+      "invalid_reasons": []
+    },
+    {
+      "id": "evidence-9e6c52a2d35f5e92837d0331b2fe5eca",
+      "obligation_ids": [
+        "O-TEST-COMMAND"
+      ],
+      "affected_scope": [
+        "demo_app/auth.py"
+      ],
+      "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
+      "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
+      "evidence_type": "test_command",
+      "value": "O-TEST-COMMAND 的当前版本材料",
+      "command": "python -m pytest -q",
+      "environment": "Python 3.11 / local deterministic fixture",
+      "artifact_path": null,
+      "artifact_hash": null,
+      "observed_at": "2026-07-26T00:00:00Z",
+      "expires_at": null,
+      "source_actor": "contributor",
+      "source_tool": "pytest",
+      "retained_for_contribution_fingerprint": null,
+      "retention_reason": null,
+      "rejected_at": null,
+      "rejected_by": null,
+      "rejection_reason": null,
+      "validity_state": "valid",
+      "invalid_reasons": []
+    }
+  ],
+  "attestations": [
+    {
+      "id": "attestation-479b25eed50652c39614b05dad9df1c1",
+      "actor": "contributor-human",
+      "role": "accountable_human",
+      "timestamp": "2026-07-26T00:00:00Z",
+      "reviewed_scope": [
+        "demo_app/auth.py"
+      ],
+      "statement": "已检查当前版本的代码差异和测试结果。",
+      "reservations": [],
+      "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
+      "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
+      "evidence_set_fingerprint": "aebdd1909b5e3fe0968910952084eec863681024ef2e6f6eb128a07fe4429b35",
+      "retained_for_contribution_fingerprint": null,
+      "retention_reason": null,
+      "status": "confirmed",
+      "invalidated_at": null,
+      "invalidation_reason": null
+    }
+  ],
+  "findings": [],
+  "repair_requests": [],
+  "attempted_operations": [],
+  "maintainer_verifications": [],
+  "final_decision": null,
+  "closure_receipt": null,
+  "schema_version": "agm.governance_case/v0.2-dev"
+}

@@ -1,0 +1,273 @@
+{
+  "id": "case-D4_no_agent_trace",
+  "mode": "maintainer_requested",
+  "mode_reason": "Structured AGM preparation was explicitly declared or requested; no claim about contributor identity is inferred.",
+  "state": "awaiting_maintainer_verification",
+  "created_at": "2026-07-26T00:00:00Z",
+  "updated_at": "2026-07-26T00:00:00Z",
+  "base_commit": "dddddddddddddddddddddddddddddddddddddddd",
+  "changed_files": [
+    "demo_app/tasks.py"
+  ],
+  "change_tags": [],
+  "semantic_targets": [],
+  "autonomy_profile": "human_direct",
+  "assurance_profile": "standard",
+  "contribution_fingerprint": "e0bc385d792ac7a129d3868c9cdc684e6016e2af5c3388fde9772b606b17afb6",
+  "policy_snapshot": {
+    "id": "policy-04085e605c5c56dfb8c5210802529a27",
+    "schema_version": "agm.policy_snapshot/v0.2-dev",
+    "manifest_version": "agm.manifest/v0.2-dev",
+    "base_commit": "dddddddddddddddddddddddddddddddddddddddd",
+    "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
+    "resolved_at": "2026-07-26T00:00:00Z",
+    "source_paths": [
+      ".agm/manifest.yml",
+      ".agm/agents/entrypoints.yml",
+      ".agm/profiles/assurance_profiles.yml",
+      ".agm/profiles/autonomy_profiles.yml",
+      ".agm/interfaces/contributor_panel.yml",
+      ".agm/policies/evidence_profiles.yml",
+      ".agm/interfaces/governance_report.yml",
+      ".agm/policies/interaction_rules.yml",
+      ".agm/interfaces/maintainer_panel.yml",
+      ".agm/interfaces/messages.yml",
+      ".agm/roles/permissions.yml",
+      ".agm/policies/risk_rules.yml",
+      ".agm/roles/roles.yml",
+      ".agm/workflows/state_machine.yml"
+    ]
+  },
+  "overall_risk_level": "medium",
+  "matched_rules": [
+    {
+      "id": "match-task-logic-medium",
+      "rule_id": "task-logic-medium",
+      "zone": "task_logic",
+      "risk_level": "medium",
+      "affected_paths": [
+        "demo_app/tasks.py"
+      ],
+      "selector_reasons": [
+        "path selectors matched: demo_app/tasks.py"
+      ],
+      "obligation_ids": [
+        "O-SUMMARY",
+        "O-CHANGED-FILES",
+        "O-RATIONALE",
+        "O-TEST-EXPLANATION"
+      ],
+      "case_required": false,
+      "source": "risk_rule",
+      "obligation_overrides": {}
+    }
+  ],
+  "obligations": [
+    {
+      "id": "obl-o-changed-files",
+      "obligation_id": "O-CHANGED-FILES",
+      "source_rule_ids": [
+        "task-logic-medium"
+      ],
+      "type": "evidence",
+      "severity": "low",
+      "blocking": true,
+      "verifier_roles": [
+        "maintainer",
+        "maintainer_verifier"
+      ],
+      "evidence_type": "changed_files",
+      "description": "Identify the files and scopes covered by the contribution.",
+      "affected_scope": [
+        "demo_app/tasks.py"
+      ],
+      "status": "satisfied",
+      "interaction_ids": []
+    },
+    {
+      "id": "obl-o-rationale",
+      "obligation_id": "O-RATIONALE",
+      "source_rule_ids": [
+        "task-logic-medium"
+      ],
+      "type": "evidence",
+      "severity": "medium",
+      "blocking": true,
+      "verifier_roles": [
+        "maintainer",
+        "maintainer_verifier"
+      ],
+      "evidence_type": "rationale",
+      "description": "Explain why the change is needed without disclosing private reasoning.",
+      "affected_scope": [
+        "demo_app/tasks.py"
+      ],
+      "status": "satisfied",
+      "interaction_ids": []
+    },
+    {
+      "id": "obl-o-summary",
+      "obligation_id": "O-SUMMARY",
+      "source_rule_ids": [
+        "task-logic-medium"
+      ],
+      "type": "evidence",
+      "severity": "low",
+      "blocking": true,
+      "verifier_roles": [
+        "maintainer",
+        "maintainer_verifier"
+      ],
+      "evidence_type": "contribution_summary",
+      "description": "Provide a concise factual contribution summary.",
+      "affected_scope": [
+        "demo_app/tasks.py"
+      ],
+      "status": "satisfied",
+      "interaction_ids": []
+    },
+    {
+      "id": "obl-o-test-explanation",
+      "obligation_id": "O-TEST-EXPLANATION",
+      "source_rule_ids": [
+        "task-logic-medium"
+      ],
+      "type": "evidence",
+      "severity": "medium",
+      "blocking": true,
+      "verifier_roles": [
+        "maintainer",
+        "maintainer_verifier"
+      ],
+      "evidence_type": "test_explanation",
+      "description": "Provide a test command or a clear explanation when tests are not applicable.",
+      "affected_scope": [
+        "demo_app/tasks.py"
+      ],
+      "status": "satisfied",
+      "interaction_ids": []
+    }
+  ],
+  "evidence": [
+    {
+      "id": "evidence-1adc34d8779f5c7fa4e2cb2fdb21f54b",
+      "obligation_ids": [
+        "O-CHANGED-FILES"
+      ],
+      "affected_scope": [
+        "demo_app/tasks.py"
+      ],
+      "contribution_fingerprint": "e0bc385d792ac7a129d3868c9cdc684e6016e2af5c3388fde9772b606b17afb6",
+      "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
+      "evidence_type": "changed_files",
+      "value": "O-CHANGED-FILES 的当前版本材料",
+      "command": null,
+      "environment": null,
+      "artifact_path": null,
+      "artifact_hash": null,
+      "observed_at": "2026-07-26T00:00:00Z",
+      "expires_at": null,
+      "source_actor": "contributor",
+      "source_tool": null,
+      "retained_for_contribution_fingerprint": null,
+      "retention_reason": null,
+      "rejected_at": null,
+      "rejected_by": null,
+      "rejection_reason": null,
+      "validity_state": "valid",
+      "invalid_reasons": []
+    },
+    {
+      "id": "evidence-ff64947789bc58859eff57aee6551c2d",
+      "obligation_ids": [
+        "O-RATIONALE"
+      ],
+      "affected_scope": [
+        "demo_app/tasks.py"
+      ],
+      "contribution_fingerprint": "e0bc385d792ac7a129d3868c9cdc684e6016e2af5c3388fde9772b606b17afb6",
+      "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
+      "evidence_type": "rationale",
+      "value": "O-RATIONALE 的当前版本材料",
+      "command": null,
+      "environment": null,
+      "artifact_path": null,
+      "artifact_hash": null,
+      "observed_at": "2026-07-26T00:00:00Z",
+      "expires_at": null,
+      "source_actor": "contributor",
+      "source_tool": null,
+      "retained_for_contribution_fingerprint": null,
+      "retention_reason": null,
+      "rejected_at": null,
+      "rejected_by": null,
+      "rejection_reason": null,
+      "validity_state": "valid",
+      "invalid_reasons": []
+    },
+    {
+      "id": "evidence-23d03e0476f85858a992e70bfca7e8f4",
+      "obligation_ids": [
+        "O-SUMMARY"
+      ],
+      "affected_scope": [
+        "demo_app/tasks.py"
+      ],
+      "contribution_fingerprint": "e0bc385d792ac7a129d3868c9cdc684e6016e2af5c3388fde9772b606b17afb6",
+      "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
+      "evidence_type": "contribution_summary",
+      "value": "O-SUMMARY 的当前版本材料",
+      "command": null,
+      "environment": null,
+      "artifact_path": null,
+      "artifact_hash": null,
+      "observed_at": "2026-07-26T00:00:00Z",
+      "expires_at": null,
+      "source_actor": "contributor",
+      "source_tool": null,
+      "retained_for_contribution_fingerprint": null,
+      "retention_reason": null,
+      "rejected_at": null,
+      "rejected_by": null,
+      "rejection_reason": null,
+      "validity_state": "valid",
+      "invalid_reasons": []
+    },
+    {
+      "id": "evidence-176f48f454ee5f08987ff6acf1d72ca3",
+      "obligation_ids": [
+        "O-TEST-EXPLANATION"
+      ],
+      "affected_scope": [
+        "demo_app/tasks.py"
+      ],
+      "contribution_fingerprint": "e0bc385d792ac7a129d3868c9cdc684e6016e2af5c3388fde9772b606b17afb6",
+      "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
+      "evidence_type": "test_explanation",
+      "value": "O-TEST-EXPLANATION 的当前版本材料",
+      "command": null,
+      "environment": null,
+      "artifact_path": null,
+      "artifact_hash": null,
+      "observed_at": "2026-07-26T00:00:00Z",
+      "expires_at": null,
+      "source_actor": "contributor",
+      "source_tool": null,
+      "retained_for_contribution_fingerprint": null,
+      "retention_reason": null,
+      "rejected_at": null,
+      "rejected_by": null,
+      "rejection_reason": null,
+      "validity_state": "valid",
+      "invalid_reasons": []
+    }
+  ],
+  "attestations": [],
+  "findings": [],
+  "repair_requests": [],
+  "attempted_operations": [],
+  "maintainer_verifications": [],
+  "final_decision": null,
+  "closure_receipt": null,
+  "schema_version": "agm.governance_case/v0.2-dev"
+}

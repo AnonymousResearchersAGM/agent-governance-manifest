@@ -4,13 +4,13 @@
   "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
   "diagnostic_status": "可以按常规流程审查",
   "change_summary": {
-    "summary": "README 非功能性文字",
+    "summary": "D1_low_risk_readme",
     "files": [
       "README.md"
     ],
     "line_ranges": {
       "README.md": [
-        "12–16"
+        "5–8"
       ]
     }
   },
@@ -19,16 +19,16 @@
       "finding_id": "risk:match-documentation-low",
       "category": "risk_area",
       "severity": "low",
-      "headline": "LOW：README.md",
-      "plain_language_explanation": "该位置是项目使用说明；需要确认文字、命令和链接准确。",
+      "headline": "低风险：README.md",
+      "plain_language_explanation": "该位置是项目说明；需要检查文字准确性和链接。",
       "affected_files": [
         "README.md"
       ],
       "affected_line_ranges": [
-        "12–16"
+        "5–8"
       ],
-      "expected_state": "按项目规则提供并检查该区域的材料。",
-      "observed_state": "已从当前贡献编译风险区域。",
+      "expected_state": "按项目要求检查",
+      "observed_state": "已识别该风险区域",
       "gap": "",
       "risk_rule_refs": [
         "documentation-low"
@@ -48,210 +48,225 @@
   ],
   "expected_requirements": [
     {
-      "title": "Record the declared action, permissions, supervision, and delegation scope.",
-      "required_by": [
-        "autonomy:supervised_agent"
-      ],
+      "title": "编码助手操作摘要",
+      "plain_requirement": "说明智能体做了什么、用了哪些权限、是否有人监督，以及是否把具有独立行动能力的工作继续交给了另一个智能体。",
       "obligation_ref": "O-AGENT-SCOPE",
-      "blocking": true,
-      "state": "current"
+      "state": "current",
+      "blocking": true
     },
     {
-      "title": "Identify the files and scopes covered by the contribution.",
-      "required_by": [
-        "documentation-low"
-      ],
+      "title": "变更文件清单",
+      "plain_requirement": "列出这次修改涉及的文件和范围。",
       "obligation_ref": "O-CHANGED-FILES",
-      "blocking": true,
-      "state": "current"
+      "state": "current",
+      "blocking": true
     },
     {
-      "title": "Provide a concise factual contribution summary.",
-      "required_by": [
-        "documentation-low"
-      ],
+      "title": "修改说明",
+      "plain_requirement": "简要说明这次修改做了什么。",
       "obligation_ref": "O-SUMMARY",
-      "blocking": true,
-      "state": "current"
+      "state": "current",
+      "blocking": true
     }
   ],
   "observed_evidence": [
     {
-      "title": "Record the declared action, permissions, supervision, and delegation scope.",
+      "title": "编码助手操作摘要",
+      "state": "current",
       "evidence_type": "agent_action_scope",
-      "state": "current",
-      "source": "contributor",
       "bound_commit": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
-      "artifact": null
+      "source": "contributor"
     },
     {
-      "title": "Identify the files and scopes covered by the contribution.",
+      "title": "变更文件清单",
+      "state": "current",
       "evidence_type": "changed_files",
-      "state": "current",
-      "source": "contributor",
       "bound_commit": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
-      "artifact": null
+      "source": "contributor"
     },
     {
-      "title": "Provide a concise factual contribution summary.",
-      "evidence_type": "contribution_summary",
+      "title": "修改说明",
       "state": "current",
-      "source": "contributor",
+      "evidence_type": "contribution_summary",
       "bound_commit": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
-      "artifact": null
+      "source": "contributor"
     }
   ],
   "evidence_gaps": [],
   "agent_involvement": {
+    "state": "verifiable",
     "status": "verifiable",
     "message": "检测到可验证的编码 Agent 活动。",
-    "details": {
-      "verified": true,
-      "type": "coding agent",
-      "modified_files": [
-        "README.md"
-      ],
-      "test_runs": [],
-      "network": false
-    }
+    "type": "编码 Agent",
+    "modified_file_count": 1,
+    "commands": [
+      "python -m pytest -q"
+    ],
+    "tests": [
+      "pytest"
+    ],
+    "used_other_tools": false,
+    "network": false,
+    "current_version": true
   },
   "human_review_status": {
-    "contributor_self_review": "贡献者尚未检查当前版本",
+    "contributor_self_review": "尚未确认",
     "maintainer_review": "尚未完成必要检查",
-    "final_decision": "尚未作出最终决定"
+    "final_recommendation": "尚未记录"
+  },
+  "final_recommendation": {
+    "status": "尚未记录",
+    "decision": null
+  },
+  "host_platform_status": {
+    "connected": false,
+    "provider": null,
+    "repository": null,
+    "pull_request_id": null,
+    "approval_state": "not_performed",
+    "merge_state": "not_performed",
+    "close_state": "not_performed",
+    "evidence_source": "local absence of host-platform adapter",
+    "verified": true
   },
   "review_readiness": {
     "status": "可以按常规流程审查",
     "blocking_gaps": 0
   },
   "recommended_route": {
-    "owner": "maintainer",
-    "message": "请查看具体 diff、测试和影响说明。"
+    "route": "normal_pr_review",
+    "owner": "维护者",
+    "message": "检查文字准确性和链接即可，可以返回正常 PR 审查。"
   },
   "inspection_objects": [
     {
-      "title": "Record the declared action, permissions, supervision, and delegation scope.：材料",
+      "title": "编码助手操作摘要",
       "object_type": "EvidenceArtifactInspectionObject",
-      "plain_language_summary": "项目材料；不可用时不会生成内容。",
+      "plain_language_summary": "可复查的项目材料。",
       "source": "contributor",
       "bound_commit": "dddddddddddddddddddddddddddddddddddddddd",
-      "content_digest": "91c07ae150a23217c924d8bc668eaa7ce061280e020dc113dfe173d1b45274d1",
+      "content_digest": "05c894f40156ca8ea9b180d69f6582f02ee33507bf89ee41bc8669d679e2e5d0",
       "availability": "available",
       "freshness": "current",
       "view_href": null,
-      "inline_content": "当前材料",
+      "inline_content": "O-AGENT-SCOPE 的当前版本材料",
       "technical_metadata": {
-        "evidence_id": "evidence-61d6ff80d35c56ad97f7966c94e21dc3",
-        "evidence_type": "agent_action_scope"
+        "evidence_id": "evidence-61d6ff80d35c56ad97f7966c94e21dc3"
       }
     },
     {
-      "title": "Identify the files and scopes covered by the contribution.：材料",
+      "title": "变更文件清单",
       "object_type": "EvidenceArtifactInspectionObject",
-      "plain_language_summary": "项目材料；不可用时不会生成内容。",
+      "plain_language_summary": "可复查的项目材料。",
       "source": "contributor",
       "bound_commit": "dddddddddddddddddddddddddddddddddddddddd",
-      "content_digest": "91c07ae150a23217c924d8bc668eaa7ce061280e020dc113dfe173d1b45274d1",
+      "content_digest": "068a7767cd17445a84a303a76374f8d476c999ca76c967aa8ccdab6cc8a31a40",
       "availability": "available",
       "freshness": "current",
       "view_href": null,
-      "inline_content": "当前材料",
+      "inline_content": "O-CHANGED-FILES 的当前版本材料",
       "technical_metadata": {
-        "evidence_id": "evidence-71ea974a9c905fa08c58db7a65c7e571",
-        "evidence_type": "changed_files"
+        "evidence_id": "evidence-71ea974a9c905fa08c58db7a65c7e571"
       }
     },
     {
-      "title": "Provide a concise factual contribution summary.：材料",
+      "title": "修改说明",
       "object_type": "EvidenceArtifactInspectionObject",
-      "plain_language_summary": "项目材料；不可用时不会生成内容。",
+      "plain_language_summary": "可复查的项目材料。",
       "source": "contributor",
       "bound_commit": "dddddddddddddddddddddddddddddddddddddddd",
-      "content_digest": "91c07ae150a23217c924d8bc668eaa7ce061280e020dc113dfe173d1b45274d1",
+      "content_digest": "418a771c56c62d5dc92078ad9c10581abd86b7676ca2cd6cffbaa5d898e53d77",
       "availability": "available",
       "freshness": "current",
       "view_href": null,
-      "inline_content": "当前材料",
+      "inline_content": "O-SUMMARY 的当前版本材料",
       "technical_metadata": {
-        "evidence_id": "evidence-bbb40967b92f5b588e0779b9e01ac84a",
-        "evidence_type": "contribution_summary"
+        "evidence_id": "evidence-bbb40967b92f5b588e0779b9e01ac84a"
       }
     },
     {
-      "title": "查看相关修改：README.md",
+      "title": "相关修改：README.md",
       "object_type": "DiffInspectionObject",
-      "plain_language_summary": "绑定当前贡献的代码差异。",
-      "source": "贡献差异",
+      "plain_language_summary": "绑定当前版本的代码差异。",
+      "source": "当前材料",
       "bound_commit": "dddddddddddddddddddddddddddddddddddddddd",
-      "content_digest": "b6c0d43cfcdf44cff40881f533972d064d1105e6dff99b5f54f903a4fd19fd8d",
+      "content_digest": "d87fc654ea81213951a8ba2a6d8d17db44532fb24004e25804c80f46d083a4fd",
       "availability": "available",
       "freshness": "current",
       "view_href": null,
-      "inline_content": "@@ -12 +12 @@\n-typo\n+word",
+      "inline_content": "@@ -1 +1 @@\n-old\n+new",
       "technical_metadata": {
         "path": "README.md",
         "line_ranges": [
-          "12–16"
+          "5–8"
         ]
       }
     },
     {
-      "title": "Agent 行动摘要",
+      "title": "编码助手行动摘要",
       "object_type": "AgentActivityInspectionObject",
       "plain_language_summary": "检测到可验证的编码 Agent 活动。",
-      "source": "Agent 活动记录",
+      "source": "可验证 Agent 记录",
       "bound_commit": "dddddddddddddddddddddddddddddddddddddddd",
-      "content_digest": "0bf7b9c2d71dbea6382fac26f3fdb83405e9cf1b30873983e36cb922ba146aef",
+      "content_digest": "8dba4514226b898d28d64967f24e3318b21cdbb7eae0ed5df190ed104854848e",
       "availability": "available",
       "freshness": "current",
       "view_href": null,
-      "inline_content": "{'verified': True, 'type': 'coding agent', 'modified_files': ['README.md'], 'test_runs': [], 'network': False}",
-      "technical_metadata": {}
+      "inline_content": "修改当前贡献并运行测试。",
+      "technical_metadata": {
+        "type": "编码 Agent",
+        "commands": [
+          "python -m pytest -q"
+        ]
+      }
     }
   ],
-  "action_effect_boundaries": [
-    {
-      "label": "确认这项检查没有问题",
-      "existing_operation": "verify_evidence",
-      "will_do": [
-        "记录该检查已完成。",
-        "保留其他有效材料。"
-      ],
-      "will_not_do": [
-        "不会修改代码。",
-        "不会批准或合并 PR。",
-        "不会作出最终接受决定。"
-      ]
-    },
-    {
-      "label": "请求贡献者补充",
-      "existing_operation": "request_repair",
-      "will_do": [
-        "记录需要补充的范围。"
-      ],
-      "will_not_do": [
-        "不会修改代码。",
-        "不会执行 git merge。",
-        "不会改变 GitHub/GitLab PR 状态。"
-      ]
-    }
-  ],
+  "action_effect_boundaries": [],
   "technical_derivation": {
-    "derived_from": {
-      "matched_rules": [
-        "match-documentation-low"
-      ],
-      "compiled_obligations": [
-        "obl-o-agent-scope",
-        "obl-o-changed-files",
-        "obl-o-summary"
-      ],
-      "evidence_set_fingerprint": "7108bc3049abd0f3009d83fd3ac99fe7bb4486632ea97b9ae28f54ab4758754a",
-      "case_state": "evidence_incomplete"
+    "case_state": "awaiting_maintainer_verification",
+    "responsible_side": [
+      "maintainer_verifier",
+      "policy_steward",
+      "maintainer"
+    ],
+    "gate_state": "awaiting_maintainer_verification",
+    "legal_operations": [
+      "ask_clarification",
+      "invalidate_attestation",
+      "record_policy_conflict",
+      "reject_evidence",
+      "request_repair",
+      "verify_evidence"
+    ],
+    "risk_rule_refs": [
+      "documentation-low"
+    ],
+    "compiled_obligation_refs": [
+      "O-AGENT-SCOPE",
+      "O-CHANGED-FILES",
+      "O-SUMMARY"
+    ],
+    "evidence_state_summary": {
+      "O-AGENT-SCOPE": "current",
+      "O-CHANGED-FILES": "current",
+      "O-SUMMARY": "current"
+    },
+    "human_confirmation_state": "尚未确认",
+    "agent_trace_state": "verifiable",
+    "route_derivation": {
+      "route": "normal_pr_review",
+      "reason": "贡献侧要求已经满足，当前轮到有权限的维护者检查；检查完成仍不等于接受。"
     },
     "host_platform": {
-      "status": "未连接，未批准，未合并",
-      "adapter": null
+      "connected": false,
+      "provider": null,
+      "repository": null,
+      "pull_request_id": null,
+      "approval_state": "not_performed",
+      "merge_state": "not_performed",
+      "close_state": "not_performed",
+      "evidence_source": "local absence of host-platform adapter",
+      "verified": true
     }
   },
   "schema_version": "agm.pr_diagnostic/v0.2-dev"

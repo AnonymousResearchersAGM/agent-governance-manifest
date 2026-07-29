@@ -17,6 +17,8 @@ decision, and auditable closure.
 
 Phase 2.1 adds `pr_diagnostic` as a second, PR-native projection of the same compiled case. The projection has no independent rule matching. Its evidence packages are runtime-only, digest-immutable sidecars.
 
+Phase 2.1.1 derives routes from existing responsibility, lifecycle stage, gate, and legal operations; it does not change canonical policy or lifecycle semantics.
+
 The four v0.1 observable domains—risk, evidence, accountability, and review
 gate—remain useful diagnostics. They are not the complete AGM ontology.
 

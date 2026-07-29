@@ -9,3 +9,5 @@ Each package binds case ID, contribution fingerprint, policy fingerprint, creati
 Caller-controlled paths are not accepted. Secret-like content, raw prompts, chain-of-thought, and unbounded terminal transcripts are rejected.
 
 Final receipts are sidecar JSON and never amend a commit or call a platform API.
+
+Phase 2.1.1 connects this model to D3 (current package), D7 (historical stale package after legal resubmission), and D10 (typed final receipt). A receipt rejects a claimed platform merge or approval without verified adapter evidence.

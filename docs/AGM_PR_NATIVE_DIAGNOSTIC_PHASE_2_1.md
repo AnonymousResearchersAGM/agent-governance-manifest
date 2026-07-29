@@ -1,6 +1,8 @@
 # AGM Phase 2.1: PR-native diagnostic projection
 
 Phase 2.1 projects an already compiled contribution case into **PR 审查诊断**.
+
+Phase 2.1 was an architecture scaffold. Phase 2.1.1 adds legal lifecycle fixtures, precise material-state projection, responsibility/gate/operation-derived routes, and sidecar end-to-end fixtures.
 It is not a set of presenter-created cues: each risk location, expected
 requirement, material gap, route, and action boundary is derived from matched
 risk rules, compiled obligations, bound materials, confirmations, and the

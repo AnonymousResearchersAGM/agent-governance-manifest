@@ -1,509 +1,305 @@
 {
   "case_id": "case-D6_declaration_conflict",
-  "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
+  "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
   "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
-  "diagnostic_status": "需要贡献者先处理",
+  "diagnostic_status": "存在阻断问题",
   "change_summary": {
-    "summary": "认证修改",
+    "summary": "D6_declaration_conflict",
     "files": [
-      "demo_app/auth.py"
+      "README.md"
     ],
     "line_ranges": {
-      "demo_app/auth.py": []
+      "README.md": [
+        "5–8"
+      ]
     }
   },
   "risk_findings": [
     {
-      "finding_id": "risk:match-authentication-critical",
+      "finding_id": "risk:match-documentation-low",
       "category": "risk_area",
-      "severity": "critical",
-      "headline": "CRITICAL：demo_app/auth.py",
-      "plain_language_explanation": "该位置决定认证或权限边界；错误修改可能让已撤销的权限继续有效。",
+      "severity": "low",
+      "headline": "低风险：README.md",
+      "plain_language_explanation": "该位置是项目说明；需要检查文字准确性和链接。",
       "affected_files": [
-        "demo_app/auth.py"
+        "README.md"
       ],
-      "affected_line_ranges": [],
-      "expected_state": "按项目规则提供并检查该区域的材料。",
-      "observed_state": "已从当前贡献编译风险区域。",
+      "affected_line_ranges": [
+        "5–8"
+      ],
+      "expected_state": "按项目要求检查",
+      "observed_state": "已识别该风险区域",
       "gap": "",
       "risk_rule_refs": [
-        "authentication-critical"
+        "documentation-low"
       ],
       "obligation_refs": [
         "O-SUMMARY",
-        "O-CHANGED-FILES",
-        "O-RATIONALE",
-        "O-AUTH-IMPACT",
-        "O-TEST-COMMAND",
-        "O-ARTIFACT",
-        "O-LIMITATIONS",
-        "O-HUMAN-ATTEST"
+        "O-CHANGED-FILES"
       ],
       "evidence_refs": [],
       "responsibility": "maintainer",
       "recommended_route": "inspect_risk",
       "blocking": false,
       "source_state_refs": [
-        "match-authentication-critical"
+        "match-documentation-low"
       ]
     }
   ],
   "expected_requirements": [
     {
-      "title": "Record the declared action, permissions, supervision, and delegation scope.",
-      "required_by": [
-        "autonomy:supervised_agent"
-      ],
+      "title": "编码助手操作摘要",
+      "plain_requirement": "说明智能体做了什么、用了哪些权限、是否有人监督，以及是否把具有独立行动能力的工作继续交给了另一个智能体。",
       "obligation_ref": "O-AGENT-SCOPE",
-      "blocking": true,
-      "state": "missing"
+      "state": "current",
+      "blocking": true
     },
     {
-      "title": "Provide a locally checkable artifact or test output.",
-      "required_by": [
-        "authentication-critical"
-      ],
-      "obligation_ref": "O-ARTIFACT",
-      "blocking": true,
-      "state": "missing"
-    },
-    {
-      "title": "Describe security, authentication, and authorization impact.",
-      "required_by": [
-        "authentication-critical"
-      ],
-      "obligation_ref": "O-AUTH-IMPACT",
-      "blocking": true,
-      "state": "missing"
-    },
-    {
-      "title": "Identify the files and scopes covered by the contribution.",
-      "required_by": [
-        "authentication-critical"
-      ],
+      "title": "变更文件清单",
+      "plain_requirement": "列出这次修改涉及的文件和范围。",
       "obligation_ref": "O-CHANGED-FILES",
-      "blocking": true,
-      "state": "missing"
+      "state": "current",
+      "blocking": true
     },
     {
-      "title": "Obtain explicit accountable-human attestation bound to the case.",
-      "required_by": [
-        "authentication-critical"
-      ],
-      "obligation_ref": "O-HUMAN-ATTEST",
-      "blocking": true,
-      "state": "missing"
-    },
-    {
-      "title": "State known limitations or explicitly state none.",
-      "required_by": [
-        "authentication-critical"
-      ],
-      "obligation_ref": "O-LIMITATIONS",
-      "blocking": true,
-      "state": "missing"
-    },
-    {
-      "title": "Explain why the change is needed without disclosing private reasoning.",
-      "required_by": [
-        "authentication-critical"
-      ],
-      "obligation_ref": "O-RATIONALE",
-      "blocking": true,
-      "state": "missing"
-    },
-    {
-      "title": "Provide a concise factual contribution summary.",
-      "required_by": [
-        "authentication-critical"
-      ],
+      "title": "修改说明",
+      "plain_requirement": "简要说明这次修改做了什么。",
       "obligation_ref": "O-SUMMARY",
-      "blocking": true,
-      "state": "missing"
-    },
-    {
-      "title": "Provide a concrete test command, environment, and outcome.",
-      "required_by": [
-        "authentication-critical"
-      ],
-      "obligation_ref": "O-TEST-COMMAND",
-      "blocking": true,
-      "state": "missing"
+      "state": "current",
+      "blocking": true
     }
   ],
-  "observed_evidence": [],
+  "observed_evidence": [
+    {
+      "title": "编码助手操作摘要",
+      "state": "current",
+      "evidence_type": "agent_action_scope",
+      "bound_commit": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
+      "source": "contributor"
+    },
+    {
+      "title": "变更文件清单",
+      "state": "current",
+      "evidence_type": "changed_files",
+      "bound_commit": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
+      "source": "contributor"
+    },
+    {
+      "title": "修改说明",
+      "state": "current",
+      "evidence_type": "contribution_summary",
+      "bound_commit": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
+      "source": "contributor"
+    }
+  ],
   "evidence_gaps": [
     {
-      "finding_id": "gap:obl-o-agent-scope",
-      "category": "evidence_gap",
-      "severity": "medium",
-      "headline": "缺少项目要求的材料",
-      "plain_language_explanation": "Record the declared action, permissions, supervision, and delegation scope.",
-      "affected_files": [],
-      "affected_line_ranges": [],
-      "expected_state": "当前提交应有可核对的材料。",
-      "observed_state": "当前未找到材料。",
-      "gap": "请贡献者补充或更新后重新提交。",
-      "risk_rule_refs": [
-        "autonomy:supervised_agent"
-      ],
-      "obligation_refs": [
-        "O-AGENT-SCOPE"
-      ],
-      "evidence_refs": [],
-      "responsibility": "contributor",
-      "recommended_route": "request_repair",
-      "blocking": true,
-      "source_state_refs": [
-        "obl-o-agent-scope"
-      ]
-    },
-    {
-      "finding_id": "gap:obl-o-artifact",
-      "category": "evidence_gap",
-      "severity": "high",
-      "headline": "缺少项目要求的材料",
-      "plain_language_explanation": "Provide a locally checkable artifact or test output.",
-      "affected_files": [
-        "demo_app/auth.py"
-      ],
-      "affected_line_ranges": [],
-      "expected_state": "当前提交应有可核对的材料。",
-      "observed_state": "当前未找到材料。",
-      "gap": "请贡献者补充或更新后重新提交。",
-      "risk_rule_refs": [
-        "authentication-critical"
-      ],
-      "obligation_refs": [
-        "O-ARTIFACT"
-      ],
-      "evidence_refs": [],
-      "responsibility": "contributor",
-      "recommended_route": "request_repair",
-      "blocking": true,
-      "source_state_refs": [
-        "obl-o-artifact"
-      ]
-    },
-    {
-      "finding_id": "gap:obl-o-auth-impact",
-      "category": "evidence_gap",
-      "severity": "critical",
-      "headline": "缺少项目要求的材料",
-      "plain_language_explanation": "Describe security, authentication, and authorization impact.",
-      "affected_files": [
-        "demo_app/auth.py"
-      ],
-      "affected_line_ranges": [],
-      "expected_state": "当前提交应有可核对的材料。",
-      "observed_state": "当前未找到材料。",
-      "gap": "请贡献者补充或更新后重新提交。",
-      "risk_rule_refs": [
-        "authentication-critical"
-      ],
-      "obligation_refs": [
-        "O-AUTH-IMPACT"
-      ],
-      "evidence_refs": [],
-      "responsibility": "contributor",
-      "recommended_route": "request_repair",
-      "blocking": true,
-      "source_state_refs": [
-        "obl-o-auth-impact"
-      ]
-    },
-    {
-      "finding_id": "gap:obl-o-changed-files",
-      "category": "evidence_gap",
-      "severity": "low",
-      "headline": "缺少项目要求的材料",
-      "plain_language_explanation": "Identify the files and scopes covered by the contribution.",
-      "affected_files": [
-        "demo_app/auth.py"
-      ],
-      "affected_line_ranges": [],
-      "expected_state": "当前提交应有可核对的材料。",
-      "observed_state": "当前未找到材料。",
-      "gap": "请贡献者补充或更新后重新提交。",
-      "risk_rule_refs": [
-        "authentication-critical"
-      ],
-      "obligation_refs": [
-        "O-CHANGED-FILES"
-      ],
-      "evidence_refs": [],
-      "responsibility": "contributor",
-      "recommended_route": "request_repair",
-      "blocking": true,
-      "source_state_refs": [
-        "obl-o-changed-files"
-      ]
-    },
-    {
-      "finding_id": "gap:obl-o-human-attest",
-      "category": "evidence_gap",
-      "severity": "critical",
-      "headline": "缺少项目要求的材料",
-      "plain_language_explanation": "Obtain explicit accountable-human attestation bound to the case.",
-      "affected_files": [
-        "demo_app/auth.py"
-      ],
-      "affected_line_ranges": [],
-      "expected_state": "当前提交应有可核对的材料。",
-      "observed_state": "当前未找到材料。",
-      "gap": "请贡献者补充或更新后重新提交。",
-      "risk_rule_refs": [
-        "authentication-critical"
-      ],
-      "obligation_refs": [
-        "O-HUMAN-ATTEST"
-      ],
-      "evidence_refs": [],
-      "responsibility": "contributor",
-      "recommended_route": "request_repair",
-      "blocking": true,
-      "source_state_refs": [
-        "obl-o-human-attest"
-      ]
-    },
-    {
-      "finding_id": "gap:obl-o-limitations",
-      "category": "evidence_gap",
-      "severity": "high",
-      "headline": "缺少项目要求的材料",
-      "plain_language_explanation": "State known limitations or explicitly state none.",
-      "affected_files": [
-        "demo_app/auth.py"
-      ],
-      "affected_line_ranges": [],
-      "expected_state": "当前提交应有可核对的材料。",
-      "observed_state": "当前未找到材料。",
-      "gap": "请贡献者补充或更新后重新提交。",
-      "risk_rule_refs": [
-        "authentication-critical"
-      ],
-      "obligation_refs": [
-        "O-LIMITATIONS"
-      ],
-      "evidence_refs": [],
-      "responsibility": "contributor",
-      "recommended_route": "request_repair",
-      "blocking": true,
-      "source_state_refs": [
-        "obl-o-limitations"
-      ]
-    },
-    {
-      "finding_id": "gap:obl-o-rationale",
-      "category": "evidence_gap",
-      "severity": "medium",
-      "headline": "缺少项目要求的材料",
-      "plain_language_explanation": "Explain why the change is needed without disclosing private reasoning.",
-      "affected_files": [
-        "demo_app/auth.py"
-      ],
-      "affected_line_ranges": [],
-      "expected_state": "当前提交应有可核对的材料。",
-      "observed_state": "当前未找到材料。",
-      "gap": "请贡献者补充或更新后重新提交。",
-      "risk_rule_refs": [
-        "authentication-critical"
-      ],
-      "obligation_refs": [
-        "O-RATIONALE"
-      ],
-      "evidence_refs": [],
-      "responsibility": "contributor",
-      "recommended_route": "request_repair",
-      "blocking": true,
-      "source_state_refs": [
-        "obl-o-rationale"
-      ]
-    },
-    {
-      "finding_id": "gap:obl-o-summary",
-      "category": "evidence_gap",
-      "severity": "low",
-      "headline": "缺少项目要求的材料",
-      "plain_language_explanation": "Provide a concise factual contribution summary.",
-      "affected_files": [
-        "demo_app/auth.py"
-      ],
-      "affected_line_ranges": [],
-      "expected_state": "当前提交应有可核对的材料。",
-      "observed_state": "当前未找到材料。",
-      "gap": "请贡献者补充或更新后重新提交。",
-      "risk_rule_refs": [
-        "authentication-critical"
-      ],
-      "obligation_refs": [
-        "O-SUMMARY"
-      ],
-      "evidence_refs": [],
-      "responsibility": "contributor",
-      "recommended_route": "request_repair",
-      "blocking": true,
-      "source_state_refs": [
-        "obl-o-summary"
-      ]
-    },
-    {
-      "finding_id": "gap:obl-o-test-command",
-      "category": "evidence_gap",
-      "severity": "high",
-      "headline": "缺少项目要求的材料",
-      "plain_language_explanation": "Provide a concrete test command, environment, and outcome.",
-      "affected_files": [
-        "demo_app/auth.py"
-      ],
-      "affected_line_ranges": [],
-      "expected_state": "当前提交应有可核对的材料。",
-      "observed_state": "当前未找到材料。",
-      "gap": "请贡献者补充或更新后重新提交。",
-      "risk_rule_refs": [
-        "authentication-critical"
-      ],
-      "obligation_refs": [
-        "O-TEST-COMMAND"
-      ],
-      "evidence_refs": [],
-      "responsibility": "contributor",
-      "recommended_route": "request_repair",
-      "blocking": true,
-      "source_state_refs": [
-        "obl-o-test-command"
-      ]
-    },
-    {
-      "finding_id": "agent-declaration-conflict",
+      "finding_id": "agent-conflict",
       "category": "agent_record_conflict",
       "severity": "high",
-      "headline": "Agent 声明与行动记录不一致",
-      "plain_language_explanation": "贡献者声明和可验证行动记录描述了不同的操作范围，需要先核对。",
+      "headline": "编码助手记录与贡献者声明不一致",
+      "plain_language_explanation": "声明未使用其他助手，但可验证记录显示使用了其他助手或自动化工具。",
       "affected_files": [
-        "demo_app/auth.py"
+        "README.md"
       ],
       "affected_line_ranges": [],
-      "expected_state": "声明应与可验证行动记录一致。",
-      "observed_state": "发现相互矛盾的两份记录。",
-      "gap": "请贡献者核对并更正行动范围说明。",
+      "expected_state": "两份记录一致",
+      "observed_state": "发现冲突",
+      "gap": "请贡献者核对并更正。",
       "risk_rule_refs": [
-        "authentication-critical"
+        "documentation-low"
       ],
       "obligation_refs": [
         "O-AGENT-SCOPE"
       ],
       "evidence_refs": [],
       "responsibility": "contributor",
-      "recommended_route": "request_repair",
+      "recommended_route": "contributor_action_required",
       "blocking": true,
       "source_state_refs": [
+        "contribution_declaration",
         "agent_activity"
       ]
     }
   ],
   "agent_involvement": {
+    "state": "verifiable",
     "status": "verifiable",
     "message": "检测到可验证的编码 Agent 活动。",
-    "details": {
-      "verified": true,
-      "declared_summary": "只修改 README",
-      "observed_summary": "修改认证代码"
-    }
+    "type": "编码 Agent",
+    "modified_file_count": 1,
+    "commands": [
+      "python -m pytest -q"
+    ],
+    "tests": [
+      "pytest"
+    ],
+    "used_other_tools": true,
+    "network": false,
+    "current_version": true
   },
   "human_review_status": {
-    "contributor_self_review": "贡献者尚未检查当前版本",
+    "contributor_self_review": "尚未确认",
     "maintainer_review": "尚未完成必要检查",
-    "final_decision": "尚未作出最终决定"
+    "final_recommendation": "尚未记录"
+  },
+  "final_recommendation": {
+    "status": "尚未记录",
+    "decision": null
+  },
+  "host_platform_status": {
+    "connected": false,
+    "provider": null,
+    "repository": null,
+    "pull_request_id": null,
+    "approval_state": "not_performed",
+    "merge_state": "not_performed",
+    "close_state": "not_performed",
+    "evidence_source": "local absence of host-platform adapter",
+    "verified": true
   },
   "review_readiness": {
-    "status": "需要贡献者先处理",
-    "blocking_gaps": 10
+    "status": "存在阻断问题",
+    "blocking_gaps": 1
   },
   "recommended_route": {
-    "owner": "contributor",
-    "message": "请贡献者完成测试、检查当前 diff，并确认实际操作后重新提交。"
+    "route": "blocked_pending_repair",
+    "owner": "贡献者",
+    "message": "当前修复范围仍未完成，请按已记录的范围补充材料。"
   },
   "inspection_objects": [
     {
-      "title": "查看相关修改：demo_app/auth.py",
-      "object_type": "DiffInspectionObject",
-      "plain_language_summary": "当前未提供可查看的代码差异。",
-      "source": "贡献差异",
+      "title": "编码助手操作摘要",
+      "object_type": "EvidenceArtifactInspectionObject",
+      "plain_language_summary": "可复查的项目材料。",
+      "source": "contributor",
       "bound_commit": "dddddddddddddddddddddddddddddddddddddddd",
-      "content_digest": null,
-      "availability": "unavailable",
-      "freshness": "unknown",
-      "view_href": null,
-      "inline_content": null,
-      "technical_metadata": {
-        "path": "demo_app/auth.py",
-        "line_ranges": []
-      }
-    },
-    {
-      "title": "Agent 行动摘要",
-      "object_type": "AgentActivityInspectionObject",
-      "plain_language_summary": "检测到可验证的编码 Agent 活动。",
-      "source": "Agent 活动记录",
-      "bound_commit": "dddddddddddddddddddddddddddddddddddddddd",
-      "content_digest": "ef9891638a3b8095fb87cb3e8608b2c26b11aca363fdf20a88488d1edeff2f23",
+      "content_digest": "05c894f40156ca8ea9b180d69f6582f02ee33507bf89ee41bc8669d679e2e5d0",
       "availability": "available",
       "freshness": "current",
       "view_href": null,
-      "inline_content": "{'verified': True, 'declared_summary': '只修改 README', 'observed_summary': '修改认证代码'}",
+      "inline_content": "O-AGENT-SCOPE 的当前版本材料",
+      "technical_metadata": {
+        "evidence_id": "evidence-5ea9526ff6f75f2696fc0834147d368f"
+      }
+    },
+    {
+      "title": "变更文件清单",
+      "object_type": "EvidenceArtifactInspectionObject",
+      "plain_language_summary": "可复查的项目材料。",
+      "source": "contributor",
+      "bound_commit": "dddddddddddddddddddddddddddddddddddddddd",
+      "content_digest": "068a7767cd17445a84a303a76374f8d476c999ca76c967aa8ccdab6cc8a31a40",
+      "availability": "available",
+      "freshness": "current",
+      "view_href": null,
+      "inline_content": "O-CHANGED-FILES 的当前版本材料",
+      "technical_metadata": {
+        "evidence_id": "evidence-f597e3033d0e5d868bb0ed2aa58d5d84"
+      }
+    },
+    {
+      "title": "修改说明",
+      "object_type": "EvidenceArtifactInspectionObject",
+      "plain_language_summary": "可复查的项目材料。",
+      "source": "contributor",
+      "bound_commit": "dddddddddddddddddddddddddddddddddddddddd",
+      "content_digest": "418a771c56c62d5dc92078ad9c10581abd86b7676ca2cd6cffbaa5d898e53d77",
+      "availability": "available",
+      "freshness": "current",
+      "view_href": null,
+      "inline_content": "O-SUMMARY 的当前版本材料",
+      "technical_metadata": {
+        "evidence_id": "evidence-5129f3416e8c5943a3d395cb3e288de8"
+      }
+    },
+    {
+      "title": "相关修改：README.md",
+      "object_type": "DiffInspectionObject",
+      "plain_language_summary": "绑定当前版本的代码差异。",
+      "source": "当前材料",
+      "bound_commit": "dddddddddddddddddddddddddddddddddddddddd",
+      "content_digest": "d87fc654ea81213951a8ba2a6d8d17db44532fb24004e25804c80f46d083a4fd",
+      "availability": "available",
+      "freshness": "current",
+      "view_href": null,
+      "inline_content": "@@ -1 +1 @@\n-old\n+new",
+      "technical_metadata": {
+        "path": "README.md",
+        "line_ranges": [
+          "5–8"
+        ]
+      }
+    },
+    {
+      "title": "编码助手行动摘要",
+      "object_type": "AgentActivityInspectionObject",
+      "plain_language_summary": "检测到可验证的编码 Agent 活动。",
+      "source": "可验证 Agent 记录",
+      "bound_commit": "dddddddddddddddddddddddddddddddddddddddd",
+      "content_digest": "8dba4514226b898d28d64967f24e3318b21cdbb7eae0ed5df190ed104854848e",
+      "availability": "available",
+      "freshness": "current",
+      "view_href": null,
+      "inline_content": "修改当前贡献并运行测试。",
+      "technical_metadata": {
+        "type": "编码 Agent",
+        "commands": [
+          "python -m pytest -q"
+        ]
+      }
+    },
+    {
+      "title": "贡献者声明",
+      "object_type": "ContributionDeclarationInspectionObject",
+      "plain_language_summary": "贡献者对工具使用和修改范围的声明。",
+      "source": "贡献者",
+      "bound_commit": "dddddddddddddddddddddddddddddddddddddddd",
+      "content_digest": "cde2625692598a509188ecbc8ae91528564525a7abe7df7f91931c0af867572a",
+      "availability": "available",
+      "freshness": "current",
+      "view_href": null,
+      "inline_content": "未使用其他助手。",
       "technical_metadata": {}
     }
   ],
-  "action_effect_boundaries": [
-    {
-      "label": "确认这项检查没有问题",
-      "existing_operation": "verify_evidence",
-      "will_do": [
-        "记录该检查已完成。",
-        "保留其他有效材料。"
-      ],
-      "will_not_do": [
-        "不会修改代码。",
-        "不会批准或合并 PR。",
-        "不会作出最终接受决定。"
-      ]
-    },
-    {
-      "label": "请求贡献者补充",
-      "existing_operation": "request_repair",
-      "will_do": [
-        "记录需要补充的范围。"
-      ],
-      "will_not_do": [
-        "不会修改代码。",
-        "不会执行 git merge。",
-        "不会改变 GitHub/GitLab PR 状态。"
-      ]
-    }
-  ],
+  "action_effect_boundaries": [],
   "technical_derivation": {
-    "derived_from": {
-      "matched_rules": [
-        "match-authentication-critical"
-      ],
-      "compiled_obligations": [
-        "obl-o-agent-scope",
-        "obl-o-artifact",
-        "obl-o-auth-impact",
-        "obl-o-changed-files",
-        "obl-o-human-attest",
-        "obl-o-limitations",
-        "obl-o-rationale",
-        "obl-o-summary",
-        "obl-o-test-command"
-      ],
-      "evidence_set_fingerprint": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-      "case_state": "evidence_incomplete"
+    "case_state": "repair_requested",
+    "responsible_side": [
+      "contributor"
+    ],
+    "gate_state": "repair_requested",
+    "legal_operations": [],
+    "risk_rule_refs": [
+      "documentation-low"
+    ],
+    "compiled_obligation_refs": [
+      "O-AGENT-SCOPE",
+      "O-CHANGED-FILES",
+      "O-SUMMARY"
+    ],
+    "evidence_state_summary": {
+      "O-AGENT-SCOPE": "current",
+      "O-CHANGED-FILES": "current",
+      "O-SUMMARY": "current"
+    },
+    "human_confirmation_state": "尚未确认",
+    "agent_trace_state": "verifiable",
+    "route_derivation": {
+      "route": "blocked_pending_repair",
+      "reason": "维护者已指定需要修改的范围，当前等待责任方补充或更正。"
     },
     "host_platform": {
-      "status": "未连接，未批准，未合并",
-      "adapter": null
+      "connected": false,
+      "provider": null,
+      "repository": null,
+      "pull_request_id": null,
+      "approval_state": "not_performed",
+      "merge_state": "not_performed",
+      "close_state": "not_performed",
+      "evidence_source": "local absence of host-platform adapter",
+      "verified": true
     }
   },
   "schema_version": "agm.pr_diagnostic/v0.2-dev"
