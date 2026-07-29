@@ -220,9 +220,15 @@
       "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
       "evidence_type": "agent_action_scope",
       "value": {
-        "activity_scope": [
+        "artifact_type": "agent_activity",
+        "validated_typed_scope": [
           "README.md"
         ],
+        "canonical_contribution_scope": [
+          "README.md"
+        ],
+        "coverage_relation": "exact_match",
+        "scope_source": "agent_activity.activity_scope",
         "typed_source_validated": true
       },
       "command": null,
@@ -253,9 +259,15 @@
       "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
       "evidence_type": "agent_action_scope",
       "value": {
-        "activity_scope": [
+        "artifact_type": "contribution_declaration",
+        "validated_typed_scope": [
           "README.md"
         ],
+        "canonical_contribution_scope": [
+          "README.md"
+        ],
+        "coverage_relation": "exact_match",
+        "scope_source": "contribution_declaration.declaration_scope",
         "typed_source_validated": true
       },
       "command": null,

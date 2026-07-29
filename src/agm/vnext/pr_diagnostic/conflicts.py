@@ -22,6 +22,7 @@ class ValidatedConflictDerivation:
     agent_activity_artifact_digest: str
     canonical_evidence_ids: tuple[str, ...]
     typed_relation: tuple[tuple[str, bool], ...]
+    overlap_scope: tuple[str, ...]
     validation_result: str = "validated"
 
 
@@ -82,6 +83,11 @@ def validate_conflict_derivation(
         or derivation.typed_relation != expected_relation
     ):
         raise VNextError("Typed artifacts do not form a trusted conflict")
+    overlap = tuple(
+        sorted(set(declaration.validated_scope) & set(activity.validated_scope))
+    )
+    if not overlap or derivation.overlap_scope != overlap:
+        raise VNextError("Trusted conflict sources do not share a validated scope")
     expected_ids = (
         _evidence_id(
             package["package_digest"], declaration.artifact_id, "O-AGENT-SCOPE"
@@ -100,11 +106,12 @@ def validate_conflict_derivation(
         if (
             item.contribution_fingerprint != case.contribution_fingerprint
             or item.policy_fingerprint != case.policy_snapshot.policy_fingerprint
-            or item.value
-            != {
-                "activity_scope": sorted(
-                    artifact.metadata.get("affected_scope", ())
-                ),
+            or item.value != {
+                "artifact_type": artifact.artifact_type,
+                "validated_typed_scope": sorted(artifact.validated_scope),
+                "canonical_contribution_scope": list(artifact.canonical_scope),
+                "coverage_relation": artifact.coverage_relation,
+                "scope_source": artifact.scope_source,
                 "typed_source_validated": True,
             }
         ):
@@ -137,27 +144,34 @@ class TrustedSidecarConflictDetector:
             case.policy_snapshot.policy_fingerprint,
         ):
             raise VNextError("Conflict package binding does not match current case")
-        declaration = next(
+        declarations = [
+            item
+            for item in artifacts
+            if item.artifact_type == "contribution_declaration"
+        ]
+        activities = [
+            item for item in artifacts if item.artifact_type == "agent_activity"
+        ]
+        pair = next(
             (
-                item
-                for item in artifacts
-                if item.artifact_type == "contribution_declaration"
+                (declaration, activity)
+                for declaration in declarations
+                for activity in activities
+                if declaration.typed_value is not None
+                and activity.typed_value is not None
+                and declaration.typed_value["other_agents_or_tools_used"] is False
+                and activity.typed_value["other_agents_or_tools_used"] is True
+                and set(declaration.validated_scope)
+                & set(activity.validated_scope)
             ),
             None,
         )
-        activity = next(
-            (item for item in artifacts if item.artifact_type == "agent_activity"),
-            None,
+        if pair is None:
+            return None
+        declaration, activity = pair
+        overlap = tuple(
+            sorted(set(declaration.validated_scope) & set(activity.validated_scope))
         )
-        if declaration is None or activity is None:
-            return None
-        if declaration.typed_value is None or activity.typed_value is None:
-            raise VNextError("Conflict sources were not typed and validated")
-        if not (
-            declaration.typed_value["other_agents_or_tools_used"] is False
-            and activity.typed_value["other_agents_or_tools_used"] is True
-        ):
-            return None
         return ValidatedConflictDerivation(
             case_id=case.id,
             policy_fingerprint=case.policy_snapshot.policy_fingerprint,
@@ -181,6 +195,7 @@ class TrustedSidecarConflictDetector:
                 ("declared_other_agents_or_tools_used", False),
                 ("observed_other_agents_or_tools_used", True),
             ),
+            overlap_scope=overlap,
         )
 
     def detect(self, case_id: str, package_digest: str) -> Any:

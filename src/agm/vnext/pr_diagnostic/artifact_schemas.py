@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import json
 import re
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from pathlib import PurePosixPath
 from typing import Any
 
@@ -62,10 +62,32 @@ class ValidatedArtifact:
     artifact_type: str
     obligation_refs: tuple[str, ...]
     derived_files: tuple[str, ...] = ()
+    validated_scope: tuple[str, ...] = ()
+    canonical_scope: tuple[str, ...] = ()
+    coverage_relation: str | None = None
+    scope_source: str | None = None
 
     @property
     def artifact_id(self) -> str:
         return str(self.metadata["artifact_id"])
+
+
+@dataclass(frozen=True)
+class ValidatedContributionScope:
+    case_id: str
+    contribution_fingerprint: str
+    head_commit_sha: str
+    verified_diff_files: tuple[str, ...]
+    verified_changed_files: tuple[str, ...]
+    canonical_affected_scope: tuple[str, ...]
+    source_artifact_ids: tuple[str, ...]
+    derivation_method: str
+
+
+@dataclass(frozen=True)
+class ValidatedPackage:
+    artifacts: tuple[ValidatedArtifact, ...]
+    contribution_scope: ValidatedContributionScope
 
 
 def _require_string(value: dict[str, Any], field: str) -> str:
@@ -92,7 +114,34 @@ def _repo_path(path: str) -> str:
     parts = PurePosixPath(path).parts
     if ".." in parts or "." in parts or SCENARIO_TOKEN.fullmatch(path):
         raise VNextError("Changed-files paths must be safe repository-relative paths")
-    return path
+    normalized = PurePosixPath(path).as_posix()
+    if normalized in {"", "."}:
+        raise VNextError("Changed-files paths must be safe repository-relative paths")
+    return normalized
+
+
+def _normalized_scope(value: Any, field: str) -> tuple[str, ...]:
+    if not isinstance(value, list) or not value:
+        raise VNextError(f"Artifact field '{field}' must be a non-empty path list")
+    paths = tuple(sorted({_repo_path(item.strip()) for item in value if isinstance(item, str) and item.strip()}))
+    if len(paths) != len(value):
+        raise VNextError(f"Artifact field '{field}' contains duplicate or invalid paths")
+    return paths
+
+
+def compare_scopes(
+    declared: tuple[str, ...], canonical: tuple[str, ...]
+) -> str:
+    left, right = set(declared), set(canonical)
+    if left == right:
+        return "exact_match"
+    if left < right:
+        return "declared_subset"
+    if left > right:
+        return "declared_superset"
+    if left.isdisjoint(right):
+        return "disjoint"
+    return "overlap_but_inconsistent"
 
 
 def _typed_json(content: str, artifact_type: str) -> dict[str, Any]:
@@ -214,14 +263,12 @@ def _validate_agent(value: dict[str, Any], case: GovernanceCase) -> None:
     if not isinstance(used, bool):
         raise VNextError("other_agents_or_tools_used must be boolean")
     tools = _require_string_list(value, "tools_used", allow_empty=True)
-    scope = _require_string_list(value, "activity_scope")
+    _normalized_scope(value.get("activity_scope"), "activity_scope")
     _require_string(value, "source_tool")
     if used and not tools:
         raise VNextError("Agent activity that used tools must name them")
     if not used and tools:
         raise VNextError("Agent activity declares no tools but tools_used is non-empty")
-    if not set(scope) & set(case.changed_files):
-        raise VNextError("Agent activity scope does not overlap the contribution")
 
 
 def _validate_declaration(value: dict[str, Any], case: GovernanceCase) -> None:
@@ -229,14 +276,12 @@ def _validate_declaration(value: dict[str, Any], case: GovernanceCase) -> None:
     if not isinstance(used, bool):
         raise VNextError("other_agents_or_tools_used must be boolean")
     tools = _require_string_list(value, "declared_tools", allow_empty=True)
-    scope = _require_string_list(value, "declaration_scope")
+    _normalized_scope(value.get("declaration_scope"), "declaration_scope")
     _require_string(value, "declared_by")
     if used and not tools:
         raise VNextError("Declaration that used tools must name them")
     if not used and tools:
         raise VNextError("Declaration says no tools but declared_tools is non-empty")
-    if not set(scope) & set(case.changed_files):
-        raise VNextError("Declaration scope does not overlap the contribution")
 
 
 def _validate_human_confirmation(value: dict[str, Any]) -> None:
@@ -255,6 +300,16 @@ class TypedArtifactValidator:
         package: dict[str, Any],
         read_artifact: Any,
     ) -> tuple[ValidatedArtifact, ...]:
+        return self.validate_package_with_scope(
+            case, package, read_artifact
+        ).artifacts
+
+    def validate_package_with_scope(
+        self,
+        case: GovernanceCase,
+        package: dict[str, Any],
+        read_artifact: Any,
+    ) -> ValidatedPackage:
         validated: list[ValidatedArtifact] = []
         known_obligations = {item.obligation_id for item in case.obligations}
         for metadata in package.get("artifacts", []):
@@ -277,13 +332,9 @@ class TypedArtifactValidator:
             if set(refs) - ARTIFACT_COMPATIBILITY[artifact_type]:
                 raise VNextError("Evidence artifact type is incompatible with referenced obligation")
             if refs:
-                scope = artifact.get("affected_scope")
-                if (
-                    not isinstance(scope, list)
-                    or not scope
-                    or not set(scope) & set(case.changed_files)
-                ):
-                    raise VNextError("Evidence artifact affected_scope is missing or unbound")
+                _normalized_scope(
+                    artifact.get("affected_scope"), "metadata affected_scope"
+                )
                 if not isinstance(artifact.get("source_tool"), str) or not artifact["source_tool"].strip():
                     raise VNextError("Evidence artifact source_tool is required")
                 parse_timestamp(
@@ -337,12 +388,17 @@ class TypedArtifactValidator:
                     artifact, content, value, artifact_type, refs, derived_files
                 )
             )
-        self._cross_validate(case, validated)
-        return tuple(validated)
+        contribution_scope, validated = self._cross_validate(
+            case, package, validated
+        )
+        return ValidatedPackage(tuple(validated), contribution_scope)
 
     def _cross_validate(
-        self, case: GovernanceCase, artifacts: list[ValidatedArtifact]
-    ) -> None:
+        self,
+        case: GovernanceCase,
+        package: dict[str, Any],
+        artifacts: list[ValidatedArtifact],
+    ) -> tuple[ValidatedContributionScope, list[ValidatedArtifact]]:
         diff_files = {
             path
             for item in artifacts
@@ -355,7 +411,121 @@ class TypedArtifactValidator:
             if item.artifact_type == "changed_files"
             for path in item.derived_files
         }
+        case_files = set(_normalized_scope(case.changed_files, "case changed_files"))
         if declared_files and diff_files and declared_files != diff_files:
             raise VNextError("Changed-files artifact does not match verified unified diff")
-        if declared_files and not declared_files <= set(case.changed_files):
-            raise VNextError("Changed-files artifact exceeds current contribution scope")
+        if diff_files and diff_files != case_files:
+            raise VNextError("Verified unified diff does not match current contribution scope")
+        if declared_files and declared_files != case_files:
+            raise VNextError("Changed-files artifact does not match current contribution scope")
+        canonical_files = diff_files or declared_files or case_files
+        canonical = tuple(sorted(canonical_files))
+        sources = tuple(
+            item.artifact_id
+            for item in artifacts
+            if item.artifact_type in {"unified_diff", "changed_files"}
+        )
+        scope = ValidatedContributionScope(
+            case_id=case.id,
+            contribution_fingerprint=case.contribution_fingerprint,
+            head_commit_sha=str(package.get("head_commit_sha") or ""),
+            verified_diff_files=tuple(sorted(diff_files)),
+            verified_changed_files=tuple(sorted(declared_files)),
+            canonical_affected_scope=canonical,
+            source_artifact_ids=sources,
+            derivation_method=(
+                "verified_unified_diff/v1"
+                if diff_files
+                else "typed_changed_files/v1"
+                if declared_files
+                else "canonical_case_scope/v1"
+            ),
+        )
+        updated: list[ValidatedArtifact] = []
+        for item in artifacts:
+            metadata_scope = (
+                _normalized_scope(
+                    item.metadata.get("affected_scope"),
+                    "metadata affected_scope",
+                )
+                if item.obligation_refs
+                else ()
+            )
+            validated_scope = metadata_scope
+            source = "artifact_metadata.affected_scope" if metadata_scope else None
+            relation = compare_scopes(validated_scope, canonical) if validated_scope else None
+            if item.artifact_type == "change_summary":
+                assert item.typed_value is not None
+                raw = item.typed_value.get(
+                    "affected_files",
+                    item.typed_value.get("affected_components"),
+                )
+                typed_scope = _normalized_scope(raw, "change_summary affected_files")
+                if typed_scope != canonical:
+                    raise VNextError(
+                        "Change summary affected files do not match canonical contribution scope"
+                    )
+                if metadata_scope != typed_scope:
+                    raise VNextError(
+                        "Change summary affected files do not match artifact metadata scope"
+                    )
+                validated_scope, relation, source = (
+                    typed_scope,
+                    "exact_match",
+                    "change_summary.affected_files",
+                )
+            elif item.artifact_type in {
+                "agent_activity",
+                "contribution_declaration",
+            }:
+                assert item.typed_value is not None
+                field = (
+                    "activity_scope"
+                    if item.artifact_type == "agent_activity"
+                    else "declaration_scope"
+                )
+                typed_scope = _normalized_scope(item.typed_value.get(field), field)
+                if typed_scope != metadata_scope:
+                    raise VNextError(
+                        f"{item.artifact_type} typed scope does not match artifact metadata scope"
+                    )
+                relation = compare_scopes(typed_scope, canonical)
+                if relation not in {"exact_match", "declared_subset"}:
+                    raise VNextError(
+                        f"{item.artifact_type} scope is outside the canonical contribution scope"
+                    )
+                validated_scope, source = typed_scope, f"{item.artifact_type}.{field}"
+            elif item.artifact_type == "changed_files":
+                if tuple(sorted(item.derived_files)) != canonical:
+                    raise VNextError(
+                        "Changed-files artifact does not match canonical contribution scope"
+                    )
+                if metadata_scope != canonical:
+                    raise VNextError(
+                        "Changed-files metadata scope does not match canonical contribution scope"
+                    )
+                validated_scope, relation, source = (
+                    canonical,
+                    "exact_match",
+                    "changed_files.files",
+                )
+            elif item.artifact_type == "unified_diff":
+                validated_scope, relation, source = (
+                    tuple(sorted(item.derived_files)),
+                    "exact_match",
+                    "verified_unified_diff",
+                )
+            elif metadata_scope and not set(metadata_scope) <= set(canonical):
+                raise VNextError(
+                    "Artifact metadata scope exceeds canonical contribution scope"
+                )
+            updated.append(
+                replace(
+                    item,
+                    validated_scope=validated_scope,
+                    canonical_scope=canonical,
+                    coverage_relation=relation,
+                    scope_source=source,
+                )
+            )
+        return scope, updated

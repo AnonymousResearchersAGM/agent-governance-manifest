@@ -481,9 +481,15 @@
       "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
       "evidence_type": "agent_action_scope",
       "value": {
-        "activity_scope": [
+        "artifact_type": "agent_activity",
+        "validated_typed_scope": [
           "demo_app/auth.py"
         ],
+        "canonical_contribution_scope": [
+          "demo_app/auth.py"
+        ],
+        "coverage_relation": "exact_match",
+        "scope_source": "agent_activity.activity_scope",
         "typed_source_validated": true
       },
       "command": null,
@@ -612,7 +618,7 @@
       "reservations": [],
       "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
       "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
-      "evidence_set_fingerprint": "139bedc75b8c8bceb1abf618b2dc5f488e5f04b5f046c32da79493329e0b52bd",
+      "evidence_set_fingerprint": "13255285009363c60a66b6c88a03c43d73cc6651259c2e683a20f15aff34695c",
       "retained_for_contribution_fingerprint": null,
       "retention_reason": null,
       "status": "confirmed",

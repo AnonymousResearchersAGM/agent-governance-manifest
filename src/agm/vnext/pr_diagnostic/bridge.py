@@ -59,10 +59,14 @@ class SidecarEvidenceBridge:
         obligation_id: str,
     ) -> dict[str, Any]:
         value: Any = item.typed_value
-        scope = list(item.metadata.get("affected_scope", ()))
+        scope = list(item.validated_scope)
         if obligation_id == "O-AGENT-SCOPE":
             value = {
-                "activity_scope": sorted(scope),
+                "artifact_type": item.artifact_type,
+                "validated_typed_scope": sorted(scope),
+                "canonical_contribution_scope": list(item.canonical_scope),
+                "coverage_relation": item.coverage_relation,
+                "scope_source": item.scope_source,
                 "typed_source_validated": True,
             }
         if item.artifact_type == "unified_diff":
@@ -137,9 +141,10 @@ class SidecarEvidenceBridge:
                 },
             )
             try:
-                validated = TypedArtifactValidator().validate_package(
+                validated_package = TypedArtifactValidator().validate_package_with_scope(
                     case, package, self.store.read_artifact
                 )
+                validated = validated_package.artifacts
                 entries = [
                     self._entry(item, package_digest, obligation_id)
                     for item in validated
@@ -222,17 +227,18 @@ class SidecarEvidenceBridge:
                     "completed",
                 )
             except Exception:
-                try:
-                    self.store.append_audit_event(
-                        "bridge_audit",
-                        {
-                            "event": "registration_rejected",
-                            "case_id": case.id,
-                            "package_digest": package_digest,
-                        },
-                    )
-                except Exception:
-                    pass
+                if not self.transaction.last_failure_audited:
+                    try:
+                        self.store.append_audit_event(
+                            "bridge_audit",
+                            {
+                                "event": "registration_rejected",
+                                "case_id": case.id,
+                                "package_digest": package_digest,
+                            },
+                        )
+                    except Exception:
+                        pass
                 raise
 
     def _validate_package_binding(self, case: Any, package: dict[str, Any]) -> None:

@@ -64,6 +64,7 @@ jobs:
           tests/test_vnext_pr_diagnostic_phase_2_1_3.py
           tests/test_vnext_pr_diagnostic_semantic_integrity.py
           tests/test_vnext_pr_diagnostic_semantic_hardening.py
+          tests/test_vnext_pr_diagnostic_scope_recovery.py
 
       - name: Validate deterministic PR diagnostic links
         run: python scripts/validate_pr_diagnostic_links.py
