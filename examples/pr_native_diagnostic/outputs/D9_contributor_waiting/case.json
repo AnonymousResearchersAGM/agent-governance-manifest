@@ -77,7 +77,7 @@
       "evidence_type": "agent_action_scope",
       "description": "Record the declared action, permissions, supervision, and delegation scope.",
       "affected_scope": [],
-      "status": "satisfied",
+      "status": "unsatisfied",
       "interaction_ids": []
     },
     {
@@ -98,7 +98,7 @@
       "affected_scope": [
         "README.md"
       ],
-      "status": "satisfied",
+      "status": "unsatisfied",
       "interaction_ids": []
     },
     {
@@ -119,96 +119,11 @@
       "affected_scope": [
         "README.md"
       ],
-      "status": "satisfied",
+      "status": "unsatisfied",
       "interaction_ids": []
     }
   ],
-  "evidence": [
-    {
-      "id": "evidence-a844fcd694c8573d873435d72ca1502c",
-      "obligation_ids": [
-        "O-AGENT-SCOPE"
-      ],
-      "affected_scope": [
-        "README.md"
-      ],
-      "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
-      "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
-      "evidence_type": "agent_action_scope",
-      "value": "编码助手修改认证逻辑并运行定向测试。",
-      "command": null,
-      "environment": null,
-      "artifact_path": null,
-      "artifact_hash": null,
-      "observed_at": "2026-07-26T00:00:00Z",
-      "expires_at": null,
-      "source_actor": "contributor",
-      "source_tool": null,
-      "retained_for_contribution_fingerprint": null,
-      "retention_reason": null,
-      "rejected_at": null,
-      "rejected_by": null,
-      "rejection_reason": null,
-      "validity_state": "valid",
-      "invalid_reasons": []
-    },
-    {
-      "id": "evidence-7add694be24753bda289245efe144591",
-      "obligation_ids": [
-        "O-CHANGED-FILES"
-      ],
-      "affected_scope": [
-        "README.md"
-      ],
-      "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
-      "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
-      "evidence_type": "changed_files",
-      "value": "本次修改仅涉及列出的贡献文件。",
-      "command": null,
-      "environment": null,
-      "artifact_path": null,
-      "artifact_hash": null,
-      "observed_at": "2026-07-26T00:00:00Z",
-      "expires_at": null,
-      "source_actor": "contributor",
-      "source_tool": null,
-      "retained_for_contribution_fingerprint": null,
-      "retention_reason": null,
-      "rejected_at": null,
-      "rejected_by": null,
-      "rejection_reason": null,
-      "validity_state": "valid",
-      "invalid_reasons": []
-    },
-    {
-      "id": "evidence-d3c05d4385af58c4b881d3369d831be0",
-      "obligation_ids": [
-        "O-SUMMARY"
-      ],
-      "affected_scope": [
-        "README.md"
-      ],
-      "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
-      "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
-      "evidence_type": "contribution_summary",
-      "value": "已提供可复查的当前版本材料。",
-      "command": null,
-      "environment": null,
-      "artifact_path": null,
-      "artifact_hash": null,
-      "observed_at": "2026-07-26T00:00:00Z",
-      "expires_at": null,
-      "source_actor": "contributor",
-      "source_tool": null,
-      "retained_for_contribution_fingerprint": null,
-      "retention_reason": null,
-      "rejected_at": null,
-      "rejected_by": null,
-      "rejection_reason": null,
-      "validity_state": "valid",
-      "invalid_reasons": []
-    }
-  ],
+  "evidence": [],
   "attestations": [],
   "findings": [],
   "repair_requests": [],

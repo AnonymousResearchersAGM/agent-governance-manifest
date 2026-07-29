@@ -10,7 +10,7 @@
     ],
     "line_ranges": {
       "README.md": [
-        "5–8"
+        "5"
       ]
     }
   },
@@ -25,7 +25,7 @@
         "README.md"
       ],
       "affected_line_ranges": [
-        "5–8"
+        "5"
       ],
       "expected_state": "按项目要求检查",
       "observed_state": "已识别该风险区域",
@@ -37,12 +37,15 @@
         "O-SUMMARY",
         "O-CHANGED-FILES"
       ],
-      "evidence_refs": [],
+      "evidence_refs": [
+        "fe7847a0d24fa5d23c222f57:@@ -5,2 +5,2 @@"
+      ],
       "responsibility": "maintainer",
       "recommended_route": "inspect_risk",
       "blocking": false,
       "source_state_refs": [
-        "match-documentation-low"
+        "match-documentation-low",
+        "fe7847a0d24fa5d23c222f57:@@ -5,2 +5,2 @@"
       ]
     }
   ],
@@ -52,14 +55,20 @@
       "plain_requirement": "列出这次修改涉及的文件和范围。",
       "obligation_ref": "O-CHANGED-FILES",
       "state": "current",
-      "blocking": true
+      "blocking": true,
+      "evidence_ids": [
+        "sidecar-854717434226230823f722c5"
+      ]
     },
     {
       "title": "修改说明",
       "plain_requirement": "简要说明这次修改做了什么。",
       "obligation_ref": "O-SUMMARY",
       "state": "current",
-      "blocking": true
+      "blocking": true,
+      "evidence_ids": [
+        "sidecar-21bcde282fac72b45c6d92a7"
+      ]
     }
   ],
   "observed_evidence": [
@@ -68,21 +77,23 @@
       "state": "current",
       "evidence_type": "changed_files",
       "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
-      "source": "contributor"
+      "source": "sidecar-bridge",
+      "evidence_id": "sidecar-854717434226230823f722c5"
     },
     {
       "title": "修改说明",
       "state": "current",
       "evidence_type": "contribution_summary",
       "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
-      "source": "contributor"
+      "source": "sidecar-bridge",
+      "evidence_id": "sidecar-21bcde282fac72b45c6d92a7"
     }
   ],
   "evidence_gaps": [],
   "agent_involvement": {
     "state": "not_detected",
     "status": "none",
-    "message": "未检测到可验证的 Agent 参与记录。该贡献可能主要由人工完成，也可能存在未被记录的辅助工具使用。",
+    "message": "未检测到可验证的编码助手活动记录。该贡献可能主要由人工完成，也可能存在未被记录的辅助工具使用。",
     "type": null,
     "modified_file_count": 0,
     "commands": [],
@@ -119,67 +130,30 @@
   "recommended_route": {
     "route": "normal_pr_review",
     "owner": "维护者",
-    "message": "检查文字准确性和链接即可，可以返回正常 PR 审查。"
+    "message": "检查文字准确性、命令示例和链接即可，可以返回常规审查。"
   },
   "inspection_objects": [
     {
-      "object_id": "evidence-2ef57367a6e757b086df72c81b69a982",
-      "title": "变更文件清单",
-      "object_type": "EvidenceArtifactInspectionObject",
-      "plain_language_summary": "来自当前案例的可复查材料。",
-      "source": "contributor",
-      "base_commit_sha": "dddddddddddddddddddddddddddddddddddddddd",
-      "head_commit_sha": null,
-      "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
-      "content_digest": "30bf1036d843d7ec26890ea666373c3d5e05268c210f4161a2577c7a3468e887",
-      "evidence_package_digest": null,
-      "availability": "available",
-      "freshness": "current",
-      "artifact_route": null,
-      "inline_content": "本次修改仅涉及列出的贡献文件。",
-      "technical_metadata": {
-        "evidence_id": "evidence-2ef57367a6e757b086df72c81b69a982"
-      }
-    },
-    {
-      "object_id": "evidence-c1bdcf9a36985eafa5894838cf09980e",
-      "title": "修改说明",
-      "object_type": "EvidenceArtifactInspectionObject",
-      "plain_language_summary": "来自当前案例的可复查材料。",
-      "source": "contributor",
-      "base_commit_sha": "dddddddddddddddddddddddddddddddddddddddd",
-      "head_commit_sha": null,
-      "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
-      "content_digest": "4f4c9d992e02134377c6092ffa3d2fa687a1751b91e93a184177023c513c7e48",
-      "evidence_package_digest": null,
-      "availability": "available",
-      "freshness": "current",
-      "artifact_route": null,
-      "inline_content": "已提供可复查的当前版本材料。",
-      "technical_metadata": {
-        "evidence_id": "evidence-c1bdcf9a36985eafa5894838cf09980e"
-      }
-    },
-    {
-      "object_id": "diff:README.md",
-      "title": "相关修改：README.md",
+      "object_id": "fe7847a0d24fa5d23c222f57",
+      "title": "相关代码差异",
       "object_type": "DiffInspectionObject",
-      "plain_language_summary": "当前未提供可查看的代码差异。",
-      "source": "当前材料",
+      "plain_language_summary": "绑定当前贡献的代码差异。",
+      "source": "已验证并绑定当前版本的材料",
       "base_commit_sha": "dddddddddddddddddddddddddddddddddddddddd",
-      "head_commit_sha": null,
+      "head_commit_sha": "cccccccccccccccccccccccccccccccccccccccc",
       "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
-      "content_digest": null,
-      "evidence_package_digest": null,
-      "availability": "unavailable",
+      "content_digest": "c1b72fef3ca826433758a2722f1e2d6a93d8f4d3da6ecb57ca6a89dfbc9fd64f",
+      "evidence_package_digest": "4df73fdf2abe0df9840f135d07f19f9369d513ae9ea329ed0e30bb001289390c",
+      "availability": "available",
       "freshness": "current",
-      "artifact_route": null,
-      "inline_content": null,
+      "artifact_route": "/artifacts/case-D8_system_handled/4df73fdf2abe0df9840f135d07f19f9369d513ae9ea329ed0e30bb001289390c/fe7847a0d24fa5d23c222f57",
+      "inline_content": "diff --git a/README.md b/README.md\n--- a/README.md\n+++ b/README.md\n@@ -5,2 +5,2 @@\n-pip install agm-demo\n+python -m pip install agm-demo\n link remains valid\n",
       "technical_metadata": {
-        "path": "README.md",
-        "line_ranges": [
-          "5–8"
-        ]
+        "artifact_type": "diff",
+        "media_type": "text/plain",
+        "obligation_refs": [],
+        "canonical_evidence_ids": [],
+        "producer_assurance": "producer_declared"
       }
     }
   ],
@@ -218,7 +192,7 @@
       "reason": "贡献侧要求已经满足，当前轮到有权限的维护者检查；检查完成仍不等于接受。"
     },
     "sidecar": {
-      "current_package": null,
+      "current_package": "4df73fdf2abe0df9840f135d07f19f9369d513ae9ea329ed0e30bb001289390c",
       "historical_packages": []
     },
     "host_platform": {

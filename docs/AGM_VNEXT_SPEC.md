@@ -933,3 +933,7 @@ Phase 2.1 PR diagnostics are a read-only projection of compiled state. They cann
 Phase 2.1.1 requires deterministic fixtures to reach claimed states through legal service operations only; participant wording cannot create a route or platform status.
 
 Phase 2.1.2 keeps commit SHA, contribution fingerprint, policy fingerprint, package digest, artifact digest and receipt digest distinct. It validates sidecar sources before projection and adds no transition or authority.
+# Phase 2.1.3 continuity
+
+Digest integrity and declared producer information are separate assurances.
+This prototype does not claim platform or cryptographic producer identity.

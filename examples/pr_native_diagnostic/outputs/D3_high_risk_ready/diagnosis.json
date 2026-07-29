@@ -10,7 +10,7 @@
     ],
     "line_ranges": {
       "demo_app/auth.py": [
-        "84–117"
+        "84–86"
       ]
     }
   },
@@ -20,12 +20,12 @@
       "category": "risk_area",
       "severity": "critical",
       "headline": "严重风险：demo_app/auth.py",
-      "plain_language_explanation": "该位置决定认证或权限何时生效；错误修改可能让已撤销的权限继续有效。",
+      "plain_language_explanation": "该位置决定认证或权限何时生效；需要重点检查。",
       "affected_files": [
         "demo_app/auth.py"
       ],
       "affected_line_ranges": [
-        "84–117"
+        "84–86"
       ],
       "expected_state": "按项目要求检查",
       "observed_state": "已识别该风险区域",
@@ -43,143 +43,179 @@
         "O-LIMITATIONS",
         "O-HUMAN-ATTEST"
       ],
-      "evidence_refs": [],
+      "evidence_refs": [
+        "1196cd99cd13cf02ddf5b446:@@ -84,3 +84,6 @@ def can_access(token):"
+      ],
       "responsibility": "maintainer",
       "recommended_route": "inspect_risk",
       "blocking": false,
       "source_state_refs": [
-        "match-authentication-critical"
+        "match-authentication-critical",
+        "1196cd99cd13cf02ddf5b446:@@ -84,3 +84,6 @@ def can_access(token):"
       ]
     }
   ],
   "expected_requirements": [
     {
-      "title": "编码助手操作摘要",
+      "title": "编码助手活动记录",
       "plain_requirement": "说明智能体做了什么、用了哪些权限、是否有人监督，以及是否把具有独立行动能力的工作继续交给了另一个智能体。",
       "obligation_ref": "O-AGENT-SCOPE",
       "state": "current",
-      "blocking": true
+      "blocking": true,
+      "evidence_ids": [
+        "sidecar-e0831122349a30c4fbbbc1f5"
+      ]
     },
     {
       "title": "可复查的测试输出",
       "plain_requirement": "提供可以实际检查的测试输出或文件。",
       "obligation_ref": "O-ARTIFACT",
       "state": "current",
-      "blocking": true
+      "blocking": true,
+      "evidence_ids": [
+        "sidecar-720c7eefc2952b91b88a2193"
+      ]
     },
     {
       "title": "认证与权限影响说明",
       "plain_requirement": "说明本次修改是否改变登录、认证或权限行为。",
       "obligation_ref": "O-AUTH-IMPACT",
       "state": "current",
-      "blocking": true
+      "blocking": true,
+      "evidence_ids": [
+        "sidecar-6a9fddb1c6aa52db0e3b71a8"
+      ]
     },
     {
       "title": "变更文件清单",
       "plain_requirement": "列出这次修改涉及的文件和范围。",
       "obligation_ref": "O-CHANGED-FILES",
       "state": "current",
-      "blocking": true
+      "blocking": true,
+      "evidence_ids": [
+        "sidecar-9b3b9ce879f4bd0309d2f889"
+      ]
     },
     {
       "title": "贡献者人工检查",
       "plain_requirement": "由负责人确认自己审阅了当前代码版本、材料和明确范围。",
       "obligation_ref": "O-HUMAN-ATTEST",
       "state": "current",
-      "blocking": true
+      "blocking": true,
+      "evidence_ids": []
     },
     {
       "title": "已知限制",
       "plain_requirement": "说明已知限制；没有已知限制也要明确说明。",
       "obligation_ref": "O-LIMITATIONS",
       "state": "current",
-      "blocking": true
+      "blocking": true,
+      "evidence_ids": [
+        "sidecar-d133ba4d97c5f722ee824377"
+      ]
     },
     {
       "title": "修改原因",
       "plain_requirement": "说明为什么需要这次修改。",
       "obligation_ref": "O-RATIONALE",
       "state": "current",
-      "blocking": true
+      "blocking": true,
+      "evidence_ids": [
+        "sidecar-69477ee7c17dbe4fbf6ac360"
+      ]
     },
     {
       "title": "修改说明",
       "plain_requirement": "简要说明这次修改做了什么。",
       "obligation_ref": "O-SUMMARY",
       "state": "current",
-      "blocking": true
+      "blocking": true,
+      "evidence_ids": [
+        "sidecar-c57f250668a00ad0069fedaf"
+      ]
     },
     {
       "title": "测试记录",
       "plain_requirement": "提供测试命令、运行环境和实际结果。",
       "obligation_ref": "O-TEST-COMMAND",
       "state": "current",
-      "blocking": true
+      "blocking": true,
+      "evidence_ids": [
+        "sidecar-18c049b993b878ef74b79239"
+      ]
     }
   ],
   "observed_evidence": [
     {
-      "title": "编码助手操作摘要",
+      "title": "编码助手活动记录",
       "state": "current",
       "evidence_type": "agent_action_scope",
       "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
-      "source": "contributor"
+      "source": "sidecar-bridge",
+      "evidence_id": "sidecar-e0831122349a30c4fbbbc1f5"
     },
     {
       "title": "可复查的测试输出",
       "state": "current",
       "evidence_type": "artifact",
       "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
-      "source": "contributor"
+      "source": "sidecar-bridge",
+      "evidence_id": "sidecar-720c7eefc2952b91b88a2193"
     },
     {
       "title": "认证与权限影响说明",
       "state": "current",
       "evidence_type": "security_auth_impact",
       "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
-      "source": "contributor"
+      "source": "sidecar-bridge",
+      "evidence_id": "sidecar-6a9fddb1c6aa52db0e3b71a8"
     },
     {
       "title": "变更文件清单",
       "state": "current",
       "evidence_type": "changed_files",
       "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
-      "source": "contributor"
+      "source": "sidecar-bridge",
+      "evidence_id": "sidecar-9b3b9ce879f4bd0309d2f889"
     },
     {
       "title": "已知限制",
       "state": "current",
       "evidence_type": "known_limitations",
       "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
-      "source": "contributor"
+      "source": "sidecar-bridge",
+      "evidence_id": "sidecar-d133ba4d97c5f722ee824377"
     },
     {
       "title": "修改原因",
       "state": "current",
       "evidence_type": "rationale",
       "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
-      "source": "contributor"
+      "source": "sidecar-bridge",
+      "evidence_id": "sidecar-69477ee7c17dbe4fbf6ac360"
     },
     {
       "title": "修改说明",
       "state": "current",
       "evidence_type": "contribution_summary",
       "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
-      "source": "contributor"
+      "source": "sidecar-bridge",
+      "evidence_id": "sidecar-c57f250668a00ad0069fedaf"
     },
     {
       "title": "测试记录",
       "state": "current",
       "evidence_type": "test_command",
       "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
-      "source": "contributor"
+      "source": "sidecar-bridge",
+      "evidence_id": "sidecar-18c049b993b878ef74b79239"
     }
   ],
   "evidence_gaps": [],
   "agent_involvement": {
     "state": "verifiable",
     "status": "verifiable",
-    "message": "检测到可验证的编码 Agent 活动。",
+    "message": "检测到一份内容完整、并绑定当前版本的编码助手活动记录。",
     "type": "编码助手",
     "modified_file_count": 1,
     "commands": [
@@ -190,10 +226,11 @@
     ],
     "used_other_tools": false,
     "network": false,
-    "current_version": true
+    "current_version": true,
+    "producer_assurance": "记录声明由某编码助手生成；当前原型已验证内容完整性和版本绑定，尚未通过代码托管平台或密码学签名确认生产者身份。"
   },
   "human_review_status": {
-    "contributor_self_review": "贡献者已确认检查当前版本。",
+    "contributor_self_review": "已完成",
     "contributor_state": "required_current",
     "maintainer_review": "尚未完成必要检查",
     "final_recommendation": "尚未记录"
@@ -220,219 +257,113 @@
   "recommended_route": {
     "route": "maintainer_focused_review",
     "owner": "维护者",
-    "message": "材料已齐备，但涉及风险区域；请重点检查代码差异、测试和影响说明。"
+    "message": "材料已齐备，但涉及风险区域；请重点检查指定差异和关键测试。"
   },
   "inspection_objects": [
     {
-      "object_id": "evidence-303307ef40b85830bac374e6673b2832",
-      "title": "编码助手操作摘要",
-      "object_type": "EvidenceArtifactInspectionObject",
-      "plain_language_summary": "来自当前案例的可复查材料。",
-      "source": "contributor",
-      "base_commit_sha": "dddddddddddddddddddddddddddddddddddddddd",
-      "head_commit_sha": null,
-      "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
-      "content_digest": "2c85355251f23bb42e1a019e7fa409fa0e2ddf6201f63b18bbdb0e45013de6a3",
-      "evidence_package_digest": null,
-      "availability": "available",
-      "freshness": "current",
-      "artifact_route": null,
-      "inline_content": "编码助手修改认证逻辑并运行定向测试。",
-      "technical_metadata": {
-        "evidence_id": "evidence-303307ef40b85830bac374e6673b2832"
-      }
-    },
-    {
-      "object_id": "evidence-c9cb8efb318b571aa48d6b5b3abc83ee",
-      "title": "可复查的测试输出",
-      "object_type": "EvidenceArtifactInspectionObject",
-      "plain_language_summary": "来自当前案例的可复查材料。",
-      "source": "contributor",
-      "base_commit_sha": "dddddddddddddddddddddddddddddddddddddddd",
-      "head_commit_sha": null,
-      "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
-      "content_digest": "ad8e8ee3fcfdccdf6ba14e4f6ed42e7c0f388aa7537e2e0902c721fa1ae1f0d8",
-      "evidence_package_digest": null,
-      "availability": "available",
-      "freshness": "current",
-      "artifact_route": null,
-      "inline_content": "认证回归测试输出：18 passed, 0 failed。",
-      "technical_metadata": {
-        "evidence_id": "evidence-c9cb8efb318b571aa48d6b5b3abc83ee"
-      }
-    },
-    {
-      "object_id": "evidence-74dce3330f48595a9ab21a2c7537c247",
-      "title": "认证与权限影响说明",
-      "object_type": "EvidenceArtifactInspectionObject",
-      "plain_language_summary": "来自当前案例的可复查材料。",
-      "source": "contributor",
-      "base_commit_sha": "dddddddddddddddddddddddddddddddddddddddd",
-      "head_commit_sha": null,
-      "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
-      "content_digest": "a31db820f1f48c29a525a0e3fc9e03a311c9302c92c0703a3d2ac5fe0aa635ce",
-      "evidence_package_digest": null,
-      "availability": "available",
-      "freshness": "current",
-      "artifact_route": null,
-      "inline_content": "影响撤销令牌、会话刷新和权限变更后的会话失效路径；未改变身份验证回退策略。",
-      "technical_metadata": {
-        "evidence_id": "evidence-74dce3330f48595a9ab21a2c7537c247"
-      }
-    },
-    {
-      "object_id": "evidence-ae80d8d778325930baf059b7a23f44d3",
-      "title": "变更文件清单",
-      "object_type": "EvidenceArtifactInspectionObject",
-      "plain_language_summary": "来自当前案例的可复查材料。",
-      "source": "contributor",
-      "base_commit_sha": "dddddddddddddddddddddddddddddddddddddddd",
-      "head_commit_sha": null,
-      "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
-      "content_digest": "30bf1036d843d7ec26890ea666373c3d5e05268c210f4161a2577c7a3468e887",
-      "evidence_package_digest": null,
-      "availability": "available",
-      "freshness": "current",
-      "artifact_route": null,
-      "inline_content": "本次修改仅涉及列出的贡献文件。",
-      "technical_metadata": {
-        "evidence_id": "evidence-ae80d8d778325930baf059b7a23f44d3"
-      }
-    },
-    {
-      "object_id": "evidence-7612a8d03815527ab4e316f5eea320ad",
-      "title": "已知限制",
-      "object_type": "EvidenceArtifactInspectionObject",
-      "plain_language_summary": "来自当前案例的可复查材料。",
-      "source": "contributor",
-      "base_commit_sha": "dddddddddddddddddddddddddddddddddddddddd",
-      "head_commit_sha": null,
-      "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
-      "content_digest": "b78c6ba018c3174a4a90293cefe222482be07f0df0aece05738d19fdc296dfb1",
-      "evidence_package_digest": null,
-      "availability": "available",
-      "freshness": "current",
-      "artifact_route": null,
-      "inline_content": "未改变密码重置、注册或多因素认证流程。",
-      "technical_metadata": {
-        "evidence_id": "evidence-7612a8d03815527ab4e316f5eea320ad"
-      }
-    },
-    {
-      "object_id": "evidence-68c7e64bf7eb55f783e0cc393f2bea62",
-      "title": "修改原因",
-      "object_type": "EvidenceArtifactInspectionObject",
-      "plain_language_summary": "来自当前案例的可复查材料。",
-      "source": "contributor",
-      "base_commit_sha": "dddddddddddddddddddddddddddddddddddddddd",
-      "head_commit_sha": null,
-      "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
-      "content_digest": "b2e065e617bda717cc40a0a99d5fcf062825046cb4aebfdfaca50a798e1abe92",
-      "evidence_package_digest": null,
-      "availability": "available",
-      "freshness": "current",
-      "artifact_route": null,
-      "inline_content": "撤销令牌后必须拒绝继续访问，避免旧会话绕过权限变更。",
-      "technical_metadata": {
-        "evidence_id": "evidence-68c7e64bf7eb55f783e0cc393f2bea62"
-      }
-    },
-    {
-      "object_id": "evidence-84efeca885875600afd7062dea8e6184",
-      "title": "修改说明",
-      "object_type": "EvidenceArtifactInspectionObject",
-      "plain_language_summary": "来自当前案例的可复查材料。",
-      "source": "contributor",
-      "base_commit_sha": "dddddddddddddddddddddddddddddddddddddddd",
-      "head_commit_sha": null,
-      "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
-      "content_digest": "4f4c9d992e02134377c6092ffa3d2fa687a1751b91e93a184177023c513c7e48",
-      "evidence_package_digest": null,
-      "availability": "available",
-      "freshness": "current",
-      "artifact_route": null,
-      "inline_content": "已提供可复查的当前版本材料。",
-      "technical_metadata": {
-        "evidence_id": "evidence-84efeca885875600afd7062dea8e6184"
-      }
-    },
-    {
-      "object_id": "evidence-9e6c52a2d35f5e92837d0331b2fe5eca",
-      "title": "测试记录",
-      "object_type": "EvidenceArtifactInspectionObject",
-      "plain_language_summary": "来自当前案例的可复查材料。",
-      "source": "contributor",
-      "base_commit_sha": "dddddddddddddddddddddddddddddddddddddddd",
-      "head_commit_sha": null,
-      "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
-      "content_digest": "e6d206e750b619319514acb7da6b4045be75bbdf5a0cedea7f9d0a99d8ce2407",
-      "evidence_package_digest": null,
-      "availability": "available",
-      "freshness": "current",
-      "artifact_route": null,
-      "inline_content": "python -m pytest tests/test_auth.py -q\n18 passed, 0 failed\n覆盖：test_revoked_token_is_rejected；test_expired_session_cannot_refresh；test_permission_change_invalidates_session",
-      "technical_metadata": {
-        "evidence_id": "evidence-9e6c52a2d35f5e92837d0331b2fe5eca"
-      }
-    },
-    {
-      "object_id": "1b5d9268ea9b08275371b14b",
+      "object_id": "1196cd99cd13cf02ddf5b446",
       "title": "相关代码差异",
       "object_type": "DiffInspectionObject",
       "plain_language_summary": "绑定当前贡献的代码差异。",
-      "source": "已验证 sidecar 材料",
+      "source": "已验证并绑定当前版本的材料",
       "base_commit_sha": "dddddddddddddddddddddddddddddddddddddddd",
       "head_commit_sha": "cccccccccccccccccccccccccccccccccccccccc",
       "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
-      "content_digest": "77be88933306f327875eeb72bdbae545a68b7201016795a63404e2b4a15fa549",
-      "evidence_package_digest": "d306181cbc543c403da7648a6dbcdc95f35f0dc7a747050f65cf5373dfc0ca26",
+      "content_digest": "1d7a3edbdc7e36008ec30aec5c45acb8d01a843eed472edd3370b4b4ad401c97",
+      "evidence_package_digest": "cbc7052a5905bb181a99ff31c8cb001104f6ad0aab83d94e8bf1c5550d671fe0",
       "availability": "available",
       "freshness": "current",
-      "artifact_route": null,
-      "inline_content": "@@ demo_app/auth.py:84-117 @@\n-    return token in active_tokens\n+    if token in revoked_tokens:\n+        return False\n+    return token in active_tokens\n\n撤销后的令牌不能继续访问受保护资源。",
+      "artifact_route": "/artifacts/case-D3_high_risk_ready/cbc7052a5905bb181a99ff31c8cb001104f6ad0aab83d94e8bf1c5550d671fe0/1196cd99cd13cf02ddf5b446",
+      "inline_content": "diff --git a/demo_app/auth.py b/demo_app/auth.py\n--- a/demo_app/auth.py\n+++ b/demo_app/auth.py\n@@ -84,3 +84,6 @@ def can_access(token):\n-    return token in active_tokens\n+    if token in revoked_tokens:\n+        return False\n+    return token in active_tokens\n",
       "technical_metadata": {
         "artifact_type": "diff",
-        "media_type": "text/plain"
+        "media_type": "text/plain",
+        "obligation_refs": [],
+        "canonical_evidence_ids": [],
+        "producer_assurance": "producer_declared"
       }
     },
     {
-      "object_id": "f22ab3a9d65025bea507720a",
+      "object_id": "6188adf2a892cf6520e92318",
+      "title": "编码助手活动记录",
+      "object_type": "AgentActivityInspectionObject",
+      "plain_language_summary": "对应当前版本的编码助手活动记录。",
+      "source": "已验证并绑定当前版本的材料",
+      "base_commit_sha": "dddddddddddddddddddddddddddddddddddddddd",
+      "head_commit_sha": "cccccccccccccccccccccccccccccccccccccccc",
+      "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
+      "content_digest": "333575029843ea140780313772b226925833a80876857058bebe557297324770",
+      "evidence_package_digest": "cbc7052a5905bb181a99ff31c8cb001104f6ad0aab83d94e8bf1c5550d671fe0",
+      "availability": "available",
+      "freshness": "current",
+      "artifact_route": "/artifacts/case-D3_high_risk_ready/cbc7052a5905bb181a99ff31c8cb001104f6ad0aab83d94e8bf1c5550d671fe0/6188adf2a892cf6520e92318",
+      "inline_content": "{\"agent_type\": \"编码助手\", \"task_summary\": \"修复令牌撤销检查\", \"files_modified\": [\"demo_app/auth.py\"], \"commands_executed\": [\"python -m pytest tests/test_auth.py -q\"], \"tests_executed\": [\"tests/test_auth.py\"], \"other_agents_or_tools_used\": false, \"network_access\": false}",
+      "technical_metadata": {
+        "artifact_type": "agent_activity",
+        "media_type": "text/plain",
+        "obligation_refs": [
+          "O-AGENT-SCOPE"
+        ],
+        "canonical_evidence_ids": [
+          "sidecar-e0831122349a30c4fbbbc1f5"
+        ],
+        "producer_assurance": "producer_declared"
+      }
+    },
+    {
+      "object_id": "a957edec8fbe6a4dab947fd1",
       "title": "测试记录",
       "object_type": "TestInspectionObject",
       "plain_language_summary": "可复查的测试命令和结果。",
-      "source": "已验证 sidecar 材料",
+      "source": "已验证并绑定当前版本的材料",
       "base_commit_sha": "dddddddddddddddddddddddddddddddddddddddd",
       "head_commit_sha": "cccccccccccccccccccccccccccccccccccccccc",
       "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
-      "content_digest": "a26f10d807c105224ac5c0d8c46ffab3325147277010bd93fa58d19491242d8e",
-      "evidence_package_digest": "d306181cbc543c403da7648a6dbcdc95f35f0dc7a747050f65cf5373dfc0ca26",
+      "content_digest": "7d2451fc960cf1addb434d4ed9eb764fea89df5ab27b8743dbc8dfb3169c57e4",
+      "evidence_package_digest": "cbc7052a5905bb181a99ff31c8cb001104f6ad0aab83d94e8bf1c5550d671fe0",
       "availability": "available",
       "freshness": "current",
-      "artifact_route": null,
-      "inline_content": "测试命令：python -m pytest tests/test_auth.py -q\n结果：18 passed, 0 failed\n关键测试：test_revoked_token_is_rejected；test_expired_session_cannot_refresh；test_permission_change_invalidates_session",
+      "artifact_route": "/artifacts/case-D3_high_risk_ready/cbc7052a5905bb181a99ff31c8cb001104f6ad0aab83d94e8bf1c5550d671fe0/a957edec8fbe6a4dab947fd1",
+      "inline_content": "python -m pytest tests/test_auth.py -q\n18 passed, 0 failed",
       "technical_metadata": {
         "artifact_type": "test_result",
-        "media_type": "text/plain"
+        "media_type": "text/plain",
+        "obligation_refs": [
+          "O-TEST-COMMAND",
+          "O-ARTIFACT"
+        ],
+        "canonical_evidence_ids": [
+          "sidecar-18c049b993b878ef74b79239",
+          "sidecar-720c7eefc2952b91b88a2193"
+        ],
+        "producer_assurance": "producer_declared"
       }
     },
     {
-      "object_id": "4e173ddcf55145b452b8dd10",
-      "title": "编码助手行动摘要",
-      "object_type": "AgentActivityInspectionObject",
-      "plain_language_summary": "编码助手的可验证行动记录。",
-      "source": "已验证 sidecar 材料",
+      "object_id": "7e2d57712b2db270ccc47cd6",
+      "title": "认证与权限影响说明",
+      "object_type": "ImpactStatementInspectionObject",
+      "plain_language_summary": "对应当前版本的影响说明。",
+      "source": "已验证并绑定当前版本的材料",
       "base_commit_sha": "dddddddddddddddddddddddddddddddddddddddd",
       "head_commit_sha": "cccccccccccccccccccccccccccccccccccccccc",
       "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
-      "content_digest": "d457ee7d5f7931a7f64735980877ce64231b72684d7048952aa7892a9422d65e",
-      "evidence_package_digest": "d306181cbc543c403da7648a6dbcdc95f35f0dc7a747050f65cf5373dfc0ca26",
+      "content_digest": "9ff3b300567f71a735009950bde764f2a8291290d2652ebe9e1ac78ccabac624",
+      "evidence_package_digest": "cbc7052a5905bb181a99ff31c8cb001104f6ad0aab83d94e8bf1c5550d671fe0",
       "availability": "available",
       "freshness": "current",
-      "artifact_route": null,
-      "inline_content": "{\"agent_type\": \"编码助手\", \"tool_name\": \"deterministic-fixture\", \"task_summary\": \"修复令牌撤销检查\", \"files_modified\": [\"demo_app/auth.py\"], \"commands_executed\": [\"python -m pytest tests/test_auth.py -q\"], \"tests_executed\": [\"tests/test_auth.py\"], \"other_agents_or_tools_used\": false, \"network_access\": false, \"risk_sensitive_files_touched\": true}",
+      "artifact_route": "/artifacts/case-D3_high_risk_ready/cbc7052a5905bb181a99ff31c8cb001104f6ad0aab83d94e8bf1c5550d671fe0/7e2d57712b2db270ccc47cd6",
+      "inline_content": "撤销令牌、会话刷新和权限变更后拒绝旧会话；未改变注册或密码重置。",
       "technical_metadata": {
-        "artifact_type": "agent_activity",
-        "media_type": "text/plain"
+        "artifact_type": "impact_statement",
+        "media_type": "text/plain",
+        "obligation_refs": [
+          "O-AUTH-IMPACT"
+        ],
+        "canonical_evidence_ids": [
+          "sidecar-6a9fddb1c6aa52db0e3b71a8"
+        ],
+        "producer_assurance": "producer_declared"
       }
     },
     {
@@ -453,30 +384,11 @@
       "technical_metadata": {
         "attestation_id": "attestation-479b25eed50652c39614b05dad9df1c1"
       }
-    },
-    {
-      "object_id": "d306181cbc543c403da7648a6dbcdc95f35f0dc7a747050f65cf5373dfc0ca26",
-      "title": "证据包",
-      "object_type": "EvidenceArtifactInspectionObject",
-      "plain_language_summary": "已验证并绑定当前贡献的证据包。",
-      "source": "当前材料",
-      "base_commit_sha": "dddddddddddddddddddddddddddddddddddddddd",
-      "head_commit_sha": null,
-      "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
-      "content_digest": "5569c3c31ce083bcf0d0fa779657c71b4d2ac5b9a132e51d43a2a641a199c6d4",
-      "evidence_package_digest": "d306181cbc543c403da7648a6dbcdc95f35f0dc7a747050f65cf5373dfc0ca26",
-      "availability": "available",
-      "freshness": "current",
-      "artifact_route": null,
-      "inline_content": "此证据包已通过摘要和贡献绑定校验。",
-      "technical_metadata": {
-        "historical_package_count": 0
-      }
     }
   ],
   "action_effect_boundaries": [
     {
-      "label": "请求贡献者补充",
+      "label": "请求贡献者补充或修正",
       "existing_operation": "request_repair",
       "will_do": [
         "记录 AGM 中这项检查的结果。"
@@ -548,7 +460,7 @@
       "reason": "贡献侧要求已经满足，当前轮到有权限的维护者检查；检查完成仍不等于接受。"
     },
     "sidecar": {
-      "current_package": "d306181cbc543c403da7648a6dbcdc95f35f0dc7a747050f65cf5373dfc0ca26",
+      "current_package": "cbc7052a5905bb181a99ff31c8cb001104f6ad0aab83d94e8bf1c5550d671fe0",
       "historical_packages": []
     },
     "host_platform": {

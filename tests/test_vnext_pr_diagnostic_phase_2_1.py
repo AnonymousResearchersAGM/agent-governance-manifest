@@ -36,7 +36,8 @@ def test_low_risk_readme_keeps_compiled_requirements_without_extra_tests(tmp_pat
     assert view.diagnostic_status == "需要贡献者先处理"  # direct unit case intentionally has no materials
     assert {item["obligation_ref"] for item in view.expected_requirements} == {"O-SUMMARY", "O-CHANGED-FILES", "O-AGENT-SCOPE"}
     assert "O-TEST-COMMAND" not in {item["obligation_ref"] for item in view.expected_requirements}
-    assert view.risk_findings[0].affected_line_ranges == ("12–16",)
+    # Caller context is descriptive only; locations require a verified diff.
+    assert view.risk_findings[0].affected_line_ranges == ()
 
 
 def test_high_risk_missing_test_is_derived_from_compiled_obligation(tmp_path):

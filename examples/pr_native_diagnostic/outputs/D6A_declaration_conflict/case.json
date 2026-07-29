@@ -1,21 +1,21 @@
 {
-  "id": "case-D4_no_agent_trace",
-  "mode": "maintainer_requested",
+  "id": "case-D6A_declaration_conflict",
+  "mode": "declared_agent_mediated",
   "mode_reason": "Structured AGM preparation was explicitly declared or requested; no claim about contributor identity is inferred.",
   "state": "awaiting_maintainer_verification",
   "created_at": "2026-07-26T00:00:00Z",
   "updated_at": "2026-07-26T00:00:00Z",
   "base_commit": "dddddddddddddddddddddddddddddddddddddddd",
   "changed_files": [
-    "demo_app/tasks.py"
+    "README.md"
   ],
   "change_tags": [],
   "semantic_targets": [],
-  "autonomy_profile": "human_direct",
+  "autonomy_profile": "supervised_agent",
   "assurance_profile": "standard",
-  "contribution_fingerprint": "e0bc385d792ac7a129d3868c9cdc684e6016e2af5c3388fde9772b606b17afb6",
+  "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
   "policy_snapshot": {
-    "id": "policy-04085e605c5c56dfb8c5210802529a27",
+    "id": "policy-eb1c9ffb2e6e5101b9110bcbd543692f",
     "schema_version": "agm.policy_snapshot/v0.2-dev",
     "manifest_version": "agm.manifest/v0.2-dev",
     "base_commit": "dddddddddddddddddddddddddddddddddddddddd",
@@ -38,24 +38,22 @@
       ".agm/workflows/state_machine.yml"
     ]
   },
-  "overall_risk_level": "medium",
+  "overall_risk_level": "low",
   "matched_rules": [
     {
-      "id": "match-task-logic-medium",
-      "rule_id": "task-logic-medium",
-      "zone": "task_logic",
-      "risk_level": "medium",
+      "id": "match-documentation-low",
+      "rule_id": "documentation-low",
+      "zone": "documentation",
+      "risk_level": "low",
       "affected_paths": [
-        "demo_app/tasks.py"
+        "README.md"
       ],
       "selector_reasons": [
-        "path selectors matched: demo_app/tasks.py"
+        "path selectors matched: README.md"
       ],
       "obligation_ids": [
         "O-SUMMARY",
-        "O-CHANGED-FILES",
-        "O-RATIONALE",
-        "O-TEST-EXPLANATION"
+        "O-CHANGED-FILES"
       ],
       "case_required": false,
       "source": "risk_rule",
@@ -64,10 +62,29 @@
   ],
   "obligations": [
     {
+      "id": "obl-o-agent-scope",
+      "obligation_id": "O-AGENT-SCOPE",
+      "source_rule_ids": [
+        "autonomy:supervised_agent"
+      ],
+      "type": "evidence",
+      "severity": "medium",
+      "blocking": true,
+      "verifier_roles": [
+        "maintainer",
+        "maintainer_verifier"
+      ],
+      "evidence_type": "agent_action_scope",
+      "description": "Record the declared action, permissions, supervision, and delegation scope.",
+      "affected_scope": [],
+      "status": "satisfied",
+      "interaction_ids": []
+    },
+    {
       "id": "obl-o-changed-files",
       "obligation_id": "O-CHANGED-FILES",
       "source_rule_ids": [
-        "task-logic-medium"
+        "documentation-low"
       ],
       "type": "evidence",
       "severity": "low",
@@ -79,28 +96,7 @@
       "evidence_type": "changed_files",
       "description": "Identify the files and scopes covered by the contribution.",
       "affected_scope": [
-        "demo_app/tasks.py"
-      ],
-      "status": "satisfied",
-      "interaction_ids": []
-    },
-    {
-      "id": "obl-o-rationale",
-      "obligation_id": "O-RATIONALE",
-      "source_rule_ids": [
-        "task-logic-medium"
-      ],
-      "type": "evidence",
-      "severity": "medium",
-      "blocking": true,
-      "verifier_roles": [
-        "maintainer",
-        "maintainer_verifier"
-      ],
-      "evidence_type": "rationale",
-      "description": "Explain why the change is needed without disclosing private reasoning.",
-      "affected_scope": [
-        "demo_app/tasks.py"
+        "README.md"
       ],
       "status": "satisfied",
       "interaction_ids": []
@@ -109,7 +105,7 @@
       "id": "obl-o-summary",
       "obligation_id": "O-SUMMARY",
       "source_rule_ids": [
-        "task-logic-medium"
+        "documentation-low"
       ],
       "type": "evidence",
       "severity": "low",
@@ -121,28 +117,7 @@
       "evidence_type": "contribution_summary",
       "description": "Provide a concise factual contribution summary.",
       "affected_scope": [
-        "demo_app/tasks.py"
-      ],
-      "status": "satisfied",
-      "interaction_ids": []
-    },
-    {
-      "id": "obl-o-test-explanation",
-      "obligation_id": "O-TEST-EXPLANATION",
-      "source_rule_ids": [
-        "task-logic-medium"
-      ],
-      "type": "evidence",
-      "severity": "medium",
-      "blocking": true,
-      "verifier_roles": [
-        "maintainer",
-        "maintainer_verifier"
-      ],
-      "evidence_type": "test_explanation",
-      "description": "Provide a test command or a clear explanation when tests are not applicable.",
-      "affected_scope": [
-        "demo_app/tasks.py"
+        "README.md"
       ],
       "status": "satisfied",
       "interaction_ids": []
@@ -150,14 +125,14 @@
   ],
   "evidence": [
     {
-      "id": "sidecar-0feb8d0f57c2cf4dbf57c5a2",
+      "id": "sidecar-bc6a37ab169a0b13e693b4d3",
       "obligation_ids": [
         "O-SUMMARY"
       ],
       "affected_scope": [
-        "demo_app/tasks.py"
+        "README.md"
       ],
-      "contribution_fingerprint": "e0bc385d792ac7a129d3868c9cdc684e6016e2af5c3388fde9772b606b17afb6",
+      "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
       "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
       "evidence_type": "contribution_summary",
       "value": "这是一份绑定当前版本的具体贡献材料。",
@@ -178,14 +153,14 @@
       "invalid_reasons": []
     },
     {
-      "id": "sidecar-c055f7dde29239ca41a8f65e",
+      "id": "sidecar-d761ba402ab8282a86937fc4",
       "obligation_ids": [
         "O-CHANGED-FILES"
       ],
       "affected_scope": [
-        "demo_app/tasks.py"
+        "README.md"
       ],
-      "contribution_fingerprint": "e0bc385d792ac7a129d3868c9cdc684e6016e2af5c3388fde9772b606b17afb6",
+      "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
       "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
       "evidence_type": "changed_files",
       "value": "这是一份绑定当前版本的具体贡献材料。",
@@ -206,45 +181,17 @@
       "invalid_reasons": []
     },
     {
-      "id": "sidecar-adb2e8612a855fbd4d745ef0",
+      "id": "sidecar-5ae82b7cba6a686dccf84e91",
       "obligation_ids": [
-        "O-RATIONALE"
+        "O-AGENT-SCOPE"
       ],
       "affected_scope": [
-        "demo_app/tasks.py"
+        "README.md"
       ],
-      "contribution_fingerprint": "e0bc385d792ac7a129d3868c9cdc684e6016e2af5c3388fde9772b606b17afb6",
+      "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
       "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
-      "evidence_type": "rationale",
-      "value": "这是一份绑定当前版本的具体贡献材料。",
-      "command": null,
-      "environment": null,
-      "artifact_path": null,
-      "artifact_hash": null,
-      "observed_at": "2026-07-26T00:00:00Z",
-      "expires_at": null,
-      "source_actor": "sidecar-bridge",
-      "source_tool": "sidecar-evidence-bridge",
-      "retained_for_contribution_fingerprint": null,
-      "retention_reason": null,
-      "rejected_at": null,
-      "rejected_by": null,
-      "rejection_reason": null,
-      "validity_state": "valid",
-      "invalid_reasons": []
-    },
-    {
-      "id": "sidecar-514852fa6c79748cd0a1e01a",
-      "obligation_ids": [
-        "O-TEST-EXPLANATION"
-      ],
-      "affected_scope": [
-        "demo_app/tasks.py"
-      ],
-      "contribution_fingerprint": "e0bc385d792ac7a129d3868c9cdc684e6016e2af5c3388fde9772b606b17afb6",
-      "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
-      "evidence_type": "test_explanation",
-      "value": "这是一份绑定当前版本的具体贡献材料。",
+      "evidence_type": "agent_action_scope",
+      "value": "{\"agent_type\": \"编码助手\", \"task_summary\": \"修正 README 安装命令和失效链接\", \"files_modified\": [\"README.md\"], \"commands_executed\": [], \"tests_executed\": [], \"other_agents_or_tools_used\": true, \"network_access\": false}",
       "command": null,
       "environment": null,
       "artifact_path": null,
@@ -263,7 +210,28 @@
     }
   ],
   "attestations": [],
-  "findings": [],
+  "findings": [
+    {
+      "id": "finding-33ca4f999ba45f5e818737fbbb13158c",
+      "code": "trusted_sidecar_conflict",
+      "severity": "high",
+      "message": "贡献者声明与编码助手活动记录不一致。",
+      "blocking": true,
+      "related_object_ids": [
+        "sidecar-5ae82b7cba6a686dccf84e91",
+        "8a5f1c8e45fca4cbaac69c5d",
+        "ed726fca76bce53cfaaf31c6",
+        "99bff2bcf93a6ae9bb70992aa4dd82cd85b433849e2a9caa643522d567b1f3e4"
+      ],
+      "affected_obligation_ids": [
+        "O-AGENT-SCOPE"
+      ],
+      "status": "open",
+      "created_at": "2026-07-26T00:00:00Z",
+      "resolved_at": null,
+      "resolution": null
+    }
+  ],
   "repair_requests": [],
   "attempted_operations": [],
   "maintainer_verifications": [],

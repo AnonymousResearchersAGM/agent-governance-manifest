@@ -9,9 +9,7 @@
       "demo_app/auth.py"
     ],
     "line_ranges": {
-      "demo_app/auth.py": [
-        "84–117"
-      ]
+      "demo_app/auth.py": []
     }
   },
   "risk_findings": [
@@ -20,13 +18,11 @@
       "category": "risk_area",
       "severity": "critical",
       "headline": "严重风险：demo_app/auth.py",
-      "plain_language_explanation": "该位置决定认证或权限何时生效；错误修改可能让已撤销的权限继续有效。",
+      "plain_language_explanation": "该位置决定认证或权限何时生效；需要重点检查。",
       "affected_files": [
         "demo_app/auth.py"
       ],
-      "affected_line_ranges": [
-        "84–117"
-      ],
+      "affected_line_ranges": [],
       "expected_state": "按项目要求检查",
       "observed_state": "已识别该风险区域",
       "gap": "",
@@ -58,56 +54,64 @@
       "plain_requirement": "提供可以实际检查的测试输出或文件。",
       "obligation_ref": "O-ARTIFACT",
       "state": "missing",
-      "blocking": true
+      "blocking": true,
+      "evidence_ids": []
     },
     {
       "title": "认证与权限影响说明",
       "plain_requirement": "说明本次修改是否改变登录、认证或权限行为。",
       "obligation_ref": "O-AUTH-IMPACT",
       "state": "missing",
-      "blocking": true
+      "blocking": true,
+      "evidence_ids": []
     },
     {
       "title": "变更文件清单",
       "plain_requirement": "列出这次修改涉及的文件和范围。",
       "obligation_ref": "O-CHANGED-FILES",
       "state": "missing",
-      "blocking": true
+      "blocking": true,
+      "evidence_ids": []
     },
     {
       "title": "贡献者人工检查",
       "plain_requirement": "由负责人确认自己审阅了当前代码版本、材料和明确范围。",
       "obligation_ref": "O-HUMAN-ATTEST",
       "state": "missing",
-      "blocking": true
+      "blocking": true,
+      "evidence_ids": []
     },
     {
       "title": "已知限制",
       "plain_requirement": "说明已知限制；没有已知限制也要明确说明。",
       "obligation_ref": "O-LIMITATIONS",
       "state": "missing",
-      "blocking": true
+      "blocking": true,
+      "evidence_ids": []
     },
     {
       "title": "修改原因",
       "plain_requirement": "说明为什么需要这次修改。",
       "obligation_ref": "O-RATIONALE",
       "state": "missing",
-      "blocking": true
+      "blocking": true,
+      "evidence_ids": []
     },
     {
       "title": "修改说明",
       "plain_requirement": "简要说明这次修改做了什么。",
       "obligation_ref": "O-SUMMARY",
       "state": "missing",
-      "blocking": true
+      "blocking": true,
+      "evidence_ids": []
     },
     {
       "title": "测试记录",
       "plain_requirement": "提供测试命令、运行环境和实际结果。",
       "obligation_ref": "O-TEST-COMMAND",
       "state": "missing",
-      "blocking": true
+      "blocking": true,
+      "evidence_ids": []
     }
   ],
   "observed_evidence": [],
@@ -332,7 +336,7 @@
   "agent_involvement": {
     "state": "not_detected",
     "status": "none",
-    "message": "未检测到可验证的 Agent 参与记录。该贡献可能主要由人工完成，也可能存在未被记录的辅助工具使用。",
+    "message": "未检测到可验证的编码助手活动记录。该贡献可能主要由人工完成，也可能存在未被记录的辅助工具使用。",
     "type": null,
     "modified_file_count": 0,
     "commands": [],
@@ -388,10 +392,7 @@
       "artifact_route": null,
       "inline_content": null,
       "technical_metadata": {
-        "path": "demo_app/auth.py",
-        "line_ranges": [
-          "84–117"
-        ]
+        "path": "demo_app/auth.py"
       }
     }
   ],
@@ -431,7 +432,7 @@
     "agent_trace_state": "not_detected",
     "route_derivation": {
       "route": "contributor_action_required",
-      "reason": "受影响材料尚未准备或更新完成，当前还不能进入维护者检查。"
+      "reason": "当前仍有贡献侧要求未完成；完成后再交给负责人或维护者。"
     },
     "sidecar": {
       "current_package": null,

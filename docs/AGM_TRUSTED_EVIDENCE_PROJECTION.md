@@ -9,3 +9,7 @@ verified current package. Human confirmations remain legal case attestations.
 
 This is a projection boundary, not a change to AGM evidence binding,
 attestation, responsibility or lifecycle semantics.
+# Phase 2.1.3 continuity
+
+Trusted projection is now downstream of the SidecarEvidenceBridge: current
+and missing project requirements come from canonical evidence compilation.

@@ -106,35 +106,7 @@
   ],
   "evidence": [
     {
-      "id": "evidence-35f8d66168305ece87a19e6d142d05b9",
-      "obligation_ids": [
-        "O-CHANGED-FILES"
-      ],
-      "affected_scope": [
-        "README.md"
-      ],
-      "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
-      "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
-      "evidence_type": "changed_files",
-      "value": "本次修改仅涉及列出的贡献文件。",
-      "command": null,
-      "environment": null,
-      "artifact_path": null,
-      "artifact_hash": null,
-      "observed_at": "2026-07-26T00:00:00Z",
-      "expires_at": null,
-      "source_actor": "contributor",
-      "source_tool": null,
-      "retained_for_contribution_fingerprint": null,
-      "retention_reason": null,
-      "rejected_at": null,
-      "rejected_by": null,
-      "rejection_reason": null,
-      "validity_state": "verified",
-      "invalid_reasons": []
-    },
-    {
-      "id": "evidence-e5379a1c07895a4ebc6e0e3a2efd77d2",
+      "id": "sidecar-fe46254d27e11b97a7b00d08",
       "obligation_ids": [
         "O-SUMMARY"
       ],
@@ -144,15 +116,43 @@
       "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
       "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
       "evidence_type": "contribution_summary",
-      "value": "已提供可复查的当前版本材料。",
+      "value": "这是一份绑定当前版本的具体贡献材料。",
       "command": null,
       "environment": null,
       "artifact_path": null,
       "artifact_hash": null,
       "observed_at": "2026-07-26T00:00:00Z",
       "expires_at": null,
-      "source_actor": "contributor",
-      "source_tool": null,
+      "source_actor": "sidecar-bridge",
+      "source_tool": "sidecar-evidence-bridge",
+      "retained_for_contribution_fingerprint": null,
+      "retention_reason": null,
+      "rejected_at": null,
+      "rejected_by": null,
+      "rejection_reason": null,
+      "validity_state": "verified",
+      "invalid_reasons": []
+    },
+    {
+      "id": "sidecar-57abb9827f0a730460fe9d77",
+      "obligation_ids": [
+        "O-CHANGED-FILES"
+      ],
+      "affected_scope": [
+        "README.md"
+      ],
+      "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
+      "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
+      "evidence_type": "changed_files",
+      "value": "这是一份绑定当前版本的具体贡献材料。",
+      "command": null,
+      "environment": null,
+      "artifact_path": null,
+      "artifact_hash": null,
+      "observed_at": "2026-07-26T00:00:00Z",
+      "expires_at": null,
+      "source_actor": "sidecar-bridge",
+      "source_tool": "sidecar-evidence-bridge",
       "retained_for_contribution_fingerprint": null,
       "retention_reason": null,
       "rejected_at": null,
@@ -177,8 +177,8 @@
         "O-SUMMARY"
       ],
       "evidence_ids": [
-        "evidence-35f8d66168305ece87a19e6d142d05b9",
-        "evidence-e5379a1c07895a4ebc6e0e3a2efd77d2"
+        "sidecar-57abb9827f0a730460fe9d77",
+        "sidecar-fe46254d27e11b97a7b00d08"
       ],
       "outcome": "verified",
       "reason": "已检查当前材料。",
@@ -212,8 +212,8 @@
       "O-SUMMARY": "verified"
     },
     "evidence_ids": [
-      "evidence-35f8d66168305ece87a19e6d142d05b9",
-      "evidence-e5379a1c07895a4ebc6e0e3a2efd77d2"
+      "sidecar-57abb9827f0a730460fe9d77",
+      "sidecar-fe46254d27e11b97a7b00d08"
     ],
     "attestation_ids": [],
     "verification_ids": [
@@ -221,7 +221,7 @@
     ],
     "repair_request_ids": [],
     "unresolved_exception_ids": [],
-    "transition_log_hash": "06dcf2d27018ea3d1b6836e62be987ed68da5753262a90020ea018275f1e52b2"
+    "transition_log_hash": "d7446ce23c421581a5ee5a5cf5fbc9bcbadb8b5f6887b6da278a82ce82d18113"
   },
   "schema_version": "agm.governance_case/v0.2-dev"
 }
