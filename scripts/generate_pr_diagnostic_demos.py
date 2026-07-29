@@ -17,7 +17,17 @@ class ScenarioLifecycleDriver:
     def add_required_evidence(self):
         for obligation in self.service.storage.load_case(self.case_id).obligations:
             if obligation.type=="human_attestation": continue
-            kwargs={"actor":"contributor","actor_role":"contributor","obligation_ids":[obligation.obligation_id],"evidence_type":obligation.evidence_type,"value":f"{obligation.obligation_id} 的当前版本材料","observed_at":FIXED_TIME}
+            concrete={
+                "summary":"修复令牌撤销后的访问拒绝行为，并保留现有登录流程。",
+                "changed_files":"本次修改仅涉及列出的贡献文件。",
+                "rationale":"撤销令牌后必须拒绝继续访问，避免旧会话绕过权限变更。",
+                "test_command":"python -m pytest tests/test_auth.py -q\n18 passed, 0 failed\n覆盖：test_revoked_token_is_rejected；test_expired_session_cannot_refresh；test_permission_change_invalidates_session",
+                "artifact":"认证回归测试输出：18 passed, 0 failed。",
+                "known_limitations":"未改变密码重置、注册或多因素认证流程。",
+                "security_auth_impact":"影响撤销令牌、会话刷新和权限变更后的会话失效路径；未改变身份验证回退策略。",
+                "agent_action_scope":"编码助手修改认证逻辑并运行定向测试。",
+            }
+            kwargs={"actor":"contributor","actor_role":"contributor","obligation_ids":[obligation.obligation_id],"evidence_type":obligation.evidence_type,"value":concrete.get(obligation.evidence_type,"已提供可复查的当前版本材料。"),"observed_at":FIXED_TIME}
             if obligation.evidence_type=="test_command": kwargs.update(command="python -m pytest -q",environment="Python 3.11 / local deterministic fixture",source_tool="pytest")
             self.service.add_evidence(self.case_id,**kwargs)
     def prepare(self): return self.service.prepare_case(self.case_id,actor="contributor",actor_role="contributor")
@@ -32,14 +42,21 @@ class ScenarioLifecycleDriver:
         try: self.service.verify(self.case_id,actor="coding-agent",role="contributor_agent",reason="无权验证",timestamp=FIXED_TIME)
         except VNextError: return
         raise AssertionError("fixture expected an unauthorized operation rejection")
-    def sidecar_package(self):
+    def sidecar_package(self, artifacts):
         case=self.service.storage.load_case(self.case_id); store=SidecarEvidenceStore(self.service.root)
-        return store.write_package(case_id=case.id,contribution_fingerprint=case.contribution_fingerprint,policy_fingerprint=case.policy_snapshot.policy_fingerprint,producer="deterministic-scenario",created_at=FIXED_TIME,artifacts=[{"type":"evidence","summary":item.evidence_type,"digest":item.id} for item in case.evidence])
+        return store.write_package(case_id=case.id,contribution_fingerprint=case.contribution_fingerprint,policy_fingerprint=case.policy_snapshot.policy_fingerprint,producer="deterministic-scenario",created_at=FIXED_TIME,base_commit_sha=case.base_commit,head_commit_sha="c"*40,artifacts=artifacts)
 
 def _context(slug: str, path: str, *, agent=True, diff=True):
-    base={"summary":slug,"changed_line_ranges":{path:["84–117"] if "auth" in path else ["5–8"]},"diff_hunks":{path:"@@ -1 +1 @@\n-old\n+new"} if diff else {}}
-    if agent: base["agent_activity"]={"verified":True,"type":"编码 Agent","modified_files":[path],"commands":["python -m pytest -q"],"test_runs":["pytest"],"used_other_tools":False,"network":False,"summary":"修改当前贡献并运行测试。"}
-    return base
+    return {"summary":slug,"changed_line_ranges":{path:["84–117"] if "auth" in path else ["5–8"]}}
+
+def _materials(path: str, *, agent: bool, declaration: bool=False, conflict: bool=False):
+    diff = """@@ demo_app/auth.py:84-117 @@\n-    return token in active_tokens\n+    if token in revoked_tokens:\n+        return False\n+    return token in active_tokens\n\n撤销后的令牌不能继续访问受保护资源。""" if "auth" in path else """@@ README.md:5-8 @@\n- pip install agm-demo\n+ python -m pip install agm-demo\n\n修正安装命令，链接仍指向同一份项目文档。"""
+    materials=[{"type":"diff","title":"相关代码差异","content":diff}]
+    if "auth" in path:
+        materials.extend([{"type":"test_result","title":"测试记录","content":"测试命令：python -m pytest tests/test_auth.py -q\n结果：18 passed, 0 failed\n关键测试：test_revoked_token_is_rejected；test_expired_session_cannot_refresh；test_permission_change_invalidates_session"},{"type":"impact_statement","title":"认证与权限影响说明","content":"本次修改在撤销令牌、会话刷新和权限变更后拒绝旧会话。未改变注册、密码重置或多因素认证。维护者应重点确认撤销列表查询发生在访问允许之前。"}])
+    if agent: materials.append({"type":"agent_activity","title":"编码助手行动摘要","content":json.dumps({"agent_type":"编码助手","tool_name":"deterministic-fixture","task_summary":"修复令牌撤销检查","files_modified":[path],"commands_executed":["python -m pytest tests/test_auth.py -q"],"tests_executed":["tests/test_auth.py"],"other_agents_or_tools_used":conflict,"network_access":False,"risk_sensitive_files_touched":"auth" in path},ensure_ascii=False)})
+    if declaration: materials.append({"type":"contribution_declaration","title":"贡献者声明","content":json.dumps({"used_other_agents_or_tools":False,"statement":"本次工作没有使用其他编码助手或自动化子任务。"},ensure_ascii=False)})
+    return materials
 
 SCENARIOS=(
  ("D1_low_risk_readme","README.md","supervised_agent","ready"),("D2_high_risk_missing","demo_app/auth.py","supervised_agent","missing"),("D3_high_risk_ready","demo_app/auth.py","supervised_agent","ready"),("D4_no_agent_trace","demo_app/tasks.py","human_direct","ready"),("D5_no_agent_high_missing_test","demo_app/auth.py","human_direct","missing"),("D6_declaration_conflict","README.md","supervised_agent","conflict"),("D7_stale_test","tests/test_auth.py","supervised_agent","stale"),("D8_system_handled","README.md","human_direct","denied"),("D9_contributor_waiting","README.md","supervised_agent","waiting"),("D10_final_recommendation","README.md","human_direct","final"))
@@ -49,21 +66,22 @@ def build_scenario(service: GovernanceService, slug: str, path: str, profile: st
     driver=ScenarioLifecycleDriver(service,case.id); ctx=_context(slug,path,agent=profile!="human_direct",diff=mode != "waiting")
     if mode in {"ready","denied","waiting","conflict","stale","final"}: driver.add_required_evidence()
     package=None
+    if mode in {"ready","missing","conflict","stale","waiting"} and profile!="human_direct":
+        package=driver.sidecar_package(_materials(path,agent=True,declaration=mode=="conflict",conflict=mode=="conflict"))
     if mode=="ready":
         driver.prepare()
         if any(o.type=="human_attestation" for o in service.storage.load_case(case.id).obligations): driver.attest()
     elif mode=="conflict":
-        driver.prepare(); ctx["contribution_declaration"]={"summary":"未使用其他助手。","used_other_tools":False}; ctx["agent_activity"]["used_other_tools"]=True; agent_scope=next(o.obligation_id for o in service.storage.load_case(case.id).obligations if o.evidence_type=="agent_action_scope"); driver.repair(agent_scope)
+        driver.prepare(); agent_scope=next(o.obligation_id for o in service.storage.load_case(case.id).obligations if o.evidence_type=="agent_action_scope"); driver.repair(agent_scope)
     elif mode=="stale":
-        driver.prepare(); package=driver.sidecar_package(); test_id=next(o.obligation_id for o in service.storage.load_case(case.id).obligations if o.evidence_type=="test_command"); driver.repair(test_id); driver.resubmit(test_id)
+        driver.prepare(); test_id=next(o.obligation_id for o in service.storage.load_case(case.id).obligations if o.evidence_type=="test_command"); driver.repair(test_id); driver.resubmit(test_id)
     elif mode=="denied": driver.prepare(); driver.denied_verify()
     elif mode=="final": driver.prepare(); driver.verify(); driver.decide_accept()
-    if mode=="ready" and slug=="D3_high_risk_ready": package=driver.sidecar_package()
-    if package: ctx["sidecar_package"]={"digest":package.package_digest,"contribution_fingerprint":package.contribution_fingerprint,"freshness":"current" if package.contribution_fingerprint==service.storage.load_case(case.id).contribution_fingerprint else "stale"}
+    if mode=="ready" and slug=="D3_high_risk_ready" and package is None: package=driver.sidecar_package(_materials(path,agent=True))
     if mode=="final":
-        package=driver.sidecar_package(); store=SidecarEvidenceStore(service.root); final=service.storage.load_case(case.id).final_decision
+        package=driver.sidecar_package(_materials(path,agent=False)); store=SidecarEvidenceStore(service.root); final=service.storage.load_case(case.id).final_decision
         receipt=FinalEvidenceReceipt(service.storage.load_case(case.id).contribution_fingerprint,service.storage.load_case(case.id).policy_snapshot.policy_fingerprint,package.package_digest,"低风险文档修改","未检测到可验证记录","不适用","已完成必要检查","建议接受",{"connected":False,"approval_state":"not_performed","merge_state":"not_performed","close_state":"not_performed","verified":True},FIXED_TIME)
-        path=store.write_final_receipt(receipt); ctx["final_receipt"]={"digest":path.stem,"href":".agm-work/evidence_store/receipts/"+path.name}
+        store.write_final_receipt(receipt)
     return case.id,ctx
 
 def generate(output: Path)->list[dict[str,str]]:

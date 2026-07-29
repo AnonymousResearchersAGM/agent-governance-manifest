@@ -83,28 +83,28 @@
       "title": "变更文件清单",
       "state": "current",
       "evidence_type": "changed_files",
-      "bound_commit": "e0bc385d792ac7a129d3868c9cdc684e6016e2af5c3388fde9772b606b17afb6",
+      "contribution_fingerprint": "e0bc385d792ac7a129d3868c9cdc684e6016e2af5c3388fde9772b606b17afb6",
       "source": "contributor"
     },
     {
       "title": "修改原因",
       "state": "current",
       "evidence_type": "rationale",
-      "bound_commit": "e0bc385d792ac7a129d3868c9cdc684e6016e2af5c3388fde9772b606b17afb6",
+      "contribution_fingerprint": "e0bc385d792ac7a129d3868c9cdc684e6016e2af5c3388fde9772b606b17afb6",
       "source": "contributor"
     },
     {
       "title": "修改说明",
       "state": "current",
       "evidence_type": "contribution_summary",
-      "bound_commit": "e0bc385d792ac7a129d3868c9cdc684e6016e2af5c3388fde9772b606b17afb6",
+      "contribution_fingerprint": "e0bc385d792ac7a129d3868c9cdc684e6016e2af5c3388fde9772b606b17afb6",
       "source": "contributor"
     },
     {
       "title": "测试覆盖说明",
       "state": "current",
       "evidence_type": "test_explanation",
-      "bound_commit": "e0bc385d792ac7a129d3868c9cdc684e6016e2af5c3388fde9772b606b17afb6",
+      "contribution_fingerprint": "e0bc385d792ac7a129d3868c9cdc684e6016e2af5c3388fde9772b606b17afb6",
       "source": "contributor"
     }
   ],
@@ -122,7 +122,8 @@
     "current_version": false
   },
   "human_review_status": {
-    "contributor_self_review": "尚未确认",
+    "contributor_self_review": "本类修改不要求额外的贡献者人工确认。",
+    "contributor_state": "not_required",
     "maintainer_review": "尚未完成必要检查",
     "final_recommendation": "尚未记录"
   },
@@ -152,97 +153,101 @@
   },
   "inspection_objects": [
     {
+      "object_id": "evidence-1adc34d8779f5c7fa4e2cb2fdb21f54b",
       "title": "变更文件清单",
       "object_type": "EvidenceArtifactInspectionObject",
-      "plain_language_summary": "可复查的项目材料。",
+      "plain_language_summary": "来自当前案例的可复查材料。",
       "source": "contributor",
-      "bound_commit": "dddddddddddddddddddddddddddddddddddddddd",
-      "content_digest": "068a7767cd17445a84a303a76374f8d476c999ca76c967aa8ccdab6cc8a31a40",
+      "base_commit_sha": "dddddddddddddddddddddddddddddddddddddddd",
+      "head_commit_sha": null,
+      "contribution_fingerprint": "e0bc385d792ac7a129d3868c9cdc684e6016e2af5c3388fde9772b606b17afb6",
+      "content_digest": "30bf1036d843d7ec26890ea666373c3d5e05268c210f4161a2577c7a3468e887",
+      "evidence_package_digest": null,
       "availability": "available",
       "freshness": "current",
-      "view_href": null,
-      "inline_content": "O-CHANGED-FILES 的当前版本材料",
+      "artifact_route": null,
+      "inline_content": "本次修改仅涉及列出的贡献文件。",
       "technical_metadata": {
         "evidence_id": "evidence-1adc34d8779f5c7fa4e2cb2fdb21f54b"
       }
     },
     {
+      "object_id": "evidence-ff64947789bc58859eff57aee6551c2d",
       "title": "修改原因",
       "object_type": "EvidenceArtifactInspectionObject",
-      "plain_language_summary": "可复查的项目材料。",
+      "plain_language_summary": "来自当前案例的可复查材料。",
       "source": "contributor",
-      "bound_commit": "dddddddddddddddddddddddddddddddddddddddd",
-      "content_digest": "b9fdcac09c8b2fdfdbe3bc16e58263afdacd4b3d89c39489c4e87a17170633bc",
+      "base_commit_sha": "dddddddddddddddddddddddddddddddddddddddd",
+      "head_commit_sha": null,
+      "contribution_fingerprint": "e0bc385d792ac7a129d3868c9cdc684e6016e2af5c3388fde9772b606b17afb6",
+      "content_digest": "b2e065e617bda717cc40a0a99d5fcf062825046cb4aebfdfaca50a798e1abe92",
+      "evidence_package_digest": null,
       "availability": "available",
       "freshness": "current",
-      "view_href": null,
-      "inline_content": "O-RATIONALE 的当前版本材料",
+      "artifact_route": null,
+      "inline_content": "撤销令牌后必须拒绝继续访问，避免旧会话绕过权限变更。",
       "technical_metadata": {
         "evidence_id": "evidence-ff64947789bc58859eff57aee6551c2d"
       }
     },
     {
+      "object_id": "evidence-23d03e0476f85858a992e70bfca7e8f4",
       "title": "修改说明",
       "object_type": "EvidenceArtifactInspectionObject",
-      "plain_language_summary": "可复查的项目材料。",
+      "plain_language_summary": "来自当前案例的可复查材料。",
       "source": "contributor",
-      "bound_commit": "dddddddddddddddddddddddddddddddddddddddd",
-      "content_digest": "418a771c56c62d5dc92078ad9c10581abd86b7676ca2cd6cffbaa5d898e53d77",
+      "base_commit_sha": "dddddddddddddddddddddddddddddddddddddddd",
+      "head_commit_sha": null,
+      "contribution_fingerprint": "e0bc385d792ac7a129d3868c9cdc684e6016e2af5c3388fde9772b606b17afb6",
+      "content_digest": "4f4c9d992e02134377c6092ffa3d2fa687a1751b91e93a184177023c513c7e48",
+      "evidence_package_digest": null,
       "availability": "available",
       "freshness": "current",
-      "view_href": null,
-      "inline_content": "O-SUMMARY 的当前版本材料",
+      "artifact_route": null,
+      "inline_content": "已提供可复查的当前版本材料。",
       "technical_metadata": {
         "evidence_id": "evidence-23d03e0476f85858a992e70bfca7e8f4"
       }
     },
     {
+      "object_id": "evidence-176f48f454ee5f08987ff6acf1d72ca3",
       "title": "测试覆盖说明",
       "object_type": "EvidenceArtifactInspectionObject",
-      "plain_language_summary": "可复查的项目材料。",
+      "plain_language_summary": "来自当前案例的可复查材料。",
       "source": "contributor",
-      "bound_commit": "dddddddddddddddddddddddddddddddddddddddd",
-      "content_digest": "b34615d6a17410031922099b3e39916f96d2806176d7bf658912bf377e43728e",
+      "base_commit_sha": "dddddddddddddddddddddddddddddddddddddddd",
+      "head_commit_sha": null,
+      "contribution_fingerprint": "e0bc385d792ac7a129d3868c9cdc684e6016e2af5c3388fde9772b606b17afb6",
+      "content_digest": "4f4c9d992e02134377c6092ffa3d2fa687a1751b91e93a184177023c513c7e48",
+      "evidence_package_digest": null,
       "availability": "available",
       "freshness": "current",
-      "view_href": null,
-      "inline_content": "O-TEST-EXPLANATION 的当前版本材料",
+      "artifact_route": null,
+      "inline_content": "已提供可复查的当前版本材料。",
       "technical_metadata": {
         "evidence_id": "evidence-176f48f454ee5f08987ff6acf1d72ca3"
       }
     },
     {
+      "object_id": "diff:demo_app/tasks.py",
       "title": "相关修改：demo_app/tasks.py",
       "object_type": "DiffInspectionObject",
-      "plain_language_summary": "绑定当前版本的代码差异。",
+      "plain_language_summary": "当前未提供可查看的代码差异。",
       "source": "当前材料",
-      "bound_commit": "dddddddddddddddddddddddddddddddddddddddd",
-      "content_digest": "d87fc654ea81213951a8ba2a6d8d17db44532fb24004e25804c80f46d083a4fd",
-      "availability": "available",
+      "base_commit_sha": "dddddddddddddddddddddddddddddddddddddddd",
+      "head_commit_sha": null,
+      "contribution_fingerprint": "e0bc385d792ac7a129d3868c9cdc684e6016e2af5c3388fde9772b606b17afb6",
+      "content_digest": null,
+      "evidence_package_digest": null,
+      "availability": "unavailable",
       "freshness": "current",
-      "view_href": null,
-      "inline_content": "@@ -1 +1 @@\n-old\n+new",
+      "artifact_route": null,
+      "inline_content": null,
       "technical_metadata": {
         "path": "demo_app/tasks.py",
         "line_ranges": [
           "5–8"
         ]
-      }
-    },
-    {
-      "title": "测试记录",
-      "object_type": "TestInspectionObject",
-      "plain_language_summary": "可复查的测试命令和结果。",
-      "source": "contributor",
-      "bound_commit": "e0bc385d792ac7a129d3868c9cdc684e6016e2af5c3388fde9772b606b17afb6",
-      "content_digest": "b34615d6a17410031922099b3e39916f96d2806176d7bf658912bf377e43728e",
-      "availability": "available",
-      "freshness": "current",
-      "view_href": null,
-      "inline_content": "O-TEST-EXPLANATION 的当前版本材料",
-      "technical_metadata": {
-        "command": null,
-        "environment": null
       }
     }
   ],
@@ -278,11 +283,15 @@
       "O-SUMMARY": "current",
       "O-TEST-EXPLANATION": "current"
     },
-    "human_confirmation_state": "尚未确认",
+    "human_confirmation_state": "not_required",
     "agent_trace_state": "not_detected",
     "route_derivation": {
       "route": "normal_pr_review",
       "reason": "贡献侧要求已经满足，当前轮到有权限的维护者检查；检查完成仍不等于接受。"
+    },
+    "sidecar": {
+      "current_package": null,
+      "historical_packages": []
     },
     "host_platform": {
       "connected": false,

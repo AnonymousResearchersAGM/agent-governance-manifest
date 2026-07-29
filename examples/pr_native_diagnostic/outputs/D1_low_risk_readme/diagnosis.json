@@ -74,21 +74,21 @@
       "title": "编码助手操作摘要",
       "state": "current",
       "evidence_type": "agent_action_scope",
-      "bound_commit": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
+      "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
       "source": "contributor"
     },
     {
       "title": "变更文件清单",
       "state": "current",
       "evidence_type": "changed_files",
-      "bound_commit": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
+      "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
       "source": "contributor"
     },
     {
       "title": "修改说明",
       "state": "current",
       "evidence_type": "contribution_summary",
-      "bound_commit": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
+      "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
       "source": "contributor"
     }
   ],
@@ -97,20 +97,21 @@
     "state": "verifiable",
     "status": "verifiable",
     "message": "检测到可验证的编码 Agent 活动。",
-    "type": "编码 Agent",
+    "type": "编码助手",
     "modified_file_count": 1,
     "commands": [
-      "python -m pytest -q"
+      "python -m pytest tests/test_auth.py -q"
     ],
     "tests": [
-      "pytest"
+      "tests/test_auth.py"
     ],
     "used_other_tools": false,
     "network": false,
     "current_version": true
   },
   "human_review_status": {
-    "contributor_self_review": "尚未确认",
+    "contributor_self_review": "本类修改不要求额外的贡献者人工确认。",
+    "contributor_state": "not_required",
     "maintainer_review": "尚未完成必要检查",
     "final_recommendation": "尚未记录"
   },
@@ -140,84 +141,119 @@
   },
   "inspection_objects": [
     {
+      "object_id": "evidence-61d6ff80d35c56ad97f7966c94e21dc3",
       "title": "编码助手操作摘要",
       "object_type": "EvidenceArtifactInspectionObject",
-      "plain_language_summary": "可复查的项目材料。",
+      "plain_language_summary": "来自当前案例的可复查材料。",
       "source": "contributor",
-      "bound_commit": "dddddddddddddddddddddddddddddddddddddddd",
-      "content_digest": "05c894f40156ca8ea9b180d69f6582f02ee33507bf89ee41bc8669d679e2e5d0",
+      "base_commit_sha": "dddddddddddddddddddddddddddddddddddddddd",
+      "head_commit_sha": null,
+      "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
+      "content_digest": "2c85355251f23bb42e1a019e7fa409fa0e2ddf6201f63b18bbdb0e45013de6a3",
+      "evidence_package_digest": null,
       "availability": "available",
       "freshness": "current",
-      "view_href": null,
-      "inline_content": "O-AGENT-SCOPE 的当前版本材料",
+      "artifact_route": null,
+      "inline_content": "编码助手修改认证逻辑并运行定向测试。",
       "technical_metadata": {
         "evidence_id": "evidence-61d6ff80d35c56ad97f7966c94e21dc3"
       }
     },
     {
+      "object_id": "evidence-71ea974a9c905fa08c58db7a65c7e571",
       "title": "变更文件清单",
       "object_type": "EvidenceArtifactInspectionObject",
-      "plain_language_summary": "可复查的项目材料。",
+      "plain_language_summary": "来自当前案例的可复查材料。",
       "source": "contributor",
-      "bound_commit": "dddddddddddddddddddddddddddddddddddddddd",
-      "content_digest": "068a7767cd17445a84a303a76374f8d476c999ca76c967aa8ccdab6cc8a31a40",
+      "base_commit_sha": "dddddddddddddddddddddddddddddddddddddddd",
+      "head_commit_sha": null,
+      "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
+      "content_digest": "30bf1036d843d7ec26890ea666373c3d5e05268c210f4161a2577c7a3468e887",
+      "evidence_package_digest": null,
       "availability": "available",
       "freshness": "current",
-      "view_href": null,
-      "inline_content": "O-CHANGED-FILES 的当前版本材料",
+      "artifact_route": null,
+      "inline_content": "本次修改仅涉及列出的贡献文件。",
       "technical_metadata": {
         "evidence_id": "evidence-71ea974a9c905fa08c58db7a65c7e571"
       }
     },
     {
+      "object_id": "evidence-bbb40967b92f5b588e0779b9e01ac84a",
       "title": "修改说明",
       "object_type": "EvidenceArtifactInspectionObject",
-      "plain_language_summary": "可复查的项目材料。",
+      "plain_language_summary": "来自当前案例的可复查材料。",
       "source": "contributor",
-      "bound_commit": "dddddddddddddddddddddddddddddddddddddddd",
-      "content_digest": "418a771c56c62d5dc92078ad9c10581abd86b7676ca2cd6cffbaa5d898e53d77",
+      "base_commit_sha": "dddddddddddddddddddddddddddddddddddddddd",
+      "head_commit_sha": null,
+      "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
+      "content_digest": "4f4c9d992e02134377c6092ffa3d2fa687a1751b91e93a184177023c513c7e48",
+      "evidence_package_digest": null,
       "availability": "available",
       "freshness": "current",
-      "view_href": null,
-      "inline_content": "O-SUMMARY 的当前版本材料",
+      "artifact_route": null,
+      "inline_content": "已提供可复查的当前版本材料。",
       "technical_metadata": {
         "evidence_id": "evidence-bbb40967b92f5b588e0779b9e01ac84a"
       }
     },
     {
-      "title": "相关修改：README.md",
+      "object_id": "64de9017b6a4fc30aa38d67a",
+      "title": "相关代码差异",
       "object_type": "DiffInspectionObject",
-      "plain_language_summary": "绑定当前版本的代码差异。",
-      "source": "当前材料",
-      "bound_commit": "dddddddddddddddddddddddddddddddddddddddd",
-      "content_digest": "d87fc654ea81213951a8ba2a6d8d17db44532fb24004e25804c80f46d083a4fd",
+      "plain_language_summary": "绑定当前贡献的代码差异。",
+      "source": "已验证 sidecar 材料",
+      "base_commit_sha": "dddddddddddddddddddddddddddddddddddddddd",
+      "head_commit_sha": "cccccccccccccccccccccccccccccccccccccccc",
+      "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
+      "content_digest": "3da55022d2e3d02d0713c294fa16f363e796d933f4613ed6e41a9a2194383fc9",
+      "evidence_package_digest": "08ab9c34ffbe7436197e510eb26b3c9bb6db51c9163179b07491dbd7cec331b9",
       "availability": "available",
       "freshness": "current",
-      "view_href": null,
-      "inline_content": "@@ -1 +1 @@\n-old\n+new",
+      "artifact_route": null,
+      "inline_content": "@@ README.md:5-8 @@\n- pip install agm-demo\n+ python -m pip install agm-demo\n\n修正安装命令，链接仍指向同一份项目文档。",
       "technical_metadata": {
-        "path": "README.md",
-        "line_ranges": [
-          "5–8"
-        ]
+        "artifact_type": "diff",
+        "media_type": "text/plain"
       }
     },
     {
+      "object_id": "88ace46475b699fcd27d10bd",
       "title": "编码助手行动摘要",
       "object_type": "AgentActivityInspectionObject",
-      "plain_language_summary": "检测到可验证的编码 Agent 活动。",
-      "source": "可验证 Agent 记录",
-      "bound_commit": "dddddddddddddddddddddddddddddddddddddddd",
-      "content_digest": "8dba4514226b898d28d64967f24e3318b21cdbb7eae0ed5df190ed104854848e",
+      "plain_language_summary": "编码助手的可验证行动记录。",
+      "source": "已验证 sidecar 材料",
+      "base_commit_sha": "dddddddddddddddddddddddddddddddddddddddd",
+      "head_commit_sha": "cccccccccccccccccccccccccccccccccccccccc",
+      "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
+      "content_digest": "bbe5912415b5572688fa231edf1a988de5e37681ffeec0a113ed23736f7657bf",
+      "evidence_package_digest": "08ab9c34ffbe7436197e510eb26b3c9bb6db51c9163179b07491dbd7cec331b9",
       "availability": "available",
       "freshness": "current",
-      "view_href": null,
-      "inline_content": "修改当前贡献并运行测试。",
+      "artifact_route": null,
+      "inline_content": "{\"agent_type\": \"编码助手\", \"tool_name\": \"deterministic-fixture\", \"task_summary\": \"修复令牌撤销检查\", \"files_modified\": [\"README.md\"], \"commands_executed\": [\"python -m pytest tests/test_auth.py -q\"], \"tests_executed\": [\"tests/test_auth.py\"], \"other_agents_or_tools_used\": false, \"network_access\": false, \"risk_sensitive_files_touched\": false}",
       "technical_metadata": {
-        "type": "编码 Agent",
-        "commands": [
-          "python -m pytest -q"
-        ]
+        "artifact_type": "agent_activity",
+        "media_type": "text/plain"
+      }
+    },
+    {
+      "object_id": "08ab9c34ffbe7436197e510eb26b3c9bb6db51c9163179b07491dbd7cec331b9",
+      "title": "证据包",
+      "object_type": "EvidenceArtifactInspectionObject",
+      "plain_language_summary": "已验证并绑定当前贡献的证据包。",
+      "source": "当前材料",
+      "base_commit_sha": "dddddddddddddddddddddddddddddddddddddddd",
+      "head_commit_sha": null,
+      "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
+      "content_digest": "5569c3c31ce083bcf0d0fa779657c71b4d2ac5b9a132e51d43a2a641a199c6d4",
+      "evidence_package_digest": "08ab9c34ffbe7436197e510eb26b3c9bb6db51c9163179b07491dbd7cec331b9",
+      "availability": "available",
+      "freshness": "current",
+      "artifact_route": null,
+      "inline_content": "此证据包已通过摘要和贡献绑定校验。",
+      "technical_metadata": {
+        "historical_package_count": 0
       }
     }
   ],
@@ -251,11 +287,15 @@
       "O-CHANGED-FILES": "current",
       "O-SUMMARY": "current"
     },
-    "human_confirmation_state": "尚未确认",
+    "human_confirmation_state": "not_required",
     "agent_trace_state": "verifiable",
     "route_derivation": {
       "route": "normal_pr_review",
       "reason": "贡献侧要求已经满足，当前轮到有权限的维护者检查；检查完成仍不等于接受。"
+    },
+    "sidecar": {
+      "current_package": "08ab9c34ffbe7436197e510eb26b3c9bb6db51c9163179b07491dbd7cec331b9",
+      "historical_packages": []
     },
     "host_platform": {
       "connected": false,

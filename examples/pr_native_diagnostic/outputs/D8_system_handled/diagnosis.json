@@ -2,7 +2,7 @@
   "case_id": "case-D8_system_handled",
   "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
   "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
-  "diagnostic_status": "系统已处理，无需额外操作",
+  "diagnostic_status": "可以按常规流程审查",
   "change_summary": {
     "summary": "D8_system_handled",
     "files": [
@@ -67,14 +67,14 @@
       "title": "变更文件清单",
       "state": "current",
       "evidence_type": "changed_files",
-      "bound_commit": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
+      "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
       "source": "contributor"
     },
     {
       "title": "修改说明",
       "state": "current",
       "evidence_type": "contribution_summary",
-      "bound_commit": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
+      "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
       "source": "contributor"
     }
   ],
@@ -92,7 +92,8 @@
     "current_version": false
   },
   "human_review_status": {
-    "contributor_self_review": "尚未确认",
+    "contributor_self_review": "本类修改不要求额外的贡献者人工确认。",
+    "contributor_state": "not_required",
     "maintainer_review": "尚未完成必要检查",
     "final_recommendation": "尚未记录"
   },
@@ -112,56 +113,68 @@
     "verified": true
   },
   "review_readiness": {
-    "status": "系统已处理，无需额外操作",
+    "status": "可以按常规流程审查",
     "blocking_gaps": 0
   },
   "recommended_route": {
-    "route": "system_handled_no_action",
-    "owner": "系统已处理",
-    "message": "系统已经拒绝该越权操作；该操作未生效，你无需再次处理。"
+    "route": "normal_pr_review",
+    "owner": "维护者",
+    "message": "检查文字准确性和链接即可，可以返回正常 PR 审查。"
   },
   "inspection_objects": [
     {
+      "object_id": "evidence-2ef57367a6e757b086df72c81b69a982",
       "title": "变更文件清单",
       "object_type": "EvidenceArtifactInspectionObject",
-      "plain_language_summary": "可复查的项目材料。",
+      "plain_language_summary": "来自当前案例的可复查材料。",
       "source": "contributor",
-      "bound_commit": "dddddddddddddddddddddddddddddddddddddddd",
-      "content_digest": "068a7767cd17445a84a303a76374f8d476c999ca76c967aa8ccdab6cc8a31a40",
+      "base_commit_sha": "dddddddddddddddddddddddddddddddddddddddd",
+      "head_commit_sha": null,
+      "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
+      "content_digest": "30bf1036d843d7ec26890ea666373c3d5e05268c210f4161a2577c7a3468e887",
+      "evidence_package_digest": null,
       "availability": "available",
       "freshness": "current",
-      "view_href": null,
-      "inline_content": "O-CHANGED-FILES 的当前版本材料",
+      "artifact_route": null,
+      "inline_content": "本次修改仅涉及列出的贡献文件。",
       "technical_metadata": {
         "evidence_id": "evidence-2ef57367a6e757b086df72c81b69a982"
       }
     },
     {
+      "object_id": "evidence-c1bdcf9a36985eafa5894838cf09980e",
       "title": "修改说明",
       "object_type": "EvidenceArtifactInspectionObject",
-      "plain_language_summary": "可复查的项目材料。",
+      "plain_language_summary": "来自当前案例的可复查材料。",
       "source": "contributor",
-      "bound_commit": "dddddddddddddddddddddddddddddddddddddddd",
-      "content_digest": "418a771c56c62d5dc92078ad9c10581abd86b7676ca2cd6cffbaa5d898e53d77",
+      "base_commit_sha": "dddddddddddddddddddddddddddddddddddddddd",
+      "head_commit_sha": null,
+      "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
+      "content_digest": "4f4c9d992e02134377c6092ffa3d2fa687a1751b91e93a184177023c513c7e48",
+      "evidence_package_digest": null,
       "availability": "available",
       "freshness": "current",
-      "view_href": null,
-      "inline_content": "O-SUMMARY 的当前版本材料",
+      "artifact_route": null,
+      "inline_content": "已提供可复查的当前版本材料。",
       "technical_metadata": {
         "evidence_id": "evidence-c1bdcf9a36985eafa5894838cf09980e"
       }
     },
     {
+      "object_id": "diff:README.md",
       "title": "相关修改：README.md",
       "object_type": "DiffInspectionObject",
-      "plain_language_summary": "绑定当前版本的代码差异。",
+      "plain_language_summary": "当前未提供可查看的代码差异。",
       "source": "当前材料",
-      "bound_commit": "dddddddddddddddddddddddddddddddddddddddd",
-      "content_digest": "d87fc654ea81213951a8ba2a6d8d17db44532fb24004e25804c80f46d083a4fd",
-      "availability": "available",
+      "base_commit_sha": "dddddddddddddddddddddddddddddddddddddddd",
+      "head_commit_sha": null,
+      "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
+      "content_digest": null,
+      "evidence_package_digest": null,
+      "availability": "unavailable",
       "freshness": "current",
-      "view_href": null,
-      "inline_content": "@@ -1 +1 @@\n-old\n+new",
+      "artifact_route": null,
+      "inline_content": null,
       "technical_metadata": {
         "path": "README.md",
         "line_ranges": [
@@ -179,7 +192,14 @@
       "maintainer"
     ],
     "gate_state": "awaiting_maintainer_verification",
-    "legal_operations": [],
+    "legal_operations": [
+      "ask_clarification",
+      "invalidate_attestation",
+      "record_policy_conflict",
+      "reject_evidence",
+      "request_repair",
+      "verify_evidence"
+    ],
     "risk_rule_refs": [
       "documentation-low"
     ],
@@ -191,11 +211,15 @@
       "O-CHANGED-FILES": "current",
       "O-SUMMARY": "current"
     },
-    "human_confirmation_state": "尚未确认",
+    "human_confirmation_state": "not_required",
     "agent_trace_state": "not_detected",
     "route_derivation": {
-      "route": "system_handled_no_action",
+      "route": "normal_pr_review",
       "reason": "贡献侧要求已经满足，当前轮到有权限的维护者检查；检查完成仍不等于接受。"
+    },
+    "sidecar": {
+      "current_package": null,
+      "historical_packages": []
     },
     "host_platform": {
       "connected": false,
