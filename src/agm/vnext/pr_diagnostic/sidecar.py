@@ -28,6 +28,11 @@ class EvidenceArtifactRef:
     contribution_fingerprint: str
     head_commit_sha: str | None
     relative_storage_path: str
+    obligation_refs: tuple[str, ...] = ()
+    case_id: str | None = None
+    policy_fingerprint: str | None = None
+    base_commit_sha: str | None = None
+    producer: str | None = None
 
 
 @dataclass(frozen=True)
@@ -97,6 +102,9 @@ class SidecarEvidenceStore:
             if "/" in artifact_id or "\\" in artifact_id or ".." in artifact_id:
                 raise VNextError("Invalid evidence artifact id")
             digest = fingerprint(content)
+            obligation_refs = tuple(str(item) for item in raw.get("obligation_refs", ()))
+            if len(set(obligation_refs)) != len(obligation_refs):
+                raise VNextError("Evidence artifact obligation references must be unique")
             normalized.append({
                 "artifact_id": artifact_id, "artifact_type": str(raw.get("type", "artifact")),
                 "title": str(raw.get("title", raw.get("summary", "材料"))), "content_digest": digest,
@@ -104,6 +112,9 @@ class SidecarEvidenceStore:
                 "source_tool": raw.get("source_tool"), "created_at": str(raw.get("created_at", when)),
                 "contribution_fingerprint": contribution_fingerprint,
                 "head_commit_sha": raw.get("head_commit_sha", head_commit_sha),
+                "base_commit_sha": raw.get("base_commit_sha", base_commit_sha),
+                "case_id": case_id, "policy_fingerprint": policy_fingerprint,
+                "producer": raw.get("producer", producer), "obligation_refs": list(obligation_refs),
                 "relative_storage_path": f"artifacts/{artifact_id}.txt",
             })
             contents[artifact_id] = content
@@ -173,6 +184,11 @@ class SidecarEvidenceStore:
         if fingerprint(content) != artifact["content_digest"]:
             raise VNextError("Evidence artifact digest verification failed")
         return artifact, content
+
+    def record_read_access(self, *, case_id: str, package_digest: str, artifact_id: str) -> None:
+        """Append a minimal local audit fact without exposing storage details."""
+        path = self.root / "read_audit.jsonl"
+        atomic_write_text(path, (path.read_text(encoding="utf8") if path.exists() else "") + canonical_json({"case_id":case_id,"package_digest":package_digest,"artifact_id":artifact_id,"access":"read"}) + "\n")
 
     def write_final_receipt(self, receipt: FinalEvidenceReceipt) -> Path:
         _safe(asdict(receipt)); _validate_host(receipt.host_platform_status)

@@ -377,6 +377,23 @@ class GovernanceService:
         self.storage.save_case(case)
         return case
 
+    def record_sidecar_conflict(
+        self, case_id: str, *, actor: str, role: str, message: str,
+        source_evidence_ids: list[str], source_artifact_ids: list[str],
+        affected_obligation_ids: list[str], package_digest: str,
+    ):
+        """Register a detected trusted-material conflict using the existing finding service.
+
+        This records a finding only; it does not choose a repair or move state.
+        """
+        authorize(self.config, role=role, action="verify_evidence")
+        case = self.storage.load_case(case_id)
+        finding = create_finding(case, code="trusted_sidecar_conflict", severity="high", message=message,
+            blocking=True, related_object_ids=[*source_evidence_ids, *source_artifact_ids, package_digest],
+            affected_obligation_ids=affected_obligation_ids)
+        self.storage.save_case(case)
+        return finding
+
     def attest(
         self,
         case_id: str,
@@ -1312,6 +1329,7 @@ class GovernanceService:
         case_id: str,
         *,
         contribution: Any = None,
+        actor_role: str = "maintainer",
     ):
         """Return a read-only PR-native projection of already compiled state.
 
@@ -1325,6 +1343,7 @@ class GovernanceService:
             contribution=contribution,
             policy_config=self.config,
             evidence_store=SidecarEvidenceStore(self.root),
+            actor_role=actor_role,
         )
 
     def preview_reviewer_action(
