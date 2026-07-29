@@ -19,6 +19,8 @@ Phase 2.1 adds `pr_diagnostic` as a second, PR-native projection of the same com
 
 Phase 2.1.1 derives routes from existing responsibility, lifecycle stage, gate, and legal operations; it does not change canonical policy or lifecycle semantics.
 
+Phase 2.1.2 adds a projection-only trusted-evidence resolver. Presentation context supplies friendly display metadata only; it cannot self-certify provenance, freshness, confirmation, receipt or platform state.
+
 The four v0.1 observable domains—risk, evidence, accountability, and review
 gate—remain useful diagnostics. They are not the complete AGM ontology.
 
