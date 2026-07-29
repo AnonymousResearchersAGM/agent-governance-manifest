@@ -342,7 +342,8 @@
     "current_version": false
   },
   "human_review_status": {
-    "contributor_self_review": "尚未确认",
+    "contributor_self_review": "项目要求贡献者检查当前版本，但尚未确认。",
+    "contributor_state": "required_missing",
     "maintainer_review": "尚未完成必要检查",
     "final_recommendation": "尚未记录"
   },
@@ -372,16 +373,20 @@
   },
   "inspection_objects": [
     {
+      "object_id": "diff:demo_app/auth.py",
       "title": "相关修改：demo_app/auth.py",
       "object_type": "DiffInspectionObject",
-      "plain_language_summary": "绑定当前版本的代码差异。",
+      "plain_language_summary": "当前未提供可查看的代码差异。",
       "source": "当前材料",
-      "bound_commit": "dddddddddddddddddddddddddddddddddddddddd",
-      "content_digest": "d87fc654ea81213951a8ba2a6d8d17db44532fb24004e25804c80f46d083a4fd",
-      "availability": "available",
+      "base_commit_sha": "dddddddddddddddddddddddddddddddddddddddd",
+      "head_commit_sha": null,
+      "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
+      "content_digest": null,
+      "evidence_package_digest": null,
+      "availability": "unavailable",
       "freshness": "current",
-      "view_href": null,
-      "inline_content": "@@ -1 +1 @@\n-old\n+new",
+      "artifact_route": null,
+      "inline_content": null,
       "technical_metadata": {
         "path": "demo_app/auth.py",
         "line_ranges": [
@@ -422,11 +427,15 @@
       "O-SUMMARY": "missing",
       "O-TEST-COMMAND": "missing"
     },
-    "human_confirmation_state": "尚未确认",
+    "human_confirmation_state": "required_missing",
     "agent_trace_state": "not_detected",
     "route_derivation": {
       "route": "contributor_action_required",
       "reason": "受影响材料尚未准备或更新完成，当前还不能进入维护者检查。"
+    },
+    "sidecar": {
+      "current_package": null,
+      "historical_packages": []
     },
     "host_platform": {
       "connected": false,

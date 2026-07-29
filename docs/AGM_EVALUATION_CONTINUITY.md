@@ -7,3 +7,5 @@ v0.2 and Phase 2.1 add compiled contribution state, commit-bound materials, resp
 Claim-to-evidence mapping has three layers: foundational reviewer-side externalization uses the existing v0.1 controlled evaluation; lifecycle and architectural correctness uses deterministic cases and automated tests; PR-native usability requires a future formative cognitive pilot and formal usability evaluation. Incremental experiments test only the new mechanisms.
 
 Phase 2.1.1 strengthens lifecycle and architectural correctness only. It does not claim that a user study has validated the rebuilt PR-native interface.
+
+Phase 2.1.2 is deterministic architectural validation only; it has not begun a new participant study.

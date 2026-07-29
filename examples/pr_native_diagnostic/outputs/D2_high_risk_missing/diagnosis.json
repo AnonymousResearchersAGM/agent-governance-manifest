@@ -365,20 +365,21 @@
     "state": "verifiable",
     "status": "verifiable",
     "message": "检测到可验证的编码 Agent 活动。",
-    "type": "编码 Agent",
+    "type": "编码助手",
     "modified_file_count": 1,
     "commands": [
-      "python -m pytest -q"
+      "python -m pytest tests/test_auth.py -q"
     ],
     "tests": [
-      "pytest"
+      "tests/test_auth.py"
     ],
     "used_other_tools": false,
     "network": false,
     "current_version": true
   },
   "human_review_status": {
-    "contributor_self_review": "尚未确认",
+    "contributor_self_review": "项目要求贡献者检查当前版本，但尚未确认。",
+    "contributor_state": "required_missing",
     "maintainer_review": "尚未完成必要检查",
     "final_recommendation": "尚未记录"
   },
@@ -408,39 +409,82 @@
   },
   "inspection_objects": [
     {
-      "title": "相关修改：demo_app/auth.py",
+      "object_id": "2511d963918c43a0178a6a60",
+      "title": "相关代码差异",
       "object_type": "DiffInspectionObject",
-      "plain_language_summary": "绑定当前版本的代码差异。",
-      "source": "当前材料",
-      "bound_commit": "dddddddddddddddddddddddddddddddddddddddd",
-      "content_digest": "d87fc654ea81213951a8ba2a6d8d17db44532fb24004e25804c80f46d083a4fd",
+      "plain_language_summary": "绑定当前贡献的代码差异。",
+      "source": "已验证 sidecar 材料",
+      "base_commit_sha": "dddddddddddddddddddddddddddddddddddddddd",
+      "head_commit_sha": "cccccccccccccccccccccccccccccccccccccccc",
+      "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
+      "content_digest": "77be88933306f327875eeb72bdbae545a68b7201016795a63404e2b4a15fa549",
+      "evidence_package_digest": "6f3d6e8c4693cab8a16cde34dc73c26690269b61d33d452bd8f32e163691754d",
       "availability": "available",
       "freshness": "current",
-      "view_href": null,
-      "inline_content": "@@ -1 +1 @@\n-old\n+new",
+      "artifact_route": null,
+      "inline_content": "@@ demo_app/auth.py:84-117 @@\n-    return token in active_tokens\n+    if token in revoked_tokens:\n+        return False\n+    return token in active_tokens\n\n撤销后的令牌不能继续访问受保护资源。",
       "technical_metadata": {
-        "path": "demo_app/auth.py",
-        "line_ranges": [
-          "84–117"
-        ]
+        "artifact_type": "diff",
+        "media_type": "text/plain"
       }
     },
     {
-      "title": "编码助手行动摘要",
-      "object_type": "AgentActivityInspectionObject",
-      "plain_language_summary": "检测到可验证的编码 Agent 活动。",
-      "source": "可验证 Agent 记录",
-      "bound_commit": "dddddddddddddddddddddddddddddddddddddddd",
-      "content_digest": "8dba4514226b898d28d64967f24e3318b21cdbb7eae0ed5df190ed104854848e",
+      "object_id": "c25bd4bff25c8c2ef46fa762",
+      "title": "测试记录",
+      "object_type": "TestInspectionObject",
+      "plain_language_summary": "可复查的测试命令和结果。",
+      "source": "已验证 sidecar 材料",
+      "base_commit_sha": "dddddddddddddddddddddddddddddddddddddddd",
+      "head_commit_sha": "cccccccccccccccccccccccccccccccccccccccc",
+      "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
+      "content_digest": "a26f10d807c105224ac5c0d8c46ffab3325147277010bd93fa58d19491242d8e",
+      "evidence_package_digest": "6f3d6e8c4693cab8a16cde34dc73c26690269b61d33d452bd8f32e163691754d",
       "availability": "available",
       "freshness": "current",
-      "view_href": null,
-      "inline_content": "修改当前贡献并运行测试。",
+      "artifact_route": null,
+      "inline_content": "测试命令：python -m pytest tests/test_auth.py -q\n结果：18 passed, 0 failed\n关键测试：test_revoked_token_is_rejected；test_expired_session_cannot_refresh；test_permission_change_invalidates_session",
       "technical_metadata": {
-        "type": "编码 Agent",
-        "commands": [
-          "python -m pytest -q"
-        ]
+        "artifact_type": "test_result",
+        "media_type": "text/plain"
+      }
+    },
+    {
+      "object_id": "f4e0846f8fe3a3eca7ff2be2",
+      "title": "编码助手行动摘要",
+      "object_type": "AgentActivityInspectionObject",
+      "plain_language_summary": "编码助手的可验证行动记录。",
+      "source": "已验证 sidecar 材料",
+      "base_commit_sha": "dddddddddddddddddddddddddddddddddddddddd",
+      "head_commit_sha": "cccccccccccccccccccccccccccccccccccccccc",
+      "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
+      "content_digest": "d457ee7d5f7931a7f64735980877ce64231b72684d7048952aa7892a9422d65e",
+      "evidence_package_digest": "6f3d6e8c4693cab8a16cde34dc73c26690269b61d33d452bd8f32e163691754d",
+      "availability": "available",
+      "freshness": "current",
+      "artifact_route": null,
+      "inline_content": "{\"agent_type\": \"编码助手\", \"tool_name\": \"deterministic-fixture\", \"task_summary\": \"修复令牌撤销检查\", \"files_modified\": [\"demo_app/auth.py\"], \"commands_executed\": [\"python -m pytest tests/test_auth.py -q\"], \"tests_executed\": [\"tests/test_auth.py\"], \"other_agents_or_tools_used\": false, \"network_access\": false, \"risk_sensitive_files_touched\": true}",
+      "technical_metadata": {
+        "artifact_type": "agent_activity",
+        "media_type": "text/plain"
+      }
+    },
+    {
+      "object_id": "6f3d6e8c4693cab8a16cde34dc73c26690269b61d33d452bd8f32e163691754d",
+      "title": "证据包",
+      "object_type": "EvidenceArtifactInspectionObject",
+      "plain_language_summary": "已验证并绑定当前贡献的证据包。",
+      "source": "当前材料",
+      "base_commit_sha": "dddddddddddddddddddddddddddddddddddddddd",
+      "head_commit_sha": null,
+      "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
+      "content_digest": "5569c3c31ce083bcf0d0fa779657c71b4d2ac5b9a132e51d43a2a641a199c6d4",
+      "evidence_package_digest": "6f3d6e8c4693cab8a16cde34dc73c26690269b61d33d452bd8f32e163691754d",
+      "availability": "available",
+      "freshness": "current",
+      "artifact_route": null,
+      "inline_content": "此证据包已通过摘要和贡献绑定校验。",
+      "technical_metadata": {
+        "historical_package_count": 0
       }
     }
   ],
@@ -478,11 +522,15 @@
       "O-SUMMARY": "missing",
       "O-TEST-COMMAND": "missing"
     },
-    "human_confirmation_state": "尚未确认",
+    "human_confirmation_state": "required_missing",
     "agent_trace_state": "verifiable",
     "route_derivation": {
       "route": "contributor_action_required",
       "reason": "受影响材料尚未准备或更新完成，当前还不能进入维护者检查。"
+    },
+    "sidecar": {
+      "current_package": "6f3d6e8c4693cab8a16cde34dc73c26690269b61d33d452bd8f32e163691754d",
+      "historical_packages": []
     },
     "host_platform": {
       "connected": false,

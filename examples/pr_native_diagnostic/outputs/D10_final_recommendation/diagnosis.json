@@ -67,14 +67,14 @@
       "title": "变更文件清单",
       "state": "current",
       "evidence_type": "changed_files",
-      "bound_commit": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
+      "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
       "source": "contributor"
     },
     {
       "title": "修改说明",
       "state": "current",
       "evidence_type": "contribution_summary",
-      "bound_commit": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
+      "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
       "source": "contributor"
     }
   ],
@@ -92,7 +92,8 @@
     "current_version": false
   },
   "human_review_status": {
-    "contributor_self_review": "尚未确认",
+    "contributor_self_review": "本类修改不要求额外的贡献者人工确认。",
+    "contributor_state": "not_required",
     "maintainer_review": "已完成必要检查",
     "final_recommendation": "已记录"
   },
@@ -122,66 +123,99 @@
   },
   "inspection_objects": [
     {
+      "object_id": "evidence-35f8d66168305ece87a19e6d142d05b9",
       "title": "变更文件清单",
       "object_type": "EvidenceArtifactInspectionObject",
-      "plain_language_summary": "可复查的项目材料。",
+      "plain_language_summary": "来自当前案例的可复查材料。",
       "source": "contributor",
-      "bound_commit": "dddddddddddddddddddddddddddddddddddddddd",
-      "content_digest": "068a7767cd17445a84a303a76374f8d476c999ca76c967aa8ccdab6cc8a31a40",
+      "base_commit_sha": "dddddddddddddddddddddddddddddddddddddddd",
+      "head_commit_sha": null,
+      "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
+      "content_digest": "30bf1036d843d7ec26890ea666373c3d5e05268c210f4161a2577c7a3468e887",
+      "evidence_package_digest": null,
       "availability": "available",
       "freshness": "current",
-      "view_href": null,
-      "inline_content": "O-CHANGED-FILES 的当前版本材料",
+      "artifact_route": null,
+      "inline_content": "本次修改仅涉及列出的贡献文件。",
       "technical_metadata": {
         "evidence_id": "evidence-35f8d66168305ece87a19e6d142d05b9"
       }
     },
     {
+      "object_id": "evidence-e5379a1c07895a4ebc6e0e3a2efd77d2",
       "title": "修改说明",
       "object_type": "EvidenceArtifactInspectionObject",
-      "plain_language_summary": "可复查的项目材料。",
+      "plain_language_summary": "来自当前案例的可复查材料。",
       "source": "contributor",
-      "bound_commit": "dddddddddddddddddddddddddddddddddddddddd",
-      "content_digest": "418a771c56c62d5dc92078ad9c10581abd86b7676ca2cd6cffbaa5d898e53d77",
+      "base_commit_sha": "dddddddddddddddddddddddddddddddddddddddd",
+      "head_commit_sha": null,
+      "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
+      "content_digest": "4f4c9d992e02134377c6092ffa3d2fa687a1751b91e93a184177023c513c7e48",
+      "evidence_package_digest": null,
       "availability": "available",
       "freshness": "current",
-      "view_href": null,
-      "inline_content": "O-SUMMARY 的当前版本材料",
+      "artifact_route": null,
+      "inline_content": "已提供可复查的当前版本材料。",
       "technical_metadata": {
         "evidence_id": "evidence-e5379a1c07895a4ebc6e0e3a2efd77d2"
       }
     },
     {
-      "title": "相关修改：README.md",
+      "object_id": "a3621e4f1c1a1c9c76803d47",
+      "title": "相关代码差异",
       "object_type": "DiffInspectionObject",
-      "plain_language_summary": "绑定当前版本的代码差异。",
-      "source": "当前材料",
-      "bound_commit": "dddddddddddddddddddddddddddddddddddddddd",
-      "content_digest": "d87fc654ea81213951a8ba2a6d8d17db44532fb24004e25804c80f46d083a4fd",
+      "plain_language_summary": "绑定当前贡献的代码差异。",
+      "source": "已验证 sidecar 材料",
+      "base_commit_sha": "dddddddddddddddddddddddddddddddddddddddd",
+      "head_commit_sha": "cccccccccccccccccccccccccccccccccccccccc",
+      "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
+      "content_digest": "3da55022d2e3d02d0713c294fa16f363e796d933f4613ed6e41a9a2194383fc9",
+      "evidence_package_digest": "8590113b07aa8d7350401b1838be5b90eb3176bd5bc6797ed36e21509aeda875",
       "availability": "available",
       "freshness": "current",
-      "view_href": null,
-      "inline_content": "@@ -1 +1 @@\n-old\n+new",
+      "artifact_route": null,
+      "inline_content": "@@ README.md:5-8 @@\n- pip install agm-demo\n+ python -m pip install agm-demo\n\n修正安装命令，链接仍指向同一份项目文档。",
       "technical_metadata": {
-        "path": "README.md",
-        "line_ranges": [
-          "5–8"
-        ]
+        "artifact_type": "diff",
+        "media_type": "text/plain"
       }
     },
     {
-      "title": "最终审查建议回执",
+      "object_id": "8590113b07aa8d7350401b1838be5b90eb3176bd5bc6797ed36e21509aeda875",
+      "title": "证据包",
       "object_type": "EvidenceArtifactInspectionObject",
-      "plain_language_summary": "记录 AGM 最终审查建议及本地平台边界。",
+      "plain_language_summary": "已验证并绑定当前贡献的证据包。",
       "source": "当前材料",
-      "bound_commit": "dddddddddddddddddddddddddddddddddddddddd",
-      "content_digest": null,
+      "base_commit_sha": "dddddddddddddddddddddddddddddddddddddddd",
+      "head_commit_sha": null,
+      "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
+      "content_digest": "5569c3c31ce083bcf0d0fa779657c71b4d2ac5b9a132e51d43a2a641a199c6d4",
+      "evidence_package_digest": "8590113b07aa8d7350401b1838be5b90eb3176bd5bc6797ed36e21509aeda875",
       "availability": "available",
       "freshness": "current",
-      "view_href": ".agm-work/evidence_store/receipts/09aa39bed64942b18b59d6fc61ebb80b6676b5507f23c3ce2dfdcab8387cbbaf.json",
-      "inline_content": null,
+      "artifact_route": null,
+      "inline_content": "此证据包已通过摘要和贡献绑定校验。",
       "technical_metadata": {
-        "receipt_digest": "09aa39bed64942b18b59d6fc61ebb80b6676b5507f23c3ce2dfdcab8387cbbaf"
+        "historical_package_count": 0
+      }
+    },
+    {
+      "object_id": "714cf1e7ba737a35bfe4b2c5e23bbfdba4472449e3c6684ea48392cad578b56e",
+      "title": "最终审查建议回执",
+      "object_type": "EvidenceArtifactInspectionObject",
+      "plain_language_summary": "已验证的 AGM 最终审查建议回执。",
+      "source": "当前材料",
+      "base_commit_sha": "dddddddddddddddddddddddddddddddddddddddd",
+      "head_commit_sha": null,
+      "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
+      "content_digest": "351a7a4ee7a2a816ea1fbf0d6b26ccfd9a4dd55c13b653aecaa5790d85968984",
+      "evidence_package_digest": null,
+      "availability": "available",
+      "freshness": "current",
+      "artifact_route": null,
+      "inline_content": "{\n  \"agent_involvement\": \"未检测到可验证记录\",\n  \"agm_final_recommendation\": \"建议接受\",\n  \"contribution_fingerprint\": \"2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5\",\n  \"contributor_self_review_status\": \"不适用\",\n  \"created_at\": \"2026-07-26T00:00:00Z\",\n  \"evidence_package_digest\": \"8590113b07aa8d7350401b1838be5b90eb3176bd5bc6797ed36e21509aeda875\",\n  \"host_platform_status\": {\n    \"approval_state\": \"not_performed\",\n    \"close_state\": \"not_performed\",\n    \"connected\": false,\n    \"merge_state\": \"not_performed\",\n    \"verified\": true\n  },\n  \"maintainer_review_status\": \"已完成必要检查\",\n  \"policy_fingerprint\": \"e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564\",\n  \"risk_summary\": \"低风险文档修改\"\n}",
+      "technical_metadata": {
+        "receipt_digest": "714cf1e7ba737a35bfe4b2c5e23bbfdba4472449e3c6684ea48392cad578b56e"
       }
     }
   ],
@@ -202,11 +236,15 @@
       "O-CHANGED-FILES": "current",
       "O-SUMMARY": "current"
     },
-    "human_confirmation_state": "尚未确认",
+    "human_confirmation_state": "not_required",
     "agent_trace_state": "not_detected",
     "route_derivation": {
       "route": "final_recommendation_recorded",
       "reason": "人类最终决定和关闭记录已经生成，当前没有待交接操作。"
+    },
+    "sidecar": {
+      "current_package": "8590113b07aa8d7350401b1838be5b90eb3176bd5bc6797ed36e21509aeda875",
+      "historical_packages": []
     },
     "host_platform": {
       "connected": false,

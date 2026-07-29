@@ -27,3 +27,5 @@ say “记录 AGM 最终审查建议” and separately show platform state as un
 unapproved, and unmerged unless adapter evidence exists.
 
 `artifact_status` remains `pending_human_review`. Phase 3 has not started.
+
+Phase 2.1.2 replaces presentation-context self-certification with verified sidecar and canonical-case sources.

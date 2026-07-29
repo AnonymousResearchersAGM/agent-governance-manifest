@@ -12,8 +12,8 @@ def _agent(data: dict) -> str:
     return "<ul>"+"".join(f"<li>{html.escape(str(row))}</li>" for row in rows)+"</ul>"
 def _object(item) -> str:
     content = f"<details><summary>展开材料</summary><pre>{html.escape(item.inline_content)}</pre></details>" if item.inline_content else ""
-    link = f'<p><a href="{html.escape(item.view_href,quote=True)}">查看完整材料</a></p>' if item.view_href else ""
-    unavailable = "<p>该材料当前不可查看。</p>" if not item.inline_content and not item.view_href else ""
+    link = f'<p><a href="{html.escape(item.artifact_route,quote=True)}">查看完整材料</a></p>' if item.artifact_route else ""
+    unavailable = "<p>该材料当前不可查看。</p>" if not item.inline_content and not item.artifact_route else ""
     return f"<article><h3>{html.escape(item.title)}</h3><p>{html.escape(item.plain_language_summary)}</p><p>{html.escape({'current':'对应当前版本','stale':'对应旧版本','expired':'已过有效期','invalid':'材料不完整','rejected':'验证未通过','unbound':'尚未关联当前版本'}.get(item.freshness,item.freshness))}</p>{content}{link}{unavailable}</article>"
 def render_pr_diagnostic_html(view: PRDiagnosticView) -> str:
     esc=html.escape
