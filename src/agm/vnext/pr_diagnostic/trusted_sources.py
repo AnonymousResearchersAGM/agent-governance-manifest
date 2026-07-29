@@ -64,7 +64,13 @@ class TrustedDiagnosticEvidenceResolver:
         for candidate in self.store.root.joinpath("receipts").glob("*.json") if self.store.root.joinpath("receipts").is_dir() else ():
             try: value = self.store.verify_receipt(candidate.stem)
             except VNextError: continue
-            if value["contribution_fingerprint"] == case.contribution_fingerprint and value["policy_fingerprint"] == case.policy_snapshot.policy_fingerprint:
+            try:
+                receipt_package = self.store.get_package_by_digest(value["evidence_package_digest"])
+            except VNextError:
+                continue
+            if (receipt_package.get("case_id") == case.id
+                and value["contribution_fingerprint"] == case.contribution_fingerprint
+                and value["policy_fingerprint"] == case.policy_snapshot.policy_fingerprint):
                 receipt = value
         confirmations = tuple(item for item in case.attestations if item.status == "confirmed" and item.policy_fingerprint == case.policy_snapshot.policy_fingerprint)
         return TrustedDiagnosticEvidenceSet(current, historical, tuple(artifacts),

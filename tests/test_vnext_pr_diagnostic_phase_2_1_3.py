@@ -68,6 +68,15 @@ def test_producer_wording_does_not_claim_identity(tmp_path):
  root=make_project(tmp_path,"wording");service=GovernanceService(root);case_id,ctx=build_scenario(service,*args);view=service.pr_diagnosis(case_id,contribution=ctx)
  assert "尚未通过" in view.agent_involvement["producer_assurance"] and "真实完成" not in view.agent_involvement["message"]
 
+def test_final_receipt_never_crosses_case_boundary(tmp_path):
+ root,service,case=_case(tmp_path,path="README.md")
+ other,_=service.open_case(["README.md"],requested_mode="declared_agent_mediated",actor="contributor",actor_role="contributor",case_id="other",base_commit="a"*40,autonomy_profile="supervised_agent",timestamp=FIXED_TIME)
+ assert other is not None
+ from agm.vnext.pr_diagnostic.sidecar import FinalEvidenceReceipt
+ store=SidecarEvidenceStore(root);package=_package(root,other,[])
+ store.write_final_receipt(FinalEvidenceReceipt(other.contribution_fingerprint,other.policy_snapshot.policy_fingerprint,package.package_digest,"low","none","none","none","accept",{"connected":False,"approval_state":"not_performed","merge_state":"not_performed","close_state":"not_performed","verified":True},FIXED_TIME))
+ assert not any(item.object_type=="FinalReceiptInspectionObject" for item in service.pr_diagnosis(case.id).inspection_objects)
+
 @pytest.mark.parametrize("value",["..","%2e%2e","C:\\secret","/absolute","a/b"])
 def test_artifact_route_rejects_pathlike_segments(value):
  assert not _safe_segment(value)
