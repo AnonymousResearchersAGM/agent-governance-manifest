@@ -323,6 +323,39 @@
       }
     },
     {
+      "object_id": "b65f397ab55181d414e96a6a",
+      "title": "贡献材料说明",
+      "object_type": "ContributionSummaryInspectionObject",
+      "plain_language_summary": "对应当前版本的贡献材料说明。",
+      "source": "已验证并绑定当前版本的材料",
+      "base_commit_sha": "dddddddddddddddddddddddddddddddddddddddd",
+      "head_commit_sha": "cccccccccccccccccccccccccccccccccccccccc",
+      "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
+      "content_digest": "de02a1bcc07b9d243c02e969da3d0891aec341a7d8afc383e1ccb44a892d17e5",
+      "evidence_package_digest": "44752110c1f888c7f79c5b41995715ee037ec66101f9e5b086f1d30afe24b33c",
+      "availability": "available",
+      "freshness": "current",
+      "artifact_route": "/artifacts/case-D5_no_agent_high_missing_test/44752110c1f888c7f79c5b41995715ee037ec66101f9e5b086f1d30afe24b33c/b65f397ab55181d414e96a6a",
+      "inline_content": "这是一份绑定当前版本的具体贡献材料。",
+      "technical_metadata": {
+        "artifact_type": "supporting_statement",
+        "media_type": "text/plain",
+        "obligation_refs": [
+          "O-SUMMARY",
+          "O-CHANGED-FILES",
+          "O-RATIONALE",
+          "O-LIMITATIONS"
+        ],
+        "canonical_evidence_ids": [
+          "sidecar-90b1a59c8ee262f13a55ac07",
+          "sidecar-ea5f8001689a8905b14c9d9f",
+          "sidecar-030f1db23df324aa85a1da3a",
+          "sidecar-cc0a9eb6327d839b49a26cad"
+        ],
+        "producer_assurance": "producer_declared"
+      }
+    },
+    {
       "object_id": "8c6b42907db5f78ab2bbaea2",
       "title": "认证与权限影响说明",
       "object_type": "ImpactStatementInspectionObject",

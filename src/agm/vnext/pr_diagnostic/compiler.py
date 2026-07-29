@@ -88,7 +88,7 @@ def compile_pr_diagnostic(*,governance_case:GovernanceCase,contribution:Any=None
         refs=tuple(f"{item.artifact_id}:{location.hunk}" for item,location in matched)
         risks.append(DiagnosticFinding(f"risk:{rule.id}","risk_area",rule.risk_level,f"{ {'low':'低风险','medium':'中等风险','high':'较高风险','critical':'严重风险'}.get(rule.risk_level,'风险区域')}：{', '.join(rule.affected_paths)}",RISK_TEXT.get(rule.zone,"该位置被项目规则识别为需要额外检查的区域。"),tuple(location.path for _,location in matched) or tuple(rule.affected_paths),lines,"按项目要求检查","已识别该风险区域","",(rule.rule_id,),tuple(rule.obligation_ids),refs,"maintainer","inspect_risk",False,(rule.id,*refs)))
     if trusted:
-        kinds={"diff":("DiffInspectionObject","绑定当前贡献的代码差异。"),"test_result":("TestInspectionObject","可复查的测试命令和结果。"),"agent_activity":("AgentActivityInspectionObject","对应当前版本的编码助手活动记录。"),"contribution_declaration":("ContributionDeclarationInspectionObject","贡献者对工具使用的声明。"),"impact_statement":("ImpactStatementInspectionObject","对应当前版本的影响说明。")}
+        kinds={"diff":("DiffInspectionObject","绑定当前贡献的代码差异。"),"supporting_statement":("ContributionSummaryInspectionObject","对应当前版本的贡献材料说明。"),"test_result":("TestInspectionObject","可复查的测试命令和结果。"),"agent_activity":("AgentActivityInspectionObject","对应当前版本的编码助手活动记录。"),"contribution_declaration":("ContributionDeclarationInspectionObject","贡献者对工具使用的声明。"),"impact_statement":("ImpactStatementInspectionObject","对应当前版本的影响说明。")}
         for item in trusted.artifacts:
             if item.artifact_type in kinds: objects.append(_trusted_object(case,item,*kinds[item.artifact_type],_artifact_evidence_ids(case,item)))
         for package in trusted.historical_packages:

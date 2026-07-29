@@ -346,6 +346,39 @@
       }
     },
     {
+      "object_id": "2a98beaacccfb603c6d263a3",
+      "title": "贡献材料说明",
+      "object_type": "ContributionSummaryInspectionObject",
+      "plain_language_summary": "对应当前版本的贡献材料说明。",
+      "source": "已验证并绑定当前版本的材料",
+      "base_commit_sha": "dddddddddddddddddddddddddddddddddddddddd",
+      "head_commit_sha": "cccccccccccccccccccccccccccccccccccccccc",
+      "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
+      "content_digest": "de02a1bcc07b9d243c02e969da3d0891aec341a7d8afc383e1ccb44a892d17e5",
+      "evidence_package_digest": "508ffedf68f2e7796876a62041e09ad22c088ce55f32413801c80183c3c2c077",
+      "availability": "available",
+      "freshness": "current",
+      "artifact_route": "/artifacts/case-D2_high_risk_missing/508ffedf68f2e7796876a62041e09ad22c088ce55f32413801c80183c3c2c077/2a98beaacccfb603c6d263a3",
+      "inline_content": "这是一份绑定当前版本的具体贡献材料。",
+      "technical_metadata": {
+        "artifact_type": "supporting_statement",
+        "media_type": "text/plain",
+        "obligation_refs": [
+          "O-SUMMARY",
+          "O-CHANGED-FILES",
+          "O-RATIONALE",
+          "O-LIMITATIONS"
+        ],
+        "canonical_evidence_ids": [
+          "sidecar-89ce3f53ff5cc668347da555",
+          "sidecar-ec0788c49601aa9415efc6fc",
+          "sidecar-eafcf9861c2c8ea9b1445178",
+          "sidecar-eb2bb974cb2822e8ff8bbf0f"
+        ],
+        "producer_assurance": "producer_declared"
+      }
+    },
+    {
       "object_id": "d379ce34da3a95ae3d232fee",
       "title": "编码助手活动记录",
       "object_type": "AgentActivityInspectionObject",

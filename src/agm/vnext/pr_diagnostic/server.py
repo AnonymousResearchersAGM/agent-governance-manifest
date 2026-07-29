@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import html
+import json
 from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import unquote, urlparse
@@ -28,6 +29,10 @@ def _handler(service, case_id: str, actor_role: str):
             if parsed.query: self._send(HTTPStatus.NOT_FOUND,"Not found","text/plain; charset=utf-8"); return
             if not parts:
                 self._send(HTTPStatus.OK,render_pr_diagnostic_html(service.pr_diagnosis(case_id,actor_role=actor_role))); return
+            if parts == ["healthz"]:
+                self._send(HTTPStatus.OK,json.dumps({"status":"ok","case_id":case_id}),"application/json; charset=utf-8"); return
+            if parts == ["audit-summary"]:
+                self._send(HTTPStatus.OK,json.dumps(store.read_audit_summary()),"application/json; charset=utf-8"); return
             if len(parts)!=4 or parts[0]!="artifacts" or not all(_safe_segment(part) for part in parts[1:]): self._send(HTTPStatus.NOT_FOUND,"Not found","text/plain; charset=utf-8"); return
             supplied_case,digest,artifact_id=parts[1:]
             if supplied_case!=case_id: self._send(HTTPStatus.NOT_FOUND,"Not found","text/plain; charset=utf-8"); return
@@ -45,8 +50,11 @@ def _handler(service, case_id: str, actor_role: str):
         def log_message(self,format,*args): return
     return Handler
 
-def serve_pr_diagnostic(service, *, case_id: str, actor_role: str="maintainer", host: str="127.0.0.1", port: int=8768):
+def create_pr_diagnostic_server(service, *, case_id: str, actor_role: str="maintainer", host: str="127.0.0.1", port: int=8768):
     validate_loopback_host(host); service.storage.load_case(case_id)
-    server=ThreadingHTTPServer((host,port),_handler(service,case_id,actor_role))
+    return ThreadingHTTPServer((host,port),_handler(service,case_id,actor_role))
+
+def serve_pr_diagnostic(service, *, case_id: str, actor_role: str="maintainer", host: str="127.0.0.1", port: int=8768):
+    server=create_pr_diagnostic_server(service,case_id=case_id,actor_role=actor_role,host=host,port=port)
     try: server.serve_forever()
     finally: server.server_close()

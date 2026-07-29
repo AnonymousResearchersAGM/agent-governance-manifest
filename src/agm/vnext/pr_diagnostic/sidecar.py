@@ -216,6 +216,22 @@ class SidecarEvidenceStore:
                 if attempt == 2: raise
                 time.sleep(0.02 * (attempt + 1))
 
+    def read_audit_summary(self) -> dict[str, int]:
+        """Return non-sensitive counters for local acceptance tooling."""
+        path = self.root / "read_audit.jsonl"
+        records = invalid = 0
+        with self._audit_lock:
+            lines = path.read_text(encoding="utf8").splitlines() if path.exists() else []
+        for line in lines:
+            try:
+                value = json.loads(line)
+                if not isinstance(value, dict):
+                    raise ValueError("audit record is not an object")
+                records += 1
+            except (json.JSONDecodeError, ValueError):
+                invalid += 1
+        return {"records": records, "invalid": invalid}
+
     def write_final_receipt(self, receipt: FinalEvidenceReceipt) -> Path:
         _safe(asdict(receipt)); _validate_host(receipt.host_platform_status)
         self.get_package_by_digest(receipt.evidence_package_digest)

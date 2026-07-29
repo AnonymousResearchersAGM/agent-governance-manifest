@@ -19,11 +19,13 @@ CHECKS = (
     "scripts/check_reviewer_guidance_demo_hashes.py",
     "scripts/check_review_briefing_demo_hashes.py",
     "scripts/check_review_interactive_demo_hashes.py",
+    "scripts/check_pr_diagnostic_demo_hashes.py",
 )
 GENERATORS = (
     "scripts/generate_reviewer_guidance_demos.py",
     "scripts/generate_review_briefing_demos.py",
     "scripts/generate_review_interactive_demos.py",
+    "scripts/generate_pr_diagnostic_demos.py",
 )
 
 
@@ -62,6 +64,8 @@ def verify_fresh_extract(
             _run(extracted, script)
         for script in CHECKS:
             _run(extracted, script)
+        _run(extracted, "scripts/validate_pr_diagnostic_links.py")
+        _run(extracted, "scripts/validate_pr_diagnostic_participant_terms.py")
         after = _snapshot(extracted, members)
         changed = sorted(
             name for name in members if before[name] != after[name]
@@ -83,6 +87,8 @@ def verify_fresh_extract(
         "tracked_file_count": len(members),
         "hash_checks_before_generation": len(CHECKS),
         "hash_checks_after_generation": len(CHECKS),
+        "fresh_demo_links_valid": True,
+        "participant_term_scan_valid": True,
         "regeneration_content_stable": True,
     }
 

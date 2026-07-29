@@ -157,6 +157,35 @@
       }
     },
     {
+      "object_id": "e7fa8972a373b135c8084ec8",
+      "title": "贡献材料说明",
+      "object_type": "ContributionSummaryInspectionObject",
+      "plain_language_summary": "对应当前版本的贡献材料说明。",
+      "source": "已验证并绑定当前版本的材料",
+      "base_commit_sha": "dddddddddddddddddddddddddddddddddddddddd",
+      "head_commit_sha": "cccccccccccccccccccccccccccccccccccccccc",
+      "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
+      "content_digest": "de02a1bcc07b9d243c02e969da3d0891aec341a7d8afc383e1ccb44a892d17e5",
+      "evidence_package_digest": "a318b5c28d459f196f8e8189d686bafceb90de331a5f3a8f6811b81e1b4fcaca",
+      "availability": "available",
+      "freshness": "current",
+      "artifact_route": "/artifacts/case-D10_final_recommendation/a318b5c28d459f196f8e8189d686bafceb90de331a5f3a8f6811b81e1b4fcaca/e7fa8972a373b135c8084ec8",
+      "inline_content": "这是一份绑定当前版本的具体贡献材料。",
+      "technical_metadata": {
+        "artifact_type": "supporting_statement",
+        "media_type": "text/plain",
+        "obligation_refs": [
+          "O-SUMMARY",
+          "O-CHANGED-FILES"
+        ],
+        "canonical_evidence_ids": [
+          "sidecar-b5a032cbe47da6ca407e5978",
+          "sidecar-438e1d8c09dabd91669d7c38"
+        ],
+        "producer_assurance": "producer_declared"
+      }
+    },
+    {
       "object_id": "0e6715d054dfeacd76e8eedd293cb3b541119e29e0fe0d9d3d4e28af9c4c04d1",
       "title": "最终审查建议回执",
       "object_type": "FinalReceiptInspectionObject",

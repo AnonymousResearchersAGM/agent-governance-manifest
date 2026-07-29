@@ -100,3 +100,20 @@ def test_d7_historical_test_is_stale_and_current_diff_is_available(tmp_path):
  assert view.recommended_route["route"]=="contributor_action_required" and view.recommended_route["owner"]=="贡献者"
  assert any(item.object_type=="DiffInspectionObject" and item.availability=="available" for item in view.inspection_objects)
  assert any(item.title=="旧版本测试结果" and item.availability=="available" for item in view.inspection_objects)
+
+@pytest.mark.parametrize("slug",["D5_no_agent_high_missing_test","D9_contributor_waiting"])
+def test_contribution_summary_is_available_for_required_scenarios(tmp_path,slug):
+ args=next(item for item in SCENARIOS if item[0]==slug)
+ root=make_project(tmp_path,slug);service=GovernanceService(root);case_id,_=build_scenario(service,*args);view=service.pr_diagnosis(case_id)
+ assert any(item.object_type=="ContributionSummaryInspectionObject" and item.availability=="available" and item.artifact_route for item in view.inspection_objects)
+
+def test_read_audit_summary_reports_valid_json_lines(tmp_path):
+ store=SidecarEvidenceStore(tmp_path)
+ store.record_read_access(case_id="case",package_digest="package",artifact_id="artifact-1")
+ store.record_read_access(case_id="case",package_digest="package",artifact_id="artifact-2")
+ assert store.read_audit_summary()=={"records":2,"invalid":0}
+
+def test_mobile_overflow_validator_boundary():
+ from run_pr_diagnostic_browser_review import _has_horizontal_overflow
+ assert not _has_horizontal_overflow(390,390)
+ assert _has_horizontal_overflow(391,390)

@@ -58,6 +58,12 @@ jobs:
       - name: Run complete test suite
         run: python -m pytest -q
 
+      - name: Validate deterministic PR diagnostic links
+        run: python scripts/validate_pr_diagnostic_links.py
+
+      - name: Scan participant-facing diagnostic terms
+        run: python scripts/validate_pr_diagnostic_participant_terms.py
+
       - name: Confirm regeneration leaves tracked files unchanged
         run: git diff --exit-code
 
