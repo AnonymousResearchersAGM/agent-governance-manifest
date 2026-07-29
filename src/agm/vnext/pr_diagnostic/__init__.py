@@ -3,10 +3,11 @@
 from .compiler import compile_pr_diagnostic
 from .models import PRDiagnosticView
 from .presenters import render_pr_diagnostic_html, render_pr_diagnostic_json, render_pr_diagnostic_markdown
-from .sidecar import EvidenceArtifactRef, EvidencePackageReceipt, SidecarEvidenceStore
+from .sidecar import EvidenceArtifactRef, EvidencePackageReceipt, FinalEvidenceReceipt, SidecarEvidenceStore
+from .trusted_sources import TrustedDiagnosticEvidenceResolver
 
 __all__ = [
-    "EvidenceArtifactRef", "EvidencePackageReceipt", "PRDiagnosticView",
+    "EvidenceArtifactRef", "EvidencePackageReceipt", "FinalEvidenceReceipt", "PRDiagnosticView", "TrustedDiagnosticEvidenceResolver",
     "SidecarEvidenceStore", "compile_pr_diagnostic", "render_pr_diagnostic_html",
     "render_pr_diagnostic_json", "render_pr_diagnostic_markdown",
 ]
