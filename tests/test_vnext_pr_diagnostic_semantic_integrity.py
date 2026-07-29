@@ -10,7 +10,7 @@ from agm.vnext.service import GovernanceService  # noqa:E402
 from generate_pr_diagnostic_demos import SCENARIOS,build_scenario  # noqa:E402
 from generate_reviewer_guidance_demos import FIXED_TIME,make_project  # noqa:E402
 
-EXPECTED={"D1_low_risk_readme":("awaiting_maintainer_verification","normal_pr_review",0),"D2_high_risk_missing":("evidence_incomplete","contributor_action_required",0),"D3_high_risk_ready":("awaiting_maintainer_verification","maintainer_focused_review",2),"D4_no_agent_trace":("awaiting_maintainer_verification","normal_pr_review",0),"D5_no_agent_high_missing_test":("evidence_incomplete","contributor_action_required",0),"D6_declaration_conflict":("repair_requested","blocked_pending_repair",0),"D7_stale_test":("resubmitted","contributor_action_required",0),"D8_system_handled":("awaiting_maintainer_verification","system_handled_no_action",0),"D9_contributor_waiting":("evidence_incomplete","waiting_for_contributor_submission",0),"D10_final_recommendation":("accepted","final_recommendation_recorded",0)}
+EXPECTED={"D1_low_risk_readme":("awaiting_maintainer_verification","normal_pr_review",0),"D2_high_risk_missing":("evidence_incomplete","contributor_action_required",0),"D3_high_risk_ready":("awaiting_maintainer_verification","maintainer_focused_review",2),"D4_no_agent_trace":("awaiting_maintainer_verification","normal_pr_review",0),"D5_no_agent_high_missing_test":("evidence_incomplete","contributor_action_required",0),"D6_declaration_conflict":("repair_requested","blocked_pending_repair",0),"D7_stale_test":("resubmitted","contributor_action_required",0),"D8_system_handled":("awaiting_maintainer_verification","normal_pr_review",0),"D9_contributor_waiting":("evidence_incomplete","waiting_for_contributor_submission",0),"D10_final_recommendation":("accepted","final_recommendation_recorded",0)}
 
 @pytest.mark.parametrize("slug,path,profile,mode",SCENARIOS)
 def test_each_scenario_is_a_legal_state_projection(tmp_path,slug,path,profile,mode):
@@ -21,7 +21,7 @@ def test_each_scenario_is_a_legal_state_projection(tmp_path,slug,path,profile,mo
     assert view.technical_derivation['case_state']==case.state
     assert all(item.source_state_refs for item in (*view.risk_findings,*view.evidence_gaps))
     if slug in {'D2_high_risk_missing','D3_high_risk_ready'}: assert any(o.object_type=='DiffInspectionObject' and o.availability=='available' for o in view.inspection_objects)
-    if slug=='D3_high_risk_ready': assert {item['state'] for item in view.expected_requirements}=={'current'} and view.human_review_status['contributor_self_review']=='对应当前版本'
+    if slug=='D3_high_risk_ready': assert {item['state'] for item in view.expected_requirements}=={'current'} and view.human_review_status['contributor_state']=='required_current'
     if slug=='D7_stale_test': assert [item['state'] for item in view.expected_requirements].count('stale')==1
     if slug=='D8_system_handled': assert case.attempted_operations and not view.action_effect_boundaries
     if slug=='D10_final_recommendation': assert case.final_decision and case.final_decision.decision=='accept'

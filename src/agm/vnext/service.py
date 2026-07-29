@@ -1318,12 +1318,13 @@ class GovernanceService:
         This method deliberately has no host-platform adapter and cannot alter
         source files, a Git ref, or a pull request.
         """
-        from .pr_diagnostic import compile_pr_diagnostic
+        from .pr_diagnostic import SidecarEvidenceStore, compile_pr_diagnostic
 
         return compile_pr_diagnostic(
             governance_case=self.storage.load_case(case_id),
             contribution=contribution,
             policy_config=self.config,
+            evidence_store=SidecarEvidenceStore(self.root),
         )
 
     def preview_reviewer_action(

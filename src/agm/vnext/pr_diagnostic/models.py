@@ -12,15 +12,19 @@ class DiagnosticRecord:
 
 @dataclass(frozen=True)
 class InspectionObject(DiagnosticRecord):
+    object_id: str
     title: str
     object_type: str
     plain_language_summary: str
     source: str
-    bound_commit: str
+    base_commit_sha: str | None
+    head_commit_sha: str | None
+    contribution_fingerprint: str
     content_digest: str | None
+    evidence_package_digest: str | None
     availability: str
     freshness: str
-    view_href: str | None = None
+    artifact_route: str | None = None
     inline_content: str | None = None
     technical_metadata: dict[str, Any] = field(default_factory=dict)
 
