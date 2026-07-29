@@ -7,3 +7,5 @@ The PR diagnosis is a compiled-state projection. Its route derives from the exis
 D3 uses a current sidecar evidence package. D7 creates a package for the old contribution, then uses legal resubmission to make its test material stale. D10 records a typed sidecar final receipt. No GitHub/GitLab adapter exists; local platform status is unconnected, unapproved, and unmerged.
 
 P92 remains paused, no new P92 material is created, and no usability experiment or Phase 3 work has begun. Artifact status remains `pending_human_review`.
+
+Phase 2.1.2 follows this lifecycle repair with trusted evidence projection and concrete review-material work; it does not alter the lifecycle core.
