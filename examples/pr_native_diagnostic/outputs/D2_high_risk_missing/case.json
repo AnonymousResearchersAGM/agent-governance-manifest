@@ -257,7 +257,7 @@
   ],
   "evidence": [
     {
-      "id": "sidecar-228e42a61af9957a9055cf8d",
+      "id": "sidecar-89ce3f53ff5cc668347da555",
       "obligation_ids": [
         "O-SUMMARY"
       ],
@@ -275,7 +275,7 @@
       "observed_at": "2026-07-26T00:00:00Z",
       "expires_at": null,
       "source_actor": "sidecar-bridge",
-      "source_tool": "sidecar-evidence-bridge",
+      "source_tool": null,
       "retained_for_contribution_fingerprint": null,
       "retention_reason": null,
       "rejected_at": null,
@@ -285,7 +285,7 @@
       "invalid_reasons": []
     },
     {
-      "id": "sidecar-cf800f964f0823f177a6d058",
+      "id": "sidecar-ec0788c49601aa9415efc6fc",
       "obligation_ids": [
         "O-CHANGED-FILES"
       ],
@@ -303,7 +303,7 @@
       "observed_at": "2026-07-26T00:00:00Z",
       "expires_at": null,
       "source_actor": "sidecar-bridge",
-      "source_tool": "sidecar-evidence-bridge",
+      "source_tool": null,
       "retained_for_contribution_fingerprint": null,
       "retention_reason": null,
       "rejected_at": null,
@@ -313,7 +313,7 @@
       "invalid_reasons": []
     },
     {
-      "id": "sidecar-7b72e60f61b94a2ca800d6c9",
+      "id": "sidecar-eafcf9861c2c8ea9b1445178",
       "obligation_ids": [
         "O-RATIONALE"
       ],
@@ -331,7 +331,7 @@
       "observed_at": "2026-07-26T00:00:00Z",
       "expires_at": null,
       "source_actor": "sidecar-bridge",
-      "source_tool": "sidecar-evidence-bridge",
+      "source_tool": null,
       "retained_for_contribution_fingerprint": null,
       "retention_reason": null,
       "rejected_at": null,
@@ -341,7 +341,7 @@
       "invalid_reasons": []
     },
     {
-      "id": "sidecar-3115d4ad3eb2eb7daa82999b",
+      "id": "sidecar-eb2bb974cb2822e8ff8bbf0f",
       "obligation_ids": [
         "O-LIMITATIONS"
       ],
@@ -359,7 +359,7 @@
       "observed_at": "2026-07-26T00:00:00Z",
       "expires_at": null,
       "source_actor": "sidecar-bridge",
-      "source_tool": "sidecar-evidence-bridge",
+      "source_tool": null,
       "retained_for_contribution_fingerprint": null,
       "retention_reason": null,
       "rejected_at": null,
@@ -369,7 +369,7 @@
       "invalid_reasons": []
     },
     {
-      "id": "sidecar-624319da56bf086ae1d2f2b6",
+      "id": "sidecar-503bd260579a70d961688a7b",
       "obligation_ids": [
         "O-AGENT-SCOPE"
       ],
@@ -379,7 +379,7 @@
       "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
       "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
       "evidence_type": "agent_action_scope",
-      "value": "{\"agent_type\": \"编码助手\", \"task_summary\": \"修复令牌撤销检查\", \"files_modified\": [\"demo_app/auth.py\"], \"commands_executed\": [\"python -m pytest tests/test_auth.py -q\"], \"tests_executed\": [\"tests/test_auth.py\"], \"other_agents_or_tools_used\": false, \"network_access\": false}",
+      "value": "{\"agent_type\": \"编码助手\", \"task_summary\": \"修复令牌撤销检查\", \"files_modified\": [\"demo_app/auth.py\"], \"commands_executed\": [\"python -m pytest tests/test_auth.py -q\"], \"tests_executed\": [\"tests/test_auth.py\"], \"other_agents_or_tools_used\": false, \"tools_used\": [], \"activity_scope\": [\"demo_app/auth.py\"], \"network_access\": false}",
       "command": null,
       "environment": null,
       "artifact_path": null,
@@ -387,7 +387,7 @@
       "observed_at": "2026-07-26T00:00:00Z",
       "expires_at": null,
       "source_actor": "sidecar-bridge",
-      "source_tool": "sidecar-evidence-bridge",
+      "source_tool": "deterministic-scenario",
       "retained_for_contribution_fingerprint": null,
       "retention_reason": null,
       "rejected_at": null,
@@ -397,7 +397,7 @@
       "invalid_reasons": []
     },
     {
-      "id": "sidecar-152fd96f4a67354ba09bf235",
+      "id": "sidecar-3f3afaff46abc86b5004b8cb",
       "obligation_ids": [
         "O-AUTH-IMPACT"
       ],
@@ -415,7 +415,7 @@
       "observed_at": "2026-07-26T00:00:00Z",
       "expires_at": null,
       "source_actor": "sidecar-bridge",
-      "source_tool": "sidecar-evidence-bridge",
+      "source_tool": null,
       "retained_for_contribution_fingerprint": null,
       "retention_reason": null,
       "rejected_at": null,

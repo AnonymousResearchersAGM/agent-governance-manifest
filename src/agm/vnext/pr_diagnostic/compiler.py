@@ -7,6 +7,7 @@ from typing import Any
 from ..config import VNextConfig
 from ..guidance.diagnostics import obligation_presentation
 from ..guidance.responsibility import derive_current_responsibility
+from ..guidance.diagnostics import build_requirement_comparisons
 from ..models import GovernanceCase, VNextError, fingerprint
 from ..state_machine import allowed_actions
 from .diff_parser import compact_ranges, parse_verified_diff
@@ -38,7 +39,7 @@ def _route(case:GovernanceCase,config:VNextConfig,responsibility:Any,gaps:list[D
     conflict=next((item for item in case.open_blocking_findings() if item.code=="trusted_sidecar_conflict"),None)
     if case.final_decision:return "final_recommendation_recorded",[]
     if conflict and case.state!="repair_requested": return "maintainer_action_required", [item for item in legal if item=="request_repair"]
-    if case.state=="repair_requested":return "blocked_pending_repair",[]
+    if case.state=="repair_requested":return "contributor_action_required",[]
     roles=set(responsibility.primary_roles)
     if case.state=="awaiting_human_attestation" or roles=={"accountable_human"}:return "waiting_for_accountable_human",[]
     if roles & {"contributor","contributor_agent"}:
@@ -69,6 +70,12 @@ def compile_pr_diagnostic(*,governance_case:GovernanceCase,contribution:Any=None
         for item in selected:
             observed.append({"title":title,"state":state,"evidence_type":item.evidence_type,"contribution_fingerprint":item.contribution_fingerprint,"source":item.source_actor,"evidence_id":item.id})
         if state!="current":gaps.append(DiagnosticFinding(f"gap:{obligation.id}","evidence_gap",obligation.severity,STATE_WORDS[state],plain,tuple(obligation.affected_scope),(),"对应当前版本",STATE_WORDS[state],"请贡献者补充或更新。",tuple(obligation.source_rule_ids),(obligation.obligation_id,),tuple(item.id for item in selected),"contributor","contributor_action_required",obligation.blocking,(obligation.id,*[item.id for item in selected])))
+    for finding in case.findings:
+        if finding.status == "open" and finding.code == "trusted_sidecar_conflict":
+            gaps.append(DiagnosticFinding(finding.id,"trusted_sidecar_conflict",finding.severity,"材料不一致","贡献者说明与编码助手活动记录不一致。",(),(),"需要维护者决定是否要求补充","发现材料矛盾","由维护者决定是否要求贡献者补充或修正。",(),tuple(finding.affected_obligation_ids),tuple(finding.related_object_ids),"maintainer","maintainer_action_required",True,tuple(finding.related_object_ids)))
+    for attempt in case.attempted_operations:
+        if attempt.result == "denied":
+            gaps.append(DiagnosticFinding(attempt.id,"denied_operation","low","系统已阻止一次未经授权的操作",f"操作：{attempt.operation}；该操作未生效。",(),(),"无需单独处理","系统已阻止该操作","仍按当前 PR 的正常路线审查。",(),(),(),"maintainer","normal_pr_review",False,(attempt.id,)))
     locations=[]
     if trusted:
         for diff in trusted.diffs:
@@ -84,6 +91,10 @@ def compile_pr_diagnostic(*,governance_case:GovernanceCase,contribution:Any=None
         kinds={"diff":("DiffInspectionObject","绑定当前贡献的代码差异。"),"test_result":("TestInspectionObject","可复查的测试命令和结果。"),"agent_activity":("AgentActivityInspectionObject","对应当前版本的编码助手活动记录。"),"contribution_declaration":("ContributionDeclarationInspectionObject","贡献者对工具使用的声明。"),"impact_statement":("ImpactStatementInspectionObject","对应当前版本的影响说明。")}
         for item in trusted.artifacts:
             if item.artifact_type in kinds: objects.append(_trusted_object(case,item,*kinds[item.artifact_type],_artifact_evidence_ids(case,item)))
+        for package in trusted.historical_packages:
+            for meta in package.get("artifacts",[]):
+                if meta.get("artifact_type") == "test_result":
+                    objects.append(_object(object_id=meta["artifact_id"],title="旧版本测试结果",kind="TestInspectionObject",summary="该测试对应旧版本，不能满足当前版本要求。",case=case,artifact_route=f"/artifacts/{case.id}/{package['package_digest']}/{meta['artifact_id']}",source="对应旧版本",freshness="stale",metadata={"head_commit_sha":meta.get("head_commit_sha"),"contribution_fingerprint":meta.get("contribution_fingerprint")}))
         for confirmation in trusted.human_confirmations:
             if confirmation.contribution_fingerprint==case.contribution_fingerprint:objects.append(_object(object_id=confirmation.id,title="贡献者人工检查",kind="HumanConfirmationInspectionObject",summary="贡献者已确认检查当前版本和范围。",case=case,content=confirmation.statement,source=confirmation.actor,metadata={"attestation_id":confirmation.id}))
         if trusted.final_receipt:objects.append(_object(object_id=fingerprint(trusted.final_receipt),title="最终审查建议回执",kind="FinalReceiptInspectionObject",summary="已验证的 AGM 最终审查建议回执。",case=case,content=json.dumps(trusted.final_receipt,ensure_ascii=False,indent=2),metadata={"receipt_digest":fingerprint(trusted.final_receipt)}))
@@ -93,7 +104,8 @@ def compile_pr_diagnostic(*,governance_case:GovernanceCase,contribution:Any=None
     agent={"state":"verifiable","status":"verifiable","message":"检测到一份内容完整、并绑定当前版本的编码助手活动记录。","type":activity_data.get("agent_type","未记录"),"modified_file_count":len(activity_data.get("files_modified",[])),"commands":tuple(activity_data.get("commands_executed",[])),"tests":tuple(activity_data.get("tests_executed",[])),"used_other_tools":activity_data.get("other_agents_or_tools_used"),"network":activity_data.get("network_access"),"current_version":True,"producer_assurance":"记录声明由某编码助手生成；当前原型已验证内容完整性和版本绑定，尚未通过代码托管平台或密码学签名确认生产者身份。"} if activity else {"state":"not_detected","status":"none","message":"未检测到可验证的编码助手活动记录。该贡献可能主要由人工完成，也可能存在未被记录的辅助工具使用。","type":None,"modified_file_count":0,"commands":(),"tests":(),"used_other_tools":None,"network":None,"current_version":False}
     attestation_required=any(item.type=="human_attestation" for item in case.obligations); confirmed=any(item.status=="confirmed" and item.contribution_fingerprint==case.contribution_fingerprint for item in case.attestations); human_state="required_current" if confirmed else ("required_missing" if attestation_required else "not_required")
     human={"contributor_self_review":{"required_current":"已完成","required_missing":"项目要求贡献者检查当前版本，但尚未确认。","not_required":"本类修改不要求额外的贡献者人工确认。"}[human_state],"contributor_state":human_state,"maintainer_review":"已完成必要检查" if case.maintainer_verifications else "尚未完成必要检查","final_recommendation":"已记录" if case.final_decision else "尚未记录"}
-    responsibility=derive_current_responsibility(case,[]); route,legal=_route(case,policy_config,responsibility,gaps,actor_role); owner,message=ROUTE_TEXT[route]
+    comparisons=build_requirement_comparisons(case)
+    responsibility=derive_current_responsibility(case,comparisons,case.findings,case.repair_requests,case.attestations); route,legal=_route(case,policy_config,responsibility,gaps,actor_role); owner,message=ROUTE_TEXT[route]
     status={"normal_pr_review":"可以按常规流程审查","maintainer_focused_review":"需要重点检查","maintainer_action_required":"发现需要先处理的材料矛盾","contributor_action_required":"需要贡献者先处理","waiting_for_contributor_submission":"等待贡献者提交维护者检查","blocked_pending_repair":"等待贡献者修正","waiting_for_accountable_human":"等待人类确认","final_recommendation_recorded":"AGM 最终审查建议已记录"}[route]
     host=HostPlatformStatus(False,None,None,None,"not_performed","not_performed","not_performed","local absence of host-platform adapter",True)
     final={"status":"建议接受" if case.final_decision and case.final_decision.decision=="accept" else "尚未记录","decision":case.final_decision.decision if case.final_decision else None}

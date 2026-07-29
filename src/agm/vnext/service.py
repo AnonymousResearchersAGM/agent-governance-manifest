@@ -312,6 +312,36 @@ class GovernanceService:
         self.storage.save_case(case)
         return item
 
+    def add_evidence_batch(self, case_id: str, *, actor: str, actor_role: str,
+                           entries: list[dict[str, Any]]):
+        """Atomically bind a prepared set of evidence records.
+
+        Binding and validation use the same canonical primitives as
+        :meth:`add_evidence`; no case is saved until every entry is valid.
+        """
+        authorize(self.config, role=actor_role, action="prepare_evidence")
+        case = self.storage.load_case(case_id)
+        previous = evidence_set_fingerprint(case.evidence)
+        bound = []
+        known = {item.id: item for item in case.evidence}
+        for entry in entries:
+            item = bind_evidence(case, source_actor=actor, root=self.root, **entry)
+            if item.id in known:
+                if known[item.id].to_dict() != item.to_dict():
+                    raise VNextError("Evidence id collision has different content or binding")
+                continue
+            case.evidence.append(item)
+            bound.append(item)
+        validate_evidence_set(case, root=self.root)
+        if bound:
+            invalidate_stale_attestations(case,
+                previous_contribution_fingerprint=case.contribution_fingerprint,
+                previous_evidence_set_fingerprint=previous,
+                affected_scope=sorted({scope for item in bound for scope in item.affected_scope}),
+                reason="The bound evidence set changed after attestation.")
+        self.storage.save_case(case)
+        return tuple(bound)
+
     def prepare_case(
         self,
         case_id: str,
@@ -388,6 +418,15 @@ class GovernanceService:
         """
         authorize(self.config, role=role, action="verify_evidence")
         case = self.storage.load_case(case_id)
+        from .pr_diagnostic.sidecar import SidecarEvidenceStore
+        store = SidecarEvidenceStore(self.root); package = store.get_package_by_digest(package_digest)
+        if package.get("case_id") != case.id or package.get("contribution_fingerprint") != case.contribution_fingerprint or package.get("policy_fingerprint") != case.policy_snapshot.policy_fingerprint:
+            raise VNextError("Trusted conflict package binding does not match case")
+        artifacts = {item["artifact_id"]: item for item in package["artifacts"]}
+        if not set(source_artifact_ids) <= set(artifacts): raise VNextError("Trusted conflict references unknown artifact")
+        if not set(source_evidence_ids) <= {item.id for item in case.evidence}: raise VNextError("Trusted conflict references unknown canonical evidence")
+        if any(item.code == "trusted_sidecar_conflict" and item.status == "open" and set(item.related_object_ids) >= {*source_artifact_ids, package_digest} for item in case.findings):
+            return next(item for item in case.findings if item.code == "trusted_sidecar_conflict" and item.status == "open" and set(item.related_object_ids) >= {*source_artifact_ids, package_digest})
         finding = create_finding(case, code="trusted_sidecar_conflict", severity="high", message=message,
             blocking=True, related_object_ids=[*source_evidence_ids, *source_artifact_ids, package_digest],
             affected_obligation_ids=affected_obligation_ids)

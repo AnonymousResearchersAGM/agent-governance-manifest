@@ -63,7 +63,7 @@
       "state": "current",
       "blocking": true,
       "evidence_ids": [
-        "sidecar-624319da56bf086ae1d2f2b6"
+        "sidecar-503bd260579a70d961688a7b"
       ]
     },
     {
@@ -81,7 +81,7 @@
       "state": "current",
       "blocking": true,
       "evidence_ids": [
-        "sidecar-152fd96f4a67354ba09bf235"
+        "sidecar-3f3afaff46abc86b5004b8cb"
       ]
     },
     {
@@ -91,7 +91,7 @@
       "state": "current",
       "blocking": true,
       "evidence_ids": [
-        "sidecar-cf800f964f0823f177a6d058"
+        "sidecar-ec0788c49601aa9415efc6fc"
       ]
     },
     {
@@ -109,7 +109,7 @@
       "state": "current",
       "blocking": true,
       "evidence_ids": [
-        "sidecar-3115d4ad3eb2eb7daa82999b"
+        "sidecar-eb2bb974cb2822e8ff8bbf0f"
       ]
     },
     {
@@ -119,7 +119,7 @@
       "state": "current",
       "blocking": true,
       "evidence_ids": [
-        "sidecar-7b72e60f61b94a2ca800d6c9"
+        "sidecar-eafcf9861c2c8ea9b1445178"
       ]
     },
     {
@@ -129,7 +129,7 @@
       "state": "current",
       "blocking": true,
       "evidence_ids": [
-        "sidecar-228e42a61af9957a9055cf8d"
+        "sidecar-89ce3f53ff5cc668347da555"
       ]
     },
     {
@@ -148,7 +148,7 @@
       "evidence_type": "agent_action_scope",
       "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
       "source": "sidecar-bridge",
-      "evidence_id": "sidecar-624319da56bf086ae1d2f2b6"
+      "evidence_id": "sidecar-503bd260579a70d961688a7b"
     },
     {
       "title": "认证与权限影响说明",
@@ -156,7 +156,7 @@
       "evidence_type": "security_auth_impact",
       "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
       "source": "sidecar-bridge",
-      "evidence_id": "sidecar-152fd96f4a67354ba09bf235"
+      "evidence_id": "sidecar-3f3afaff46abc86b5004b8cb"
     },
     {
       "title": "变更文件清单",
@@ -164,7 +164,7 @@
       "evidence_type": "changed_files",
       "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
       "source": "sidecar-bridge",
-      "evidence_id": "sidecar-cf800f964f0823f177a6d058"
+      "evidence_id": "sidecar-ec0788c49601aa9415efc6fc"
     },
     {
       "title": "已知限制",
@@ -172,7 +172,7 @@
       "evidence_type": "known_limitations",
       "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
       "source": "sidecar-bridge",
-      "evidence_id": "sidecar-3115d4ad3eb2eb7daa82999b"
+      "evidence_id": "sidecar-eb2bb974cb2822e8ff8bbf0f"
     },
     {
       "title": "修改原因",
@@ -180,7 +180,7 @@
       "evidence_type": "rationale",
       "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
       "source": "sidecar-bridge",
-      "evidence_id": "sidecar-7b72e60f61b94a2ca800d6c9"
+      "evidence_id": "sidecar-eafcf9861c2c8ea9b1445178"
     },
     {
       "title": "修改说明",
@@ -188,7 +188,7 @@
       "evidence_type": "contribution_summary",
       "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
       "source": "sidecar-bridge",
-      "evidence_id": "sidecar-228e42a61af9957a9055cf8d"
+      "evidence_id": "sidecar-89ce3f53ff5cc668347da555"
     }
   ],
   "evidence_gaps": [
@@ -332,10 +332,10 @@
       "head_commit_sha": "cccccccccccccccccccccccccccccccccccccccc",
       "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
       "content_digest": "1d7a3edbdc7e36008ec30aec5c45acb8d01a843eed472edd3370b4b4ad401c97",
-      "evidence_package_digest": "6c016df0f93aeb0001a99e58e94ead01734181521b3fc14e60f50187e985b3d9",
+      "evidence_package_digest": "508ffedf68f2e7796876a62041e09ad22c088ce55f32413801c80183c3c2c077",
       "availability": "available",
       "freshness": "current",
-      "artifact_route": "/artifacts/case-D2_high_risk_missing/6c016df0f93aeb0001a99e58e94ead01734181521b3fc14e60f50187e985b3d9/327f69645af6e628ce8ff139",
+      "artifact_route": "/artifacts/case-D2_high_risk_missing/508ffedf68f2e7796876a62041e09ad22c088ce55f32413801c80183c3c2c077/327f69645af6e628ce8ff139",
       "inline_content": "diff --git a/demo_app/auth.py b/demo_app/auth.py\n--- a/demo_app/auth.py\n+++ b/demo_app/auth.py\n@@ -84,3 +84,6 @@ def can_access(token):\n-    return token in active_tokens\n+    if token in revoked_tokens:\n+        return False\n+    return token in active_tokens\n",
       "technical_metadata": {
         "artifact_type": "diff",
@@ -346,7 +346,7 @@
       }
     },
     {
-      "object_id": "c2be989218922d3cb102ec8f",
+      "object_id": "d379ce34da3a95ae3d232fee",
       "title": "编码助手活动记录",
       "object_type": "AgentActivityInspectionObject",
       "plain_language_summary": "对应当前版本的编码助手活动记录。",
@@ -354,12 +354,12 @@
       "base_commit_sha": "dddddddddddddddddddddddddddddddddddddddd",
       "head_commit_sha": "cccccccccccccccccccccccccccccccccccccccc",
       "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
-      "content_digest": "333575029843ea140780313772b226925833a80876857058bebe557297324770",
-      "evidence_package_digest": "6c016df0f93aeb0001a99e58e94ead01734181521b3fc14e60f50187e985b3d9",
+      "content_digest": "9e59b3d82822f528759818ee7cc6b29c9c4ce045ce9c773a2ad00aa4df6e0e70",
+      "evidence_package_digest": "508ffedf68f2e7796876a62041e09ad22c088ce55f32413801c80183c3c2c077",
       "availability": "available",
       "freshness": "current",
-      "artifact_route": "/artifacts/case-D2_high_risk_missing/6c016df0f93aeb0001a99e58e94ead01734181521b3fc14e60f50187e985b3d9/c2be989218922d3cb102ec8f",
-      "inline_content": "{\"agent_type\": \"编码助手\", \"task_summary\": \"修复令牌撤销检查\", \"files_modified\": [\"demo_app/auth.py\"], \"commands_executed\": [\"python -m pytest tests/test_auth.py -q\"], \"tests_executed\": [\"tests/test_auth.py\"], \"other_agents_or_tools_used\": false, \"network_access\": false}",
+      "artifact_route": "/artifacts/case-D2_high_risk_missing/508ffedf68f2e7796876a62041e09ad22c088ce55f32413801c80183c3c2c077/d379ce34da3a95ae3d232fee",
+      "inline_content": "{\"agent_type\": \"编码助手\", \"task_summary\": \"修复令牌撤销检查\", \"files_modified\": [\"demo_app/auth.py\"], \"commands_executed\": [\"python -m pytest tests/test_auth.py -q\"], \"tests_executed\": [\"tests/test_auth.py\"], \"other_agents_or_tools_used\": false, \"tools_used\": [], \"activity_scope\": [\"demo_app/auth.py\"], \"network_access\": false}",
       "technical_metadata": {
         "artifact_type": "agent_activity",
         "media_type": "text/plain",
@@ -367,7 +367,7 @@
           "O-AGENT-SCOPE"
         ],
         "canonical_evidence_ids": [
-          "sidecar-624319da56bf086ae1d2f2b6"
+          "sidecar-503bd260579a70d961688a7b"
         ],
         "producer_assurance": "producer_declared"
       }
@@ -382,10 +382,10 @@
       "head_commit_sha": "cccccccccccccccccccccccccccccccccccccccc",
       "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
       "content_digest": "9ff3b300567f71a735009950bde764f2a8291290d2652ebe9e1ac78ccabac624",
-      "evidence_package_digest": "6c016df0f93aeb0001a99e58e94ead01734181521b3fc14e60f50187e985b3d9",
+      "evidence_package_digest": "508ffedf68f2e7796876a62041e09ad22c088ce55f32413801c80183c3c2c077",
       "availability": "available",
       "freshness": "current",
-      "artifact_route": "/artifacts/case-D2_high_risk_missing/6c016df0f93aeb0001a99e58e94ead01734181521b3fc14e60f50187e985b3d9/930ab4cabe456d213d195d8e",
+      "artifact_route": "/artifacts/case-D2_high_risk_missing/508ffedf68f2e7796876a62041e09ad22c088ce55f32413801c80183c3c2c077/930ab4cabe456d213d195d8e",
       "inline_content": "撤销令牌、会话刷新和权限变更后拒绝旧会话；未改变注册或密码重置。",
       "technical_metadata": {
         "artifact_type": "impact_statement",
@@ -394,7 +394,7 @@
           "O-AUTH-IMPACT"
         ],
         "canonical_evidence_ids": [
-          "sidecar-152fd96f4a67354ba09bf235"
+          "sidecar-3f3afaff46abc86b5004b8cb"
         ],
         "producer_assurance": "producer_declared"
       }
@@ -438,10 +438,10 @@
     "agent_trace_state": "verifiable",
     "route_derivation": {
       "route": "contributor_action_required",
-      "reason": "当前仍有贡献侧要求未完成；完成后再交给负责人或维护者。"
+      "reason": "受影响材料尚未准备或更新完成，当前还不能进入维护者检查。"
     },
     "sidecar": {
-      "current_package": "6c016df0f93aeb0001a99e58e94ead01734181521b3fc14e60f50187e985b3d9",
+      "current_package": "508ffedf68f2e7796876a62041e09ad22c088ce55f32413801c80183c3c2c077",
       "historical_packages": []
     },
     "host_platform": {

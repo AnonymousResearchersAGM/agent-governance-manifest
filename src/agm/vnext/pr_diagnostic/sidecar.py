@@ -7,6 +7,9 @@ current or trusted through a presentation dictionary.
 from __future__ import annotations
 
 import json
+import os
+import threading
+import time
 from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any
@@ -33,6 +36,14 @@ class EvidenceArtifactRef:
     policy_fingerprint: str | None = None
     base_commit_sha: str | None = None
     producer: str | None = None
+    command: str | None = None
+    environment: str | None = None
+    result_summary: str | None = None
+    exit_code: int | None = None
+    tests_passed: int | None = None
+    tests_failed: int | None = None
+    affected_scope: list[str] | None = None
+    observed_at: str | None = None
 
 
 @dataclass(frozen=True)
@@ -58,6 +69,8 @@ class FinalEvidenceReceipt:
     agm_final_recommendation: str
     host_platform_status: dict[str, Any]
     created_at: str
+    case_id: str | None = None
+    final_decision_id: str | None = None
 
 
 def _safe(value: Any) -> None:
@@ -74,6 +87,7 @@ def _validate_host(status: dict[str, Any]) -> None:
 
 
 class SidecarEvidenceStore:
+    _audit_lock = threading.Lock()
     def __init__(self, root: Path):
         self.project_root = root.resolve()
         self.root = (self.project_root / ".agm-work" / "evidence_store").resolve()
@@ -116,6 +130,10 @@ class SidecarEvidenceStore:
                 "case_id": case_id, "policy_fingerprint": policy_fingerprint,
                 "producer": raw.get("producer", producer), "obligation_refs": list(obligation_refs),
                 "relative_storage_path": f"artifacts/{artifact_id}.txt",
+                "command": raw.get("command"), "environment": raw.get("environment"),
+                "result_summary": raw.get("result_summary"), "exit_code": raw.get("exit_code"),
+                "tests_passed": raw.get("tests_passed"), "tests_failed": raw.get("tests_failed"),
+                "affected_scope": list(raw.get("affected_scope", [])), "observed_at": raw.get("observed_at", raw.get("created_at", when)),
             })
             contents[artifact_id] = content
         payload = {"package_version": "agm.sidecar_evidence/v1", "case_id": case_id,
@@ -187,8 +205,16 @@ class SidecarEvidenceStore:
 
     def record_read_access(self, *, case_id: str, package_digest: str, artifact_id: str) -> None:
         """Append a minimal local audit fact without exposing storage details."""
-        path = self.root / "read_audit.jsonl"
-        atomic_write_text(path, (path.read_text(encoding="utf8") if path.exists() else "") + canonical_json({"case_id":case_id,"package_digest":package_digest,"artifact_id":artifact_id,"access":"read"}) + "\n")
+        path = self.root / "read_audit.jsonl"; path.parent.mkdir(parents=True, exist_ok=True)
+        line = canonical_json({"case_id":case_id,"package_digest":package_digest,"artifact_id":artifact_id,"access":"read"}) + "\n"
+        for attempt in range(3):
+            try:
+                with self._audit_lock, path.open("a", encoding="utf8") as handle:
+                    handle.write(line); handle.flush(); os.fsync(handle.fileno())
+                return
+            except PermissionError:
+                if attempt == 2: raise
+                time.sleep(0.02 * (attempt + 1))
 
     def write_final_receipt(self, receipt: FinalEvidenceReceipt) -> Path:
         _safe(asdict(receipt)); _validate_host(receipt.host_platform_status)
@@ -197,6 +223,28 @@ class SidecarEvidenceStore:
         if path.exists() and path.read_text(encoding="utf8") != encoded: raise VNextError("Final receipt digest collision")
         if not path.exists(): atomic_write_text(path, encoded)
         return path
+
+    def write_bridge_receipt(self, payload: dict[str, Any]) -> Path:
+        payload = dict(payload); digest = fingerprint(payload)
+        path = self.root / "bridge_receipts" / f"{digest}.json"; encoded = canonical_json(payload) + "\n"
+        if path.exists() and path.read_text(encoding="utf8") != encoded: raise VNextError("Bridge receipt digest collision")
+        if not path.exists(): atomic_write_text(path, encoded)
+        audit = self.root / "bridge_audit.jsonl"; audit.parent.mkdir(parents=True, exist_ok=True)
+        with self._audit_lock, audit.open("a", encoding="utf8") as handle:
+            handle.write(canonical_json({"event":payload["registration_status"],"receipt_digest":digest,"case_id":payload["case_id"],"package_digest":payload["package_digest"]})+"\n"); handle.flush(); os.fsync(handle.fileno())
+        return path
+
+    def append_conflict_audit(self, event: str, *, case_id: str, package_digest: str) -> None:
+        path=self.root/"conflict_audit.jsonl"; path.parent.mkdir(parents=True,exist_ok=True)
+        line=canonical_json({"event":event,"case_id":case_id,"package_digest":package_digest})+"\n"
+        for attempt in range(3):
+            try:
+                with self._audit_lock,path.open("a",encoding="utf8") as handle:
+                    handle.write(line);handle.flush();os.fsync(handle.fileno())
+                return
+            except PermissionError:
+                if attempt==2:raise
+                time.sleep(.02*(attempt+1))
 
     def verify_receipt(self, receipt_digest: str) -> dict[str, Any]:
         if not receipt_digest or "/" in receipt_digest or "\\" in receipt_digest or ".." in receipt_digest: raise VNextError("Invalid receipt digest")

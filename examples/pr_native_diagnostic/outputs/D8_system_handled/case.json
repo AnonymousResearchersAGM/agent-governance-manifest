@@ -106,7 +106,7 @@
   ],
   "evidence": [
     {
-      "id": "sidecar-21bcde282fac72b45c6d92a7",
+      "id": "sidecar-931fff35939f0eb0e0024b40",
       "obligation_ids": [
         "O-SUMMARY"
       ],
@@ -124,7 +124,7 @@
       "observed_at": "2026-07-26T00:00:00Z",
       "expires_at": null,
       "source_actor": "sidecar-bridge",
-      "source_tool": "sidecar-evidence-bridge",
+      "source_tool": null,
       "retained_for_contribution_fingerprint": null,
       "retention_reason": null,
       "rejected_at": null,
@@ -134,7 +134,7 @@
       "invalid_reasons": []
     },
     {
-      "id": "sidecar-854717434226230823f722c5",
+      "id": "sidecar-340e6fc5152c2321bcd56ab5",
       "obligation_ids": [
         "O-CHANGED-FILES"
       ],
@@ -152,7 +152,7 @@
       "observed_at": "2026-07-26T00:00:00Z",
       "expires_at": null,
       "source_actor": "sidecar-bridge",
-      "source_tool": "sidecar-evidence-bridge",
+      "source_tool": null,
       "retained_for_contribution_fingerprint": null,
       "retention_reason": null,
       "rejected_at": null,

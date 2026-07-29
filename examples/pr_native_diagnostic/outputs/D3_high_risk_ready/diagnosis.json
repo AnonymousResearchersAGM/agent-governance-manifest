@@ -63,7 +63,7 @@
       "state": "current",
       "blocking": true,
       "evidence_ids": [
-        "sidecar-e0831122349a30c4fbbbc1f5"
+        "sidecar-2f3e222f2941d1204f80b502"
       ]
     },
     {
@@ -73,7 +73,7 @@
       "state": "current",
       "blocking": true,
       "evidence_ids": [
-        "sidecar-720c7eefc2952b91b88a2193"
+        "sidecar-d98c8010a9ed89b9824a0239"
       ]
     },
     {
@@ -83,7 +83,7 @@
       "state": "current",
       "blocking": true,
       "evidence_ids": [
-        "sidecar-6a9fddb1c6aa52db0e3b71a8"
+        "sidecar-853d40a7ffb8a7bba05376b3"
       ]
     },
     {
@@ -93,7 +93,7 @@
       "state": "current",
       "blocking": true,
       "evidence_ids": [
-        "sidecar-9b3b9ce879f4bd0309d2f889"
+        "sidecar-6d0e0586c1c7d150fbc68e62"
       ]
     },
     {
@@ -111,7 +111,7 @@
       "state": "current",
       "blocking": true,
       "evidence_ids": [
-        "sidecar-d133ba4d97c5f722ee824377"
+        "sidecar-9bfd6106b343c315c1ee894f"
       ]
     },
     {
@@ -121,7 +121,7 @@
       "state": "current",
       "blocking": true,
       "evidence_ids": [
-        "sidecar-69477ee7c17dbe4fbf6ac360"
+        "sidecar-c3899dc4831f7e77a772d3b3"
       ]
     },
     {
@@ -131,7 +131,7 @@
       "state": "current",
       "blocking": true,
       "evidence_ids": [
-        "sidecar-c57f250668a00ad0069fedaf"
+        "sidecar-c7247635254a6b40b03b28c8"
       ]
     },
     {
@@ -141,7 +141,7 @@
       "state": "current",
       "blocking": true,
       "evidence_ids": [
-        "sidecar-18c049b993b878ef74b79239"
+        "sidecar-6a7c3f57f86cdea9a5f05a04"
       ]
     }
   ],
@@ -152,7 +152,7 @@
       "evidence_type": "agent_action_scope",
       "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
       "source": "sidecar-bridge",
-      "evidence_id": "sidecar-e0831122349a30c4fbbbc1f5"
+      "evidence_id": "sidecar-2f3e222f2941d1204f80b502"
     },
     {
       "title": "可复查的测试输出",
@@ -160,7 +160,7 @@
       "evidence_type": "artifact",
       "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
       "source": "sidecar-bridge",
-      "evidence_id": "sidecar-720c7eefc2952b91b88a2193"
+      "evidence_id": "sidecar-d98c8010a9ed89b9824a0239"
     },
     {
       "title": "认证与权限影响说明",
@@ -168,7 +168,7 @@
       "evidence_type": "security_auth_impact",
       "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
       "source": "sidecar-bridge",
-      "evidence_id": "sidecar-6a9fddb1c6aa52db0e3b71a8"
+      "evidence_id": "sidecar-853d40a7ffb8a7bba05376b3"
     },
     {
       "title": "变更文件清单",
@@ -176,7 +176,7 @@
       "evidence_type": "changed_files",
       "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
       "source": "sidecar-bridge",
-      "evidence_id": "sidecar-9b3b9ce879f4bd0309d2f889"
+      "evidence_id": "sidecar-6d0e0586c1c7d150fbc68e62"
     },
     {
       "title": "已知限制",
@@ -184,7 +184,7 @@
       "evidence_type": "known_limitations",
       "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
       "source": "sidecar-bridge",
-      "evidence_id": "sidecar-d133ba4d97c5f722ee824377"
+      "evidence_id": "sidecar-9bfd6106b343c315c1ee894f"
     },
     {
       "title": "修改原因",
@@ -192,7 +192,7 @@
       "evidence_type": "rationale",
       "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
       "source": "sidecar-bridge",
-      "evidence_id": "sidecar-69477ee7c17dbe4fbf6ac360"
+      "evidence_id": "sidecar-c3899dc4831f7e77a772d3b3"
     },
     {
       "title": "修改说明",
@@ -200,7 +200,7 @@
       "evidence_type": "contribution_summary",
       "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
       "source": "sidecar-bridge",
-      "evidence_id": "sidecar-c57f250668a00ad0069fedaf"
+      "evidence_id": "sidecar-c7247635254a6b40b03b28c8"
     },
     {
       "title": "测试记录",
@@ -208,7 +208,7 @@
       "evidence_type": "test_command",
       "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
       "source": "sidecar-bridge",
-      "evidence_id": "sidecar-18c049b993b878ef74b79239"
+      "evidence_id": "sidecar-6a7c3f57f86cdea9a5f05a04"
     }
   ],
   "evidence_gaps": [],
@@ -270,10 +270,10 @@
       "head_commit_sha": "cccccccccccccccccccccccccccccccccccccccc",
       "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
       "content_digest": "1d7a3edbdc7e36008ec30aec5c45acb8d01a843eed472edd3370b4b4ad401c97",
-      "evidence_package_digest": "cbc7052a5905bb181a99ff31c8cb001104f6ad0aab83d94e8bf1c5550d671fe0",
+      "evidence_package_digest": "06c6606f64d21044da5aa26c63a4d3a9223d8cc5c036b8c3d50809491228dab1",
       "availability": "available",
       "freshness": "current",
-      "artifact_route": "/artifacts/case-D3_high_risk_ready/cbc7052a5905bb181a99ff31c8cb001104f6ad0aab83d94e8bf1c5550d671fe0/1196cd99cd13cf02ddf5b446",
+      "artifact_route": "/artifacts/case-D3_high_risk_ready/06c6606f64d21044da5aa26c63a4d3a9223d8cc5c036b8c3d50809491228dab1/1196cd99cd13cf02ddf5b446",
       "inline_content": "diff --git a/demo_app/auth.py b/demo_app/auth.py\n--- a/demo_app/auth.py\n+++ b/demo_app/auth.py\n@@ -84,3 +84,6 @@ def can_access(token):\n-    return token in active_tokens\n+    if token in revoked_tokens:\n+        return False\n+    return token in active_tokens\n",
       "technical_metadata": {
         "artifact_type": "diff",
@@ -284,7 +284,7 @@
       }
     },
     {
-      "object_id": "6188adf2a892cf6520e92318",
+      "object_id": "2a7ca9ded4f783c45db8e0d6",
       "title": "编码助手活动记录",
       "object_type": "AgentActivityInspectionObject",
       "plain_language_summary": "对应当前版本的编码助手活动记录。",
@@ -292,12 +292,12 @@
       "base_commit_sha": "dddddddddddddddddddddddddddddddddddddddd",
       "head_commit_sha": "cccccccccccccccccccccccccccccccccccccccc",
       "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
-      "content_digest": "333575029843ea140780313772b226925833a80876857058bebe557297324770",
-      "evidence_package_digest": "cbc7052a5905bb181a99ff31c8cb001104f6ad0aab83d94e8bf1c5550d671fe0",
+      "content_digest": "9e59b3d82822f528759818ee7cc6b29c9c4ce045ce9c773a2ad00aa4df6e0e70",
+      "evidence_package_digest": "06c6606f64d21044da5aa26c63a4d3a9223d8cc5c036b8c3d50809491228dab1",
       "availability": "available",
       "freshness": "current",
-      "artifact_route": "/artifacts/case-D3_high_risk_ready/cbc7052a5905bb181a99ff31c8cb001104f6ad0aab83d94e8bf1c5550d671fe0/6188adf2a892cf6520e92318",
-      "inline_content": "{\"agent_type\": \"编码助手\", \"task_summary\": \"修复令牌撤销检查\", \"files_modified\": [\"demo_app/auth.py\"], \"commands_executed\": [\"python -m pytest tests/test_auth.py -q\"], \"tests_executed\": [\"tests/test_auth.py\"], \"other_agents_or_tools_used\": false, \"network_access\": false}",
+      "artifact_route": "/artifacts/case-D3_high_risk_ready/06c6606f64d21044da5aa26c63a4d3a9223d8cc5c036b8c3d50809491228dab1/2a7ca9ded4f783c45db8e0d6",
+      "inline_content": "{\"agent_type\": \"编码助手\", \"task_summary\": \"修复令牌撤销检查\", \"files_modified\": [\"demo_app/auth.py\"], \"commands_executed\": [\"python -m pytest tests/test_auth.py -q\"], \"tests_executed\": [\"tests/test_auth.py\"], \"other_agents_or_tools_used\": false, \"tools_used\": [], \"activity_scope\": [\"demo_app/auth.py\"], \"network_access\": false}",
       "technical_metadata": {
         "artifact_type": "agent_activity",
         "media_type": "text/plain",
@@ -305,7 +305,7 @@
           "O-AGENT-SCOPE"
         ],
         "canonical_evidence_ids": [
-          "sidecar-e0831122349a30c4fbbbc1f5"
+          "sidecar-2f3e222f2941d1204f80b502"
         ],
         "producer_assurance": "producer_declared"
       }
@@ -320,10 +320,10 @@
       "head_commit_sha": "cccccccccccccccccccccccccccccccccccccccc",
       "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
       "content_digest": "7d2451fc960cf1addb434d4ed9eb764fea89df5ab27b8743dbc8dfb3169c57e4",
-      "evidence_package_digest": "cbc7052a5905bb181a99ff31c8cb001104f6ad0aab83d94e8bf1c5550d671fe0",
+      "evidence_package_digest": "06c6606f64d21044da5aa26c63a4d3a9223d8cc5c036b8c3d50809491228dab1",
       "availability": "available",
       "freshness": "current",
-      "artifact_route": "/artifacts/case-D3_high_risk_ready/cbc7052a5905bb181a99ff31c8cb001104f6ad0aab83d94e8bf1c5550d671fe0/a957edec8fbe6a4dab947fd1",
+      "artifact_route": "/artifacts/case-D3_high_risk_ready/06c6606f64d21044da5aa26c63a4d3a9223d8cc5c036b8c3d50809491228dab1/a957edec8fbe6a4dab947fd1",
       "inline_content": "python -m pytest tests/test_auth.py -q\n18 passed, 0 failed",
       "technical_metadata": {
         "artifact_type": "test_result",
@@ -333,8 +333,8 @@
           "O-ARTIFACT"
         ],
         "canonical_evidence_ids": [
-          "sidecar-18c049b993b878ef74b79239",
-          "sidecar-720c7eefc2952b91b88a2193"
+          "sidecar-6a7c3f57f86cdea9a5f05a04",
+          "sidecar-d98c8010a9ed89b9824a0239"
         ],
         "producer_assurance": "producer_declared"
       }
@@ -349,10 +349,10 @@
       "head_commit_sha": "cccccccccccccccccccccccccccccccccccccccc",
       "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
       "content_digest": "9ff3b300567f71a735009950bde764f2a8291290d2652ebe9e1ac78ccabac624",
-      "evidence_package_digest": "cbc7052a5905bb181a99ff31c8cb001104f6ad0aab83d94e8bf1c5550d671fe0",
+      "evidence_package_digest": "06c6606f64d21044da5aa26c63a4d3a9223d8cc5c036b8c3d50809491228dab1",
       "availability": "available",
       "freshness": "current",
-      "artifact_route": "/artifacts/case-D3_high_risk_ready/cbc7052a5905bb181a99ff31c8cb001104f6ad0aab83d94e8bf1c5550d671fe0/7e2d57712b2db270ccc47cd6",
+      "artifact_route": "/artifacts/case-D3_high_risk_ready/06c6606f64d21044da5aa26c63a4d3a9223d8cc5c036b8c3d50809491228dab1/7e2d57712b2db270ccc47cd6",
       "inline_content": "撤销令牌、会话刷新和权限变更后拒绝旧会话；未改变注册或密码重置。",
       "technical_metadata": {
         "artifact_type": "impact_statement",
@@ -361,7 +361,7 @@
           "O-AUTH-IMPACT"
         ],
         "canonical_evidence_ids": [
-          "sidecar-6a9fddb1c6aa52db0e3b71a8"
+          "sidecar-853d40a7ffb8a7bba05376b3"
         ],
         "producer_assurance": "producer_declared"
       }
@@ -460,7 +460,7 @@
       "reason": "贡献侧要求已经满足，当前轮到有权限的维护者检查；检查完成仍不等于接受。"
     },
     "sidecar": {
-      "current_package": "cbc7052a5905bb181a99ff31c8cb001104f6ad0aab83d94e8bf1c5550d671fe0",
+      "current_package": "06c6606f64d21044da5aa26c63a4d3a9223d8cc5c036b8c3d50809491228dab1",
       "historical_packages": []
     },
     "host_platform": {

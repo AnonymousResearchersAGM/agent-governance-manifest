@@ -257,7 +257,7 @@
   ],
   "evidence": [
     {
-      "id": "sidecar-c57f250668a00ad0069fedaf",
+      "id": "sidecar-c7247635254a6b40b03b28c8",
       "obligation_ids": [
         "O-SUMMARY"
       ],
@@ -275,7 +275,7 @@
       "observed_at": "2026-07-26T00:00:00Z",
       "expires_at": null,
       "source_actor": "sidecar-bridge",
-      "source_tool": "sidecar-evidence-bridge",
+      "source_tool": null,
       "retained_for_contribution_fingerprint": null,
       "retention_reason": null,
       "rejected_at": null,
@@ -285,7 +285,7 @@
       "invalid_reasons": []
     },
     {
-      "id": "sidecar-9b3b9ce879f4bd0309d2f889",
+      "id": "sidecar-6d0e0586c1c7d150fbc68e62",
       "obligation_ids": [
         "O-CHANGED-FILES"
       ],
@@ -303,7 +303,7 @@
       "observed_at": "2026-07-26T00:00:00Z",
       "expires_at": null,
       "source_actor": "sidecar-bridge",
-      "source_tool": "sidecar-evidence-bridge",
+      "source_tool": null,
       "retained_for_contribution_fingerprint": null,
       "retention_reason": null,
       "rejected_at": null,
@@ -313,7 +313,7 @@
       "invalid_reasons": []
     },
     {
-      "id": "sidecar-69477ee7c17dbe4fbf6ac360",
+      "id": "sidecar-c3899dc4831f7e77a772d3b3",
       "obligation_ids": [
         "O-RATIONALE"
       ],
@@ -331,7 +331,7 @@
       "observed_at": "2026-07-26T00:00:00Z",
       "expires_at": null,
       "source_actor": "sidecar-bridge",
-      "source_tool": "sidecar-evidence-bridge",
+      "source_tool": null,
       "retained_for_contribution_fingerprint": null,
       "retention_reason": null,
       "rejected_at": null,
@@ -341,7 +341,7 @@
       "invalid_reasons": []
     },
     {
-      "id": "sidecar-d133ba4d97c5f722ee824377",
+      "id": "sidecar-9bfd6106b343c315c1ee894f",
       "obligation_ids": [
         "O-LIMITATIONS"
       ],
@@ -359,7 +359,7 @@
       "observed_at": "2026-07-26T00:00:00Z",
       "expires_at": null,
       "source_actor": "sidecar-bridge",
-      "source_tool": "sidecar-evidence-bridge",
+      "source_tool": null,
       "retained_for_contribution_fingerprint": null,
       "retention_reason": null,
       "rejected_at": null,
@@ -369,7 +369,7 @@
       "invalid_reasons": []
     },
     {
-      "id": "sidecar-e0831122349a30c4fbbbc1f5",
+      "id": "sidecar-2f3e222f2941d1204f80b502",
       "obligation_ids": [
         "O-AGENT-SCOPE"
       ],
@@ -379,7 +379,7 @@
       "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
       "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
       "evidence_type": "agent_action_scope",
-      "value": "{\"agent_type\": \"编码助手\", \"task_summary\": \"修复令牌撤销检查\", \"files_modified\": [\"demo_app/auth.py\"], \"commands_executed\": [\"python -m pytest tests/test_auth.py -q\"], \"tests_executed\": [\"tests/test_auth.py\"], \"other_agents_or_tools_used\": false, \"network_access\": false}",
+      "value": "{\"agent_type\": \"编码助手\", \"task_summary\": \"修复令牌撤销检查\", \"files_modified\": [\"demo_app/auth.py\"], \"commands_executed\": [\"python -m pytest tests/test_auth.py -q\"], \"tests_executed\": [\"tests/test_auth.py\"], \"other_agents_or_tools_used\": false, \"tools_used\": [], \"activity_scope\": [\"demo_app/auth.py\"], \"network_access\": false}",
       "command": null,
       "environment": null,
       "artifact_path": null,
@@ -387,7 +387,7 @@
       "observed_at": "2026-07-26T00:00:00Z",
       "expires_at": null,
       "source_actor": "sidecar-bridge",
-      "source_tool": "sidecar-evidence-bridge",
+      "source_tool": "deterministic-scenario",
       "retained_for_contribution_fingerprint": null,
       "retention_reason": null,
       "rejected_at": null,
@@ -397,7 +397,7 @@
       "invalid_reasons": []
     },
     {
-      "id": "sidecar-18c049b993b878ef74b79239",
+      "id": "sidecar-6a7c3f57f86cdea9a5f05a04",
       "obligation_ids": [
         "O-TEST-COMMAND"
       ],
@@ -409,7 +409,7 @@
       "evidence_type": "test_command",
       "value": "python -m pytest tests/test_auth.py -q\n18 passed, 0 failed",
       "command": "python -m pytest tests/test_auth.py -q",
-      "environment": "sidecar deterministic fixture",
+      "environment": "deterministic demo fixture",
       "artifact_path": null,
       "artifact_hash": null,
       "observed_at": "2026-07-26T00:00:00Z",
@@ -425,7 +425,7 @@
       "invalid_reasons": []
     },
     {
-      "id": "sidecar-720c7eefc2952b91b88a2193",
+      "id": "sidecar-d98c8010a9ed89b9824a0239",
       "obligation_ids": [
         "O-ARTIFACT"
       ],
@@ -436,8 +436,8 @@
       "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
       "evidence_type": "artifact",
       "value": "python -m pytest tests/test_auth.py -q\n18 passed, 0 failed",
-      "command": null,
-      "environment": null,
+      "command": "python -m pytest tests/test_auth.py -q",
+      "environment": "deterministic demo fixture",
       "artifact_path": null,
       "artifact_hash": null,
       "observed_at": "2026-07-26T00:00:00Z",
@@ -453,7 +453,7 @@
       "invalid_reasons": []
     },
     {
-      "id": "sidecar-6a9fddb1c6aa52db0e3b71a8",
+      "id": "sidecar-853d40a7ffb8a7bba05376b3",
       "obligation_ids": [
         "O-AUTH-IMPACT"
       ],
@@ -471,7 +471,7 @@
       "observed_at": "2026-07-26T00:00:00Z",
       "expires_at": null,
       "source_actor": "sidecar-bridge",
-      "source_tool": "sidecar-evidence-bridge",
+      "source_tool": null,
       "retained_for_contribution_fingerprint": null,
       "retention_reason": null,
       "rejected_at": null,
@@ -494,7 +494,7 @@
       "reservations": [],
       "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
       "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
-      "evidence_set_fingerprint": "f33b23ff9657d1409e81c64782ce0dbf406bfa508d238277d83f070b5d81656f",
+      "evidence_set_fingerprint": "a1adf229d183167ac391c9f0f667f17dc142d67a1868ecbb271e728869be30de",
       "retained_for_contribution_fingerprint": null,
       "retention_reason": null,
       "status": "confirmed",

@@ -106,7 +106,7 @@
   ],
   "evidence": [
     {
-      "id": "sidecar-fe46254d27e11b97a7b00d08",
+      "id": "sidecar-b5a032cbe47da6ca407e5978",
       "obligation_ids": [
         "O-SUMMARY"
       ],
@@ -124,7 +124,7 @@
       "observed_at": "2026-07-26T00:00:00Z",
       "expires_at": null,
       "source_actor": "sidecar-bridge",
-      "source_tool": "sidecar-evidence-bridge",
+      "source_tool": null,
       "retained_for_contribution_fingerprint": null,
       "retention_reason": null,
       "rejected_at": null,
@@ -134,7 +134,7 @@
       "invalid_reasons": []
     },
     {
-      "id": "sidecar-57abb9827f0a730460fe9d77",
+      "id": "sidecar-438e1d8c09dabd91669d7c38",
       "obligation_ids": [
         "O-CHANGED-FILES"
       ],
@@ -152,7 +152,7 @@
       "observed_at": "2026-07-26T00:00:00Z",
       "expires_at": null,
       "source_actor": "sidecar-bridge",
-      "source_tool": "sidecar-evidence-bridge",
+      "source_tool": null,
       "retained_for_contribution_fingerprint": null,
       "retention_reason": null,
       "rejected_at": null,
@@ -177,8 +177,8 @@
         "O-SUMMARY"
       ],
       "evidence_ids": [
-        "sidecar-57abb9827f0a730460fe9d77",
-        "sidecar-fe46254d27e11b97a7b00d08"
+        "sidecar-438e1d8c09dabd91669d7c38",
+        "sidecar-b5a032cbe47da6ca407e5978"
       ],
       "outcome": "verified",
       "reason": "已检查当前材料。",
@@ -212,8 +212,8 @@
       "O-SUMMARY": "verified"
     },
     "evidence_ids": [
-      "sidecar-57abb9827f0a730460fe9d77",
-      "sidecar-fe46254d27e11b97a7b00d08"
+      "sidecar-438e1d8c09dabd91669d7c38",
+      "sidecar-b5a032cbe47da6ca407e5978"
     ],
     "attestation_ids": [],
     "verification_ids": [
@@ -221,7 +221,7 @@
     ],
     "repair_request_ids": [],
     "unresolved_exception_ids": [],
-    "transition_log_hash": "d7446ce23c421581a5ee5a5cf5fbc9bcbadb8b5f6887b6da278a82ce82d18113"
+    "transition_log_hash": "f724d3417c64f6c2e3aa2ea12d16f695c5fa0b3f1d9891119b3ca7825719c51d"
   },
   "schema_version": "agm.governance_case/v0.2-dev"
 }

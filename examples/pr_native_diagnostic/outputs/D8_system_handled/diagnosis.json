@@ -57,7 +57,7 @@
       "state": "current",
       "blocking": true,
       "evidence_ids": [
-        "sidecar-854717434226230823f722c5"
+        "sidecar-340e6fc5152c2321bcd56ab5"
       ]
     },
     {
@@ -67,7 +67,7 @@
       "state": "current",
       "blocking": true,
       "evidence_ids": [
-        "sidecar-21bcde282fac72b45c6d92a7"
+        "sidecar-931fff35939f0eb0e0024b40"
       ]
     }
   ],
@@ -78,7 +78,7 @@
       "evidence_type": "changed_files",
       "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
       "source": "sidecar-bridge",
-      "evidence_id": "sidecar-854717434226230823f722c5"
+      "evidence_id": "sidecar-340e6fc5152c2321bcd56ab5"
     },
     {
       "title": "修改说明",
@@ -86,10 +86,32 @@
       "evidence_type": "contribution_summary",
       "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
       "source": "sidecar-bridge",
-      "evidence_id": "sidecar-21bcde282fac72b45c6d92a7"
+      "evidence_id": "sidecar-931fff35939f0eb0e0024b40"
     }
   ],
-  "evidence_gaps": [],
+  "evidence_gaps": [
+    {
+      "finding_id": "attempted-operation-24b50a84273755eb88d2694d3cfeddb9",
+      "category": "denied_operation",
+      "severity": "low",
+      "headline": "系统已阻止一次未经授权的操作",
+      "plain_language_explanation": "操作：verify_evidence；该操作未生效。",
+      "affected_files": [],
+      "affected_line_ranges": [],
+      "expected_state": "无需单独处理",
+      "observed_state": "系统已阻止该操作",
+      "gap": "仍按当前 PR 的正常路线审查。",
+      "risk_rule_refs": [],
+      "obligation_refs": [],
+      "evidence_refs": [],
+      "responsibility": "maintainer",
+      "recommended_route": "normal_pr_review",
+      "blocking": false,
+      "source_state_refs": [
+        "attempted-operation-24b50a84273755eb88d2694d3cfeddb9"
+      ]
+    }
+  ],
   "agent_involvement": {
     "state": "not_detected",
     "status": "none",
@@ -143,10 +165,10 @@
       "head_commit_sha": "cccccccccccccccccccccccccccccccccccccccc",
       "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
       "content_digest": "c1b72fef3ca826433758a2722f1e2d6a93d8f4d3da6ecb57ca6a89dfbc9fd64f",
-      "evidence_package_digest": "4df73fdf2abe0df9840f135d07f19f9369d513ae9ea329ed0e30bb001289390c",
+      "evidence_package_digest": "da0bde2a7f8ad9a0532662716bcff4aaea0052a009c6ee793bd7088d207da31b",
       "availability": "available",
       "freshness": "current",
-      "artifact_route": "/artifacts/case-D8_system_handled/4df73fdf2abe0df9840f135d07f19f9369d513ae9ea329ed0e30bb001289390c/fe7847a0d24fa5d23c222f57",
+      "artifact_route": "/artifacts/case-D8_system_handled/da0bde2a7f8ad9a0532662716bcff4aaea0052a009c6ee793bd7088d207da31b/fe7847a0d24fa5d23c222f57",
       "inline_content": "diff --git a/README.md b/README.md\n--- a/README.md\n+++ b/README.md\n@@ -5,2 +5,2 @@\n-pip install agm-demo\n+python -m pip install agm-demo\n link remains valid\n",
       "technical_metadata": {
         "artifact_type": "diff",
@@ -192,7 +214,7 @@
       "reason": "贡献侧要求已经满足，当前轮到有权限的维护者检查；检查完成仍不等于接受。"
     },
     "sidecar": {
-      "current_package": "4df73fdf2abe0df9840f135d07f19f9369d513ae9ea329ed0e30bb001289390c",
+      "current_package": "da0bde2a7f8ad9a0532662716bcff4aaea0052a009c6ee793bd7088d207da31b",
       "historical_packages": []
     },
     "host_platform": {

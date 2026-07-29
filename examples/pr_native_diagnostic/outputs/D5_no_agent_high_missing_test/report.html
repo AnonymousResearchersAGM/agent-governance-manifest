@@ -1,4 +1,12 @@
-<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PR 审查诊断</title><style>body{margin:0;background:#f3f6f8;font:16px/1.55 system-ui;color:#18212f;overflow-wrap:anywhere}main{max-width:1040px;margin:auto;padding:16px}header{background:#153452;color:#fff;padding:20px;border-radius:12px}section,article,details{background:#fff;border:1px solid #dbe2ea;border-radius:12px;padding:16px;margin:14px 0;min-width:0}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.gap{border-left:6px solid #a64b17}pre{white-space:pre-wrap;overflow:auto}@media(max-width:720px){main{padding:8px}.grid{grid-template-columns:1fr}}</style><main><header><h1>PR 审查诊断</h1><p>这是本地审查工作台：不会修改代码，不会执行 git merge，也不会批准或合并代码托管平台 PR。</p></header><section class=gap><h2>需要贡献者先处理</h2><p>请补充或更新下列材料后，再提交维护者检查。</p><p><strong>下一步：</strong>贡献者</p></section><section><h2>这次 PR 改了什么</h2><p>D5_no_agent_high_missing_test</p><p>demo_app/auth.py</p></section><section><h2>风险位置与原因</h2><article><h3>严重风险：demo_app/auth.py</h3><p>demo_app/auth.py </p><p>该位置决定认证或权限何时生效；需要重点检查。</p></article></section><section><h2>项目要求与当前情况</h2><ul><li>可复查的测试输出：未提供</li><li>认证与权限影响说明：未提供</li><li>变更文件清单：未提供</li><li>贡献者人工检查：未提供</li><li>已知限制：未提供</li><li>修改原因：未提供</li><li>修改说明：未提供</li><li>测试记录：未提供</li></ul></section><section><h2>缺失和异常</h2><article class=gap><h3>未提供</h3><p>提供可以实际检查的测试输出或文件。</p><p>请贡献者补充或更新。</p></article><article class=gap><h3>未提供</h3><p>说明本次修改是否改变登录、认证或权限行为。</p><p>请贡献者补充或更新。</p></article><article class=gap><h3>未提供</h3><p>列出这次修改涉及的文件和范围。</p><p>请贡献者补充或更新。</p></article><article class=gap><h3>未提供</h3><p>由负责人确认自己审阅了当前代码版本、材料和明确范围。</p><p>请贡献者补充或更新。</p></article><article class=gap><h3>未提供</h3><p>说明已知限制；没有已知限制也要明确说明。</p><p>请贡献者补充或更新。</p></article><article class=gap><h3>未提供</h3><p>说明为什么需要这次修改。</p><p>请贡献者补充或更新。</p></article><article class=gap><h3>未提供</h3><p>简要说明这次修改做了什么。</p><p>请贡献者补充或更新。</p></article><article class=gap><h3>未提供</h3><p>提供测试命令、运行环境和实际结果。</p><p>请贡献者补充或更新。</p></article></section><section><h2>编码助手参与情况</h2><p>未检测到可验证的 Agent 参与记录。该贡献可能主要由人工完成，也可能存在未被记录的辅助工具使用。</p></section><section><h2>人工检查状态</h2><ul><li>贡献者是否已经检查当前版本：项目要求贡献者检查当前版本，但尚未确认。</li><li>维护者是否完成必要检查：尚未完成必要检查</li><li>是否已由有权限的人类维护者记录最终建议：尚未记录</li></ul></section><section><h2>AGM 最终审查建议</h2><p>尚未记录</p><h2>代码托管平台</h2><p>未连接代码托管平台；未通过本页批准 PR；未通过本页合并 PR。</p></section><section><h2>具体检查对象</h2><article><h3>相关修改：demo_app/auth.py</h3><p>当前未提供可查看的代码差异。</p><p>对应当前版本</p><p>该材料当前不可查看。</p></article></section><details><summary>技术详情</summary><pre>{
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PR 审查诊断</title><style>body{margin:0;background:#f3f6f8;font:16px/1.55 system-ui;color:#18212f;overflow-wrap:anywhere}main{max-width:1040px;margin:auto;padding:16px}header{background:#153452;color:#fff;padding:20px;border-radius:12px}section,article,details{background:#fff;border:1px solid #dbe2ea;border-radius:12px;padding:16px;margin:14px 0;min-width:0}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.gap{border-left:6px solid #a64b17}pre{white-space:pre-wrap;overflow:auto}@media(max-width:720px){main{padding:8px}.grid{grid-template-columns:1fr}}</style><main><header><h1>PR 审查诊断</h1><p>这是本地审查工作台：不会修改代码，不会执行 git merge，也不会批准或合并代码托管平台 PR。</p></header><section class=gap><h2>需要贡献者先处理</h2><p>请补充或更新下列材料后，再提交维护者检查。</p><p><strong>下一步：</strong>贡献者</p></section><section><h2>这次 PR 改了什么</h2><p>D5_no_agent_high_missing_test</p><p>demo_app/auth.py</p></section><section><h2>风险位置与原因</h2><article><h3>严重风险：demo_app/auth.py</h3><p>demo_app/auth.py 84–86</p><p>该位置决定认证或权限何时生效；需要重点检查。</p></article></section><section><h2>项目要求与当前情况</h2><ul><li>可复查的测试输出：未提供</li><li>认证与权限影响说明：对应当前版本</li><li>变更文件清单：对应当前版本</li><li>贡献者人工检查：未提供</li><li>已知限制：对应当前版本</li><li>修改原因：对应当前版本</li><li>修改说明：对应当前版本</li><li>测试记录：未提供</li></ul></section><section><h2>缺失和异常</h2><article class=gap><h3>未提供</h3><p>提供可以实际检查的测试输出或文件。</p><p>请贡献者补充或更新。</p></article><article class=gap><h3>未提供</h3><p>由负责人确认自己审阅了当前代码版本、材料和明确范围。</p><p>请贡献者补充或更新。</p></article><article class=gap><h3>未提供</h3><p>提供测试命令、运行环境和实际结果。</p><p>请贡献者补充或更新。</p></article></section><section><h2>编码助手参与情况</h2><p>未检测到可验证的 Agent 参与记录。该贡献可能主要由人工完成，也可能存在未被记录的辅助工具使用。</p></section><section><h2>人工检查状态</h2><ul><li>贡献者是否已经检查当前版本：项目要求贡献者检查当前版本，但尚未确认。</li><li>维护者是否完成必要检查：尚未完成必要检查</li><li>是否已由有权限的人类维护者记录最终建议：尚未记录</li></ul></section><section><h2>AGM 最终审查建议</h2><p>尚未记录</p><h2>代码托管平台</h2><p>未连接代码托管平台；未通过本页批准 PR；未通过本页合并 PR。</p></section><section><h2>具体检查对象</h2><article><h3>相关代码差异</h3><p>绑定当前贡献的代码差异。</p><p>对应当前版本</p><details><summary>展开材料</summary><pre>diff --git a/demo_app/auth.py b/demo_app/auth.py
+--- a/demo_app/auth.py
++++ b/demo_app/auth.py
+@@ -84,3 +84,6 @@ def can_access(token):
+-    return token in active_tokens
++    if token in revoked_tokens:
++        return False
++    return token in active_tokens
+</pre></details><p><a href="/artifacts/case-D5_no_agent_high_missing_test/44752110c1f888c7f79c5b41995715ee037ec66101f9e5b086f1d30afe24b33c/1835172d38d3c0ea00a04803">查看完整材料</a></p></article><article><h3>认证与权限影响说明</h3><p>对应当前版本的影响说明。</p><p>对应当前版本</p><details><summary>展开材料</summary><pre>撤销令牌、会话刷新和权限变更后拒绝旧会话；未改变注册或密码重置。</pre></details><p><a href="/artifacts/case-D5_no_agent_high_missing_test/44752110c1f888c7f79c5b41995715ee037ec66101f9e5b086f1d30afe24b33c/8c6b42907db5f78ab2bbaea2">查看完整材料</a></p></article></section><details><summary>技术详情</summary><pre>{
   &quot;case_state&quot;: &quot;evidence_incomplete&quot;,
   &quot;responsible_side&quot;: [
     &quot;contributor&quot;,
@@ -21,22 +29,22 @@
   ],
   &quot;evidence_state_summary&quot;: {
     &quot;O-ARTIFACT&quot;: &quot;missing&quot;,
-    &quot;O-AUTH-IMPACT&quot;: &quot;missing&quot;,
-    &quot;O-CHANGED-FILES&quot;: &quot;missing&quot;,
+    &quot;O-AUTH-IMPACT&quot;: &quot;current&quot;,
+    &quot;O-CHANGED-FILES&quot;: &quot;current&quot;,
     &quot;O-HUMAN-ATTEST&quot;: &quot;missing&quot;,
-    &quot;O-LIMITATIONS&quot;: &quot;missing&quot;,
-    &quot;O-RATIONALE&quot;: &quot;missing&quot;,
-    &quot;O-SUMMARY&quot;: &quot;missing&quot;,
+    &quot;O-LIMITATIONS&quot;: &quot;current&quot;,
+    &quot;O-RATIONALE&quot;: &quot;current&quot;,
+    &quot;O-SUMMARY&quot;: &quot;current&quot;,
     &quot;O-TEST-COMMAND&quot;: &quot;missing&quot;
   },
   &quot;human_confirmation_state&quot;: &quot;required_missing&quot;,
   &quot;agent_trace_state&quot;: &quot;not_detected&quot;,
   &quot;route_derivation&quot;: {
     &quot;route&quot;: &quot;contributor_action_required&quot;,
-    &quot;reason&quot;: &quot;当前仍有贡献侧要求未完成；完成后再交给负责人或维护者。&quot;
+    &quot;reason&quot;: &quot;受影响材料尚未准备或更新完成，当前还不能进入维护者检查。&quot;
   },
   &quot;sidecar&quot;: {
-    &quot;current_package&quot;: null,
+    &quot;current_package&quot;: &quot;44752110c1f888c7f79c5b41995715ee037ec66101f9e5b086f1d30afe24b33c&quot;,
     &quot;historical_packages&quot;: []
   },
   &quot;host_platform&quot;: {

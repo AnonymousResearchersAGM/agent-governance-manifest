@@ -2,14 +2,16 @@
   "case_id": "case-D9_contributor_waiting",
   "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
   "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
-  "diagnostic_status": "需要贡献者先处理",
+  "diagnostic_status": "等待贡献者提交维护者检查",
   "change_summary": {
     "summary": "D9_contributor_waiting",
     "files": [
       "README.md"
     ],
     "line_ranges": {
-      "README.md": []
+      "README.md": [
+        "5"
+      ]
     }
   },
   "risk_findings": [
@@ -22,7 +24,9 @@
       "affected_files": [
         "README.md"
       ],
-      "affected_line_ranges": [],
+      "affected_line_ranges": [
+        "5"
+      ],
       "expected_state": "按项目要求检查",
       "observed_state": "已识别该风险区域",
       "gap": "",
@@ -33,12 +37,15 @@
         "O-SUMMARY",
         "O-CHANGED-FILES"
       ],
-      "evidence_refs": [],
+      "evidence_refs": [
+        "7be53bcfb462954eabfb86ec:@@ -5,2 +5,2 @@"
+      ],
       "responsibility": "maintainer",
       "recommended_route": "inspect_risk",
       "blocking": false,
       "source_state_refs": [
-        "match-documentation-low"
+        "match-documentation-low",
+        "7be53bcfb462954eabfb86ec:@@ -5,2 +5,2 @@"
       ]
     }
   ],
@@ -47,120 +54,72 @@
       "title": "编码助手活动记录",
       "plain_requirement": "说明智能体做了什么、用了哪些权限、是否有人监督，以及是否把具有独立行动能力的工作继续交给了另一个智能体。",
       "obligation_ref": "O-AGENT-SCOPE",
-      "state": "missing",
+      "state": "current",
       "blocking": true,
-      "evidence_ids": []
+      "evidence_ids": [
+        "sidecar-9429b682a74ce5e63ef1d18f"
+      ]
     },
     {
       "title": "变更文件清单",
       "plain_requirement": "列出这次修改涉及的文件和范围。",
       "obligation_ref": "O-CHANGED-FILES",
-      "state": "missing",
+      "state": "current",
       "blocking": true,
-      "evidence_ids": []
+      "evidence_ids": [
+        "sidecar-97ef8437c8a74b50c8e0cd9f"
+      ]
     },
     {
       "title": "修改说明",
       "plain_requirement": "简要说明这次修改做了什么。",
       "obligation_ref": "O-SUMMARY",
-      "state": "missing",
+      "state": "current",
       "blocking": true,
-      "evidence_ids": []
-    }
-  ],
-  "observed_evidence": [],
-  "evidence_gaps": [
-    {
-      "finding_id": "gap:obl-o-agent-scope",
-      "category": "evidence_gap",
-      "severity": "medium",
-      "headline": "未提供",
-      "plain_language_explanation": "说明智能体做了什么、用了哪些权限、是否有人监督，以及是否把具有独立行动能力的工作继续交给了另一个智能体。",
-      "affected_files": [],
-      "affected_line_ranges": [],
-      "expected_state": "对应当前版本",
-      "observed_state": "未提供",
-      "gap": "请贡献者补充或更新。",
-      "risk_rule_refs": [
-        "autonomy:supervised_agent"
-      ],
-      "obligation_refs": [
-        "O-AGENT-SCOPE"
-      ],
-      "evidence_refs": [],
-      "responsibility": "contributor",
-      "recommended_route": "contributor_action_required",
-      "blocking": true,
-      "source_state_refs": [
-        "obl-o-agent-scope"
-      ]
-    },
-    {
-      "finding_id": "gap:obl-o-changed-files",
-      "category": "evidence_gap",
-      "severity": "low",
-      "headline": "未提供",
-      "plain_language_explanation": "列出这次修改涉及的文件和范围。",
-      "affected_files": [
-        "README.md"
-      ],
-      "affected_line_ranges": [],
-      "expected_state": "对应当前版本",
-      "observed_state": "未提供",
-      "gap": "请贡献者补充或更新。",
-      "risk_rule_refs": [
-        "documentation-low"
-      ],
-      "obligation_refs": [
-        "O-CHANGED-FILES"
-      ],
-      "evidence_refs": [],
-      "responsibility": "contributor",
-      "recommended_route": "contributor_action_required",
-      "blocking": true,
-      "source_state_refs": [
-        "obl-o-changed-files"
-      ]
-    },
-    {
-      "finding_id": "gap:obl-o-summary",
-      "category": "evidence_gap",
-      "severity": "low",
-      "headline": "未提供",
-      "plain_language_explanation": "简要说明这次修改做了什么。",
-      "affected_files": [
-        "README.md"
-      ],
-      "affected_line_ranges": [],
-      "expected_state": "对应当前版本",
-      "observed_state": "未提供",
-      "gap": "请贡献者补充或更新。",
-      "risk_rule_refs": [
-        "documentation-low"
-      ],
-      "obligation_refs": [
-        "O-SUMMARY"
-      ],
-      "evidence_refs": [],
-      "responsibility": "contributor",
-      "recommended_route": "contributor_action_required",
-      "blocking": true,
-      "source_state_refs": [
-        "obl-o-summary"
+      "evidence_ids": [
+        "sidecar-776dde024e0504cb96669944"
       ]
     }
   ],
+  "observed_evidence": [
+    {
+      "title": "编码助手活动记录",
+      "state": "current",
+      "evidence_type": "agent_action_scope",
+      "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
+      "source": "sidecar-bridge",
+      "evidence_id": "sidecar-9429b682a74ce5e63ef1d18f"
+    },
+    {
+      "title": "变更文件清单",
+      "state": "current",
+      "evidence_type": "changed_files",
+      "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
+      "source": "sidecar-bridge",
+      "evidence_id": "sidecar-97ef8437c8a74b50c8e0cd9f"
+    },
+    {
+      "title": "修改说明",
+      "state": "current",
+      "evidence_type": "contribution_summary",
+      "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
+      "source": "sidecar-bridge",
+      "evidence_id": "sidecar-776dde024e0504cb96669944"
+    }
+  ],
+  "evidence_gaps": [],
   "agent_involvement": {
-    "state": "not_detected",
-    "status": "none",
-    "message": "未检测到可验证的编码助手活动记录。该贡献可能主要由人工完成，也可能存在未被记录的辅助工具使用。",
-    "type": null,
-    "modified_file_count": 0,
+    "state": "verifiable",
+    "status": "verifiable",
+    "message": "检测到一份内容完整、并绑定当前版本的编码助手活动记录。",
+    "type": "编码助手",
+    "modified_file_count": 1,
     "commands": [],
     "tests": [],
-    "used_other_tools": null,
-    "network": null,
-    "current_version": false
+    "used_other_tools": false,
+    "network": false,
+    "current_version": true,
+    "producer_assurance": "记录声明由某编码助手生成；当前原型已验证内容完整性和版本绑定，尚未通过代码托管平台或密码学签名确认生产者身份。"
   },
   "human_review_status": {
     "contributor_self_review": "本类修改不要求额外的贡献者人工确认。",
@@ -184,32 +143,63 @@
     "verified": true
   },
   "review_readiness": {
-    "status": "需要贡献者先处理",
-    "blocking_gaps": 3
+    "status": "等待贡献者提交维护者检查",
+    "blocking_gaps": 0
   },
   "recommended_route": {
-    "route": "contributor_action_required",
+    "route": "waiting_for_contributor_submission",
     "owner": "贡献者",
-    "message": "请补充或更新下列材料后，再提交维护者检查。"
+    "message": "当前无需你操作；下一步由贡献者提交维护者检查。"
   },
   "inspection_objects": [
     {
-      "object_id": "diff:README.md",
-      "title": "相关修改：README.md",
+      "object_id": "7be53bcfb462954eabfb86ec",
+      "title": "相关代码差异",
       "object_type": "DiffInspectionObject",
-      "plain_language_summary": "当前未提供可查看的代码差异。",
-      "source": "当前材料",
+      "plain_language_summary": "绑定当前贡献的代码差异。",
+      "source": "已验证并绑定当前版本的材料",
       "base_commit_sha": "dddddddddddddddddddddddddddddddddddddddd",
-      "head_commit_sha": null,
+      "head_commit_sha": "cccccccccccccccccccccccccccccccccccccccc",
       "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
-      "content_digest": null,
-      "evidence_package_digest": null,
-      "availability": "unavailable",
+      "content_digest": "c1b72fef3ca826433758a2722f1e2d6a93d8f4d3da6ecb57ca6a89dfbc9fd64f",
+      "evidence_package_digest": "278cee27758afb7fcd11d333c25d422a625bc69bf419347a4af566d85c8dc601",
+      "availability": "available",
       "freshness": "current",
-      "artifact_route": null,
-      "inline_content": null,
+      "artifact_route": "/artifacts/case-D9_contributor_waiting/278cee27758afb7fcd11d333c25d422a625bc69bf419347a4af566d85c8dc601/7be53bcfb462954eabfb86ec",
+      "inline_content": "diff --git a/README.md b/README.md\n--- a/README.md\n+++ b/README.md\n@@ -5,2 +5,2 @@\n-pip install agm-demo\n+python -m pip install agm-demo\n link remains valid\n",
       "technical_metadata": {
-        "path": "README.md"
+        "artifact_type": "diff",
+        "media_type": "text/plain",
+        "obligation_refs": [],
+        "canonical_evidence_ids": [],
+        "producer_assurance": "producer_declared"
+      }
+    },
+    {
+      "object_id": "b37068d4d9ee18b13f78898b",
+      "title": "编码助手活动记录",
+      "object_type": "AgentActivityInspectionObject",
+      "plain_language_summary": "对应当前版本的编码助手活动记录。",
+      "source": "已验证并绑定当前版本的材料",
+      "base_commit_sha": "dddddddddddddddddddddddddddddddddddddddd",
+      "head_commit_sha": "cccccccccccccccccccccccccccccccccccccccc",
+      "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
+      "content_digest": "f07f37516a07a79021170bb623f020acbe0dcc8071dac62090bbf5afc32928b2",
+      "evidence_package_digest": "278cee27758afb7fcd11d333c25d422a625bc69bf419347a4af566d85c8dc601",
+      "availability": "available",
+      "freshness": "current",
+      "artifact_route": "/artifacts/case-D9_contributor_waiting/278cee27758afb7fcd11d333c25d422a625bc69bf419347a4af566d85c8dc601/b37068d4d9ee18b13f78898b",
+      "inline_content": "{\"agent_type\": \"编码助手\", \"task_summary\": \"修正 README 安装命令和失效链接\", \"files_modified\": [\"README.md\"], \"commands_executed\": [], \"tests_executed\": [], \"other_agents_or_tools_used\": false, \"tools_used\": [], \"activity_scope\": [\"README.md\"], \"network_access\": false}",
+      "technical_metadata": {
+        "artifact_type": "agent_activity",
+        "media_type": "text/plain",
+        "obligation_refs": [
+          "O-AGENT-SCOPE"
+        ],
+        "canonical_evidence_ids": [
+          "sidecar-9429b682a74ce5e63ef1d18f"
+        ],
+        "producer_assurance": "producer_declared"
       }
     }
   ],
@@ -231,18 +221,18 @@
       "O-SUMMARY"
     ],
     "evidence_state_summary": {
-      "O-AGENT-SCOPE": "missing",
-      "O-CHANGED-FILES": "missing",
-      "O-SUMMARY": "missing"
+      "O-AGENT-SCOPE": "current",
+      "O-CHANGED-FILES": "current",
+      "O-SUMMARY": "current"
     },
     "human_confirmation_state": "not_required",
-    "agent_trace_state": "not_detected",
+    "agent_trace_state": "verifiable",
     "route_derivation": {
-      "route": "contributor_action_required",
+      "route": "waiting_for_contributor_submission",
       "reason": "当前仍有贡献侧要求未完成；完成后再交给负责人或维护者。"
     },
     "sidecar": {
-      "current_package": null,
+      "current_package": "278cee27758afb7fcd11d333c25d422a625bc69bf419347a4af566d85c8dc601",
       "historical_packages": []
     },
     "host_platform": {

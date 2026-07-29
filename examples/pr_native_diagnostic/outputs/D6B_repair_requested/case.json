@@ -125,35 +125,7 @@
   ],
   "evidence": [
     {
-      "id": "sidecar-ab4603ffa7c70c56d04d59b4",
-      "obligation_ids": [
-        "O-SUMMARY"
-      ],
-      "affected_scope": [
-        "README.md"
-      ],
-      "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
-      "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
-      "evidence_type": "contribution_summary",
-      "value": "这是一份绑定当前版本的具体贡献材料。",
-      "command": null,
-      "environment": null,
-      "artifact_path": null,
-      "artifact_hash": null,
-      "observed_at": "2026-07-26T00:00:00Z",
-      "expires_at": null,
-      "source_actor": "sidecar-bridge",
-      "source_tool": "sidecar-evidence-bridge",
-      "retained_for_contribution_fingerprint": null,
-      "retention_reason": null,
-      "rejected_at": null,
-      "rejected_by": null,
-      "rejection_reason": null,
-      "validity_state": "valid",
-      "invalid_reasons": []
-    },
-    {
-      "id": "sidecar-462a862d612aab894dc80b1c",
+      "id": "sidecar-4072f043f8a2415db9137504",
       "obligation_ids": [
         "O-CHANGED-FILES"
       ],
@@ -171,7 +143,7 @@
       "observed_at": "2026-07-26T00:00:00Z",
       "expires_at": null,
       "source_actor": "sidecar-bridge",
-      "source_tool": "sidecar-evidence-bridge",
+      "source_tool": null,
       "retained_for_contribution_fingerprint": null,
       "retention_reason": null,
       "rejected_at": null,
@@ -181,7 +153,7 @@
       "invalid_reasons": []
     },
     {
-      "id": "sidecar-2c8ec3193f19c0a712fa882f",
+      "id": "sidecar-82ce4250f93afc1fd3fed3eb",
       "obligation_ids": [
         "O-AGENT-SCOPE"
       ],
@@ -191,7 +163,7 @@
       "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
       "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
       "evidence_type": "agent_action_scope",
-      "value": "{\"agent_type\": \"编码助手\", \"task_summary\": \"修正 README 安装命令和失效链接\", \"files_modified\": [\"README.md\"], \"commands_executed\": [], \"tests_executed\": [], \"other_agents_or_tools_used\": true, \"network_access\": false}",
+      "value": "{\"agent_type\": \"编码助手\", \"task_summary\": \"修正 README 安装命令和失效链接\", \"files_modified\": [\"README.md\"], \"commands_executed\": [], \"tests_executed\": [], \"other_agents_or_tools_used\": true, \"tools_used\": [\"sub-agent\"], \"activity_scope\": [\"README.md\"], \"network_access\": false}",
       "command": null,
       "environment": null,
       "artifact_path": null,
@@ -199,7 +171,35 @@
       "observed_at": "2026-07-26T00:00:00Z",
       "expires_at": null,
       "source_actor": "sidecar-bridge",
-      "source_tool": "sidecar-evidence-bridge",
+      "source_tool": "deterministic-scenario",
+      "retained_for_contribution_fingerprint": null,
+      "retention_reason": null,
+      "rejected_at": null,
+      "rejected_by": null,
+      "rejection_reason": null,
+      "validity_state": "valid",
+      "invalid_reasons": []
+    },
+    {
+      "id": "sidecar-6997ba0cfc5d50f908a09a77",
+      "obligation_ids": [
+        "O-SUMMARY"
+      ],
+      "affected_scope": [
+        "README.md"
+      ],
+      "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
+      "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
+      "evidence_type": "contribution_summary",
+      "value": "{\"other_agents_or_tools_used\": false, \"declared_tools\": [], \"declaration_scope\": [\"README.md\"], \"declared_by\": \"contributor\", \"observed_at\": \"2026-07-26T00:00:00Z\", \"statement\": \"没有使用其他自动化工具。\"}",
+      "command": null,
+      "environment": null,
+      "artifact_path": null,
+      "artifact_hash": null,
+      "observed_at": "2026-07-26T00:00:00Z",
+      "expires_at": null,
+      "source_actor": "sidecar-bridge",
+      "source_tool": "contributor",
       "retained_for_contribution_fingerprint": null,
       "retention_reason": null,
       "rejected_at": null,
@@ -218,10 +218,11 @@
       "message": "贡献者声明与编码助手活动记录不一致。",
       "blocking": true,
       "related_object_ids": [
-        "sidecar-2c8ec3193f19c0a712fa882f",
-        "38e899324920e8686ae66d0d",
-        "8de6e9be4823d547588494d6",
-        "3e7a7346faf3eabf61785b79cce704471c703a660393bd32b7329bffd24bd75c"
+        "sidecar-6997ba0cfc5d50f908a09a77",
+        "sidecar-82ce4250f93afc1fd3fed3eb",
+        "9ac2e7b2d1484d4558dd9039",
+        "fd6dc5c5bc0fd4bb5a7fb328",
+        "4b5f450732a5dfe80e9c4de44cae754010af9cf96070b318cc68dd856a520973"
       ],
       "affected_obligation_ids": [
         "O-AGENT-SCOPE"

@@ -19,7 +19,7 @@ def _package(root,case,artifacts):return SidecarEvidenceStore(root).write_packag
 def _diff():return "diff --git a/demo_app/auth.py b/demo_app/auth.py\n--- a/demo_app/auth.py\n+++ b/demo_app/auth.py\n@@ -84,1 +84,2 @@\n+    return False\n"
 
 def test_bridge_registers_test_as_canonical_evidence(tmp_path):
- root,service,case=_case(tmp_path);p=_package(root,case,[{"type":"test_result","content":"python -m pytest tests/test_auth.py -q\n18 passed, 0 failed","source_tool":"pytest","obligation_refs":["O-TEST-COMMAND","O-ARTIFACT"]}]);receipt=SidecarEvidenceBridge(service).register_package(case.id,package_digest=p.package_digest)
+ root,service,case=_case(tmp_path);p=_package(root,case,[{"type":"test_result","content":"python -m pytest tests/test_auth.py -q\n18 passed, 0 failed","source_tool":"pytest","command":"python -m pytest tests/test_auth.py -q","environment":"fixture","result_summary":"18 passed, 0 failed","affected_scope":["demo_app/auth.py"],"observed_at":FIXED_TIME,"obligation_refs":["O-TEST-COMMAND","O-ARTIFACT"]}]);receipt=SidecarEvidenceBridge(service).register_package(case.id,package_digest=p.package_digest)
  assert len(receipt.evidence_ids)==2 and all(item.validity_state=="valid" for item in service.storage.load_case(case.id).evidence)
 
 @pytest.mark.parametrize("artifact,needle",[
@@ -53,7 +53,7 @@ def test_verified_diff_locations_are_hunk_derived(diff,expected):
 def test_malformed_diff_is_rejected(bad):
  with pytest.raises(VNextError):parse_verified_diff(bad)
 
-@pytest.mark.parametrize("slug,route",[("D1_low_risk_readme","normal_pr_review"),("D2_high_risk_missing","contributor_action_required"),("D3_high_risk_ready","maintainer_focused_review"),("D6A_declaration_conflict","maintainer_action_required"),("D6B_repair_requested","blocked_pending_repair"),("D8_system_handled","normal_pr_review")])
+@pytest.mark.parametrize("slug,route",[("D1_low_risk_readme","normal_pr_review"),("D2_high_risk_missing","contributor_action_required"),("D3_high_risk_ready","maintainer_focused_review"),("D6A_declaration_conflict","maintainer_action_required"),("D6B_repair_requested","contributor_action_required"),("D8_system_handled","normal_pr_review")])
 def test_scenario_routes_are_canonical(tmp_path,slug,route):
  args=next(item for item in SCENARIOS if item[0]==slug)
  with use_execution_context(DemoExecutionContext("p213-"+slug,FIXED_TIME,"key")):
@@ -80,3 +80,23 @@ def test_final_receipt_never_crosses_case_boundary(tmp_path):
 @pytest.mark.parametrize("value",["..","%2e%2e","C:\\secret","/absolute","a/b"])
 def test_artifact_route_rejects_pathlike_segments(value):
  assert not _safe_segment(value)
+
+def test_bridge_is_idempotent_and_does_not_prepare_case(tmp_path):
+ root,service,case=_case(tmp_path);p=_package(root,case,[{"type":"supporting_statement","content":"summary","affected_scope":["demo_app/auth.py"],"source_tool":"fixture","observed_at":FIXED_TIME,"obligation_refs":["O-SUMMARY"]}])
+ first=SidecarEvidenceBridge(service).register_package(case.id,package_digest=p.package_digest)
+ second=SidecarEvidenceBridge(service).register_package(case.id,package_digest=p.package_digest)
+ loaded=service.storage.load_case(case.id)
+ assert first.evidence_ids==second.evidence_ids and len(loaded.evidence)==1 and loaded.state=="evidence_incomplete"
+
+def test_bridge_batch_failure_is_atomic(tmp_path):
+ root,service,case=_case(tmp_path);p=_package(root,case,[{"type":"supporting_statement","content":"summary","affected_scope":["demo_app/auth.py"],"source_tool":"fixture","observed_at":FIXED_TIME,"obligation_refs":["O-SUMMARY"]},{"type":"diff","content":_diff(),"obligation_refs":["O-TEST-COMMAND"]}])
+ with pytest.raises(VNextError):SidecarEvidenceBridge(service).register_package(case.id,package_digest=p.package_digest)
+ assert not service.storage.load_case(case.id).evidence
+
+def test_d7_historical_test_is_stale_and_current_diff_is_available(tmp_path):
+ args=next(item for item in SCENARIOS if item[0]=="D7_stale_test")
+ root=make_project(tmp_path,"d7");service=GovernanceService(root);case_id,_=build_scenario(service,*args);case=service.storage.load_case(case_id);view=service.pr_diagnosis(case_id)
+ assert any(item.evidence_type=="test_explanation" and item.validity_state=="stale" for item in case.evidence)
+ assert view.recommended_route["route"]=="contributor_action_required" and view.recommended_route["owner"]=="贡献者"
+ assert any(item.object_type=="DiffInspectionObject" and item.availability=="available" for item in view.inspection_objects)
+ assert any(item.title=="旧版本测试结果" and item.availability=="available" for item in view.inspection_objects)

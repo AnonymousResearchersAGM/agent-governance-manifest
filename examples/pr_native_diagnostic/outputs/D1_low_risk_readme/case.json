@@ -125,7 +125,7 @@
   ],
   "evidence": [
     {
-      "id": "sidecar-f41ec4ed463c1d9c48b9c92f",
+      "id": "sidecar-80abebbc10341115f46e7d44",
       "obligation_ids": [
         "O-SUMMARY"
       ],
@@ -143,7 +143,7 @@
       "observed_at": "2026-07-26T00:00:00Z",
       "expires_at": null,
       "source_actor": "sidecar-bridge",
-      "source_tool": "sidecar-evidence-bridge",
+      "source_tool": null,
       "retained_for_contribution_fingerprint": null,
       "retention_reason": null,
       "rejected_at": null,
@@ -153,7 +153,7 @@
       "invalid_reasons": []
     },
     {
-      "id": "sidecar-dc1a15b135339d915e6e51ba",
+      "id": "sidecar-79ee7211294073587724e79a",
       "obligation_ids": [
         "O-CHANGED-FILES"
       ],
@@ -171,7 +171,7 @@
       "observed_at": "2026-07-26T00:00:00Z",
       "expires_at": null,
       "source_actor": "sidecar-bridge",
-      "source_tool": "sidecar-evidence-bridge",
+      "source_tool": null,
       "retained_for_contribution_fingerprint": null,
       "retention_reason": null,
       "rejected_at": null,
@@ -181,7 +181,7 @@
       "invalid_reasons": []
     },
     {
-      "id": "sidecar-c75e1cc986a1c94a7e5951fc",
+      "id": "sidecar-7c4149b7bf69c418a80cc327",
       "obligation_ids": [
         "O-AGENT-SCOPE"
       ],
@@ -191,7 +191,7 @@
       "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
       "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
       "evidence_type": "agent_action_scope",
-      "value": "{\"agent_type\": \"编码助手\", \"task_summary\": \"修正 README 安装命令和失效链接\", \"files_modified\": [\"README.md\"], \"commands_executed\": [], \"tests_executed\": [], \"other_agents_or_tools_used\": false, \"network_access\": false}",
+      "value": "{\"agent_type\": \"编码助手\", \"task_summary\": \"修正 README 安装命令和失效链接\", \"files_modified\": [\"README.md\"], \"commands_executed\": [], \"tests_executed\": [], \"other_agents_or_tools_used\": false, \"tools_used\": [], \"activity_scope\": [\"README.md\"], \"network_access\": false}",
       "command": null,
       "environment": null,
       "artifact_path": null,
@@ -199,7 +199,7 @@
       "observed_at": "2026-07-26T00:00:00Z",
       "expires_at": null,
       "source_actor": "sidecar-bridge",
-      "source_tool": "sidecar-evidence-bridge",
+      "source_tool": "deterministic-scenario",
       "retained_for_contribution_fingerprint": null,
       "retention_reason": null,
       "rejected_at": null,

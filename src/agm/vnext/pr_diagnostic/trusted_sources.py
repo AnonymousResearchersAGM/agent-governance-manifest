@@ -69,8 +69,14 @@ class TrustedDiagnosticEvidenceResolver:
             except VNextError:
                 continue
             if (receipt_package.get("case_id") == case.id
+                and receipt_package.get("contribution_fingerprint") == case.contribution_fingerprint
+                and receipt_package.get("policy_fingerprint") == case.policy_snapshot.policy_fingerprint
+                and value.get("case_id") == case.id
                 and value["contribution_fingerprint"] == case.contribution_fingerprint
-                and value["policy_fingerprint"] == case.policy_snapshot.policy_fingerprint):
+                and value["policy_fingerprint"] == case.policy_snapshot.policy_fingerprint
+                and case.final_decision is not None
+                and value.get("final_decision_id") == case.final_decision.id
+                and value.get("agm_final_recommendation") == {"accept":"建议接受","reject":"建议拒绝","close":"建议关闭"}.get(case.final_decision.decision)):
                 receipt = value
         confirmations = tuple(item for item in case.attestations if item.status == "confirmed" and item.policy_fingerprint == case.policy_snapshot.policy_fingerprint)
         return TrustedDiagnosticEvidenceSet(current, historical, tuple(artifacts),
