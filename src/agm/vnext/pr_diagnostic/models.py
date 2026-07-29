@@ -55,6 +55,19 @@ class ActionEffectBoundary(DiagnosticRecord):
 
 
 @dataclass(frozen=True)
+class HostPlatformStatus(DiagnosticRecord):
+    connected: bool
+    provider: str | None
+    repository: str | None
+    pull_request_id: str | None
+    approval_state: str
+    merge_state: str
+    close_state: str
+    evidence_source: str
+    verified: bool
+
+
+@dataclass(frozen=True)
 class PRDiagnosticView(DiagnosticRecord):
     case_id: str
     contribution_fingerprint: str
@@ -67,6 +80,8 @@ class PRDiagnosticView(DiagnosticRecord):
     evidence_gaps: tuple[DiagnosticFinding, ...]
     agent_involvement: dict[str, Any]
     human_review_status: dict[str, Any]
+    final_recommendation: dict[str, Any]
+    host_platform_status: HostPlatformStatus
     review_readiness: dict[str, Any]
     recommended_route: dict[str, Any]
     inspection_objects: tuple[InspectionObject, ...]

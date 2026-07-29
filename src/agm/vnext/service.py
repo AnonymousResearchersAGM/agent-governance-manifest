@@ -1323,6 +1323,7 @@ class GovernanceService:
         return compile_pr_diagnostic(
             governance_case=self.storage.load_case(case_id),
             contribution=contribution,
+            policy_config=self.config,
         )
 
     def preview_reviewer_action(

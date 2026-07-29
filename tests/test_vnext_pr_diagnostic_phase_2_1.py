@@ -57,7 +57,7 @@ def test_missing_diff_is_never_invented_and_main_layer_has_local_boundary(tmp_pa
     assert diff.availability == "unavailable" and diff.inline_content is None
     page = render_pr_diagnostic_html(view)
     assert "当前未提供可查看的代码差异" in page
-    assert "不会修改代码、批准或合并平台 PR" in page
+    assert "不会修改代码，不会执行 git merge" in page
     assert "state machine" not in page.split("<details>")[0]
 
 
