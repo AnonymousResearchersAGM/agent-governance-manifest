@@ -130,7 +130,10 @@
   "recommended_route": {
     "route": "final_recommendation_recorded",
     "owner": "无需额外处理",
-    "message": "AGM 最终审查建议已经记录；本页没有批准或合并平台 PR。"
+    "action_owner": "无需额外处理",
+    "next_action": "查看已记录的 AGM 最终审查建议；本页不会批准或合并平台 PR。",
+    "message": "查看已记录的 AGM 最终审查建议；本页不会批准或合并平台 PR。",
+    "final_authority": "维护者"
   },
   "inspection_objects": [
     {
@@ -220,12 +223,14 @@
       "head_commit_sha": null,
       "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
       "content_digest": "1ed24c733d13ce7d889a455312e74603c50c8dcc4b039ed3a49d214a95f85db6",
-      "evidence_package_digest": null,
+      "evidence_package_digest": "cac873baaacc94ed945f56a31ddc7a59638477d7b45b20ba041f1d6f57fd5524",
       "availability": "available",
       "freshness": "current",
-      "artifact_route": null,
+      "artifact_route": "/artifacts/case-D10_final_recommendation/cac873baaacc94ed945f56a31ddc7a59638477d7b45b20ba041f1d6f57fd5524/7bbbb55099951cbf699e427c292525a2451832974155fe22abefceabb18831bd",
       "inline_content": "{\n  \"agent_involvement\": \"未检测到可验证记录\",\n  \"agm_final_recommendation\": \"建议接受\",\n  \"case_id\": \"case-D10_final_recommendation\",\n  \"contribution_fingerprint\": \"2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5\",\n  \"contributor_self_review_status\": \"不适用\",\n  \"created_at\": \"2026-07-26T00:00:00Z\",\n  \"evidence_package_digest\": \"cac873baaacc94ed945f56a31ddc7a59638477d7b45b20ba041f1d6f57fd5524\",\n  \"final_decision_id\": \"decision-fab7c07da1755a98bee65a7e82011b5f\",\n  \"host_platform_status\": {\n    \"approval_state\": \"not_performed\",\n    \"close_state\": \"not_performed\",\n    \"connected\": false,\n    \"merge_state\": \"not_performed\",\n    \"verified\": true\n  },\n  \"maintainer_review_status\": \"已完成必要检查\",\n  \"policy_fingerprint\": \"e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564\",\n  \"risk_summary\": \"低风险文档修改\"\n}",
       "technical_metadata": {
+        "artifact_type": "final_receipt",
+        "media_type": "application/json",
         "receipt_digest": "7bbbb55099951cbf699e427c292525a2451832974155fe22abefceabb18831bd"
       }
     }
@@ -269,5 +274,6 @@
       "verified": true
     }
   },
+  "verification_submission": null,
   "schema_version": "agm.pr_diagnostic/v0.2-dev"
 }

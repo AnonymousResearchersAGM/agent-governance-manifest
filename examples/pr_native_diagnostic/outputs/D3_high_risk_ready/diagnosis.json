@@ -257,7 +257,10 @@
   "recommended_route": {
     "route": "maintainer_focused_review",
     "owner": "维护者",
-    "message": "材料已齐备，但涉及风险区域；请重点检查指定差异和关键测试。"
+    "action_owner": "维护者",
+    "next_action": "核验现有材料，并重点检查指定差异和关键测试。",
+    "message": "核验现有材料，并重点检查指定差异和关键测试。",
+    "final_authority": "维护者"
   },
   "inspection_objects": [
     {
@@ -583,5 +586,6 @@
       "verified": true
     }
   },
+  "verification_submission": null,
   "schema_version": "agm.pr_diagnostic/v0.2-dev"
 }

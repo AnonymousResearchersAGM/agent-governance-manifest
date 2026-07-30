@@ -296,7 +296,10 @@
   "recommended_route": {
     "route": "contributor_action_required",
     "owner": "贡献者",
-    "message": "请补充或更新下列材料后，再提交维护者检查。"
+    "action_owner": "贡献者",
+    "next_action": "请补充或更新下列材料后，再提交维护者核验。",
+    "message": "请补充或更新下列材料后，再提交维护者核验。",
+    "final_authority": "维护者"
   },
   "inspection_objects": [
     {
@@ -512,5 +515,6 @@
       "verified": true
     }
   },
+  "verification_submission": null,
   "schema_version": "agm.pr_diagnostic/v0.2-dev"
 }

@@ -2,7 +2,7 @@
   "case_id": "case-D9_contributor_waiting",
   "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
   "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
-  "diagnostic_status": "等待贡献者提交维护者检查",
+  "diagnostic_status": "材料已准备，尚未送交维护者核验",
   "change_summary": {
     "summary": "更新 README 的安装命令，并保留现有链接说明。",
     "files": [
@@ -143,13 +143,16 @@
     "verified": true
   },
   "review_readiness": {
-    "status": "等待贡献者提交维护者检查",
+    "status": "材料已准备，尚未送交维护者核验",
     "blocking_gaps": 0
   },
   "recommended_route": {
     "route": "waiting_for_contributor_submission",
     "owner": "贡献者",
-    "message": "当前无需你操作；下一步由贡献者提交维护者检查。"
+    "action_owner": "贡献者",
+    "next_action": "确认本轮治理材料，并明确提交给维护者核验。",
+    "message": "确认本轮治理材料，并明确提交给维护者核验。",
+    "final_authority": "维护者"
   },
   "inspection_objects": [
     {
@@ -300,6 +303,18 @@
       "evidence_source": "local absence of host-platform adapter",
       "verified": true
     }
+  },
+  "verification_submission": {
+    "pr_status": "已创建，可供查看",
+    "material_completeness": "已通过自动检查",
+    "contributor_confirmation": "本类修改不要求额外的贡献者人工确认。",
+    "submission_status": "尚未提交",
+    "missing_handoff_record": "尚未生成本轮维护者核验提交记录",
+    "action_owner": "贡献者",
+    "next_action": "确认本轮治理材料，并明确提交给维护者核验。",
+    "final_authority": "维护者",
+    "source_state": "evidence_incomplete",
+    "persisted": false
   },
   "schema_version": "agm.pr_diagnostic/v0.2-dev"
 }

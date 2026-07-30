@@ -10,19 +10,14 @@ import sys
 import tempfile
 import time
 import urllib.request
+import urllib.parse
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 from generate_pr_diagnostic_demos import SCENARIOS  # noqa: E402
 
-MOBILE_SCENARIOS = {
-    "D2_high_risk_missing",
-    "D3_high_risk_ready",
-    "D6A_declaration_conflict",
-    "D7_stale_test",
-    "D9_contributor_waiting",
-}
+MOBILE_SCENARIOS = {item[0] for item in SCENARIOS}
 
 INLINE_ASSERTION_DETAILS = (
     "D8 denied operation",
@@ -36,12 +31,28 @@ def _empty_report() -> dict[str, object]:
         "desktop_pages": 0,
         "mobile_pages": 0,
         "artifact_link_clicks": 0,
+        "structured_artifacts": 0,
+        "structured_artifact_pages": 0,
+        "structured_artifact_types": [],
+        "readable_views": 0,
+        "raw_views": 0,
+        "tab_switches": 0,
+        "keyboard_tab_switches": 0,
+        "copy_actions": 0,
+        "exact_raw_copy_checks": 0,
+        "formatted_copy_checks": 0,
+        "wrap_toggle_actions": 0,
+        "raw_pane_local_scroll_checks": 0,
+        "raw_panes_with_horizontal_scroll": 0,
         "inline_object_assertions": 0,
         "inline_assertion_details": [],
         "http_200": 0,
         "http_404": 0,
+        "unexpected_5xx": 0,
         "console_errors": [],
         "uncaught_exceptions": [],
+        "external_requests": [],
+        "csp_violations": [],
         "overflow_failures": [],
         "read_audit_records": 0,
         "invalid_audit_lines": 0,
@@ -66,6 +77,135 @@ def _stop(proc: subprocess.Popen[str]) -> None:
         proc.wait(timeout=5)
 
 
+def _track_page(page, report: dict[str, object], slug: str, origin: str) -> None:
+    page.on(
+        "console",
+        lambda message: report["console_errors"].append(
+            {"scenario": slug, "text": message.text}
+        )
+        if message.type == "error"
+        else None,
+    )
+    page.on(
+        "pageerror",
+        lambda error: report["uncaught_exceptions"].append(
+            {"scenario": slug, "text": str(error)}
+        ),
+    )
+    page.on(
+        "request",
+        lambda request: report["external_requests"].append(
+            {"scenario": slug, "url": request.url}
+        )
+        if f"{urllib.parse.urlparse(request.url).scheme}://{urllib.parse.urlparse(request.url).netloc}" != origin
+        else None,
+    )
+    page.on(
+        "response",
+        lambda response: report.__setitem__(
+            "http_404", int(report["http_404"]) + 1
+        )
+        if response.status == 404
+        else report.__setitem__(
+            "unexpected_5xx", int(report["unexpected_5xx"]) + 1
+        )
+        if response.status >= 500
+        else None,
+    )
+
+
+def _assert_page_overflow(page, report: dict[str, object], slug: str, viewport: str) -> None:
+    dimensions = page.evaluate(
+        "() => ({scroll: document.documentElement.scrollWidth, inner: window.innerWidth})"
+    )
+    if _has_horizontal_overflow(dimensions["scroll"], dimensions["inner"]):
+        report["overflow_failures"].append({"scenario": slug, "viewport": viewport})
+
+
+def _inspect_structured_artifact(
+    page,
+    *,
+    report: dict[str, object],
+    slug: str,
+    viewport: str,
+    seen: set[tuple[str, str]],
+) -> None:
+    if page.locator('[role="tablist"][aria-label="材料视图"]').count() != 1:
+        if not page.locator("pre").is_visible():
+            raise RuntimeError(f"non-structured artifact was not rendered inertly: {page.url}")
+        return
+    artifact_id = page.locator("[data-artifact-viewer]").get_attribute("data-raw")
+    artifact_type_text = page.locator(
+        "main > details.technical > ul > li"
+    ).first.text_content()
+    artifact_type = artifact_type_text.split(
+        "：" if "：" in artifact_type_text else ":", 1
+    )[-1].strip()
+    identity = (page.url, viewport)
+    if identity not in seen:
+        seen.add(identity)
+        report["structured_artifact_pages"] += 1
+    types = set(report["structured_artifact_types"])
+    types.add(artifact_type)
+    report["structured_artifact_types"] = sorted(types)
+    readable = page.locator("#tab-readable")
+    raw_tab = page.locator("#tab-raw")
+    if readable.get_attribute("aria-selected") != "true":
+        raise RuntimeError("readable view is not the default")
+    report["readable_views"] += 1
+    raw_tab.click()
+    report["tab_switches"] += 1
+    report["raw_views"] += 1
+    if raw_tab.get_attribute("aria-selected") != "true":
+        raise RuntimeError("raw tab did not activate")
+    raw_code = page.locator("#raw-code")
+    style = raw_code.evaluate(
+        "(node) => ({whiteSpace:getComputedStyle(node).whiteSpace,"
+        "overflowX:getComputedStyle(node).overflowX,"
+        "scrollWidth:node.scrollWidth,clientWidth:node.clientWidth})"
+    )
+    if style["whiteSpace"] != "pre" or style["overflowX"] not in {"auto", "scroll"}:
+        raise RuntimeError("desktop raw view does not preserve lines with local scroll")
+    report["raw_pane_local_scroll_checks"] += 1
+    if style["scrollWidth"] > style["clientWidth"]:
+        report["raw_panes_with_horizontal_scroll"] += 1
+    raw_expected = page.evaluate(
+        "() => new TextDecoder().decode(Uint8Array.from(atob("
+        "document.querySelector('[data-artifact-viewer]').dataset.raw), c => c.charCodeAt(0)))"
+    )
+    formatted_expected = raw_code.text_content()
+    page.locator('[data-copy="raw"]').click()
+    page.wait_for_function("() => document.querySelector('[role=status]').textContent.includes('原始')")
+    copied_raw = page.evaluate("navigator.clipboard.readText()")
+    if copied_raw.replace("\r\n", "\n") != raw_expected.replace("\r\n", "\n"):
+        raise RuntimeError("exact raw copy differs from canonical source")
+    report["copy_actions"] += 1
+    report["exact_raw_copy_checks"] += 1
+    page.locator('[data-copy="formatted"]').click()
+    page.wait_for_function("() => document.querySelector('[role=status]').textContent.includes('格式化')")
+    copied_formatted = page.evaluate("navigator.clipboard.readText()")
+    if copied_formatted.replace("\r\n", "\n") != formatted_expected.replace("\r\n", "\n"):
+        raise RuntimeError("formatted copy differs from pretty display")
+    report["copy_actions"] += 1
+    report["formatted_copy_checks"] += 1
+    wrap = page.locator("#wrap-raw")
+    wrap.check()
+    if raw_code.evaluate("(node) => getComputedStyle(node).whiteSpace") != "pre-wrap":
+        raise RuntimeError("wrap toggle did not enable wrapping")
+    wrap.uncheck()
+    if raw_code.evaluate("(node) => getComputedStyle(node).whiteSpace") != "pre":
+        raise RuntimeError("wrap toggle did not restore exact line display")
+    report["wrap_toggle_actions"] += 2
+    raw_tab.press("ArrowLeft")
+    report["keyboard_tab_switches"] += 1
+    report["tab_switches"] += 1
+    if readable.get_attribute("aria-selected") != "true":
+        raise RuntimeError("keyboard tab switch failed")
+    if artifact_id is None:
+        raise RuntimeError("artifact raw identity is missing")
+    _assert_page_overflow(page, report, slug, viewport)
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -81,6 +221,7 @@ def main() -> int:
 
     args.output.mkdir(parents=True, exist_ok=True)
     report = _empty_report()
+    structured_seen: set[tuple[str, str]] = set()
     executable = os.environ.get("AGM_CHROMIUM_EXECUTABLE")
     with sync_playwright() as playwright:
         launch = {"headless": True}
@@ -116,20 +257,16 @@ def main() -> int:
                     if health.status != 200:
                         raise RuntimeError(f"health check failed: {slug}")
                     context = browser.new_context(viewport={"width": 1280, "height": 900})
-                    page = context.new_page()
-                    page.on(
-                        "console",
-                        lambda message, scenario=slug: report["console_errors"].append(
-                            {"scenario": scenario, "text": message.text}
-                        )
-                        if message.type == "error"
-                        else None,
+                    context.grant_permissions(
+                        ["clipboard-read", "clipboard-write"], origin=url.rstrip("/")
                     )
-                    page.on(
-                        "pageerror",
-                        lambda error, scenario=slug: report[
-                            "uncaught_exceptions"
-                        ].append({"scenario": scenario, "text": str(error)}),
+                    page = context.new_page()
+                    origin=f"{urllib.parse.urlparse(url).scheme}://{urllib.parse.urlparse(url).netloc}"
+                    _track_page(page,report,slug,origin)
+                    page.add_init_script(
+                        "window.__cspViolations=[];"
+                        "document.addEventListener('securitypolicyviolation',"
+                        "event=>window.__cspViolations.push(event.violatedDirective));"
                     )
                     response = page.goto(url, wait_until="networkidle")
                     if response is None or response.status != 200:
@@ -165,20 +302,12 @@ def main() -> int:
                         report["inline_assertion_details"].append(
                             "D10 host-platform boundary"
                         )
-                    dimensions = page.evaluate(
-                        "() => ({scroll: document.documentElement.scrollWidth, inner: window.innerWidth})"
-                    )
-                    if _has_horizontal_overflow(
-                        dimensions["scroll"], dimensions["inner"]
-                    ):
-                        report["overflow_failures"].append(
-                            {"scenario": slug, "viewport": "desktop"}
-                        )
+                    _assert_page_overflow(page,report,slug,"desktop")
                     page.screenshot(
                         path=str(args.output / f"{slug}-desktop.png"), full_page=True
                     )
                     hrefs = page.locator('a[href*="/artifacts/"]').evaluate_all(
-                        "(items) => items.map((item) => item.getAttribute('href'))"
+                        "(items) => [...new Set(items.map((item) => item.getAttribute('href')))]"
                     )
                     for href in hrefs:
                         locator = page.locator(f'a[href="{href}"]').first
@@ -191,8 +320,14 @@ def main() -> int:
                                 and artifact_response.status == 404
                             )
                             raise RuntimeError(f"artifact failed: {href}")
-                        if not page.locator("pre").is_visible():
-                            raise RuntimeError(f"artifact was not rendered inertly: {href}")
+                        _inspect_structured_artifact(
+                            page,report=report,slug=slug,viewport="desktop",
+                            seen=structured_seen,
+                        )
+                        report["csp_violations"].extend(
+                            {"scenario":slug,"directive":item}
+                            for item in page.evaluate("window.__cspViolations || []")
+                        )
                         report["artifact_link_clicks"] += 1
                         report["http_200"] += 1
                         page.go_back(wait_until="domcontentloaded")
@@ -204,20 +339,41 @@ def main() -> int:
                             device_scale_factor=1,
                             is_mobile=True,
                         )
+                        mobile.grant_permissions(
+                            ["clipboard-read", "clipboard-write"], origin=url.rstrip("/")
+                        )
                         mobile_page = mobile.new_page()
+                        _track_page(mobile_page,report,slug,origin)
+                        mobile_page.add_init_script(
+                            "window.__cspViolations=[];"
+                            "document.addEventListener('securitypolicyviolation',"
+                            "event=>window.__cspViolations.push(event.violatedDirective));"
+                        )
                         mobile_response = mobile_page.goto(url, wait_until="networkidle")
                         if mobile_response is None or mobile_response.status != 200:
                             raise RuntimeError(f"mobile page failed: {slug}")
                         report["http_200"] += 1
-                        dimensions = mobile_page.evaluate(
-                            "() => ({scroll: document.documentElement.scrollWidth, inner: window.innerWidth})"
+                        _assert_page_overflow(mobile_page,report,slug,"390x844")
+                        mobile_hrefs = mobile_page.locator('a[href*="/artifacts/"]').evaluate_all(
+                            "(items) => [...new Set(items.map((item) => item.getAttribute('href')))]"
                         )
-                        if _has_horizontal_overflow(
-                            dimensions["scroll"], dimensions["inner"]
-                        ):
-                            report["overflow_failures"].append(
-                                {"scenario": slug, "viewport": "390x844"}
+                        for href in mobile_hrefs:
+                            response=mobile_page.goto(
+                                urllib.parse.urljoin(url,href),wait_until="domcontentloaded"
                             )
+                            if response is None or response.status != 200:
+                                raise RuntimeError(f"mobile artifact failed: {href}")
+                            _inspect_structured_artifact(
+                                mobile_page,report=report,slug=slug,
+                                viewport="390x844",seen=structured_seen,
+                            )
+                            report["csp_violations"].extend(
+                                {"scenario":slug,"directive":item}
+                                for item in mobile_page.evaluate("window.__cspViolations || []")
+                            )
+                            report["artifact_link_clicks"] += 1
+                            report["http_200"] += 1
+                            mobile_page.goto(url,wait_until="domcontentloaded")
                         mobile_page.screenshot(
                             path=str(args.output / f"{slug}-mobile-390x844.png"),
                             full_page=True,
@@ -229,6 +385,11 @@ def main() -> int:
                             urllib.request.urljoin(url, "audit-summary"), timeout=10
                         ).read()
                     )
+                    expected_reads=len(hrefs)+(len(mobile_hrefs) if slug in MOBILE_SCENARIOS else 0)
+                    if audit["records"] != expected_reads:
+                        raise RuntimeError(
+                            f"tab switches changed read audit identity: {audit['records']} != {expected_reads}"
+                        )
                     report["read_audit_records"] += audit["records"]
                     report["invalid_audit_lines"] += audit["invalid"]
                 finally:
@@ -253,14 +414,20 @@ def main() -> int:
                     raise RuntimeError(f"runtime cleanup failed: {slug}")
         finally:
             browser.close()
+    report["structured_artifacts"] = len(
+        {url for url, _viewport in structured_seen}
+    )
     (args.output / "browser-review.json").write_text(
         json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf8"
     )
     print(json.dumps(report, ensure_ascii=False))
     return 0 if not (
         report["http_404"]
+        or report["unexpected_5xx"]
         or report["console_errors"]
         or report["uncaught_exceptions"]
+        or report["external_requests"]
+        or report["csp_violations"]
         or report["overflow_failures"]
         or report["invalid_audit_lines"]
     ) else 1

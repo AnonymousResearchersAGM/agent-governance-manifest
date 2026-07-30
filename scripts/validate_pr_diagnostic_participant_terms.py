@@ -7,6 +7,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / "examples" / "pr_native_diagnostic" / "outputs"
 FORBIDDEN = (
+    "当前责任方",
+    "current responsible party",
     "governance",
     "治理状态",
     "obligation",

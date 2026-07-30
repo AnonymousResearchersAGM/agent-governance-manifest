@@ -149,7 +149,10 @@
   "recommended_route": {
     "route": "normal_pr_review",
     "owner": "维护者",
-    "message": "请检查文字、示例、链接和说明是否一致，可以返回常规审查。"
+    "action_owner": "维护者",
+    "next_action": "请检查文字、示例、链接和说明是否一致，可以返回常规审查。",
+    "message": "请检查文字、示例、链接和说明是否一致，可以返回常规审查。",
+    "final_authority": "维护者"
   },
   "inspection_objects": [
     {
@@ -309,5 +312,6 @@
       "verified": true
     }
   },
+  "verification_submission": null,
   "schema_version": "agm.pr_diagnostic/v0.2-dev"
 }
