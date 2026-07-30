@@ -150,63 +150,7 @@
   ],
   "evidence": [
     {
-      "id": "evidence-1adc34d8779f5c7fa4e2cb2fdb21f54b",
-      "obligation_ids": [
-        "O-CHANGED-FILES"
-      ],
-      "affected_scope": [
-        "demo_app/tasks.py"
-      ],
-      "contribution_fingerprint": "e0bc385d792ac7a129d3868c9cdc684e6016e2af5c3388fde9772b606b17afb6",
-      "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
-      "evidence_type": "changed_files",
-      "value": "本次修改仅涉及列出的贡献文件。",
-      "command": null,
-      "environment": null,
-      "artifact_path": null,
-      "artifact_hash": null,
-      "observed_at": "2026-07-26T00:00:00Z",
-      "expires_at": null,
-      "source_actor": "contributor",
-      "source_tool": null,
-      "retained_for_contribution_fingerprint": null,
-      "retention_reason": null,
-      "rejected_at": null,
-      "rejected_by": null,
-      "rejection_reason": null,
-      "validity_state": "valid",
-      "invalid_reasons": []
-    },
-    {
-      "id": "evidence-ff64947789bc58859eff57aee6551c2d",
-      "obligation_ids": [
-        "O-RATIONALE"
-      ],
-      "affected_scope": [
-        "demo_app/tasks.py"
-      ],
-      "contribution_fingerprint": "e0bc385d792ac7a129d3868c9cdc684e6016e2af5c3388fde9772b606b17afb6",
-      "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
-      "evidence_type": "rationale",
-      "value": "撤销令牌后必须拒绝继续访问，避免旧会话绕过权限变更。",
-      "command": null,
-      "environment": null,
-      "artifact_path": null,
-      "artifact_hash": null,
-      "observed_at": "2026-07-26T00:00:00Z",
-      "expires_at": null,
-      "source_actor": "contributor",
-      "source_tool": null,
-      "retained_for_contribution_fingerprint": null,
-      "retention_reason": null,
-      "rejected_at": null,
-      "rejected_by": null,
-      "rejection_reason": null,
-      "validity_state": "valid",
-      "invalid_reasons": []
-    },
-    {
-      "id": "evidence-23d03e0476f85858a992e70bfca7e8f4",
+      "id": "sidecar-1b7d097e7333293c64ef4404",
       "obligation_ids": [
         "O-SUMMARY"
       ],
@@ -216,15 +160,30 @@
       "contribution_fingerprint": "e0bc385d792ac7a129d3868c9cdc684e6016e2af5c3388fde9772b606b17afb6",
       "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
       "evidence_type": "contribution_summary",
-      "value": "已提供可复查的当前版本材料。",
+      "value": {
+        "affected_components": [
+          "demo_app/tasks.py"
+        ],
+        "artifact_type": "change_summary",
+        "behavioral_change": "任务列表返回顺序稳定。",
+        "contribution_fingerprint": "e0bc385d792ac7a129d3868c9cdc684e6016e2af5c3388fde9772b606b17afb6",
+        "head_commit_sha": "cccccccccccccccccccccccccccccccccccccccc",
+        "obligation_refs": [
+          "O-SUMMARY"
+        ],
+        "observed_at": "2026-07-26T00:00:00Z",
+        "schema_version": "agm.evidence_artifact/v1",
+        "source_tool": "deterministic-scenario",
+        "summary": "让任务列表按稳定顺序返回，避免调用方收到不确定顺序。"
+      },
       "command": null,
       "environment": null,
       "artifact_path": null,
       "artifact_hash": null,
       "observed_at": "2026-07-26T00:00:00Z",
       "expires_at": null,
-      "source_actor": "contributor",
-      "source_tool": null,
+      "source_actor": "sidecar-bridge",
+      "source_tool": "deterministic-scenario",
       "retained_for_contribution_fingerprint": null,
       "retention_reason": null,
       "rejected_at": null,
@@ -234,7 +193,88 @@
       "invalid_reasons": []
     },
     {
-      "id": "evidence-176f48f454ee5f08987ff6acf1d72ca3",
+      "id": "sidecar-e0d652c66fa5f5edad07bb91",
+      "obligation_ids": [
+        "O-CHANGED-FILES"
+      ],
+      "affected_scope": [
+        "demo_app/tasks.py"
+      ],
+      "contribution_fingerprint": "e0bc385d792ac7a129d3868c9cdc684e6016e2af5c3388fde9772b606b17afb6",
+      "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
+      "evidence_type": "changed_files",
+      "value": {
+        "artifact_type": "changed_files",
+        "contribution_fingerprint": "e0bc385d792ac7a129d3868c9cdc684e6016e2af5c3388fde9772b606b17afb6",
+        "files": [
+          "demo_app/tasks.py"
+        ],
+        "head_commit_sha": "cccccccccccccccccccccccccccccccccccccccc",
+        "obligation_refs": [
+          "O-CHANGED-FILES"
+        ],
+        "observed_at": "2026-07-26T00:00:00Z",
+        "schema_version": "agm.evidence_artifact/v1",
+        "source_tool": "deterministic-scenario"
+      },
+      "command": null,
+      "environment": null,
+      "artifact_path": null,
+      "artifact_hash": null,
+      "observed_at": "2026-07-26T00:00:00Z",
+      "expires_at": null,
+      "source_actor": "sidecar-bridge",
+      "source_tool": "deterministic-scenario",
+      "retained_for_contribution_fingerprint": null,
+      "retention_reason": null,
+      "rejected_at": null,
+      "rejected_by": null,
+      "rejection_reason": null,
+      "validity_state": "valid",
+      "invalid_reasons": []
+    },
+    {
+      "id": "sidecar-84cc58d9528a4d0a89180470",
+      "obligation_ids": [
+        "O-RATIONALE"
+      ],
+      "affected_scope": [
+        "demo_app/tasks.py"
+      ],
+      "contribution_fingerprint": "e0bc385d792ac7a129d3868c9cdc684e6016e2af5c3388fde9772b606b17afb6",
+      "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
+      "evidence_type": "rationale",
+      "value": {
+        "artifact_type": "rationale",
+        "contribution_fingerprint": "e0bc385d792ac7a129d3868c9cdc684e6016e2af5c3388fde9772b606b17afb6",
+        "head_commit_sha": "cccccccccccccccccccccccccccccccccccccccc",
+        "intended_outcome": "调用方获得可预测的任务顺序。",
+        "obligation_refs": [
+          "O-RATIONALE"
+        ],
+        "observed_at": "2026-07-26T00:00:00Z",
+        "reason": "避免任务顺序随运行环境变化。",
+        "schema_version": "agm.evidence_artifact/v1",
+        "source_tool": "deterministic-scenario"
+      },
+      "command": null,
+      "environment": null,
+      "artifact_path": null,
+      "artifact_hash": null,
+      "observed_at": "2026-07-26T00:00:00Z",
+      "expires_at": null,
+      "source_actor": "sidecar-bridge",
+      "source_tool": "deterministic-scenario",
+      "retained_for_contribution_fingerprint": null,
+      "retention_reason": null,
+      "rejected_at": null,
+      "rejected_by": null,
+      "rejection_reason": null,
+      "validity_state": "valid",
+      "invalid_reasons": []
+    },
+    {
+      "id": "sidecar-88c3ec45462c1e379d9f1729",
       "obligation_ids": [
         "O-TEST-EXPLANATION"
       ],
@@ -244,15 +284,34 @@
       "contribution_fingerprint": "e0bc385d792ac7a129d3868c9cdc684e6016e2af5c3388fde9772b606b17afb6",
       "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
       "evidence_type": "test_explanation",
-      "value": "已提供可复查的当前版本材料。",
-      "command": null,
-      "environment": null,
+      "value": {
+        "affected_scope": [
+          "demo_app/tasks.py"
+        ],
+        "artifact_type": "test_result",
+        "command": "python -m pytest tests/test_tasks.py -q",
+        "contribution_fingerprint": "e0bc385d792ac7a129d3868c9cdc684e6016e2af5c3388fde9772b606b17afb6",
+        "environment": "deterministic demo fixture",
+        "exit_code": 0,
+        "head_commit_sha": "cccccccccccccccccccccccccccccccccccccccc",
+        "obligation_refs": [
+          "O-TEST-EXPLANATION"
+        ],
+        "observed_at": "2026-07-26T00:00:00Z",
+        "result_summary": "8 passed, 0 failed",
+        "schema_version": "agm.evidence_artifact/v1",
+        "source_tool": "pytest",
+        "tests_failed": 0,
+        "tests_passed": 8
+      },
+      "command": "python -m pytest tests/test_tasks.py -q",
+      "environment": "deterministic demo fixture",
       "artifact_path": null,
       "artifact_hash": null,
       "observed_at": "2026-07-26T00:00:00Z",
       "expires_at": null,
-      "source_actor": "contributor",
-      "source_tool": null,
+      "source_actor": "sidecar-bridge",
+      "source_tool": "pytest",
       "retained_for_contribution_fingerprint": null,
       "retention_reason": null,
       "rejected_at": null,

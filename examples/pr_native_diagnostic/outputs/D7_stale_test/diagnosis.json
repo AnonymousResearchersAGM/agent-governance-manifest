@@ -1,200 +1,330 @@
 {
   "case_id": "case-D7_stale_test",
-  "contribution_fingerprint": "88a38b827edd056b99aa94745ed1248f1f6f63fb6725689d33fe6b5aa2a33f07",
+  "contribution_fingerprint": "3ba834ceea18329dda9be0c238812981588fc9021b71849b9eedd3c32eecbea3",
   "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
   "diagnostic_status": "需要贡献者先处理",
   "change_summary": {
-    "summary": "D7_stale_test",
+    "summary": "让任务列表按稳定顺序返回，避免调用方收到不确定顺序。",
     "files": [
-      "tests/test_auth.py"
+      "demo_app/tasks.py"
     ],
     "line_ranges": {
-      "tests/test_auth.py": [
-        "84–117"
+      "demo_app/tasks.py": [
+        "20"
       ]
     }
   },
   "risk_findings": [
     {
-      "finding_id": "risk:match-test-strategy-high",
+      "finding_id": "risk:match-task-logic-medium",
       "category": "risk_area",
-      "severity": "high",
-      "headline": "较高风险：tests/test_auth.py",
-      "plain_language_explanation": "该位置影响测试和验证覆盖。",
+      "severity": "medium",
+      "headline": "中等风险：demo_app/tasks.py",
+      "plain_language_explanation": "该位置影响应用的业务行为。",
       "affected_files": [
-        "tests/test_auth.py"
+        "demo_app/tasks.py"
       ],
       "affected_line_ranges": [
-        "84–117"
+        "20"
       ],
       "expected_state": "按项目要求检查",
       "observed_state": "已识别该风险区域",
       "gap": "",
       "risk_rule_refs": [
-        "test-strategy-high"
+        "task-logic-medium"
       ],
       "obligation_refs": [
         "O-SUMMARY",
         "O-CHANGED-FILES",
         "O-RATIONALE",
-        "O-TEST-COMMAND",
-        "O-ARTIFACT",
-        "O-LIMITATIONS"
+        "O-TEST-EXPLANATION"
       ],
-      "evidence_refs": [],
+      "evidence_refs": [
+        "45deff07792b4852f9858edd:@@ -20,1 +20,2 @@ def list_tasks():"
+      ],
       "responsibility": "maintainer",
       "recommended_route": "inspect_risk",
       "blocking": false,
       "source_state_refs": [
-        "match-test-strategy-high"
+        "match-task-logic-medium",
+        "45deff07792b4852f9858edd:@@ -20,1 +20,2 @@ def list_tasks():"
       ]
     }
   ],
   "expected_requirements": [
     {
-      "title": "编码助手操作摘要",
+      "title": "编码助手活动记录",
       "plain_requirement": "说明智能体做了什么、用了哪些权限、是否有人监督，以及是否把具有独立行动能力的工作继续交给了另一个智能体。",
       "obligation_ref": "O-AGENT-SCOPE",
       "state": "current",
-      "blocking": true
-    },
-    {
-      "title": "可复查的测试输出",
-      "plain_requirement": "提供可以实际检查的测试输出或文件。",
-      "obligation_ref": "O-ARTIFACT",
-      "state": "current",
-      "blocking": true
+      "blocking": true,
+      "evidence_ids": [
+        "sidecar-1f2e14f11daf50a1ea018a89",
+        "sidecar-595108d7e4aaf3b3086f08e5"
+      ]
     },
     {
       "title": "变更文件清单",
       "plain_requirement": "列出这次修改涉及的文件和范围。",
       "obligation_ref": "O-CHANGED-FILES",
-      "state": "current",
-      "blocking": true
-    },
-    {
-      "title": "已知限制",
-      "plain_requirement": "说明已知限制；没有已知限制也要明确说明。",
-      "obligation_ref": "O-LIMITATIONS",
-      "state": "current",
-      "blocking": true
+      "state": "invalid",
+      "blocking": true,
+      "evidence_ids": [
+        "sidecar-d20a534c3484758f130137a7",
+        "sidecar-eb8771f0386756c9143d7d26"
+      ]
     },
     {
       "title": "修改原因",
       "plain_requirement": "说明为什么需要这次修改。",
       "obligation_ref": "O-RATIONALE",
-      "state": "current",
-      "blocking": true
+      "state": "invalid",
+      "blocking": true,
+      "evidence_ids": [
+        "sidecar-51390e570e2f165ae0f072ed",
+        "sidecar-db05e17b640c53aca2484749"
+      ]
     },
     {
       "title": "修改说明",
       "plain_requirement": "简要说明这次修改做了什么。",
       "obligation_ref": "O-SUMMARY",
-      "state": "current",
-      "blocking": true
+      "state": "invalid",
+      "blocking": true,
+      "evidence_ids": [
+        "sidecar-862e6be823de150c273e5a7a",
+        "sidecar-d1430b4d017147126a6844ab"
+      ]
     },
     {
-      "title": "测试记录",
-      "plain_requirement": "提供测试命令、运行环境和实际结果。",
-      "obligation_ref": "O-TEST-COMMAND",
+      "title": "测试覆盖说明",
+      "plain_requirement": "说明测试覆盖了什么，以及它如何支持本次修改。",
+      "obligation_ref": "O-TEST-EXPLANATION",
       "state": "stale",
-      "blocking": true
+      "blocking": true,
+      "evidence_ids": [
+        "sidecar-92b2a65ca59de304c84fea99"
+      ]
     }
   ],
   "observed_evidence": [
     {
-      "title": "编码助手操作摘要",
+      "title": "编码助手活动记录",
       "state": "current",
       "evidence_type": "agent_action_scope",
-      "contribution_fingerprint": "c456c0c5af5e0e16a165529345f2d1fc44fe78443954136c40caf5e994467508",
-      "source": "contributor"
+      "contribution_fingerprint": "3ba834ceea18329dda9be0c238812981588fc9021b71849b9eedd3c32eecbea3",
+      "source": "sidecar-bridge",
+      "evidence_id": "sidecar-1f2e14f11daf50a1ea018a89"
     },
     {
-      "title": "可复查的测试输出",
+      "title": "编码助手活动记录",
       "state": "current",
-      "evidence_type": "artifact",
-      "contribution_fingerprint": "c456c0c5af5e0e16a165529345f2d1fc44fe78443954136c40caf5e994467508",
-      "source": "contributor"
+      "evidence_type": "agent_action_scope",
+      "contribution_fingerprint": "e0bc385d792ac7a129d3868c9cdc684e6016e2af5c3388fde9772b606b17afb6",
+      "source": "sidecar-bridge",
+      "evidence_id": "sidecar-595108d7e4aaf3b3086f08e5"
     },
     {
       "title": "变更文件清单",
-      "state": "current",
+      "state": "invalid",
       "evidence_type": "changed_files",
-      "contribution_fingerprint": "c456c0c5af5e0e16a165529345f2d1fc44fe78443954136c40caf5e994467508",
-      "source": "contributor"
+      "contribution_fingerprint": "e0bc385d792ac7a129d3868c9cdc684e6016e2af5c3388fde9772b606b17afb6",
+      "source": "sidecar-bridge",
+      "evidence_id": "sidecar-d20a534c3484758f130137a7"
     },
     {
-      "title": "已知限制",
-      "state": "current",
-      "evidence_type": "known_limitations",
-      "contribution_fingerprint": "c456c0c5af5e0e16a165529345f2d1fc44fe78443954136c40caf5e994467508",
-      "source": "contributor"
+      "title": "变更文件清单",
+      "state": "invalid",
+      "evidence_type": "changed_files",
+      "contribution_fingerprint": "3ba834ceea18329dda9be0c238812981588fc9021b71849b9eedd3c32eecbea3",
+      "source": "sidecar-bridge",
+      "evidence_id": "sidecar-eb8771f0386756c9143d7d26"
     },
     {
       "title": "修改原因",
-      "state": "current",
+      "state": "invalid",
       "evidence_type": "rationale",
-      "contribution_fingerprint": "c456c0c5af5e0e16a165529345f2d1fc44fe78443954136c40caf5e994467508",
-      "source": "contributor"
+      "contribution_fingerprint": "e0bc385d792ac7a129d3868c9cdc684e6016e2af5c3388fde9772b606b17afb6",
+      "source": "sidecar-bridge",
+      "evidence_id": "sidecar-51390e570e2f165ae0f072ed"
+    },
+    {
+      "title": "修改原因",
+      "state": "invalid",
+      "evidence_type": "rationale",
+      "contribution_fingerprint": "3ba834ceea18329dda9be0c238812981588fc9021b71849b9eedd3c32eecbea3",
+      "source": "sidecar-bridge",
+      "evidence_id": "sidecar-db05e17b640c53aca2484749"
     },
     {
       "title": "修改说明",
-      "state": "current",
+      "state": "invalid",
       "evidence_type": "contribution_summary",
-      "contribution_fingerprint": "c456c0c5af5e0e16a165529345f2d1fc44fe78443954136c40caf5e994467508",
-      "source": "contributor"
+      "contribution_fingerprint": "3ba834ceea18329dda9be0c238812981588fc9021b71849b9eedd3c32eecbea3",
+      "source": "sidecar-bridge",
+      "evidence_id": "sidecar-862e6be823de150c273e5a7a"
     },
     {
-      "title": "测试记录",
+      "title": "修改说明",
+      "state": "invalid",
+      "evidence_type": "contribution_summary",
+      "contribution_fingerprint": "e0bc385d792ac7a129d3868c9cdc684e6016e2af5c3388fde9772b606b17afb6",
+      "source": "sidecar-bridge",
+      "evidence_id": "sidecar-d1430b4d017147126a6844ab"
+    },
+    {
+      "title": "测试覆盖说明",
       "state": "stale",
-      "evidence_type": "test_command",
-      "contribution_fingerprint": "c456c0c5af5e0e16a165529345f2d1fc44fe78443954136c40caf5e994467508",
-      "source": "contributor"
+      "evidence_type": "test_explanation",
+      "contribution_fingerprint": "e0bc385d792ac7a129d3868c9cdc684e6016e2af5c3388fde9772b606b17afb6",
+      "source": "sidecar-bridge",
+      "evidence_id": "sidecar-92b2a65ca59de304c84fea99"
     }
   ],
   "evidence_gaps": [
     {
-      "finding_id": "gap:obl-o-test-command",
+      "finding_id": "gap:obl-o-changed-files",
       "category": "evidence_gap",
-      "severity": "high",
-      "headline": "对应旧版本",
-      "plain_language_explanation": "提供测试命令、运行环境和实际结果。",
+      "severity": "low",
+      "headline": "材料验证未通过",
+      "plain_language_explanation": "列出这次修改涉及的文件和范围。",
       "affected_files": [
-        "tests/test_auth.py"
+        "demo_app/tasks.py"
+      ],
+      "affected_line_ranges": [],
+      "expected_state": "对应当前版本",
+      "observed_state": "材料验证未通过",
+      "gap": "请贡献者补充或更新。",
+      "risk_rule_refs": [
+        "task-logic-medium"
+      ],
+      "obligation_refs": [
+        "O-CHANGED-FILES"
+      ],
+      "evidence_refs": [
+        "sidecar-d20a534c3484758f130137a7",
+        "sidecar-eb8771f0386756c9143d7d26"
+      ],
+      "responsibility": "contributor",
+      "recommended_route": "contributor_action_required",
+      "blocking": true,
+      "source_state_refs": [
+        "obl-o-changed-files",
+        "sidecar-d20a534c3484758f130137a7",
+        "sidecar-eb8771f0386756c9143d7d26"
+      ]
+    },
+    {
+      "finding_id": "gap:obl-o-rationale",
+      "category": "evidence_gap",
+      "severity": "medium",
+      "headline": "材料验证未通过",
+      "plain_language_explanation": "说明为什么需要这次修改。",
+      "affected_files": [
+        "demo_app/tasks.py"
+      ],
+      "affected_line_ranges": [],
+      "expected_state": "对应当前版本",
+      "observed_state": "材料验证未通过",
+      "gap": "请贡献者补充或更新。",
+      "risk_rule_refs": [
+        "task-logic-medium"
+      ],
+      "obligation_refs": [
+        "O-RATIONALE"
+      ],
+      "evidence_refs": [
+        "sidecar-51390e570e2f165ae0f072ed",
+        "sidecar-db05e17b640c53aca2484749"
+      ],
+      "responsibility": "contributor",
+      "recommended_route": "contributor_action_required",
+      "blocking": true,
+      "source_state_refs": [
+        "obl-o-rationale",
+        "sidecar-51390e570e2f165ae0f072ed",
+        "sidecar-db05e17b640c53aca2484749"
+      ]
+    },
+    {
+      "finding_id": "gap:obl-o-summary",
+      "category": "evidence_gap",
+      "severity": "low",
+      "headline": "材料验证未通过",
+      "plain_language_explanation": "简要说明这次修改做了什么。",
+      "affected_files": [
+        "demo_app/tasks.py"
+      ],
+      "affected_line_ranges": [],
+      "expected_state": "对应当前版本",
+      "observed_state": "材料验证未通过",
+      "gap": "请贡献者补充或更新。",
+      "risk_rule_refs": [
+        "task-logic-medium"
+      ],
+      "obligation_refs": [
+        "O-SUMMARY"
+      ],
+      "evidence_refs": [
+        "sidecar-862e6be823de150c273e5a7a",
+        "sidecar-d1430b4d017147126a6844ab"
+      ],
+      "responsibility": "contributor",
+      "recommended_route": "contributor_action_required",
+      "blocking": true,
+      "source_state_refs": [
+        "obl-o-summary",
+        "sidecar-862e6be823de150c273e5a7a",
+        "sidecar-d1430b4d017147126a6844ab"
+      ]
+    },
+    {
+      "finding_id": "gap:obl-o-test-explanation",
+      "category": "evidence_gap",
+      "severity": "medium",
+      "headline": "对应旧版本",
+      "plain_language_explanation": "说明测试覆盖了什么，以及它如何支持本次修改。",
+      "affected_files": [
+        "demo_app/tasks.py"
       ],
       "affected_line_ranges": [],
       "expected_state": "对应当前版本",
       "observed_state": "对应旧版本",
       "gap": "请贡献者补充或更新。",
       "risk_rule_refs": [
-        "test-strategy-high"
+        "task-logic-medium"
       ],
       "obligation_refs": [
-        "O-TEST-COMMAND"
+        "O-TEST-EXPLANATION"
       ],
       "evidence_refs": [
-        "evidence-ed39ff65b35551b1882eeb3b503ba6e1"
+        "sidecar-92b2a65ca59de304c84fea99"
       ],
       "responsibility": "contributor",
       "recommended_route": "contributor_action_required",
       "blocking": true,
       "source_state_refs": [
-        "obl-o-test-command",
-        "evidence-ed39ff65b35551b1882eeb3b503ba6e1"
+        "obl-o-test-explanation",
+        "sidecar-92b2a65ca59de304c84fea99"
       ]
     }
   ],
   "agent_involvement": {
-    "state": "not_detected",
-    "status": "none",
-    "message": "未检测到可验证的 Agent 参与记录。该贡献可能主要由人工完成，也可能存在未被记录的辅助工具使用。",
-    "type": null,
-    "modified_file_count": 0,
-    "commands": [],
-    "tests": [],
-    "used_other_tools": null,
-    "network": null,
-    "current_version": false
+    "state": "verifiable",
+    "status": "verifiable",
+    "message": "检测到一份内容完整、并绑定当前版本的编码助手活动记录。",
+    "type": "编码助手",
+    "modified_file_count": 1,
+    "commands": [
+      "python -m pytest tests/test_tasks.py -q"
+    ],
+    "tests": [
+      "tests/test_tasks.py"
+    ],
+    "used_other_tools": false,
+    "network": false,
+    "current_version": true,
+    "producer_assurance": "记录声明由某编码助手生成；当前原型已验证内容完整性和版本绑定，尚未通过代码托管平台或密码学签名确认生产者身份。"
   },
   "human_review_status": {
     "contributor_self_review": "本类修改不要求额外的贡献者人工确认。",
@@ -219,167 +349,166 @@
   },
   "review_readiness": {
     "status": "需要贡献者先处理",
-    "blocking_gaps": 1
+    "blocking_gaps": 4
   },
   "recommended_route": {
     "route": "contributor_action_required",
     "owner": "贡献者",
-    "message": "请补充或更新下列材料后，再提交维护者检查。"
+    "action_owner": "贡献者",
+    "next_action": "请补充或更新下列材料后，再提交维护者核验。",
+    "message": "请补充或更新下列材料后，再提交维护者核验。",
+    "final_authority": "维护者"
   },
   "inspection_objects": [
     {
-      "object_id": "evidence-4e783629142e5c41b12a71c78b8bb605",
-      "title": "编码助手操作摘要",
-      "object_type": "EvidenceArtifactInspectionObject",
-      "plain_language_summary": "来自当前案例的可复查材料。",
-      "source": "contributor",
-      "base_commit_sha": "dddddddddddddddddddddddddddddddddddddddd",
-      "head_commit_sha": null,
-      "contribution_fingerprint": "88a38b827edd056b99aa94745ed1248f1f6f63fb6725689d33fe6b5aa2a33f07",
-      "content_digest": "2c85355251f23bb42e1a019e7fa409fa0e2ddf6201f63b18bbdb0e45013de6a3",
-      "evidence_package_digest": null,
-      "availability": "available",
-      "freshness": "current",
-      "artifact_route": null,
-      "inline_content": "编码助手修改认证逻辑并运行定向测试。",
-      "technical_metadata": {
-        "evidence_id": "evidence-4e783629142e5c41b12a71c78b8bb605"
-      }
-    },
-    {
-      "object_id": "evidence-35e7e3baa5885c9fbd74b5a1ca5980a5",
-      "title": "可复查的测试输出",
-      "object_type": "EvidenceArtifactInspectionObject",
-      "plain_language_summary": "来自当前案例的可复查材料。",
-      "source": "contributor",
-      "base_commit_sha": "dddddddddddddddddddddddddddddddddddddddd",
-      "head_commit_sha": null,
-      "contribution_fingerprint": "88a38b827edd056b99aa94745ed1248f1f6f63fb6725689d33fe6b5aa2a33f07",
-      "content_digest": "ad8e8ee3fcfdccdf6ba14e4f6ed42e7c0f388aa7537e2e0902c721fa1ae1f0d8",
-      "evidence_package_digest": null,
-      "availability": "available",
-      "freshness": "current",
-      "artifact_route": null,
-      "inline_content": "认证回归测试输出：18 passed, 0 failed。",
-      "technical_metadata": {
-        "evidence_id": "evidence-35e7e3baa5885c9fbd74b5a1ca5980a5"
-      }
-    },
-    {
-      "object_id": "evidence-22d94576afa85f5589ed167736f7ed54",
-      "title": "变更文件清单",
-      "object_type": "EvidenceArtifactInspectionObject",
-      "plain_language_summary": "来自当前案例的可复查材料。",
-      "source": "contributor",
-      "base_commit_sha": "dddddddddddddddddddddddddddddddddddddddd",
-      "head_commit_sha": null,
-      "contribution_fingerprint": "88a38b827edd056b99aa94745ed1248f1f6f63fb6725689d33fe6b5aa2a33f07",
-      "content_digest": "30bf1036d843d7ec26890ea666373c3d5e05268c210f4161a2577c7a3468e887",
-      "evidence_package_digest": null,
-      "availability": "available",
-      "freshness": "current",
-      "artifact_route": null,
-      "inline_content": "本次修改仅涉及列出的贡献文件。",
-      "technical_metadata": {
-        "evidence_id": "evidence-22d94576afa85f5589ed167736f7ed54"
-      }
-    },
-    {
-      "object_id": "evidence-23eb444a35f75861bc51649ccb3e32d7",
-      "title": "已知限制",
-      "object_type": "EvidenceArtifactInspectionObject",
-      "plain_language_summary": "来自当前案例的可复查材料。",
-      "source": "contributor",
-      "base_commit_sha": "dddddddddddddddddddddddddddddddddddddddd",
-      "head_commit_sha": null,
-      "contribution_fingerprint": "88a38b827edd056b99aa94745ed1248f1f6f63fb6725689d33fe6b5aa2a33f07",
-      "content_digest": "b78c6ba018c3174a4a90293cefe222482be07f0df0aece05738d19fdc296dfb1",
-      "evidence_package_digest": null,
-      "availability": "available",
-      "freshness": "current",
-      "artifact_route": null,
-      "inline_content": "未改变密码重置、注册或多因素认证流程。",
-      "technical_metadata": {
-        "evidence_id": "evidence-23eb444a35f75861bc51649ccb3e32d7"
-      }
-    },
-    {
-      "object_id": "evidence-f8d5ebf5649552e7b94dd31614672764",
-      "title": "修改原因",
-      "object_type": "EvidenceArtifactInspectionObject",
-      "plain_language_summary": "来自当前案例的可复查材料。",
-      "source": "contributor",
-      "base_commit_sha": "dddddddddddddddddddddddddddddddddddddddd",
-      "head_commit_sha": null,
-      "contribution_fingerprint": "88a38b827edd056b99aa94745ed1248f1f6f63fb6725689d33fe6b5aa2a33f07",
-      "content_digest": "b2e065e617bda717cc40a0a99d5fcf062825046cb4aebfdfaca50a798e1abe92",
-      "evidence_package_digest": null,
-      "availability": "available",
-      "freshness": "current",
-      "artifact_route": null,
-      "inline_content": "撤销令牌后必须拒绝继续访问，避免旧会话绕过权限变更。",
-      "technical_metadata": {
-        "evidence_id": "evidence-f8d5ebf5649552e7b94dd31614672764"
-      }
-    },
-    {
-      "object_id": "evidence-885094ad1e4e51b4a2dd599aa7e18c98",
-      "title": "修改说明",
-      "object_type": "EvidenceArtifactInspectionObject",
-      "plain_language_summary": "来自当前案例的可复查材料。",
-      "source": "contributor",
-      "base_commit_sha": "dddddddddddddddddddddddddddddddddddddddd",
-      "head_commit_sha": null,
-      "contribution_fingerprint": "88a38b827edd056b99aa94745ed1248f1f6f63fb6725689d33fe6b5aa2a33f07",
-      "content_digest": "4f4c9d992e02134377c6092ffa3d2fa687a1751b91e93a184177023c513c7e48",
-      "evidence_package_digest": null,
-      "availability": "available",
-      "freshness": "current",
-      "artifact_route": null,
-      "inline_content": "已提供可复查的当前版本材料。",
-      "technical_metadata": {
-        "evidence_id": "evidence-885094ad1e4e51b4a2dd599aa7e18c98"
-      }
-    },
-    {
-      "object_id": "evidence-ed39ff65b35551b1882eeb3b503ba6e1",
-      "title": "测试记录",
-      "object_type": "EvidenceArtifactInspectionObject",
-      "plain_language_summary": "来自当前案例的可复查材料。",
-      "source": "contributor",
-      "base_commit_sha": "dddddddddddddddddddddddddddddddddddddddd",
-      "head_commit_sha": null,
-      "contribution_fingerprint": "88a38b827edd056b99aa94745ed1248f1f6f63fb6725689d33fe6b5aa2a33f07",
-      "content_digest": null,
-      "evidence_package_digest": null,
-      "availability": "unavailable",
-      "freshness": "stale",
-      "artifact_route": null,
-      "inline_content": null,
-      "technical_metadata": {
-        "evidence_id": "evidence-ed39ff65b35551b1882eeb3b503ba6e1"
-      }
-    },
-    {
-      "object_id": "diff:tests/test_auth.py",
-      "title": "相关修改：tests/test_auth.py",
+      "object_id": "45deff07792b4852f9858edd",
+      "title": "相关代码差异",
       "object_type": "DiffInspectionObject",
-      "plain_language_summary": "当前未提供可查看的代码差异。",
-      "source": "当前材料",
+      "plain_language_summary": "绑定当前贡献的代码差异。",
+      "source": "已验证并绑定当前版本的材料",
+      "base_commit_sha": "dddddddddddddddddddddddddddddddddddddddd",
+      "head_commit_sha": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "contribution_fingerprint": "3ba834ceea18329dda9be0c238812981588fc9021b71849b9eedd3c32eecbea3",
+      "content_digest": "6d5e5faef2a959bb42ae86569c0f54c7a13f1bdbc10c1e5346406e62f342b5a0",
+      "evidence_package_digest": "ddc778cba33d16b5466cb914ce1b5cc0580d56b3056ea216c7eab7761ceb39eb",
+      "availability": "available",
+      "freshness": "current",
+      "artifact_route": "/artifacts/case-D7_stale_test/ddc778cba33d16b5466cb914ce1b5cc0580d56b3056ea216c7eab7761ceb39eb/45deff07792b4852f9858edd",
+      "inline_content": "diff --git a/demo_app/tasks.py b/demo_app/tasks.py\n--- a/demo_app/tasks.py\n+++ b/demo_app/tasks.py\n@@ -20,1 +20,2 @@ def list_tasks():\n+    return sorted(tasks)\n",
+      "technical_metadata": {
+        "artifact_type": "unified_diff",
+        "media_type": "text/plain",
+        "obligation_refs": [],
+        "canonical_evidence_ids": [],
+        "producer_assurance": "producer_declared"
+      }
+    },
+    {
+      "object_id": "bf33a8306e67e83e33be81b0",
+      "title": "修改说明",
+      "object_type": "ContributionSummaryInspectionObject",
+      "plain_language_summary": "对应当前版本的修改说明。",
+      "source": "已验证并绑定当前版本的材料",
+      "base_commit_sha": "dddddddddddddddddddddddddddddddddddddddd",
+      "head_commit_sha": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "contribution_fingerprint": "3ba834ceea18329dda9be0c238812981588fc9021b71849b9eedd3c32eecbea3",
+      "content_digest": "8b68e7078eaabf838d76c247ce08e4f56ed3a6e1fdb1299e7cde6f15250d8669",
+      "evidence_package_digest": "ddc778cba33d16b5466cb914ce1b5cc0580d56b3056ea216c7eab7761ceb39eb",
+      "availability": "available",
+      "freshness": "current",
+      "artifact_route": "/artifacts/case-D7_stale_test/ddc778cba33d16b5466cb914ce1b5cc0580d56b3056ea216c7eab7761ceb39eb/bf33a8306e67e83e33be81b0",
+      "inline_content": "{\"affected_components\": [\"demo_app/tasks.py\"], \"artifact_type\": \"change_summary\", \"behavioral_change\": \"任务列表返回顺序稳定。\", \"contribution_fingerprint\": \"3ba834ceea18329dda9be0c238812981588fc9021b71849b9eedd3c32eecbea3\", \"head_commit_sha\": \"eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\", \"obligation_refs\": [\"O-SUMMARY\"], \"observed_at\": \"2026-07-26T00:00:00Z\", \"schema_version\": \"agm.evidence_artifact/v1\", \"source_tool\": \"deterministic-scenario\", \"summary\": \"让任务列表按稳定顺序返回，避免调用方收到不确定顺序。\"}",
+      "technical_metadata": {
+        "artifact_type": "change_summary",
+        "media_type": "text/plain",
+        "obligation_refs": [
+          "O-SUMMARY"
+        ],
+        "canonical_evidence_ids": [
+          "sidecar-862e6be823de150c273e5a7a"
+        ],
+        "producer_assurance": "producer_declared"
+      }
+    },
+    {
+      "object_id": "23098c9ebffe4bd6fb0eb1f8",
+      "title": "变更文件清单",
+      "object_type": "ChangedFilesInspectionObject",
+      "plain_language_summary": "对应当前版本的变更文件清单。",
+      "source": "已验证并绑定当前版本的材料",
+      "base_commit_sha": "dddddddddddddddddddddddddddddddddddddddd",
+      "head_commit_sha": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "contribution_fingerprint": "3ba834ceea18329dda9be0c238812981588fc9021b71849b9eedd3c32eecbea3",
+      "content_digest": "83a890cfae527d9d5f4aaa0a135a548689ba0e7ca4a46c7502e65d902e207f47",
+      "evidence_package_digest": "ddc778cba33d16b5466cb914ce1b5cc0580d56b3056ea216c7eab7761ceb39eb",
+      "availability": "available",
+      "freshness": "current",
+      "artifact_route": "/artifacts/case-D7_stale_test/ddc778cba33d16b5466cb914ce1b5cc0580d56b3056ea216c7eab7761ceb39eb/23098c9ebffe4bd6fb0eb1f8",
+      "inline_content": "{\"artifact_type\": \"changed_files\", \"contribution_fingerprint\": \"3ba834ceea18329dda9be0c238812981588fc9021b71849b9eedd3c32eecbea3\", \"files\": [\"demo_app/tasks.py\"], \"head_commit_sha\": \"eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\", \"obligation_refs\": [\"O-CHANGED-FILES\"], \"observed_at\": \"2026-07-26T00:00:00Z\", \"schema_version\": \"agm.evidence_artifact/v1\", \"source_tool\": \"deterministic-scenario\"}",
+      "technical_metadata": {
+        "artifact_type": "changed_files",
+        "media_type": "text/plain",
+        "obligation_refs": [
+          "O-CHANGED-FILES"
+        ],
+        "canonical_evidence_ids": [
+          "sidecar-eb8771f0386756c9143d7d26"
+        ],
+        "producer_assurance": "producer_declared"
+      }
+    },
+    {
+      "object_id": "0ffc480cd376f8dc1972ac58",
+      "title": "修改原因",
+      "object_type": "RationaleInspectionObject",
+      "plain_language_summary": "对应当前版本的修改原因。",
+      "source": "已验证并绑定当前版本的材料",
+      "base_commit_sha": "dddddddddddddddddddddddddddddddddddddddd",
+      "head_commit_sha": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "contribution_fingerprint": "3ba834ceea18329dda9be0c238812981588fc9021b71849b9eedd3c32eecbea3",
+      "content_digest": "c63181b224ff5bc9cb4bba4dbc0de7013576ca0b1851dc0a295044fe5b273483",
+      "evidence_package_digest": "ddc778cba33d16b5466cb914ce1b5cc0580d56b3056ea216c7eab7761ceb39eb",
+      "availability": "available",
+      "freshness": "current",
+      "artifact_route": "/artifacts/case-D7_stale_test/ddc778cba33d16b5466cb914ce1b5cc0580d56b3056ea216c7eab7761ceb39eb/0ffc480cd376f8dc1972ac58",
+      "inline_content": "{\"artifact_type\": \"rationale\", \"contribution_fingerprint\": \"3ba834ceea18329dda9be0c238812981588fc9021b71849b9eedd3c32eecbea3\", \"head_commit_sha\": \"eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\", \"intended_outcome\": \"调用方获得可预测的任务顺序。\", \"obligation_refs\": [\"O-RATIONALE\"], \"observed_at\": \"2026-07-26T00:00:00Z\", \"reason\": \"避免任务顺序随运行环境变化。\", \"schema_version\": \"agm.evidence_artifact/v1\", \"source_tool\": \"deterministic-scenario\"}",
+      "technical_metadata": {
+        "artifact_type": "rationale",
+        "media_type": "text/plain",
+        "obligation_refs": [
+          "O-RATIONALE"
+        ],
+        "canonical_evidence_ids": [
+          "sidecar-db05e17b640c53aca2484749"
+        ],
+        "producer_assurance": "producer_declared"
+      }
+    },
+    {
+      "object_id": "2a5ba9fc9182a542fb10e4f9",
+      "title": "编码助手活动记录",
+      "object_type": "AgentActivityInspectionObject",
+      "plain_language_summary": "对应当前版本的编码助手活动记录。",
+      "source": "已验证并绑定当前版本的材料",
+      "base_commit_sha": "dddddddddddddddddddddddddddddddddddddddd",
+      "head_commit_sha": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "contribution_fingerprint": "3ba834ceea18329dda9be0c238812981588fc9021b71849b9eedd3c32eecbea3",
+      "content_digest": "8abc4af70ef41e35556024d293a19315bed4546088f233a8089b9c92b4991d98",
+      "evidence_package_digest": "ddc778cba33d16b5466cb914ce1b5cc0580d56b3056ea216c7eab7761ceb39eb",
+      "availability": "available",
+      "freshness": "current",
+      "artifact_route": "/artifacts/case-D7_stale_test/ddc778cba33d16b5466cb914ce1b5cc0580d56b3056ea216c7eab7761ceb39eb/2a5ba9fc9182a542fb10e4f9",
+      "inline_content": "{\"activity_scope\": [\"demo_app/tasks.py\"], \"agent_type\": \"编码助手\", \"artifact_type\": \"agent_activity\", \"commands_executed\": [\"python -m pytest tests/test_tasks.py -q\"], \"contribution_fingerprint\": \"3ba834ceea18329dda9be0c238812981588fc9021b71849b9eedd3c32eecbea3\", \"files_modified\": [\"demo_app/tasks.py\"], \"head_commit_sha\": \"eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\", \"network_access\": false, \"obligation_refs\": [\"O-AGENT-SCOPE\"], \"observed_at\": \"2026-07-26T00:00:00Z\", \"other_agents_or_tools_used\": false, \"schema_version\": \"agm.evidence_artifact/v1\", \"source_tool\": \"deterministic-agent-recorder\", \"task_summary\": \"实现任务列表稳定排序。\", \"tests_executed\": [\"tests/test_tasks.py\"], \"tools_used\": []}",
+      "technical_metadata": {
+        "artifact_type": "agent_activity",
+        "media_type": "text/plain",
+        "obligation_refs": [
+          "O-AGENT-SCOPE"
+        ],
+        "canonical_evidence_ids": [
+          "sidecar-1f2e14f11daf50a1ea018a89"
+        ],
+        "producer_assurance": "producer_declared"
+      }
+    },
+    {
+      "object_id": "e7c953507581d042d933b869",
+      "title": "旧版本测试结果",
+      "object_type": "TestInspectionObject",
+      "plain_language_summary": "该测试对应旧版本，不能满足当前版本要求。",
+      "source": "对应旧版本",
       "base_commit_sha": "dddddddddddddddddddddddddddddddddddddddd",
       "head_commit_sha": null,
-      "contribution_fingerprint": "88a38b827edd056b99aa94745ed1248f1f6f63fb6725689d33fe6b5aa2a33f07",
+      "contribution_fingerprint": "3ba834ceea18329dda9be0c238812981588fc9021b71849b9eedd3c32eecbea3",
       "content_digest": null,
       "evidence_package_digest": null,
-      "availability": "unavailable",
-      "freshness": "current",
-      "artifact_route": null,
+      "availability": "available",
+      "freshness": "stale",
+      "artifact_route": "/artifacts/case-D7_stale_test/b62ccc8e145bce729cbf63bbac2665ca2544a78e9b47686a075de19ace152e69/e7c953507581d042d933b869",
       "inline_content": null,
       "technical_metadata": {
-        "path": "tests/test_auth.py",
-        "line_ranges": [
-          "84–117"
-        ]
+        "head_commit_sha": "cccccccccccccccccccccccccccccccccccccccc",
+        "contribution_fingerprint": "e0bc385d792ac7a129d3868c9cdc684e6016e2af5c3388fde9772b606b17afb6"
       }
     }
   ],
@@ -393,36 +522,32 @@
     "gate_state": "resubmitted",
     "legal_operations": [],
     "risk_rule_refs": [
-      "test-strategy-high"
+      "task-logic-medium"
     ],
     "compiled_obligation_refs": [
       "O-AGENT-SCOPE",
-      "O-ARTIFACT",
       "O-CHANGED-FILES",
-      "O-LIMITATIONS",
       "O-RATIONALE",
       "O-SUMMARY",
-      "O-TEST-COMMAND"
+      "O-TEST-EXPLANATION"
     ],
     "evidence_state_summary": {
       "O-AGENT-SCOPE": "current",
-      "O-ARTIFACT": "current",
-      "O-CHANGED-FILES": "current",
-      "O-LIMITATIONS": "current",
-      "O-RATIONALE": "current",
-      "O-SUMMARY": "current",
-      "O-TEST-COMMAND": "stale"
+      "O-CHANGED-FILES": "invalid",
+      "O-RATIONALE": "invalid",
+      "O-SUMMARY": "invalid",
+      "O-TEST-EXPLANATION": "stale"
     },
     "human_confirmation_state": "not_required",
-    "agent_trace_state": "not_detected",
+    "agent_trace_state": "verifiable",
     "route_derivation": {
       "route": "contributor_action_required",
       "reason": "受影响材料尚未准备或更新完成，当前还不能进入维护者检查。"
     },
     "sidecar": {
-      "current_package": null,
+      "current_package": "ddc778cba33d16b5466cb914ce1b5cc0580d56b3056ea216c7eab7761ceb39eb",
       "historical_packages": [
-        "2220a726e205ad9a515076889bc4a37388066d386eb572b6390bf91bffab4150"
+        "b62ccc8e145bce729cbf63bbac2665ca2544a78e9b47686a075de19ace152e69"
       ]
     },
     "host_platform": {
@@ -437,5 +562,6 @@
       "verified": true
     }
   },
+  "verification_submission": null,
   "schema_version": "agm.pr_diagnostic/v0.2-dev"
 }

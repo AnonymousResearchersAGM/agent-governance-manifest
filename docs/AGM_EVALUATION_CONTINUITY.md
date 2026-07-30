@@ -9,3 +9,7 @@ Claim-to-evidence mapping has three layers: foundational reviewer-side externali
 Phase 2.1.1 strengthens lifecycle and architectural correctness only. It does not claim that a user study has validated the rebuilt PR-native interface.
 
 Phase 2.1.2 is deterministic architectural validation only; it has not begun a new participant study.
+# Phase 2.1.3 continuity
+
+No P92 continuation, new participant package, recruitment, paper revision or
+Phase 3 work is authorised here. Artifact status remains `pending_human_review`.

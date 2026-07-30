@@ -104,6 +104,8 @@ def test_fresh_tracked_zip_passes_hashes_before_regeneration(
         output,
         ref=str(packaged["commit"]),
     )
-    assert result["hash_checks_before_generation"] == 3
-    assert result["hash_checks_after_generation"] == 3
+    assert result["hash_checks_before_generation"] == 4
+    assert result["hash_checks_after_generation"] == 4
+    assert result["fresh_demo_links_valid"] is True
+    assert result["participant_term_scan_valid"] is True
     assert result["regeneration_content_stable"] is True

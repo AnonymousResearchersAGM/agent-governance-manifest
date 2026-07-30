@@ -16,3 +16,8 @@ a human-confirmation requirement is shown as not required.
 The project has no GitHub/GitLab adapter. AGM final recommendations therefore
 remain separate from platform approval, merge and close state. P92 remains
 paused; no participant experiment or Phase 3 work has begun.
+# Phase 2.1.3 continuity
+
+Phase 2.1.2 established trusted-source projection. Phase 2.1.3 registers
+accepted sidecar material through canonical evidence rather than retaining a
+parallel diagnostic evidence state.

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from copy import deepcopy
 from collections.abc import Mapping
 from functools import wraps
 from pathlib import Path
@@ -312,6 +313,51 @@ class GovernanceService:
         self.storage.save_case(case)
         return item
 
+    def add_evidence_batch(self, case_id: str, *, actor: str, actor_role: str,
+                           entries: list[dict[str, Any]]):
+        """Atomically bind a prepared set of evidence records.
+
+        Binding and validation use the same canonical primitives as
+        :meth:`add_evidence`; no case is saved until every entry is valid.
+        """
+        case = self.storage.load_case(case_id)
+        prepared, bound = self._prepare_evidence_batch(
+            case, actor=actor, actor_role=actor_role, entries=entries
+        )
+        self.storage.save_case(prepared)
+        return bound
+
+    def _prepare_evidence_batch(
+        self,
+        case: GovernanceCase,
+        *,
+        actor: str,
+        actor_role: str,
+        entries: list[dict[str, Any]],
+    ) -> tuple[GovernanceCase, tuple[Any, ...]]:
+        """Construct a fully validated case copy without persisting it."""
+        authorize(self.config, role=actor_role, action="prepare_evidence")
+        case = deepcopy(case)
+        previous = evidence_set_fingerprint(case.evidence)
+        bound = []
+        known = {item.id: item for item in case.evidence}
+        for entry in entries:
+            item = bind_evidence(case, source_actor=actor, root=self.root, **entry)
+            if item.id in known:
+                if known[item.id].to_dict() != item.to_dict():
+                    raise VNextError("Evidence id collision has different content or binding")
+                continue
+            case.evidence.append(item)
+            bound.append(item)
+        validate_evidence_set(case, root=self.root)
+        if bound:
+            invalidate_stale_attestations(case,
+                previous_contribution_fingerprint=case.contribution_fingerprint,
+                previous_evidence_set_fingerprint=previous,
+                affected_scope=sorted({scope for item in bound for scope in item.affected_scope}),
+                reason="The bound evidence set changed after attestation.")
+        return case, tuple(bound)
+
     def prepare_case(
         self,
         case_id: str,
@@ -376,6 +422,42 @@ class GovernanceService:
             )
         self.storage.save_case(case)
         return case
+
+    def _record_validated_sidecar_conflict(self, case, derivation):
+        """Record only a detector-produced, independently revalidated conflict."""
+        from .pr_diagnostic.conflicts import validate_conflict_derivation
+        from .pr_diagnostic.sidecar import SidecarEvidenceStore
+
+        validate_conflict_derivation(
+            case, SidecarEvidenceStore(self.root), derivation
+        )
+        related = [
+            *derivation.canonical_evidence_ids,
+            derivation.declaration_artifact_id,
+            derivation.agent_activity_artifact_id,
+            derivation.package_digest,
+        ]
+        existing = next(
+            (
+                item
+                for item in case.findings
+                if item.code == "trusted_sidecar_conflict"
+                and item.status == "open"
+                and set(item.related_object_ids) == set(related)
+            ),
+            None,
+        )
+        if existing:
+            return existing
+        return create_finding(
+            case,
+            code="trusted_sidecar_conflict",
+            severity="high",
+            message="贡献者说明与编码助手活动记录不一致。",
+            blocking=True,
+            related_object_ids=related,
+            affected_obligation_ids=["O-AGENT-SCOPE"],
+        )
 
     def attest(
         self,
@@ -1312,6 +1394,7 @@ class GovernanceService:
         case_id: str,
         *,
         contribution: Any = None,
+        actor_role: str = "maintainer",
     ):
         """Return a read-only PR-native projection of already compiled state.
 
@@ -1325,6 +1408,7 @@ class GovernanceService:
             contribution=contribution,
             policy_config=self.config,
             evidence_store=SidecarEvidenceStore(self.root),
+            actor_role=actor_role,
         )
 
     def preview_reviewer_action(

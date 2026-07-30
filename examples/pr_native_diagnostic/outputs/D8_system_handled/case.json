@@ -106,35 +106,7 @@
   ],
   "evidence": [
     {
-      "id": "evidence-2ef57367a6e757b086df72c81b69a982",
-      "obligation_ids": [
-        "O-CHANGED-FILES"
-      ],
-      "affected_scope": [
-        "README.md"
-      ],
-      "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
-      "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
-      "evidence_type": "changed_files",
-      "value": "本次修改仅涉及列出的贡献文件。",
-      "command": null,
-      "environment": null,
-      "artifact_path": null,
-      "artifact_hash": null,
-      "observed_at": "2026-07-26T00:00:00Z",
-      "expires_at": null,
-      "source_actor": "contributor",
-      "source_tool": null,
-      "retained_for_contribution_fingerprint": null,
-      "retention_reason": null,
-      "rejected_at": null,
-      "rejected_by": null,
-      "rejection_reason": null,
-      "validity_state": "valid",
-      "invalid_reasons": []
-    },
-    {
-      "id": "evidence-c1bdcf9a36985eafa5894838cf09980e",
+      "id": "sidecar-14c785c4bf08b1fc14b03dc2",
       "obligation_ids": [
         "O-SUMMARY"
       ],
@@ -144,15 +116,71 @@
       "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
       "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
       "evidence_type": "contribution_summary",
-      "value": "已提供可复查的当前版本材料。",
+      "value": {
+        "affected_components": [
+          "README.md"
+        ],
+        "artifact_type": "change_summary",
+        "behavioral_change": "文档安装示例更明确。",
+        "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
+        "head_commit_sha": "cccccccccccccccccccccccccccccccccccccccc",
+        "obligation_refs": [
+          "O-SUMMARY"
+        ],
+        "observed_at": "2026-07-26T00:00:00Z",
+        "schema_version": "agm.evidence_artifact/v1",
+        "source_tool": "deterministic-scenario",
+        "summary": "更新 README 的安装命令，并保留现有链接说明。"
+      },
       "command": null,
       "environment": null,
       "artifact_path": null,
       "artifact_hash": null,
       "observed_at": "2026-07-26T00:00:00Z",
       "expires_at": null,
-      "source_actor": "contributor",
-      "source_tool": null,
+      "source_actor": "sidecar-bridge",
+      "source_tool": "deterministic-scenario",
+      "retained_for_contribution_fingerprint": null,
+      "retention_reason": null,
+      "rejected_at": null,
+      "rejected_by": null,
+      "rejection_reason": null,
+      "validity_state": "valid",
+      "invalid_reasons": []
+    },
+    {
+      "id": "sidecar-da774c42e81c1e067ce5bf25",
+      "obligation_ids": [
+        "O-CHANGED-FILES"
+      ],
+      "affected_scope": [
+        "README.md"
+      ],
+      "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
+      "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
+      "evidence_type": "changed_files",
+      "value": {
+        "artifact_type": "changed_files",
+        "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
+        "files": [
+          "README.md"
+        ],
+        "head_commit_sha": "cccccccccccccccccccccccccccccccccccccccc",
+        "obligation_refs": [
+          "O-CHANGED-FILES"
+        ],
+        "observed_at": "2026-07-26T00:00:00Z",
+        "schema_version": "agm.evidence_artifact/v1",
+        "source_tool": "deterministic-scenario"
+      },
+      "command": null,
+      "environment": null,
+      "artifact_path": null,
+      "artifact_hash": null,
+      "observed_at": "2026-07-26T00:00:00Z",
+      "expires_at": null,
+      "source_actor": "sidecar-bridge",
+      "source_tool": "deterministic-scenario",
       "retained_for_contribution_fingerprint": null,
       "retention_reason": null,
       "rejected_at": null,

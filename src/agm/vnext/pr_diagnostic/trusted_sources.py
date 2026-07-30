@@ -24,6 +24,8 @@ class TrustedArtifact:
     contribution_fingerprint: str
     head_commit_sha: str | None
     media_type: str
+    obligation_refs: tuple[str, ...]
+    producer_assurance: str
 
 
 @dataclass(frozen=True)
@@ -54,7 +56,7 @@ class TrustedDiagnosticEvidenceResolver:
                 artifact, content = self.store.read_artifact(current["package_digest"], metadata["artifact_id"])
                 if artifact["contribution_fingerprint"] != case.contribution_fingerprint:
                     raise VNextError("Current evidence artifact contribution binding does not match case")
-                artifacts.append(TrustedArtifact(artifact["artifact_id"], artifact["artifact_type"], artifact["title"], content, artifact["content_digest"], current["package_digest"], artifact["contribution_fingerprint"], artifact.get("head_commit_sha"), artifact["media_type"]))
+                artifacts.append(TrustedArtifact(artifact["artifact_id"], artifact["artifact_type"], artifact["title"], content, artifact["content_digest"], current["package_digest"], artifact["contribution_fingerprint"], artifact.get("head_commit_sha"), artifact["media_type"], tuple(artifact.get("obligation_refs", ())), "producer_declared"))
         by_type: dict[str, list[TrustedArtifact]] = {}
         for item in artifacts: by_type.setdefault(item.artifact_type, []).append(item)
         receipt = None
@@ -62,13 +64,27 @@ class TrustedDiagnosticEvidenceResolver:
         for candidate in self.store.root.joinpath("receipts").glob("*.json") if self.store.root.joinpath("receipts").is_dir() else ():
             try: value = self.store.verify_receipt(candidate.stem)
             except VNextError: continue
-            if value["contribution_fingerprint"] == case.contribution_fingerprint and value["policy_fingerprint"] == case.policy_snapshot.policy_fingerprint:
+            try:
+                receipt_package = self.store.get_package_by_digest(value["evidence_package_digest"])
+            except VNextError:
+                continue
+            if (receipt_package.get("case_id") == case.id
+                and receipt_package.get("contribution_fingerprint") == case.contribution_fingerprint
+                and receipt_package.get("policy_fingerprint") == case.policy_snapshot.policy_fingerprint
+                and value.get("case_id") == case.id
+                and value["contribution_fingerprint"] == case.contribution_fingerprint
+                and value["policy_fingerprint"] == case.policy_snapshot.policy_fingerprint
+                and case.final_decision is not None
+                and value.get("final_decision_id") == case.final_decision.id
+                and value.get("agm_final_recommendation") == {"accept":"建议接受","reject":"建议拒绝","close":"建议关闭"}.get(case.final_decision.decision)):
                 receipt = value
         confirmations = tuple(item for item in case.attestations if item.status == "confirmed" and item.policy_fingerprint == case.policy_snapshot.policy_fingerprint)
         return TrustedDiagnosticEvidenceSet(current, historical, tuple(artifacts),
             next(iter(by_type.get("agent_activity", ())), None),
             next(iter(by_type.get("contribution_declaration", ())), None),
-            tuple(by_type.get("test_result", ())), tuple(by_type.get("diff", ())),
+            tuple(by_type.get("test_result", ())), tuple(
+                [*by_type.get("unified_diff", ()), *by_type.get("diff", ())]
+            ),
             confirmations, receipt,
             {"connected": False, "approval_state": "not_performed", "merge_state": "not_performed", "close_state": "not_performed", "verified": True})
 

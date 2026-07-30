@@ -58,6 +58,23 @@ jobs:
       - name: Run complete test suite
         run: python -m pytest -q
 
+      - name: Verify Phase 2.1.3 semantic hardening boundaries
+        run: >-
+          python -m pytest -q
+          tests/test_vnext_pr_diagnostic_phase_2_1_3.py
+          tests/test_vnext_pr_diagnostic_semantic_integrity.py
+          tests/test_vnext_pr_diagnostic_semantic_hardening.py
+          tests/test_vnext_pr_diagnostic_scope_recovery.py
+
+      - name: Validate deterministic PR diagnostic links
+        run: python scripts/validate_pr_diagnostic_links.py
+
+      - name: Scan participant-facing diagnostic terms
+        run: python scripts/validate_pr_diagnostic_participant_terms.py
+
+      - name: Validate PR diagnostic scenario consistency
+        run: python scripts/validate_pr_diagnostic_scenario_consistency.py
+
       - name: Confirm regeneration leaves tracked files unchanged
         run: git diff --exit-code
 

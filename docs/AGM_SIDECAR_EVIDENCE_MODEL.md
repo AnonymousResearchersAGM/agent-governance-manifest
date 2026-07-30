@@ -13,3 +13,7 @@ Final receipts are sidecar JSON and never amend a commit or call a platform API.
 Phase 2.1.1 connects this model to D3 (current package), D7 (historical stale package after legal resubmission), and D10 (typed final receipt). A receipt rejects a claimed platform merge or approval without verified adapter evidence.
 
 Phase 2.1.2 validates package and artifact digests before using sidecar content in a diagnostic projection.
+# Phase 2.1.3 continuity
+
+Satisfiable sidecar artifacts require explicit project-requirement references
+and must enter canonical registration and validation.

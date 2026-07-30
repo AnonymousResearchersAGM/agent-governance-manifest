@@ -390,3 +390,8 @@ default-folded technical section.
 Frozen interactive outputs use LF on every platform. Repository delivery ZIPs
 are built from Git blob content rather than the Windows working tree and are
 verified in a clean extraction before any generator runs.
+# Phase 2.1.3 continuity
+
+The diagnostic projection no longer owns parallel evidence freshness. Verified
+sidecar artifacts bridge into canonical evidence; verified diffs provide risk
+locations. No real code-host adapter or participant-study authority is added.

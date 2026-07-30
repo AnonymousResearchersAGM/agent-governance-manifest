@@ -5,9 +5,12 @@ from .models import PRDiagnosticView
 from .presenters import render_pr_diagnostic_html, render_pr_diagnostic_json, render_pr_diagnostic_markdown
 from .sidecar import EvidenceArtifactRef, EvidencePackageReceipt, FinalEvidenceReceipt, SidecarEvidenceStore
 from .trusted_sources import TrustedDiagnosticEvidenceResolver
+from .bridge import BridgeReceipt, SidecarEvidenceBridge
+from .artifact_projection import StructuredArtifactProjection, project_structured_artifact
 
 __all__ = [
     "EvidenceArtifactRef", "EvidencePackageReceipt", "FinalEvidenceReceipt", "PRDiagnosticView", "TrustedDiagnosticEvidenceResolver",
-    "SidecarEvidenceStore", "compile_pr_diagnostic", "render_pr_diagnostic_html",
+    "SidecarEvidenceStore", "SidecarEvidenceBridge", "BridgeReceipt", "compile_pr_diagnostic", "render_pr_diagnostic_html",
     "render_pr_diagnostic_json", "render_pr_diagnostic_markdown",
+    "StructuredArtifactProjection", "project_structured_artifact",
 ]

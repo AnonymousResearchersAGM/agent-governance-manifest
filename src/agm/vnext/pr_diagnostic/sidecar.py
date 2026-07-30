@@ -7,6 +7,9 @@ current or trusted through a presentation dictionary.
 from __future__ import annotations
 
 import json
+import os
+import threading
+import time
 from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any
@@ -28,6 +31,19 @@ class EvidenceArtifactRef:
     contribution_fingerprint: str
     head_commit_sha: str | None
     relative_storage_path: str
+    obligation_refs: tuple[str, ...] = ()
+    case_id: str | None = None
+    policy_fingerprint: str | None = None
+    base_commit_sha: str | None = None
+    producer: str | None = None
+    command: str | None = None
+    environment: str | None = None
+    result_summary: str | None = None
+    exit_code: int | None = None
+    tests_passed: int | None = None
+    tests_failed: int | None = None
+    affected_scope: list[str] | None = None
+    observed_at: str | None = None
 
 
 @dataclass(frozen=True)
@@ -53,6 +69,8 @@ class FinalEvidenceReceipt:
     agm_final_recommendation: str
     host_platform_status: dict[str, Any]
     created_at: str
+    case_id: str | None = None
+    final_decision_id: str | None = None
 
 
 def _safe(value: Any) -> None:
@@ -69,6 +87,7 @@ def _validate_host(status: dict[str, Any]) -> None:
 
 
 class SidecarEvidenceStore:
+    _audit_lock = threading.Lock()
     def __init__(self, root: Path):
         self.project_root = root.resolve()
         self.root = (self.project_root / ".agm-work" / "evidence_store").resolve()
@@ -97,6 +116,9 @@ class SidecarEvidenceStore:
             if "/" in artifact_id or "\\" in artifact_id or ".." in artifact_id:
                 raise VNextError("Invalid evidence artifact id")
             digest = fingerprint(content)
+            obligation_refs = tuple(str(item) for item in raw.get("obligation_refs", ()))
+            if len(set(obligation_refs)) != len(obligation_refs):
+                raise VNextError("Evidence artifact obligation references must be unique")
             normalized.append({
                 "artifact_id": artifact_id, "artifact_type": str(raw.get("type", "artifact")),
                 "title": str(raw.get("title", raw.get("summary", "材料"))), "content_digest": digest,
@@ -104,7 +126,14 @@ class SidecarEvidenceStore:
                 "source_tool": raw.get("source_tool"), "created_at": str(raw.get("created_at", when)),
                 "contribution_fingerprint": contribution_fingerprint,
                 "head_commit_sha": raw.get("head_commit_sha", head_commit_sha),
+                "base_commit_sha": raw.get("base_commit_sha", base_commit_sha),
+                "case_id": case_id, "policy_fingerprint": policy_fingerprint,
+                "producer": raw.get("producer", producer), "obligation_refs": list(obligation_refs),
                 "relative_storage_path": f"artifacts/{artifact_id}.txt",
+                "command": raw.get("command"), "environment": raw.get("environment"),
+                "result_summary": raw.get("result_summary"), "exit_code": raw.get("exit_code"),
+                "tests_passed": raw.get("tests_passed"), "tests_failed": raw.get("tests_failed"),
+                "affected_scope": list(raw.get("affected_scope", [])), "observed_at": raw.get("observed_at", raw.get("created_at", when)),
             })
             contents[artifact_id] = content
         payload = {"package_version": "agm.sidecar_evidence/v1", "case_id": case_id,
@@ -174,6 +203,35 @@ class SidecarEvidenceStore:
             raise VNextError("Evidence artifact digest verification failed")
         return artifact, content
 
+    def record_read_access(self, *, case_id: str, package_digest: str, artifact_id: str) -> None:
+        """Append a minimal local audit fact without exposing storage details."""
+        path = self.root / "read_audit.jsonl"; path.parent.mkdir(parents=True, exist_ok=True)
+        line = canonical_json({"case_id":case_id,"package_digest":package_digest,"artifact_id":artifact_id,"access":"read"}) + "\n"
+        for attempt in range(3):
+            try:
+                with self._audit_lock, path.open("a", encoding="utf8") as handle:
+                    handle.write(line); handle.flush(); os.fsync(handle.fileno())
+                return
+            except OSError:
+                if attempt == 2: raise
+                time.sleep(0.02 * (attempt + 1))
+
+    def read_audit_summary(self) -> dict[str, int]:
+        """Return non-sensitive counters for local acceptance tooling."""
+        path = self.root / "read_audit.jsonl"
+        records = invalid = 0
+        with self._audit_lock:
+            lines = path.read_text(encoding="utf8").splitlines() if path.exists() else []
+        for line in lines:
+            try:
+                value = json.loads(line)
+                if not isinstance(value, dict):
+                    raise ValueError("audit record is not an object")
+                records += 1
+            except (json.JSONDecodeError, ValueError):
+                invalid += 1
+        return {"records": records, "invalid": invalid}
+
     def write_final_receipt(self, receipt: FinalEvidenceReceipt) -> Path:
         _safe(asdict(receipt)); _validate_host(receipt.host_platform_status)
         self.get_package_by_digest(receipt.evidence_package_digest)
@@ -181,6 +239,95 @@ class SidecarEvidenceStore:
         if path.exists() and path.read_text(encoding="utf8") != encoded: raise VNextError("Final receipt digest collision")
         if not path.exists(): atomic_write_text(path, encoded)
         return path
+
+    def write_bridge_receipt(self, payload: dict[str, Any]) -> Path:
+        payload = dict(payload); digest = fingerprint(payload)
+        path = self.root / "bridge_receipts" / f"{digest}.json"; encoded = canonical_json(payload) + "\n"
+        if path.exists() and path.read_text(encoding="utf8") != encoded: raise VNextError("Bridge receipt digest collision")
+        if not path.exists(): atomic_write_text(path, encoded)
+        audit = self.root / "bridge_audit.jsonl"; audit.parent.mkdir(parents=True, exist_ok=True)
+        with self._audit_lock, audit.open("a", encoding="utf8") as handle:
+            handle.write(canonical_json({"event":payload["registration_status"],"receipt_digest":digest,"case_id":payload["case_id"],"package_digest":payload["package_digest"]})+"\n"); handle.flush(); os.fsync(handle.fileno())
+        return path
+
+    def bridge_receipt_path(self, payload: dict[str, Any]) -> Path:
+        return self.root / "bridge_receipts" / f"{fingerprint(payload)}.json"
+
+    def finalize_bridge_receipt(self, payload: dict[str, Any]) -> tuple[Path, str]:
+        payload = dict(payload); digest = fingerprint(payload)
+        path = self.bridge_receipt_path(payload)
+        encoded = canonical_json(payload) + "\n"
+        if path.exists() and path.read_text(encoding="utf8") != encoded:
+            raise VNextError("Bridge receipt digest collision")
+        if not path.exists():
+            atomic_write_text(path, encoded)
+        return path, digest
+
+    def registration_path(self, package_digest: str) -> Path:
+        if not package_digest or "/" in package_digest or "\\" in package_digest or ".." in package_digest:
+            raise VNextError("Invalid registration package digest")
+        return self.root / "registration_index" / f"{package_digest}.json"
+
+    def read_registration(self, package_digest: str) -> dict[str, Any] | None:
+        path = self.registration_path(package_digest)
+        if not path.exists():
+            return None
+        value = json.loads(path.read_text(encoding="utf8"))
+        if value.get("package_digest") != package_digest:
+            raise VNextError("Registration index package binding is invalid")
+        return value
+
+    def finalize_registration(self, payload: dict[str, Any]) -> Path:
+        path = self.registration_path(payload["package_digest"])
+        encoded = canonical_json(payload) + "\n"
+        if path.exists() and path.read_text(encoding="utf8") != encoded:
+            raise VNextError("Registration index collision")
+        if not path.exists():
+            atomic_write_text(path, encoded)
+        return path
+
+    def append_audit_event(self, name: str, payload: dict[str, Any]) -> None:
+        if name not in {"bridge_audit", "conflict_audit"}:
+            raise VNextError("Unknown sidecar audit")
+        path = self.root / f"{name}.jsonl"; path.parent.mkdir(parents=True, exist_ok=True)
+        line = canonical_json(payload) + "\n"
+        for attempt in range(3):
+            try:
+                with self._audit_lock, path.open("a", encoding="utf8") as handle:
+                    handle.write(line); handle.flush(); os.fsync(handle.fileno())
+                return
+            except OSError:
+                if attempt == 2: raise
+                time.sleep(.02 * (attempt + 1))
+
+    def audit_lengths(self) -> dict[str, int]:
+        with self._audit_lock:
+            return {
+                name: (self.root / f"{name}.jsonl").stat().st_size
+                if (self.root / f"{name}.jsonl").exists() else 0
+                for name in ("bridge_audit", "conflict_audit")
+            }
+
+    def restore_audit_lengths(self, lengths: dict[str, int]) -> None:
+        with self._audit_lock:
+            for name, length in lengths.items():
+                path = self.root / f"{name}.jsonl"
+                if not path.exists():
+                    continue
+                with path.open("r+b") as handle:
+                    handle.truncate(length); handle.flush(); os.fsync(handle.fileno())
+
+    def append_conflict_audit(self, event: str, *, case_id: str, package_digest: str) -> None:
+        path=self.root/"conflict_audit.jsonl"; path.parent.mkdir(parents=True,exist_ok=True)
+        line=canonical_json({"event":event,"case_id":case_id,"package_digest":package_digest})+"\n"
+        for attempt in range(3):
+            try:
+                with self._audit_lock,path.open("a",encoding="utf8") as handle:
+                    handle.write(line);handle.flush();os.fsync(handle.fileno())
+                return
+            except PermissionError:
+                if attempt==2:raise
+                time.sleep(.02*(attempt+1))
 
     def verify_receipt(self, receipt_digest: str) -> dict[str, Any]:
         if not receipt_digest or "/" in receipt_digest or "\\" in receipt_digest or ".." in receipt_digest: raise VNextError("Invalid receipt digest")

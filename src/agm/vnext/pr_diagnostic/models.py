@@ -72,6 +72,20 @@ class HostPlatformStatus(DiagnosticRecord):
 
 
 @dataclass(frozen=True)
+class VerificationSubmissionProjection(DiagnosticRecord):
+    pr_status: str
+    material_completeness: str
+    contributor_confirmation: str
+    submission_status: str
+    missing_handoff_record: str
+    action_owner: str
+    next_action: str
+    final_authority: str
+    source_state: str
+    persisted: bool = False
+
+
+@dataclass(frozen=True)
 class PRDiagnosticView(DiagnosticRecord):
     case_id: str
     contribution_fingerprint: str
@@ -91,4 +105,5 @@ class PRDiagnosticView(DiagnosticRecord):
     inspection_objects: tuple[InspectionObject, ...]
     action_effect_boundaries: tuple[ActionEffectBoundary, ...]
     technical_derivation: dict[str, Any]
+    verification_submission: VerificationSubmissionProjection | None = None
     schema_version: str = "agm.pr_diagnostic/v0.2-dev"

@@ -1,8 +1,8 @@
 {
-  "id": "case-D6_declaration_conflict",
+  "id": "case-D6A_declaration_conflict",
   "mode": "declared_agent_mediated",
   "mode_reason": "Structured AGM preparation was explicitly declared or requested; no claim about contributor identity is inferred.",
-  "state": "repair_requested",
+  "state": "awaiting_maintainer_verification",
   "created_at": "2026-07-26T00:00:00Z",
   "updated_at": "2026-07-26T00:00:00Z",
   "base_commit": "dddddddddddddddddddddddddddddddddddddddd",
@@ -15,7 +15,7 @@
   "assurance_profile": "standard",
   "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
   "policy_snapshot": {
-    "id": "policy-f3e1248509435774a639f40123a03c9b",
+    "id": "policy-eb1c9ffb2e6e5101b9110bcbd543692f",
     "schema_version": "agm.policy_snapshot/v0.2-dev",
     "manifest_version": "agm.manifest/v0.2-dev",
     "base_commit": "dddddddddddddddddddddddddddddddddddddddd",
@@ -125,63 +125,7 @@
   ],
   "evidence": [
     {
-      "id": "evidence-5ea9526ff6f75f2696fc0834147d368f",
-      "obligation_ids": [
-        "O-AGENT-SCOPE"
-      ],
-      "affected_scope": [
-        "README.md"
-      ],
-      "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
-      "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
-      "evidence_type": "agent_action_scope",
-      "value": "编码助手修改认证逻辑并运行定向测试。",
-      "command": null,
-      "environment": null,
-      "artifact_path": null,
-      "artifact_hash": null,
-      "observed_at": "2026-07-26T00:00:00Z",
-      "expires_at": null,
-      "source_actor": "contributor",
-      "source_tool": null,
-      "retained_for_contribution_fingerprint": null,
-      "retention_reason": null,
-      "rejected_at": null,
-      "rejected_by": null,
-      "rejection_reason": null,
-      "validity_state": "valid",
-      "invalid_reasons": []
-    },
-    {
-      "id": "evidence-f597e3033d0e5d868bb0ed2aa58d5d84",
-      "obligation_ids": [
-        "O-CHANGED-FILES"
-      ],
-      "affected_scope": [
-        "README.md"
-      ],
-      "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
-      "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
-      "evidence_type": "changed_files",
-      "value": "本次修改仅涉及列出的贡献文件。",
-      "command": null,
-      "environment": null,
-      "artifact_path": null,
-      "artifact_hash": null,
-      "observed_at": "2026-07-26T00:00:00Z",
-      "expires_at": null,
-      "source_actor": "contributor",
-      "source_tool": null,
-      "retained_for_contribution_fingerprint": null,
-      "retention_reason": null,
-      "rejected_at": null,
-      "rejected_by": null,
-      "rejection_reason": null,
-      "validity_state": "valid",
-      "invalid_reasons": []
-    },
-    {
-      "id": "evidence-5129f3416e8c5943a3d395cb3e288de8",
+      "id": "sidecar-4b186604461bee10a7223237",
       "obligation_ids": [
         "O-SUMMARY"
       ],
@@ -191,15 +135,149 @@
       "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
       "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
       "evidence_type": "contribution_summary",
-      "value": "已提供可复查的当前版本材料。",
+      "value": {
+        "affected_components": [
+          "README.md"
+        ],
+        "artifact_type": "change_summary",
+        "behavioral_change": "文档安装示例更明确。",
+        "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
+        "head_commit_sha": "cccccccccccccccccccccccccccccccccccccccc",
+        "obligation_refs": [
+          "O-SUMMARY"
+        ],
+        "observed_at": "2026-07-26T00:00:00Z",
+        "schema_version": "agm.evidence_artifact/v1",
+        "source_tool": "deterministic-scenario",
+        "summary": "更新 README 的安装命令，并保留现有链接说明。"
+      },
       "command": null,
       "environment": null,
       "artifact_path": null,
       "artifact_hash": null,
       "observed_at": "2026-07-26T00:00:00Z",
       "expires_at": null,
-      "source_actor": "contributor",
-      "source_tool": null,
+      "source_actor": "sidecar-bridge",
+      "source_tool": "deterministic-scenario",
+      "retained_for_contribution_fingerprint": null,
+      "retention_reason": null,
+      "rejected_at": null,
+      "rejected_by": null,
+      "rejection_reason": null,
+      "validity_state": "valid",
+      "invalid_reasons": []
+    },
+    {
+      "id": "sidecar-abc07b5eccb68a27d55b6801",
+      "obligation_ids": [
+        "O-CHANGED-FILES"
+      ],
+      "affected_scope": [
+        "README.md"
+      ],
+      "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
+      "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
+      "evidence_type": "changed_files",
+      "value": {
+        "artifact_type": "changed_files",
+        "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
+        "files": [
+          "README.md"
+        ],
+        "head_commit_sha": "cccccccccccccccccccccccccccccccccccccccc",
+        "obligation_refs": [
+          "O-CHANGED-FILES"
+        ],
+        "observed_at": "2026-07-26T00:00:00Z",
+        "schema_version": "agm.evidence_artifact/v1",
+        "source_tool": "deterministic-scenario"
+      },
+      "command": null,
+      "environment": null,
+      "artifact_path": null,
+      "artifact_hash": null,
+      "observed_at": "2026-07-26T00:00:00Z",
+      "expires_at": null,
+      "source_actor": "sidecar-bridge",
+      "source_tool": "deterministic-scenario",
+      "retained_for_contribution_fingerprint": null,
+      "retention_reason": null,
+      "rejected_at": null,
+      "rejected_by": null,
+      "rejection_reason": null,
+      "validity_state": "valid",
+      "invalid_reasons": []
+    },
+    {
+      "id": "sidecar-42aa35f31e6d4250daa97646",
+      "obligation_ids": [
+        "O-AGENT-SCOPE"
+      ],
+      "affected_scope": [
+        "README.md"
+      ],
+      "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
+      "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
+      "evidence_type": "agent_action_scope",
+      "value": {
+        "artifact_type": "agent_activity",
+        "validated_typed_scope": [
+          "README.md"
+        ],
+        "canonical_contribution_scope": [
+          "README.md"
+        ],
+        "coverage_relation": "exact_match",
+        "scope_source": "agent_activity.activity_scope",
+        "typed_source_validated": true
+      },
+      "command": null,
+      "environment": null,
+      "artifact_path": null,
+      "artifact_hash": null,
+      "observed_at": "2026-07-26T00:00:00Z",
+      "expires_at": null,
+      "source_actor": "sidecar-bridge",
+      "source_tool": "deterministic-agent-recorder",
+      "retained_for_contribution_fingerprint": null,
+      "retention_reason": null,
+      "rejected_at": null,
+      "rejected_by": null,
+      "rejection_reason": null,
+      "validity_state": "valid",
+      "invalid_reasons": []
+    },
+    {
+      "id": "sidecar-cf023fd1b20e8f8f8611299e",
+      "obligation_ids": [
+        "O-AGENT-SCOPE"
+      ],
+      "affected_scope": [
+        "README.md"
+      ],
+      "contribution_fingerprint": "2b3a6640db85b91a480a65ff86e0ba4af867bfef20db93b4b75c00aa446177e5",
+      "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
+      "evidence_type": "agent_action_scope",
+      "value": {
+        "artifact_type": "contribution_declaration",
+        "validated_typed_scope": [
+          "README.md"
+        ],
+        "canonical_contribution_scope": [
+          "README.md"
+        ],
+        "coverage_relation": "exact_match",
+        "scope_source": "contribution_declaration.declaration_scope",
+        "typed_source_validated": true
+      },
+      "command": null,
+      "environment": null,
+      "artifact_path": null,
+      "artifact_hash": null,
+      "observed_at": "2026-07-26T00:00:00Z",
+      "expires_at": null,
+      "source_actor": "sidecar-bridge",
+      "source_tool": "contributor-declaration",
       "retained_for_contribution_fingerprint": null,
       "retention_reason": null,
       "rejected_at": null,
@@ -212,12 +290,18 @@
   "attestations": [],
   "findings": [
     {
-      "id": "finding-c3079d7bbbb55b2ca1ad9c0d4e166059",
-      "code": "repair_required",
+      "id": "finding-33ca4f999ba45f5e818737fbbb13158c",
+      "code": "trusted_sidecar_conflict",
       "severity": "high",
-      "message": "请更新指定测试记录。",
+      "message": "贡献者说明与编码助手活动记录不一致。",
       "blocking": true,
-      "related_object_ids": [],
+      "related_object_ids": [
+        "sidecar-cf023fd1b20e8f8f8611299e",
+        "sidecar-42aa35f31e6d4250daa97646",
+        "1790cac9055e561f1e28f272",
+        "998d538b71dfa6eb3f4183e0",
+        "08af44f951d4acecc8797c2819cc8b4118d0284ad33a4da53405c4d066b9663f"
+      ],
       "affected_obligation_ids": [
         "O-AGENT-SCOPE"
       ],
@@ -227,26 +311,7 @@
       "resolution": null
     }
   ],
-  "repair_requests": [
-    {
-      "id": "repair-41a7392e470754879e6fcf4e7a63c377",
-      "finding_ids": [
-        "finding-c3079d7bbbb55b2ca1ad9c0d4e166059"
-      ],
-      "responsible_role": "contributor",
-      "affected_obligation_ids": [
-        "O-AGENT-SCOPE"
-      ],
-      "requested_correction": "请更新指定测试记录。",
-      "revalidation_required": [
-        "O-AGENT-SCOPE"
-      ],
-      "requested_by": "maintainer-reviewer",
-      "requested_at": "2026-07-26T00:00:00Z",
-      "status": "open",
-      "attempts": []
-    }
-  ],
+  "repair_requests": [],
   "attempted_operations": [],
   "maintainer_verifications": [],
   "final_decision": null,

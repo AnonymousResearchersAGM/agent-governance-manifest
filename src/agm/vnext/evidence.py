@@ -303,6 +303,10 @@ def validate_evidence_set(
         for obligation_id in item.obligation_ids:
             grouped.setdefault((obligation_id, item.evidence_type), []).append(item)
     for (obligation_id, evidence_type), items in grouped.items():
+        if obligation_id == "O-AGENT-SCOPE" and evidence_type == "agent_action_scope":
+            # Scope-specific typed records are complementary, not contradictory.
+            # Their contribution-wide coverage is evaluated below.
+            continue
         distinct_values = {canonical_json(item.value) for item in items}
         if len(distinct_values) <= 1:
             continue
@@ -327,6 +331,36 @@ def validate_evidence_set(
             and item.evidence_type == obligation.evidence_type
             and item.validity_state in {"valid", "verified"}
         ]
+        if (
+            obligation.obligation_id == "O-AGENT-SCOPE"
+            and obligation.evidence_type == "agent_action_scope"
+        ):
+            typed = [
+                item
+                for item in candidates
+                if isinstance(item.value, dict)
+                and item.value.get("typed_source_validated") is True
+            ]
+            if typed:
+                canonical_scope = set(case.changed_files)
+                activity_coverage: set[str] = set()
+                full_declaration = False
+                for item in typed:
+                    value = item.value
+                    scope = set(value.get("validated_typed_scope", ()))
+                    if value.get("artifact_type") == "agent_activity":
+                        activity_coverage.update(scope)
+                    elif (
+                        value.get("artifact_type") == "contribution_declaration"
+                        and scope == canonical_scope
+                    ):
+                        full_declaration = True
+                complete = (
+                    activity_coverage == canonical_scope or full_declaration
+                )
+                if not complete:
+                    obligation.status = "unsatisfied"
+                    continue
         if any(item.validity_state == "verified" for item in candidates):
             obligation.status = "verified"
         elif candidates:

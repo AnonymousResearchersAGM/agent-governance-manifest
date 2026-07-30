@@ -257,175 +257,7 @@
   ],
   "evidence": [
     {
-      "id": "evidence-303307ef40b85830bac374e6673b2832",
-      "obligation_ids": [
-        "O-AGENT-SCOPE"
-      ],
-      "affected_scope": [
-        "demo_app/auth.py"
-      ],
-      "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
-      "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
-      "evidence_type": "agent_action_scope",
-      "value": "编码助手修改认证逻辑并运行定向测试。",
-      "command": null,
-      "environment": null,
-      "artifact_path": null,
-      "artifact_hash": null,
-      "observed_at": "2026-07-26T00:00:00Z",
-      "expires_at": null,
-      "source_actor": "contributor",
-      "source_tool": null,
-      "retained_for_contribution_fingerprint": null,
-      "retention_reason": null,
-      "rejected_at": null,
-      "rejected_by": null,
-      "rejection_reason": null,
-      "validity_state": "valid",
-      "invalid_reasons": []
-    },
-    {
-      "id": "evidence-c9cb8efb318b571aa48d6b5b3abc83ee",
-      "obligation_ids": [
-        "O-ARTIFACT"
-      ],
-      "affected_scope": [
-        "demo_app/auth.py"
-      ],
-      "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
-      "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
-      "evidence_type": "artifact",
-      "value": "认证回归测试输出：18 passed, 0 failed。",
-      "command": null,
-      "environment": null,
-      "artifact_path": null,
-      "artifact_hash": null,
-      "observed_at": "2026-07-26T00:00:00Z",
-      "expires_at": null,
-      "source_actor": "contributor",
-      "source_tool": null,
-      "retained_for_contribution_fingerprint": null,
-      "retention_reason": null,
-      "rejected_at": null,
-      "rejected_by": null,
-      "rejection_reason": null,
-      "validity_state": "valid",
-      "invalid_reasons": []
-    },
-    {
-      "id": "evidence-74dce3330f48595a9ab21a2c7537c247",
-      "obligation_ids": [
-        "O-AUTH-IMPACT"
-      ],
-      "affected_scope": [
-        "demo_app/auth.py"
-      ],
-      "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
-      "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
-      "evidence_type": "security_auth_impact",
-      "value": "影响撤销令牌、会话刷新和权限变更后的会话失效路径；未改变身份验证回退策略。",
-      "command": null,
-      "environment": null,
-      "artifact_path": null,
-      "artifact_hash": null,
-      "observed_at": "2026-07-26T00:00:00Z",
-      "expires_at": null,
-      "source_actor": "contributor",
-      "source_tool": null,
-      "retained_for_contribution_fingerprint": null,
-      "retention_reason": null,
-      "rejected_at": null,
-      "rejected_by": null,
-      "rejection_reason": null,
-      "validity_state": "valid",
-      "invalid_reasons": []
-    },
-    {
-      "id": "evidence-ae80d8d778325930baf059b7a23f44d3",
-      "obligation_ids": [
-        "O-CHANGED-FILES"
-      ],
-      "affected_scope": [
-        "demo_app/auth.py"
-      ],
-      "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
-      "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
-      "evidence_type": "changed_files",
-      "value": "本次修改仅涉及列出的贡献文件。",
-      "command": null,
-      "environment": null,
-      "artifact_path": null,
-      "artifact_hash": null,
-      "observed_at": "2026-07-26T00:00:00Z",
-      "expires_at": null,
-      "source_actor": "contributor",
-      "source_tool": null,
-      "retained_for_contribution_fingerprint": null,
-      "retention_reason": null,
-      "rejected_at": null,
-      "rejected_by": null,
-      "rejection_reason": null,
-      "validity_state": "valid",
-      "invalid_reasons": []
-    },
-    {
-      "id": "evidence-7612a8d03815527ab4e316f5eea320ad",
-      "obligation_ids": [
-        "O-LIMITATIONS"
-      ],
-      "affected_scope": [
-        "demo_app/auth.py"
-      ],
-      "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
-      "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
-      "evidence_type": "known_limitations",
-      "value": "未改变密码重置、注册或多因素认证流程。",
-      "command": null,
-      "environment": null,
-      "artifact_path": null,
-      "artifact_hash": null,
-      "observed_at": "2026-07-26T00:00:00Z",
-      "expires_at": null,
-      "source_actor": "contributor",
-      "source_tool": null,
-      "retained_for_contribution_fingerprint": null,
-      "retention_reason": null,
-      "rejected_at": null,
-      "rejected_by": null,
-      "rejection_reason": null,
-      "validity_state": "valid",
-      "invalid_reasons": []
-    },
-    {
-      "id": "evidence-68c7e64bf7eb55f783e0cc393f2bea62",
-      "obligation_ids": [
-        "O-RATIONALE"
-      ],
-      "affected_scope": [
-        "demo_app/auth.py"
-      ],
-      "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
-      "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
-      "evidence_type": "rationale",
-      "value": "撤销令牌后必须拒绝继续访问，避免旧会话绕过权限变更。",
-      "command": null,
-      "environment": null,
-      "artifact_path": null,
-      "artifact_hash": null,
-      "observed_at": "2026-07-26T00:00:00Z",
-      "expires_at": null,
-      "source_actor": "contributor",
-      "source_tool": null,
-      "retained_for_contribution_fingerprint": null,
-      "retention_reason": null,
-      "rejected_at": null,
-      "rejected_by": null,
-      "rejection_reason": null,
-      "validity_state": "valid",
-      "invalid_reasons": []
-    },
-    {
-      "id": "evidence-84efeca885875600afd7062dea8e6184",
+      "id": "sidecar-a5407d921fba2ba1e2c0f05c",
       "obligation_ids": [
         "O-SUMMARY"
       ],
@@ -435,15 +267,30 @@
       "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
       "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
       "evidence_type": "contribution_summary",
-      "value": "已提供可复查的当前版本材料。",
+      "value": {
+        "affected_components": [
+          "demo_app/auth.py"
+        ],
+        "artifact_type": "change_summary",
+        "behavioral_change": "已撤销令牌现在会被明确拒绝。",
+        "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
+        "head_commit_sha": "cccccccccccccccccccccccccccccccccccccccc",
+        "obligation_refs": [
+          "O-SUMMARY"
+        ],
+        "observed_at": "2026-07-26T00:00:00Z",
+        "schema_version": "agm.evidence_artifact/v1",
+        "source_tool": "deterministic-scenario",
+        "summary": "在访问检查中拒绝已撤销令牌，再判断令牌是否仍然有效。"
+      },
       "command": null,
       "environment": null,
       "artifact_path": null,
       "artifact_hash": null,
       "observed_at": "2026-07-26T00:00:00Z",
       "expires_at": null,
-      "source_actor": "contributor",
-      "source_tool": null,
+      "source_actor": "sidecar-bridge",
+      "source_tool": "deterministic-scenario",
       "retained_for_contribution_fingerprint": null,
       "retention_reason": null,
       "rejected_at": null,
@@ -453,7 +300,216 @@
       "invalid_reasons": []
     },
     {
-      "id": "evidence-9e6c52a2d35f5e92837d0331b2fe5eca",
+      "id": "sidecar-a5371d34253806cbc7a48a71",
+      "obligation_ids": [
+        "O-CHANGED-FILES"
+      ],
+      "affected_scope": [
+        "demo_app/auth.py"
+      ],
+      "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
+      "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
+      "evidence_type": "changed_files",
+      "value": {
+        "artifact_type": "changed_files",
+        "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
+        "files": [
+          "demo_app/auth.py"
+        ],
+        "head_commit_sha": "cccccccccccccccccccccccccccccccccccccccc",
+        "obligation_refs": [
+          "O-CHANGED-FILES"
+        ],
+        "observed_at": "2026-07-26T00:00:00Z",
+        "schema_version": "agm.evidence_artifact/v1",
+        "source_tool": "deterministic-scenario"
+      },
+      "command": null,
+      "environment": null,
+      "artifact_path": null,
+      "artifact_hash": null,
+      "observed_at": "2026-07-26T00:00:00Z",
+      "expires_at": null,
+      "source_actor": "sidecar-bridge",
+      "source_tool": "deterministic-scenario",
+      "retained_for_contribution_fingerprint": null,
+      "retention_reason": null,
+      "rejected_at": null,
+      "rejected_by": null,
+      "rejection_reason": null,
+      "validity_state": "valid",
+      "invalid_reasons": []
+    },
+    {
+      "id": "sidecar-1174dc93ff33ee33c9874e00",
+      "obligation_ids": [
+        "O-RATIONALE"
+      ],
+      "affected_scope": [
+        "demo_app/auth.py"
+      ],
+      "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
+      "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
+      "evidence_type": "rationale",
+      "value": {
+        "artifact_type": "rationale",
+        "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
+        "head_commit_sha": "cccccccccccccccccccccccccccccccccccccccc",
+        "intended_outcome": "撤销后的访问稳定失败。",
+        "obligation_refs": [
+          "O-RATIONALE"
+        ],
+        "observed_at": "2026-07-26T00:00:00Z",
+        "reason": "避免已撤销令牌继续访问。",
+        "schema_version": "agm.evidence_artifact/v1",
+        "source_tool": "deterministic-scenario"
+      },
+      "command": null,
+      "environment": null,
+      "artifact_path": null,
+      "artifact_hash": null,
+      "observed_at": "2026-07-26T00:00:00Z",
+      "expires_at": null,
+      "source_actor": "sidecar-bridge",
+      "source_tool": "deterministic-scenario",
+      "retained_for_contribution_fingerprint": null,
+      "retention_reason": null,
+      "rejected_at": null,
+      "rejected_by": null,
+      "rejection_reason": null,
+      "validity_state": "valid",
+      "invalid_reasons": []
+    },
+    {
+      "id": "sidecar-abd69d0007c078db2c5c2a05",
+      "obligation_ids": [
+        "O-LIMITATIONS"
+      ],
+      "affected_scope": [
+        "demo_app/auth.py"
+      ],
+      "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
+      "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
+      "evidence_type": "known_limitations",
+      "value": {
+        "artifact_type": "known_limitations",
+        "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
+        "declared_by": "demo contributor",
+        "head_commit_sha": "cccccccccccccccccccccccccccccccccccccccc",
+        "limitations": [],
+        "no_known_limitations": true,
+        "obligation_refs": [
+          "O-LIMITATIONS"
+        ],
+        "observed_at": "2026-07-26T00:00:00Z",
+        "schema_version": "agm.evidence_artifact/v1",
+        "source_tool": "deterministic-scenario"
+      },
+      "command": null,
+      "environment": null,
+      "artifact_path": null,
+      "artifact_hash": null,
+      "observed_at": "2026-07-26T00:00:00Z",
+      "expires_at": null,
+      "source_actor": "sidecar-bridge",
+      "source_tool": "deterministic-scenario",
+      "retained_for_contribution_fingerprint": null,
+      "retention_reason": null,
+      "rejected_at": null,
+      "rejected_by": null,
+      "rejection_reason": null,
+      "validity_state": "valid",
+      "invalid_reasons": []
+    },
+    {
+      "id": "sidecar-788cf44ac6f00d9b16450100",
+      "obligation_ids": [
+        "O-AUTH-IMPACT"
+      ],
+      "affected_scope": [
+        "demo_app/auth.py"
+      ],
+      "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
+      "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
+      "evidence_type": "security_auth_impact",
+      "value": {
+        "artifact_type": "impact_statement",
+        "compatibility_impact": {
+          "reason": "未改变令牌格式或调用接口。",
+          "status": "not_applicable"
+        },
+        "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
+        "data_impact": {
+          "reason": "不读取或迁移持久化数据。",
+          "status": "not_applicable"
+        },
+        "head_commit_sha": "cccccccccccccccccccccccccccccccccccccccc",
+        "obligation_refs": [
+          "O-AUTH-IMPACT"
+        ],
+        "observed_at": "2026-07-26T00:00:00Z",
+        "operational_impact": "部署后现有已撤销会话会立即失去访问能力。",
+        "schema_version": "agm.evidence_artifact/v1",
+        "security_impact": "已撤销令牌在访问检查中被拒绝。",
+        "source_tool": "deterministic-scenario"
+      },
+      "command": null,
+      "environment": null,
+      "artifact_path": null,
+      "artifact_hash": null,
+      "observed_at": "2026-07-26T00:00:00Z",
+      "expires_at": null,
+      "source_actor": "sidecar-bridge",
+      "source_tool": "deterministic-scenario",
+      "retained_for_contribution_fingerprint": null,
+      "retention_reason": null,
+      "rejected_at": null,
+      "rejected_by": null,
+      "rejection_reason": null,
+      "validity_state": "valid",
+      "invalid_reasons": []
+    },
+    {
+      "id": "sidecar-05e694d06b91107c77627417",
+      "obligation_ids": [
+        "O-AGENT-SCOPE"
+      ],
+      "affected_scope": [
+        "demo_app/auth.py"
+      ],
+      "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
+      "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
+      "evidence_type": "agent_action_scope",
+      "value": {
+        "artifact_type": "agent_activity",
+        "validated_typed_scope": [
+          "demo_app/auth.py"
+        ],
+        "canonical_contribution_scope": [
+          "demo_app/auth.py"
+        ],
+        "coverage_relation": "exact_match",
+        "scope_source": "agent_activity.activity_scope",
+        "typed_source_validated": true
+      },
+      "command": null,
+      "environment": null,
+      "artifact_path": null,
+      "artifact_hash": null,
+      "observed_at": "2026-07-26T00:00:00Z",
+      "expires_at": null,
+      "source_actor": "sidecar-bridge",
+      "source_tool": "deterministic-agent-recorder",
+      "retained_for_contribution_fingerprint": null,
+      "retention_reason": null,
+      "rejected_at": null,
+      "rejected_by": null,
+      "rejection_reason": null,
+      "validity_state": "valid",
+      "invalid_reasons": []
+    },
+    {
+      "id": "sidecar-629091aaae00ffe1e22404f5",
       "obligation_ids": [
         "O-TEST-COMMAND"
       ],
@@ -463,14 +519,82 @@
       "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
       "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
       "evidence_type": "test_command",
-      "value": "python -m pytest tests/test_auth.py -q\n18 passed, 0 failed\n覆盖：test_revoked_token_is_rejected；test_expired_session_cannot_refresh；test_permission_change_invalidates_session",
-      "command": "python -m pytest -q",
-      "environment": "Python 3.11 / local deterministic fixture",
+      "value": {
+        "affected_scope": [
+          "demo_app/auth.py"
+        ],
+        "artifact_type": "test_result",
+        "command": "python -m pytest tests/test_auth.py -q",
+        "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
+        "environment": "deterministic demo fixture",
+        "exit_code": 0,
+        "head_commit_sha": "cccccccccccccccccccccccccccccccccccccccc",
+        "obligation_refs": [
+          "O-TEST-COMMAND",
+          "O-ARTIFACT"
+        ],
+        "observed_at": "2026-07-26T00:00:00Z",
+        "result_summary": "18 passed, 0 failed",
+        "schema_version": "agm.evidence_artifact/v1",
+        "source_tool": "pytest",
+        "tests_failed": 0,
+        "tests_passed": 18
+      },
+      "command": "python -m pytest tests/test_auth.py -q",
+      "environment": "deterministic demo fixture",
       "artifact_path": null,
       "artifact_hash": null,
       "observed_at": "2026-07-26T00:00:00Z",
       "expires_at": null,
-      "source_actor": "contributor",
+      "source_actor": "sidecar-bridge",
+      "source_tool": "pytest",
+      "retained_for_contribution_fingerprint": null,
+      "retention_reason": null,
+      "rejected_at": null,
+      "rejected_by": null,
+      "rejection_reason": null,
+      "validity_state": "valid",
+      "invalid_reasons": []
+    },
+    {
+      "id": "sidecar-acc83e803590dcfb0304ee16",
+      "obligation_ids": [
+        "O-ARTIFACT"
+      ],
+      "affected_scope": [
+        "demo_app/auth.py"
+      ],
+      "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
+      "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
+      "evidence_type": "artifact",
+      "value": {
+        "affected_scope": [
+          "demo_app/auth.py"
+        ],
+        "artifact_type": "test_result",
+        "command": "python -m pytest tests/test_auth.py -q",
+        "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
+        "environment": "deterministic demo fixture",
+        "exit_code": 0,
+        "head_commit_sha": "cccccccccccccccccccccccccccccccccccccccc",
+        "obligation_refs": [
+          "O-TEST-COMMAND",
+          "O-ARTIFACT"
+        ],
+        "observed_at": "2026-07-26T00:00:00Z",
+        "result_summary": "18 passed, 0 failed",
+        "schema_version": "agm.evidence_artifact/v1",
+        "source_tool": "pytest",
+        "tests_failed": 0,
+        "tests_passed": 18
+      },
+      "command": "python -m pytest tests/test_auth.py -q",
+      "environment": "deterministic demo fixture",
+      "artifact_path": null,
+      "artifact_hash": null,
+      "observed_at": "2026-07-26T00:00:00Z",
+      "expires_at": null,
+      "source_actor": "sidecar-bridge",
       "source_tool": "pytest",
       "retained_for_contribution_fingerprint": null,
       "retention_reason": null,
@@ -494,7 +618,7 @@
       "reservations": [],
       "policy_fingerprint": "e8d4a424445f914a36ad726b6f3aec6f0f11fbc6d034faec9de88aedd2318564",
       "contribution_fingerprint": "c70b49d4da2174163216fcdbfce88c2bd17d6b7a499ce2b69a2625a488ee897a",
-      "evidence_set_fingerprint": "d48d71a7b5dec256ca8587e82fd1daab45410cdedf2873594d272d918caf859f",
+      "evidence_set_fingerprint": "13255285009363c60a66b6c88a03c43d73cc6651259c2e683a20f15aff34695c",
       "retained_for_contribution_fingerprint": null,
       "retention_reason": null,
       "status": "confirmed",
